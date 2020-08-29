@@ -76,7 +76,6 @@ module.exports = class Reviews {
    }
    //decrease studentCount when student leaves
    decrementStudents(courseName){
-       console.log("DECREMENT")
     var CourseDB = mongoose.model('UNCC_CoursesDB', courseDBSchema);
     return CourseDB.findOne({CourseName:courseName}).updateOne({
         $inc: {

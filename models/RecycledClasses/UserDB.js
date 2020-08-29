@@ -167,7 +167,6 @@ module.exports = class UserDB {
                 });
             }else{
                 console.log("followHandle does not exists");
-                console.log(handle);
                 callback(false);
             }
         })

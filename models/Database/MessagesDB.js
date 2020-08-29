@@ -38,7 +38,6 @@ module.exports = class Messages {
           console.log("From function :" +senderImg)
           docs[0].messages.push({sender:sender, senderImg:senderImg, message:msg, dateTime:dateTime });
           docs[0].save().then(function(data){
-            console.log(data)
           });
           for(var x = 0; x < docs[0].userHandles.length; x++){
             if(docs[0].userHandles[x] != sender){
@@ -83,7 +82,6 @@ module.exports = class Messages {
       console.log("ID", id)
       msgDB.findOne({_id: id})
       .exec((err, docs)=>{
-        console.log("Leave thread", docs)
         for(x in docs.userHandles){
           if(docs.userHandles[x][0] === userHandle){
             docs.userHandles.splice(x,1);

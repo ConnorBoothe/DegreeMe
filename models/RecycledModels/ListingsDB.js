@@ -193,7 +193,6 @@ module.exports = class ListingsDB {
     });
     for(x in Schedule){
       listing.Schedule.push({timeSlot:Schedule[x]});
-      console.log(Schedule[x])
     }
 
     return listing.save();
@@ -257,7 +256,6 @@ module.exports = class ListingsDB {
             tempSlot  = docs[0].Schedule[x];
         }
     }
-    console.log("Time:" +tempSlot)
     //remove the time slot
     docs[0].Schedule.pull(tempSlot);
     return docs[0].save();
@@ -293,7 +291,6 @@ module.exports = class ListingsDB {
         count++;
         ratingTotal += parseInt(docs.Reviews[x].Rating);
       }
-      console.log("rating: " + ratingTotal / count)
       ListingsDB.findOne({
         Handle: receiver
       }).updateOne({
