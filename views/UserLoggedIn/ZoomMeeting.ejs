@@ -114,9 +114,7 @@
             <span class="tutoring">Host: </span> <a href="/User/<%=meeting.Members[0].handle%>" class="meetingHandle"><%=meeting.Members[0].name%></a> </h3>
           
         <%}%>
-        
-          <% console.log(meeting)%>
-          <%if(meeting.date < new Date() && !meeting.LeftReview){%>
+              <%if(meeting.date < new Date() && !meeting.LeftReview){%>
               <%if(session.name != meeting.tutorHandle){%>
                 <a href="../Review/<%=meeting._id%>" class="btn btn-primary">Rate Your Tutor</a>
               <%}%>
