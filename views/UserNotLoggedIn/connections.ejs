@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Connect</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="initial-scale=1,user-scalable=no,viewport-fit=cover">
+    <link rel="icon" href="assets/img/favicon.png" type="image/png" />
+    
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="assets/css/main.css" rel="stylesheet">
+
+    <link href="assets/css/header.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/bootstrap/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="assets/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="assets/js/main.js"></script>
+    <script type="text/javascript" src="assets/js/underLineMainNav.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery-autocomplete/1.0.7/jquery.auto-complete.js"></script>
+    <script type="text/javascript" src="assets/js/searchAutocomplete.js"></script>
+</head>
+
+<body>
+
+
+    <div class="page-container ">
+        <div id="headerContainer">
+            <% include partials/header.ejs %>
+        </div>
+        <div class="homeContainer ">
+            <div class=" connectionsPadding contentBlock">
+                <h1 class="tagline text-dark"><%=qs.course%></h1>
+
+
+                <div id="connectionSearchBarContainer">
+                    <div id="searchBarWrapper">
+
+                        <div id="searchBar" class="active-cyan-3 active-cyan-4 mb-4">
+                            <form method="GET" autocomplete="off">
+                                <div class="input-container-home">
+                                    <div class="input-container1">
+                                        <form method="POST" action="/SearchCourse">
+                                            <input name="course" id="searchInput" class="form-control"
+                                                placeholder="Enter the full name of any course at UNC Charlotte" />
+                                            <button class="searchBtn"><i class="fa fa-user icon"><img
+                                                        src="assets/img/search.svg.svg"
+                                                        class="signup-icon" /></i></button>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <% if (!qs.course){%>
+                    <!-- <h2 class="setSchedule">Enter your courses on the Settings page and this page will populate with tutors for your current courses.</h2> -->
+                    <%}else{%>
+                    <br>
+                    <div class="courseSearchResults">
+                        <div class="courseSearchResults-wrapper">
+                            <%for(x in tutorArray){%>
+                            <div class="tutorBlock tutorBlockLight">
+                                <ul class="tutorBlockHeader">
+
+
+
+                                    <li><img src="<%=tutorArray[x].img%>" alt="Profile Pic" class="profile-pic" />
+                                        <h1 class="connectionName text-dark"><%=tutorArray[x].Name %></h1>
+                                    </li>
+
+                                    <li class="starRating">
+                                        <% for(var i =0; i < tutorArray[x].getRating(); i++){ %>
+                                        <span>&#9733;</span>
+                                        <%}%>
+                            </li>
+                            <li>
+                                    <p class="type badge badge-primary"><%=tutorArray[x].Type%> Session</p>
+                                    </li>
+                                </ul>
+                                <div class="tutorBlockBody">
+
+                                    <%if(tutorArray[x].Type === "Group"){%>
+                                    <div class="infoItem text-dark">
+                                        <div><img src="assets/img/MyFinancesDark.svg" class="time dollarImg" /></div>
+                                        <div>
+                                            <p class="timeTextDark"><%=tutorArray[x].HourlyRate%>/hour per student</p>
+                                        </div>
+                                    </div>
+                                    <%} else{%>
+                                    <div class="infoItem text-dark">
+                                        <div><img src="assets/img/MyFinancesDark.svg" class="time dollarImg" /></div>
+                                        <div>
+                                            <p class="timeTextDark"><%=tutorArray[x].HourlyRate%>/hour</p>
+                                        </div>
+                                    </div>
+                                    <%}%>
+                                        
+                                        <div class="infoItem text-dark"><div><img src="assets/img/hourGlass.svg" class="time dateImg"/></div><div><p class="timeTextDark"><%=tutorArray[x].NumHours%>
+                                    hour(s) duration</p>
+                                </div>
+                            </div>
+                            <div class="infoItem text-dark">
+                                <div><img src="assets/img/date.svg" class="time dateImg" /></div>
+                                <div>
+                                    <p class="timeTextDark"><%=tutorArray[x].Date%></p>
+                                </div>
+                            </div>
+                            <div class="infoItem text-dark"><img src="assets/img/clock.svg" class="time timeImg" />
+                                <p class="timeTextDark"><%=tutorArray[x].Time%></p>
+                            </div>
+                            <div class="infoItem text-dark">
+                                <div><img src="assets/img/MySessionsDark.svg" class="time" /></div>
+                                <div>
+                                    <p class="timeTextDark"><%=tutorArray[x].Building%></p>
+                                </div>
+                            </div>
+
+
+                            <div class="tutorButtons">
+                                <a type="submit" class="btn btn-primary tutorBtn text-light"
+                                    name='<%=tutorArray[x].Handle%>'
+                                    onclick="location.href='/login?error=Please create an account to connect with tutors'">View
+                                    Tutor</a>
+
+                                <form method="POST" action="/connect">
+                                    <input name="type" type="hidden" value="Added" class="form-control">
+                                    <input name="from" type="hidden" value="My Connections" class="form-control">
+                                    <input type="hidden" name="tutor" value="<%=tutorArray[x].getName()%>" />
+                                    <input type="hidden" name="img" value="<%=tutorArray[x].img%>" />
+                                    <input type="hidden" name="time" value="<%=tutorArray[x].time%>" />
+                                    <input type="hidden" name="date" value="<%=tutorArray[x].date%>" />
+                                    <input type="hidden" name="location" value="<%=tutorArray[x].location%>" />
+                                    <input type="hidden" name="class" value="" />
+                                    <a href="/login?error=Please create an account to connect with tutors"
+                                        class=" viewDetails btn btn-primary tutorBtn" name="">View Session</a>
+
+                                </form>
+                            </div>
+                        </div>
+                        <br>
+
+                    </div>
+
+
+                    <%}%>
+            </div>
+                </div>
+                </div>
+               <%}%>
+
+                </div>
+            </div>
+            <% include partials/footer.ejs %>
+</body>
+
+</html>

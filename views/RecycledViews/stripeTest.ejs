@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Contact</title>
+        <meta charset="UTF-8">
+        <link rel="icon" href="assets/img/favicon.png" type="image/png" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+        <link href="assets/css/main.css" rel="stylesheet">
+        <link href="assets/css/header.css" rel="stylesheet">
+        <link rel="stylesheet" href="assets/bootstrap/node_modules/bootstrap/dist/css/bootstrap.min.css">
+        <script src="assets/jquery/dist/jquery.js"></script>
+        <script type="text/javascript" src="assets/js/main.js"></script>
+    </head>
+    <body>
+        <form method="POST" action="/charge">
+            <script 
+            src="https://checkout.stripe.com/checkout.js"
+            class="stripe-button"
+            data-key='pk_test_89vfyOdmTWo09jkpoyAnRy1l00ll36NLGn'
+            data-amount="100"
+            data-name= "Cute Dog"
+            data-description = "This is my cute dog"
+            data-locale="auto"
+            data-currency="USD"
+            >
+            </script>
+            <input name = "chargeAmount" type="hidden" value="3000"/>
+        </form>
+            
+        <% include partials/footer.ejs %>
+<!--        
+        <script type="text/javascript" src="assets/js/script.js"></script> -->
+        <script type="text/javascript" src="assets/js/pay.js"></script>
+    </body>
+</html>  

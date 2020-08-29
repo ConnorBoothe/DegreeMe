@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Home | degreeMe</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="icon" href="assets/img/favicon.png" type="image/png" />
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="assets/bootstrap/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+    <link href="assets/css/main1.css" rel="stylesheet">
+    <link href="assets/css/userProfile.css" rel="stylesheet">
+    <link href="/assets/css/home.css" rel="stylesheet">
+    <!-- Require jQuery -->
+    <script src="assets/jquery/dist/jquery.js"></script>
+
+</head>
+<body class="color-dark">
+    <div class="">
+        <%- include ('partials/sideBar.ejs')%>
+        <%- include ('partials/homeSideBar.ejs')%>
+        <%- include ('partials/horizontalHeader.ejs')%>
+        <%- include ('partials/newMessageButton.ejs')%>
+        <%- include ('partials/newMessageModal.ejs')%>
+        <input type="hidden" name="handle" value="<%=session.handle%>"/>
+        <input type="hidden" name="stripeId" value="<%=session.stripeId%>"/>
+        <input type="hidden" name="userId" value="<%=session.userId%>"/>
+        <input type="hidden" name="tutor" value="<%=session.tutor%>"/>
+       
+        <div class="home-wrapper">
+            <%-include ('partials/myCoursesSideBar.ejs')%>
+            <div class="timeline">
+                <h1 class="text-light timeline-title">Timeline</h1>
+                <div class="timeline-container-status request-help-container">
+                    <div class="helpRequest-body">
+                    <img class="timelinePost-Image" src="<%=session.img%>" />
+                
+                   <div class="requestHelp">
+                    <div class="help-text-container">
+                    <span 
+                    class="input textarea" role="textbox" 
+                    
+                    contenteditable>Request help from the degreeMe community</span>
+                    </div>
+                </div>
+                    <div class="requestHelpDetails">
+                        <ul class="request-input-container">
+                            <li>
+                                <label class="text-light">Asking Price</label>
+                                <p class="text-light priceContainer">$ <input type="text" class="askingPrice" placeholder="30.00" /></p>
+                                <p class="priceError"></p>
+                            </li>
+                            <li class="courseLi">
+                                <label class="text-light">Due Date</label>
+                                <input type="date" class="dueDate" placeholder="Due Date" />
+                            </li>
+
+                           
+                        </ul>
+                        <label class="text-light">Optional</label><br>
+                        <input class="tagCourse" type="text" placeholder="Tag a Course"/>
+                                <div class="tagCourse-wrapper">
+                                    <div class="tagCourse-container"><p class="tagCourse-loading text-light">Search Courses</p></div>
+                                </div>
+                        <div class="anonRadio">
+                            <label class="text-light" for="yourself">Post as yourself</label>
+                            <input id="yourself" name="requestType" type="radio" checked value="<%=session.handle%>" />
+                            <label class="text-light secondLabel" for="anon">Post anonymously</label>
+                            <input id="anon" name="requestType" type="radio" value="<%=session.userId%>" />
+                        </div>
+                        <div class="postBtn">
+                            <input name="userName" type="hidden" value="<%=session.name%>"/>
+                            <button class="btn btn-primary requestHelpBtn">Post</button>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <% for (x in timeline){%>
+                  
+                <%if(timeline[x].type == "Help Request"){%>
+                    <%if(x == timeline.length -3){%>
+                    <input class="postId" name="postId" type="hidden" value="<%=timeline[x].id%>" />
+                    <div class="timeline-container-helprequest loadMore">
+                    <%}else{%>
+                        <input class="postId" name="postId" type="hidden" value="<%=timeline[x].id%>" />
+                        <div class="timeline-container-helprequest">
+                    <%}%>
+                        <div class="postHeader">
+                            <div class="postRight">
+                                <p class="postDate">Due Date: <span class="text-light"><%=timeline[x].date%></span></p>
+                        
+                                <%if (timeline[x].bids){%>
+                                    <% if(timeline[x].bids.length === 1){%>
+                                        <p class="postBids badge badge-warning"><%=timeline[x].bids.length%> Bid</p>
+                                    <%} else{%>
+                                        <p class="postBids badge badge-warning"><%=timeline[x].bids.length%> Bids</p>
+
+                                    <%}%>
+                                <%}%>
+                            </div>
+                            <%if(timeline[x].anonymous == false){%>
+                                <img class="timelinePost-Image" src="<%=timeline[x].userImage%>" />
+                                <p class="timelinePost-help"><a
+                                    class="userNameLink" href="/User/<%=timeline[x].userHandle%>"><%=timeline[x].userName%>
+                                </a>
+                                    <p class="text-light helpReqTxt"><span class="badge badge-success">Help Request</span></p>
+                                </div>
+                                <p class="caption1"><%=timeline[x].caption%></p>
+                            <%}else{%>
+                                <img class="timelinePost-Image" src="../assets/img/favicon.png" />
+                                <p class="timelinePost-username">Anonymous</p>
+                                <p class="text-light helpReqTxt"><span class="badge badge-success">Help Request</span></p>
+                            </div>
+                            <p class="captionAnon"><%=timeline[x].caption%></p>
+                            <%}%>
+                           
+                       
+                        <div class="helpRequestDetails">
+                            <p class="text-light price">Asking Price: <span class="askPrice"> $<%=timeline[x].PostDetails.toFixed(2)%></span>
+                                <span class="badge badge-primary info-badge help-course"><%=timeline[x].course%></span>
+                            </p>
+                         
+                        </div>
+                        
+                        <div class="postActions">
+                            <%if(timeline[x].type == "Help Request"){%>
+                                <% if (timeline[x].hasLiked == false){%>
+                                    <button class="like-button like-help">
+                                        <span class="likeCount"><%=timeline[x].likes%></span>
+                                        <svg class="bi bi-heart heartIcon" width="1em" height="1em" viewBox="0 0 16 16"
+                                            fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd"
+                                                d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                                        </svg>
+                                    </button>
+                                    <% }else{%>
+                                    <button class="like-button like-help hasLiked">
+                                        <span class="likeCount"><%=timeline[x].likes%></span>
+                                        <svg class="bi bi-heart heartIcon" width="1em" height="1em" viewBox="0 0 16 16"
+                                            fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd"
+                                                d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                                        </svg>
+                                    </button>
+                                    <%}%>
+
+                            <%}else{%>
+
+                          
+                            <% if (timeline[x].hasLiked == false){%>
+                            <button class="like-button like-nonhelp">
+                                <span class="likeCount"><%=timeline[x].likes%></span>
+                                <svg class="bi bi-heart heartIcon" width="1em" height="1em" viewBox="0 0 16 16"
+                                    fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                                </svg>
+                            </button>
+                            <% }else{%>
+                            <button class="like-button like-nonhelp hasLiked">
+                                <span class="likeCount"><%=timeline[x].likes%></span>
+                                <svg class="bi bi-heart heartIcon" width="1em" height="1em" viewBox="0 0 16 16"
+                                    fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                                </svg>
+                            </button>
+                            <%}%>
+                            <%}%>
+                            
+                            <%if(session.tutor){%>
+                                <div class="placeBid">
+                                    <div class="bid-input-container">
+                                        <input type="hidden" class="timelineId" value="<%=timeline[x].id%>"/>
+                                        <input type="hidden" class="bidder" value="<%=session.handle%>"/>
+                                        <input type="hidden" class="userId" value="<%=session.userId%>"/>
+                                        <span class="help-dollar-text">$</span><input type="text" class="bid-input" placeholder="25" />
+                                        <input type="hidden" class="stripeId" value="<%=session.stripeId%>"/>
+                                        <input type="hidden" class="stripeId" value="<%=timeline[x].caption%>"/>
+                                    </div>
+                                    <button type="button" class="btn btn-primary respondBtn">Place Bid</button>
+                                </div>
+                            <%}else{%>
+                                <div class="placeBid">
+                                    <a href="/MyFinances" type="button" class="addPaymentInfo">Add payment info to place a bid</a>
+                                </div>
+
+                            <%}%>
+                        </div>
+                    </div>
+                <%}if(timeline[x].type === "Tutor Listing"){%>
+                        <input class="postId" name="postId" type="hidden" value="<%=timeline[x].id%>" />
+                        <div class="timeline-container-status">
+                            <div class="postHeader">
+                                <div class="postRight">
+                                    <p class="postDate nonhelp-date"><%=timeline[x].date%></p>
+                                </div>
+                              
+                                <img class="timelinePost-Image" src="<%=timeline[x].userImage%>" />
+                                <p class="timelinePost-username"><%=timeline[x].userName%><p class="postHandle"><a
+                                            href="/User/<%=timeline[x].userHandle%>"><%=timeline[x].userHandle%></a></p></p>
+                            </div>
+        
+                            <p class="caption"><%=timeline[x].caption%></p>
+                            <p class="price-nonhelp badge badge-warning">Price: $<%=timeline[x].price%></p>
+                            <a class="btn btn-primary view-timeline-btn" href="..<%=timeline[x].url%>">View</a>
+                            
+                            <div class="postActions">
+                                <% if (timeline[x].hasLiked == false){%>
+                                <button class="like-button">
+                                    <span class="likeCount"><%=timeline[x].likes%></span>
+                                    <svg class="bi bi-heart heartIcon" width="1em" height="1em" viewBox="0 0 16 16"
+                                        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                                    </svg>
+                                </button>
+                                <% }else{%>
+                                <button class="like-button hasLiked">
+                                    <span class="likeCount"><%=timeline[x].likes%></span>
+                                    <svg class="bi bi-heart heartIcon" width="1em" height="1em" viewBox="0 0 16 16"
+                                        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                                    </svg>
+                                </button>
+                                <%}%>
+                                            <!-- <button type="button" class="comment-button" data-toggle="modal" data-target="#commentModal" name = "New Message">  
+                                                <svg class="bi bi-chat-square commentIcon " width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h2.5a2 2 0 0 1 1.6.8L8 14.333 9.9 11.8a2 2 0 0 1 1.6-.8H14a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2.5a1 1 0 0 1 .8.4l1.9 2.533a1 1 0 0 0 1.6 0l1.9-2.533a1 1 0 0 1 .8-.4H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                                  </svg>
+                                               
+                                                
+                                            </button> -->
+                                            
+                                <button class="share-button">
+                                    <svg class="bi bi-cursor shareIcon" width="1em" height="1em" viewBox="0 0 16 16"
+                                        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M14.082 2.182a.5.5 0 0 1 .103.557L8.528 15.467a.5.5 0 0 1-.917-.007L5.57 10.694.803 8.652a.5.5 0 0 1-.006-.916l12.728-5.657a.5.5 0 0 1 .556.103zM2.25 8.184l3.897 1.67a.5.5 0 0 1 .262.263l1.67 3.897L12.743 3.52 2.25 8.184z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                <%}if(timeline[x].type === "Study Group"){%>
+                <input class="postId" name="postId" type="hidden" value="<%=timeline[x].id%>" />
+                <div class="timeline-container-status">
+                    <div class="postHeader">
+                        <div class="postRight">
+                            <p class="postDate"><%=timeline[x].date%></p>
+                        </div>
+                        <img class="timelinePost-Image" src="<%=timeline[x].userImage%>" />
+                        <p class="timelinePost-username"><%=timeline[x].userName%><p class="postHandle"><a
+                                    href="/User/<%=timeline[x].userHandle%>"><%=timeline[x].userHandle%></a></p></p>
+                    </div>
+                    <p class="caption"><%=timeline[x].caption%><a href="/Group/<%=timeline[x].url%>" class="btn btn-primary view-timeline-btn">View</a></p>
+                    
+                    <ul class="postDetailsList">
+                        <li class="postDetailsItem">
+                            <p class="badge badge-primary info-badge"><%=timeline[x].course%></p>
+                        </li>
+                        <li class="postDetailsItem">
+                            <p class="badge badge-warning info-badge">Prof. <%=timeline[x].price%></p>
+                        </li>
+                    </ul>
+                    <div class="postActions">
+
+                        <% if (timeline[x].hasLiked == false){%>
+                        <button class="like-button">
+                            <span class="likeCount"><%=timeline[x].likes%></span>
+                            <svg class="bi bi-heart heartIcon" width="1em" height="1em" viewBox="0 0 16 16"
+                                fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                            </svg>
+                        </button>
+                        <% }else{%>
+                        <button class="like-button hasLiked">
+                            <span class="likeCount"><%=timeline[x].likes%></span>
+                            <svg class="bi bi-heart heartIcon" width="1em" height="1em" viewBox="0 0 16 16"
+                                fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                            </svg>
+                        </button>
+                        <%}%>
+                        
+                        <br>
+                    </div>
+                </div>
+                <%}%>
+                <%}%>
+                <div class="spinner-container">
+          <div class="spinner-border" role="status">
+            <span class="sr-only"></span>
+            
+        </div>
+        <p class="text-light loadingMore">Loading more items</p>
+        </div>
+       
+                <!--  -->
+            </div>
+        </div>
+    </div>
+    <!-- Scripts -->
+
+    <script src="./assets/jquery/jquery.session/jquery.session.js"></script>
+    <script src="../assets/js/popper.min.js"></script>
+    <script src="../assets/js/jquery-maskMoney.js"></script>
+    <script type="text/javascript" src="../assets/js/MoneyInput.js"></script>
+    <script type="text/javascript" src="../assets/js/Client-DateFunctions.js"></script>
+    <script type="text/javascript" src="/assets/bootstrap/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/assets/js/UpdateTimeline.js"></script>
+    <script type="text/javascript" src="/assets/js/ajaxCalls/placeBid.js"></script>
+    <script type="text/javascript" src="/assets/js/ajaxCalls/getUserTimeline.js"></script>
+    <!-- Below file was deleted. -->
+    <!-- <script type="text/javascript" src="../assets/js/ajaxCalls/zeroNotificationCount.js"></script> -->
+    <script type="text/javascript" src="/assets/js/CreateConversation_Autocomplete.js"></script>
+    <!-- <script type="text/javascript" src="../assets/js/statusAlerts.js"></script> -->
+</body>
+
+</html>

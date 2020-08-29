@@ -1,0 +1,12 @@
+.recentNotifContainer{
+    height:130px;
+    width:100%;
+    background-color:#202020;
+    border: 2px solid rgb(83, 83, 83);
+    margin-bottom:30px;
+    border-radius:10px;
+}
+#recentNotifWrapper{
+    margin-right:20%;
+    margin-left:20%;
+}

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<head>
+  <title>Create Zoom Meeting | degreeMe </title>
+  <meta charset="UTF-8">
+  <link rel="icon" href="../assets/img/favicon.png" type="image/png" />
+  <!-- Stylesheets -->
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/bootstrap/node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link href="../assets/css/main1.css" rel="stylesheet">
+  <link href="../assets/css/home.css" rel="stylesheet">
+  <!-- Scripts -->
+  <script src="../assets/jquery/dist/jquery.js"></script>
+ 
+</head>
+
+<body class="color-dark">
+  <div class="page-container">
+    <%- include ('partials/sideBar.ejs') %>
+    <%- include ('partials/horizontalHeader.ejs')%>
+    <%- include ('partials/StudyGroupProfileSideBar.ejs')%>
+
+    <div class="profile-wrapper">
+
+      <div class="meeting-info">
+        <!-- Make sure role is host -->
+        
+        <%if(!meeting.ZoomLink  && session.handle === meeting.Members[1].handle && meeting.Virtual){%>
+        <div class="createZoomMeeting-container">
+          <h1>There's one more step!</h1>
+          <h3 class="zoomLinkMsg">Schedule your virtual tutoring session with <span class="text-bold"><%=meeting.Members[0].name%></span> by clicking the button
+            below.</h3>
+          <h3 class="zoomLinkMsg">Ensure that the date/time of your Zoom meeting matches with the date/time of the
+            tutoring session.</h3>
+          <a target="_blank" href="https://zoom.us/meeting" class="scheduleMeeting btn btn-primary">Schedule your Zoom meeting here</a>
+
+          <h3 class="zoomLinkMsg inviteLinkMsg">Once the Zoom meeting is scheduled, enter the <span
+              class="text-bold">invite link</span> in the field below so <span class="text-bold"><%=meeting.Members[0].name%></span> has access to it.
+          </h3>
+          <form method="POST" action="addZoom" class="addZoom">
+            <input type="text" name="zoomLink" class="zoomInput" placeholder="Enter Invite Link" />
+            <input type="hidden" name="meetingId" value="<%=params.meetingId%>" />
+            <input type="submit" class="btn btn-primary" value="Add Invite Link" />
+          </form>
+          
+        </div>
+
+        <%}else if(session.handle === meeting.Members[1].handle && !meeting.Virtual && meeting.Location.length < 1){%>
+          <div class="createZoomMeeting-container">
+            <h1>There's one more step!</h1>
+            <h3 class="zoomLinkMsg1">Schedule your physical tutoring session with <span class="text-bold"><%=meeting.Members[0].name%></span></h3>
+            <form class="addLocation">
+              <div class="location-container">
+                <div class="location-input-wrapper">
+                   <div class="input-container-hostSession1 location-input-container">
+                    <h3 class="locationLabel text-light">Building</h3>
+
+                      <input name="building" id="building" type="text"
+                         class="input-field-createStudyGroup location-input  <%=session.theme%>"
+                         placeholder="Atkins" autocomplete="off" />
+
+                   </div>
+                   <p id="buildingErr"></p>
+                </div>
+                <div class="">
+                   
+
+                   <div class="input-container-hostSession1 location-input-container">
+                    <h3 class="locationLabel text-light">Room Number</h3>
+                      <input name="room" id="room" type="text"
+                         class="input-field-createStudyGroup location-input <%=session.theme%>" placeholder="G32"
+                         autocomplete="off">
+
+                   </div>
+             </div>
+            
+                <p id="roomErr"></p>
+               
+             </div>
+              <input type="hidden" name="meetingId" class="meetingId" value="<%=params.meetingId%>" />
+              <input type="submit" class="btn btn-primary addLocation-btn" value="Add Location" />
+            </form>
+            
+          </div>
+
+          <%}%>
+        <div class="listingMeetupInfo">
+        <%if(meeting.Members.length < 3){%>
+        <a href="/User/<%=meeting.Members[0].handle%>" class="memberImage" data-toggle="tooltip" data-placement="top"
+        title="<%=meeting.Members[0].handle%>">
+        <img class="meetingImg" src="../<%=meeting.Members[0].image%>" />
+        </a>
+        <a href="/User/<%=meeting.Members[1].handle%>" class="memberImage" data-toggle="tooltip" data-placement="top"
+          title="<%=meeting.Members[1].handle%>">
+          <img class="meetingImg1" src="../<%=meeting.Members[1].image%>" />
+        </a>
+        <img src="../assets/img/remote_arrows.svg" class="listingMeetupImg" />
+        <%console.log(meeting.Members[0])%>
+        <h3 class="meetingInfoName"><a href="/User/<%=meeting.Members[0].handle%>"  class="meetingHandle"><%=meeting.Members[0].name%></a>
+          <span class="tutoring">tutoring</span> <a href="/User/<%=meeting.Members[1].handle%>" class="meetingHandle"><%=meeting.Members[1].name%></a> </h3>
+        <%} else{%>
+          <h3 class="membersTitle">Members</h3>
+          <ul class="membersList">
+            <%for(x in meeting.Members){%>
+             
+              <li>
+                <a href="/User/<%=meeting.Members[0].handle%>" class="memberImage" data-toggle="tooltip" data-placement="top"
+                  title="<%=meeting.Members[0].handle%>">
+                <img class="meetingImg2" src="../<%=meeting.Members[x].image%>" />
+                </a>
+              
+              </li>
+            <%}%>
+          </ul>
+          <h3 class="hostName">
+            <span class="tutoring">Host: </span> <a href="/User/<%=meeting.Members[0].handle%>" class="meetingHandle"><%=meeting.Members[0].name%></a> </h3>
+          
+        <%}%>
+        
+          <% console.log(meeting)%>
+          <%if(meeting.date < new Date() && !meeting.LeftReview){%>
+              <%if(session.name != meeting.tutorHandle){%>
+                <a href="../Review/<%=meeting._id%>" class="btn btn-primary">Rate Your Tutor</a>
+              <%}%>
+          <%}else if(meeting.date > new Date()){%>
+            <div class="meetingDateTime-container">
+              <p class="badge-warning meetingDateTime"><%=formatDate(meeting.date) + " @ " + formatTime(meeting.date)%></p>
+            </div>
+        
+          
+          <div class="memberJoined-container">
+            <%if(timeStampArr.length == 0){%>
+              <% for(x in meeting.Members){%>
+                <p class="meetingMembers">
+                  <img src="../<%=meeting.Members[1].image%>" class="joinMeetingImg" />
+                  <%=meeting.Members[x].handle%> has not joined
+                </p>
+              <%}%>
+            <%}else{%>
+              <%var joined = false;%>
+              <%console.log(timeStampArr)%>
+              <% for(x in timeStampArr){%>
+                <p class="meetingMembers">
+                  <img src="/<%=timeStampArr[x][1]%>" class="joinMeetingImg" />
+                  
+                  <%if((timeStampArr[x][3] === "joinMeeting") && timeStampArr[x][0] === session.handle){%>
+                    <%joined = true;%>
+                    <span class="joinedHandle"><%=timeStampArr[x][0]%></span> joined at <%=formatTime(new Date(timeStampArr[x][2]))%>
+                  <%}else{%>
+                    <span class="joinedHandle"><%=timeStampArr[x][0]%></span> left at <%=formatTime(new Date(timeStampArr[x][2]))%>
+                  <%}%>
+                </p>
+              <%}%>
+            <%}%>
+              
+          </div>
+        <div>
+          <p class="joinMeetingText">Click the join button below so we can verify that both parties were present during the meeting. Once the meeting is complete, click the leave button.
+            This gives us data that we will use to make refund decisions if the session does not go as planned.
+          </p>
+          <%if(!joined){%>
+            <input type="hidden" name="status" value="joinMeeting" />
+            <input type="hidden" name="meetingId" value="<%=meeting._id%>" />
+            <input type="hidden" name="image" value="<%=session.img%>" />
+            <button class="btn btn-primary joinBtn">Join</button>
+          <%}else{%>
+            <input type="hidden" name="status" value="leaveMeeting" />
+            <input type="hidden" name="meetingId" value="<%=meeting._id%>" />
+            <input type="hidden" name="image" value="<%=session.img%>" />
+            <button class="btn btn-danger joinBtn">Leave</button>
+          <%}%>
+         
+        </div>
+       
+        
+        <h3>Details</h3>
+          <ul class="meetingDetails-list">
+            <li>
+                  <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-book" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M3.214 1.072C4.813.752 6.916.71 8.354 2.146A.5.5 0 0 1 8.5 2.5v11a.5.5 0 0 1-.854.354c-.843-.844-2.115-1.059-3.47-.92-1.344.14-2.66.617-3.452 1.013A.5.5 0 0 1 0 13.5v-11a.5.5 0 0 1 .276-.447L.5 2.5l-.224-.447.002-.001.004-.002.013-.006a5.017 5.017 0 0 1 .22-.103 12.958 12.958 0 0 1 2.7-.869zM1 2.82v9.908c.846-.343 1.944-.672 3.074-.788 1.143-.118 2.387-.023 3.426.56V2.718c-1.063-.929-2.631-.956-4.09-.664A11.958 11.958 0 0 0 1 2.82z"/>
+                    <path fill-rule="evenodd" d="M12.786 1.072C11.188.752 9.084.71 7.646 2.146A.5.5 0 0 0 7.5 2.5v11a.5.5 0 0 0 .854.354c.843-.844 2.115-1.059 3.47-.92 1.344.14 2.66.617 3.452 1.013A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.276-.447L15.5 2.5l.224-.447-.002-.001-.004-.002-.013-.006-.047-.023a12.582 12.582 0 0 0-.799-.34 12.96 12.96 0 0 0-2.073-.609zM15 2.82v9.908c-.846-.343-1.944-.672-3.074-.788-1.143-.118-2.387-.023-3.426.56V2.718c1.063-.929 2.631-.956 4.09-.664A11.956 11.956 0 0 1 15 2.82z"/>
+                  </svg>
+              <%=meeting.class%>
+        </li>
+        <%if(!meeting.Virtual && meeting.Location.length > 0){%>
+        <li>
+          <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-building" fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+              d="M14.763.075A.5.5 0 0 1 15 .5v15a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5V14h-1v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V10a.5.5 0 0 1 .342-.474L6 7.64V4.5a.5.5 0 0 1 .276-.447l8-4a.5.5 0 0 1 .487.022zM6 8.694L1 10.36V15h5V8.694zM7 15h2v-1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5V15h2V1.309l-7 3.5V15z" />
+            <path
+              d="M2 11h1v1H2v-1zm2 0h1v1H4v-1zm-2 2h1v1H2v-1zm2 0h1v1H4v-1zm4-4h1v1H8V9zm2 0h1v1h-1V9zm-2 2h1v1H8v-1zm2 0h1v1h-1v-1zm2-2h1v1h-1V9zm0 2h1v1h-1v-1zM8 7h1v1H8V7zm2 0h1v1h-1V7zm2 0h1v1h-1V7zM8 5h1v1H8V5zm2 0h1v1h-1V5zm2 0h1v1h-1V5zm0-2h1v1h-1V3z" />
+          </svg>
+          Building: <%=meeting.Location[0].Building%>
+        </li>
+        <li>
+          <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-geo" fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg">
+            <path d="M11 4a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+            <path d="M7.5 4h1v9a.5.5 0 0 1-1 0V4z" />
+            <path fill-rule="evenodd"
+              d="M6.489 12.095a.5.5 0 0 1-.383.594c-.565.123-1.003.292-1.286.472-.302.192-.32.321-.32.339 0 .013.005.085.146.21.14.124.372.26.701.382.655.246 1.593.408 2.653.408s1.998-.162 2.653-.408c.329-.123.56-.258.701-.382.14-.125.146-.197.146-.21 0-.018-.018-.147-.32-.339-.283-.18-.721-.35-1.286-.472a.5.5 0 1 1 .212-.977c.63.137 1.193.34 1.61.606.4.253.784.645.784 1.182 0 .402-.219.724-.483.958-.264.235-.618.423-1.013.57-.793.298-1.855.472-3.004.472s-2.21-.174-3.004-.471c-.395-.148-.749-.336-1.013-.571-.264-.234-.483-.556-.483-.958 0-.537.384-.929.783-1.182.418-.266.98-.47 1.611-.606a.5.5 0 0 1 .595.383z" />
+          </svg>
+          Room Number: <%=meeting.Location[0].Room%>
+        </li>
+        <%}%>
+        <li>
+          <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-clock" fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm8-7A8 8 0 1 1 0 8a8 8 0 0 1 16 0z" />
+            <path fill-rule="evenodd"
+              d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z" />
+          </svg>
+          <%=meeting.hours%> hour long
+        </li>
+        </ul>
+        <%if(meeting.ZoomLink){%>
+          <a target="_blank" href="<%=meeting.ZoomLink%>" class="btn goTo btn-primary">Go to Zoom meeting</a>
+          <%}else if(meeting.Members[1].handle === session.handle){%>
+  
+          <%}else{%>
+          <p class="zoomMsg">Zoom meeting not scheduled.</p>
+          <button class="btn btn-primary">Send <%=meeting.tutorHandle%> a Reminder </button>
+  
+          <%}%>
+          <%}%>
+      </div>
+    </div>
+    <script type="text/javascript" src="/assets/bootstrap/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../assets/js/Client-DateFunctions.js"></script>
+    <script type="text/javascript" src="../assets/js/ajaxCalls/joinMeeting.js"></script>
+</body>
+
+</html>

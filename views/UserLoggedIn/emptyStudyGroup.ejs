@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<head>
+    <title>Study Groups | degreeMe </title>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/assets/img/favicon.png" type="image/png" />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+    <link href="/assets/css/main1.css" rel="stylesheet">
+    <!-- <link href="/assets/css/userProfile.css" rel="stylesheet"> -->
+    <link href="/assets/css/home.css" rel="stylesheet">
+    <link href="/assets/css/FindStudyGroups.css" rel="stylesheet">
+    <link href="/assets/css/emptyStudyGroup.css" rel="stylesheet">
+   
+    <link rel="stylesheet" href="/assets/bootstrap/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link href="http://fonts.googleapis.com/css?family=Bitter&subset=latin" rel="stylesheet" type="text/css">
+    <script src="assets/jquery/dist/jquery.js"></script>
+   
+
+</head>
+
+<body class="color-dark">
+
+
+    <%- include ('partials/newMessageModal.ejs') %>
+    <%- include ('partials/sideBar.ejs') %>
+    <%- include ('partials/horizontalHeader.ejs')%>
+
+    <div class="  tutorResultsContent ">
+        <div class="text-light findTutorTitle">
+            <h1 class="findTutorSubTitle">Search Groups<em> or </em>Create a Group</h1>
+        </div>
+            <div id="connectionSearchBarContainer">
+                <div id="searchBarWrapper">
+                    <div id="searchBar" class="active-cyan-3 active-cyan-4 mb-4">
+                        <form method="POST" autocomplete="off" class="searchCourse" action="searchCourse">
+                            <div class="input-container2Light">
+                                <button class="searchBtn"><svg class="text-light" width="1em" height="1em"
+                                        viewBox="0 0 16 16" class="bi bi-search" fill="currentColor"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
+                                        <path fill-rule="evenodd"
+                                            d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
+                                    </svg></button>
+                                <input id="searchInput" name="course" class=" input-field "
+                                    placeholder="Search Groups by Course ie ITIS 4166" />
+
+                            </div>
+                        </form>
+                    </div>
+                   
+                </div>
+                <div class="studyGroup-search-container">
+                    <p class="groups-autocomplete-status">Search Groups</p>
+                    <div class="studyGroup-search">
+
+                    </div>
+                </div>
+            </div>
+            
+            <div id="empty-groups-container">
+               <img class="studyGroups-emptyImg" src="/assets/img/groupStudy3.svg">
+  
+                    
+                    <span class="btn btn-primary createStudyGroup">
+                        <a href="/StartAGroup">Create Study Group</a></span>                
+                      
+                </div>
+            </div>
+          
+            <script type="text/javascript" src="/assets/bootstrap/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+            <script type="text/javascript" src="/assets/js/highlightCurrentMenuItem.js"></script>
+            <script type="text/javascript" src="/assets/js/showSideBar.js"></script>
+                <script src="../assets/jquery/jquery.session/jquery.session.js"></script>
+                <script type="text/javascript" src="../assets/js/ajaxCalls/showStudyGroups.js"></script>
+            <script type="text/javascript" src="../assets/js/ajaxCalls/StudyGroups_Autocomplete.js"></script>
+            <script type="text/javascript" src="../assets/js/emptyStudyGroups.js"></script>
+            <script type="text/javascript" src="../assets/js/Client-DateFunctions.js"></script>
+
+
+</body>
+
+</html>

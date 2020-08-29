@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>degreeMe | Connect</title>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+    <link href="/assets/css/main1.css" rel="stylesheet">
+    <link href="/assets/css/toggle.css" rel="stylesheet">
+    <link href="/assets/css/userProfile.css" rel="stylesheet">
+    <link href="/assets/css/userHeader.css" rel="stylesheet">
+    <link href="/assets/css/tutorGrid.css" rel="stylesheet">
+    <link href="assets/css/messageSuccess.css" rel="stylesheet">
+    <link rel="icon" href="/assets/img/favicon.png" type="image/png" />
+    <link rel="stylesheet" href="/assets/bootstrap/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="/assets/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="/assets/js/highlightCurrentMenuItem.js"></script>
+    
+    <script type="text/javascript" src="/assets/js/notification.js"></script>
+    <script src="../assets/jquery/jquery.session/jquery.session.js"></script>
+    <script type="text/javascript" src="/assets/js/highlightCurrentMenuItem.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script type="text/javascript" src="./assets/js/tutorSearch.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+    <script type="text/javascript" src="/assets/js/CreateConversation_Autocomplete.js"></script>
+    <script type="text/javascript" src="assets/js/messages.js"></script>
+
+    <script type="text/javascript" src="./assets/js/searchAutocomplete.js"></script>
+    <script type="text/javascript" src="./assets/js/searchFilter.js"></script>
+    <script type="text/javascript" src="/assets/js/showSideBar.js"></script>
+    <script type="text/javascript" src="/assets/bootstrap/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+       <script type="text/javascript" src="/assets/js/courseSearch.js"></script>
+</head>
+<body class="color-dark">
+    <% include partials/newMessageModal.ejs %>
+    <% include partials/sideBar.ejs %>
+    <% include partials/horizontalHeader.ejs%>
+    <h1 class="tutorTotal  badge badge-primary"><%=tutorCount%> Tutors Available </h1>
+    <div class="myCoursesContainer">
+        <button class="showCoursesButton"><img class="rightArrowImg" src="assets/img/leftArrow.svg" />
+            <p class="myCoursesText">My Courses</p>
+        </button>
+    </div>
+    <div class="searchFilterContainer">
+        <button class="showFilterButton"><img class="rightArrowImg1" src="assets/img/rightArrowLight.svg" />
+            <p class="myCoursesText">Search Filters</p>
+        </button>
+    </div>
+    <div class="sideBarMyCourses">
+        <ul>
+            <li class=""><a href="/Connect?course=%C2%A0Data%20Structures%20and%20Algorithms">Data Structures and
+                    Algorithms</a></li>
+            <small class="sideBarTutorCount badge badge-primary">42 Tutors</small>
+            <li><a href="/http://127.0.0.1:3000/Connect?course=%C2%A0College%20Algebra">College Algebra</a></li>
+            <small class="sideBarTutorCount badge badge-primary">16 Tutors</small>
+            <li><a href="http://127.0.0.1:3000/Connect?course=%C2%A0Principles%20of%20Accounting%20I">Principles of
+                    Accounting 1</a></li>
+            <small class="sideBarTutorCount badge badge-primary">22 Tutors</small>
+            <li>
+                <div class="input-container-addCourse">
+
+                    <input id="users" name="subject" class=" input-field-message subject" placeholder="Add a Course"
+                        spellcheck="false" />
+
+                    <div class="btn icon3" id="addCourseBtn"><img class="addImg" src="/assets/img/ConnectDark.svg" />
+                    </div>
+                </div>
+    </div>
+    </li>
+    </ul>
+    </div>
+    <div class="sideBarSearchFilter">
+        <h1 class="myCoursesTitle">Search Filters</h1>
+        <div class="searchFilterItems-Container">
+            <form method="POST" action="searchFilter">
+                <h2 class="searchFilterHeader">Type</h2>
+                <label id="GroupLabel" class="searchType" for="All">All</label>
+                <input id="All" class="" type="radio" name="searchType" />
+                <label id="GroupLabel" class="searchType" for="Group">Group</label>
+                <input id="Group" class="" type="radio" name="searchType" />
+                <label id="IndividualLabel" class="searchType" for="Individual">Individual</label>
+                <input id="Individual" class="" type="radio" name="searchType" />
+                <h2 class="searchFilterHeader searchFilterHeader2">Price Range</h2>
+                <input class="priceSlider" name="theme" type="range" min="7" max="50" value="1" class="" id="">
+                <div class="priceSliderContainer">
+                    <ul class="searchFilterPriceMenu">
+                        <li class=" searchFilterPriceItem1">
+                            <p>$7</p>
+                        </li>
+                        <li class=" searchFilterPriceItem">
+                            <p>$50</p>
+                        </li>
+                    </ul>
+                </div>
+                <p class="searchFilterPriceText">$7/hr or less</p>
+                <button class="btn btn-primary searchFilterBtn">Update Results</button>
+            </form>
+        </div>
+    </div>
+    <div class=" connectionsPadding contentBlock">
+        <div id="connectionSearchBarContainer">
+            <div class="schoolTitle">
+                <h1 class="badge badge-success mainTitle1">UNC Charlotte</h1>
+            </div>
+            <div id="searchBarWrapper">
+                <div id="searchBar" class="active-cyan-3 active-cyan-4 mb-4">
+                    <form method="GET" autocomplete="off">
+                        <div class="input-container1Light">
+                            <input id="searchInput" class=" input-field "
+                                placeholder="Search Courses at UNC Charlotte" />
+                            <button class="searchBtn"><i class="fa fa-user icon"><img src="/assets/img/search.svg.svg"
+                                        class="signup-icon" /></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <h1 class="resultSubject"><%=qs.course%></h1>
+        <% if(qs.course){%>
+            <h1 class="noTutors"><%=subject%></h1>
+        <%}%>
+    </body>
+    
+</html>

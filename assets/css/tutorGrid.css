@@ -1,0 +1,58 @@
+.tutorBtn{
+    background-color: #007bff;
+}
+.tutorButtons a{
+    display:inline-block!important;
+    
+}
+.tutorBlock{   
+    height:200px;
+    margin-bottom:20px;
+    display: -webkit-inline-box;
+    margin-bottom:50px;
+    border-radius:10px;
+    
+}
+.reviewBlock{  
+        min-height:120px;
+        margin-bottom:20px;
+        display: -webkit-inline-box;
+        margin-bottom:50px;
+        border-radius:10px;
+        
+}
+.iconImg{
+    float:left;
+    margin-right:15px;
+    width:10px!important;
+}
+.iconImg svg {
+    fill: #d4d4d4;
+    width: 15px;
+}
+.courseText {
+    top: 6px;
+}
+.infoItem{
+    width:50%;
+    margin-right:0!important;
+    margin-bottom:10px;
+}
+.hostName{
+    color:white;
+    
+}
+.tutorButtons form{
+    display:block!important;
+    width:10%!important;
+    position:absolute;
+}
+.tutorBlockBody{
+    text-align: left;
+    width: 65%;
+    margin-bottom: 0;
+    margin-top:25px;
+    margin-left:0;
+    float: right;
+    color: #a3a3a3;
+}

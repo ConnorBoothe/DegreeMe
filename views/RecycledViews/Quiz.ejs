@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Create Custom Connection</title>
+        <meta charset="UTF-8">
+        <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+        <link href="assets/css/main1.css" rel="stylesheet">
+        <link href="assets/css/toggle.css" rel="stylesheet">
+        <link href="assets/css/userProfile.css" rel="stylesheet">
+        <link href="assets/css/userHeader.css" rel="stylesheet">
+        <link href="assets/css/update.css" rel="stylesheet">
+        <link rel="stylesheet" href="assets/bootstrap/node_modules/bootstrap/dist/css/bootstrap.min.css">
+        <script src="assets/jquery/dist/jquery.js"></script>
+      
+        <script type="text/javascript" src="assets/js/main.js"></script>
+        <script type="text/javascript" src="assets/js/notification.js"></script>
+        <script type="text/javascript" src="assets/js/highlightCurrentMenuItem.js"></script>
+        <script type="text/javascript" src="assets/js/update.js"></script>
+        
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+        <script type="text/javascript" src="assets/js/quiz.js"></script>
+        <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+        <script type="text/javascript" src="assets/js/highlightAnswerChoice.js"></script>
+    </head>
+    
+      
+        <body>
+    
+        <div class="page-container">
+            <% include partials/sideBar.ejs%>
+            <% include partials/horizontalHeader.ejs%>
+            <div class="homeContainer <%=session.theme%>">
+                    <div class="contentBlock">
+                        <ul class="questionHeader">
+                            <% for(var x = 0; x<10;x++){%>
+                              <li id="<%=x+1%>" class="questionNumHeader bg-primary"><p><%=x+1%></p></li>
+                            <%}%>
+                        </ul>
+                  <div class="quizContainer">
+                    
+                     
+                    <form method="POST" action="/submitQuiz">
+                    <% for(var x = 0; x<10;x++){%>
+                        <a name="<%=x+1%>"></a>
+                        
+                    <div class="quiz">
+                        
+                        <div class="question">
+                         
+                          <div class="questionTxt"><span id="quizNumber<%=x%>" class="quizNumber bg-primary"><%=x+1%></span>What is the name of the dicator of Italy during WW2?</div>
+                         
+                            <div class="answerChoices<%=x%>">
+                              <label class="<%=session.theme%>" for="A"><span>This is an answer choice</span></label>
+                              <input id="A" type="radio" value="A" name="quiz">
+                              <label class="<%=session.theme%>" for="B"><span>This is an answer choice</span></label>
+                              <input id="B"type="radio" value="B" name="quiz">
+                              <label class="<%=session.theme%>" for="C"><span>This is an answer choice</span></label>
+                              <input id="C" type="radio" value="C" name="quiz">
+                              <label class="<%=session.theme%>" for="D" ><span>This is an answer choice</span></label>
+                              <input id="D" type="radio" value="D" name="quiz">
+                            </div>
+                        </div>
+                      
+                    </div>  
+                    <%}%>
+                    <input type="submit" class="btn btn-danger"/>
+                  </form>
+                  </div>
+
+                      
+                              
+                  
+                 
+            
+                </div>
+                
+                </div>
+                
+            </div>
+       
+    </body>
+</html>

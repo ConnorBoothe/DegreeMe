@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+    <head>
+        <title>Edit Listing | degreeMe</title>
+        <link rel="icon" href="../assets/img/favicon.png" type="image/png" />
+        <meta charset="UTF-8">
+        <!-- Stylesheets -->
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="../assets/bootstrap/node_modules/bootstrap/dist/css/bootstrap.min.css">
+        <link href="../assets/css/main1.css" rel="stylesheet">
+        <link href="../assets/css/HostASession.css" rel="stylesheet">
+        <link href="../assets/css/listingCalendar.css" rel="stylesheet">
+        <link href="../assets/css/home.css" rel="stylesheet">
+        <script src="../assets/jquery/dist/jquery.js"></script>
+    </head>
+        <body class="color-dark">
+           <input type="hidden" id="listingId" name="listingId" value="<%=params.id%>"/>
+           <%- include ('partials/sideBar.ejs')%>
+           <%- include ('partials/horizontalHeader.ejs')%>
+                <div class="homeContainer">
+                    <div class="contentBlockHost">
+                     <div class="listingSuccess">
+                        <h3>Your tutor listing has been updated!</h3>
+                        <img class="successImg" src="../assets/img/undraw_completed.svg" />
+                     </div>
+                        <div id= "signUpWrapper">
+                            <div id="hostSession-form" class="">
+                              <div class="slider-container">
+                                 <%if(listing.Active){%>
+                                    <input class="priceSlider" name="theme" type="range" min="1" max="2" value="1" class="" id="">
+                                    <p class="active">Active</p>
+                                 <%}else{%>
+                                    <input class="priceSlider" name="theme" type="range" min="1" max="2" value="2" class="" id="">
+                                    <p class="active" style="color:#dc3545;">Disabled</p>
+                                <%}%>
+                              </div>   
+                              <%if(listing.Active){%>
+                                 <div class="createListingDiv">
+                              <%}else{%>
+                                 <div class="createListingDiv" style="opacity:.7">
+                              <%}%>
+                                      
+                                       <div class="edit-header-container">
+                                        
+                              
+                                       <h1 class="userInfoHeading editListing">Editing Listing</h1>
+                                    </div>
+                                       <div class="unchangeable-wrapper">
+
+                                       
+                                          <div class="unchangeableDetails">
+                                             <h1 class="listingTypeHeader">Type</h1>
+                                             <p class="editListing-text"><%=listing.Type.split(" ")[0] %></p>
+                                          </div>
+                                          <div class="unchangeableDetails">
+                                             <h1 class="listingTypeHeader">Course</h1>
+                                             <p class="editListing-text"><%=listing.CourseCode%></p>
+                                          </div>
+                                          <div class="unchangeableDetails">
+                                             <h2 class="listingTypeHeader">Expiration Date</h2>
+                                             <p class="editListing-text"><%=formatDate(listing.ExpirationDate)%></p>
+                                          </div>
+                                    </div>
+                                       <div>
+                                          <div class="price-container-edit">
+                                       <h1 class="userInfoHeading">Listing Details</h1>
+                                    <form method="POST" action="/createSession">
+                                       <input type="hidden" name="bs" value="bullshit"/>
+                                      <div class="listingDetailsContainer">
+                                      <p class="listingDetailsLabel">Session Price</p>
+                                        <div class="input-container-hostSession1">
+                                           <i class="fa fa-user"><img src="../assets/img/dollarWhite.svg" class="dollar-icon"/></i>
+                                           <input value="<%=listing.HourlyRate%>" type="text" name="hourlyRate" id="hourlyRate" class=" input-field-hostSession1" id="hourlyRate" value="0.00" placeholder="0.00"  autocomplete="off"/>
+                                           <p class="fa fa-user icon hours"><strong>USD/hour</strong></p>
+                                           <small class="hourlyRateTxt"></small>
+                                        </div>
+                                        </div>
+                                        <!-- <small>We take a 5% platform fee from this transaction</small> -->
+                                        <div class="listingDetailsContainer">
+                                          <p class="listingDetailsLabel">Session Duration</p>
+                                        <div class="input-container-hostSession1">
+                                            <input value ="<%=listing.NumHours%>" id="duration" min="1" max="5" step="0.5" type="number" name="duration" class="input-field-hostSession1  <%=session.theme%>" id="duration" placeholder="1" value="1" autocomplete="off"/>
+                                            <p class="fa fa-user icon hours"><strong>Hour(s)</strong></p>
+                                         </div>
+                                        </div>
+                                        <%if(!listing.Virtual){%>
+                                          <div class="listingDetailsContainer">
+                                             <p class="listingDetailsLabel">Building</p>
+                                         <div class="input-container-hostSession1">
+                                             <input value="<%=listing.Building%>"  name="building" id="building" type="text" class=" input-field-hostSession1  <%=session.theme%>" placeholder="Atkins" autocomplete="off"/>     
+                                          </div>
+                                       </div>
+                                          <div class="listingDetailsContainer">
+                                             <p class="listingDetailsLabel">Room Number</p>
+                                          <div class="input-container-hostSession1">
+                                             <input value="<%=listing.Room%>" name="room" id="room" type="text" class=" input-field-hostSession1  <%=session.theme%>" placeholder="G32" autocomplete="off">   
+                                          </div>
+                                       </div>
+                                       <%}%>
+                                          <%if(listing.Type != 'Individual Session'){%>
+                                             <div class="groupSesh">
+                                                <div class="listingDetailsContainer">
+                                                <p class="listingDetailsLabel">Maximum Students Allowed</p>
+                                               <div class="input-container-hostSession1">
+                                                  <input value="<%=listing.MaxStudents%>" step="1" min="1" max="7" type="number" name="maxStudents" class="input-field-hostSession1  <%=session.theme%>" id="maxStudents" placeholder="5" autocomplete="off"/>
+                                                </div> 
+                                               </div>
+                                             </div>
+                                          <%}%>
+                                       </div>
+                                       <br>
+                                      
+                                       <h2 class="userInfoHeading">Update Expiration</h2>
+                                       <!-- Will add expiration date to sessions. For now, user must manually disable it -->
+                                       <div class="durationSliderContainer">
+                                          <select class="expiration host-session-select">
+                                             <option value="0">Select Expiration Date</option>
+                                             <option value="1">Expires in 1 week</option>
+                                             <option value="2">Expires in 2 weeks</option>
+                                             <option value="4">Expires in 1 month</option>
+                                          </select>
+                                       </div>
+                                      
+                                       <input type="hidden" value="" name="listingDuration" id="listingDuration"/>
+                                       <h1 class="userInfoHeading1">Current Schedule</h1>
+                                       <div class="currentSchedule-container">
+                                       <% for(x in listing.Schedule){%>
+                                             <div class="currentSchedule">
+                                                <%if(new Date() <= new Date(listing.Schedule[x].date)){%>
+                                                   <p class="badge badge-warning"><%=formatDate(new Date(listing.Schedule[x].date)) + " " + formatTime(new Date(listing.Schedule[x].date))%></p>
+                                                <%}%>
+                                             </div>
+                                       <%}%>
+                                       </div>
+                                         <h1 class="userInfoHeading1">Edit Your Schedule<span class="scheduleErr">No time slots selected</span></h1>
+                                         <p class="calendar-info">By making new time selections, you will overwrite your old schedule.</p>
+                                         <!-- Display calendar rows -->
+                                         <div class="calendar-wrapper">
+                                         <%- include ('partials/calendarDisplay') %> 
+                                       </div>
+                                         <button class="btn btn-primary saveChanges" id="">Save Changes</button>
+                                         <p class="listingErrMsg"></p>
+                                         <input type="hidden" id="userId" value="<%=session.userId%>"/>
+                                        
+                                      </div>
+                                     
+                                    </form> 
+                                    </div> 
+                                 </div>
+                              </div>
+
+                                  </div>
+                                 
+                    </div> 
+                    <div aria-live="polite" aria-atomic="true" style="position: fixed; bottom: 0; right: 0;min-height: 200px;margin-right:3%;" >
+                     <div class="toast" data-delay="1000">
+                       <div class="toast-body bg-danger text-light">
+                         Error: Timeslot overlap
+                       </div>
+                     </div>
+                   </div>
+
+         <!-- Scripts -->
+        <script src="../assets/jquery/jquery.session/jquery.session.js"></script>
+        <script src="../assets/js/popper.min.js"></script>
+        <script type="text/javascript" src="../assets/bootstrap/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="../assets/js/jquery-maskMoney.js"></script>
+        <script type="text/javascript" src="../assets/js/MoneyInput.js"></script>
+        <script type="text/javascript" src="../assets/js/hostSessionDOM.js"></script>
+        <script type="text/javascript" src="../assets/js/Client-DateFunctions.js"></script>
+        <script type="text/javascript" src="../assets/js/highlightCurrentMenuItem.js"></script>
+        <script type="text/javascript" src="../assets/js/ajaxCalls/calendar.js"></script>
+        <script type="text/javascript" src="../assets/js/ajaxCalls/editListing.js"></script>
+    </body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Create Custom Connection</title>
+        <meta charset="UTF-8">
+        <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+        <link href="assets/css/main1.css" rel="stylesheet">
+        <link href="assets/css/toggle.css" rel="stylesheet">
+        <link href="assets/css/userProfile.css" rel="stylesheet">
+        <link href="assets/css/userHeader.css" rel="stylesheet">
+        <link href="assets/css/update.css" rel="stylesheet">
+        <link rel="stylesheet" href="assets/bootstrap/node_modules/bootstrap/dist/css/bootstrap.min.css">
+        <script src="assets/jquery/dist/jquery.js"></script>
+      
+        <script type="text/javascript" src="assets/js/main.js"></script>
+        <script type="text/javascript" src="assets/js/notification.js"></script>
+        <script type="text/javascript" src="assets/js/highlightCurrentMenuItem.js"></script>
+        <script type="text/javascript" src="assets/js/update.js"></script>
+        
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+        <script type="text/javascript" src="assets/js/quiz.js"></script>
+        <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    </head>
+    
+      
+        <body>
+    
+        <div class="page-container">
+            <% include partials/sideBar.ejs%>
+            <% include partials/horizontalHeader.ejs%>
+            <div class="homeContainer <%=session.theme%>">
+                    <div class="contentBlock">
+                        <div id= "signUpWrapper">
+                            <div id="signup-form" class="">
+                                    <% if(session.theme == 'bg-dark'){%>
+                                    <form method="POST" action="/createConnection">
+                                      <div class="form-group">
+                                          <label class="text-light">User</label>
+                                          <h2 name="name" id="first"><%=session.handle%></h2>
+                                          <small id="firstTxt"></small>
+                                      </div>
+                                      <div class="form-group">
+                                        <label class="text-light">School</label>
+                                        <h2 name="school" id="schoolSignUp" ><%=session.school%></h2>
+                                        <small id="schoolTxt"></small>
+                                      </div>
+                                      <div class="form-group">
+                                        <label class="text-light">Subject</label>
+                                        <input name="subject" id="subject" type="text" class="form-control" placeholder="Enter Subject">
+                                      </div>
+                                      <div class="form-group">
+                                        <label class="text-light">Grade Received in Course</label><br>
+                                        <select name="grade">
+                                            <option value="A">A</option>
+                                            <option value="B">B</option>
+                                            <option value="C">C</option>
+                                            <option value="D">D</option>
+                                            <option value="F">F</option>
+                                        </select>
+                                      </div>
+                                      <button class="btn btn-danger" id="quizBtn">Take the Quiz</button>
+                                      <div class='formPt2'>
+                                      <div class="form-group">
+                                          <label class="text-light">Quiz Grade</label>
+                                          <input name="score" id="date" type="text" class="form-control" value="87%" disabled='disabled'>
+                                         
+                                        </div>
+                                      <div class="form-group">
+                                            <label class="text-light">Date</label>
+                                            <input name="date" id="date" type="date" class="form-control" placeholder="Enter Subject">
+                                           
+                                          </div>
+                                        <div class="form-group">
+                                            <label class="text-light">Time</label>
+                                            <input name="time" id="time" type="time" class="form-control" placeholder="Enter Subject">     
+                                        </div>
+                                        <div class="form-group">
+                                                <label class="text-light">Location</label>
+                                                <input name="location" id="location" type="text" class="form-control" placeholder="Enter Subject">
+                                        </div>
+                                      
+                                      <div class="form-group">
+                                        <label class="text-light">Group or Individual?</label><br>
+                                        
+                                        <select name="type">
+                                            <option value="Group">Group</option>
+                                            <option value="Individual">Individual</option>
+                                        </select>
+                                        
+                                      </div>
+                                      <button type="submit" class="btn btn-danger" id="loginBtnSignUp">Create</button>
+                                    </div>
+                                    </form>   
+                                    <%}else{%>
+                                      <form method="POST" action="/createConnection">
+                                        <div class="form-group">
+                                            <label class="text-dark">User Name</label>
+                                            <input name="name" id="first" type="text" class="form-control"  placeholder="First Name" spellcheck="false" value="<%=session.name%>">
+                                            <small id="firstTxt"></small>
+                                        </div>
+                                        <div class="form-group">
+                                          <label class="text-dark">School</label>
+                                          <input name="school" id="schoolSignUp" type="text" class="form-control" placeholder="Enter School" value="<%=session.school%>">
+                                          <small id="schoolTxt"></small>
+                                        </div>
+                                        <div class="form-group">
+                                          <label class="text-dark">Subject</label>
+                                          <input name="subject" id="subject" type="text" class="form-control" placeholder="Enter Subject">
+                                        </div>
+                                        <div class="form-group">
+                                          <label class="text-dark">Grade Received in Course</label><br>
+                                          
+                                          <select name="grade">
+                                              <option value="A">A</option>
+                                              <option value="B">B</option>
+                                              <option value="C">C</option>
+                                              <option value="D">D</option>
+                                              <option value="F">F</option>
+                                          </select>
+                                          </div>
+                                       
+                                        <div class="form-group">
+                                              <label class="text-dark">Date</label>
+                                              <input name="date" id="date" type="date" class="form-control" placeholder="Enter Subject">
+                                             
+                                            </div>
+                                          <div class="form-group">
+                                              <label class="text-dark">Time</label>
+                                              <input name="time" id="time" type="time" class="form-control" placeholder="Enter Subject">     
+                                          </div>
+                                          <div class="form-group">
+                                                  <label class="text-light">Location</label>
+                                                  <input name="location" id="location" type="text" class="form-control" placeholder="Enter Subject">
+                                          </div>
+                                        
+                                        <div class="form-group">
+                                          <label class="text-dark">Group or Individual?</label><br>
+                                          <select name="type">
+                                              <option value="Group">Group</option>
+                                              <option value="Individual">Individual</option>
+                                          </select>
+                                        </div>
+                                        <button type="submit" class="btn btn-danger" id="loginBtnSignUp">Create</button>
+                                      </form>   
+                                    <%}%>
+                                    <input style="display:none" id="session" value="<%=session.theme%>"/>
+                                  </div>
+                    </div>  
+                  <div class="quizContainer">
+
+                  
+                    <div class="quiz">
+                        <h1 class="quizTitle"></h1>
+                        <div class="question">
+                          <h2 class="questionTxt">What is 2+2?</h2>
+                          <form>
+                            <div class="answerChoices">
+                              <label for="A">This is an answer choice</label>
+                              <input id="A" type="radio" value="A" name="quiz">
+                              <label for="B">B</label>
+                              <input id="B"type="radio" value="B" name="quiz">
+                              <label for="C">C</label>
+                              <input id="C" type="radio" value="C" name="quiz">
+                              <label for="D" >D</label>
+                              <input id="D" type="radio" value="D" name="quiz">
+                            </div>
+                        </div>
+                      </form>
+                    </div>  
+                  </div>
+
+                      
+                              
+                  
+                 
+            
+                </div>
+                
+                </div>
+                
+            </div>
+       
+    </body>
+</html>

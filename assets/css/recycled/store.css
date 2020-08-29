@@ -1,0 +1,70 @@
+.subscriptionList{
+  display:inline-block;
+  background-color:#23272A	;
+  box-shadow: 1px 1px 1px 2px grey;
+  margin-right:20px;
+  list-style-type:none;
+  width:16%;
+  border-radius:10px;
+
+  padding-bottom:50px;
+
+  margin-top:40px;
+
+}
+
+.subscriptionListHeader{
+  color:#a9a9a9;
+  font-size:22px;
+  font-family:"Helvetica Neue", Helvetica, sans-serif;
+  padding-top:25px;
+  
+}
+.loginLink2{
+  font-family:"Helvetica Neue", Helvetica, sans-serif;
+  font-size:16px!important;
+  font-weight:100!important;
+ color:white!important;
+ box-shadow: 1px 1px 0px 1px #343a40;
+ margin-top:-5px;
+ border-radius:20px!important;
+width:150px;
+ border:none!important;
+
+ padding:10px;
+}
+.subList li .subscriptionHeader{
+  font-family:"Helvetica Neue", Helvetica, sans-serif;
+  padding-top:25px;
+  display:inline-block;
+
+}
+.subList li{
+  display:inline-block;
+}
+.subTxt{
+  font-size:22px;
+  font-family:"Helvetica Neue", Helvetica, sans-serif;
+  text-align:left;
+  display:inline-block;
+  width:300px;
+}
+.storeInfo{
+  text-align:center;
+  margin-left:auto;
+  margin-right:auto;
+}
+.subTxt span{
+  font-size:30px;
+}
+.subscriptionList ul li, .subscriptionList1 ul li,.subscriptionList2 ul li, .subscriptionList3 ul li{
+  padding-bottom:10px;
+  padding-top:10px;
+  font-size:18px;
+  list-style-type:none;
+  color:white;
+  text-align:left;
+  padding-left:20px;
+  padding-right:20px;
+  font-family:"Helvetica Neue", Helvetica, sans-serif;
+}

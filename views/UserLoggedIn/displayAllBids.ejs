@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<head>
+    <title>Home | degreeMe</title>
+    <meta charset="UTF-8">
+    <!-- Stylesheets -->
+    <link rel="icon" href="assets/img/favicon.png" type="image/png" />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/bootstrap/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link href="assets/css/main1.css" rel="stylesheet">
+    <link href="/assets/css/home.css" rel="stylesheet">
+    <link href="/assets/css/acceptedBids.css" rel="stylesheet">
+    <script src="assets/jquery/dist/jquery.js"></script>
+   
+    <!-- Will use this in the future -->
+    <!-- <script type="text/javascript" src="../assets/js/statusAlerts.js"></script> -->
+</head>
+
+
+<body class="color-dark">
+    <div class="">
+        <%- include ('partials/sideBar.ejs')%>
+        <%- include ('partials/horizontalHeader.ejs')%>
+        <%- include ('partials/newMessageButton.ejs')%>
+        <%- include ('partials/newMessageModal.ejs')%>
+
+        <div class="home-wrapper">
+            <%- include ('partials/myCoursesSideBar.ejs')%>
+            <div class="timeline">
+                <h1 class="text-light timeline-title">Accepted Bids</h1>
+                <%for(x in acceptedBids){%>
+                <div class="timeline-container-status">
+                    <div class="postHeader">
+                        <div class="postRight">
+                            <p class="dueDateText badge badge-warning info-badge">Due: <%= formatDate(acceptedBids[x].DueDate) %></p>
+                    
+                            
+                        </div>
+                        <img class="timelinePost-Image" src="<%= session.img %>" />
+                        <p class="timelinePost-username"><%= acceptedBids[x].Bidder %></p>
+                    </div>
+                    <p class="caption"><%= acceptedBids[x].Description %></p>
+                    <ul class="postDetailsList">
+                        <li class="postDetailsItem ">
+                            <p class="badge badge-dark info-badge priceBadge">$<%= acceptedBids[x].Price %></p>
+                        </li>
+                        <li class="postDetailsItem ">
+                            <a class="btn btn-primary viewBid" href="/AcceptedBid/<%= acceptedBids[x]._id %>">View</a>
+                        </li>
+                        
+                    </ul>
+                    <div class="">
+                        <p class="text text-light fundsTxt">Funds will be released <%= formatDate(acceptedBids[x].DueDate) %> at 12:00 AM</p>
+
+                    </div>
+                </div>
+                <%}%>
+            </div>
+        </div>
+    </div>
+  
+    <script src="../assets/jquery/jquery.session/jquery.session.js"></script>
+    <script type="text/javascript" src="/assets/bootstrap/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../assets/js/popper.min.js"></script>
+    <script src="../assets/js/jquery-maskMoney.js"></script>
+    <script type="text/javascript" src="../assets/js/MoneyInput.js"></script>
+    <script type="text/javascript" src="/assets/js/CreateConversation_Autocomplete.js"></script>
+    <script type="text/javascript" src="/assets/js/UpdateTimeline.js"></script>
+    <script type="text/javascript" src="/assets/js/ajaxCalls/placeBid.js"></script>
+    <script type="text/javascript" src="../assets/js/Client-DateFunctions.js"></script>
+
+</body>
+
+</html>

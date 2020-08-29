@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+    <head>
+        <title><%=params.CourseName%> | degreeMe </title>
+        <meta charset="UTF-8">
+        <link rel="icon" href="../assets/img/favicon.png" type="image/png" />
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="../assets/bootstrap/node_modules/bootstrap/dist/css/bootstrap.min.css">
+        <link href="../assets/css/main1.css" rel="stylesheet">
+        <link href="../assets/css/home.css" rel="stylesheet">
+        <link href="../assets/css/CourseProfile.css" rel="stylesheet">
+        <script src="../assets/jquery/dist/jquery.js"></script>
+    </head>
+        <body class="color-dark">
+         <div class="page-container">
+            <%- include ('partials/sideBar.ejs')%>
+            <%- include ('partials/horizontalHeader.ejs')%>
+            <div class="profile-wrapper">
+              <div class="courseProfileContainer1">
+                  <div class="course-profile-header">
+                        <div class="CourseHeader-wrapper">
+                                    <div class="">
+                                        <div class="">
+                                          <div class="CourseTitle">
+                                            
+                                            <h1 class="courseName text-light"><%=course.CourseName%></h1>
+                                            <div class="courseCodeTxt courseCodeTxt1" ><%=course.Department%> <%=course.CourseCode%>
+                                                  
+                                                <p class="badge badge-primary numStudents">Discussion</p></div>
+                                        </div>
+                                            <!-- <h1 class="schoolNameProfile text-light" >UNC Charlotte</h1> -->
+                                          
+                                        </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Display if they have published a tutoring session -->
+                </div>
+            </div>
+            <div class="comments-container">
+                <!-- (id, commenterImg, commenter, message1, date1) -->
+                <div class="comment-sub-container">
+                    <p class="userQuestion"><img class="discImg" src="../<%=discussion.userImg%>"/><span class="userName-text"><a href="../User/<%=discussion.userHandle%>"><%=discussion.userHandle%></a></span></p>
+                    <h3 class="text-light question-Header"><%=discussion.post%></h3>
+                    <form method="POST" action="addComment">
+                        <textarea class="commentMsg" name="commentMessage" placeholder="Write your response"></textarea>
+                        <input type="hidden" name="commentImg" value="<%=session.img%>" />
+                        <input type="hidden" name="originalHandle" value="<%=discussion.userHandle%>" />
+                        <input type="hidden" name="commentHandle" value="<%=session.handle%>" />
+                        <input type="hidden" name="course" value="<%=discussion.courseName%>" />
+                        <input type="hidden" name="discId" value="<%=discussion._id%>" />
+                        <br>
+                        <input class="btn btn-primary" id="comments-button" type="submit" name="" value="Add Response" />
+                    </form>
+                    <h3 class="text-light response-Header">Responses</h3>
+                <div class="commentTabs">
+                    <% for(var x= discussion.comments.length-1; x>= 0 ; x--){%>
+                    <div class="comment-container">
+                            <p class="text-light" id="text-date"><%=formatDate(discussion.comments[x].date)%></p>
+                        <span>
+                            <img class="discImg" src="../<%=discussion.comments[x].commenterImg%>" />
+                            <a href= "../User/<%=discussion.comments[x].commenterHandle%>"><span class="text-light userName-text" ><%=discussion.comments[x].commenterHandle%></span></a>
+                        </span>
+
+
+                        <p class="text-light comments-text"><%=discussion.comments[x].message%></p>
+                        
+
+                    </div>
+                    <%}%>
+                </div>          
+
+            </div>
+            </div>
+            
+            
+        
+    </div>
+    
+   
+    
+    <script src="../assets/jquery/jquery.session/jquery.session.js"></script>
+    <script type="text/javascript" src="../assets/js/Client-DateFunctions.js"></script>
+
+    <script type="text/javascript" src="/assets/bootstrap/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    </body>
+</html>

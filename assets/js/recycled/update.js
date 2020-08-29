@@ -1,0 +1,9 @@
+$(document).ready(function(){
+    $('.update').on("click",function(e){
+        e.preventDefault();
+        $(this).next().fadeIn(500);
+    })
+    $('.x').on("click",function(){
+        $(this).parent().fadeOut(200);
+    })
+});

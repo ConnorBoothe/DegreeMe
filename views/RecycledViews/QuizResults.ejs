@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Create Custom Connection</title>
+        <meta charset="UTF-8">
+        <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+        <link href="assets/css/main1.css" rel="stylesheet">
+        <link href="assets/css/toggle.css" rel="stylesheet">
+        <link href="assets/css/userProfile.css" rel="stylesheet">
+        <link href="assets/css/userHeader.css" rel="stylesheet">
+        <link href="assets/css/update.css" rel="stylesheet">
+        <link rel="stylesheet" href="assets/bootstrap/node_modules/bootstrap/dist/css/bootstrap.min.css">
+        <script src="assets/jquery/dist/jquery.js"></script>
+      
+        <script type="text/javascript" src="assets/js/main.js"></script>
+        <script type="text/javascript" src="assets/js/notification.js"></script>
+        <script type="text/javascript" src="assets/js/highlightCurrentMenuItem.js"></script>
+        <script type="text/javascript" src="assets/js/update.js"></script>
+        
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+        <script type="text/javascript" src="assets/js/quiz.js"></script>
+        <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+        <script type="text/javascript" src="assets/js/highlightAnswerChoice.js"></script>
+    </head>
+    
+      
+        <body>
+    
+        <div class="page-container">
+            <% include partials/sideBar.ejs%>
+            <% include partials/horizontalHeader.ejs%>
+            <div class="homeContainer <%=session.theme%>">
+                <div class="contentBlock">
+                <div id="failedTest">
+                        <h1><%=qs.course%> Knowledge Check Score: 69%</h1>
+                       
+                        <img class="failImg" src="assets/img/FailedTest.svg" />
+                        <br>
+                        <p class="quizResultsTxt">You must score 70% or above to continue</p>
+                        <a href="/KnowledgeCheck?course=Math"+qs.course class="btn btn-danger">Try Again</a>
+                </div>
+                  
+
+                      
+                              
+                  
+                 
+            
+                </div>
+                
+                </div>
+                
+            </div>
+       
+    </body>
+</html>

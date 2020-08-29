@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<head>
+    <title><%=studyGroup.GroupName%> | degreeMe</title>
+    <meta charset="UTF-8">
+    <link rel="icon" href="../assets/img/favicon.png" type="image/png" />
+    <!-- Stylesheets -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/bootstrap/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link href="../assets/css/main1.css" rel="stylesheet">
+    <link href="../assets/css/StudyGroupProfile.css" rel="stylesheet" />
+    <link href="../assets/css/home.css" rel="stylesheet">
+    <!-- Scripts -->
+    <script src="../assets/jquery/dist/jquery.js"></script>
+
+    <!-- <script type="text/javascript" src="../assets/js/newMeetupDOM.js"></script> -->
+</head>
+
+<body class="color-dark">
+    <div class="page-container">
+        <%- include ('partials/newMeetupModal.ejs') %>
+        <%- include ('partials/sideBar.ejs') %>
+        <%- include ('partials/horizontalHeader.ejs')%>
+        <%- include ('partials/groupMembersSideBar.ejs')%>
+        <div class="profile-wrapper">
+            <div class="studyGroupProfileContainer">
+                <!-- Modal -->
+                <div class="modal fade" id="groupProfileModal" tabindex="-1" role="dialog"
+                    aria-labelledby="groupProfileModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <div class="modal-picture">
+                                    <img class="modal-bye" src="../../assets/img/feeling-sad.svg">
+                                </div>
+                                <div class="modal-title-text">
+                                    <h4 class="modal-title" id="groupProfileModalLabel">OH NO!</h4>
+                                </div>
+
+                            </div>
+                            <br>
+                            <div class="modal-secondText">
+                                <div class="modal-body">
+                                    ...
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button id="groupProfileNo" type="button" class="btn btn-default"
+                                    data-dismiss="modal">No</button>
+                                <button id="groupProfileYes" type="button" class="btn btn-danger">Yes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="course-profile-header">
+                    <div class="studyGroupHeader-wrapper">
+
+                        <div id="courseTitle" class="CourseTitle">
+                            <div class="groupName text-light">
+                                <h1 class="groupName text-light"><%=studyGroup.GroupName%></h1>
+                                <h1 class="subjectName text-light"><%=studyGroup.Subject%></h1>
+                            <p class="admin">Admin: <a href="../User/<%=studyGroup.HostHandle%>"><img class="adminImage" src="../<%=studyGroup.HostImage%>" /><%=studyGroup.HostHandle%></p></a>
+                            
+                            </div>
+                            
+                            <div class="studyGroupProfileButtons">
+                                <% var isMember = false;%>
+                                <% for (x in studyGroup.Members){%>
+                                <%if(studyGroup.Members[x].MemberHandle == session.handle){%>
+                                <%isMember = true%>
+                                <%}%>
+                                                <%}%>
+                                <% if(isMember){%>
+                                <a href="../messages?messageId=<%=studyGroup.MessageId%>" class="btn btn-dark follow-btn groupMessage">Group Message Thread</a>
+                                <button id="makeSession" class="btn btn-primary follow-btn " data-toggle="modal"
+                                    data-target="#newMeetup">Create Study Session</button>
+                                <form action="/#" method="post" id="joinedGroup">
+                                    <input name="joinGroup" type="hidden" value="<%=studyGroup._id%>" />
+                                    <input name="joinGroup" type="hidden" value="<%=studyGroup.GroupName%>" />
+                                    <button id="groupBtn" data-status="unjoin" type="button"
+                                            class="btn btn-success joinButton" 
+                                            data-group='<%=studyGroup.GroupName%>'>
+                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z"/>
+                                              </svg>
+                                            Joined 
+                                    </button>
+                                </form>
+                                <% }else{%>
+                                <a href="../messages?messageId=<%=studyGroup.MessageId%>" class="btn btn-dark follow-btn groupMessage">Group Message Thread</a>
+                                <button id="makeSession" class="btn btn-primary follow-btn " data-toggle="modal"
+                                    data-target="#newMeetup">Create Study Session</button>
+                                <form action="/#" method="post" id="joinGroup">
+                                    <input name="joinGroup" type="hidden" value="<%=studyGroup._id%>" />
+                                    <input name="joinGroup" type="hidden" value="<%=studyGroup.GroupName%>" />
+                                    <button id="groupBtn" data-status="join" type="button"
+                                         
+                                            class="btn btn-primary joinButton"> Join Group </button>
+                                </form>
+
+                                <%}%>
+                            </div>
+                        </div> 
+                    </div>
+            </div>
+    </div>
+    <div class="course-profile-info">
+           <h1 class="studyGroupMeetupsHeader">Group Timeline</h1>
+           <% var isMeetupMember=false;%>
+                                <% for(var x = meetups.length - 1; x>=0; x--){%>
+                                <%var j = x%>
+                                <div class="studyGroupMeetup-container">
+                                    <%if(meetups[j].Attendees.length > 3){%>
+                                        <%var membersLength = meetups[j].Attendees.length;%>
+                                        <div class="memberImage-container">
+                                            <p class="attendTxt">Attendees</p>
+                                        <% for(var y = 0; y < 3; y++){%>
+                                        <img class="memberImage" src="../<%=meetups[j].Attendees[y].userImage%>" />
+                                        <!-- <div class="memberImages"> -->
+                                        <ul>
+                                        <li>
+                                            <a href="#" class="memberImage" data-toggle="tooltip" data-placement="top"
+                                            title="<%=meetups[j].Attendees[y].handle%>">
+                                            <img class="memberImage" src="../<%=meetups[j].Attendees[y].userImage%>" />
+                                        </a>
+                                        </li>
+                                        
+                                    </ul>
+                                        <p class="plusStudents">+ <%=membersLength - 3%> more students</p>
+                                    </div>
+                                        <%if(meetups[j].Attendees[y].handle == session.handle){%>
+                                        <%isMeetupMember = true%>
+                                        <%}%>
+                            <%}%>
+                                        <%}else if(meetups[j].Attendees.length > 0){%>
+                                        <div class="memberImage-container">
+                                            <p class="attendTxt">Attendees</p>
+                                            <ul>
+                                                <% for(y in meetups[j].Attendees){%>
+                                                <li> <a href="/User/<%=meetups[j].Attendees[y].handle%>" class="memberImage"
+                                                        data-toggle="tooltip" data-placement="top"
+                                                        title="<%=meetups[j].Attendees[y].handle%>">
+                                                        <img class="memberImage"
+                                                            src="../<%=meetups[j].Attendees[y].userImage%>" />
+                                                    </a></li>
+                                                <%if(meetups[j].Attendees[y].handle == session.handle){%>
+                                                    <%isMeetupMember = true%>
+                                                <%}%>
+                            <%}%>
+                        <%}%>
+                    </ul>        
+                </div>
+                                    <p class="StudySession-Description"><%=meetups[x].description%></p>
+                                    <p class="badge badge-dark">Study Session</p>
+                                    <%if(meetups[x].type == "Virtual"){%>
+                                        <p class="StudySession-item"><a href="../User/<%=meetups[x].hostHandle%>"><%=meetups[x].hostHandle%></a> created a <%=meetups[x].type%> Study Session</p>
+                                    <%}else {%>
+                                        <p class="StudySession-item"><%=meetups[x].hostHandle%> created an <%=meetups[x].type%> Study Session</p>
+                                        <p class="StudySession-item location-item">Building: <%=meetups[x].building%></p>
+                                        <p class="StudySession-item location-item">Room: <%=meetups[x].room%></p>
+                                    <%}%>
+                                    <p class="datetime badge badge-warning">When: <%=formatDate(meetups[x].date) %> @
+                                        <%=formatTime(meetups[x].time)%></p>
+                                    <!-- if attendees is greater than 3, display images and + x students -->
+                                   
+                <% if(isMeetupMember){%>
+                
+                                            <form action="/#" method="post" id="attendMeeting">
+                                            <div class="studyGroupAttending">
+
+                                                <input name="attendMeeting" type="hidden" value="<%=meetups[x]._id%>" />
+                                                <button id="attendMeeting<%=x%>" data-status="leave" type="button"
+                                                        class="btn btn-danger attendButton" 
+                                                        data-group="<%=meetups[x].description%>"> Leave </button>
+                                            </div>
+                                            </form>
+                                            <a class="btn btn-primary viewStudySesh" href="../meetup/<%=meetups[x]._id%>">View</a>
+                                            <% }else{%>
+                                               
+                                            <form action="/#" method="post" id="attendMeeting">
+                                                <div class="studyGroupAttending">
+                                                <input name="attendMeeting" type="hidden" value="attendingGroup" />
+                                                <input name="meetingId" type="hidden" value="<%=meetups[x]._id%>" />
+                                                <button id="attendMeeting<%=x%>" data-status="attend" type="button"
+                                                        class="btn btn-primary attendButton"> Attend </button>
+                                                    </div>
+                                            </form>
+                                            <%}%>
+                                        </div>
+            <%}%>
+       
+    </div>
+                                    <script src="../assets/js/popper.min.js"></script>
+                                    <script type="text/javascript"
+                                        src="/assets/bootstrap/node_modules/bootstrap/dist/js/bootstrap.min.js">
+                                    </script>
+                                    <script type="text/javascript" src="../assets/js/getStudyGroups.js"></script>
+                                    <script type="text/javascript" src="../assets/js/follow-client.js"></script>
+                                    <script type="text/javascript" src="../assets/js/createMeetup-client.js"></script>
+                                    <script type="text/javascript" src="../assets/js/Client-DateFunctions.js"></script>
+
+</body>
+
+</html>

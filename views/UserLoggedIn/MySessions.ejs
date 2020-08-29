@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+    <head>
+        <title>My Session | degreeMe</title>
+        <meta charset="UTF-8">
+        <link rel="icon" href="assets/img/favicon.png" type="image/png" />
+        <!-- Stylesheets -->
+        <link rel="stylesheet" href="assets/bootstrap/node_modules/bootstrap/dist/css/bootstrap.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+        <link href="assets/css/main1.css" rel="stylesheet">
+        <link href="assets/css/userProfile.css" rel="stylesheet">
+        <link href="assets/css/userHeader.css" rel="stylesheet">
+        <link href="assets/css/home.css" rel="stylesheet">
+        <link href="assets/css/mySessions.css" rel="stylesheet">
+        <!-- Scripts -->
+        <script src="assets/jquery/dist/jquery.js"></script>
+        <script src="../assets/jquery/jquery.session/jquery.session.js"></script>
+    </head>
+        <body class="bodyClass">
+    
+        <div class="page-container">
+            <%- include ('partials/sideBar.ejs') %>
+            <%- include ('partials/horizontalHeader.ejs')%>
+            
+            <div class="homeContainer1">
+                <div class="listContainer" >
+                    <ul>
+                            <% if (StripeId!="none" && docs.length < 1){%>
+                                <h1 class="createdAccountH1">Success!</h1>
+                                <h3 class="createdAccount"> Your're now a seller on the degreeMe platform.</h3>
+                                                          
+                            <%}%>
+                            </h1>
+                    <%if(docs.length < 1){%>
+                        <div class="rocket-container" >
+                            <img src="assets/img/rocket-full.svg" class="rocketImg"/><br>
+                            <a href="/HostASession" class="startEarningBtn">Start Earning </a>
+                        </div>
+                    <%}else{%>
+                    <div class="currentSessions">
+                        <h3 class=" tutorListingHeader">My Tutor Listings</h3>
+                        <%for(x in docs){%>
+                            <div class="sessionBlock">
+                                <div>
+                                <h1 class="text-light currentSessionSubject"><%=docs[x].CourseCode%></h1>
+                                <h1 class="badge badge-warning seshType"><%=docs[x].Type.split(" ")[0]%></h1>
+                            </div>
+                                <a  class="badge badge-primary editSession" href="/editListing/<%=docs[x]._id%>">Edit Session</a>
+                                <%if(docs[x].Active){%>
+                                    <div class="liveContainer"><div class="liveSession"></div><p>Active</p></div>
+                                <%}else{%>
+                                    <div class="liveContainer"><div class="disabledSession"></div><p>Disabled</p></div>
+                                <%}%>
+                                
+                            </div>
+                        <%}%>
+                        <br>
+                    </div>
+                       <%}%>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" src="../assets/js/Client-DateFunctions.js"></script>
+    </body>
+</html>

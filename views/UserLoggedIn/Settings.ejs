@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+    <head>
+        <title> Settings | degreeMe</title>
+        <link rel="icon" href="../assets/img/favicon.png" type="image/png" />
+        <meta charset="UTF-8">
+
+        <link href="assets/css/main1.css" rel="stylesheet">
+        <link href="assets/css/home.css" rel="stylesheet">
+        <link href="assets/css/userProfile.css" rel="stylesheet">
+        <link href="assets/css/settings.css" rel="stylesheet">
+        <link rel="stylesheet" href="../assets/js/croppie/croppie.css" />
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="assets/bootstrap/node_modules/bootstrap/dist/css/bootstrap.min.css">
+        <script src="assets/jquery/dist/jquery.js"></script>
+        
+        <!-- <script src="https://js.stripe.com/v3/"></script>    -->
+    </head>
+    
+      
+        <body>
+            <div class="overlay"></div>
+        <div class="page-container">
+            <%- include ('partials/sideBar.ejs')%>
+            <%- include ('partials/horizontalHeader.ejs')%>
+            <div class="homeContainer">
+                    <div class="contentBlock1">
+                        <div id= "settingsWrapper">
+                          <div class="editProfile">
+                            <div>
+                              <img src="../<%=session.img%>" class="editImg" id="userImage"/>
+                            </div>
+                            
+
+                          <div class="img-btn-container">
+                            <div id="img-btn"><h3>Change Profile Photo</h3></div><div id="result1"></div>
+                        </div>
+                        <small id="imgTxt"></small>
+                        <div id="img-upload-container">
+                          <div id="img-secondary-wrapper">
+                        <input type='hidden' name='img1' id='croppedImg' value="" required/>
+                        <input type="file" id="upload" class="upload-file" value="Upload an Image" accept="image/gif, image/jpeg, image/png">
+                        <span class="picX"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
+                          <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
+                        </svg></span>
+                    <div id="upload-demo"></div>
+                    
+                    <div  class="upload-result btn-primary">Use</div>
+                    </div>
+                      </div>
+                              </div>
+                          </div>
+                      
+                          <form method="POST" action="Settings" class="settings-form">
+                            <input name="img1" type="hidden" id="imagebase64" name="imagebase64">
+                            <input name="handle" type="hidden" id="" name="" value="<%=session.handle%>">
+                            <input type="submit" class="btn btn-primary" value="Update Profile"/>
+                        </form>
+                        <p class="noChangeTxt">No changes were made</p>
+                </div>
+
+                        
+            </div>  
+                    
+            </div>
+                
+        </div>
+        <script src="../assets/js/croppie/croppie.min.js"></script>
+        <script type="text/javascript" src="assets/js/crop.js"></script>
+        <script type="text/javascript" src="assets/js/FormValidation/settings-validation.js"></script>
+        <script type="text/javascript" src="../assets/js/Client-DateFunctions.js"></script>
+    </body>
+</html>

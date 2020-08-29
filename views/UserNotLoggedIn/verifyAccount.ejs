@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Contact</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <!-- StyleSheets -->
+    <link rel="icon" href="assets/img/favicon.png" type="image/png" />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+    <link href="assets/css/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/bootstrap/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link href="assets/css/header.css" rel="stylesheet">
+    <link href="assets/css/footer.css" rel="stylesheet">
+    <!-- Scripts-->
+    <script src="assets/jquery/dist/jquery.js"></script>
+</head>
+
+<body>
+    <h3 class="mobileMsg">Mobile and Tablet Versions Coming Soon.<br> Please access CollegeTutor via laptop/desktop.
+    </h3>
+    <h3 class="mobileMsg"></h3>
+    <div class="page-container">
+        <div id="headerContainer">
+            <%-include ('partials/header.ejs') %>
+        </div>
+        <div class="homeContainer">
+            <div class="contentBlock">
+                <h1 class="confirmationHeader">Enter your account confirmation code</h1><br>
+                <form method="POST" action="updateStatus">
+                    <input name="code" type="text" class="confirmInput" />
+                    <input name="email" type="hidden" value="<%=qs.email%>" class="confirmInput" />
+                    <input type="submit" value="Confirm" class="btn btn-primary confirmSubmit" />
+                </form>
+            </div>
+        </div>
+    </div>
+    <%- include ('partials/footer.ejs') %>
+</body>
+</html>
