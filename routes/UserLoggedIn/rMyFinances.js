@@ -41,7 +41,6 @@ router.get('/MyFinances', function (req, res) {
         stripe.balance.retrieve({}, {
           stripeAccount: user[0].StripeId
         }).then(function (balance) {
-          //console.log(balance)
           new Promise((resolve, reject) => {
             stripe.balanceTransactions.list({
               //stripe_account: user[0].stripeId,

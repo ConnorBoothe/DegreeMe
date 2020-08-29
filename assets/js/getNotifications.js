@@ -87,7 +87,6 @@ $(".bell").on("click", function(){
                 alert(err)
             }
             }).done(function(res) {    
-                console.log(res)  
                 var notifications = "";
                 for(var x=0; x < res.length; x++){
 

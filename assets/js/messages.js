@@ -62,7 +62,6 @@
             //route message to correct locations
             var messageQueryId = window.location.toString().split("=");
             if (data.msg.id === messageQueryId[1]) {
-                console.log(data.msg)
                 if (data.msg.sender === $(".userProfileName").text()) {
                     chat.append('<div class="sent-wrapper"><div class="containMessageSent">' +
 

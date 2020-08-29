@@ -30,7 +30,6 @@ $(document).ready(function(){
             Schedule:createSchedule(), 
             expirationDate:createExpiration(parseInt($(".expiration").val())*7)
         }
-        console.log(payload.Schedule)
         $.ajax({
             url: "/editListing",
             type: 'POST',

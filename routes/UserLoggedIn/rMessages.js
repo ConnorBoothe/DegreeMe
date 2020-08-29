@@ -48,12 +48,10 @@ router.get('/messages', function (req, res) {
                     //users.unreadCountToZero(req.session.handle.substr(1), req.query.messageId);
                     var userInThread = false;
                     for (x in userHandles) {
-                        console.log("User handle", userHandles[x])
                         if (userHandles[x][0] === req.session.handle) {
                             userInThread = true;
                         }
                     }
-                    console.log(userInThread)
                     if (userInThread) {
                         users.unreadCountToZero(req.query.messageId, req.session.handle, req, res, messages, dateFunctions.formatMessageCreatedDate, dateFunctions.displayTimeSince);
                     } else {
@@ -84,9 +82,7 @@ router.post("/createThread",
         if (!errors.isEmpty()) {
             res.redirect('/Home');
         }
-        //host, hostImg, subject, threadId, handle, datec
-        console.log(req.body.userHandles)
-
+        //host, hostImg, subject, threadId, handle, date
         users.getUserImgs(req.body.userHandles).then(function (data1) {
             var userHandleArray = [];
              //sort alphabetically

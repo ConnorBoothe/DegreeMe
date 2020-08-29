@@ -85,14 +85,11 @@ router.post("/sendDirectMessage",
     check('receiver').trim().escape(),
     check('receiverImage').trim(),
     function (req, res) {
-        console.log(req.body.receiver, req.body.receiverImage)
-        console.log("YOOOO")
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             res.redirect('/Home');
         }
         let messageId = "";
-        console.log(req.body.receiver, req.body.receiverImg)
         messages.newThread(req.body.host, req.body.hostImg, [
                 [req.body.host, req.body.hostImg],
                 [req.body.receiver, req.body.receiverImg]

@@ -25,7 +25,6 @@ router.use(session({
 }));
 //render the meetup profile page
 router.get('/meetup/:MeetupId', function (req, res) {
-    console.log("Meetup Profile")
     if (req.session.userId) {
         studyGroupMeetups.getMeetupById(req.params.MeetupId).exec((err, docs) => {
             var memberCount = 0;

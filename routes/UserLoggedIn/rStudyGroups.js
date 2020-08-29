@@ -188,7 +188,6 @@ router.post("/join",
                 messages.addUserToThread(data[0].MessageId, [req.session.handle, req.session.img]);
                 //addThread(host, hostImg, subject, threadId, handle)
                 messages.getConversation(data[0].MessageId).then(function(data){
-                  console.log("messagesDATA", data)
                   users.addThread(data.host, data.hostImg, data.subject, data._id, req.session.handle)
                 })
                

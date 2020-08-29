@@ -29,7 +29,6 @@ router.use(bodyParser.urlencoded({
 }));
 router.get('/AcceptedBids', function (req, res) {
     acceptedBids.getAllAcceptedBids(req.session.handle).exec((err, docs)=>{
-        console.log("All bids",docs)
         res.render("UserLoggedIn/displayAllBids",{
             session: req.session,
             acceptedBids: docs,
