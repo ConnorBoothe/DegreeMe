@@ -8,11 +8,9 @@ $(document).ready(function(){
     function readURL(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
-            
             reader.onload = function (e) {
                 $('#blah').attr('src', e.target.result);
             }
-            
             reader.readAsDataURL(input.files[0]);
         }
     }
@@ -37,7 +35,7 @@ $(document).ready(function(){
     var defaultImg = "";
     var location = window.location.href.toString().split("/")[3];
     if( location === "SignUp"){
-        defaultImg = "assets/img/favicon.png"
+        defaultImg = "assets/img/croppieDefaultImage-100.jpg"
     }
     else if(location === "Settings"){
         defaultImg = $(".editImg").attr("src");
@@ -60,7 +58,7 @@ $(document).ready(function(){
     });
     $('.cr-slider').attr({'min':.5, 'max':1.5});
     $uploadCrop.croppie('bind', defaultImg).then(function(){ 
-        $uploadCrop.croppie('setZoom', 0.5)
+        // $uploadCrop.croppie('setZoom', 0.5)
       });
         // $(".cr-image").attr("src", $(".profile-img").attr("src"));
 $("#img-btn").on("click", function(){
