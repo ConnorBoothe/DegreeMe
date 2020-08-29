@@ -25,8 +25,6 @@ var concentrations = [];
         })
     }
    // console.log(response)
-console.log(majors)
-console.log(degrees)
 // console.log(majors)
 })
 

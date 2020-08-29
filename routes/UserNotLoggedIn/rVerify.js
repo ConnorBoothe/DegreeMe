@@ -65,7 +65,6 @@ router.post("/updateStatus", function(req, res){
                         //console.log(customer);
                         //console.log(docs[0].id);
                         UserDB.setCustomerId(docs[0].id,customer.id).then(function(data){
-                            console.log(data);
                         }).catch(function(err){
                             console.log(err);
                         });    

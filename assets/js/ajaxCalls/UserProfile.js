@@ -295,7 +295,6 @@ $(document).ready(function(){
               "Content-Type": "application/json"
             }, statusCode: {
               202: function (result) {
-                  console.log(result)
                   $(".spinner-container1").hide();
                 $(".profile-item-list").html(formatCourses(result.courses));
               },
@@ -321,7 +320,6 @@ $(document).ready(function(){
             }, statusCode: {
               202: function (result) {
                 $(".spinner-container1").hide();
-                  console.log(result)
                 $(".profile-item-list").html(populateTutors(result.tutoringSessions));
               },
               500: function (result) {
@@ -337,7 +335,6 @@ $(document).ready(function(){
         payload = {
             userHandle: $(".userProfileHandle").text().trim()
         }
-        console.log(payload.userHandle)
         $.ajax({
             url: "/getReviews",
             type: 'POST',

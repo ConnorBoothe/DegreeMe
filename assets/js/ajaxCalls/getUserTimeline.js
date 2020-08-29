@@ -242,7 +242,6 @@ $(document).ready(function(){
               "Content-Type": "application/json"
             }, statusCode: {
               202: function (result) {
-                console.log(result)
                 $(".spinner-container").fadeOut();
                 $(".timeline").append(createTimeline(result.newItems));
                

@@ -18,8 +18,6 @@ router.use(session({
 router.get('/searchStudents/:major', function (req, res) {
 
     users.getUsersByMajor(req.params.major).exec((err, docs) => {
-        console.log("Get students by major")
-        console.log(docs)
         res.render('UserNotLoggedIn/searchStudents', { students: docs, major: req.params.major });
     })
 

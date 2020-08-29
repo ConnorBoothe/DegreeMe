@@ -31,7 +31,6 @@ router.get('/API/SortedStudyGroups', function(req, res){
                     for(i in docs){
                         
                         if(myCourses[x] === docs[i].Subject){
-                            console.log(true)
                             containsResults = true;
                             groupsArr.push(docs[i]);
                             

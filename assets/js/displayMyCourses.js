@@ -287,7 +287,6 @@ $(document).ready(function(){
               "Content-Type": "application/json"
             }, statusCode: {
               202: function (res) {
-                  console.log(res)
                 $(".myCoursesText").each(function(x){
                     if($(".myCoursesText").eq(x).text() == res.course){
                         $(".myCoursesText").eq(x).parent().parent().remove();

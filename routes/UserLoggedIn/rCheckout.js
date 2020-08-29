@@ -240,7 +240,6 @@ router.post("/charge",
                             } ], docs.Virtual)
                             .then(function (data) {
                                 var meetingId = data._id;
-                                console.log(data)
                                 for (x in data.Members) {
                                     //add tutoring session to user profile of all members
                                     users.addTutoringSession(data.Members[x].handle, data._id, data.courseCode, data.date, data.Members[1].image, data.userHandle, data.Members[x].role);

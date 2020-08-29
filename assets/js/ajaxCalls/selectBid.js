@@ -59,7 +59,6 @@ $(document).ready(function(){
                  // The payment has been processed!
                  console.log(result1.paymentIntent.status)
                  if (result1.paymentIntent.status === 'requires_capture') {
-                    console.log(result1.paymentIntent.status);
                     $(".payment-status").text("Payment Success");
                     document.location.href = "/messages?messageId="+result.threadId;
                   }

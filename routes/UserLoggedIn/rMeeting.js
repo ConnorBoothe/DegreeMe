@@ -28,7 +28,6 @@ router.use(bodyParser.urlencoded({
   saveUninitialized: true
 }));
 router.get('/meeting/:meetingId', function (req, res) {
-  console.log("Meeting running")
   meetups.getMeetupById(req.params.meetingId)
     .then(function (data) {
       //check if current user is a member of the meeting

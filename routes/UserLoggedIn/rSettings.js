@@ -146,7 +146,6 @@ router.post('/MakeStripeAccount',
                     //add the stripeId to user's account
                     users.addStripeId(req.session.userId, account.id).then(function (data) {
                         console.log("StripeId added to user account");
-                        console.log(data);
                         //change tutor property to true in UserDB
                         users.becomeTutor(req.session.handle);
                     }).catch(function (error) {

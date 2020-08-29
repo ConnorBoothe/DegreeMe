@@ -30,7 +30,6 @@ router.use(bodyParser.urlencoded({
 router.get('/AcceptedBid/:bidId', function (req, res) {
     acceptedBids.getAcceptedBidByById(req.params.bidId).exec((err, docs)=>{
         if(docs){
-            console.log("ACCEPT",docs)
             res.render("UserLoggedIn/displaySingleAcceptedBid",{
                 session: req.session,
                 acceptedBid: docs,
