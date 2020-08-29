@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Connect</title>
+        <meta charset="UTF-8">
+        <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+        <link href="/assets/css/main1.css" rel="stylesheet">
+        <link href="/assets/css/toggle.css" rel="stylesheet">
+        <link href="/assets/css/userProfile.css" rel="stylesheet">
+        <link href="/assets/css/userHeader.css" rel="stylesheet">
+       
+        <link rel="icon" href="/assets/img/favicon.png" type="image/png" />
+        <link rel="stylesheet" href="/assets/bootstrap/node_modules/bootstrap/dist/css/bootstrap.min.css">
+        <script src="/assets/jquery/dist/jquery.js"></script>
+        <script type="text/javascript" src="/assets/js/main.js"></script>
+        <script type="text/javascript" src="/assets/js/highlightCurrentMenuItem.js"></script>
+        <script type="text/javascript" src="/assets/js/notification.js"></script>
+        <script type="text/javascript" src="/assets/js/highlightCurrentMenuItem.js"></script>
+        
+       
+        <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="/assets/js/searchAutocomplete.js"></script>
+        <script type="text/javascript" src="/assets/js/tutorSearch.js"></script>
+        <script type="text/javascript" src="/assets/js/connect.js"></script>
+       
+    </head>
+    <body class="<%=session.theme%>">
+   
+            <% include partials/sideBar.ejs %>
+            <% include partials/horizontalHeader.ejs%>
+           
+            
+                </div>
+            <div class=" connectionsPadding contentBlock">
+                    
+                <div class="schoolTitle">
+                    <h1 class="mainTitle"><%=session.school%> </h1>
+                    <h1 class="tutorTotal pageNameColor badge badge-primary"><%=tutorCount%> Tutors Available </h1>
+                </div>
+                <div id="connectionSearchBarContainer">
+                <div id="searchBarWrapper">
+                        <div id="searchBar" class="active-cyan-3 active-cyan-4 mb-4" >
+                            <form method="GET" autocomplete="off">
+                                    <div class="input-container1 <%=session.theme%>">
+                                        <% if(session.theme === 'bg-dark'){%>
+                                            <input id="searchInput" class="form-control input-field <%=session.theme%> text-light" placeholder="Search any course at UNC Charlotte"/>
+                                        <%}else{%>
+                                            <input id="searchInput" class="form-control input-field <%=session.theme%> text-dark" placeholder="Search any course at UNC Charlotte"/>
+                                        <%}%>
+                                            <button class="searchBtn <%=session.theme%>"><i class="fa fa-user icon"><img src="/assets/img/search.svg" class="signup-icon"/></i></button>
+                                        </div>
+                            </form>
+                        </div>
+                    </div>
+                  
+                    
+                <div id="subjectNames">
+                <ul>
+                   
+                    <% if(session.theme === 'bg-dark'){%>
+                     
+                            <li><p class="classLabel text-light badge badge-primary">My Schedule</p></li>
+                            <% Object.keys(subjectGroups).forEach(item => { %>
+                                <li class="subjectItem text-light" id="<%=item.replace(' ','')%>"><%=item%></li>
+                            <%});%>
+                            <%}else{%>
+                                <li><p class="classLabel text-dark"><p class="classLabel text-light badge badge-primary">My Schedule</p> </p></li>
+                            <% Object.keys(subjectGroups).forEach(item => { %>
+                                <li class="subjectItem text-dark" id="<%=item.replace(' ','')%>"><%=item%></li>
+                            <%});%>
+
+                        <%}%>
+                   
+                    
+                  
+                </ul>
+            </div>
+            
+            <h1 class="classTitle text-light" ><%=qs.course%></h1>
+            <% Object.keys(subjectGroups).forEach(item => { %>
+                <a name="<%=item.replace(' ','')%>"><div class="paddingDiv"></div></a>
+                <% if(session.theme === 'bg-dark'){%>
+                    <h1 class="classTitle text-light" ><%= item %></h1>
+                <%}else{%>
+                    <h1 class="classTitle text-dark" ><%= item %></h1>
+                <%}%>
+                
+                <div class="your-class">
+                    <% var tutorCount = 0; %>   
+                        <% for(x in subjectGroups[item]){ %>
+                           
+                            <% if(session.theme === 'bg-dark'){%>
+                            <div class="tutorBlock tutorBlockDark">
+                                <ul class="tutorBlockHeader">
+                                    
+                                        <li><img src="<%=subjectGroups[item][x].getImg()%>" alt="Profile Pic" class="profile-pic"/><h1 class="connectionName text-light" ><%=subjectGroups[item][x].getName()  %></h1></li>
+                                    <%}else if(session.theme === 'bg-light'){%>
+                                        <div class="tutorBlock tutorBlockLight">
+                                                <ul class="tutorBlockHeader">
+                                        <li><img src="<%=subjectGroups[item][x].getImg()%>"  alt="Profile Pic" class="profile-pic"/><h1 class="connectionName text-dark" ><%=subjectGroups[item][x].getName()  %></h1></li>
+                                    <%}%>
+                                    <li class="starRating">
+                                        <% for(var i =0; i < subjectGroups[item][x].getRating(); i++){ %>
+                                            <span>&#9733;</span>
+                                        <%}%>
+                                    </li>
+                                    <li>
+                                            <p class="type badge badge-primary"><%=subjectGroups[item][x].Type%> Session</p>
+                                        </li>
+                                </ul>
+                                <div class="tutorBlockBody">
+                                    <% if(session.theme === 'bg-dark'){%>
+                                    
+                                       
+                                    <%}else{%>
+                                        <div><h2 class="connections-sub text-dark">Time</h2></div>
+                                        <div class="grade text-dark"><%=subjectGroups[item][x].time%></div>
+                                    <%}%>
+                                    <% if(session.theme === 'bg-dark'){%>
+                                       <%if(subjectGroups[item][x].Type === "Group"){%>
+                                        <div class=" text-light"><div><img src="assets/img/MyFinancesDark.svg" class="time dollarImg"/></div><div><p class="timeText"><%=subjectGroups[item][x].HourlyRate%>/hour per student</p></div></div>
+                                        <%} else{%>
+                                            <div class=" text-light"><div><img src="assets/img/MyFinancesDark.svg" class="time dollarImg"/></div><div><p class="timeText"><%=subjectGroups[item][x].HourlyRate%>/hour</p></div></div>
+                                        <%}%>
+                                        
+                                        <div class=" text-light"><div><img src="assets/img/hourGlass.svg" class="time dateImg"/></div><div><p class="timeText"><%subjectGroups[item][x].NumHours%> hours duration</p></div></div>
+                                        <div class=" text-light"><div><img src="assets/img/date.svg" class="time dateImg"/></div><div><p class="timeText"><%=subjectGroups[item][x].Date%></p></div></div>
+                                        <div class=" text-light"><img src="assets/img/clock.svg" class="time timeImg"/><p class="timeText"><%=subjectGroups[item][x].Time%></p></div>
+                                        <div class=" text-light"><div><img src="assets/img/MySessionsDark.svg" class="time"/></div><div><p class="timeText"><%=subjectGroups[item][x].Building%></p></div></div>
+                                       
+                                        <%}else{%>
+                                            <div><h2 class="connections-sub text-dark">Location <%=subjectGroups[item][x].location%></h2></div>
+                                           
+                                        <%}%>
+                                       
+                                        
+                                        </div>
+                                
+                               
+                               
+                                <br>
+                                <div class="tutorButtons">
+                                    <input value= "View Tutor"
+                                        type= "submit" class="btn btn-primary tutorBtn" name='<%=subjectGroups[item][x].Handle%>'
+                                        onclick="location.href='/Tutor?name=<%=subjectGroups[item][x].Handle%>'"/>
+                                    <form method="POST" action="/connect">
+                                        <input name="type" type="hidden" value="Added" class="form-control">
+                                        <input name="from" type="hidden" value="My Connections" class="form-control">
+                                        <input type="hidden" name="tutor" value="<%=subjectGroups[item][x].getName()%>"/>
+                                        <input type="hidden" name="img" value="<%=subjectGroups[item][x].getImg()%>"/>
+                                        <input type="hidden" name="time" value="<%=subjectGroups[item][x].time%>"/>
+                                        <input type="hidden" name="date" value="<%=subjectGroups[item][x].date%>"/>
+                                        <input type="hidden" name="location" value="<%=subjectGroups[item][x].location%>"/>
+                                        <input type="hidden" name="class" value="<%=item%>"/>
+                                        <a href="/Checkout?name=<%=subjectGroups[item][x].getName()%>&class=<%=item%>" class=" viewDetails btn btn-primary tutorBtn" name="">View</a>
+                                       
+                                    </form>
+                                   
+                                        <p class="rsvp"></p>
+                                       
+                                </div>
+                            </div>
+                            <% tutorCount++ %>   
+                        <%}%>    
+                </div>
+                <div class="buttonContainer">
+                    <% if(session.theme === 'bg-dark'){%>
+                    <h2 class="tutorCount text-light"><%=tutorCount%> Tutor<%  if(tutorCount > 1){%>s<% } %> Available in <%=item%></h2> <!--Determine whether or not to concatenate an s on tutor-->
+                    <%}else{%>
+                        <h2 class="tutorCount text-dark"><%=tutorCount%> Tutor<%  if(tutorCount > 1){%>s<% } %> Available in <%=item%></h2>
+                    <%}%>
+                    <button class="slick-prev slick-arrow btn-danger"><img src="assets/img/back.svg.svg" width="50" class="connectionArrow" alt="previous"/>
+                    </button>
+                    <button class="slick-next slick-arrow btn-danger" aria-label="Next" type="button"><img src="assets/img/forward.svg.svg" width="50" class="connectionArrow" alt="next"/></button>
+                </div>
+                    
+            <%});%>    
+            </div>
+            
+        <div id="loadingDiv">
+            
+                <div class="loader"></div>
+        </div>
+        
+    </body>
+    
+</html>

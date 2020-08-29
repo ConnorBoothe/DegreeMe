@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<head>
+    <title><%=params.CourseName%> | degreeMe </title>
+    <link rel="icon" href="../assets/img/favicon.png" type="image/png" />
+
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../assets/bootstrap/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link href="../assets/css/main1.css" rel="stylesheet">
+    <link href="../assets/css/home.css" rel="stylesheet">
+    <link href="../assets/css/CourseProfile.css" rel="stylesheet">
+    <link href="../assets/css/tutorGrid.css" rel="stylesheet">
+    <!-- Include jQuery -->
+    <script src="../assets/jquery/dist/jquery.js"></script>
+</head>
+
+<body class="color-dark">
+    <div class="page-container">
+        <%- include ('partials/sideBar.ejs')%>
+        <%- include ('partials/horizontalHeader.ejs')%>
+        <%- include ('partials/discussionModal.ejs')%>
+        <% var joined = false%>
+
+        <% for(x in course.students){%>
+        <%if(course.students[x].Handle === session.handle){%>
+        <%joined = true;%>
+        <%}%>
+            
+            <%}%>
+        <div class="profile-wrapper">
+            <div class="courseProfileContainer">
+                <div class="course-profile-header">
+                    <div class="CourseHeader-wrapper">
+                        <div class="">
+                            <div class="">
+                                <div class="CourseTitle">
+                                    <h1 class="courseName text-light"><%=course.CourseName%></h1>
+                                    <div class="courseCode">
+                                        <p class="courseCodeTxt"><%=course.Department%> <%=course.CourseCode%></p>
+                                        <%if(course.studentCount == 1){%>
+                                            <p class="badge badge-warning numStudents"><span
+                                                class="studentCount"><%=course.studentCount%></span>
+                                            <span>Student</span></p>
+                                        <%}else{%>
+                                            <p class="badge badge-warning numStudents"><span
+                                                class="studentCount"><%=course.studentCount%></span>
+                                            <span>Students</span></p>
+                                        <%}%>
+                                        
+                                    </div>
+                                </div>
+                                <!-- <h1 class="schoolNameProfile text-light" >UNC Charlotte</h1> -->
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- Modal -->
+                    <div class="modal modal-dialog fade" id="courseProfileModal" tabindex="-1" role="dialog"
+                        aria-labelledby="courseProfileModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="courseProfileModalLabel" style="color: white;text-align:left;">Unfollow
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                            aria-hidden="true">&times;</span></button>
+                                  
+                                    </h4>
+                                </div>
+                                <div class="modal-body" style="color: white;">
+                                    ...
+                                </div>
+                                <div class="modal-footer">
+                                    <button id="courseProfileNo" type="button" class="btn btn-default"
+                                        data-dismiss="modal">No</button>
+                                    <button id="courseProfileYes" type="button" class="btn btn-danger">Yes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <% if(!joined){%>
+                    <div class="courseButtons">
+                        <form method="POST" class="addCourse">
+                            <input name="courseId" type="hidden" value="<%=course._id%>" />
+                            <input name="status" type="hidden" value="addCourse" />
+                            <button class="btn btn-primary follow-btn joinCourse">Add Course</button>
+                        </form>
+                    </div>
+                    <%}else{%>
+                    <div class="courseButtons">
+                        <form method="POST" class="addCourse">
+                            <input name="courseId" type="hidden" value="<%=course._id%>" />
+                            <input name="status" type="hidden" value="leaveCourse" />
+                            <button class="btn btn-success follow-btn joined joinCourse">Joined</button>
+                        </form>
+                    </div>
+                    <%}%> 
+            </div>
+            <div class="profileBody">
+                <div class="profileNav">
+                    <ul class="profile-ul">
+                        <li class="discussionTab tab-selected">DISCUSSION</li>
+                        <li class="studentsTab">STUDENTS</li>
+                        <li class="tutorTab">TUTORS</li>
+                        <li class="studyTab">GROUPS</li>
+                    </ul>
+                </div>
+        </div>
+        
+    </div>
+    
+    <div class="course-profile-info">
+          
+            <div class="question-container">
+               
+                        <h1 class="DiscussionTitle">
+                            Questions asked in <%=course.Department%> <%=course.CourseCode%>
+                    </h1>
+
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                        Ask a Question
+                    </button>
+
+
+                    <div class="discussion-container">
+
+                    </div>
+                </div>
+
+            </div>
+    <!-- Scripts -->
+  
+    <script type="text/javascript" src="../assets/js/ajaxCalls/CourseProfile.js"></script>
+    <script type="text/javascript" src="../assets/js/ajaxCalls/getDiscussion.js"></script>
+    <script type="text/javascript" src="../assets/js/ajaxCalls/joinCourse.js"></script>
+    <script type="text/javascript" src="../assets/js/Client-DateFunctions.js"></script>
+    <script src="../assets/js/connect.js"></script>
+    <script src="../assets/js/follow-client.js"></script>
+</body>
+
+
+</html>

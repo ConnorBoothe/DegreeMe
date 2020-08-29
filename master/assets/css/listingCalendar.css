@@ -1,0 +1,77 @@
+.calendarContainer table td{
+    background-color:#23272A;
+    width:10%!important;
+    min-width:50px!important;
+    border-right:2px solid #2c2f33;
+    text-align:center!important;
+    cursor:pointer;
+}
+.calendarContainer table tr{
+    width:100%;
+}
+.calendarContainer table td label{
+    width:100%;
+    cursor:pointer;
+    position:relative;
+}
+#calendar1, #calendar2, #calendar3{
+    display:none;
+}
+.calendar-wrapper{
+    height:730px;
+}
+.dateButtons{
+    font-size:14px;
+    margin-left:20px;
+    margin-right:20px;
+    margin-bottom:20px;
+    cursor:pointer;
+    font-family: 'Open Sans', sans-serif;
+}
+.calendarContainer table th{
+    margin-right:100px!important;
+    background-color:#2c2f33;
+    width:200px;
+    padding-top:8px;
+    padding-bottom:8px;
+    border-right:2px solid #2c2f33;
+    border-bottom:1px solid #2c2f33;
+}
+.calendarContainer{
+  
+    font-family: 'Open Sans', sans-serif;
+  font-size:16px;
+}
+
+.listingSuccess{
+    display:none;
+    text-align:center;
+    
+}
+.successImg{
+    width:200px;
+}
+.deleteTime{
+    display:none;
+    position:relative;
+    top:0;
+    left:0;
+    height:100%;
+    font-weight:900!important;
+    font-size:0.1px;
+    font-family: 'Open Sans', sans-serif;
+    color:black;
+   
+    width:100%;
+}
+.timeLabel, .newTime{
+    margin-bottom:0!important;
+    font-size:14px;
+    /* display:none; */
+}
+.timeLabel{
+    color:#d4d4d4;
+}
+.calendarDay{
+    display:none;
+}

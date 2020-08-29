@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Messages | degreeMe</title>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/assets/img/favicon.png" type="image/png" />
+    <!-- Stylesheets -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@700&display=swap" rel="stylesheet">
+<link rel="icon" href="/assets/img/favicon.png" type="image/png" />
+    <link rel="stylesheet" href="assets/bootstrap/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link href="assets/css/main1.css" rel="stylesheet">
+    <link href="assets/css/userProfile.css" rel="stylesheet">
+    <link href="assets/css/userHeader.css" rel="stylesheet">
+    <link href="assets/css/messages.css" rel="stylesheet">
+    <link href="assets/css/home.css" rel="stylesheet">
+    <!-- Scripts -->
+    <script src="assets/jquery/dist/jquery.js"></script>
+</head>
+<body class="bodyClass">
+    <div class="page-container">
+        <%- include ('partials/sideBar.ejs') %>
+        <div id="horizontalHeader" class="horizontalDark">
+            <div class="blocker"></div>
+            <!-- <button class="navbar-toggler third-button" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent22" aria-controls="navbarSupportedContent22" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <svg class="bi bi-list" viewBox="0 0 16 16" fill="#a9a9a9" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+                </svg>
+            </button> -->
+            <h1 id="pageTitle" class="pageTitleDark">
+                <a href="/Home" class="text-dark"><img src="../assets/img/degreeMeLogo.svg" alt="logo" class="logo"
+                        width="20" /></a>
+                <div>
+                    <ul class="headerContainer">
+                        <li>
+                            <span class="bell" name="Notifications">
+                                <svg class="bi bi-bell-fill" width="1em" height="1em" viewBox="0 0 16 16"
+                                    fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z" />
+                                </svg>
+                                <span class="badge badge-danger bdge"></span>
+                                <span class='hint' style='position:absolute'></span>
+                            </span>
+                        </li>
+                        <li>
+                            <button type="button" class="message" name="New Message">
+                                <svg class="bi bi-chat-fill" width="1em" height="1em" viewBox="0 0 16 16"
+                                    fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6-.097 1.016-.417 2.13-.771 2.966-.079.186.074.394.273.362 2.256-.37 3.597-.938 4.18-1.234A9.06 9.06 0 0 0 8 15z" />
+                                </svg>
+                                <span class="badge badge-danger bdge1"></span>
+                                <span class='hint' style='position:absolute'></span>
+                            </button>
+                        </li>
+                        <li>
+                            <div class="userHeader">
+                                <img class="userProfileImg" src="../<%=session.img%>" alt="Profile Picture" />
+                                <h1 class="userProfileName "><%=session.handle%><span></span></h1>
+
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+                <div id="showNotifications" class="notifications">
+                    <h1 id="recentNotifications">Notifications</h1>
+                    <ul>
+                        <% for(x in session.notifications){%>
+
+                        <li class=" notificationsDark">
+                            <img class="notifImg" src="<%=session.img%>" />
+                            <p class="notif"><%=session.notifications[x] %></p>
+
+                        </li>
+                        <% }%>
+                    </ul>
+                </div>
+
+                <div id="newMessageForm" class="notificationsdark">
+                    <form method="POST" class="newThread" autocomplete="off">
+                        <p class="msgFormBigTxt">New Conversation</span></p>
+                        <div class="input-container-message">
+
+                            <input id="subject" name="subject" class=" input-field-message subject"
+                                placeholder="Subject" />
+
+                        </div>
+                        <div class="searchPeople-container">
+                            <div class="input-container-message">
+                                <button class="searchBtn <%=session.theme%>"><i class="fa fa-user icon"><img
+                                            src="../assets/img/search.svg.svg" class="signup-icon1" /></i></button>
+                                <input id="users" name="subject" class=" input-field-message subject"
+                                    placeholder="Search People" spellcheck="false" />
+                                <div class="btn icon2" id="usersBtn"><img class="addImg"
+                                        src="../assets/img/ConnectDark.svg" /></div>
+                            </div>
+                        </div>
+                        <p class="msgFormTxt">Added Users</p>
+                        <div id="usersDiv">
+                            <p class="noUsersAdded badge badge-danger">No users added</p>
+                        </div>
+                        <input placeholder="Subject" value="Create" type="submit"
+                            class="btn btn-primary createThread" />
+                    </form>
+                    <div class="background"></div>
+                    <div class="success-checkmark">
+                        <div class="check-icon">
+                            <span class="icon-line line-tip"></span>
+                            <span class="icon-line line-long"></span>
+                            <div class="icon-circle"></div>
+                            <div class="icon-fix"></div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="headerLinkPageTitle message-title">
+                    <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-chat-left-dots" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v11.586l2-2A2 2 0 0 1 4.414 11H14a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                        <path d="M5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                    </svg>
+                    <%=messages.subject%>
+                </div>
+                <%console.log(messages.title)%>
+                <div class="input-container-main">
+                    <form method="POST" action="/SearchMain" class="searchForm">
+                        <span class="mainSearch" name="Notifications">
+                            <img id="bellImg" alt='bell' src='../assets/img/search.svg.svg' />
+                        </span>
+                        <input name="course" id="" class=" main-search-input" placeholder="Search" autocomplete="off" />
+                    </form>
+                </div>
+
+                <div class="siteWideSearchContainer">
+                    <div class="tab-container">
+                        <label for="users1" class="searchTab searchMenuUnderLine">Users</label>
+                        <input type="radio" name="searchType" id="users1" value="users" />
+                        <label for="courses" class="searchTab">Courses</label>
+                        <input type="radio" name="searchType" id="courses" value="courses" />
+                        <label for="tutors" class="searchTab ">Tutors</label>
+                        <input type="radio" name="searchType" id="tutors" value="tutors" />
+                        <label for="studyGroups" class="searchTab ">Study Groups</label>
+                        <input type="radio" name="searchType" id="studyGroups" value="studyGroups" />
+                    </div>
+                    <div class="resultsContainer">
+                        <p class='emptySearch'>Search Users</p>
+                    </div>
+
+
+                </div>
+            </h1>
+
+            <ul id="horizontalMenu">
+            </ul>
+            <div class="userHeaderWrapper">
+                <!-- <div id="versionTxt">
+                    <p class="text-light"><i>Version 1.0</i></p>
+                </div> -->
+            </div>
+        </div>
+        <div class="membersRightSideBar">
+            <p class="messageHeader">People</p>
+            <div class="messageHandle-container">
+            <% for(x in messages.userHandles){%>
+            <div class='messageHandle '>
+                <a href="/User/<%=messages.userHandles[x][0]%>">
+                    <div class="online"></div>
+                    <img class="messageSideBarImg" src="<%=messages.userHandles[x][1]%>" />
+                    <span class="userHandleTxt"><%=messages.userHandles[x][0]%></span>
+                </a>
+            </div>
+            <%}%>
+        </div>
+        </div>
+        <div class="homeContainer ">
+            <div class="messageBlock" >    
+                <div id="messagesContainer">          
+                    <div id="convoTitle"><p><img class="hostImg" src="<%=messages.hostImg%>"/><span class="dateStarted"><%=messages.host%><%=formatDate(new Date(messages.datetime))%></span>
+            </p>
+        </div>
+        <%if(messages.messages.length > 0 ){%>
+        <% for(x in messages.messages){%>
+        <!-- check if session handle === sender -->
+        <%if(session.handle === messages.messages[x].sender){%>
+        <div class="sent-wrapper">
+        <div class="containMessageSent">
+            <div class="msg_">
+                <p class="msgSender">
+
+                </p>
+                <p class="messageBody sentMsg bg-primary"><%=messages.messages[x].message%></p>
+            </div>
+            <p class="msg-date msg-date-sent"><%=formatTime(new Date(messages.messages[x].dateTime))%></p>
+        </div>
+    </div>
+        <% } else{%>
+        <div class="containMessageReceived">
+            <p class="sender_handle">
+            <img class="messageImg" src="<%=messages.messages[x].senderImg%>" />
+                <%=messages.messages[x].sender%>
+            </p>
+            
+            <div class="msg_1" style="left:0px">
+                <p class="messageBody receivedMsg"><%=messages.messages[x].message%></p>
+            </div>
+            <p class="msg-date"><%=formatTime(new Date(messages.messages[x].dateTime))%></p>
+        </div>
+        <%}%>
+            <%}%>
+        <%}%>
+        </div>
+        <div id="newMsg"></div>
+        <div id="typeMsg" class="">
+            <form id="messageForm" method='POST' action=' '>
+                <div class="msgInput">
+                    <span class="sendMsg-btn">
+                        <a class="memberImage" data-toggle="tooltip" data-placement="top" title="Send Message">
+                            <button class="msg-send-btn"> 
+                            <svg  fill="#a9a9a9" width="1.25em" height="1.25em" viewBox="0 0 16 16" class="bi bi-arrow-up-circle-fill"
+                                fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-10.646.354a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 6.207V11a.5.5 0 0 1-1 0V6.207L5.354 8.354z" />
+                            </svg>
+                        </button>
+                        </a>
+                    
+                    </span>
+                    <input class="sendMsgInput" name="content" type="text" placeholder="Write your message here"
+                        autocomplete="off" spellcheck="off" style="text-transform: capitalize;"/>
+                </div>
+
+
+                <input name="id" class="threadId" value="<%=qs.messageId%>" type="hidden"
+        placeholder="Type your message here" />
+        <input name="userId" class="userId" value="<%=session.handle%>" type="hidden" />
+        </form>
+    </div>
+    </div>
+    <p id="bottom"></p>
+    </div>
+    </div>
+    <audio id="pop">
+        <source src="assets/sounds/Blop-Mark_DiAngelo-79054334.mp3" type="audio/mpeg">
+    </audio>
+ <script src="assets/js/socket.io.min.js"></script>
+ <script type="text/javascript" src="assets/js/messages.js"></script>
+ <script type="text/javascript" src="assets/js/highlightCurrentMenuItem.js"></script>
+ <script type="text/javascript" src="assets/js/Client-DateFunctions.js"></script>
+ <script src="../assets/js/popper.min.js"></script>
+ <script type="text/javascript" src="/assets/bootstrap/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+ <script type="text/javascript" src="/assets/js/displayMyCourses.js"></script>
+ <script src="../assets/jquery/jquery.session/jquery.session.js"></script>
+ <script src="../assets/js/getNotifications.js"></script>
+ <script type="text/javascript" src="../assets/js/SiteWideSearch.js"></script>
+
+</body>
+
+</html>

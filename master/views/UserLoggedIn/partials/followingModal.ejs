@@ -1,0 +1,26 @@
+<!-- Modal -->
+<div class="modal fade" id="followingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog " role="document">
+    <div class="modal-content modal-content-follow">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Following</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <% if(user.following.length > 0){%>
+        <%for (x in user.following){%>
+         <div class="followersContainer">
+          <a href="/User/<%=user.following[x].user_handle%>">
+            <img class="userImage" src="../<%=user.following[x].user_image%>"/>
+          <p class="followHandle"><%=user.following[x].user_handle%></p>
+          </a>
+        </div>
+        <%}%>
+        <%}%>
+      </div>
+    
+    </div>
+  </div>
+</div>

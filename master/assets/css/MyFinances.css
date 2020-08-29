@@ -1,0 +1,312 @@
+/* Change the white to any color ;) */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px #18191a inset !important;
+}
+.homeContainer{
+  min-height:100vh!important;
+  height:100%!important;
+  margin-bottom:0;
+  padding-bottom:0;
+  background-color:#191919;
+}
+.success-message{
+  margin-left:250px!important;
+  padding-left:10%;
+  color:#d4d4d4;
+}
+.startEarning{
+  margin-left:250px;
+ 
+}
+.startEarningContainer{
+  padding-left:10%;
+}
+.column {
+    float: left;
+    width: 23.33%;
+    height:100px;
+    
+    border-right:2px solid #a3a3a3;
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  .moneyOwed h1{
+      margin-left:20%;
+      text-align:left;
+      margin-top:50px;
+      font-size:22px;
+  }
+.earningsTitle{
+    font-size:28px;
+    color:#a9a9a9;
+}
+.earningsAmt{
+    font-size:35px;
+}
+
+.popover-title {
+  background-color: #121212;
+  color:#fff;
+}
+.popover{
+  width:250px;
+  margin-left: 0px!important;
+}
+#settingsWrapper{
+  width:100%;
+  text-align:left;
+}
+#settings-form{
+position: relative;
+display:inline-block;
+border-radius:5px;
+margin-left:auto;
+margin-right:auto;
+width:800px;
+}
+.checkout-container{
+  margin-left:auto;
+  margin-right: auto;
+  width:600px;
+  background-color:#242526;
+  text-align:left;
+  border-radius:10px;
+  box-shadow:1px 2px #131313;
+  padding-bottom:20px;
+}
+
+label{
+float:left;
+}
+
+.slidecontainer {
+  width: 10%; /* Width of the outside container */
+
+}
+
+/* The slider itself */
+.slider {
+
+
+  width: 10%; /* Full-width */
+  height: 15px; /* Specified height */
+}
+
+input[type=range] {
+  -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+  width: 100%; /* Specific width is required for Firefox. */
+  background: transparent; /* Otherwise white in Chrome */
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+}
+
+input[type=range]:focus {
+  outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+}
+
+input[type=range]::-ms-track {
+  width: 50%;
+  cursor: pointer;
+
+  /* Hides the slider so custom styles can be added */
+  background: transparent; 
+  border-color: transparent;
+  color: transparent;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+ 
+  height: 25px;
+  width: 25px;
+  border-radius: 15px;
+  background: white!important;
+  cursor: pointer;
+  margin-top: 0px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d; /* Add cool effects to your sliders! */
+  -webkit-transition: width 2s; /* Safari prior 6.1 */
+transition: width 2s;
+}
+
+/* All the same stuff for Firefox */
+input[type=range]::-moz-range-thumb {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 1px solid #000000;
+  height: 25px;
+  width: 25px;
+  border-radius: 15px;
+  background: white!important;
+  cursor: pointer;
+  -webkit-transition: width 2s; /* Safari prior 6.1 */
+transition: width 2s;
+}
+
+/* All the same stuff for IE */
+input[type=range]::-ms-thumb {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 1px solid #000000;
+  height: 36px;
+  width: 16px;
+  border-radius: 50px;
+  background: #d3d3d3;
+  cursor: pointer;
+  -webkit-transition: width 2s; /* Safari prior 6.1 */
+transition: width 2s;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 30%;
+  height: 25px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #d3d3d3;
+  border-radius: 50px;
+  border: 0.2px solid #010101;
+  -webkit-transition: width 2s; /* Safari prior 6.1 */
+transition: width 2s;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #d3d3d3;
+}
+
+input[type=range]::-moz-range-track {
+  width: 30%;
+  height: 8.4px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #343a40;
+  border-radius: 1.3px;
+  border: 0.2px solid #010101;
+}
+input{
+  color:white;
+  background-color: #343a40;
+  border-radius: 4px;
+  border-color:rgba(0,0,0,0);
+}
+.form-control{
+  color:white!important;
+  background-color: #242526!important;
+  border-radius: 4px;
+  box-shadow:#131313 1px 2px;
+  border:none!important;
+}
+.form-control:disabled{
+  color:grey;
+  background-color: #343a40;
+}
+input[type=range]::-ms-track {
+  width: 30%;
+  height: 18px;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  border-width: 16px 0;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: #2a6495;
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: #3071a9;
+}
+input[type=range]::-ms-fill-upper {
+  background: #3071a9;
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+.create-seller-text{
+  text-align:left;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: #367ebd;
+}
+.contentBlock2{
+  text-align: center;
+  margin-left:250px!important;
+  background-color:#18191a;
+  width:80%;
+
+  padding-bottom:100px;
+}
+.createSeller-submit{
+  font-family: 'Open Sans', sans-serif!important;
+  width:200px;
+  margin-top:20px;
+  margin-bottom:20px!important;
+}
+.container{
+  position: relative;
+  
+}
+.panel-dark{
+  border-color:black;
+ 
+}
+.panel-heading{
+
+}
+.panel-body{
+  background-color: transparent;
+}
+.panel-title{
+  font-size:25px;
+  margin-top:30px;
+}
+label{
+  padding-bottom: 0%;
+  padding-top: 0%;
+}
+.depositTxt{
+  margin-left:26%;
+}
+.row {
+position: relative;
+left: 0;
+}
+.buttonSubmit {
+  margin-top: 10px;
+}
+.buttonSubmit small {
+  margin-left: 10px;
+}
+/* image */
+.paymentImage {
+  position: relative;
+  right: 200px;
+  top: 70px;
+  width: 170px;
+}
+/* input fields in the form */
+.control-label {
+  margin-top: 5px;
+  padding-top: 10px;
+  font-size: 1.0em;
+  font-family: 'Open Sans', sans-serif!important;
+
+}
+/* Phone number and SSN */
+#settings-form h4 {
+  padding-top: 10px;
+}
+
+/* alert message */
+.alert {
+  position: relative;
+  top: -63px;
+}
+

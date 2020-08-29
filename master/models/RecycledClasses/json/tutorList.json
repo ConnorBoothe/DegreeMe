@@ -1,0 +1,192 @@
+{
+    "tutors": [
+    {
+        "id":"1",
+        "name":"Annette Smith",
+        "img":"assets/img/book-icon.png",
+        "Category": "Data Structures",
+        "GPA": "A",
+        "Rating": 3,
+        "Bio": "I'm Jill and I love to code!",
+        "School": "Tennessee",
+        "type":"Individual"
+    },
+    {
+        "id":"2",
+        "name":"Matthew Smith",
+        "img":"assets/img/book-icon.png",
+        "Category": "History",
+        "GPA": "A",
+        "Rating": 2,
+        "Bio": "I'm Matt and I love to code!",
+        "School": "Clemson",
+        "type":"Group"
+    },
+    {
+        "id":"3",
+        "name":"Bella Jones",
+        "img":"assets/img/book-icon.png",
+        "Category": "Data Structures",
+        "GPA": "A",
+        "Rating": 5,
+        "Bio": "I'm Jill and I love to code!",
+        "School": "UNC Chapel Hill",
+        "type":"Individual"
+    },
+    {
+        "id":"4",
+        "name":"Briana McKenzie",
+        "img":"assets/img/book-icon.png",
+        "Category": "Data Structures",
+        "GPA": "A",
+        "Rating": 3,
+        "Bio": "Hi I'm Annette",
+        "School": "UNC Charlotte",
+        "type":"Group"
+    },
+    {
+        "id":"5",
+        "name":"Sam Smith",
+        "img":"assets/img/book-icon.png",
+        "Category": "College Algebra",
+        "GPA": "A",
+        "Rating": 5,
+        "Bio": "Hi I'm Sam",
+        "School": "UNC Charlotte",
+        "type":"Individual"
+    },
+    {
+        "id":"6",
+        "name":"Chris Paul",
+        "img":"assets/img/book-icon.png",
+        "Category": "College Algebra",
+        "GPA": "B",
+        "Rating": 4,
+        "Bio": "Hi I'm Chris",
+        "School": "UNC Charlotte",
+        "type":"Group"
+    },
+    {
+        "id":"7",
+        "name":"Lebron James",
+        "img":"assets/img/book-icon.png",
+        "Category": "Data Structures",
+        "GPA": "B",
+        "Rating": 5,
+        "Bio": "Hi I'm Lebron",
+        "School": "UNC Charlotte",
+        "type":"Group"
+    },
+    {
+        "id":"8",
+        "name":"Dwayne Wade",
+        "img":"assets/img/book-icon.png",
+        "Category": "History",
+        "GPA": "A",
+        "Rating": 5,
+        "Bio": "Hi I'm Dom",
+        "School": "Alabama",
+        "type":"Group"
+    },
+    {
+        "id":"9",
+        "name":"Darrel Smith",
+        "img":"assets/img/book-icon.png",
+        "Category": "Calculus 2",
+        "GPA": "A",
+        "Rating": 5,
+        "Bio": "Hi I'm Bob",
+        "School": "UNC Charlotte",
+        "type":"Group"
+    },
+    {
+        "id":"10",
+        "name":"Tommy Smith",
+        "img":"assets/img/book-icon.png",
+        "Category": "Biology",
+        "GPA": "B",
+        "Rating": 5,
+        "Bio": "Hi I'm Tommy",
+        "School": "UNC Charlotte",
+        "type":"Individual"
+    },
+    {
+        "id":"11",
+        "name":"Todd Smith",
+        "img":"assets/img/book-icon.png",
+        "Category": "Calculus 2",
+        "GPA": "B",
+        "Rating": 5,
+        "Bio": "I'm Bob and I love to code!",
+        "School": "UNC Charlotte",
+        "type":"Group"
+    },
+    {
+        "id":"12",
+        "name":"Dan Smith",
+        "img":"assets/img/book-icon.png",
+        "Category": "Biology",
+        "GPA": "B",
+        "Rating": 5,
+        "Bio": "I'm Connor and I love to code!",
+        "School": "UNC Charlotte",
+        "type":"Individual"
+    },
+    {
+        "id":"13",
+        "name":"Connor Jones",
+        "img":"assets/img/book-icon.png",
+        "Category": "Biology",
+        "GPA": "A",
+        "Rating": 4,
+        "Bio": "I'm Bob and I love to code!",
+        "School": "UNC Charlotte",
+        "type":"Group"
+    },
+    {
+        "id":"14",
+        "name":"Blake Griffin",
+        "img":"assets/img/book-icon.png",
+        "Category": "College Algebra",
+        "GPA": "A",
+        "Rating": 5,
+        "Bio": "I'm Blake and I love to code!",
+        "School": "UNC Charlotte",
+        "type":"Group"
+    },
+    {
+        "id":"15",
+        "name":"Robert Robins",
+        "img":"assets/img/book-icon.png",
+        "Category": "History",
+        "GPA": "B",
+        "Rating": 5,
+        "Bio": "I'm Bob and I love to code!",
+        "School": "UNC Charlotte",
+        "type":"Group"
+    },
+    {
+        "id":"16",
+        "name":"Robert Thompson",
+        "img":"assets/img/book-icon.png",
+        "Category": "Calculus 2",
+        "GPA": "A",
+        "Rating": 5,
+        "Bio": "I'm Bob and I love to code!",
+        "School": "UNC Charlotte",
+        "type":"Group"
+    },
+    {
+        "id":"16",
+        "name":"Klay Thompson",
+        "img":"assets/img/book-icon.png",
+        "Category": "Biology",
+        "GPA": "A",
+        "Rating": 5,
+        "Bio": "I'm Bob and I love to code!",
+        "School": "UNC Charlotte",
+        "type":"Group"
+    }
+]
+
+}

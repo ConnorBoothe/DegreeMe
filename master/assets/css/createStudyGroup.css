@@ -1,0 +1,229 @@
+.input-container3 {
+       
+
+    width: 47%;
+    float:left;
+    margin-bottom: 20px!important;
+    margin-top:30px!important;
+    border-radius:0px!important;
+    padding-bottom:none!important;      
+    height:40px!important;
+    background-color:#202020;
+  }
+  .contentBlockHost{
+    padding-left:300px!important;
+    background-color:#18191a;
+    padding-bottom:50px!important;
+    height:100%!important;
+}
+#hostSession-form label{
+  font-family: 'Open Sans', sans-serif;
+  font-size:16px;
+}
+#hostSession-form{
+  margin-left:10%;
+   margin-right:13%!important;
+ 
+   padding-right:70px;
+   padding-left:70px;
+ }
+  .input-container4 {
+   
+    width: 47%;
+    
+    margin-bottom: 20px!important;
+    margin-top:30px!important;
+    border-radius:0px!important;
+    padding-bottom:none!important;      
+    margin-left:6%;
+    height:40px!important;
+
+    background-color:#202020;
+    
+    
+  }
+  .emptySearch{
+    font-family: 'Open Sans', sans-serif;
+    padding-top:30px;
+  }
+  .study-item-container{
+    position:relative;
+    background-color:#121212;
+    margin-bottom:20px;
+    margin-left:20px;
+    margin-right:20px;
+    border-bottom:2px solid #121212;
+}
+  .createStudyGroupDiv{
+    border-radius:10px;
+    padding:20px;
+    margin-left:10%;
+    margin-right:10%;
+    margin-bottom:50px;
+  }
+  #schoolSignUp-sg{
+    background-color:#046A38!important;
+    max-width:300px;
+    padding:5px;
+    border-radius:10px;
+    margin-left:20px!important;
+    font-size:16px!important;
+    margin-bottom:20px!important;
+    margin-top:20px!important;
+  }
+  .userInfoHead-SG{
+      font-size:25px;
+  }
+  .groupTxt{
+    font-size:18px;
+    font-family: 'Open Sans', sans-serif;
+    padding-top:10px;
+    padding-bottom:10px;
+  }
+  #sg-first{
+    font-size:20px!important;
+    margin-top:20px!important;
+    margin-bottom:40px!important;
+  }
+  .loginLabel1{
+    text-align:left;
+    color:white!important;
+    padding-left:20px;
+    background-color:#242526!important;
+    padding-top:5px;
+    padding-bottom:20px!important;
+    margin-bottom:0!important;
+    height:22px;
+    font-size:14px;
+    font-family: 'Open Sans', sans-serif;
+
+}
+.input-field-createStudyGroup{
+       
+    background-color:#242526!important;
+    width:100%!important;
+    height:100%!important;
+    border-right:none!important;
+    font-size:20px;
+    color:white;
+    padding-left:20px;
+    border-top:0!important;
+    border-left:0!important;
+ 
+  }
+  #createStudyGroup{
+    font-family: 'Open Sans', sans-serif!important;
+    width:200px;
+  }
+  #courseNameTxt, #professorTxt,  #groupNameTxt, #groupDescriptionTxt{
+    color:#dc3545;
+    text-align:left;
+    margin-bottom:0!important;
+    border-bottom:none;
+    position:absolute;
+  }
+  .inviteFriends{
+    padding-top:20px;
+  }
+  .inviteBtn{
+    font-family: 'Open Sans', sans-serif;
+  }
+  .modal-content{
+    background-color:#212121!important;
+    color:white!important;
+}
+  .group-success-img{
+    width:300px;
+    margin-top:50px;
+  }
+  .emails{
+    width:95%;
+    border:none;
+    color:white;
+    background-color:#343a40;
+    font-family: 'Open Sans', sans-serif;
+  }
+  .appendEmails{
+    display:inline-block;
+    font-family: 'Open Sans', sans-serif;
+    background-color:#121212;
+    padding-left:5px;
+    padding-right:5px;
+    padding-top:2px;
+    padding-bottom:2px;
+    border-radius:10px;
+    color:white;
+    margin-left:5px;
+  }
+  .addEmailBtn{
+    background-color:#343a40;
+    color:white;
+    padding-right:20px;
+  }
+  .inviteMsg{
+    width:100%;
+    background-color:#343a40;
+    height:70px;
+    border:none;
+    outline:none;
+    color:white;
+    padding-left:10px;
+    font-family: 'Open Sans', sans-serif;
+
+  }
+  .emailErr{
+    color:#dc3545;
+    margin-top:-20px!important;
+    font-size:14px;
+    display:none;
+    position:absolute;
+    font-family: 'Open Sans', sans-serif;
+  }
+  .addEmailBtn:hover{
+    opacity:.8;
+  }
+  .course-autocomplete{
+    position:absolute;
+    min-height:200px;
+    width:100%;
+    background-color:#202020;
+    z-index:2;
+    display:none;
+  }
+  .course-autocomplete ul{
+    width:100%;
+  }
+  .course-autocomplete ul li{
+    width:100%;
+    text-align:left;
+    padding-top:5px;
+    font-size:20px;
+    list-style-type:none;
+    padding-left:10px;
+    height:100%;
+    font-family: 'Open Sans', sans-serif!important;
+  }
+  .course-autocomplete ul li:hover{
+    background-color:black;
+  }
+  .courseName{
+    font-size:16px;
+    padding-top:5px;
+    padding-bottom:5px;
+    margin-bottom:0!important;
+    cursor:pointer;
+    text-align:left;
+    
+  }
+  #courseName{
+    position:relative;
+    z-index:2;
+  }
+  .courseCountainer{
+    cursor:pointer;
+  }
+  .homeContainer{
+    min-height:100vh!important;
+    height:100%!important;;
+    padding-bottom:200px;
+  }

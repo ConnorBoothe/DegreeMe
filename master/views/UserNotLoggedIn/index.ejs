@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<head>
+    <title>degreeMe</title>
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="initial-scale=1,user-scalable=no,viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- StyleSheets -->
+    <link rel="icon" href="assets/img/favicon.png" type="image/png" />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+    <link href="../assets/css/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/bootstrap/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link href="../assets/css/header.css" rel="stylesheet">
+    <link href="../assets/css/index.css" rel="stylesheet">
+    <link href="../assets/css/footer.css" rel="stylesheet">
+    <!-- Scripts -->
+    <script src="../assets/jquery/dist/jquery.js"></script>
+
+    <!-- <script type="text/javascript" src="assets/js/loginHamburgerMenu.js"></script> -->
+</head>
+<body class="">
+    <h3 class="mobileMsg">Mobile and Tablet Versions Coming Soon</h3>
+    <div class="page-container ">
+       
+        <div class="index-page-container">
+            
+            <div class="index-container  ">
+                <div id="headerContainer">
+        
+                   
+                    <%-include ('partials/header.ejs') %>
+
+                </div>
+                <div class="homeTitle">
+                    <ul>
+                    <li >
+
+                   
+                    <div class="homeBody">
+                    <h1>Helping you do
+                        <br>
+                        college online
+                        <br>
+                    </h1>
+                    <br>
+                        <p class="app-description">DegreeMe is a social network for college students that allows you to earn money
+                            by tutoring for a course you've already taken, get help when you need it, follow students in your courses, 
+                            create groups around any topic, chat, and much more. Scroll to learn about us.</p>
+                        <a href="/SignUp" class="btn btn-primary join-btn" id="">Join for free</a>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+
+                        
+                    </div>
+                </li>
+                <li class="loginLi">
+                    <div class="formContainer">
+                        <div class="lifestyle">
+                            <img src="assets/img/undraw_having_fun_iais1.svg" alt="headphones">
+                        </div>
+                        <%-include ('partials/login.ejs') %>
+                    </div>
+                </li>
+            </ul>
+                </div>
+
+                
+            </div>
+            <div class="index-container1">
+                <div class="index-wrapper">
+                    <div class="homeBody">
+
+                   
+                    <h1 class="index-header">Transform your education into a <br>
+                                            lucrative side hustle
+                    </h1>
+                    <p class="app-description">In a world where colleges are consistenly looking for new ways to make students pay, degreeMe is here to reverse the trend. 
+                        We allow you to monetize your education by becoming a tutor for a class you've previously taken. Set your schedule and your hourly rate and start earning!
+                    </p>
+                    <a href="/SignUp" class="btn btn-primary join-btn" id="">Become a Tutor</a>
+                   
+                    <br>
+                  
+                </div>
+                <img class="index-img-sideHustle" src="assets/img/undraw_wallet_aym5.svg" alt="Earn image"/>
+                </div>
+            </div>
+            <div class="index-container1">
+                <div class="index-wrapper">
+                    <div class="homeBody">
+
+                   
+                        <h1 class="index-header">Get help from a student that's<br> been in your shoes <br>
+                                            
+                        </h1>
+                    <p class="app-description">Search through our database of tutors or publish a help request that all users will see.
+                        View the tutor's profile to see information and reviews so you can find the perfect fit.
+                    </p>
+                    <a href="/SignUp" class="btn btn-primary join-btn" id="">Join for free</a>
+                   
+                    <br>
+                  
+                </div>
+                <img class="index-img-sideHustle" src="assets/img/undraw_shared_goals_3d12.svg" alt="Earn image"/>
+                </div>
+            </div>
+            <div class="index-container1">
+                <div class="index-wrapper">
+                    <div class="homeBody">
+                    <h1 class="index-header">College should be social<br>
+                                            
+                    </h1>
+                    <p class="app-description">Stay connected on campus in an increasingly virtual environment. 
+                        Follow students to see their actions in realtime, post to course discussion boards, find students in any major,
+                        send direct messages and create group chats.
+                    </p>
+                    <a href="/SignUp" class="btn btn-primary join-btn" id="">Join for free</a>
+                   
+                    <br>
+                  
+                </div>
+                <img class="index-img-sideHustle1" src="assets/img/undraw_best_place_r685.svg" alt="Earn image"/>
+                </div>
+            </div>
+            <div class="index-container1">
+                <div class="index-wrapper">
+                    <div class="homeBody">
+                    <h1 class="index-header">Create and join groups<br>
+                                            
+                    </h1>
+                    <p class="app-description">Create groups surrounding any topic of interest and invite your friends. Version 1
+                        supports the ability to create  and attend study sessions within the group. Study sessions will either be 
+                        hosted at a physical location or via Zoom call.
+                    </p>
+                    <a href="/SignUp" class="btn btn-primary join-btn" id="">Join for free</a>
+                   
+                    <br>
+                  
+                </div>
+                <img class="index-img-sideHustle" src="assets/img/undraw_hang_out_h9ud.svg" alt="Earn image"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="assets/jquery/jquery.session/jquery.session.js"></script>
+    <script type="text/javascript" src="assets/js/formValidation_1.js"></script>
+</body>
+
+<%- include ('partials/footer.ejs') %>
+
+</html>

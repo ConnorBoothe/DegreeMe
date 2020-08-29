@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+    <head>
+        <title>Connections</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+        <link href="assets/css/main1.css" rel="stylesheet">
+        <link href="assets/css/toggle.css" rel="stylesheet">
+        <link href="assets/css/userProfile.css" rel="stylesheet">
+        <link href="assets/css/userHeader.css" rel="stylesheet">
+        <link href="assets/css/update.css" rel="stylesheet">
+        <link rel="stylesheet" href="assets/bootstrap/node_modules/bootstrap/dist/css/bootstrap.min.css">
+        <script src="assets/jquery/dist/jquery.js"></script>
+        <script type="text/javascript" src="assets/js/main.js"></script>
+        <script type="text/javascript" src="assets/js/update.js"></script>
+        <script type="text/javascript" src="assets/js/notification.js"></script>
+        <script type="text/javascript" src="assets/js/highlightCurrentMenuItem.js"></script>
+        <script type="text/javascript" src="assets/js/searchAutocomplete.js"></script>
+        <script type="text/javascript" src="assets/js/tutorSearch.js"></script>
+    </head>
+    <% if(session.theme === 'bg-dark'){%>
+        <body class="bodyClass">
+    <%}else{%>
+        <body class="bg-light">
+    <%}%>
+        <div class="page-container">
+            <% include partials/sideBar.ejs%>
+            <% include partials/horizontalHeader.ejs%>
+            
+            <div class="homeContainer <%=session.theme%>">
+                <div class="contentBlock " >
+                    <% if(session.theme == 'bg-dark'){%>
+                        <h1 class="text-light">You don't have any connections.</h1>
+                    <%}else{%>
+                        <h1 class="text-dark">You don't have any connections.</h1>
+                    <%}%>
+                   <br>
+                    <a href="/Connect" class="btn btn-danger ">Connect With a Tutor</a>
+                </div>
+            </div>
+        </div>
+   
+    </body>
+</html>

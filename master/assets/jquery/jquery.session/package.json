@@ -1,0 +1,45 @@
+{
+  "_from": "jquery.session",
+  "_id": "jquery.session@1.0.0",
+  "_inBundle": false,
+  "_integrity": "sha1-EP/YdgFQ68tm9nd3SKHTHCZTnUA=",
+  "_location": "/jquery.session",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "jquery.session",
+    "name": "jquery.session",
+    "escapedName": "jquery.session",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/jquery.session/-/jquery.session-1.0.0.tgz",
+  "_shasum": "10ffd8760150ebcb66f6777748a1d31c26539d40",
+  "_spec": "jquery.session",
+  "_where": "C:\\xampp\\htdocs\\NetworkApp\\CollegeTutor_3",
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/cargix1/JQuery-Session-Plugin/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "Provides a simple interface into window.sessionStorage while providing limited support for cross protocol requests.",
+  "homepage": "https://github.com/cargix1/JQuery-Session-Plugin",
+  "license": "ISC",
+  "main": "jquery.session.js",
+  "name": "jquery.session",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cargix1/JQuery-Session-Plugin.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.0.0"
+}

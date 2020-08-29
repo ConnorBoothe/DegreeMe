@@ -1,0 +1,31 @@
+/* guy on top of timeline Image */
+#chill {
+    width: 80px;
+    position: relative;
+    top: -80px;
+    float: right;
+}
+.text_arrow_Container{
+    position:absolute;
+    left:0!important;
+    top:0!important;
+    margin-left:260px!important;
+    margin-top:400px!important;
+}
+/* arrow below timeline */
+#emptyHomeText img {
+    width: 80px;
+}
+/* text next to arrow */
+#emptyHomeText {
+   color:white;
+   width:200px;
+}
+#emptyHomeText h1 {
+    font-size: 20px;
+    font-weight: 200;
+}
+/* svg */
+.bi-heart {
+    fill: #dc3545!important;
+}

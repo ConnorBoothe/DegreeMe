@@ -1,0 +1,11 @@
+<link href="../assets/css/meetupSideBar.css" rel="stylesheet">
+<div class="meetupSideBar meetup-SB">
+    <div class="meetupSideBar-container">
+        <h2 class="meetupSideBarTitle"><%=memberCount%> Students Attending</h2>
+        <ul class="sideBarMenu">
+            <% for(x in meetup.Attendees){%>
+                <li class="sideBarItemMenu"><a href="/User/<%= meetup.Attendees[x].handle%>"><img class="attendeeImg" src="../<%= meetup.Attendees[x].userImage%>"/><%= meetup.Attendees[x].handle%></a></li>
+            <%}%>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Connect</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="initial-scale=1,user-scalable=no,viewport-fit=cover">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+    <link href="/assets/css/main.css" rel="stylesheet">
+    <link href="/assets/css/main1.css" rel="stylesheet">
+    <link rel="icon" href="/assets/img/favicon.png" type="image/png" />
+    <link rel="stylesheet" href="/assets/bootstrap/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="/assets/jquery/dist/jquery.js"></script>
+    <script src="../assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/assets/bootstrap/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script type="text/javascript" src="./assets/js/searchAutocomplete.js"></script>
+    <script type="text/javascript" src="/assets/js/popovers.js"></script>
+    <script src="../assets/jquery/jquery.session/jquery.session.js"></script>
+    
+    
+
+</head>
+
+<body class="color-dark">
+    <%-include ('partials/header.ejs') %>
+
+
+<% if(numTutors != ""){%>
+    <h1 class="tutorTotal  badge badge-primary"><%=numTutors%> Tutors Available </h1>
+<%}%>
+    
+    
+    </li>
+    </ul>
+    </div>
+   
+    <div class=" connectionsPadding contentBlock">
+        
+        <div class="schoolTitle">
+            <h1 class="badge badge-success mainTitle1">UNC Charlotte</h1>
+
+        </div>
+
+        <div id="connectionSearchBarContainer">
+            <div id="searchBarWrapper">
+                <div id="searchBar" class="active-cyan-3 active-cyan-4 mb-4">
+                    <form method="GET" autocomplete="off" class="searchCourse" action="findTutors">
+                        <div class="input-container1Light">
+                            
+                                <input name="courseName" id="searchInput" class=" input-field " placeholder="Search Courses at UNC Charlotte"/>
+                                <button class="searchBtn"><i class="fa fa-user icon"><img src="/assets/img/search.svg.svg" class="signup-icon"/></i></button>
+                            </div>
+                    </form>
+                        </div>
+                    </div>
+                    <div id="course-container">   
+                                                              
+                                    
+                                <h1 class="resultSubject"><%=qs.course%></h1>
+                                <br>
+                                <%if(qs.course){%>
+                                    <%for(x in subject){%>
+                                    <div class="tutorBlock tutorBlockDark">
+                                        <ul class="tutorBlockHeader">
+                                            <li><img src="<%=subject[x].img%>" alt="Profile Pic" class="profile-pic" />
+                                                <h1 class="connectionName text-light"><%=subject[x].Name %></h1>
+                                            </li>
+                                            <li class="starRating">
+                                                <% for(var i =0; i < subject[x].getRating(); i++){ %>
+                                                <span>&#9733;</span>
+                                                <%}%>
+                                            </li>
+                                            <li>
+                                                <p class="type badge badge-primary"><%=subject[x].Type%> Session</p>
+                                            </li>
+                                        
+                                        <div class="tutorBlockBody">
+                                            
+                                            <div class="infoItem text-light">
+                                                <div><img src="assets/img/MyFinancesDark.svg" class="time dollarImg" />
+                                                </div>
+                                                <%var isGroup=false;%>
+                                                <%if(subject[x].Type == 'Group'){%>
+                                                    <%isGroup = true;%>
+                                                    <%}%>
+                                                <%if(isGroup){%>
+                                                <div>
+                                                    <p class="timeText"><%=subject[x].HourlyRate%>/hour per person</p>
+                                                </div>
+                                            <%}else{%>
+                                                <div>
+                                                    <p class="timeText"><%=subject[x].HourlyRate%>/hour</p>
+                                                </div>
+                                                <%}%>
+                                            
+                                            </div>
+                                        <div class="infoItem text-light"><div><img src="assets/img/hourGlass.svg" class="time dateImg"/></div><div><p class="timeText"><%=subject[x].NumHours%>
+                                            hour(s) duration</p>
+                                        </div>
+                                    </div>
+                                    <div class="infoItem text-light">
+                                        <div><img src="assets/img/date.svg" class="time dateImg" /></div>
+                                        <div>
+                                            <p class="timeText"><%=subject[x].Date%></p>
+                                        </div>
+                                    </div>
+                                    <div class="infoItem text-light"><img src="assets/img/clock.svg"
+                                            class="time timeImg" />
+                                        <p class="timeText"><%=subject[x].Time%></p>
+                                    </div>
+                                    <div class="infoItem text-light">
+                                        <div><img src="assets/img/MySessionsDark.svg" class="time" /></div>
+                                        <div>
+                                            <p class="timeText"><%=subject[x].Building%></p>
+                                        </div>
+                                    </div>
+                                    <div class="tutorButtons">
+                                        
+                                            <button class=" viewDetails btn btn-primary tutorBtn" style='-webkit-appearance: none!important;'name="">View Tutor
+                                                </button>
+
+                                            <button class=" viewDetails btn btn-primary tutorBtn" style='-webkit-appearance: none!important;'name="">View Listing
+                                            </button>
+                                                
+                                        
+                                    </div>
+                            </div>
+                        </ul>
+                            <br>
+                        </div>
+                </div>
+               
+                <%}%>
+         
+               <%}%>
+            </div>
+             
+                
+    </div>
+    <% include partials/footer.ejs %>
+</div>
+</body>
+</html>

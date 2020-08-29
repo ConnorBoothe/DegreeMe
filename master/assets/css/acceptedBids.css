@@ -1,0 +1,60 @@
+.timelinePost-username{
+    margin-top:15px;
+}
+.dueDateText{
+    font-size:16px;
+    margin-top:20px;
+}
+.priceBadge{
+    font-size:25px!important;
+    font-family:none;
+}
+.viewBid{
+    padding-top:0px;
+    padding-bottom:0px;
+    font-family: 'Open Sans', sans-serif;
+    font-size:14px;
+    margin-top:-1px;
+
+}
+.fundTxt{
+    float:right;
+    width:60%;
+}
+.placeBid{
+    margin-top:-35px;
+    margin-right:55px!important;
+
+}
+.winningBidder{
+    font-family: 'Open Sans', sans-serif;
+}
+.bidderHandle{
+    color:#d4d4d4;
+}
+.winningBidderImg{
+    margin-left:10px;
+    margin-right:5px;
+    margin-top:-10px;
+}
+.userHandleText{
+    font-size:14px;
+    font-family: 'Open Sans', sans-serif;
+    color:#d4d4d4;
+}
+.viewThread-btn{
+    font-family: 'Open Sans', sans-serif;
+    font-size:15px;
+}
+.fileUploads{
+    color:#d4d4d4;
+    font-family: 'Open Sans', sans-serif;
+    width:100%;
+}
+.fundsTxt{
+    position:relative;
+    padding-bottom:10px!important;
+    font-family: 'Open Sans', sans-serif;
+    margin-left:20px;
+
+}

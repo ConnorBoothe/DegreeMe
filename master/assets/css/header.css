@@ -1,0 +1,224 @@
+header{
+    width:100%;
+    text-align:left;
+    margin:0;
+    
+}
+  #headerLinkContainer li{
+      display:inline-block;
+      margin-left:40px;
+  }
+  #headerLinkContainer li .menu-item{
+    margin-left:40px;
+  }
+  .headerLinks a {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    color:#d4d4d4;
+    cursor:pointer;
+    margin-top:-5px;
+  }
+  .headerLinks a:hover {
+    color:#a9a9a9;
+   opacity:0.75;
+  }
+  
+  .headerLinks a:hover:after { 
+    width: 100%; 
+    left: 0; 
+  }
+#headerContainer{
+    position:relative;
+    height:50px;
+    z-index:1;
+    width:100%;
+    top:0;
+    padding-bottom:60px;
+    background-color:#303133!important;
+    
+}
+header{
+    height:60px;
+}
+/* headerlinks */
+#headerLinkContainer {
+  list-style-type: none;
+  height: 60px;
+  width: 1100px;
+  padding-top: 15px;
+  position:relative;
+  text-align:center;
+  margin-left:auto;
+  margin-right:auto;
+}
+ #headerLinkContainer ul{
+   position: relative;
+   left:0;
+ }
+ #headerLinkContainer ul li a:hover{
+  color:#007bff;
+}
+#headerLinkContainer ul li a{
+  color:white;
+}
+ .headerLinks{
+     margin-right:1%;
+     font-size:17px;
+     margin-left:20px!important;
+     display:inline-block;
+     list-style-type:none;
+     text-align:left;
+     }
+
+ #headerLinks span{
+     color:#a9a9a9;
+     padding-right:20px;
+ }
+ .logo{
+  width:140px;
+  margin-top:1px!important;
+}
+ #siteLogo{
+    margin-right:20px;
+ }
+#siteLogo a{
+    padding-left:20px;    
+}
+#siteLogo a span{
+  padding-left:5px;
+}
+ #siteLogo a, button a, li a{
+    
+    text-decoration:none!important;
+}
+/*Search Bar CSS*/
+#searchBarWrapper{
+  width:100%;
+  text-align:center;
+  margin-top:20px;
+  margin-bottom:15px;
+  padding-top:13px;
+}
+
+#suggestionsContainer{
+  display:none;
+  position:absolute;
+  width:35%;
+  min-height: 200px;
+  margin-left:29%;
+  background-color:#a9a9a9;
+  border-bottom-left-radius:5px;
+  border-bottom-right-radius:5px;
+  color:black;
+  margin-top:-2%;
+  text-align:left;
+  
+}
+#suggestionsContainer span{
+  float:left;
+  margin-left:1%;
+  margin-right:1.5%;
+  margin-top:-2px;
+}
+#suggestionsContainer span img{
+  width:15px;
+}
+.suggestionsText{
+ 
+  font-size:18px;
+  font-family: 'Roboto', sans-serif;
+  cursor:pointer;
+  margin-bottom:0!important;
+  height:40px;
+}
+#userText{
+  margin-left:5%;
+  margin-top:1%;
+  color:black!important;
+  margin-bottom:-2px;
+  padding-bottom:10px;
+}
+#suggestionsWrapper{
+  margin-bottom:50px;
+}
+.suggestionsTextContainer{
+  width:100%;
+  height:80px;
+}
+.suggestionsText:hover{
+  background-color:#e0e0e0;
+}
+#searchBar form input{
+  display:inline-block;
+}
+.search{
+  height:40px;
+  width:80px;
+  border-radius:5px;
+  margin-left:15px;
+
+}
+.searchBtn{
+  border:none!important;
+
+  padding-right:15px;
+}
+.searchBtn:focus{
+  outline:none!important;
+}
+#headerLinkContainer ul li:not(:first-child) {
+  position: relative;
+  right: 65px;
+}
+
+/** For iPad Pro (max) - iPad (min) view **/
+@media only screen and (max-width: 1024px) and (min-width: 768px) {
+  /* headerlinks */
+  #headerLinkContainer {
+      list-style-type: none;
+      height: 60px;
+      position: absolute;
+      width: 900px;
+      margin-left: -2.5%;
+  }
+  .secondaryMenu {
+      width:350px;
+      position:absolute;
+      right:25px;
+      margin-right: 0%;
+  }
+ 
+  #headerLinkContainer ul li:not(:first-child) {
+      position: relative;
+      right: 125px;
+  }
+
+  #headerLinkContainer ul li:first-child {
+      position: relative;
+      left: -75px;
+  }
+  
+}
+.login-logo-link.spinner-border{
+  width:100%!important;
+}
+
+.login-logo-link{
+  height:65px!important;
+  color:white;
+}
+.loggingYouIn{
+  color:white;
+  font-family: 'Open Sans', sans-serif;
+  margin-left:5px;
+}
+.spinner-border{
+  color:white!important;
+}
+.sr-only{
+  color:white!important;
+  width:10px!important;
+}

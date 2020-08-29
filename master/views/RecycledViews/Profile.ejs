@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Connection</title>
+        <meta charset="UTF-8">
+        <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+        <link href="assets/css/main1.css" rel="stylesheet">
+        <script type="text/javascript" src="assets/js/main.js"></script>
+        <link href="assets/css/toggle.css" rel="stylesheet">
+        <link href="assets/css/userProfile.css" rel="stylesheet">
+        <link href="assets/css/userHeader.css" rel="stylesheet">
+        <link href="/assets/css/tutorGrid.css" rel="stylesheet">
+        <link href="/assets/css/home.css" rel="stylesheet">
+        <link rel="icon" href="assets/img/favicon.png" type="image/png" />
+        <link rel="stylesheet" href="assets/bootstrap/node_modules/bootstrap/dist/css/bootstrap.min.css">
+        <script src="assets/jquery/dist/jquery.js"></script>
+        <script type="text/javascript" src="/assets/bootstrap/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script  src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+        <script type="text/javascript" src="/assets/js/Profile.js"></script>
+        <script type="text/javascript" src="assets/js/highlightCurrentMenuItem.js"></script>
+        <script type="text/javascript" src="assets/js/notification.js"></script>
+        <script type="text/javascript" src="assets/js/update.js"></script>
+        <script type="text/javascript" src="../assets/js/tutorSearch.js"></script>
+        <script type="text/javascript" src="../assets/js/messages.js"></script>
+        <script type="text/javascript" src="../assets/js/showProfileItems.js"></script>
+        <link href="../assets/css/messageSuccess.css" rel="stylesheet">
+        <script type="text/javascript" src="../assets/js/popovers.js"></script>
+        <script src="../assets/jquery/jquery.session/jquery.session.js"></script>
+        <!-- <script type="text/javascript" src="/assets/js/popovers.js"></script> -->
+    </head>
+        
+    </head>
+        <body class="color-dark">
+    
+        <div class="page-container">
+            <% include partials/followersModal.ejs %>
+            <% include partials/followingModal.ejs %>
+            <% include partials/sideBar.ejs%>
+            <% include partials/horizontalHeader.ejs%>
+            
+            <div class="profile-wrapper">
+              <div class="profileContainer">
+                  <div class="profile-header">
+                        <div class="connectionList-wrapper">
+                                    <div class="connectionList">
+                                        <div class="connectionHeader">
+                                            <img src="<%=tutor.Image%>" width="200" alt="Profile Picture" class="profilePictureDetails"/>
+                                            <h1 class="tutorName text-light"><%=tutor.Name%></h1>
+                                            <h1 class="userProfileHandle" ><%= tutor.Handle%></h1>
+                                             <!-- Make sure you re-enter dynamic school once UNCC school name changed at sign up tutor.School-->
+                                            <!-- <h1 class="schoolNameProfile text-light" >UNC Charlotte</h1> -->
+                                               
+                                        </div>
+                                       
+                                   
+                            </div>
+                    </div>
+                    <div class="connectionBody-container">   
+            <!--   -->
+            <div class="tutorMiddle">
+              
+                <!-- <p class="profileBio">This a profile Bio. Keep it short and sweet. No more than 250 characters?</p> -->
+                <div class="followers-container">
+                    <ul class="followers-list">
+                        <li class="followers-item"> <button type="button" class="" data-toggle="modal" data-target="#followersModal" name = "New Message">  
+                            <h1>21 <span>Followers</span></h1></button>
+                        </li>
+                        <li class="followers-item"> <button type="button" class="" data-toggle="modal" data-target="#followingModal" name = "New Message">  
+                            <h1>21 <span>Following</span></h1></button>
+                        </li>
+                    </ul>
+                    <div class="ProfileButtons">
+                        <button class="btn btn-primary follow-btn">Follow</button>
+                        <!-- Display if they have published a tutoring session -->
+                        <button class="btn btn-primary follow-btn">Send Message</button>
+                    </div>
+                </div>
+                
+               
+            </div> 
+            
+        </div>
+        
+        <div>
+            
+            <!-- <h2 class="connection-subheader">Currently Tutoring In </h2></li> -->
+                <%for (x in Subjects){%>
+                    <!-- <p class=" subjectList bg-dark"></p> -->
+                <%}%>
+                <!-- </div> -->
+                <!-- <div class="rightBarReview"><p class="readReviewsTxt"><%=reviewCount%> Reviews</p>
+                    <div class="review-wrapper">
+                                               
+                        <%for(x in tutor.Reviews){%>
+                            <div class="reviewDisplay-container ">
+                            <div class="reviewDisplay-top">
+                                    <h1 class=" reviewName"><%=tutor.Reviews[x].SenderHandle%> <span class="course badge badge-primary"><%=tutor.Reviews[x].Course%></span><i></i>
+                                        
+                                </h1>
+                                <span class="stars"> <% for(var i =0; i < parseInt(tutor.Reviews[x].Rating); i++){ %>
+                                    <span>&#9733;</span>
+
+                                <% }%>
+                            </span>
+                                    <h2 class="text-light course"></h2>
+                                </div>
+                                <div class="reviewDisplay-bottom">
+                                        <h2 class="reviewBody"><%=tutor.Reviews[x].Message%></h2>
+                                    </div>    
+                                </div>
+                        <%}%>
+                                
+                       
+                    </div> -->
+                    
+                    </div>
+                    
+            </div>
+            <div class="profileBody">
+                <div class="profileNav">
+                    <ul class="profile-ul">
+                        <li>Courses</li>
+                        <li>Tutoring Sessions</li>
+                        <li>Clubs</li>
+                        <li>Reviews</li>
+                    </ul>
+                </div>
+                <div class="profile-info">
+                    <ul class="profile-item-list">
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+</html>

@@ -1,0 +1,2394 @@
+/*
+color palette:
+Left Blue: #1561ad
+
+Right Blue- Muted: #1c77ac
+
+Blue Green: #1dbab4
+
+Red-Orange: #fc5226
+*/
+/* Change the white to any color ;) */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px #202020 inset !important;
+
+}
+
+/*Change text in autofill textbox*/
+input:-webkit-autofill {
+    -webkit-text-fill-color: white !important;
+}
+
+::-webkit-scrollbar {
+    width: .75em;
+  }
+   
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3)!important;
+  }
+   
+  ::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    outline: 1px solid slategrey;
+  }
+.mobileMsg{
+    display:none;
+}
+::-webkit-scrollbar-thumb {
+    background: #a9a9a9;
+    border-radius:10px;
+    margin-top:50px;
+    margin-left:5px!important;
+}​
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+    
+    
+    border:none;
+    -webkit-box-shadow: 0 0 0 30px #202020 inset !important;
+    
+}
+/*Change text in autofill textbox*/
+input:-webkit-autofill {
+    -webkit-text-fill-color: white !important;
+}
+
+#mainNav{
+   position:fixed;
+    height:60px;
+    width:100%;
+    background-color:#242526;
+    box-shadow:1px 1px 1px 1px #131313;
+}
+.headerBtn{
+    padding-right:10px;
+}
+
+.headerBtn button{
+    height:20px;
+    font-size:15px;
+}
+body{
+    margin:0;
+    min-width: 100%;
+    overflow-x: hidden;
+    text-align:center;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    font-family:Helvetica Neue, Helvetica, sans-serif;
+
+}
+
+ul{
+    padding-left:0!important;
+}
+header{
+    width:100%;
+    text-align:center;
+    margin:0;
+    padding:0;
+    
+   
+}
+/* input:focus{
+    outline:none!important;
+  } */
+#navMenu ul li{
+    list-style-type:none;
+    margin-bottom:15px;
+}
+
+.homeContainer{
+    min-height:100vh;
+    padding-top:120px;
+    padding-left:400px;
+    padding-right:400px;
+    margin-bottom:0;
+    padding-bottom:0;
+    color:#a9a9a9;
+    background-color:#18191a;
+    
+    
+}
+.signup-container{
+    min-height:100vh;
+    padding-top:120px;
+    padding-left:200px;
+    padding-right:200px;
+    margin-bottom:0;
+    padding-bottom:0;
+    color:#a9a9a9;
+    background-color:#18191a;
+    
+    
+}
+.homeContainer1{
+   
+   
+    min-height:100vh;
+    padding-top:40px;
+    margin-bottom:0;
+    padding-bottom:0;
+    color:#a9a9a9;
+    background-color:#18191a;
+    
+    
+}
+/* 
+Menu css
+*/
+
+/* 
+  ##Device = Desktops
+  ##Screen = 1281px to higher resolution desktops
+*/
+    .socialIcon{
+        width:30px;
+    }
+    .secondaryMenu{
+        width:350px;
+        position:absolute;
+        right:0;
+        margin-right:7%;
+    }
+    .socialItem{
+        display:inline-block;
+        margin-left:10px;
+    }
+    .copyright{
+        font-family: 'Open Sans', sans-serif;
+
+    }
+    .list-unstyled li{
+        font-family: 'Open Sans', sans-serif;
+    }
+    .list-unstyled li a{
+        color:#d4d4d4;
+    }
+    .list-unstyled li a:hover{
+        color:#007bff;
+    }
+    footer h1{
+        font-size:20px;
+        color:black;
+       
+        
+    }
+    footer table{
+        width:100%;
+       
+    }
+
+    footer table td{
+        width:150px!important;
+        padding-right:80px;
+        height:40px!important;
+    }
+
+    
+   
+    .aboutTable{
+        
+        display:inline-block;
+        margin-bottom:40px;
+      
+    }
+    .aboutTable .aboutHeading{
+
+width:200px;
+font-size:32px;
+text-align:center;
+background-color:#d3cfcf;
+    }
+    .subscriptionTable .aboutHeading{
+
+        width:50px;
+        font-size:28px;
+        text-align:center;
+            }
+        .subscriptionContainer{
+            width:100%;
+            text-align:center
+        }
+        .subscriptionWrapper{
+            width:60%;
+            text-align:center;
+            display:inline-block;
+            
+        }
+    .compensationPlan{
+        font-family:Helvetica Neue, Helvetica, sans-serif;
+        margin-top:180px;
+    }
+    .compensationTxt{
+        font-family:Helvetica Neue, Helvetica, sans-serif;
+        font-size:22px;
+        margin-top:30px;
+    }
+    .aboutTable .first{
+        border-right:2px solid #330099;
+    }
+    .aboutTableContainer{
+        width:100%;
+        text-align:center;
+        margin-top:60px;
+        
+    }
+    .subscriptionTableContainer{
+        width:100%;
+        text-align:center;
+        margin-top:60px;
+        margin-right:200px!important;
+        margin-right:20%!important;
+    }
+    .aboutTable .aboutTableItem{
+        font-size:22px;
+        text-align:left;
+        padding-top:35px;
+        padding-left:80px;
+        padding-right:40px;
+        background-color:#343a40;
+    }
+    .aboutTable1 .aboutTableItem1{
+        font-size:22px;
+        text-align:center;
+        padding-top:35px;
+        padding-left:80px;
+        padding-right:80px;
+        font-family:"Helvetica Neue", Helvetica, sans-serif;
+    }
+    .subscriptionTable  .aboutTableItem2{
+        font-size:16px;
+        text-align:left;
+        padding-top:35px;
+        padding-left:20px;
+        padding-right:20px;
+        width:10%!important;
+    
+    
+    }
+
+    .aboutTable1 tr{
+        width:30%;
+    }
+    
+    .subTxt{
+        font-size:20px;
+        font-family:"Helvetica Neue", Helvetica, sans-serif;
+        padding-left:200px;
+        padding-right:200px;
+        padding-top:30px;
+        display:inline-block;
+    }
+    .aboutTable td{
+        color:black;
+        font-size:30px;
+       
+    }
+    .subscriptionTable td{
+        color:black;
+        font-size:25px;
+       
+    }
+    .aboutTable1{
+        
+        display:inline-block;
+        margin-bottom:150px;
+        margin-top:50px;
+      
+    }
+    .aboutTable1 .first{
+        border-right:2px solid #330099;
+    }
+   
+    .aboutTable1 .aboutTableItem{
+        font-size:22px;
+        text-align:left;
+        padding-top:35px;
+        padding-left:80px;
+        padding-right:40px;
+        
+    }
+    .aboutTable1 .aboutHeading1{
+
+width:400px;
+font-size:24px;
+text-align:center;
+font-family:"Helvetica Neue", Helvetica, sans-serif;
+border-bottom:2px solid #330099;
+
+    }
+    .subscriptionTable .aboutHeading1{
+
+        width:300px;
+        font-size:20px;
+        text-align:center;
+        font-family:"Helvetica Neue", Helvetica, sans-serif;
+        border-bottom:2px solid #330099;
+            }
+    .subscriptionTable{
+        
+        display:inline-block;
+        margin-bottom:150px;
+        margin-top:50px;
+     
+        width:100%;
+      
+    }
+    .subscriptionTable .first{
+        border-right:2px solid #330099;
+    }
+   
+    .subscriptionTable .aboutTableItem{
+        font-size:22px;
+        text-align:left;
+        padding-top:35px;
+        padding-left:80px;
+        padding-right:80px;
+        margin-right:20px;
+    }
+    .subscriptionTable .aboutHeading1{
+
+width:400px;
+font-size:24px;
+text-align:center;
+font-family:"Helvetica Neue", Helvetica, sans-serif;
+border-bottom:2px solid #330099;
+    }
+    .login-header{
+        color:white;
+        font-size:18px;
+    }
+    .orText{
+        font-family: 'Open Sans', sans-serif;
+        color:#a9a9a9!important;
+    }
+    .login-button{
+        border:2px solid #007bff!important;
+        color:white!important;
+        box-shadow:1px 2px #131313;
+    }
+    .login-button:hover{
+      background-color:#007bff!important;
+    }
+   .loginLink1{
+    font-family: 'Open Sans', sans-serif;
+    font-size:13px!important;
+     
+       margin-top:-5px;
+       border-radius:20px!important;
+      margin-left:20px;
+   
+   }
+   .loginLogo{
+       width:60px!important;
+       margin-left:auto;
+       margin-right:auto;
+       display:inline-block;
+   }
+   
+   .loginLink2{
+    font-family:"Helvetica Neue", Helvetica, sans-serif;
+    font-size:16px!important;
+    font-weight:100!important;
+   color:white!important;
+   box-shadow: 1px 1px 0px 1px #343a40;
+   margin-top:-5px;
+   border-radius:20px!important;
+
+   background-color:#330099!important;
+   border:none!important;
+   height:40px;
+   padding:10px;
+}
+   .learnMore{
+    color:#330099!important;
+   }
+   .loginLinkList{
+       list-style-type:None!important;
+        text-align:center;
+       width:100%;
+   }
+   .loginLinkList li{
+    display:inline-block!important;
+    padding-right:10px;
+   }
+
+   .loginLink{
+    font-family: 'Open Sans', sans-serif!important;
+    font-size:14px!important;
+    font-weight:100!important;
+   border-radius:20px;
+   width:150px;
+
+}
+.updatePW-btn{
+    font-family: 'Open Sans', sans-serif!important;
+    font-size:14px!important;
+    font-weight:100!important;
+   border-radius:20px;
+   width:150px;
+
+}
+.one{
+    margin-right:20px;
+}
+.two{
+    background-color:red;
+}
+.subscriptionList{
+    display:inline-block;
+    background-color:#d3cfcf    ;
+    box-shadow: 2px 2px 1px 1px grey;
+    margin-right:20px;
+    list-style-type:none;
+    width:16%;
+    border-radius:10px;
+ 
+    padding-bottom:50px;
+    height:600px;
+    margin-top:40px;
+  
+}
+.subscriptionList1{
+    display:inline-block;
+    background-color:#99f091;
+    box-shadow: 2px 2px 1px 1px grey;
+    margin-right:20px;
+    list-style-type:none;
+    width:16%;
+    border-radius:10px;
+ 
+    padding-bottom:50px;
+    height:600px;
+    margin-top:40px;
+  
+}
+.subscriptionList2{
+    display:inline-block;
+    background-color:#fa8072;
+  
+    box-shadow: 2px 2px 1px 1px grey;
+    margin-right:20px;
+    list-style-type:none;
+    width:16%;
+    border-radius:10px;
+ 
+    padding-bottom:50px;
+    height:600px;
+    margin-top:40px;
+  
+}
+.subscriptionList3{
+    display:inline-block;
+    background-color:#fed88f ;
+    
+    box-shadow: 2px 2px 1px 1px grey;
+    margin-right:20px;
+    list-style-type:none;
+    width:16%;
+    border-radius:10px;
+ 
+    padding-bottom:50px;
+    height:600px;
+    margin-top:40px;
+  
+}
+.subscriptionListHeader{
+    color:#23272A;
+    font-size:24px;
+    font-family:"Helvetica Neue", Helvetica, sans-serif;
+    padding-top:25px;
+    
+}
+.subImg{
+    margin-left:10%;
+    margin-right:10%;
+    width:1200px!important;
+    margin-top:30px;
+    
+}
+.subscriptionList ul li, .subscriptionList1 ul li,.subscriptionList2 ul li, .subscriptionList3 ul li{
+    padding-bottom:10px;
+    padding-top:10px;
+    font-size:20px;
+    list-style-type:none;
+    color:black;
+    text-align:left;
+    padding-left:20px;
+
+}
+
+   .loginErr{
+       font-size:20px!important;
+        color:#a9a9a9;
+        font-family: 'Open Sans', sans-serif!important;
+   }
+   .signInTitleContainer{
+       margin-top:20px;
+   }
+    .mainTitle{
+        margin-top:100px;
+        margin-bottom:50px;
+    }
+    #mainImg{
+        padding-top:30px;
+    }
+    
+    #img-btn{
+        border-radius:20px;
+        font-family: 'Open Sans', sans-serif!important;
+      
+    }
+    #img-btn1{
+        border-radius:20px;
+        font-family: 'Open Sans', sans-serif!important;
+      
+    }
+    .img-btn-container{
+        margin-top:40px;
+    }
+    .page-container{
+        background-color:#121212!important;
+    }
+    .content{
+        margin-left:5%;
+        margin-right:5%;
+        text-align:center;
+    }
+    /*content block style template start*/
+    .contentBlock{
+        width:100%;
+        text-align:center;
+        position:relative;
+        
+        
+        
+    }
+    .homePageSmall{
+        text-align:center!important;
+        width:100%;
+        font-family:"Helvetica Neue", Helvetica, sans-serif;
+        
+    }
+    .contentBlock img{
+        width:100%;
+    }
+    .tagline{
+        font-family: 'Open Sans', sans-serif;
+        font-size:35px;
+        margin-bottom:20px;
+        color:white;
+    }
+    .tagline1{
+        font-size:25px;
+        color:black;
+    }
+    /*content block style template end*/
+   
+    #searchInput{
+       background-color:#a9a9a9;
+        border:none;
+        border-radius:20px;
+        margin-bottom:15px;
+        padding-left:20px;
+        font-size:16px;
+        width: 100%;
+        border:none!important;
+       background-color:none!important;
+        border-width: 0px;
+        outline:0; /* I have also tried outline:none */
+        padding-bottom:0!important;
+        font-family: 'Open Sans', sans-serif;
+        -webkit-box-shadow: none!important;
+        color:#212529!important;
+    }
+    #searchInput::placeholder{
+        color:#212529!important;
+    }
+    .searchBtn{
+        border-radius:20px;
+        background-color:none!important;
+    }
+    .searchColorDark{
+        background-color:#a9a9a9;
+        color:black;
+    }
+    .searchColorLight{
+        background-color:rgb(33, 35, 37)!important;
+        color:#a9a9a9!important;
+    }
+    /*index.html styling*/
+    .button{
+        
+        width:300px;
+        height:50px;
+    }
+    .button span{
+        font-weight:bold;
+    }
+    .button:hover{
+        background-color:black;
+    }
+    #searchSchool{
+        width:300px;
+        margin-left:30px;
+        border-radius:5px;
+    }
+    .searchItem{
+        margin-bottom:1px;
+        width:100%;
+        height:30px;
+        padding-bottom:5px;
+        padding-bottom:45px;
+    }
+    .searchItem:hover{
+        background-color:#e2e1e1;
+    }
+    /*connections page CSS*/
+    .connectionArrow{
+        width:7px!important;
+    }
+   
+    #subjectNames li {
+        display:inline-block;
+        font-size:20px;
+        padding-right:20px;
+    
+    }
+    .subjectItem{
+        cursor:pointer;
+        line-height:5px;
+        padding-bottom:0;
+        margin-bottom:0;
+    }
+    .subjectItem:hover{
+        color:#1dbab4;
+    }
+    #subjectNames{
+        width:100%;
+        z-index:4;
+        height:40px;
+        padding-right:5%;
+        padding-left:5%;
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        transition: all 0.5s ease;
+        
+    }
+    
+    .classLabel{
+        padding:5px;
+        border-radius:3px;
+    }
+    .paddingDiv{
+        height:150px;
+    }
+   
+    #plusOne-badge{
+        margin-left:5px;
+        position:absolute;
+        display:none;
+    }
+    #classDisplayMsg{
+        width:100%;
+        position:absolute;
+        
+        padding-top:100px;
+    }
+    #classDisplayMsg h1{
+        font-size:40px;
+    }
+    #classDisplayMsg h2{
+        font-size:100px;
+        margin-top:-50px;
+        
+    }
+    #connectionsWrapper{
+        border: 5px solid #1dbab4;
+        padding:30px;
+        border-radius:10px;
+        min-height:600px;
+        width:75%;
+        background-color:#2d95e5;
+    }
+    .connectionsContainer{
+        
+        margin-right:33%;
+        opacity:0%;
+    }
+    .connectionsContainer ul li{
+        list-style-type:none;
+        text-align:left;
+    }
+    .connections-sideBar{
+        
+        color:white;
+        width:15%;
+        min-height:500px;
+        float:left;
+        margin-left:10%;
+        border-radius:10px;
+        text-align:center;
+        position:relative;
+        z-index:3;
+        
+    }
+    .connections-sideBar h1{
+        padding-bottom:15px;
+    }
+    .connections-sideBar-Container{
+        width:100%;
+        display:inline-block;
+        text-align:left;
+        padding-left:40px;
+    }
+    .connections-sideBar ul li{
+        padding-bottom:15px;
+        padding:none;
+        list-style-type:none;
+        font-size:20px;
+        width:100%;
+        cursor:pointer;
+
+    }
+    .connections-sideBar ul li:hover{
+        text-decoration:underline;
+    }
+    .connections-sideBar .connections-sideBar-Container ul{
+        padding-left:none!important;
+        width:100%;
+    }
+    .mainTitle{
+        font-size:40px;
+        margin-top:0;
+        margin-bottom:10px;
+    }
+    .subTitle{
+        font-size:25px;
+    }
+    .bx-wrapper{
+        width:50%;
+        float:right;
+        
+    }
+    .tutors-wrapper{
+      
+        text-align:center;
+        float:right;
+    }
+    .tutors-container{
+        margin-top:50px;
+        text-align:left;
+        display:inline-block;
+        margin-left:auto;
+        margin-right:auto;
+    }
+    .tutors-container h1{
+        font-size:35px;
+        padding-bottom:20px;
+    }
+    .tutors-container h2{
+        font-size:25px;
+       
+    }
+    .tutors-container h2 a{
+        color:white;
+    }
+    .tutors-container section{
+        margin-bottom:50px;
+        background-color:#fc5226;
+        padding:25px;
+        display:inline-block;
+        border-radius:10px;
+    }
+    .td-button{
+        width:50px!important;
+        margin-right:30px;
+        padding-right:0;
+    }
+    /*Connection Page CSS*/
+    .connectionList-wrapper{
+        width:100%;
+        text-align:center;
+        margin-left:30%;
+       
+    }
+    .connectionList-container{
+        display:inline-block;
+        margin-left:auto;
+        margin-right:auto;
+        width:100%;
+        min-height:700px;
+        border-radius:20px;
+        color:#a3a3a3;
+        margin-bottom:150px;
+    }
+    #connectBtn{
+        margin-top:20px;
+        width:200px;
+    }
+    .connectionList{
+        text-align:left;
+        width:100%;
+    }
+    .connectionHeader{
+        text-align:center;
+        float:left;
+    }
+    .connectionHeader li img{
+        width:50px;
+    }
+    .connectionHeader li{
+        margin-bottom:-10px!important;
+        width:250px!important;
+    }
+    .connectionBody{
+        margin-top:50px;
+        text-align:left;
+        display:inline-block;
+        margin-right:600px;
+    }
+    .connectionBody li p{
+        font-size:15px!important;
+    }
+    .connectionBody-container{
+        width:100%;
+        text-align:center;
+    }
+    .connectionButton{
+        margin-top:30px;
+        border-radius:15px;
+        width:200px;
+        height:50px;
+    }
+    .connectionList li{
+        list-style-type:none;
+    }
+    .connectionList li span{
+        color:#ffc608;
+        font-size:35px;
+        padding-right:7px;
+    }
+    .connectionName{
+        font-size:18px!important;
+        text-align:center;
+        font-family:Helvetica Neue, Helvetica, sans-serif;
+        
+    }
+    .tutorName{
+        font-size:30px;
+        margin-left:30px;
+    }
+    .schoolName{
+        font-size:20px;
+        
+    }
+    .profilePicture{
+        width:150px!important;
+    }
+    .connectionsImg{
+        width:250px!important;
+    }
+    #connectionsTitle{
+        display:none;
+        position:absolute;
+        width:100%;
+    }
+    .connection-subheader{
+        font-size:25px;
+        
+    }
+    
+    /*Review Form styles*/
+    #reviewsContainer{
+    background-color:#d3d3d3;
+    color:black;
+    padding-bottom:100px;
+    padding-top:100px;
+    margin-left:15%;
+    }
+    .review-form{
+        width:50%;
+        text-align:center;
+        margin-right:0;
+        margin-left:0;
+        margin-top:40px;
+        padding-bottom:50px;
+    }
+    .review-form label h2{
+        font-size:20px;
+    }
+   
+    .review-wrapper{
+        width:100%;
+        margin-top:100px;
+    }
+    .reviewDisplay-container{
+        width:60%;
+        background-color:#d3d3d3;
+        text-align:left;
+        display:inline-block;
+        border-radius:7px;
+        padding:20px;
+        padding-left:20px;
+        padding-right:20px;
+        float:left;
+    }
+    .reviewsTitle{
+        font-size:25px;
+        text-align:left;
+    }
+    .reviewDisplay-container h2 i{
+        font-size:20px;
+    }
+    .reviewDisplay-bottom .reviewBody{
+        font-size:22px;
+    }
+    .reviewDisplay-top span{
+        color:#ffc608;
+        font-size:25px;
+        padding-right:4px;
+        
+    }
+    
+    .reviewDisplay-top{
+        float:left;
+        width:250px;
+        margin-left:20px;
+        text-align:left;
+
+    }
+    .reviewDisplay-bottom{
+       
+        margin-top:30px;
+    }
+    .reviewDisplay-container h1{
+        font-size:30px;
+    }
+    .reviewDisplay-container h2{
+        font-size:25px;
+    }
+    .review-form form{
+        text-align:center;
+    }
+    #reviewWrapper{
+        display:inline-block;
+        width:100%;
+        text-align:left;
+        margin-top:50px;
+        margin-bottom:150px;
+        
+    }
+    .reviewTitle{
+        margin-top:100px;
+        
+    }
+    .reviewTitle h1{
+        font-size:30px;
+    }
+    #reviewWrapper form{
+        width:100%;
+        text-align:left;
+    }
+    /*About Page Styling*/
+    .about-wrapper{
+        width:100%;
+        text-align:center;
+    }
+    .about-container{
+        margin-top:50px;
+        text-align:left;
+        display:inline-block;
+        margin-left:auto;
+        margin-right:auto;
+        width:60%;
+    }
+    .about-container h2{
+        color:grey;
+        padding-bottom:20px;
+    }
+    .about-container section ul li{
+        list-style-type:none;
+        
+    }
+    .about-container section ul li span{
+        font-size:30px;
+        padding-right:5px;
+        font-weight:bold;
+    }
+    /*Stars styling*/
+    .rating{
+    
+        display:inline-block;
+        transform: rotateY(180deg);
+     
+        text-align:left;
+    }
+    
+    .rating input{
+        display:none;
+    }
+    
+    .rating label{
+        display:inline-block;
+        cursor:pointer;
+        width:40px;
+    }
+  label{
+      color:#a9a9a9!important;
+      font-family: 'Open Sans', sans-serif!important;
+      font-size:15px!important;
+
+  }
+  .forgotPW{
+      color:#a9a9a9;
+  }
+    .rating label:before{
+        content: '\2605';
+        font-family:fontAwesome;
+        position:relative;
+        display:block;
+        font-size:35px;
+        top:0;
+        opacity:.9;
+        color:#d9d9d9;
+    }
+     .rating label:after{
+        content: '\2605';
+        font-family:fontAwesome;
+        position:absolute;
+        display:block;
+        font-size:35px;
+        color:rgb(248, 215, 29);
+        top:0;
+        opacity:0;
+        
+      
+    }
+    .rating label:hover:after,
+    .rating label:hover ~ label:after,
+    .rating input:checked~label:after{
+        
+        opacity:1;
+       
+    }
+    .stars{
+       
+        margin-top:-10px!important;
+        
+    }
+    
+    .name{
+        margin:0;
+    }
+    .stars div:before{
+        display:inline;
+        content: '\2605';
+        font-family:fontAwesome;
+        color:rgb(248, 215, 29);
+               
+    }
+    #total{
+        margin-top:-30px;
+        margin-bottom:30px;
+    }
+    #total .stars{
+        text-align:center;
+    }
+    #total .stars div:before{
+        font-size:25px;
+    }
+    .stars div{
+        display:inline;
+    }
+    .stars1 div{
+        display:inline;
+        color:rgb(248, 215, 29);
+    }
+
+    .table tbody{
+        font-family:Roboto!important;
+        font-size:18px!important;
+        
+    }
+    .tableImg{
+        width: 75px!important;
+    }
+    .thead{
+        
+        border-radius:4px;
+    }
+    /*Tutor Block Styling*/
+.profile-pic{
+    height:100%!important;
+}
+.tutorBlock:hover{
+    opacity:90%;
+    border:1px solid #a9a9a9;
+    cursor:pointer;
+}
+    .tutorBlock{
+       
+        
+        height:200px;
+        margin-bottom:20px;
+        width:650px;
+        display:block;
+        
+       
+        border-radius:10px;
+        
+    }
+    .courseSearchResults{
+        width:100%;
+        text-align:center;
+        padding-bottom:150px;
+    }
+    .courseSearchResults-wrapper{
+        
+        text-align:center;
+        display:inline-block;
+        margin-right:auto;
+        margin-left:auto;
+    }
+    .dateImg{
+        margin-top:5px;
+        
+    }
+    .tutorBlockLight{
+        background-color:#eeeeec;
+        border: 2px solid #d3d3d3;
+    }
+    .tutorBlockHeader{
+        text-align:center;
+        margin-bottom:5px;
+        float:left;
+        margin-left:40px;
+    }
+    .tutorBlockBody{
+        text-align:left;
+        width:65%;
+        
+       margin-bottom:10px;
+       margin-top:25px;
+        margin-left:50px;
+        float:right;
+        color:#a3a3a3;
+     
+    }
+
+    .gradeLabel{
+        text-align:center;
+        color:white;
+    }
+    .tutorBlock .tutorBlockHeader img{
+        width:100px;
+    }
+    .tutorBlock ul li{
+        list-style-type: none;
+    }
+    .tutorBlock h1{
+        font-size:20px;
+        padding-top:10px;
+    }
+    .tutorBlock h2{
+        font-size:20px;
+    }
+    .profile-pic{
+        width:50%!important;
+        padding-top:10px;
+    }
+    .dollarImg{
+        width:12px!important;
+        margin-top:2px;
+    }
+   
+    .classTitle{
+        padding-bottom:30px;
+    }
+    .connectButton{
+        margin-bottom:10px;
+        width: 90px;
+        float:right;
+        margin-right:18%;
+        
+    }
+    
+    .your-class{
+        padding-bottom:150px;
+    }
+    .slick-arrow{
+        width:50px;
+        height:50px!important;
+        border-radius:25px;
+        font-size:20px;
+        font-weight:bold;
+    }
+    .slick-arrow p{
+        margin-top:5px;
+    }
+    
+    .buttonContainer{
+        margin-top:-170px;
+        padding-bottom:50px;
+        
+    }
+    .rsvp{
+       position:absolute;
+       margin-top:220px;
+       font-size:18px!important;
+       width:375px;
+       
+    }
+    .type{
+        font-size:16px!important;
+        font-weight:500!important;
+        color:#a3a3a3;
+        font-family:Helvetica Neue, Helvetica, sans-serif;
+        margin-top:5px;
+         
+      }
+      
+     
+    .gpa{
+        margin-top:22px;
+    }
+    .loginLabel{
+        text-align:left;
+        color:white;
+        padding-left:20px;
+        background-color:#242526!important;
+        height:100%;
+        margin-bottom:0!important;
+        padding-top:5px;
+        padding-bottom:0px!important;
+        height:15px;
+        font-size:13px;
+        font-family: 'Open Sans', sans-serif;
+
+    }
+    .loginLabel1{
+        text-align:left;
+        color:white!important;
+        padding-left:20px;
+        background-color:#242526!important;
+        margin-bottom:5px!important;
+        padding-top:5px;
+        height:22px;
+        font-size:14px;
+        
+    }
+    .buttonContainer h2{
+        padding-bottom:20px;
+    }
+    * {box-sizing: border-box;}
+    .input-container {
+        display:block;
+        width: 100%;
+        margin-bottom: 50px!important;
+        margin-top:30px!important;
+        border-radius:0px!important;
+        padding-bottom:none!important;      
+        height:40px!important;
+        outline:none;
+        background-color:#242526;
+      }
+      .input-container2 {
+       
+        display:block;
+        width: 100%;
+        margin-bottom: 20px!important;
+        margin-top:30px!important;
+        border-radius:0px!important;
+        padding-bottom:none!important;      
+        outline:none!important;
+        height:40px!important;
+
+        background-color:#242526;
+        
+        
+      }
+      .input-container3 {
+       
+        outline:none;
+        width: 47%;
+        float:left;
+        margin-bottom: 20px!important;
+        margin-top:30px!important;
+        border-radius:0px!important;
+        padding-bottom:none!important;      
+        height:40px!important;
+        background-color:#242526;
+      }
+      .input-container4 {
+       
+        width: 47%;
+        outline:none;
+        margin-bottom: 20px!important;
+        margin-top:30px!important;
+        border-radius:0px!important;
+        padding-bottom:none!important;      
+        margin-left:6%;
+        height:40px!important;
+
+        background-color:#242526;
+        
+        
+      }
+      .name div{
+          display:inline-block;
+      }
+      .errMsg{
+          margin-top:-5px;
+          color:#dc3545;
+      }
+      .input-container1 {
+        display: -ms-flexbox; /* IE10 */
+        display: flex;
+        width: 80%;
+        margin-bottom: 5px;
+        
+        background-color:#a9a9a9;
+        border-collapse: separate; 
+        border-radius:20px;
+        
+        padding-bottom:20!important;
+        
+        height:45px;
+        background-color:none;
+        
+      }
+      .input-container-home{
+        display: -ms-flexbox; /* IE10 */
+        display: flex;
+        width: 100%;
+        margin-bottom: 5px;
+        margin-right:10%;
+        margin-left:10%;
+        height:60px;
+        border-radius:10px;
+      }
+      
+      .icon {
+        padding-top: 7px;
+       padding-bottom:0;
+        color: black;;
+        min-width: 50px;
+        text-align: center;
+        height:30px;
+        border-radius:20px;
+      }
+     .login-nav{
+         border-radius:10px!important;
+         padding-top:3px!important;
+         padding-bottom:3px!important;
+         box-shadow:1px 2px #131313;
+         font-family: 'Open Sans', sans-serif;
+         font-size:16px!important;
+         position:relative;
+         width:100px!important;
+         margin-left:220px;
+
+     }
+     .login-nav:hover{
+         color:white!important;
+         
+
+     }
+      /* .input-field:focus {
+        border:none!important;
+        outline: 0!important;
+      } */
+
+      
+      /* Set a style for the submit button */
+      .btn {
+        
+        color: white;
+        padding: 15px 20px;
+        border: none;
+        cursor: pointer;
+     
+        opacity: 0.9;
+      
+      }
+      
+      .btn:hover {
+        opacity: 1;
+      }
+    #sign-up, #logout{
+        border-radius:5px;
+        
+    }
+    #logout{
+        height:20px;
+        width:100px;
+        padding-left:20px;
+        padding-right:20px;
+        padding-bottom:5px;
+        padding-top:5px;
+        margin-top:15px;
+    }
+    #logout:hover{
+        color:white!important;
+    }
+    /*Log in form*/
+    #loginWrapper{
+        width:40%;
+        text-align:center;
+       
+    }
+    #login-form{
+        width:350px;
+        padding:20px;
+        display:none;
+ 
+        border-radius:5px;
+        margin-top:-15px;
+        position:absolute;
+        z-index:10;
+        margin-top:15vh;
+        min-height:400px;
+        opacity:1.0;
+        margin-left:20%;
+       
+
+        
+    }
+    #login-form form{
+        text-align:left;
+    }
+    #login-form .x{
+        
+        float:right;
+        color:white;
+        font-size:25px;
+        font-weight:bold;
+        cursor:pointer;
+    }
+    #signUpWrapper{
+        width:100%;
+        text-align:center;
+        margin-top: -30px;
+    }
+    .firstName{
+       
+        float:left;
+       
+    }
+    .lastName{
+        width:48%;
+        float:right;
+        margin-top:-21px;
+        
+    }
+    #lastTxt, #firstTxt, #handleTxt, #emailTxt, #majorTxt, #pwTxt, #ReTypeTxt, #classTxt{
+        color:#dc3545;
+        position:absolute;
+    }
+    .schoolInput{
+        width:48%;
+        float:right;
+        margin-top:-9px;
+        
+    }
+    .signup-header{
+        font-size:35px;
+        padding-bottom:30px;
+        font-family: 'Open Sans', sans-serif;
+        text-align: center;
+    }
+    .signup-header span{
+        font-family: 'Pacifico', cursive;
+        font-size:30px;
+    }
+    .signup-icon{
+        width:15px!important;
+    }
+    #signup-form{
+        width:100%;
+        padding-left:15%;
+        padding-right:15%;
+   
+        
+        border-radius:5px;
+        display:inline-block;
+        position:relative;
+        text-align:center;
+    }
+    input[type="text"]{
+    
+    height:100%;
+    padding-top:5px;
+   
+    }
+    input[type="text"]:focus{
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        outline:none!important;
+    }
+    #signup-form .form-group input {
+        background-color:#e7e7e7;
+        
+    }
+    .form-group .label{
+        text-align:left!important;
+    }
+    .fileUpload input{
+        
+        color:#a9a9a9;
+        cursor:pointer;
+        width:30%;
+        cursor:pointer;
+        padding-bottom:10px;
+        margin-top:10px;
+    }
+    #signup-form input::placeholder{
+        color:#212529;
+    }
+    #signup-form:last-child{
+        background-color:none!important;
+    }
+    #signup-form form{
+        text-align:left;
+    }
+    #signup-form .x{
+        
+        float:right;
+        color:black;
+        font-size:25px;
+        font-weight:bold;
+        cursor:pointer;
+    }
+  
+    #email::placeholder, #password::placeholder{
+        
+        opacity: 1; /* Firefox */
+          
+    }
+    .signIn{
+        text-align:center;
+        font-size:20px;
+        color:white!important;
+        font-family: 'Open Sans', sans-serif;
+        margin-bottom:40px!important;
+    }
+    .noAccount{
+        text-align:left;
+        font-size:22px;
+        font-family:Helvetica Neue, Helvetica, sans-serif;
+    }
+    .signInLogo{
+        float:left;
+        width:30px!important;
+        margin-right:10px;
+        margin-top:5px;
+    }
+    .signInTitle img{
+        margin-right:15px;
+    }
+    .signUpTxt{
+       padding:5px;
+       border:3px solid #5bc0de;
+       border-radius:5px;
+       color: white;
+    }
+    .signUpTxt:hover{
+        border:3px solid white;
+        color: #5bc0de;
+        text-decoration:none;
+    }
+    #emailMsg1, #pwMsg1{
+        position:absolute;
+        color:#dc3545;
+        font-size:14px;
+        font-family: 'Open Sans', sans-serif;
+    }
+ 
+    .app-description{
+        font-family: 'Open Sans', sans-serif;
+        font-size:18px;
+        color:#d4d4d4;
+        text-align:left;
+        width:600px;
+    }
+    .betaVersion{
+        position:fixed;
+        color:#585757;
+        right:0;
+        font-family: 'Open Sans', sans-serif;
+        margin-top:18px;
+        margin-right:15px;
+    }
+    .form-group{
+        padding-top:5px;
+    }
+   
+    #login-form h1{
+        font-size:30px;
+        padding-bottom:5px;
+    }
+    #login-form p{
+        padding-top:10px;
+    }
+    #login-form p a{
+        font-size:15px;
+    }
+    #login-form p a button{
+        border-radius:5px;
+        padding:5px;
+    }
+    #overlay{
+        position:relative;
+        min-height:100vh;
+        width:100%;
+        background-color:black;
+        opacity:.3;
+        z-index:6;
+        top:0;
+        display:none;
+    }
+    
+    #loadingDiv{
+        width:100%;
+        min-height:100vh;
+        position:absolute;
+        top:0;
+        
+        text-align:center;
+        background-color: #fbfbfb;
+        opacity:.8;
+    }
+    .loader {
+        border: 8px solid #f3f3f3; /* Light grey */
+        border-top: 8px solid #3498db; /* Blue */
+        border-radius: 50%;
+        width: 80px;
+        height: 80px;
+        animation: spin 2s linear infinite;
+        text-align:center;
+        display:inline-block;
+        margin-top:350px;
+      }
+      
+      #loginPage label, #loginPage input, #loginPage button{
+        font-family: "Helvetica Neue", Helvetica, sans-serif;
+      }
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      /*create connection page*/
+      #rateDiv{
+          
+          font-size:20px;
+          text-align:center;
+      }
+      
+      #rateDiv span{
+          width:200px;
+          background-color:#1dbab4;
+          padding:5px;
+          border-radius:5px;
+          margin-bottom:70px;
+      }
+      #connect ul li{
+          display:inline-block;
+      }
+      #connect ul li input[type="radio"]{
+        display:none;
+      }
+
+      #connect .star{
+        color:#ffc608;
+        font-size:30px;
+        padding-right:3px;
+        
+      }
+      #connect h2{
+        margin-top:30px;
+        margin-bottom:30px;
+    }
+      #connectStarContainer{
+        margin-top:-15px;
+        margin-bottom:20px;
+      }
+      .dayContainer{
+          min-height:300px;
+          width:200px;
+          background-color:#fbfbfb;
+          color:grey;
+          border-radius:10px;
+          margin-right:15px;
+          margin-left:15px;
+          text-align:center;
+      }
+    
+
+
+      /* The switch - the box around the slider */
+
+      #themeTxt{
+          font-size:10px;
+      }
+
+#switchContainer .mode{
+    width:100px;
+    font-size:12px;
+    font-weight:bold;
+    margin-top:-25px;
+    margin-right:12px;
+}
+.switch {
+    position: relative;
+    display: block;
+    width: 60px;
+    height: 25px;
+    margin-bottom:0;
+    
+  }
+  
+ 
+  .themeTxt{
+      width:100%;
+      font-size:13px;
+  }
+  .form-group small{
+      position:absolute;
+  }
+
+  /* Autocomplete suggestions styling */
+  #ui-id-1{
+    background-color:#eeeeec;
+    width:40%;
+    margin-top:50px!important;
+    border:1px solid #a9a9a9;
+    margin-top:10px!important;
+    border-radius:10px;
+  }
+  .ui-menu-item{
+      list-style-type: none;
+      cursor:pointer;
+      padding-top:10px;
+      padding-bottom:10px;
+      padding-left:10px;
+      font-family: "Helvetica Neue", Helvetica, sans-serif;
+      font-size:18px;
+      
+
+  }
+  .ui-menu-item:hover{
+    background-color:#343a40!important;
+    border-radius:10px;
+
+}
+  
+  /* Jobs Page CSS */
+  .jobsImg{
+      height:80px!important;
+      margin-top:30px;
+      margin-bottom:20px;
+  }
+  .jobsHeading, .aboutHeading{
+      font-size:28px;
+      font-family: 'Open Sans', sans-serif;
+
+  }
+  .jobsHeading {
+      color: white;
+      font-size: 2.5em;
+  }
+  .jobsHeading2{
+    color: white;
+    font-size:25px;
+    font-family: 'Open Sans', sans-serif;
+
+    text-align:center;
+    margin-top:50px;
+    margin-bottom:30px;
+}
+.jobsList{
+    font-size:25px;
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+    text-align:center;
+}
+.jobsItem{
+    text-align:center;
+    background-color:#007bff;
+    height:200px;
+    border-radius:100px;
+    width:200px;
+   margin-left:auto;
+   margin-right:auto;
+    margin-bottom:30px;
+}
+.jobsImg1{
+    width:200px!important;
+}
+.jobsImg2{
+    width:120px!important;
+}
+.jobsItem1{
+    text-align:center;
+ 
+   
+    margin-right:auto;
+    margin-left:auto;
+    margin-bottom:30px;
+}
+
+.jobsItem .jobsItemSmall {
+ 
+    font-size:21px!important;
+}
+.jobsSkills{
+    
+    display:inline-block;
+    width:30%;
+    color: white;
+    font-size:30px!important;
+    text-align:left;
+    margin-bottom:70px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.jobsSkillsText{
+    font-size:17px!important;
+}
+.jobTitle {
+    color: white;
+    text-shadow: 1px 1px black;
+}
+
+.jobsTable{
+    width:100%;
+}
+.jobsSkills table{
+    text-align:center;
+    font-size:25px;
+}
+#benefits-container{
+    width:60%;
+    display:inline-block;
+    margin-left:auto;
+    margin-right:auto;
+}
+#benefits-container table{
+    width:100%;
+    
+   
+}
+
+.social{
+    width:150px;
+}
+.perksItem{
+    font-size:18px;
+    padding-bottom:10px!important;
+    text-align:center;
+    width:80px;
+    font-family: 'Open Sans', sans-serif;
+    color:white;
+   
+}
+#benefits-wrapper{
+    width:100%;
+    text-align:center;
+    margin-top:70px;
+    margin-bottom:125px;
+    
+}
+
+.create{
+    width:300px!important;
+  
+}
+#footer{
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+    background-color:#23272A;
+    border-top: 1px solid grey;
+}
+#footer table tr td a{
+    color:#343a40;
+}
+.flag{
+    width:25px;
+    margin-left:15px;
+    margin-top:-2px;
+}
+.confirmInput{
+    height:40px!important;
+    font-size:16px;
+    text-align:left;
+    background-color:#eeeeec;
+    border:1px solid black;
+    border-radius:5px;
+    width:300px;
+    padding-left:20px;
+    font-family: 'Open Sans', sans-serif!important;
+}
+.verifyErr{
+    font-size:20px!important;
+}
+
+.confirmationHeader{
+    font-family: 'Open Sans', sans-serif!important;
+    font-size:28px;
+    color:white;
+}
+.confirmSubmit{
+    margin-top:-15px;
+}
+
+/** Desktop **/
+@media only screen and (min-width: 1000px) {
+    #email1, #password1{
+        background-color:#242526!important;
+        color:white!important;
+        border-radius:0!important;
+        border-bottom: 2px solid #a9a9a9;
+        margin-bottom:5px;
+        font-size:16px;
+        width: 100%;
+        border-top:none;
+        border-left:none;
+        border-right:none;
+       background-color:none!important;
+        padding-bottom:0!important;
+        font-family: 'Open Sans', sans-serif!important;
+        -webkit-box-shadow: none!important;
+    }
+        #mainImg img{
+            padding-left:35%;
+            padding-right:35%;
+        }
+        #searchBar{
+            width:700px;
+            display:inline-block;
+          }
+        .secondaryMenu{
+            width:150px;
+            position:absolute;
+            right:0;
+            margin-top:-45px;
+        }
+        .hamburgerContainer {
+            display: none;
+        }
+        .input-field{
+            background-color:#242526!important;
+            width:100%;
+            height:100%!important;
+            font-size:30px;
+         }
+         .input-field1{
+            background-color:#242526!important;
+            width:100%!important;
+            height:100%!important;
+            border-right:none!important;
+            border-top:none!important;
+            border-left:none!important;
+            font-size:20px;
+            color:white;
+            padding-left:20px;
+         }
+         .input-field1::placeholder{
+            color:#a9a9a9!important;
+         }
+         #loginPage{
+             margin-left:30%;
+             margin-right:30%;
+             margin-top:50px;
+         }
+         /*disclaimer on page */
+         .disclaimerText2{
+            color:#d4d4d4;
+         }
+         .disclaimerText2 h3 strong{
+            font-weight: 900;
+         }
+         #searchInput{
+            background-color:white;
+             border-radius:50px;
+             margin-bottom:15px;
+             padding-left:40px;
+             width: 100%;
+             height:100%;
+             border:none!important;
+            background-color:none!important;
+             border-width: 0px;
+             outline:0; /* I have also tried outline:none */
+             padding-bottom:0!important;
+             font-family: 'Open Sans', sans-serif;
+             -webkit-box-shadow: none!important;
+             color:#212529!important;
+         }
+        
+        .loginIcon{
+            padding-top:5px;
+            padding-left:15px!important;
+        }
+        .loginLink{
+            font-family: 'Open Sans', sans-serif;
+            font-size:15px!important;
+            border-radius:40px!important;
+            padding-left:25px!important;
+            padding-right:25px!important;
+            width:100%;
+            box-shadow: 1px 2px #343a40;
+           }
+
+}
+.createAccount{
+    font-size:20px!important;
+    border-radius:20px!important;
+}
+/** For tablet view **/
+@media only screen and (max-width: 1000px) and (min-width: 750px) {
+    #email1, #password1{
+        font-size:40px!important;
+        font-family: 'Open Sans', sans-serif;
+        height:200px!important;
+    }
+    .forgotPW{
+        font-size:30px!important;
+    }
+    
+    .loginIcon{
+        padding-top:25px;
+        padding-left:45px!important;
+    }
+    .page-container{
+        background-color:#23272A!important;
+    }
+    .tagline {
+        font-size: 70px;
+        padding-left:5%;
+        padding-right:5%;
+    }
+    .socialItem{
+        display:none!important;
+    }
+    .icon {
+        padding-top: 7px;
+        padding-bottom:0;
+        min-width: 50px!important;
+        text-align: center;
+        height:50px;
+        color:white!important;
+        border-radius:80px;
+        margin-right:20px;
+      }
+      .signup-icon{
+          width:30px!important;
+      }
+    .loginLink1, .loginLink{
+        font-family: 'Open Sans', sans-serif;
+        font-size:55px!important;
+           border-radius:40px!important;
+          margin-left:20px;
+          padding-left:25px!important;
+          padding-right:25px!important;
+       
+          width:200px;
+       }
+      
+       #searchInput{
+        background-color:white;
+         border-radius:50px;
+         margin-bottom:15px;
+         padding-left:40px;
+         font-size:40px;
+         width: 100%;
+         height:100%;
+         border:none!important;
+        background-color:none!important;
+         border-width: 0px;
+         outline:0; /* I have also tried outline:none */
+         padding-bottom:0!important;
+         font-family: 'Open Sans', sans-serif;
+         -webkit-box-shadow: none!important;
+         color:#212529!important;
+     }
+  
+     .signIn{
+         font-size:50px;
+         color:white!important;
+         text-align:center;
+         margin-bottom:40px!important;
+     }
+       .contentBlock{
+           padding-top:100px;
+       }
+       #mainNav{
+        position:relative;
+         height:100px;
+         width:100%;
+         background-color:#23272A;
+     }
+       #headerContainer{
+        position:relative;
+        height:150px;
+        z-index:1;
+        width:100%;
+        top:0;
+        padding-top:40px;
+    
+        
+    }
+    #headerLinkContainer{
+        position:relative!important;
+        }
+    #headerLinkContainer ul{
+        display:none!important;
+    }
+    .secondaryMenu{
+        position:absolute!important;
+        right:0;
+        top:0;
+        padding-top:0!important;
+    }
+    #mainImg img {
+       padding-left: 15%;
+       padding-right: 15%;
+       padding-top:150px;
+    }
+    #siteLogo{
+        margin-top:15px!important;
+    }
+    #siteLogo a img{
+        width:300px;
+    }
+    #searchBar {
+        display:inline-block;
+        width:100%;
+    }
+    
+   
+    .input-container-home{
+        margin-left:0!important;
+    }
+    /** .headerLinks {
+       display: none;
+    } **/
+    .headerMenu{
+        display:none!important;
+    }
+  
+    .popOutMenu {
+        position: absolute;
+        background-color:#4f5f76; 
+        height: 788px;
+        width: 280px;
+        top: 0;
+        
+        animation: popout 1s ease;
+        -webkit-animation: popout 1s ease;
+  
+    }
+    .hamburgerContainer {
+        height: 300px;
+        right: 0;
+        width: 30px!important;
+        margin-right: 0;
+        cursor: pointer;
+        position: absolute!important;
+        height: 150px;
+        /** width: 100px!important; **/
+        left: 0;
+        top: 60;
+        z-index: 3;
+        margin-left: 50px;
+    }
+
+   
+    .hamburgerBars {
+        width: 60px!important;
+        height: 6px;
+        background-color: white;
+        margin-bottom: 15px;
+        
+    }
+    @-webkit-keyframes fadeIn {
+        from {opacity: 0;}
+        to {opacity: 1;}
+      }
+      
+      @keyframes fadeIn {
+        from {opacity: 0;}
+        to {opacity:1 ;}
+      }
+
+    .mobileMsg{
+        display:none;
+        text-align:center;
+        margin-top:100px;
+    } 
+}
+/** For mobile View **/
+@media only screen and (max-width: 750px) {
+    .tagline {
+        font-size: 33px;
+    }
+    #mainImg img{
+        padding-left: 30%;
+        padding-right: 30%;
+    }
+    .headerMenu{
+        display:none!important;
+    }
+    #loginPage{
+        margin-right:180px;
+        margin-left:20%;
+        width: 400px;
+        text-align:left;
+        background-color:#343a40;
+        padding:20px;
+        padding-left:50px;
+        padding-right:50px;
+    }
+    #siteLogo a img{
+        width:200px;
+    }
+}
+
+/** Hamburger Menu **/
+   
+    #siteLogo{
+        position: absolute;
+        margin-right:20px;
+        width: 100px;
+        margin-left: 85px;
+     }
+     .logo{
+        width:140px;
+        margin-top:-7px;
+        margin-right:60px;
+      }
+      #siteLogo a{
+        padding-left: 0; 
+    }
+    .secondaryMenu {
+        width:350px;
+        position:absolute;
+        right:0;
+    }
+
+  /* Connections page */
+ 
+/*Tutor Block Styling*/
+.tutorName{
+font-size:27px;
+padding-top:10px;
+font-family:Helvetica Neue, Helvetica, sans-serif;
+}
+.schoolName, .reviewsTitle{
+font-size:22px;
+font-family:Helvetica Neue, Helvetica, sans-serif;
+background-color: #046A38;
+margin-bottom:20px!important;
+
+}
+.tutorBtn{
+width:170px;
+border-radius:10px!important;
+font-family:Helvetica Neue, Helvetica, sans-serif;
+margin-bottom:30px!important;
+}
+.feedback{
+font-family:Helvetica Neue, Helvetica, sans-serif;
+font-size:30px;
+}
+.tutorButtons{
+width:30%;
+float:right;
+margin-top:-120px;
+margin-right:60px;
+position: relative;
+z-index: 3;
+
+}
+.tutorButtons form{
+
+width:100px;
+}
+.tutorButtons input{
+
+width:110px;
+}
+.timeLi{
+    display:inline-block;
+    width:100%;
+    margin-left:40px;
+}
+.timeImg{
+    margin-top:5px;
+}
+.timeLi div{
+    display:inline-block;
+}
+.time{
+    float:left;
+    margin-right:30px;
+    width:15px!important;
+}
+.timeTextDark{
+    font-family:Helvetica Neue, Helvetica, sans-serif;
+    margin-left:15px;
+    font-size:17px;
+    margin-bottom:5px;
+    
+    margin-right:0;
+    color:#a3a3a3;
+}
+.subscribeRadio{
+    margin-top:30px;
+}
+.resultSubject{
+    font-family:Helvetica Neue, Helvetica, sans-serif;
+    color:#a9a9a9;
+    font-size: 31px;
+    padding-top:65px;
+    margin-bottom:10px;
+}
+#payment-request.visible {
+    visibility: visible;
+    opacity: 1;
+  }
+  .packageSelect{
+    font-family:Helvetica Neue, Helvetica, sans-serif;
+    padding-left:10px;
+      height:40px;
+      font-size:16px;
+      margin-bottom:30px;
+      border-radius:10px;
+      background-color:#eeeeec;
+      width:60%;
+  }
+  .packageSelect label{
+    font-family:Helvetica Neue, Helvetica, sans-serif;
+  }
+  #payment-form {
+    margin: 0 -30px;
+    padding: 20px 30px 30px;
+    border-radius: 4px;
+    border: 1px solid #e8e8fb;
+  }
+  #card-element{
+      width:60%;
+      border: 1px solid #a9a9a9;
+      color:black!important;
+      background-color:#eeeeec!important;
+      border-radius:10px;
+      margin-left:5px;
+      margin-bottom:30px;
+  }

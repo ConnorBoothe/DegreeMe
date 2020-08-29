@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<head>
+    <title>Meetups | degreeMe</title>
+    <meta charset="UTF-8">
+    <!-- Stylesheets -->
+    <link rel="icon" href="assets/img/favicon.png" type="image/png" />
+    <link rel="stylesheet" href="assets/bootstrap/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+    <link href="assets/css/main1.css" rel="stylesheet">
+    <link href="assets/css/userProfile.css" rel="stylesheet">
+    <link href="assets/css/meetups.css" rel="stylesheet">
+    <link href="assets/css/home.css" rel="stylesheet">
+    <!-- Scripts -->
+    <script src="assets/jquery/dist/jquery.js"></script>
+  
+</head>
+<body class="bodyClass">
+    <div class="page-container">
+        <%- include ('partials/sideBar.ejs') %>
+        <%- include ('partials/horizontalHeader.ejs')%>
+        <div class="homeContainer1">
+            <div class="listContainer ">
+                <ul class="myConnectionOptionList">
+                    <li id="meetupsAll" class=" myConnectionOptions">All</li>
+                    <li id="meetupsCurrent" class=" myConnectionOptions">Current</li>
+                    <li id="meetupsPast" class="badge badge-primary myConnectionOptions">Past</li>
+                </ul>
+                <h3 class="noMeetups"></h3>
+                <div class="tableContainer">
+                    <div class="tableWrapper">
+                        <table id="meetupsTable" class="table_">
+                            <thead class="">
+                                <tr>
+                                    <th class="text-light">Tutor</th>
+                                    <th class="text-light">Student</th>
+                                    <th class="text-light">Class</th>
+                                    <th class="text-light">Date</th>
+                                    <th class="text-light">Time</th>
+                                    <th class="text-light">Building</th>
+                                    <th class="text-light">Room</th>
+                                    <th class="text-light">Members</th>
+                                    <th class="text-light"></th>
+                                  
+                                
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <div class="myConnectionsWrapper">
+                                    <% for(x in meetups){%>
+                                    <tr class="myConnectionContainer">
+                                        <td class="text-light"><%=meetups[x].tutorHandle%></td>
+                                        <td class="text-light"><%=meetups[x].userHandle%></td>
+                                        <td class="text-light"><%=meetups[x].class%></td>
+                                        <td class="text-light"><%= formatDate(meetups[x].date)%></td>
+                                        <td class="text-light"><%= formatTime(meetups[x].date)%></td>
+                                        <td class="text-light"><%=meetups[x].building%></td>
+                                        <td class="text-light"><%=meetups[x].room%></td>
+                                        <td>
+                                            <%for(i in meetups[x].Members){%>
+                                            <a href="/User/<%= meetups[x].Members[i].handle%>" class="memberImage"
+                                                data-toggle="tooltip" title="<%= meetups[x].Members[i].handle%>">
+                                                <img class="meetupsImg" src="../<%=meetups[x].Members[i].image%>" />
+                                            </a>
+                                            <%}%>
+                                        </td>
+            
+                                        <td></td>           
+                                    </tr>
+                                    <%}%>
+                                </div>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="assets/js/meetupsClient.js"></script>
+    <script src="assets/js/ajaxCalls/meetups.js"></script>
+    <script type="text/javascript" src="../assets/js/Client-DateFunctions.js"></script>
+
+</body>
+</html>

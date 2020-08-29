@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+    <head>
+        <title>Study Groups | degreeMe </title>
+        <meta charset="UTF-8">
+        <!-- Stylesheets -->
+        <link rel="icon" href="assets/img/favicon.png" type="image/png" />
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="assets/bootstrap/node_modules/bootstrap/dist/css/bootstrap.min.css">
+        <link href="assets/css/main1.css" rel="stylesheet">
+        <link href="assets/css/home.css" rel="stylesheet">
+        <link href="assets/css/createStudyGroup.css" rel="stylesheet">
+    <link href="assets/css/userProfile.css" rel="stylesheet">
+        <!-- Scripts -->
+        <script src="assets/jquery/dist/jquery.js"></script>
+        <script src="../assets/jquery/jquery.session/jquery.session.js"></script>
+    </head>
+        <body class="color-dark">
+    
+        <div class="page-container ">
+            <%- include ('partials/sideBar.ejs') %>
+            <%- include ('partials/horizontalHeader.ejs')%>
+            <%- include ('partials/inviteModal.ejs')%>
+            <div class="homeContainer">
+                    <div class="contentBlockHost">
+                        <div id="signUpWrapper">
+                            <input type="hidden" name="group_name" class="hiddenGroup"/>
+                            <input type="hidden" name="group_name" class="hiddenGroupId"/>
+                            <div id="hostSession-form" class="">
+                                <form method="POST" action="StudyGroup">
+                                       <div class="createStudyGroupDiv">
+                                          <h1 class="userInfoHead-SG">Create a Group    <span id="schoolSignUp-sg"><%=session.school%></span></h1>
+                                            <p class="groupTxt">Groups bring students together around various topics of interest.</p>
+                                          
+                                        <div class="study-item-container">
+                                            <p class="text-light loginLabel1">Group Name</p>
+                                            <input name="groupName" id="group_name" type="text" class="input-field-createStudyGroup" autocomplete="off" style="text-transform: capitalize;" />
+                                            <p id="groupNameTxt"></p>
+                                        </div>
+                                        <div class="study-item-container">
+                                            <p class="text-light loginLabel1">Group Description</p>
+                                            <input name="groupDescription" id="group_description" type="text" class="input-field-createStudyGroup" autocomplete="off" style="text-transform: capitalize;"/>
+                                            <p id="groupDescriptionTxt"></p>
+                                        </div>
+                                        <div class="study-item-container">
+                                            <p class="text-light loginLabel1">Course</p>
+                                            <input name="course" id="courseName" type="text" class="input-field-createStudyGroup" autocomplete="off" style="text-transform: capitalize;"/>
+                                            <p id="courseNameTxt"></p>
+                                            <div class="autocomplete-wrapper">
+                                                <div class="course-autocomplete">
+                                                    <ul>
+                                                        <p class='emptySearch'>Search Courses</p>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="study-item-container">
+                                            <p class="text-light loginLabel1">Professor</p>
+                                            <input id="professor" name="professor" class="input-field-createStudyGroup" autocomplete="off" style="text-transform: capitalize;"/>
+                                            <p id="professorTxt"></p>
+                                        </div>
+                                        <button id="createStudyGroup" type="submit" class="btn btn-primary loginLink">Create Group</button>
+                                       </div>
+                                        
+                                      
+                                       </div>
+                                      
+                                    </form>
+                                    <input style="display:none" id="session" value="<%=session.theme%>"/>
+
+                                  </div>        
+                    </div>  
+                </div>
+                
+                </div>
+                
+            </div>
+            <script type="text/javascript" src="../assets/js/ajaxCalls/CreateStudyGroups.js"></script>
+            <script type="text/javascript" src="../assets/js/Client-DateFunctions.js"></script>
+            <script type="text/javascript" src="../assets/js/emailInvite.js"></script>
+
+    </body>
+</html>
