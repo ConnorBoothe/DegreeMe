@@ -527,12 +527,11 @@ module.exports = class UserDB {
             }
         })
     }
-    // //add a bid to UserDB
-    // addBid(handle, timelineId, bidder, price){
-    //     var UserDB = mongoose.model('UserDB',userDBSchema);
-    //     UserDB.findOne({handle: handle}).exec((err,docs)=>{
-    //         docs.bids.push({timelineId:timelineId, bidder:bidder, price:price});
-    //         return docs.save();
-    //     })
-    // }
+    //get list of emails given a list of user handles
+    getUserEmailsByHandle(handleArray){
+        console.log(handleArray)
+        var UserDB = mongoose.model('UserDB',userDBSchema);
+        return UserDB.find({handle:{$in: handleArray}}, "email");
+
+    }
 }
