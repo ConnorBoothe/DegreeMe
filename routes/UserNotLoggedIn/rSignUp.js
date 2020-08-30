@@ -153,8 +153,8 @@ router.post('/SignUp', [
                                 {
                                     "to": [
                                         {
-                                            "email": "chrisbred4s@gmail.com",
-                                            "name": "Christian Hithe"
+                                            "email": req.body.email,
+                                            "name": req.body.name
                                         }
                                 ],
                                     "dynamic_template_data": {
@@ -164,8 +164,7 @@ router.post('/SignUp', [
                                         "email": req.body.email,
                                 
                                 },
-                                    "subject": " "
-                                }
+                            }
                             ],
                                 "from": {
                                     "email": "notifications@degreeme.io",

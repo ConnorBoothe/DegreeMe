@@ -42,7 +42,7 @@
                     <span 
                     class="input textarea" role="textbox" 
                     
-                    contenteditable>Request help from the degreeMe community</span>
+                    contenteditable>Request help from the degreeMe community...</span>
                     </div>
                 </div>
                     <div class="requestHelpDetails">
@@ -176,19 +176,23 @@
                                         <input type="hidden" class="timelineId" value="<%=timeline[x].id%>"/>
                                         <input type="hidden" class="bidder" value="<%=session.handle%>"/>
                                         <input type="hidden" class="userId" value="<%=session.userId%>"/>
-                                        <span class="help-dollar-text">$</span><input type="text" class="bid-input" placeholder="25" />
+                                        <span class="help-dollar-text">$</span><input type="text" class="bid-input" placeholder="25.00" />
                                         <input type="hidden" class="stripeId" value="<%=session.stripeId%>"/>
                                         <input type="hidden" class="stripeId" value="<%=timeline[x].caption%>"/>
                                     </div>
                                     <button type="button" class="btn btn-primary respondBtn">Place Bid</button>
+                                    
                                 </div>
+                               
                             <%}else{%>
                                 <div class="placeBid">
                                     <a href="/MyFinances" type="button" class="addPaymentInfo">Add payment info to place a bid</a>
                                 </div>
 
                             <%}%>
+                            <p class="bidErrTxt">Bid must be $5 or greater</p>
                         </div>
+                      
                     </div>
                 <%}if(timeline[x].type === "Tutor Listing"){%>
                         <input class="postId" name="postId" type="hidden" value="<%=timeline[x].id%>" />

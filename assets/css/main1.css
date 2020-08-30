@@ -305,6 +305,9 @@ Menu css
         color:white;
         font-family: 'Open Sans', sans-serif;
     }
+    .input-field-addCourse::placeholder{
+        color:#d4d4d4;
+    }
     .courseExists{
         position:absolute;
         color:#dc3545;

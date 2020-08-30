@@ -311,3 +311,7 @@ input[name="anonymous"]{
     position: relative;
     top: 20px;
 }
+.course-noStudents, .noGroups{
+    font-size:18px;
+    color:#d4d4d4;
+}

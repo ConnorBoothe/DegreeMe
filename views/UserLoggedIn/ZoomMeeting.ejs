@@ -23,7 +23,7 @@
       <div class="meeting-info">
         <!-- Make sure role is host -->
         
-        <%if(!meeting.ZoomLink  && session.handle === meeting.Members[1].handle && meeting.Virtual){%>
+        <%if(!meeting.ZoomLink  && session.handle === meeting.Members[0].handle && meeting.Virtual){%>
         <div class="createZoomMeeting-container">
           <h1>There's one more step!</h1>
           <h3 class="zoomLinkMsg">Schedule your virtual tutoring session with <span class="text-bold"><%=meeting.Members[0].name%></span> by clicking the button
@@ -43,7 +43,7 @@
           
         </div>
 
-        <%}else if(session.handle === meeting.Members[1].handle && !meeting.Virtual && meeting.Location.length < 1){%>
+        <%}else if(session.handle === meeting.Members[0].handle && !meeting.Virtual && meeting.Location.length < 1){%>
           <div class="createZoomMeeting-container">
             <h1>There's one more step!</h1>
             <h3 class="zoomLinkMsg1">Schedule your physical tutoring session with <span class="text-bold"><%=meeting.Members[0].name%></span></h3>
@@ -212,7 +212,7 @@
         </ul>
         <%if(meeting.ZoomLink){%>
           <a target="_blank" href="<%=meeting.ZoomLink%>" class="btn goTo btn-primary">Go to Zoom meeting</a>
-          <%}else if(meeting.Members[1].handle === session.handle){%>
+          <%}else if(meeting.Members[0].handle === session.handle){%>
   
           <%}else{%>
           <p class="zoomMsg">Zoom meeting not scheduled.</p>
