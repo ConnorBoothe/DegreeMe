@@ -186,7 +186,6 @@ $(document).ready(function(){
                         //tag a course functionality (request a tutor)
                         $(".tagCourse-loading").text("Search Courses")
                         $(".tagCourse").on("keyup", function(){
-                            alert("YO")
                             $(".tagCourse-container").html(filterAddCourseResults(res, $(this).val()));
                         })
                         $(".tagCourse-container").on("click",".tagCourseCountainer", function(){
