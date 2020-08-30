@@ -5,6 +5,8 @@ const router = express.Router();
 const session = require('express-session');
 const nodemailer = require("nodemailer");
 const bodyParser = require("body-parser");
+const unirest = require("unirest");
+const mail = unirest("POST", "https://api.sendgrid.com/v3/mail/send");
 var stripe = require('stripe')(process.env.STRIPE_KEY);
 //DBs used
 const userDB = require('../../models/Database/UserDB');
@@ -85,29 +87,49 @@ router.post("/sendEmail", function(req, res){
     //generate random code and save it to the DB
     var activationCode = Math.floor(Math.random() * 10000);
     UserDB.updateActivationCode(req.body.email1,  activationCode);
+    UserDB.getUserByEmail(req.query.email).exec((err, docs)=>{
+        mail.headers({
+            "content-type": "application/json",
+            "authorization": process.env.SENDGRID_API_KEY,
+            });
+        
+            mail.type("json");
+            mail.send({
+            "personalizations": [
+                {
+                    "to": [
+                        {
+                            "email": docs[0].email,
+                        }
+                ],
+                    "dynamic_template_data": {
+                        "subject": "Account Confirmation",
+                        "name": docs[0].first_name,
+                        "code": activationCode,
+                        "email": docs[0].email,
+                
+                },
+            }
+            ],
+                "from": {
+                    "email": "notifications@degreeme.io",
+                    "name": "DegreeMe"
+            },
+                "reply_to": {
+                    "email": "noreply@degreeme.io",
+                    "name": "No Reply"
+            },
+                "template_id": "d-e54827ff53514c15969d2e52db32e13d"
+            });
+        
+            mail.end(function (res) {
+                // if (res.error) throw new Error(res.error);
+        
+            console.log(res.body);
+            });
+    })
 
-    let testAccount =  nodemailer.createTestAccount();
-    let transporter = nodemailer.createTransport({
-        service:"gmail",
-        auth: {
-          user: "connorboothe@gmail.com", // generated ethereal user
-          pass: "Niner96**" // generated ethereal password
-        }
-      });
-    transporter.sendMail({
-        from: '"CollegeTutor Team" <connorboothe@gmail.com>', // sender address
-        to: "emendel@uncc.edu", // list of receivers
-        subject: "Account Confirmation", // Subject line
-        html: "<h3>Follow the link below and enter code <strong>"+activationCode+"</strong> to confirm your account</h3><a href='http://127.0.0.1:3000/VerifyAccount?email="+req.body.email1+"'><button style='width:300px; font-size:20px; color:white; background-color:#007bff;"+
-        "border:none; border-radius:5px; font-family:Helvetica Neue, Helvetica, sans-serif; cursor:pointer;'>Confirm</button></a>"// html body
-      }, function(err,info){
-        if(err){
-            console.log(err)
-        }
-        else{
-            console.log(info)
-        }
-      });
+   
     res.redirect("/login?message=New Email Sent");
 });
 module.exports = router;

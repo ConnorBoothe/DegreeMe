@@ -26,7 +26,7 @@ function hourDifference(date){
   return Math.ceil(diffTime / (1000 * 60 * 60));
 }
 //job runs every night at midnight
-var job = new CronJob('0 * * * * *', function() {
+var job = new CronJob('0 0 0 * * *', function() {
   console.log("Running")
     listings.getListings().exec((err,docs)=>{
         for(x in docs){
@@ -323,7 +323,6 @@ var job = new CronJob('0 * * * * *', function() {
               
                           mail.end(function (res) {
                               // if (res.error) throw new Error(res.error);
-              
                           console.log(res.body);
                           })
                     })
