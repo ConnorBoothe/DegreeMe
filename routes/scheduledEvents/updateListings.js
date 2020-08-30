@@ -85,7 +85,6 @@ var job = new CronJob('0 * * * * *', function() {
     })
       meetups.getAllMeetups().exec((err,docs)=>{
         for(x in docs){
-         
           var hourDiff = hourDifference(docs[x].date);
           //send email reminder to all members
           if(hourDiff > 0 && hourDiff < 24){
@@ -140,8 +139,93 @@ var job = new CronJob('0 * * * * *', function() {
             
         })
     }
-    
+    if(hourDiff < 0 && hourDiff > -24){
+      var membersArr = [];
+      for(i in docs[x].Members){
+        if(docs[x].Members[i].role != "Host"){
+          membersArr.push(docs[x].Members[i].handle);
+        }
+      }
+      users.getUserEmailsByHandle(membersArr).exec((err, docs1)=>{
+        var emailObjArray = [];
+      for(x in docs1){
+        emailObjArray.push({"email": docs1[x].email});
+      }
+      mail.headers({
+      "content-type": "application/json",
+      "authorization": process.env.SENDGRID_API_KEY,
+      });
+
+      mail.type("json");
+      mail.send({
+      "personalizations": [
+          {
+              "to": emailObjArray,
+              "dynamic_template_data": {
+                  "subject": "Leave your tutor a review",
+                  "name": "Name",
+                  "code": "activationCode",
+                  "email": "req.body.email",
+          
+          },
+      }
+      ],
+          "from": {
+              "email": "notifications@degreeme.io",
+              "name": "DegreeMe"
+      },
+          "reply_to": {
+              "email": "noreply@degreeme.io",
+              "name": "No Reply"
+      },
+          "template_id": "d-e54827ff53514c15969d2e52db32e13d"
+      });
+
+      mail.end(function (res) {
+          // if (res.error) throw new Error(res.error);
+      console.log(res.body);
+      })
+    });
   }
+  //send a reminder to set location/zoom link 3 days before session occurs
+  if(hourDiff < 72 && !docs[x].ZoomLink && !docs[x].Location){
+    users.getUserByHandle(docs[x].tutorHandle).exec((err, user)=>{
+      mail.headers({
+        "content-type": "application/json",
+        "authorization": process.env.SENDGRID_API_KEY,
+        });
+  
+        mail.type("json");
+        mail.send({
+        "personalizations": [
+            {
+                "to": user[0].email,
+                "dynamic_template_data": {
+                    "subject": "You need to activate your account",
+                    "name": "Name",
+                    "code": "activationCode",
+                    "email": "req.body.email",
+            },
+        }
+        ],
+            "from": {
+                "email": "notifications@degreeme.io",
+                "name": "DegreeMe"
+        },
+            "reply_to": {
+                "email": "noreply@degreeme.io",
+                "name": "No Reply"
+        },
+            "template_id": "d-e54827ff53514c15969d2e52db32e13d"
+        });
+  
+        mail.end(function (res) {
+            // if (res.error) throw new Error(res.error);
+        console.log(res.body);
+        })
+    })
+  }
+}
 });
         users.getAllUsers().exec((err,docs)=>{
           for(x in docs){
