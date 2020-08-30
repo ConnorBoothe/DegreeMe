@@ -184,8 +184,10 @@ function populateStudents(students){
       +"<input type='hidden' value ='"+students[x][0].handle+"'/>"
       +"<input type='hidden' value ='"+students[x][0].image+"'/>"
       +"<button id=\""+noAtHandle+"\" data-status=\"follow\" type=\"button\" class=\"btn btn-primary followingButton\">Follow</button>"
-      +"<a href='../User/"+students[x][0].handle+"'><h3><img class='studentImage' src='../"+students[x][0].image+"'/>"+students[x][0].first_name+" "+students[x][0].last_name+"</h3><h5>"+students[x][0].handle+"</h5></a>"
-      +"<p class='bioTxt'>"+students[x][0].Bio+"</p></li>"  
+      +"<a href='../User/"+students[x][0].handle+"'><h3><img class='studentImage' src='../"+students[x][0].image+"'/>"+students[x][0].first_name+" "+students[x][0].last_name+"</h3><h5>"+students[x][0].handle+"</h5></a>";
+      if(students[x][0].Bio != "Tell the world a bit about yourself"){
+        student += "<p class='bioTxt'>"+students[x][0].Bio+"</p></li>";  
+      }
     }
   }
   student +="</ul></div>";
@@ -289,7 +291,6 @@ $(document).ready(function(){
               }
             }
           }
-          
         }
           $(".course-profile-info").html(discussion+"</div></div>");
     });
