@@ -189,7 +189,12 @@ function populateStudents(students){
     }
   }
   student +="</ul></div>";
-  return student;
+  if(student === "<div class='student-container'><ul>"){
+    return "<h3>No students have added this course</h3>";
+  }
+  else{
+    return student;
+  }
 }
 $(document).ready(function(){
     $(".tutorTab").on("click", function(){
@@ -298,7 +303,7 @@ $(document).ready(function(){
                }
                }).done(function(res) { 
                  var studyGroups = "<div class='question-container'><a href='/StartAGroup' type='button' class='btn btn-primary' >"+
-                             "Create a Study Group</a><div class='discussion-container'>";
+                             "Create a Group</a><div class='discussion-container'>";
                  var noGroups = true;
                   for(var x = res.length-1; x>=0; x--){
                    if(res[x].Subject === $(".courseCodeTxt").text()){
@@ -317,7 +322,7 @@ $(document).ready(function(){
                  
                }
                if(noGroups){
-                studyGroups += 'No groups exist';
+                studyGroups += '<p class="noGroups">No groups exist</p>';
                }
                  $(".course-profile-info").html(studyGroups+"</div></div>");
            });
@@ -348,8 +353,14 @@ $(document).ready(function(){
       }, statusCode: {
         202: function (result) {
          $(".question-container").remove();
-
-         $(".course-profile-info").html(populateStudents(result.students));
+          console.log(result.students)
+          if(result.students != ""){
+            $(".course-profile-info").html(populateStudents(result.students));
+          }
+          else{
+            $(".course-profile-info").html("<h3 class='course-noStudents'>No students have added this course</h3>");
+          }
+        
         },
         500: function (result) {
           alert("500 ");

@@ -267,8 +267,12 @@ router.post('/getStudentsByCourse',
             var numInMajor = 0;
             var students = [];
             new Promise((resolve, reject) => {
+                if(data[0].students.length === 0){
+                    res.status(202).json({
+                        students: ""
+                    })
+                }
                 for (var i in data[0].students) {
-                    console.log("DATA)", data[0].students)
                     if (data[0].students[i].id != req.session.userId) {
                         numInMajor++;
                         users.getUserByHandle(data[0].students[i].Handle).then(function (docs) {
@@ -292,6 +296,9 @@ router.post('/getStudentsByCourse',
                 res.status(202).json({
                     students: students
                 })
+            })
+            .catch(function(err){
+                console.log(err)
             })
         })
 
