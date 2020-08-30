@@ -153,8 +153,8 @@ router.post('/SignUp', [
                                 {
                                     "to": [
                                         {
-                                            "email": "connorboothe@gmail.com",
-                                            "name": "Connor Boothe"
+                                            "email": "chrisbred4s@gmail.com",
+                                            "name": "Christian Hithe"
                                         }
                                 ],
                                     "dynamic_template_data": {
