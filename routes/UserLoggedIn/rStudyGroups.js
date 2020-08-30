@@ -357,7 +357,12 @@ router.post("/meetup/addStudyGroupMeetup",
     }
     var splitEmails = req.body.emails.split(",");
     console.log(splitEmails)
-
+    var toEmails = [];
+    for(x in splitEmails){
+      if(splitEmails[x] != ""){
+        toEmails.push({"email": splitEmails[x]});
+      }
+    }
     var mail = unirest("POST", "https://api.sendgrid.com/v3/mail/send");
 
     mail.headers({
@@ -368,12 +373,7 @@ router.post("/meetup/addStudyGroupMeetup",
     mail.send({
     "personalizations": [
         {
-            "to": [
-                {
-                    "email": "chrisbred4s@gmail.com",
-                    "name": "Christian Hithe"
-                }
-        ],
+            "to": toEmails,
             "dynamic_template_data": {
                 "subject": "Group Invitation",
                 "name": req.session.name,

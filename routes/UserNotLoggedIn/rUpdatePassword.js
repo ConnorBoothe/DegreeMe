@@ -76,7 +76,7 @@ router.post("/sendPWEmail", function(req, res){
     UserDB.updateActivationCode(req.body.email,  activationCode);
     UserDB.getUserByEmail(req.body.email).exec((err, docs1)=>{
         if(docs1.length > 0 ){
-
+            
             var mail = unirest("POST", "https://api.sendgrid.com/v3/mail/send");
 
                             mail.headers({
@@ -90,8 +90,8 @@ router.post("/sendPWEmail", function(req, res){
                                 {
                                     "to": [
                                         {
-                                            "email": "chrisbred4s@gmail.com",
-                                            "name": "Christian Hithe"
+                                            "email": docs1[0].email,
+                                            "name": docs1[0].first_name + " " + docs1[0].last_name
                                         }
                                 ],
                                     "dynamic_template_data": {
