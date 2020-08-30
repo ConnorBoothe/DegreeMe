@@ -1,11 +1,15 @@
 $(document).ready(function(){
   $(".input").on("focus", function(){
       $(".requestHelpDetails").fadeIn();
-      if($(this).text() === "Request help from the degreeMe community"  ){
+      if($(this).text() === "Request help from the degreeMe community..."  ){
         $(".textarea[contenteditable]:empty::before").hide();
         $(this).html("")
       }
   });
+  $(".bid-input").on("focus", function(){
+    $(this).parent().css("border-bottom", "none");
+    $(".bidErrTxt").hide();
+  })
    $(".timeline").on("click", ".respondBtn", function(){
       payload = {
         timelineId: $(this).prev().children().eq(0).val(),
@@ -16,7 +20,8 @@ $(document).ready(function(){
     }
     console.log(payload)
     var button = $(this).parent();
-    $.ajax({
+    if(parseInt($(".bid-input").val()) >= 5){
+      $.ajax({
         url: "/addBid",
         type: 'POST',
         data: JSON.stringify(payload),
@@ -47,5 +52,11 @@ $(document).ready(function(){
           },
         },
       });
+    }
+    else{
+      button.children().eq(0).css("border-bottom", "2px solid #dc3545");
+      button.next().show();
+    }
+   
    })
 })
