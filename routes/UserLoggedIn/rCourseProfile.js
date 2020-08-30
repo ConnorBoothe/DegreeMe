@@ -157,52 +157,55 @@ router.post('/Course/addComment',
             
                 notifications.addNotification(discussion[0].userHandle ,req.body.commentHandle," answered your question", req.body.commentImg, "/Course/"+req.body.course+"?discussion="+req.body.discId)
                 users.incrementNotificationCount(discussion[0].userHandle);
+                users.getUserByHandle(discussion[0].userHandle).exec((err, user)=>{
+                    var mail = unirest("POST", "https://api.sendgrid.com/v3/mail/send");
+
+                    mail.headers({
+                        "content-type": "application/json",
+                        "authorization": process.env.SENDGRID_API_KEY,
+                    });
+                    mail.type("json");
+                    mail.send({
+                    "personalizations": [
+                        {
+                            "to": [
+                                {
+                                    "email": user[0].email,
+                                    "name": user[0].first_name + " " + user[0].last_name
+                                }
+                        ],
+                            "dynamic_template_data": {
+                                "subject": req.body.commentHandle + " answered your question.",
+                                "handle": req.body.commentHandle,
+                                "message": req.body.commentMessage,
+                                "discid": req.body.discId,
+                        },
+                            "subject": " "
+                        }
+                    ],
+                        "from": {
+                            "email": "notifications@degreeme.io",
+                            "name": "DegreeMe"
+                    },
+                        "reply_to": {
+                            "email": "noreply@degreeme.io",
+                            "name": "No Reply"
+                    },
+                        "template_id": "d-82f62439c48d4ca39527f769641396d0"
+                    });
+                    mail.end(function (res) {
+                    if (res.error){
+                        console.log(res);
+                        // throw new Error(res.error);
+                    } 
+                });
+                })
+                
             })
+
           
             
-            var mail = unirest("POST", "https://api.sendgrid.com/v3/mail/send");
-
-                                mail.headers({
-                                    "content-type": "application/json",
-                                    "authorization": process.env.SENDGRID_API_KEY,
-                                });
-                                mail.type("json");
-                                mail.send({
-                                "personalizations": [
-                                    {
-                                        "to": [
-                                            {
-                                                "email": "connorboothe@gmail.com",
-                                                "name": "Christian Hithe"
-                                            }
-                                    ],
-                                        "dynamic_template_data": {
-                                            "subject": req.body.commentHandle + " answered your question.",
-                                            "handle": req.body.commentHandle,
-                                            "message": req.body.commentMessage,
-                                            "discid": req.body.discId,
-                                    },
-                                        "subject": " "
-                                    }
-                                ],
-                                    "from": {
-                                        "email": "notifications@degreeme.io",
-                                        "name": "DegreeMe"
-                                },
-                                    "reply_to": {
-                                        "email": "noreply@degreeme.io",
-                                        "name": "No Reply"
-                                },
-                                    "template_id": "d-82f62439c48d4ca39527f769641396d0"
-                                });
-                                mail.end(function (res) {
-                                if (res.error){
-                                    console.log(res);
-                                    // throw new Error(res.error);
-                                } 
-
-                            console.log(res.body);
-                            });
+           
                             // var options = {
                             //     auth: {
                             //         api_key: process.env.SENDGRID_API_KEY
@@ -264,8 +267,10 @@ router.post('/getStudentsByCourse',
             res.redirect('/Home');
         }
         coursesDB.getCourseByName(req.body.course).then(function (data) {
+            console.log(data)
             var numInMajor = 0;
             var students = [];
+            console.log(data)
             new Promise((resolve, reject) => {
                 if(data[0].students.length === 0){
                     res.status(202).json({

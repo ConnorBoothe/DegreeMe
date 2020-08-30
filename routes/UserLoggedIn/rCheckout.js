@@ -158,6 +158,42 @@ router.post('/bids/chargeHelp',
                             users.incrementNotificationCount(userData[0].handle);
                             //close the bid
                             timeline.closeBid(req.body.timelineId).exec();
+                            var mail = unirest("POST", "https://api.sendgrid.com/v3/mail/send");
+
+                                        mail.headers({
+                                            "content-type": "application/json",
+                                            "authorization": process.env.SENDGRID_API_KEY,
+                                        });
+                                        mail.type("json");
+                                        mail.send({
+                                        "personalizations": [
+                                            {
+                                                "to": [
+                                                    {
+                                                        "email": req.session.email,
+                                                        "name": req.session.name
+                                                    }
+                                            ],
+                                                "dynamic_template_data": {
+                                                    "subject": "Congrats, you won the bid!",
+                                                    "name": req.session.name,
+                                                    
+                                                 
+                                            },
+                                                "subject": " "
+                                            }
+                                        ],
+                                            "from": {
+                                                "email": "notifications@degreeme.io",
+                                                "name": "DegreeMe"
+                                        },
+                                            "reply_to": {
+                                                "email": "noreply@degreeme.io",
+                                                "name": "No Reply"
+                                        },
+                                            "template_id": "d-54ee1291c75f468cbe05c2d88ceaf4c2"
+                                        });
+                                        mail.end();
                             res.status(202).json({
                                 StripeId: docs[0].StripeId,
                                 secret: paymentIntent.client_secret,
@@ -253,8 +289,8 @@ router.post("/charge",
                                     console.log(data)
                                 });
                                 listings.incrementStudentsAttending(req.body.tutorSessionId, req.body.timeId);
-
-                                    var mail = unirest("POST", "https://api.sendgrid.com/v3/mail/send");
+                                    users.getUserByHandle(docs.Handle).exec((err, user)=>{
+                                        var mail = unirest("POST", "https://api.sendgrid.com/v3/mail/send");
 
                                         mail.headers({
                                             "content-type": "application/json",
@@ -266,8 +302,8 @@ router.post("/charge",
                                             {
                                                 "to": [
                                                     {
-                                                        "email": "chrisbred4s@gmail.com",
-                                                        "name": "Christian Hithe"
+                                                        "email": user[0].email,
+                                                        "name": user[0].first_name + " " + user[0].last_name
                                                     }
                                             ],
                                                 "dynamic_template_data": {
@@ -292,8 +328,9 @@ router.post("/charge",
                                         mail.end(function (res) {
                                         // if (res.error) throw new Error(res.error);
 
-                                    console.log(res.body);
                                     });
+                                    })
+                                    
                                 
                                 res.status(202).json({
                                     StripeId: tutor[0].StripeId,

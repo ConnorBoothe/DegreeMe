@@ -9,6 +9,7 @@ var app = express();
 // courses.getAllCourses().exec((err,docs)=>{
 //   for(x in docs){
 //     docs[x].students = [];
+//         docs[x].studentCount  = 0;
 //     docs[x].save();
 //   }
 // })

@@ -419,8 +419,8 @@ router.post("/addBid",
                                     {
                                         "to": [
                                             {
-                                                "email": "chrisbred4s@gmail.com",
-                                                "name": "Christian Hithe"
+                                                "email": req.session.email,
+                                                "name": req.session.name
                                             }
                                     ],
                                         "dynamic_template_data": {

@@ -229,7 +229,6 @@ var job = new CronJob('0 * * * * *', function() {
 });
         users.getAllUsers().exec((err,docs)=>{
           for(x in docs){
-            
             if(docs[x].dateCreated){
               var hourDiff = Math.abs(hourDifference(docs[x].dateCreated));
               //send a reminder to verify account if its been 24 hours or less since creation
