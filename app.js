@@ -85,7 +85,7 @@ app.use(require('./routes/UserLoggedIn/rDisplaySingleAcceptedBid.js'));
 //API Routes
 app.use(require('./routes/API/SendStudyGroupData.js')); 
 app.use(require('./routes/API/sendMeetups.js'));  
-app.use(require('./routes/API/SendUserHandles.js')); 
+app.use(require('./routes/API/sendUserHandles.js')); 
 app.use(require('./routes/API/SendNotifications.js'));   
 app.use(require('./routes/API/sendTutors.js'));
 app.use(require('./routes/API/getMyCourses.js')); 
