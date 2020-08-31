@@ -31,5 +31,8 @@
   },
   "devDependencies": {
     "express-session": "^1.17.1"
+  },
+  "engines": {
+    "node": "10.x"
   }
 }
