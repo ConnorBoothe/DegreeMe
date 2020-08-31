@@ -19,7 +19,7 @@ const User = require("../../models/classes/Student");
 const Connection = require('../../models/classes/Connection');
 //use session and bodyParser
 router.use(session({
-    secret: 'iloveu',
+    secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: true
 }));
