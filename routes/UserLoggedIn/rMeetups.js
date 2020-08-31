@@ -1,4 +1,5 @@
 //packages used
+require('dotenv').config();
 const express = require('express');
 const {
   check,
@@ -18,8 +19,9 @@ var dateFunctions = new DateFunctions();
 var notifications = new NotificationDB();
 var meetups = new MeetupsDB();
 //use session and bodyParser
+var expiryDate = new Date(Date.now() + 60 * 60 * 1000) // 1 hour
 router.use(session({
-  secret: 'iloveu',
+  secret: process.env.SESSION_SECRET,
   resave: true,
   saveUninitialized: true
 }));

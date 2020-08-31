@@ -1,4 +1,5 @@
 //packages used
+require('dotenv').config();
 var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser');
@@ -15,7 +16,7 @@ var users = new userDB();
 var courses = new CourseDB();
 //register the session and use bodyParser
 router.use(session({
-    secret: 'iloveu',
+    secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: true
 }));

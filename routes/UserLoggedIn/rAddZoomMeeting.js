@@ -1,3 +1,4 @@
+require('dotenv').config();
 var express = require("express");
 var router = express.Router();
 var session = require('express-session');
@@ -15,7 +16,7 @@ router.use(bodyParser.urlencoded({
     extended: true
 }));
 router.use(session({
-    secret: 'iloveu',
+    secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: true
 }));

@@ -1,4 +1,5 @@
 //packages used
+require('dotenv').config();
 const express = require('express');
 const router = express.Router();
 const session = require('express-session');
@@ -15,7 +16,7 @@ const Tutor = require('../../models/classes/Tutor');
 var listings = new ListingsDB();
 //use the session and bodyParser
 router.use(session({
-    secret: 'iloveu',
+    secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: true
 }));

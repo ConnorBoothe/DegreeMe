@@ -1,4 +1,5 @@
 //packages used
+require('dotenv').config();
 const express = require('express');
 const {
     check,
@@ -6,14 +7,14 @@ const {
 } = require('express-validator');
 const router = express.Router();
 const bodyParser = require('body-parser');
-const session = require("express-session")({
-    secret: "my-secret",
+const session = require("express-session");
+var expiryDate = new Date(Date.now() + 60 * 60 * 1000) // 1 hour
+router.use(session({
+    secret: process.env.SESSION_SECRET,
     resave: true,
-    saveUninitialized: true,
-
-});
+    saveUninitialized: true
+}));
 //use session and bodyParser
-router.use(session);
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({
     extended: true,

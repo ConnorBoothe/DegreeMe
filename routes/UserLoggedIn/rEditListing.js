@@ -1,4 +1,5 @@
 //packages used
+require('dotenv').config();
 const express = require('express');
 const router = express.Router();
 const session = require('express-session');
@@ -20,8 +21,9 @@ var users = new UserDB();
 //instantiate classes
 var dateFunctions = new DateFunctions();
 //use body parser and session
+var expiryDate = new Date(Date.now() + 60 * 60 * 1000) // 1 hour
 router.use(session({
-    secret: 'iloveu',
+    secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: true
 }));

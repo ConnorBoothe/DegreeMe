@@ -1,4 +1,5 @@
 //packages used
+require('dotenv').config();
 const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
@@ -16,8 +17,9 @@ var acceptedBids = new AcceptedBidsDB();
 //instantiate classes
 var dateFunctions = new DateFunctions();
 //register the session and use bodyParser
+var expiryDate = new Date(Date.now() + 60 * 60 * 1000) // 1 hour
 router.use(session({
-  secret: 'iloveu',
+  secret: process.env.SESSION_SECRET,
   resave: true,
   saveUninitialized: true
 }));

@@ -37,8 +37,9 @@ var bids = new BidsDB();
 var groups = new Groups();
 var acceptedBids = new AcceptedBids();
 //register the session and use bodyParser
+
 router.use(session({
-    secret: 'iloveu',
+    secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: true
 }));

@@ -1,4 +1,5 @@
 //packages used
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
@@ -14,8 +15,9 @@ const TimelineDB = require("../../models/Database/TimeLineDB");
 var listings = new ListingDB();
 var timeline = new TimelineDB();
 //register the session and bodyParser
+var expiryDate = new Date(Date.now() + 60 * 60 * 1000) // 1 hour
 router.use(session({
-  secret: 'iloveu',
+  secret: process.env.SESSION_SECRET,
   resave: true,
   saveUninitialized: true
 }));

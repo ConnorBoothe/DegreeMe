@@ -1,4 +1,5 @@
 //packages used
+require('dotenv').config();
 const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
@@ -16,14 +17,10 @@ var meetups = new MeetupsDB();
 //instantiate classes
 var dateFunctions = new DateFunctions();
 //register the session and use bodyParser
-router.use(session({
-  secret: 'iloveu',
-  resave: true,
-  saveUninitialized: true
-}));
 router.use(bodyParser.json());
-router.use(bodyParser.urlencoded({
-  extended: true,
+var expiryDate = new Date(Date.now() + 60 * 60 * 1000) // 1 hour
+router.use(session({
+  secret: process.env.SESSION_SECRET,
   resave: true,
   saveUninitialized: true
 }));

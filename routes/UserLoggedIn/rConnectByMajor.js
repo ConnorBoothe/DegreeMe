@@ -1,4 +1,5 @@
 //packages used
+require('dotenv').config();
 const express = require('express');
 const router = express.Router();
 const session = require('express-session');
@@ -21,7 +22,7 @@ router.use(bodyParser.urlencoded({
   extended: true
 }));
 router.use(session({
-  secret: 'iloveu',
+  secret: process.env.SESSION_SECRET,
   resave: true,
   saveUninitialized: true
 }));
