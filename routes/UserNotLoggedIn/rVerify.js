@@ -87,7 +87,7 @@ router.post("/sendEmail", function(req, res){
     //generate random code and save it to the DB
     var activationCode = Math.floor(Math.random() * 10000);
     UserDB.updateActivationCode(req.body.email1,  activationCode);
-    UserDB.getUserByEmail(req.query.email).exec((err, docs)=>{
+    UserDB.getUserByEmail(req.body.email1).exec((err, docs)=>{
         mail.headers({
             "content-type": "application/json",
             "authorization": process.env.SENDGRID_API_KEY,

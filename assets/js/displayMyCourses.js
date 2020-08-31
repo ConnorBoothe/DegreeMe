@@ -197,7 +197,7 @@ $(document).ready(function(){
                      }
                     
                      else{
-                         $(".resultsContainer").html("<p class='noMatch'>No matching Results</p>");
+                         $(".autocomplete-addCourse").html("<p class='noMatch text-light'>No matching Results</p>");
                      }
              },
              500: function (result) {

@@ -127,7 +127,7 @@ router.post('/Course/newDiscussion',
     check('userImg').isString().trim(),
     check('anonymous').isString().trim().escape(),
     check('course').isString().trim().escape(),
-    check('post').isString().trim().escape(),
+    check('post').isString().trim(),
     function (req, res) {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -143,7 +143,7 @@ router.post('/Course/addComment',
     check('discId').isString().trim().escape(),
     check('commentImg').isString().trim(),
     check('commentHandle').isString().trim().escape(),
-    check('commentMessage').isString().trim().escape(),
+    check('commentMessage').isString().trim(),
     check('course').isString().trim().escape(),
     function (req, res) {
         const errors = validationResult(req);

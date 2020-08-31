@@ -130,7 +130,7 @@ function populateTutors(data, subject){
         }
     }
     if(sessions === ""){
-        return "<h3>Become the first tutor for this course</h3><img class='noTutorImage' src='../assets/img/undraw_stand_out.svg'/><br><br><a href='/HostASession' class='firstTutor-btn'>Start Your Side Hustle</a>";
+        return "<h3>Become the first tutor for this course</h3><img class='noTutorImage' src='../assets/img/undraw_stand_out.svg'/><br><br><a href='/MyFinances' class='firstTutor-btn'>Start Your Side Hustle</a>";
     }
     else{
         return sessions;

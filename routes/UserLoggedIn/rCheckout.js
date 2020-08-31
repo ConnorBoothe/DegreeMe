@@ -145,10 +145,8 @@ router.post('/bids/chargeHelp',
                         ], new Date(), "Help Request")
                         .then(function (thread) {
                             //(id,sender, senderImg, msg,  dateTime
-                            console.log(thread._id)
                             acceptedBids.addAcceptedBid(userData[0].handle, userData[0].img, req.session.handle, req.body.price, req.body.dueDate, req.body.description,
                                 thread._id,req.body.timelineId, req.body.bidId, docs[0].StripeId, paymentIntent.id )
-                            console.log("DATE: " + dateFunctions.displayDate(req.body.timelineDate));
                             messages.addMessage(thread._id, req.session.handle, req.session.img, "Congrats on winning the bid! This task must be completed by " +
                                 req.body.timelineDate, new Date());
                             users.addThread(req.session.handle, req.session.img, "Help Request", thread._id, userData[0].handle);
