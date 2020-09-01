@@ -22,7 +22,9 @@ var expiryDate = new Date(Date.now() + 60 * 60 * 1000) // 1 hour
 router.use(session({
   secret: process.env.SESSION_SECRET,
   resave: true,
-  saveUninitialized: true
+  saveUninitialized: true,
+  cookie: { secure: true,
+      maxAge:  6*60*60*1000 },
 }));
 router.get('/AcceptedBids', function (req, res) {
     acceptedBids.getAllAcceptedBids(req.session.handle).exec((err, docs)=>{

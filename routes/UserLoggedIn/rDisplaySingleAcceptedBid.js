@@ -27,7 +27,9 @@ router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({
   extended: true,
   resave: true,
-  saveUninitialized: true
+  saveUninitialized: true,
+  cookie: { secure: true,
+      maxAge:  6*60*60*1000 },
 }));
 router.get('/AcceptedBid/:bidId', function (req, res) {
     acceptedBids.getAcceptedBidByById(req.params.bidId).exec((err, docs)=>{

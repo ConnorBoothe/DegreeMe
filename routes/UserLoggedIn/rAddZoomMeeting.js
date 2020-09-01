@@ -18,7 +18,9 @@ router.use(bodyParser.urlencoded({
 router.use(session({
     secret: process.env.SESSION_SECRET,
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie: { secure: true,
+        maxAge:  6*60*60*1000 },
 }));
 //add zoom link via meeting page
 router.post("/meeting/addZoom/",

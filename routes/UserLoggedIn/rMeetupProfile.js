@@ -23,7 +23,9 @@ var expiryDate = new Date(Date.now() + 60 * 60 * 1000) // 1 hour
 router.use(session({
     secret: process.env.SESSION_SECRET,
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie: { secure: true,
+        maxAge:  6*60*60*1000 },
 }));
 //render the meetup profile page
 router.get('/meetup/:MeetupId', function (req, res) {

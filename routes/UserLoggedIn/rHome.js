@@ -41,7 +41,9 @@ var acceptedBids = new AcceptedBids();
 router.use(session({
     secret: process.env.SESSION_SECRET,
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie: { secure: true,
+        maxAge:  6*60*60*1000 },
 }));
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({
