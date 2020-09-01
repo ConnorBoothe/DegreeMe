@@ -4,6 +4,8 @@ const helmet = require("helmet");
 const csp = require("helmet-csp");
 const ejs = require("ejs");
 var app = express();
+
+
 //used to zero out courses in DB
 // const CourseDB = require('./models/Database/UNCC_CoursesDB');
 // var courses = new CourseDB();

@@ -3,11 +3,17 @@ require('dotenv').config();
 const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
+const redis = require('redis');
 const {Datastore} = require('@google-cloud/datastore');
 const {DatastoreStore} = require('@google-cloud/connect-datastore');
 const session = require('express-session');
+const redisStore = require('connect-redis')(session);
 const nodemailer = require("nodemailer");
 const sgTransport = require('nodemailer-sendgrid-transport');
+const REDISHOST = process.env.REDISHOST || 'localhost';
+const REDISPORT = process.env.REDISPORT || 6379;
+const client = redis.createClient(REDISPORT, REDISHOST);
+client.on('error', (err) => console.error('ERR:REDIS:', err));
 const {
     check,
     validationResult
@@ -41,28 +47,7 @@ var acceptedBids = new AcceptedBids();
 //register the session and use bodyParser
 
 router.use(session({
-    store: new DatastoreStore({
-        kind: 'express-sessions',
-     
-        // Optional: expire the session after this many milliseconds.
-        // note: datastore does not automatically delete all expired sessions
-        // you may want to run separate cleanup requests to remove expired sessions
-        // 0 means do not expire
-        expirationMs: 0,
-     
-        dataset: new Datastore({
-     
-          // For convenience, @google-cloud/datastore automatically looks for the
-          // GCLOUD_PROJECT environment variable. Or you can explicitly pass in a
-          // project ID here:
-          projectId: process.env.GCLOUD_PROJECT,
-     
-          // For convenience, @google-cloud/datastore automatically looks for the
-          // GOOGLE_APPLICATION_CREDENTIALS environment variable. Or you can
-          // explicitly pass in that path to your key file here:
-          keyFilename: process.env.GOOGLE_APPLICATION_CREDENTIALS
-        })
-      }),
+    store: new redisStore({ host:REDISHOST , port: REDISPORT, client: client, ttl: 86400 }),
     secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: true,

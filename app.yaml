@@ -1,2 +1,7 @@
 runtime: nodejs
 env: flex
+vpc_access_connector:
+  name: degreeme-connector
+ env_variables:
+      REDISHOST: '10.157.152.164'
+      REDISPORT: '6379'
