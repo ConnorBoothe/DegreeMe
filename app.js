@@ -14,13 +14,7 @@ var app = express();
 //     docs[x].save();
 //   }
 // })
-app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: true,
-  saveUninitialized: true,
-  cookie: { secure: true,
-      maxAge:  6*60*60*1000 },
-}));
+
 //set limit size of file upload
 app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({
