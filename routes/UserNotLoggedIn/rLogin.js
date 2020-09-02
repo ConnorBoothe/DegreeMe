@@ -26,7 +26,7 @@ const User = require("../../models/classes/Student");
 const Connection = require('../../models/classes/Connection');
 //use session and bodyParser
 router.use(session({
-    store: new redisStore({ host:REDISHOST , port: REDISPORT, client: client, ttl: 86400 }),
+    store: new redisStore({client: client, ttl: 86400 }),
     secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: true,

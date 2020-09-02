@@ -4,14 +4,13 @@ const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
 const redis = require('redis');
-const {Datastore} = require('@google-cloud/datastore');
-const {DatastoreStore} = require('@google-cloud/connect-datastore');
 const session = require('express-session');
 const redisStore = require('connect-redis')(session);
 const nodemailer = require("nodemailer");
 const sgTransport = require('nodemailer-sendgrid-transport');
-const REDISHOST = process.env.REDISHOST || 'localhost';
-const REDISPORT = process.env.REDISPORT || 6379;
+const REDISHOST = "10.157.152.164" || 'localhost';
+const REDISPORT = "6379" || 6379;
+
 const client = redis.createClient(REDISPORT, REDISHOST);
 client.on('error', (err) => console.error('ERR:REDIS:', err));
 const {
@@ -47,7 +46,7 @@ var acceptedBids = new AcceptedBids();
 //register the session and use bodyParser
 
 router.use(session({
-    store: new redisStore({ host:REDISHOST , port: REDISPORT, client: client, ttl: 86400 }),
+    store: new redisStore({client: client, ttl: 86400 }),
     secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: true,

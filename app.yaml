@@ -1,7 +1,13 @@
 runtime: nodejs
 env: flex
+# Update with Serverless VPC Access connector details
 vpc_access_connector:
-  name: degreeme-connector
- env_variables:
-      REDISHOST: '10.157.152.164'
-      REDISPORT: '6379'
+  name: 'projects/degreeme1/locations/us-east1/connectors/degreeme-con'
+#Redis env variables
+env_variables:
+  REDISHOST: '10.64.193.60'
+  REDISPORT: '6379'
+# Update with Redis instance network name
+network:
+  name: default
+
