@@ -1,5 +1,5 @@
     //handles messages front end functionality
-    var socket = io.connect('http://127.0.0.1:4000');
+    var socket = io.connect('http://35.227.40.190:4000');
     //var socket = io.connect('http://67.202.55.10:8080');
     var messageForm = $("#messageForm");
     var chat = $('#messagesContainer');
