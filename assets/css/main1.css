@@ -6,7 +6,9 @@ input:-webkit-autofill:active  {
     -webkit-box-shadow: 0 0 0 30px #343a40 inset !important;
 
 }
-
+body{
+    display:none;
+}
 /*Change text in autofill textbox*/
 input:-webkit-autofill {
     -webkit-text-fill-color: white !important;
