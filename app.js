@@ -3,9 +3,6 @@ const session = require('express-session');
 const helmet = require("helmet");
 const csp = require("helmet-csp");
 const ejs = require("ejs");
-
-
-
 var app = express();
 // app.use(session({
 //   store: new MongoStore({mongooseConnection: mongoose.connection}),
@@ -50,7 +47,7 @@ app.use(express.urlencoded({
 //         scriptSrc: ["'self'", , "https://js.stripe.com/"],
 //         imgSrc:["'self'", "data:"],
 //         objectSrc: ["'none'"],
-        // upgradeInsecureRequests: [],
+//         upgradeInsecureRequests: [],
 //       },
 //       reportOnly: false,
 //     })
@@ -126,6 +123,6 @@ app.get('*', function(req, res) {
         res.redirect('/');
     }
 });
-app.listen(8080);
+app.listen(80);
 
 
