@@ -123,6 +123,6 @@ app.get('*', function(req, res) {
         res.redirect('/');
     }
 });
-app.listen(443);
+app.listen(80);
 
 
