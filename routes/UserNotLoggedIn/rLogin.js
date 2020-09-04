@@ -1,17 +1,18 @@
 //packages used
 const express = require('express');
 const router = express.Router();
-const redis = require('redis');
-
+const mongoose = require("mongoose");
+var passport = require('passport');
+router.use(passport.initialize());
+router.use(passport.session()); //persistent login session
+console.log(process.env.MONGO_URL)
+mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true,useUnifiedTopology: true },function(err){
+    console.log(err);
+});
 const session = require('express-session'); //used to manipulate the session
-const redisStore = require('connect-redis')(session);
+var MongoStore = require('connect-mongo')(session);
 const bodyParser = require('body-parser'); //used to read user input
 const bcrypt = require('bcryptjs'); //used to decrypt password
-
-const REDISHOST = process.env.REDISHOST || 'localhost';
-const REDISPORT = process.env.REDISPORT || 6379;
-const client = redis.createClient(REDISPORT, REDISHOST);
-client.on('error', (err) => console.error('ERR:REDIS:', err));
 const {
     check,
     validationResult
@@ -26,13 +27,15 @@ const User = require("../../models/classes/Student");
 const Connection = require('../../models/classes/Connection');
 //use session and bodyParser
 router.use(session({
-    store: new redisStore({client: client, ttl: 86400 }),
-    secret: process.env.SESSION_SECRET,
-    resave: true,
-    saveUninitialized: true,
-    cookie: { secure: true,
-        maxAge:  6*60*60*1000 },
-}));
+    store: new MongoStore({
+        mongooseConnection: mongoose.connection
+      }),
+      secret: 'toolbox1217!',
+      resave: true,
+      saveUninitialized: true,
+      cookie: { secure: true,
+          maxAge:  6*60*60*1000 },
+    }));
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({
     extended: true
@@ -120,6 +123,7 @@ router.post('/login', [
                                         docs[x].class, docs[x].date, docs[x].time, docs[x].location));
                                 }
                             }
+                            console.log(req.session.id)
                             res.redirect('/Home');
                         })
                     } else {

@@ -3,16 +3,19 @@ require('dotenv').config();
 const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
-const redis = require('redis');
-const session = require('express-session');
-const redisStore = require('connect-redis')(session);
+const mongoose = require("mongoose");
+mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true,useUnifiedTopology: true },function(err){console.log(err)});
+const session = require('express-session'); //used to manipulate the session
+var MongoDBStore = require('connect-mongodb-session')(session);
+var store = new MongoDBStore({
+    uri: process.env.MONGO_URL,
+    collection: 'sessions'
+  });
+  store.on('error', function(error) {
+    console.log(error);
+  });
 const nodemailer = require("nodemailer");
-const sgTransport = require('nodemailer-sendgrid-transport');
-const REDISHOST = "10.157.152.164" || 'localhost';
-const REDISPORT = "6379" || 6379;
 
-const client = redis.createClient(REDISPORT, REDISHOST);
-client.on('error', (err) => console.error('ERR:REDIS:', err));
 const {
     check,
     validationResult
@@ -46,7 +49,7 @@ var acceptedBids = new AcceptedBids();
 //register the session and use bodyParser
 
 router.use(session({
-    store: new redisStore({client: client, ttl: 86400 }),
+    store: store,
     secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: true,
@@ -56,7 +59,7 @@ router.use(session({
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({
     extended: true,
-    resave: true,
+    resave: false,
     saveUninitialized: true
 }));
 //takes in an array of meetups as param and sorts by date
@@ -80,6 +83,7 @@ function sortTutoringSessions(tutorSeshArray) {
 //render the home page
 router.get('/Home', function (req, res) {
     if (req.session.userId) {
+        console.log(req.session.id)
         //get tutoring sessions hosted by this user
         // getUserTimeline(followingList, blockNumber, lastBlock)
         // var handles = req.session.following;
@@ -430,7 +434,7 @@ router.post("/addBid",
                                     {
                                         "to": [
                                             {
-                                                "email": req.session.email,
+                                                "email": "connorboothe@gmail.com",
                                                 "name": req.session.name
                                             }
                                     ],
