@@ -1397,7 +1397,6 @@ border-bottom:2px solid #330099;
          position:relative;
          width:100px!important;
          margin-left:220px;
-
      }
      .login-nav:hover{
          color:white!important;
@@ -2243,9 +2242,9 @@ border-bottom:2px solid #330099;
         padding-left: 30%;
         padding-right: 30%;
     }
-    .headerMenu{
+    /* .headerMenu{
         display:none!important;
-    }
+    } */
     #loginPage{
         margin-right:180px;
         margin-left:20%;
