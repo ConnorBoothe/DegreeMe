@@ -19,6 +19,8 @@
 </head>
 <body class="color-dark">
     <div class="overlay"></div>
+    <%- include ('partials/mobileComingSoon.ejs')%>
+    <div class="homeWrap">
     <div class="page-container">
         <%- include ('partials/followersModal.ejs') %>
         <%- include ('partials/followingModal.ejs') %>
@@ -27,7 +29,6 @@
         <%- include ('partials/horizontalHeader.ejs')%>
 
         <div class="profileContainer">
-
             <div class="profile-header">
                 <div class="profileHeader">
                     <div class="profile-img-container">
@@ -221,8 +222,10 @@
                             <%}%>
             </ul>
         </div>
-
-        <script src="../assets/jquery/jquery.session/jquery.session.js"></script>
+    </div>
+</div>
+</div>
+    <script src="../assets/jquery/jquery.session/jquery.session.js"></script>
     <script type="text/javascript" src="../assets/js/displayMyCourses.js"></script>
     <script src="../assets/js/getNotifications.js"></script>
     <script src="../assets/js/popper.min.js"></script>
