@@ -18,6 +18,9 @@
     padding-right:15%;
     color:#a9a9a9;
     background-color:#191919;
-}
-  
   }
+  @viewport {
+    width: device-width ;
+    zoom: 1.0 ;
+  }
+}
