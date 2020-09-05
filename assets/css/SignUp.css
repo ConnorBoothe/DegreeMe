@@ -196,3 +196,134 @@ max-width: 100%;
     margin-left:40%;
     left:0;
  }
+
+ /* mobile view */
+ 
+@media only screen and (max-width: 375px) { 
+    .name div {
+        display: inline;
+    }
+    .loginLabel1 {
+        text-align: left;
+        color: white!important;
+        padding-left: 20px;
+        background-color: #242526!important;
+        margin-bottom: 5px!important;
+        padding-top: 5px;
+        height: 22px;
+        font-size: 14px;
+        width: 262px;
+        display: inline-block;
+    }
+    .input-container3 {
+        outline: none;
+        width: 100%;
+        margin-bottom: 20px!important;
+        margin-top: 30px!important;
+        border-radius: 0px!important;
+        padding-bottom: none!important;
+        height: 40px!important;
+        background-color: #242526;
+    }
+    .input-container4 {
+        width: 100%!important;
+        outline: none;
+        margin-bottom: 20px!important;
+        margin-top: 30px!important;
+        border-radius: 0px!important;
+        padding-bottom: none!important;
+        margin-left: 0px!important;
+        height: 40px!important;
+        background-color: #242526;
+    }
+    input[type="text"] {
+        height: 100%;
+        padding-top: 5px;
+    }
+    #emailSignUp {
+        height: 40px;
+    }
+    #signUpWrapper {
+        width: 375px;
+        text-align: center;
+        margin-top: -30px;
+    }
+    #signup-form {
+        width: 100%;
+        padding-left: 15%;
+        padding-right: 15%;
+        border-radius: 5px;
+        display: inline-block;
+        position: relative;
+        right: 200px;
+        text-align: center;
+    }
+    /* nav bar set up */
+  .socialItem {
+    display: none!important;
+  }
+  #headerLinkContainer ul li:nth-child(2){
+    display: none!important;
+  } 
+  #headerLinkContainer ul li:nth-child(3){
+    display: none!important;
+  } 
+  #headerLinkContainer ul li:not(:first-child) {
+    position: relative;
+    right: 125px;
+  }
+  #headerLinkContainer {
+    list-style-type: none;
+    height: 60px;
+    width: 100%;
+    padding-top: 15px;
+    position: relative;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .logo{
+    width:120px;
+    margin-top:-7px;
+    position: relative;
+    right: 20px;
+  }
+  .login-nav {
+    border-radius: 10px!important;
+    padding-top: 3px!important;
+    padding-bottom: 3px!important;
+    box-shadow: 1px 2px #131313;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px!important;
+    position: relative;
+    left: 50px;
+    width: 100px!important;
+    margin-left: 0px!important;
+  }
+  /* end of nav bar design for mobile */
+
+  /* styling upload picture */
+  #img-upload-container #img-secondary-wrapper {
+    border-radius: 20px;
+    background-color: #202020;
+    margin-left: auto;
+    margin-right: auto;
+    /* border: 2px solid #a9a9a9; */
+    position: fixed;
+    top: 150px;
+    right:10px;
+    width: 350px;
+    }
+    #img-upload-container {
+        display: none;
+        position: absolute;
+        top: 0;
+        width: 410px;
+        z-index: 3;
+        margin-left: 40%;
+        left: 0;
+    }
+    .cr-boundary {
+        width: 350px!important;
+    }
+}
