@@ -112,7 +112,7 @@ $(document).ready(function(){
                         $(".hiddenGroup").val($("input[name='groupName']").val())
                         $(".hiddenGroupId").val(result.groupId)
                         $("#hostSession-form").hide();
-                        $("#hostSession-form").html("<h1>Group Successfully Created</h1><img class='group-success-img' src='../assets/img/undraw_launch_day_4e04.svg'/>"+
+                        $("#hostSession-form").html("<h1>Group Successfully Created</h1><img class='group-success-img' src='../assets/img/undraw_launch_day_4e04.svg'/>"
                         +'<input type="hidden" class="emailAction" value="Invite Group"/>'+
                         "<h2 class='inviteFriends'>Invite Your Friends</h2><button data-toggle='modal' data-target='#inviteModal' class='btn btn-primary'>Via email</button>");
                         $("#hostSession-form").fadeIn();

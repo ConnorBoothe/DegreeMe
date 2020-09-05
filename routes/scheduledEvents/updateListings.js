@@ -107,7 +107,7 @@ var job = new CronJob('0 0 0 * * *', function() {
             mail.send({
             "personalizations": [
                 {
-                    "to": emailObjArr,
+                    "to": emailObjArray,
                     "dynamic_template_data": {
                         "subject": "Your tutoring session is approaching",
                         "name": "Name",

@@ -21,12 +21,14 @@
 </head>
 
 <body class="color-dark">
+    <%- include ('partials/mobileComingSoon.ejs')%>
+    <div class="homeWrap">
     <%- include ('partials/newMessageModal.ejs') %>
     <%- include ('partials/sideBar.ejs') %>
     <%- include ('partials/horizontalHeader.ejs')%>
     <%- include ('partials/newMessageButton.ejs')%>
     <h1 class="tutorTotal  badge badge-primary"><%=tutorCount%> Tutors Available </h1>
-    <div class="  tutorResultsContent "> 
+    <div class="tutorResultsContent "> 
         <%if(noSearch){%>
         <div class="text-light findTutorTitle">
             <h3 class="findTutorSubTitle">Find a tutor that's been in your shoes</h3>
@@ -188,6 +190,7 @@
             </div>
                <%}%>
     </div>
+</div>
     <script src="../assets/jquery/jquery.session/jquery.session.js"></script>
     <script type="text/javascript" src="../assets/js/displayMyCourses.js"></script>
     <script src="../assets/js/getNotifications.js"></script>

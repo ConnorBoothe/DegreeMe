@@ -12,6 +12,8 @@
         <script src="../assets/jquery/dist/jquery.js"></script>
     </head>
         <body class="color-dark">
+         <%- include ('partials/mobileComingSoon.ejs')%>
+         <div class="homeWrap">
            <input type="hidden" id="listingId" name="listingId" value="<%=params.id%>"/>
            <%- include ('partials/sideBar.ejs')%>
            <%- include ('partials/horizontalHeader.ejs')%>
