@@ -1,3 +1,36 @@
+@media only screen and (max-width: 1000px) {
+    .homeContainer, .homeWrap {
+      display:none!important;
+    }
+    .mobileComingSoon{
+        display:block!important;
+        width:300px;
+        margin-left:auto;
+        margin-right:auto;
+        text-align:center;
+    }
+    .mobileVersionTxt{
+        color:white;
+        text-align:left!important;
+        font-family: 'Open Sans', sans-serif;
+        margin-top:30px;
+    }
+    .mobileVersionImg{
+        width:180px;
+        margin-top:30px;
+    }
+    .mobileVersionImg1{
+        width:250px;
+        margin-top:30px;
+    }
+}
+@media only screen and (min-width: 1000px) {
+   
+    .mobileComingSoon{
+        display:none!important;
+    }
+
+}
 /* Change the white to any color ;) */
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 

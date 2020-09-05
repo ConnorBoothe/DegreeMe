@@ -4,6 +4,12 @@ const helmet = require("helmet");
 const csp = require("helmet-csp");
 const ejs = require("ejs");
 var app = express();
+//require https connection
+// app.use(function(request, response){
+//   if(!request.secure){
+//     response.redirect("https://" + request.headers.host + request.url);
+//   }
+// });
 // app.use(session({
 //   store: new MongoStore({mongooseConnection: mongoose.connection}),
 //   secret: 'toolbox1217!',
