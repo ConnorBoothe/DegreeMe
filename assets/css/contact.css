@@ -18,6 +18,25 @@
     padding-right:15%;
     color:#a9a9a9;
     background-color:#191919;
-}
-  
   }
+}
+
+@media only screen and (max-width: 375px) {
+  .homeContainer{
+    
+    min-height:100vh;
+    padding-top:120px;
+    padding-left:15%;
+    padding-right:15%;
+    color:#a9a9a9;
+    background-color:#191919;
+  }
+  .contactUsText p {
+      font-size: 20px;
+      padding-top: 10px;
+      color: white;
+  }
+  .socialItem {
+    display: none!important;
+  }
+}
