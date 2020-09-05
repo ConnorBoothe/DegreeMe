@@ -117,16 +117,32 @@ header{
     padding-bottom:0;
     color:#a9a9a9;
     background-color:#18191a;
-
+    
+    
 }
-
+.signup-container{
+    min-height:100vh;
+    padding-top:120px;
+    padding-left:200px;
+    padding-right:200px;
+    margin-bottom:0;
+    padding-bottom:0;
+    color:#a9a9a9;
+    background-color:#18191a;
+    
+    
+}
 .homeContainer1{
+   
+   
     min-height:100vh;
     padding-top:40px;
     margin-bottom:0;
     padding-bottom:0;
     color:#a9a9a9;
     background-color:#18191a;
+    
+    
 }
 /* 
 Menu css
@@ -1299,10 +1315,38 @@ border-bottom:2px solid #330099;
         padding-bottom:none!important;      
         outline:none!important;
         height:40px!important;
+
         background-color:#242526;
         
+        
       }
-      
+      .input-container3 {
+       
+        outline:none;
+        width: 47%;
+        float:left;
+        margin-bottom: 20px!important;
+        margin-top:30px!important;
+        border-radius:0px!important;
+        padding-bottom:none!important;      
+        height:40px!important;
+        background-color:#242526;
+      }
+      .input-container4 {
+       
+        width: 47%;
+        outline:none;
+        margin-bottom: 20px!important;
+        margin-top:30px!important;
+        border-radius:0px!important;
+        padding-bottom:none!important;      
+        margin-left:6%;
+        height:40px!important;
+
+        background-color:#242526;
+        
+        
+      }
       .name div{
           display:inline-block;
       }
@@ -1434,7 +1478,11 @@ border-bottom:2px solid #330099;
         font-weight:bold;
         cursor:pointer;
     }
-   
+    #signUpWrapper{
+        width:100%;
+        text-align:center;
+        margin-top: -30px;
+    }
     .firstName{
        
         float:left;
@@ -1469,7 +1517,17 @@ border-bottom:2px solid #330099;
     .signup-icon{
         width:15px!important;
     }
-  
+    #signup-form{
+        width:100%;
+        padding-left:15%;
+        padding-right:15%;
+   
+        
+        border-radius:5px;
+        display:inline-block;
+        position:relative;
+        text-align:center;
+    }
     input[type="text"]{
     
     height:100%;
@@ -2188,9 +2246,9 @@ border-bottom:2px solid #330099;
         padding-left: 30%;
         padding-right: 30%;
     }
-    /* .headerMenu{
+    .headerMenu{
         display:none!important;
-    } */
+    }
     #loginPage{
         margin-right:180px;
         margin-left:20%;

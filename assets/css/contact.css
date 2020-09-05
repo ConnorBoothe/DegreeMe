@@ -9,41 +9,15 @@
     color: white;
 }
 
-@media only screen and (max-width: 375px){
+@media only screen and (max-width: 1024px) and (min-width: 768px) {
   /* full screen */
   .homeContainer{
-    min-height:100vh;
+    min-height:85vh;
     padding-top:120px;
     padding-left:15%;
     padding-right:15%;
     color:#a9a9a9;
     background-color:#191919;
-  }
-  .contactUsText p {
-    font-size: 20px;
-    padding-top: 10px;
-    color: white;
-  }
-  .socialItem {
-    display: none!important;
-  }
-  #headerLinkContainer ul li:not(:first-child){
-    display: none!important;
-  }
-  #headerLinkContainer {
-    list-style-type: none;
-    height: 60px;
-    width: 100%;
-    padding-top: 15px;
-    position: relative;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .logo{
-    width:140px;
-    margin-top:-7px;
-    position: relative;
-    right: 50px;
-  }
 }
+  
+  }
