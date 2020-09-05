@@ -9,10 +9,10 @@
     color: white;
 }
 
-@media only screen and (max-width: 375px){
+@media only screen and (max-width: 1024px) and (min-width: 768px) {
   /* full screen */
   .homeContainer{
-    min-height:100vh;
+    min-height:85vh;
     padding-top:120px;
     padding-left:15%;
     padding-right:15%;
