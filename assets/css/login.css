@@ -1,0 +1,31 @@
+@media only screen and (max-width: 375px) {
+    #loginPage {
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 50px;
+        width: 280px;
+    }
+    .p {
+        width: 20em;
+    }
+    .loginLabel {
+        text-align: left;
+        color: white;
+        padding-left: 20px;
+        background-color: #242526!important;
+        height: 100%;
+        margin-bottom: 0!important;
+        padding-top: 5px;
+        padding-bottom: 0px!important;
+        height: 25px;
+        font-size: 13px;
+        font-family: 'Open Sans', sans-serif;
+    }
+     /*disclaimer on page */
+     .disclaimerText2{
+        color: #d4d4d4;
+     }
+     .disclaimerText2 h3 strong{
+        font-weight: 900;
+     }
+}
