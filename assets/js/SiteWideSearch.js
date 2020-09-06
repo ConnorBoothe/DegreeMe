@@ -1,5 +1,4 @@
 $(document).ready(function(){
-    
     $("body").show();
     $.session.set("type", "Users");
     $(".searchForm").on("submit", function(e){

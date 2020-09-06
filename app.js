@@ -6,8 +6,10 @@ const ejs = require("ejs");
 var app = express();
 //require https connection
 // app.use(function(request, response){
-//   if(!request.secure){
+//     var redirected = false;
+//   if(!request.secure && !redirected){
 //     response.redirect("https://" + request.headers.host + request.url);
+//     redirected = true;
 //   }
 // });
 // app.use(session({
@@ -43,25 +45,25 @@ app.use(express.urlencoded({
     extended:true
 }));
 //set the Content Security Policy of thhe app
-// app.use(
-//     csp({
-//       directives: {
-//         defaultSrc: ["'self'", "https://js.stripe.com/" ],
-//         connectSrc:["'self'", "ws://degreeme1.ue.r.appspot.com/socket.io/","degreeme1.ue.r.appspot.com:4000"],
-//         fontSrc:["'self'", "https://fonts.gstatic.com"],
-//         styleSrc:["'self'", "https://fonts.googleapis.com", "'unsafe-inline'"],
-//         scriptSrc: ["'self'", , "https://js.stripe.com/"],
-//         imgSrc:["'self'", "data:"],
-//         objectSrc: ["'none'"],
-//         upgradeInsecureRequests: [],
-//       },
-//       reportOnly: false,
-//     })
-//   );
-// //add additional layers of security
-// app.use(helmet({
-//     contentSecurityPolicy:false //security policy already set above
-// }));
+app.use(
+    csp({
+      directives: {
+        defaultSrc: ["'self'", "https://js.stripe.com/" ],
+        connectSrc:["'self'", "ws://degreeme1.ue.r.appspot.com/socket.io/","degreeme1.ue.r.appspot.com:4000"],
+        fontSrc:["'self'", "https://fonts.gstatic.com"],
+        styleSrc:["'self'", "https://fonts.googleapis.com", "'unsafe-inline'"],
+        scriptSrc: ["'self'", , "https://js.stripe.com/"],
+        imgSrc:["'self'", "data:"],
+        objectSrc: ["'none'"],
+        upgradeInsecureRequests: [],
+      },
+      reportOnly: false,
+    })
+  );
+//add additional layers of security
+app.use(helmet({
+    contentSecurityPolicy:false //security policy already set above
+}));
 app.set('view engine', 'ejs'); //set the view engine to ejs
 app.use('/assets', express.static('assets')); //use assets folder for static files
 //events scheduled to run on the server

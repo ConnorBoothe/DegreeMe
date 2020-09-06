@@ -15,16 +15,22 @@
     <link href="assets/css/header.css" rel="stylesheet">
     <link href="assets/css/footer.css" rel="stylesheet">
     <link href="assets/css/contact.css" rel="stylesheet">
+    <link href="../assets/css/index.css" rel="stylesheet">
     <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../assets/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="assets/js/showPopOutMenu.js"></script>
+
+
+
 </head>
+    
 
 <body>
     <!-- <h3 class="mobileMsg">Mobile and Tablet Versions Coming Soon</h3> -->
     <div class="page-container">
         <div id="headerContainer">
             <%-include ('partials/header.ejs') %>
-
+            <%-include ('partials/popout-menu.ejs') %>
         </div>
         <div class="homeContainer">
             <div class="contentBlock">
