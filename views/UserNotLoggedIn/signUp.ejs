@@ -14,6 +14,7 @@
   <link href="assets/css/header.css" rel="stylesheet">
   <link href="assets/css/schoolSuggestions.css" rel="stylesheet">
   <link href="assets/css/SignUp.css" rel="stylesheet">
+  <link href="../assets/css/index.css" rel="stylesheet">
   <link rel="stylesheet" href="../assets/js/croppie/croppie.css" />
   <!-- Scripts -->
   <script src="assets/jquery/dist/jquery.js"></script>
@@ -22,6 +23,9 @@
   <script type="text/javascript" src="assets/js/schoolSuggestions.js"></script>
   <script src="../assets/js/croppie/croppie.min.js"></script>
   <script type="text/javascript" src="assets/js/crop.js"></script>
+  <script type="text/javascript" src="assets/js/showPopOutMenu.js"></script>
+
+
 </head>
 
 <body class="bg-light">
@@ -30,6 +34,7 @@
   <div class="page-container ">
     <div id="headerContainer">
       <%- include ('partials/header.ejs') %>
+      <%-include ('partials/popout-menu.ejs') %>
     </div>
     <div class="signup-container">
       <div id="signUpWrapper">

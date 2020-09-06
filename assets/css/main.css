@@ -1615,13 +1615,7 @@ border-bottom:2px solid #330099;
         font-family: 'Open Sans', sans-serif;
     }
  
-    .app-description{
-        font-family: 'Open Sans', sans-serif;
-        font-size:18px;
-        color:#d4d4d4;
-        text-align:left;
-        width:600px;
-    }
+   
     .betaVersion{
         position:fixed;
         color:#585757;
@@ -2245,6 +2239,7 @@ border-bottom:2px solid #330099;
         padding-left: 30%;
         padding-right: 30%;
     }
+  
     /* .headerMenu{
         display:none!important;
     } 
@@ -2266,25 +2261,13 @@ border-bottom:2px solid #330099;
 
 /** Hamburger Menu **/
    
-    #siteLogo{
-        position: absolute;
-        margin-right:20px;
-        width: 100px;
-        margin-left: 85px;
-     }
-     .logo{
-        width:140px;
-        margin-top:-7px;
-        margin-right:60px;
-      }
-      #siteLogo a{
-        padding-left: 0; 
-    }
+    
     .secondaryMenu {
         width:350px;
         position:absolute;
         right:0;
     }
+   
 
   /* Connections page */
  
