@@ -126,13 +126,7 @@
     color: white; 
     width: 13em;
   }
-  /* styling the graphic  */
-  .capsAbout {
-      width: 50%;
-      top: 7px;
-      position: relative;
-      left: 670px;
-  }
+
   /* Icons */
   .iconAbout {
       margin-top: 20px;
@@ -183,42 +177,124 @@
        
     } */
 
-@media only screen and (max-width: 375px) { 
-      /* nav bar set up */
-    .socialItem {
-      display: none!important;
-    }
-    #headerLinkContainer ul li:nth-child(2){
-      display: none!important;
-    } 
-    #headerLinkContainer ul li:nth-child(3){
-      display: none!important;
-    } 
-    #headerLinkContainer ul li:not(:first-child) {
-      position: relative;
-      right: 125px;
-    }
-    #headerLinkContainer {
-      list-style-type: none;
-      height: 60px;
-      width: 100%;
-      padding-top: 15px;
-      position: relative;
-      text-align: center;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .login-nav {
-      border-radius: 10px!important;
-      padding-top: 3px!important;
-      padding-bottom: 3px!important;
-      box-shadow: 1px 2px #131313;
-      font-family: 'Open Sans', sans-serif;
-      font-size: 16px!important;
-      position: relative;
-      left: 50px;
-      width: 100px!important;
-      margin-left: 0px!important;
-    }
-    /* end of nav bar design for mobile */
+@media only screen and (max-width: 750px) { 
+ /* nav bar set up */
+.socialItem {
+  display: none!important;
+}
+#headerLinkContainer ul li:nth-child(2){
+  display: none!important;
+} 
+#headerLinkContainer ul li:nth-child(3){
+  display: none!important;
+} 
+#headerLinkContainer ul li:not(:first-child) {
+  position: relative;
+  right: 125px;
+}
+#headerLinkContainer {
+  list-style-type: none;
+  height: 60px;
+  width: 100%;
+  padding-top: 15px;
+  position: relative;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+.logo{
+  width:120px;
+  margin-top:-7px;
+  position: relative;
+  right: 20px;
+}
+.login-nav {
+  border-radius: 10px!important;
+  padding-top: 3px!important;
+  padding-bottom: 3px!important;
+  box-shadow: 1px 2px #131313;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px!important;
+  position: relative;
+  left: 50px;
+  width: 100px!important;
+  margin-left: 0px!important;
+}
+/* end of nav bar design for mobile */
+.aboutUsTitle img {
+  width: 70%;
+  float: none!important;
+  position: relative;
+  }
+  .aboutUsTitle {
+    display: inline-block;
+    position: relative;
+    margin-right: auto;
+    margin-left: auto;
+    top: 50px;
+    left: 0px!important;
+  }
+  #aboutContainer {
+    background-color: #191919;
+    padding-top: 0px;
+    height: 91.6vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-right: auto;
+    margin-left: auto;
+ }
+ /*styling the children of the parent div */
+ .aboutChild p {
+  color: white;
+  height: 150px;
+  text-shadow: 1px 1px white;
+  font-size: 4em;
+  text-align: center!important;
+  padding-top: 60px; 
+}
+.aboutChild h1 {
+  font-weight: 100;
+  text-align: center!important;
+  font-size: 25px;
+  color: white; 
+  margin-right: auto;
+  margin-left: auto;
+  }
+  .betaVersion {
+    position: fixed;
+    color: #585757;
+    right: 0;
+    font-family: 'Open Sans', sans-serif;
+    margin-top: 18px;
+    margin-right: 10px!important;
+  }
+  .scrollArrow {
+    color: #007bff;
+    position: absolute;
+    top: 44%;
+    left: 43%;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+  }
+  footer {
+    text-align: center;
+    color: white;
+    background-color: #202020;
+    overflow: hidden;
+    width: 100%!important;
+    margin-top: auto;
+  }
+  .column {
+    flex: 100%;
+    max-width: 100%;
+  }
+  .wholeScreen {
+    background-color: #191919;
+    min-height: 100vh;
+  }
+  .page-container1 {
+    background-color: black;
+    min-height: 100vh;
+  }
 }
