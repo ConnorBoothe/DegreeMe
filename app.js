@@ -1,32 +1,29 @@
+require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
+const mongoose = require('mongoose');
+const MongoStore = require('connect-mongo')(session);
 const helmet = require("helmet");
 const csp = require("helmet-csp");
 const ejs = require("ejs");
 var app = express();
-//require https connection
-// app.use(function(request, response){
-//     var redirected = false;
-//   if(!request.secure && !redirected){
-//     response.redirect("https://" + request.headers.host + request.url);
-//     redirected = true;
-//   }
+app.set('trust proxy', 1) // trust first proxy
+// client.auth('password', function (err) {
+//     if (err){
+//       console.log(err)
+//     } 
 // });
+
 // app.use(session({
-//   store: new MongoStore({mongooseConnection: mongoose.connection}),
-//   secret: 'toolbox1217!',
-//   resave: true,
-//   saveUninitialized: true,
-//   cookie: { secure: true,
-//       maxAge:  6*60*60*1000 },
-// }));
-// app.use(passport.initialize());
-// app.use(passport.session());
-// app.use(function(req, res, next){
-//   res.locals.login = req.isAuthenticated();
-//   res.locals.session = req.session;
-//   next();
-// })
+//   store: new MongoStore({
+//      mongooseConnection: mongoose.connection // prune expired entries every 24h
+//     }),
+//     secret: 'toolbox1217!',
+//     resave: true,
+//     saveUninitialized: true,
+//     cookie: { secure: true,
+//         maxAge:  6*60*60*1000 },
+//   }));
 //used to zero out courses in DB
 // const CourseDB = require('./models/Database/UNCC_CoursesDB');
 // var courses = new CourseDB();

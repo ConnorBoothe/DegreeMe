@@ -1,10 +1,12 @@
 runtime: nodejs
 env: flex
 manual_scaling:
-  instances: 1
-# # Update with Serverless VPC Access connector details
-# vpc_access_connector:
-#   name: 'projects/degreeme1/locations/us-east1/connectors/degreeme-con'
+  instances: 3
+# Update with Serverless VPC Access connector details
+ 
+# handlers:
+# - url: /.*
+#  script: auto
 #Redis env variables
 # env_variables:
 #   REDISHOST: '10.64.193.60'
