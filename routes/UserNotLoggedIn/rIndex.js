@@ -2,13 +2,27 @@
 const express = require('express');
 const router = express.Router();
 const session = require('express-session');
+const mongoose = require("mongoose");
+mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true,useUnifiedTopology: true },function(err){
+    console.log(err);
+});
+var MongoStore = require('connect-mongo')(session);
 router.use(session({
-    secret: 'iloveu',
+    store: new MongoStore({
+        mongooseConnection: mongoose.connection
+       }),
+    secret: 'toolbox1217!',
     resave: true,
     saveUninitialized: true
 }));
 //render the index page
 router.get('/', function(req, res){
-    res.render('UserNotLoggedIn/index');
+    if(req.session.userId){
+        res.redirect("/Home")
+    }
+    else{
+        res.render('UserNotLoggedIn/index');
+    }
+    
 });
 module.exports = router;

@@ -1,11 +1,8 @@
 //packages used
+require('dotenv').config();
 const express = require('express');
 const router = express.Router();
 const mongoose = require("mongoose");
-var passport = require('passport');
-router.use(passport.initialize());
-router.use(passport.session()); //persistent login session
-console.log(process.env.MONGO_URL)
 mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true,useUnifiedTopology: true },function(err){
     console.log(err);
 });
@@ -28,7 +25,7 @@ const Connection = require('../../models/classes/Connection');
 //use session and bodyParser
 router.use(session({
     store: new MongoStore({
-        mongooseConnection: mongoose.connection
+       mongooseConnection: mongoose.connection
       }),
       secret: 'toolbox1217!',
       resave: true,
@@ -95,6 +92,7 @@ router.post('/login', [
                         req.session.rating = 5;
                         req.session.mySchedule = user.getMySchedule();
                         req.session.myCourses = docs1[0].myCourses;
+                        console.log(req.session)
                         if(docs1[0].StripeId === "none"){
                             req.session.tutor = false;
                         }
