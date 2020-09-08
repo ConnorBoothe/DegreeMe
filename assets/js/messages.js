@@ -1,5 +1,5 @@
     //handles messages front end functionality
-    var socket = io.connect('https://https://degreeme1.ue.r.appspot.com/:4000');
+    var socket = io.connect('https://degreeme.io',{transports: ['websocket']});
     //var socket = io.connect('http://67.202.55.10:8080');
     var messageForm = $("#messageForm");
     var chat = $('#messagesContainer');

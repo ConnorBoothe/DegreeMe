@@ -255,9 +255,10 @@
     margin-left: 85px;
  } */
  .logo{
-    width:140px;
+    width:110px;
     margin-left:70px;
-    margin-top:15px!important;
+    margin-top:18px!important;
+
   }
 
   #siteLogo a{
@@ -335,16 +336,29 @@
 .popout-wrapper ul li svg{
     margin-right:10px;
 }
+
+.signup-container{
+    display:none;
+}
+.input-field2{
+    width:100%!important;
+}
   /* end of nav bar design for mobile */
+ 
 }
 /* desktop */
 @media only screen and (min-width: 1000px) {
-
+    .signup-container-mobile{
+        display:none!important;
+     }
     #mobileHeaderLinkContainer{
        display:none!important;
     }
     .index-container-mobile{
         display:none!important;
     }
-    
+    .popout-container{
+        display:none;
+    }
+
 }

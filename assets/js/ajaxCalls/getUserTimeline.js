@@ -30,7 +30,7 @@ function formatBid(post){
                     '</a>'+
                     '<p class="text-light helpReqTxt"><span class="badge badge-success">Help Request</span></p>'+
                 '</div>'+
-                '<p class="caption1">'+post.caption+'</p>';
+                '<p class="caption1">Task: '+post.caption+'</p>';
             }else{
                 bid += '<img class="timelinePost-Image" src="../assets/img/favicon.png" />'+
                 '<p class="timelinePost-username">Anonymous</p>'+

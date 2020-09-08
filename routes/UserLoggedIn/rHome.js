@@ -6,16 +6,8 @@ const bodyParser = require('body-parser');
 const mongoose = require("mongoose");
 mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true,useUnifiedTopology: true },function(err){console.log(err)});
 const session = require('express-session'); //used to manipulate the session
-var MongoDBStore = require('connect-mongodb-session')(session);
-var store = new MongoDBStore({
-    uri: process.env.MONGO_URL,
-    collection: 'sessions'
-  });
-  store.on('error', function(error) {
-    console.log(error);
-  });
+var MongoStore = require('connect-mongo')(session);
 const nodemailer = require("nodemailer");
-
 const {
     check,
     validationResult
@@ -49,13 +41,15 @@ var acceptedBids = new AcceptedBids();
 //register the session and use bodyParser
 
 router.use(session({
-    store: store,
-    secret: process.env.SESSION_SECRET,
-    resave: true,
-    saveUninitialized: true,
-    cookie: { secure: true,
-        maxAge:  6*60*60*1000 },
-}));
+    store: new MongoStore({
+       mongooseConnection: mongoose.connection
+      }),
+      secret: 'toolbox1217!',
+      resave: true,
+      saveUninitialized: true,
+      cookie: { secure: true,
+          maxAge:  6*60*60*1000 },
+    }));
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({
     extended: true,
@@ -83,15 +77,7 @@ function sortTutoringSessions(tutorSeshArray) {
 //render the home page
 router.get('/Home', function (req, res) {
     if (req.session.userId) {
-        console.log(req.session.id)
-        //get tutoring sessions hosted by this user
-        // getUserTimeline(followingList, blockNumber, lastBlock)
-        // var handles = req.session.following;
-        // if(!handles.includes(req.session.handle)){
-        //     handles.push({user_handle:req.session.handle, user_image:req.session.img})
-        // }
-       
-        timeline.getUserTimeline(req.session.following, 0, req).exec((err, docs1) => {
+       timeline.getUserTimeline(req.session.following, 0, req).exec((err, docs1) => {
             if (err) {
                 console.log(err);
             } else {

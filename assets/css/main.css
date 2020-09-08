@@ -13,8 +13,8 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover, 
 input:-webkit-autofill:focus, 
 input:-webkit-autofill:active  {
-    -webkit-box-shadow: 0 0 0 30px #202020 inset !important;
-    background-color: #202020 !important;
+    -webkit-box-shadow: 0 0 0 30px #242526 inset !important;
+    background-color: #242526 !important;
     background-image: none !important;
 
 
@@ -2050,7 +2050,7 @@ border-bottom:2px solid #330099;
 }
 /** For tablet view **/
 @media only screen and (max-width: 1000px) and (min-width: 750px) {
-    #email1, #password1{
+    /* #email1, #password1{
         font-size:40px!important;
         font-family: 'Open Sans', sans-serif;
         height:200px!important;
@@ -2110,7 +2110,7 @@ border-bottom:2px solid #330099;
         background-color:none!important;
          border-width: 0px;
          outline:0; /* I have also tried outline:none */
-         padding-bottom:0!important;
+         /* padding-bottom:0!important;
          font-family: 'Open Sans', sans-serif;
          -webkit-box-shadow: none!important;
          color:#212529!important;
@@ -2129,7 +2129,7 @@ border-bottom:2px solid #330099;
         position:relative;
          height:100px;
          width:100%;
-         background-color:#23272A;
+         background-color:#18191a;
      }
        #headerContainer{
         position:relative;
@@ -2171,12 +2171,12 @@ border-bottom:2px solid #330099;
     
    
     .input-container-home{
-        margin-left:0!important;
-    }
+        margin-left:0!important; */
+    /* }  */
     /** .headerLinks {
        display: none;
     } **/
-    .headerMenu{
+    /* .headerMenu{
         display:none!important;
     }
   
@@ -2200,7 +2200,7 @@ border-bottom:2px solid #330099;
         position: absolute!important;
         height: 150px;
         /** width: 100px!important; **/
-        left: 0;
+        /* left: 0;
         top: 60;
         z-index: 3;
         margin-left: 50px;
@@ -2213,8 +2213,8 @@ border-bottom:2px solid #330099;
         background-color: white;
         margin-bottom: 15px;
         
-    }
-    @-webkit-keyframes fadeIn {
+    } */ 
+    /* @-webkit-keyframes fadeIn {
         from {opacity: 0;}
         to {opacity: 1;}
       }
@@ -2228,7 +2228,7 @@ border-bottom:2px solid #330099;
         display:none;
         text-align:center;
         margin-top:100px;
-    } 
+    }  */
 }
 /** For mobile View **/
 @media only screen and (max-width: 750px) {

@@ -27,15 +27,15 @@
         
         <%if(!meeting.ZoomLink  && session.handle === meeting.Members[0].handle && meeting.Virtual){%>
         <div class="createZoomMeeting-container">
-          <h1>There's one more step!</h1>
-          <h3 class="zoomLinkMsg">Schedule your virtual tutoring session with <span class="text-bold"><%=meeting.Members[0].name%></span> by clicking the button
-            below.</h3>
-          <h3 class="zoomLinkMsg">Ensure that the date/time of your Zoom meeting matches with the date/time of the
-            tutoring session.</h3>
-          <a target="_blank" href="https://zoom.us/meeting" class="scheduleMeeting btn btn-primary">Schedule your Zoom meeting here</a>
+          <p class="stepNumber">Step 1</p>
+          <h1 class="scheduleHeader">Schedule your Zoom meeting</h1>
+          <p class="zoomLinkMsg">Schedule your Zoom meeting with <%=meeting.Members[0].name%> by clicking the button
+            below. Ensure that the date/time of your Zoom meeting matches with the date/time of the
+            tutoring session.</p>
+          <a target="_blank" href="https://zoom.us/meeting" class="scheduleMeeting btn btn-primary">Schedule Meeting</a>
 
-          <h3 class="zoomLinkMsg inviteLinkMsg">Once the Zoom meeting is scheduled, enter the <span
-              class="text-bold">invite link</span> in the field below so <span class="text-bold"><%=meeting.Members[0].name%></span> has access to it.
+          <h3 class="zoomLinkMsg inviteLinkMsg">Once the Zoom meeting is scheduled, enter the 
+            invite link in the field below so <%=meeting.Members[0].name%> has access to it.
           </h3>
           <form method="POST" action="addZoom" class="addZoom">
             <input type="text" name="zoomLink" class="zoomInput" placeholder="Enter Invite Link" />

@@ -1,25 +1,26 @@
-@media only screen and (max-width: 375px) {
-    #loginPage {
+@media only screen and (max-width: 750px) {
+    /* #loginPage {
         margin-left: auto;
         margin-right: auto;
         margin-top: 50px;
         width: 280px;
-    }
-    .p {
+    } */
+    /* .p {
         width: 20em;
-    }
+    } */
     .loginLabel {
         text-align: left;
         color: white;
         padding-left: 20px;
-        background-color: #242526!important;
+        background-color: #18191a!important;
         height: 100%;
         margin-bottom: 0!important;
         padding-top: 5px;
-        padding-bottom: 0px!important;
+        padding-bottom: 5px!important;
         height: 25px;
         font-size: 13px;
         font-family: 'Open Sans', sans-serif;
+        padding-left:0!important;
     }
      /*disclaimer on page */
      .disclaimerText2{
@@ -28,4 +29,16 @@
      .disclaimerText2 h3 strong{
         font-weight: 900;
      }
+     #loginPage{
+        margin-left:10px;
+        margin-right:10px;
+    }
+    .input-field{
+        background-color: #242526!important;
+        border:none!important;
+        border-radius:0!important;
+        font-family: 'Open Sans', sans-serif!important;
+        outline:0!important;
+        color: white!important;
+    }
 }

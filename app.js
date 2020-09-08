@@ -1,13 +1,18 @@
 require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
-const mongoose = require('mongoose');
-const MongoStore = require('connect-mongo')(session);
 const helmet = require("helmet");
 const csp = require("helmet-csp");
 const ejs = require("ejs");
-var app = express();
+var app = module.exports = express(); 
 app.set('trust proxy', 1) // trust first proxy
+
+//classes used
+const MessageDB = require('./models/Database/MessagesDB');
+const userDB = require('./models/Database/UserDB');
+//instantiate DBs for use
+var messages = new MessageDB();
+var users = new userDB();
 // client.auth('password', function (err) {
 //     if (err){
 //       console.log(err)
@@ -46,7 +51,7 @@ app.use(
     csp({
       directives: {
         defaultSrc: ["'self'", "https://js.stripe.com/" ],
-        connectSrc:["'self'", "ws://degreeme1.ue.r.appspot.com/socket.io/","degreeme1.ue.r.appspot.com:4000"],
+        connectSrc:["'self'", "ws://degreeme.io/socket.io/","degreeme.io:8080"],
         fontSrc:["'self'", "https://fonts.gstatic.com"],
         styleSrc:["'self'", "https://fonts.googleapis.com", "'unsafe-inline'"],
         scriptSrc: ["'self'", , "https://js.stripe.com/"],
@@ -57,7 +62,7 @@ app.use(
       reportOnly: false,
     })
   );
-//add additional layers of security
+// add additional layers of security
 app.use(helmet({
     contentSecurityPolicy:false //security policy already set above
 }));
@@ -128,6 +133,30 @@ app.get('*', function(req, res) {
         res.redirect('/');
     }
 });
-app.listen(8080);
+var api = require('./routes/Websockets/MessageSocket.js'); // pass 'app'
+let server = app.listen(8080);
+const io = require('socket.io')(server);
+app.set("io", io);
+// console.log(app.get("io"))
 
-
+//create a websocket connection
+io.sockets.on('connection', function (socket) {
+  //catch the emitted 'send message' event
+  socket.on('send message', function (data) {
+      //add message to the db
+      messages.addMessage(data.id, data.sender, data.senderImg, data.message, data.date);
+      messages.getConversation(data.id).exec((err, docs) => {
+          for (x in docs.userHandles) {
+            //move thread to top of the list
+              users.moveThread(data.id, docs.userHandles[x][0], data.sender);
+              //mark as unread for the receiver
+              if(docs.userHandles[x][0] !== data.sender){
+                  users.unseeMessage(docs.userHandles[x][0], docs._id)
+              }
+          }
+      })
+      io.sockets.emit('new message', {
+          msg: data
+      });
+  });
+});

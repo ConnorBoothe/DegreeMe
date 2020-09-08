@@ -1572,7 +1572,7 @@ Menu css
         padding-bottom:50px;
     }
     .zoomInput{
-        background-color:#242526;
+        background-color:#1d1d1d;
         border:none;
         padding-bottom:3px;
         padding-top:3px;
@@ -1595,9 +1595,11 @@ Menu css
         margin-top:70px;
     }
     .zoomLinkMsg{
-        font-size:18px!important;
+        font-size:16px!important;
         text-align:left;
         color:#d4d4d4;
+        padding-left:20px;
+        padding-right:20px;
     }
     .zoomLinkMsg1{
         font-size:18px!important;
@@ -1625,6 +1627,8 @@ Menu css
         padding-top:30px;
         border-radius:10px;
         min-height:150px;
+        background-color:#242526;
+        margin-bottom:30px;
     }
     .listingMeetupImg{
         width:180px;
