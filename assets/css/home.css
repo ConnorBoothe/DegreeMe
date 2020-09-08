@@ -40,6 +40,7 @@
 }
 .timeline-container-status{
     min-height:100px;
+    border-bottom: 2px solid #007bff;
     background-color:#242526;
     box-shadow:1px 2px #131313;
     margin-right:5%;
@@ -50,7 +51,7 @@
 }
 .timeline-container-helprequest{
     min-height:100px;
-    background-color:#313235;
+    background-color:#242526;
     box-shadow:1px 2px #131313;
     border-bottom: 2px solid #28a745;
     margin-right:5%;
@@ -627,7 +628,6 @@ margin-bottom:20px;
     margin-left:60px;
 }
 .like-button{
-    
     width:60px;
     border:none!important;
     position:absolute;
@@ -635,7 +635,7 @@ margin-bottom:20px;
     
 }
 .like-help{
-    background-color:#37383b;  
+    background-color:#242526;  
 }
 .like-nonhelp{
     background-color: #242526;

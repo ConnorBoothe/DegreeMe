@@ -1,4 +1,6 @@
 $(document).ready(function(){
+    //hide border bottom on help request form
+    $(".timeline-container-status").eq(0).css("border-bottom", "none");
     $("body").show();
     $.session.set("type", "Users");
     $(".searchForm").on("submit", function(e){
