@@ -68,7 +68,7 @@ $(document).ready(function(){
                             else if(result.Courses.length > 0){
                                var courses = "";
                                 for( x in result.Courses){
-                                    courses+= "<div class='courseCountainer'><a href='/Course/"+result.Courses[x].CourseName+"'><p class='courseName'>"+result.Courses[x].CourseName+"</p><p class='courseCode'>"+result.Courses[x].Department + " " +
+                                    courses+= "<div class='courseCountainer'><a href='/course/"+result.Courses[x].CourseName+"'><p class='courseName'>"+result.Courses[x].CourseName+"</p><p class='courseCode'>"+result.Courses[x].Department + " " +
                                     result.Courses[x].CourseCode+"</p></a></div>";
                                 }
                                 $(".resultsContainer").html(courses);
@@ -105,7 +105,7 @@ $(document).ready(function(){
                             }
                             else if(result.Users.length > 0){
                                 for( x in result.Users){
-                                    users+= "<div class='courseCountainer'><a href='/User/"+result.Users[x].handle+"'><img class='searchUser' src=../"+result.Users[x].img+"><p class='searchName'>"+result.Users[x].first_name+ " "+
+                                    users+= "<div class='courseCountainer'><a href='/user/"+result.Users[x].handle+"'><img class='searchUser' src=../"+result.Users[x].img+"><p class='searchName'>"+result.Users[x].first_name+ " "+
                                         result.Users[x].last_name+"<p class='userHandle'>"+result.Users[x].handle+
                                         "</p></a></div></p>";
                                 }

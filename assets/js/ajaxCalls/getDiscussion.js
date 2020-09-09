@@ -46,11 +46,11 @@ $(document).ready(function(){
               '<p class="questionText">'+res.discussion[x].post+'</p>';
               if(parseInt(res.discussion[x].commentCount) === 1){
                 discussion +=
-              '<p><a class="responseLink" href="/Course/'+res.discussion[x].courseName+'?discussion='+res.discussion[x]._id+'">'+res.discussion[x].commentCount+' Comment</a></p>';
+              '<p><a class="responseLink" href="/course/'+res.discussion[x].courseName+'?discussion='+res.discussion[x]._id+'">'+res.discussion[x].commentCount+' Comment</a></p>';
               }
               else{
                 discussion +=
-                '<p><a class="responseLink" href="/Course/'+res.discussion[x].courseName+'?discussion='+res.discussion[x]._id+'">'+res.discussion[x].commentCount+' Comments</a></p>';
+                '<p><a class="responseLink" href="/course/'+res.discussion[x].courseName+'?discussion='+res.discussion[x]._id+'">'+res.discussion[x].commentCount+' Comments</a></p>';
                 
               }             
               if(handle === res.discussion[x].userHandle){
@@ -75,18 +75,18 @@ $(document).ready(function(){
             else if(res.discussion[x].anonymous === false){
               discussion +=  '<div class="question">'+
               '<div class="question-container1">'+
-              '<a href="/User/'+res.discussion[x].userHandle+'">'+
+              '<a href="/user/'+res.discussion[x].userHandle+'">'+
               '<img class="discImg" src="../'+res.discussion[x].userImg+'"/>'+
               '<span class="discName">'+res.discussion[x].userHandle+'</span></a>'+
               '<p class="dateText">'+formatDate(new Date(res.discussion[x].date))+"</p>"+
               '<p class="questionText">'+res.discussion[x].post+'</p>';
               if(parseInt(res.discussion[x].commentCount) === 1){
                 discussion +=
-              '<p><a class="responseLink" href="/Course/'+res.discussion[x].courseName+'?discussion='+res.discussion[x]._id+'">'+res.discussion[x].commentCount+' Comment</a></p>';
+              '<p><a class="responseLink" href="/course/'+res.discussion[x].courseName+'?discussion='+res.discussion[x]._id+'">'+res.discussion[x].commentCount+' Comment</a></p>';
               }
               else{
                 discussion +=
-                '<p><a class="responseLink" href="/Course/'+res.discussion[x].courseName+'?discussion='+res.discussion[x]._id+'">'+res.discussion[x].commentCount+' Comments</a></p>';
+                '<p><a class="responseLink" href="/course/'+res.discussion[x].courseName+'?discussion='+res.discussion[x]._id+'">'+res.discussion[x].commentCount+' Comments</a></p>';
                 
               }              
               if(handle === res.discussion[x].userHandle){

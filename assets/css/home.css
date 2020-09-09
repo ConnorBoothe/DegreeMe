@@ -34,6 +34,9 @@
     color:#a9a9a9!important;
     margin-bottom:0!important;
 }
+.postHandle a{
+    color:#d4d4d4;
+}
 .timelinePost-Image{
     width:40px;
     float:left;
@@ -41,7 +44,7 @@
 .timeline-container-status{
     min-height:100px;
     border-bottom: 2px solid #007bff;
-    background-color:#242526;
+    background-color:#37383b;
     box-shadow:1px 2px #131313;
     margin-right:5%;
     margin-bottom:30px;
@@ -51,7 +54,7 @@
 }
 .timeline-container-helprequest{
     min-height:100px;
-    background-color:#242526;
+    background-color:#37383b;
     box-shadow:1px 2px #131313;
     border-bottom: 2px solid #28a745;
     margin-right:5%;
@@ -631,14 +634,14 @@ margin-bottom:20px;
     width:60px;
     border:none!important;
     position:absolute;
-    background-color:#212529;  
+    background-color:#37383b;  
     
 }
 .like-help{
-    background-color:#242526;  
+    background-color:#37383b;  
 }
 .like-nonhelp{
-    background-color: #242526;
+    background-color: #37383b;
 }
 .hasLiked .likeCount, .hasLiked path{
     color:#dc3545!important;
@@ -722,7 +725,7 @@ margin-bottom:20px;
     margin-left: 20px;
     margin-top:5px;
     font-size:17px;
-    
+    font-family: 'Open Sans', sans-serif!important;
 }
 .price-nonhelp{
     margin-left:20px;

@@ -64,7 +64,7 @@ function filterMeetupResults(res, type){
                 '<td class="text-light">'+res[x].room+'</td>'+
                 '<td>';
                 for(i in res[x].Members){
-                    meetups+= '<a href="/User/'+res[x].Members[i].handle+'" class="memberImage" data-toggle="tooltip" data-placement="top" title="'+res[x].Members[i].handle+'">'+
+                    meetups+= '<a href="/user/'+res[x].Members[i].handle+'" class="memberImage" data-toggle="tooltip" data-placement="top" title="'+res[x].Members[i].handle+'">'+
                         '<img class="meetupsImg" src="../'+res[x].Members[i].image+'"/>'+
                     '</a>';
                 }
@@ -90,7 +90,7 @@ function filterMeetupResults(res, type){
                 '<td class="text-light">'+res[x].room+'</td>'+
                 '<td>';
                 for(i in res[x].Members){
-                    meetups+= '<a href="/User/'+res[x].Members[i].handle+'" class="memberImage" data-toggle="tooltip" data-placement="top" title="'+res[x].Members[i].handle+'">'+
+                    meetups+= '<a href="/user/'+res[x].Members[i].handle+'" class="memberImage" data-toggle="tooltip" data-placement="top" title="'+res[x].Members[i].handle+'">'+
                         '<img class="meetupsImg" src="../'+res[x].Members[i].image+'"/>'+
                     '</a>';
                 }
@@ -116,7 +116,7 @@ function filterMeetupResults(res, type){
                 '<td class="text-light">'+res[x].room+'</td>'+
                 '<td>';
                 for(i in res[x].Members){
-                    meetups+= '<a href="/User/'+res[x].Members[i].handle+'" class="memberImage" data-toggle="tooltip" data-placement="top" title="'+res[x].Members[i].handle+'">'+
+                    meetups+= '<a href="/user/'+res[x].Members[i].handle+'" class="memberImage" data-toggle="tooltip" data-placement="top" title="'+res[x].Members[i].handle+'">'+
                         '<img class="meetupsImg" src="../'+res[x].Members[i].image+'"/>'+
                     '</a>';
                 }

@@ -6,7 +6,7 @@ function formatCourses(res){
     var myCourses = "";
     for(x in res){
         myCourses += 
-        '<a class="courseLink" href="/Course/'+res[x].courseName+'" data-toggle="tooltip" data-placement="top" title="'+res[x].courseName+'">'+
+        '<a class="courseLink" href="/course/'+res[x].courseName+'" data-toggle="tooltip" data-placement="top" title="'+res[x].courseName+'">'+
         '<div class="course-container">'+
             '<h5 class="courseCode1">'+res[x].courseCode+'</h5>'+
             '<span class="badge badge-success profile-student-count">#UNCC</span>'+
@@ -124,7 +124,7 @@ function populateTutors(data){
      "<div class='tutorButtons'>"+
          "<a type='submit' class='btn btn-primary tutorBtn text-light'"+
              "name=''"+
-             "href='/User/"+data[x].Handle+"'>View Profile"+
+             "href='/user/"+data[x].Handle+"'>View Profile"+
              "</a>"+
          "<form method='POST' action='/connect'>"+
              "<input name='type' type='hidden' value='Added' class='form-control'>"+
@@ -186,7 +186,7 @@ function formatReviews(res){
         reviews+="<div class='reviewBlock tutorBlockDark'>"+
         "<ul class='review-header'>"+
             "<li>"+
-            '<a class="" href="/User/'+res[x].SenderHandle+'" data-toggle="tooltip" data-placement="top" title="'+res[x].SenderHandle+'">'+
+            '<a class="" href="/user/'+res[x].SenderHandle+'" data-toggle="tooltip" data-placement="top" title="'+res[x].SenderHandle+'">'+
                " <h1 class=' review-handle text-light'><img src='../"+res[x].SenderImg+"' alt='Profile Pic' class='review-pic' />"+ res[x].SenderHandle+"</h1>"+
             '</a>'+
        "</li>"+

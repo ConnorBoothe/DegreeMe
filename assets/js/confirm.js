@@ -6,6 +6,9 @@ var style = {
 };
 
 $(document).ready(function () {
+  $(".dateTimeText").on("click", function(){
+    $(this).css("border", "none");
+  })
   var stripe = Stripe('pk_test_89vfyOdmTWo09jkpoyAnRy1l00ll36NLGn', { stripeAccount: $('input[name="StripeId"]')[0].value }); // Your Publishable Key
   var elements = stripe.elements();
   var card = elements.create('card', { style: style });
@@ -22,8 +25,17 @@ $(document).ready(function () {
 
   var form = document.getElementById('stripe-payment-form');
   form.addEventListener('submit', function (ev) {
-    document.getElementById('submit').disabled = true;
     ev.preventDefault();
+
+    if($(".dateTimeText").text() === "Select Date/Time"){
+      $(".date-container").css("border", "2px solid #dc3545");
+      $(".toast-body").text("Payment not processed: No time selected.")
+      $('.toast').toast("show",{
+          autohide: false
+      });
+    }
+    else{
+      document.getElementById('submit').disabled = true;
     //get intent ajax call
     console.log("getting payment intent");
     payload = {
@@ -75,10 +87,15 @@ $(document).ready(function () {
           });
         },
         500: function (result) {
+
           alert("500 " + result.responseJSON.err);
+          document.getElementById('submit').disabled = false;
+         
         },
       },
     });
+    }
+    
   })
 
 })

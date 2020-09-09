@@ -97,9 +97,9 @@ $(document).ready(function(){
         }
         for(var x = res.length-1; x >=0; x--){
             courses+='<div class="myCoursesWrapper">'+
-            '<a href="/Course/'+res[x].courseName+'"><p class="myCoursesText">'+res[x].courseName+'</p>'+
+            '<a href="/course/'+res[x].courseName+'"><p class="myCoursesText">'+res[x].courseName+'</p>'+
             '<p class="myCoursesSubText">'+res[x].courseCode+'</p></a>'+
-            '  <span type="button" class="dots-btn" data-container="body" data-toggle="popover" data-placement="right" data-content="<ul class=popoverUl><li><a class=askQuestionBtn href=/Course/'+removeSpace(res[x].courseName)+'>Ask a Question</a></li><li><form method=POST class=leaveCourseForm ><input class=courseName type=hidden name=course value='+removeSpace(res[x].courseName)+' /><button class=leaveCourse>Leave</button></form></li></ul>"><img class="dots" src="../assets/img/3dots.svg"/></span>'+
+            '  <span type="button" class="dots-btn" data-container="body" data-toggle="popover" data-placement="right" data-content="<ul class=popoverUl><li><a class=askQuestionBtn href=/course/'+removeSpace(res[x].courseName)+'>Ask a Question</a></li><li><form method=POST class=leaveCourseForm ><input class=courseName type=hidden name=course value='+removeSpace(res[x].courseName)+' /><button class=leaveCourse>Leave</button></form></li></ul>"><img class="dots" src="../assets/img/3dots.svg"/></span>'+
             '</div>';   
         }
         $(".myCourse-container").html(courses);
@@ -144,10 +144,10 @@ $(document).ready(function(){
                             })
                           })
                         $("#myCourses").prepend('<div class="addMyCoursesWrapper">'+
-                        '<a href="/Course/'+result.course+'"><p class="myCoursesText">'+result.course+'</p>'+
+                        '<a href="/course/'+result.course+'"><p class="myCoursesText">'+result.course+'</p>'+
                         '<p class="myCoursesText">'+result.code+'</p></a>'+
                         '<div class="courseActions">'+
-                        '  <span type="button" class="dots-btn" data-container="body" data-toggle="popover" data-placement="right" data-content="<ul class=popoverUl><li><a class=askQuestionBtn href=/Course/'+removeSpace(result.course)+'>Ask a Question</a></li><li><form method=POST class=leaveCourseForm ><input class=courseName type=hidden name=course value='+removeSpace(result.course)+' /><button class=leaveCourse>Leave</button></form></li></ul>"><img class="dots" src="../assets/img/3dots.svg"/></span>'+
+                        '  <span type="button" class="dots-btn" data-container="body" data-toggle="popover" data-placement="right" data-content="<ul class=popoverUl><li><a class=askQuestionBtn href=/course/'+removeSpace(result.course)+'>Ask a Question</a></li><li><form method=POST class=leaveCourseForm ><input class=courseName type=hidden name=course value='+removeSpace(result.course)+' /><button class=leaveCourse>Leave</button></form></li></ul>"><img class="dots" src="../assets/img/3dots.svg"/></span>'+
                         '</div></div>');
                         
                       },

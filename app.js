@@ -126,7 +126,7 @@ app.use(require('./routes/API/sendUsersAndImages.js'));
 app.get('*', function(req, res) {
     //if user logged in, redirect to home
     if(req.session.userId){
-        res.redirect('/Home');
+        res.redirect('/home');
     }
     //redirect to index
     else{

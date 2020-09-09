@@ -203,7 +203,7 @@ $(".userHeader").on("click", function(){
         '<rect width="4" height="9" x="6" y="6" rx="1"/>'+
         '<rect width="4" height="14" x="11" y="1" rx="1"/>'+
       '</svg></span><span class="text-light profileMenuTitle">My Finances</span></li></a>'+
-      '<a id="" href="/User/'+$(".userProfileName").text()+'"><li><span class="accountIcon"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">'
+      '<a id="" href="/user/'+$(".userProfileName").text()+'"><li><span class="accountIcon"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">'
       +'<path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>'
       +'<path fill-rule="evenodd" d="M2 15v-1c0-1 1-4 6-4s6 3 6 4v1H2zm6-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>'
     +'</svg></span><span class="text-light profileMenuTitle">My Profile</span></li></a>'+
@@ -237,7 +237,6 @@ $(".message").on("click", function(){
                 for(var x=res.length-1; x>=0; x--){
                     if(res[x].unreadCount === 0){
                         threads +=  '<a href=../messages?messageId='+res[x].threadId+'><li class=" notifications"><div><div class="blue-dot"></div> <img class="notifImg" src="../'+res[x].hostImg+'"/><p class="notif">'+res[x].subject+'</p><p class="text-secondary">Created '+displayTimeSince(res[x].timestamp)+'</p></div></a></li>';
-                     
                     }
                     else{
                         threads +=  
