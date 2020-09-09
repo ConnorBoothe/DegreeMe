@@ -39,7 +39,7 @@ router.use(bodyParser.urlencoded({
   cookie: { secure: true,
       maxAge:  6*60*60*1000 },
 }));
-router.get('/AcceptedBid/:bidId', function (req, res) {
+router.get('/acceptedBid/:bidId', function (req, res) {
     acceptedBids.getAcceptedBidByById(req.params.bidId).exec((err, docs)=>{
         if(docs){
             res.render("UserLoggedIn/displaySingleAcceptedBid",{
@@ -49,7 +49,7 @@ router.get('/AcceptedBid/:bidId', function (req, res) {
             });
         }
         else{
-            res.redirect("/Home");
+            res.redirect("/home");
         }
         
     })

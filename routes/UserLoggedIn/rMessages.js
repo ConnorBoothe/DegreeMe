@@ -65,16 +65,16 @@ router.get('/messages', function (req, res) {
                     if (userInThread) {
                         users.unreadCountToZero(req.query.messageId, req.session.handle, req, res, messages, dateFunctions.formatMessageCreatedDate, dateFunctions.displayTimeSince);
                     } else {
-                        res.redirect('/Home')
+                        res.redirect('/home')
                     }
                 }
                 else{
-                    res.redirect('/Home'); //redirect docs is null, redirect
+                    res.redirect('/home'); //redirect docs is null, redirect
  
                 }
             })
         } else {
-            res.redirect('/Home'); //redirect if no query string is given
+            res.redirect('/home'); //redirect if no query string is given
         }
     } else {
         res.redirect('/login?error=Session%20Ended'); //redirect if user is not logged in
@@ -90,7 +90,7 @@ router.post("/createThread",
     function (req, res) {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            res.redirect('/Home');
+            res.redirect('/home');
         }
         //host, hostImg, subject, threadId, handle, date
         users.getUserImgs(req.body.userHandles).then(function (data1) {

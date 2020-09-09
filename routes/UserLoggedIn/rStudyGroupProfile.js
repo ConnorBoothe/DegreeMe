@@ -100,7 +100,7 @@ router.get('/Group/:GroupId', function (req, res) {
         });
       }
       else{
-        res.redirect("/Home")
+        res.redirect("/home")
       }
     });
   } else {
@@ -121,7 +121,7 @@ router.post('/Group/createMeetup',
   function (req, res) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      res.redirect('/Home');
+      res.redirect('/home');
     }
     studyGroupMeetups.addMeetup(req.body.groupName, req.session.handle, req.body.groupId, req.body.type, req.body.date, req.body.time,
         req.body.building, req.body.room, req.body.description, req.body.courseName, req.body.zoomLink, req.session.handle, req.session.img).then(function (data) {
@@ -146,7 +146,7 @@ router.post("/attendStudyGroup",
   function (req, res) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      res.redirect('/Home');
+      res.redirect('/home');
     }
     if (req.session.userId) {
       new Promise((resolve, reject) => {
@@ -178,7 +178,7 @@ router.post("/leaveStudyGroup",
   function (req, res) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      res.redirect('/Home');
+      res.redirect('/home');
     }
     if (req.session.userId) {
       new Promise((resolve, reject) => {

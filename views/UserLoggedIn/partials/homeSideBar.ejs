@@ -3,10 +3,10 @@
         <h2 class="homeSideBarTitle">Your Groups</h2>
       
         <ul class="sideBarItemMenu">
-            <%for (var x = myStudyGroups.length-1; x>=0;x-- ){%>
+            <%for (var x = myStudyGroups.length-1; x>=0;x--){%>
                 <li class="sideBarItemMenu-item"><a href="/Group/<%=myStudyGroups[x].studyGroupId%>"><%= myStudyGroups[x].studyGroupName%></a></li>
             <%}%>
-            <li class="sideBarItemMenu-item"><a href="/StartAGroup" class="btn btn-primary startGroup">Start a Group</a></li>
+            <li class="sideBarItemMenu-item"><a href="/startAGroup" class="btn btn-primary startGroup">Start a Group</a></li>
         </ul>
     </div>
     <%if(meetups.length > 0 ){%>
@@ -30,7 +30,7 @@
         <h2 class="homeSideBarTitle">Your Accepted Bids</h2>
         <ul class="sideBarItemMenu">
             <li class="sideBarItemMenu-item">
-                <a href="/AcceptedBids" class="btn btn-primary startGroup">View bids</a>
+                <a href="/acceptedBids" class="btn btn-primary startGroup">View bids</a>
             </li>
         </ul>
     </div>
@@ -43,7 +43,7 @@
                 <li class="sideBarItemMenu-item">
                     <div class="tutoringSideBar-container">
                     <h3 class="tutoringSessionSideBarName">
-                        <a class="hostToolTip" href="../User/<%=currentTutoringSessions[x].hostHandle%>" data-toggle="tooltip" data-placement="top" title="<%=currentTutoringSessions[x].hostHandle%>">
+                        <a class="hostToolTip" href="../user/<%=currentTutoringSessions[x].hostHandle%>" data-toggle="tooltip" data-placement="top" title="<%=currentTutoringSessions[x].hostHandle%>">
                             <img class="hostImg" src='../<%=currentTutoringSessions[x].hostImg%>'/>
                         </a>
                         <a href="meeting/<%=currentTutoringSessions[x].sessionId%>">
@@ -63,7 +63,7 @@
             <li class="sideBarItemMenu-item">
                 <div class="tutoringSideBar-container">
                 <h3 class="tutoringSessionSideBarName">
-                    <a class="hostToolTip" href="../User/<%=pastTutoringSessions[x].hostHandle%>" data-toggle="tooltip" data-placement="top" title="<%=pastTutoringSessions[x].hostHandle%>">
+                    <a class="hostToolTip" href="../user/<%=pastTutoringSessions[x].hostHandle%>" data-toggle="tooltip" data-placement="top" title="<%=pastTutoringSessions[x].hostHandle%>">
                         <img class="hostImg" src='../<%=pastTutoringSessions[x].hostImg%>'/>
                     </a>
                     <a href="meeting/<%=pastTutoringSessions[x].sessionId%>">

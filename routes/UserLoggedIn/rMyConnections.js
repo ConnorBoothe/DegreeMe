@@ -39,7 +39,7 @@ router.post('/deleteSession',
     function (req, res) {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            res.redirect('/Home');
+            res.redirect('/home');
         }
         connections.removeListing(req.body.id, req.body.subject);
         res.redirect('/listings');

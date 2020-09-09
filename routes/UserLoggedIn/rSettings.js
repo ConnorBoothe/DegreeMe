@@ -96,7 +96,7 @@ router.post('/MakeStripeAccount',
     function (req, res) {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            res.redirect('/Home');
+            res.redirect('/home');
         }
         //logic goes here
         var namearr = (req.session.name).split(" ");
@@ -198,7 +198,7 @@ router.post("/Settings",
     function (req, res) {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            res.redirect('/Home');
+            res.redirect('/home');
         }
         upload(req, res, (err) => {
             if (err) {
@@ -214,10 +214,10 @@ router.post("/Settings",
                     req.session.img = data;
                 } else {
                     console.log(err)
-                    res.redirect("/Home")
+                    res.redirect("/home")
                 }
             });
-            res.redirect("/Home")
+            res.redirect("/home")
         });
     });
 module.exports = router;

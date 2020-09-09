@@ -8,7 +8,6 @@ const bodyParser = require('body-parser');
 const mongoose = require("mongoose");
 
 const nodemailer = require("nodemailer");
-const sgTransport = require('nodemailer-sendgrid-transport');
 const {
     check,
     validationResult
@@ -45,15 +44,14 @@ router.use(session({
         maxAge:  6*60*60*1000 },
   }));
 //render the course profile page
-router.get('/Course/:CourseName', function (req, res) {
+router.get('/course/:CourseName', function (req, res) {
     //attempt to decode the param.
     try {
         decodeURIComponent(req.path)
     }
     catch(e) {
         console.log(e)
-        console.log("TITS")
-       res.redirect("/Home")
+       res.redirect("/home")
     }
     if(req.session.userId){
         if (req.query.discussion) {
@@ -74,7 +72,7 @@ router.get('/Course/:CourseName', function (req, res) {
                         })
                     }
                     else{
-                        res.redirect("/Home")
+                        res.redirect("/home")
                     }
                    
                 })
@@ -94,7 +92,7 @@ router.get('/Course/:CourseName', function (req, res) {
                         })    
                     }
                     else{
-                        res.redirect("/Home")
+                        res.redirect("/home")
                     }
                     
                 })
@@ -107,7 +105,7 @@ router.get('/Course/:CourseName', function (req, res) {
                 console.log(req.params.CourseName)
                 coursesDB.getCourseByName(req.params.CourseName).exec((err, docs) => {
                     if(docs.length > 0){
-                        res.render('UserLoggedIn/CourseProfile', {
+                        res.render('UserLoggedIn/courseProfile', {
                             qs: req.query,
                             session: req.session,
                             params: req.params,
@@ -115,7 +113,7 @@ router.get('/Course/:CourseName', function (req, res) {
                         });
                     }
                     else{
-                        res.redirect("/Home")
+                        res.redirect("/home")
                     }
                 })
     
@@ -130,7 +128,7 @@ router.get('/Course/:CourseName', function (req, res) {
     
 });
 //add new discussion post to course
-router.post('/Course/newDiscussion',
+router.post('/course/newDiscussion',
     check('userHandle').isString().trim().escape(),
     check('userName').isString().trim().escape(),
     check('userImg').isString().trim(),
@@ -141,14 +139,14 @@ router.post('/Course/newDiscussion',
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             //redirect to index if error
-            res.redirect('/Home');
+            res.redirect('/home');
         }
         discussionBoard.postDiscussion(req.body.userHandle, req.body.userName, req.body.userImg, req.body.anonymous, req.body.course, new Date(), req.body.post);
-        res.redirect("/Course/" + req.body.course);
+        res.redirect("/course/" + req.body.course);
 
     });
 //add comment to discussion post
-router.post('/Course/addComment',
+router.post('/course/addComment',
     check('discId').isString().trim().escape(),
     check('commentImg').isString().trim(),
     check('commentHandle').isString().trim().escape(),
@@ -158,13 +156,13 @@ router.post('/Course/addComment',
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             //redirect to index if error
-            res.redirect('/Home');
+            res.redirect('/home');
         }
         if(req.session.userId){
         discussionBoard.addComment(req.body.discId, req.body.commentImg, req.body.commentHandle, req.body.commentMessage, new Date()).then(function(){
             discussionBoard.getAllDiscussionById(req.body.discId).exec((err, discussion)=>{
             
-                notifications.addNotification(discussion[0].userHandle ,req.body.commentHandle," answered your question", req.body.commentImg, "/Course/"+req.body.course+"?discussion="+req.body.discId)
+                notifications.addNotification(discussion[0].userHandle ,req.body.commentHandle," answered your question", req.body.commentImg, "/course/"+req.body.course+"?discussion="+req.body.discId)
                 users.incrementNotificationCount(discussion[0].userHandle);
                 users.getUserByHandle(discussion[0].userHandle).exec((err, user)=>{
                     var mail = unirest("POST", "https://api.sendgrid.com/v3/mail/send");
@@ -236,7 +234,7 @@ router.post('/Course/addComment',
             //         cid: 'commentImg'
             //     }
             // ],
-            //     html: "<div style='width:100%; text-align:center'><div style='margin-left:auto;margin-right:auto;width:100%;padding-bottom:20px; padding-top:20px'><h2 class='text-light'><img width='50' src='cid:commentImg' alt='cheers' />"+req.body.commentHandle+" commented on your discussion board post.<p>"+req.body.commentMessage+"</p></h2><img width='' src='cid:myimagecid' alt='cheers' /><br><a href='http://127.0.0.1:3000/Course/"+req.body.course+"?discussion=" + req.body.discId+"'><button style='width:200px; font-size:20px; color:white; background-color:#007bff;" +
+            //     html: "<div style='width:100%; text-align:center'><div style='margin-left:auto;margin-right:auto;width:100%;padding-bottom:20px; padding-top:20px'><h2 class='text-light'><img width='50' src='cid:commentImg' alt='cheers' />"+req.body.commentHandle+" commented on your discussion board post.<p>"+req.body.commentMessage+"</p></h2><img width='' src='cid:myimagecid' alt='cheers' /><br><a href='http://127.0.0.1:3000/course/"+req.body.course+"?discussion=" + req.body.discId+"'><button style='width:200px; font-size:20px; color:white; background-color:#007bff;" +
             //     "border:none; border-radius:10px; font-family:Open Sans, sans-serif;padding:5px; cursor:pointer;margin-top:20px; '>View post</button></a></div></div>",
             // }
             // mailer.sendMail(email, function(err, result) {
@@ -245,7 +243,7 @@ router.post('/Course/addComment',
             //     }
                
             // });
-            res.redirect("/Course/" + req.body.course + "?discussion=" + req.body.discId);
+            res.redirect("/course/" + req.body.course + "?discussion=" + req.body.discId);
         })
     }
     else{
@@ -253,17 +251,17 @@ router.post('/Course/addComment',
     }
     });
 //delete discussion post
-router.post('/Course/removeDiscussion',
+router.post('/course/removeDiscussion',
     check('discId').isString().trim().escape(),
     check('course').isString().trim().escape(),
     function (req, res) {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             //redirect to home if error
-            res.redirect('/Home');
+            res.redirect('/home');
         }
         discussionBoard.deleteQuestion(req.body.discId).then(function (data) {
-            res.redirect("/Course/" + req.body.course);
+            res.redirect("/course/" + req.body.course);
         })
     });
 //get student list for course
@@ -273,7 +271,7 @@ router.post('/getStudentsByCourse',
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             //redirect to index if error
-            res.redirect('/Home');
+            res.redirect('/home');
         }
         coursesDB.getCourseByName(req.body.course).then(function (data) {
             console.log(data)

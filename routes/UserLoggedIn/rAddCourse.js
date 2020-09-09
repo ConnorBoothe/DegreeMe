@@ -33,7 +33,7 @@ router.use(bodyParser.urlencoded({
     extended: true
 }));
 //add course to My Courses from Course Profile Page
-router.post('/Course/addCourse',
+router.post('/course/addCourse',
     check('courseName').isString().trim().escape(),
     function (req, res) {
         //stores validation errors
@@ -46,12 +46,12 @@ router.post('/Course/addCourse',
                 courses.incrementStudents(data[0].CourseName).exec();
                 users.addCourse(req.session.handle, data[0].CourseName, data[0]._id, data[0].Department + " " + data[0].CourseCode)
                 courses.addStudent(data[0].CourseName, req.session.img, req.session.handle, req.session.name)
-                res.redirect("/Home");
+                res.redirect("/home");
             })
             .catch(function (error) {
                 console.log(error)
                 console.log("Add course threw an error")
-                res.redirect("/Home")
+                res.redirect("/home")
             })
 
     });

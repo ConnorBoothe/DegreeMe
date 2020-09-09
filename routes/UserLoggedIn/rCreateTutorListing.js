@@ -69,7 +69,7 @@ router.post('/createSession', [
     if (!errors.isEmpty()) {
       console.log(errors)
       console.log("ERROR")
-      res.redirect('/Home');
+      res.redirect('/home');
     }
     console.log("Schedule",req.body.schedule)
     if (req.body.virtual == "Physical Location") {

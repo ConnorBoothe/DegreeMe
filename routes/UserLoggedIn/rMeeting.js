@@ -70,14 +70,14 @@ router.get('/meeting/:meetingId', function (req, res) {
             formatTime: dateFunctions.formatTimeFromDate
           });
         } else {
-          res.redirect("/Home")
+          res.redirect("/home")
         }
       } else {
         res.redirect('/login?error=Session%20Ended')
       }
     })
     .catch(function(){
-      res.redirect("/Home");
+      res.redirect("/home");
     })
 
 });
@@ -89,7 +89,7 @@ router.post('/meeting/joinMeeting',
   function (req, res) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      res.redirect('/Home');
+      res.redirect('/home');
     }
     //add join timestamp
     meetups.addTimeStamp(req.body.meetingId)
@@ -123,7 +123,7 @@ router.post('/meeting/leaveMeeting',
   function (req, res) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      res.redirect('/Home');
+      res.redirect('/home');
     }
     meetups.addTimeStamp(req.body.meetingId)
       .then(function (meetup) {

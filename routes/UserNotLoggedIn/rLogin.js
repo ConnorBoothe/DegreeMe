@@ -122,7 +122,7 @@ router.post('/login', [
                                 }
                             }
                             console.log(req.session.id)
-                            res.redirect('/Home');
+                            res.redirect('/home');
                         })
                     } else {
                         console.log("Account Not Verified")

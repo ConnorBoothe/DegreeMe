@@ -9,7 +9,6 @@ const sgMail = require('@sendgrid/mail');
 var multer = require("multer");
 const path = require('path');
 const nodemailer = require("nodemailer");
-const sgTransport = require('nodemailer-sendgrid-transport');
 const fs = require("fs");
 var unirest = require('unirest');
 //const stripe = require('stripe')('sk_test_R9jRtcqaPjkvbrQkt7TaLIK8');

@@ -18,7 +18,7 @@ router.use(session({
 //render the index page
 router.get('/', function(req, res){
     if(req.session.userId){
-        res.redirect("/Home")
+        res.redirect("/home")
     }
     else{
         res.render('UserNotLoggedIn/index');

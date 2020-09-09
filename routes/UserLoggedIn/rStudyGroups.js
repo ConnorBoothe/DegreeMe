@@ -8,7 +8,7 @@ var MongoStore = require('connect-mongo')(session);
 const bodyParser = require('body-parser');
 const nodemailer = require("nodemailer");
 var unirest = require('unirest');
-const sgTransport = require('nodemailer-sendgrid-transport');
+
 const {
   check,
   validationResult
@@ -44,7 +44,7 @@ router.use(session({
       maxAge:  6*60*60*1000 },
 }));
 //render the Find Group page
-router.get('/Groups', function (req, res) {
+router.get('/groups', function (req, res) {
   var i = 0;
   if (req.session.userId) {
     new Promise((resolve, reject) => {
@@ -54,7 +54,7 @@ router.get('/Groups', function (req, res) {
           if (doks1.length !== 0) {
             resolve([err, doks1.splice(0, 20)]);
           } else {
-            res.redirect('/Groups');
+            res.redirect('/groups');
             // noResults = true;
           }
         })
@@ -167,7 +167,7 @@ router.get('/Groups', function (req, res) {
 });
 
 //render the Create Group page
-router.get('/StartAGroup', function (req, res) {
+router.get('/startAGroup', function (req, res) {
   if (req.session.userId) {
     res.render('UserLoggedIn/StudyGroups', {
       qs: req.query,
@@ -185,7 +185,7 @@ router.post("/join",
   function (req, res) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      res.redirect('/Home');
+      res.redirect('/home');
     }
     if (req.session.userId) {
       new Promise((resolve, reject) => {
@@ -201,7 +201,7 @@ router.post("/join",
                 })
                
                 for (x in data[0].Members) {
-                  notifications.addNotification(data[0].Members[x].MemberHandle, req.session.handle, "Joined " + data[0].GroupName, req.session.img, "/User/" + req.session.handle);
+                  notifications.addNotification(data[0].Members[x].MemberHandle, req.session.handle, "Joined " + data[0].GroupName, req.session.img, "/user/" + req.session.handle);
                   users.incrementNotificationCount(data[0].Members[x].MemberHandle);
                 }
               })
@@ -231,7 +231,7 @@ router.post("/unjoin",
   function (req, res) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      res.redirect('/Home');
+      res.redirect('/home');
     }
     if (req.session.userId) {
       new Promise((resolve, reject) => {
@@ -272,7 +272,7 @@ router.post("/unjoin",
   function (req, res) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      res.redirect('/Home');
+      res.redirect('/home');
     }
     studyGroups.getGroupNames().then(function(data){
       var groupNameExists = false;
@@ -324,7 +324,7 @@ router.post("/unjoin",
 //   function (req, res) {
 //     const errors = validationResult(req);
 //     if (!errors.isEmpty()) {
-//       res.redirect('/Home');
+//       res.redirect('/home');
 //     }
 //     studyGroups.addStudyGroup(req.session.userId, req.session.handle, req.session.name, req.session.img, req.body.course, "fake ID", req.body.professor,
 //         req.session.school, req.body.groupName, req.body.groupDescription, req.body.groupImage)
@@ -334,7 +334,7 @@ router.post("/unjoin",
 //           req.body.professor, req.body.course, data._id);
 //         users.addStudyGroup(req.session.handle, data._id, req.body.groupName, data.Subject);
 //         setTimeout(function () {
-//           res.redirect("/Home?status=Study%20Group%20Created");
+//           res.redirect("/home?status=Study%20Group%20Created");
 //         }, 100);
 //       })
 //       .catch(function (err) {
@@ -349,12 +349,12 @@ router.post("/meetup/addStudyGroupMeetup",
   function (req, res) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      res.redirect('/Home');
+      res.redirect('/home');
     }
     studyGroupMeetups.addAttendee(req.body.sessionId, req.body.handle, req.body.image, function () {
       users.addMeetup(req.session.handle, req.body.sessionId, req.body.meetupName, req.body.date, req.body.meetupType);
     });
-    res.redirect("/Home");
+    res.redirect("/home");
   })
 
   router.post("/sendEmailInvite",

@@ -62,7 +62,7 @@
                             <div class="groupName text-light">
                                 <h1 class="groupName text-light"><%=studyGroup.GroupName%></h1>
                                 <h1 class="subjectName text-light"><%=studyGroup.Subject%></h1>
-                            <p class="admin">Admin: <a href="../User/<%=studyGroup.HostHandle%>"><img class="adminImage" src="../<%=studyGroup.HostImage%>" /><%=studyGroup.HostHandle%></p></a>
+                            <p class="admin">Admin: <a href="../user/<%=studyGroup.HostHandle%>"><img class="adminImage" src="../<%=studyGroup.HostImage%>" /><%=studyGroup.HostHandle%></p></a>
                             
                             </div>
                             
@@ -140,7 +140,7 @@
                                             <p class="attendTxt">Attendees</p>
                                             <ul>
                                                 <% for(y in meetups[j].Attendees){%>
-                                                <li> <a href="/User/<%=meetups[j].Attendees[y].handle%>" class="memberImage"
+                                                <li> <a href="/user/<%=meetups[j].Attendees[y].handle%>" class="memberImage"
                                                         data-toggle="tooltip" data-placement="top"
                                                         title="<%=meetups[j].Attendees[y].handle%>">
                                                         <img class="memberImage"
@@ -156,7 +156,7 @@
                                     <p class="StudySession-Description"><%=meetups[x].description%></p>
                                     <p class="badge badge-dark">Study Session</p>
                                     <%if(meetups[x].type == "Virtual"){%>
-                                        <p class="StudySession-item"><a href="../User/<%=meetups[x].hostHandle%>"><%=meetups[x].hostHandle%></a> created a <%=meetups[x].type%> Study Session</p>
+                                        <p class="StudySession-item"><a href="../user/<%=meetups[x].hostHandle%>"><%=meetups[x].hostHandle%></a> created a <%=meetups[x].type%> Study Session</p>
                                     <%}else {%>
                                         <p class="StudySession-item"><%=meetups[x].hostHandle%> created an <%=meetups[x].type%> Study Session</p>
                                         <p class="StudySession-item location-item">Building: <%=meetups[x].building%></p>

@@ -75,7 +75,7 @@ function sortTutoringSessions(tutorSeshArray) {
     return tutorSeshArray;
 }
 //render the home page
-router.get('/Home', function (req, res) {
+router.get('/home', function (req, res) {
     if (req.session.userId) {
        timeline.getUserTimeline(req.session.following, 0, req).exec((err, docs1) => {
             if (err) {
@@ -116,7 +116,7 @@ router.get('/Home', function (req, res) {
                     }
                     if (docs1.length > 0) {
                         acceptedBids.getUserBids(req.session.handle).exec((err, bids)=>{
-                        res.render('UserLoggedIn/Home', {
+                        res.render('UserLoggedIn/home', {
                             session: req.session,
                             qs: req.query,
                             timeline: timeLineArray,
@@ -163,7 +163,7 @@ router.post("/zeroNotifications",
     function (req, res) {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            res.redirect('/Home');
+            res.redirect('/home');
         }
         users.clearNotificationCount(req.body.handle)
             .then(function (data) {
@@ -184,7 +184,7 @@ router.post("/Seen",
     function (req, res) {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            res.redirect('/Home');
+            res.redirect('/home');
         }
         console.log(req.body.notifId)
         notifications.seenNotification(req.body.notifId)
@@ -202,7 +202,7 @@ router.post("/SeenMsg",
     function (req, res) {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            res.redirect('/Home');
+            res.redirect('/home');
         }
         users.sawMessage(req.body.handle, req.body.threadId, res);
     })
@@ -214,7 +214,7 @@ router.post("/addCourse",
     function (req, res) {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            res.redirect('/Home');
+            res.redirect('/home');
         }
         if (!req.body.exist) {
             users.addCourse(req.body.handle, req.body.course, req.body.courseId, req.body.courseCode);
@@ -233,7 +233,7 @@ router.post("/leaveCourse",
     function (req, res) {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            res.redirect('/Home');
+            res.redirect('/home');
         }
         //remove course from UserDB
         if (req.body.course.includes("+")) {
@@ -265,7 +265,7 @@ router.post("/addLike",
     function (req, res) {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            res.redirect('/Home');
+            res.redirect('/home');
         }
         timeline.hasLiked(req.body.postId, req.body.handle)
             .then(function (data1) {
@@ -305,7 +305,7 @@ router.post("/removeLike",
     function (req, res) {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            res.redirect('/Home');
+            res.redirect('/home');
         }
         timeline.decrementLikes(req.body.postId)
             .then(function () {
@@ -329,7 +329,7 @@ router.post("User/Settings",
     function (req, res) {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            res.redirect('/Home');
+            res.redirect('/home');
         }
         upload(req, res, (err) => {
             if (err) {
@@ -364,7 +364,7 @@ router.post("/addHelpRequest",
     function (req, res) {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            res.redirect('/Home');
+            res.redirect('/home');
         }
         if (req.body.userHandle != req.session.handle) {
             users.getUserById(req.body.userHandle).exec((err, docs) => {
@@ -391,7 +391,7 @@ router.post("/addBid",
     function (req, res) {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            res.redirect('/Home');
+            res.redirect('/home');
         }
         var timelineObj = {};
          //users.addBid(req.session.handle, req.body.timelineId, req.body.bidder, req.body.price);
@@ -446,7 +446,7 @@ router.post("/addBid",
                                 mail.end(function (resp) {
                                 if (resp.error){
                                     console.log(resp.error)
-                                    // res.redirect("/Home")
+                                    // res.redirect("/home")
                                     // throw new Error(res.error);
                                 } 
 
@@ -494,7 +494,7 @@ router.post("/loadMore",
     function (req, res) {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            res.redirect('/Home');
+            res.redirect('/home');
         }
         timeline.getUserTimeline(req.session.following, req.body.blockNum, req).exec((err, docs) => {
             if (err) {
@@ -513,7 +513,7 @@ router.post("/siteWideSearch",
     function (req, res) {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            res.redirect('/Home');
+            res.redirect('/home');
         }
         if (req.body.type == "Courses") {
             if (req.body.searchValue.split("")[4] == " ") {

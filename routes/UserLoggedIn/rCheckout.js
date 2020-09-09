@@ -106,7 +106,7 @@ router.get('/bids/:timelineId', function (req, res) {
                         });
                     })
                     .catch(function (err) {
-                        res.redirect("/Home")
+                        res.redirect("/home")
                     })
             })
     } else {
@@ -120,7 +120,7 @@ router.post('/bids/chargeHelp',
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             //redirect to index if error
-            res.redirect('/Home');
+            res.redirect('/home');
         }
         //charge the person who started the help request
         //send funds to the bidder
@@ -224,7 +224,7 @@ router.post("/charge",
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             //redirect to index if error
-            res.redirect('/Home');
+            res.redirect('/home');
         }
         if (req.session.userId) {
             listings.getStudentsAttending(req.body.tutorSessionId).exec((err, docs) => {

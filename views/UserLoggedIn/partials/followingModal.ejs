@@ -12,7 +12,7 @@
         <% if(user.following.length > 0){%>
         <%for (x in user.following){%>
          <div class="followersContainer">
-          <a href="/User/<%=user.following[x].user_handle%>">
+          <a href="/user/<%=user.following[x].user_handle%>">
             <img class="userImage" src="../<%=user.following[x].user_image%>"/>
           <p class="followHandle"><%=user.following[x].user_handle%></p>
           </a>

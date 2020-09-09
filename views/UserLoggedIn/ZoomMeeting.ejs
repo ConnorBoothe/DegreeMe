@@ -86,25 +86,25 @@
           <%}%>
         <div class="listingMeetupInfo">
         <%if(meeting.Members.length < 3){%>
-        <a href="/User/<%=meeting.Members[0].handle%>" class="memberImage" data-toggle="tooltip" data-placement="top"
+        <a href="/user/<%=meeting.Members[0].handle%>" class="memberImage" data-toggle="tooltip" data-placement="top"
         title="<%=meeting.Members[0].handle%>">
         <img class="meetingImg" src="../<%=meeting.Members[0].image%>" />
         </a>
-        <a href="/User/<%=meeting.Members[1].handle%>" class="memberImage" data-toggle="tooltip" data-placement="top"
+        <a href="/user/<%=meeting.Members[1].handle%>" class="memberImage" data-toggle="tooltip" data-placement="top"
           title="<%=meeting.Members[1].handle%>">
           <img class="meetingImg1" src="../<%=meeting.Members[1].image%>" />
         </a>
         <img src="../assets/img/remote_arrows.svg" class="listingMeetupImg" />
         <%console.log(meeting.Members[0])%>
-        <h3 class="meetingInfoName"><a href="/User/<%=meeting.Members[0].handle%>"  class="meetingHandle"><%=meeting.Members[0].name%></a>
-          <span class="tutoring">tutoring</span> <a href="/User/<%=meeting.Members[1].handle%>" class="meetingHandle"><%=meeting.Members[1].name%></a> </h3>
+        <h3 class="meetingInfoName"><a href="/user/<%=meeting.Members[0].handle%>"  class="meetingHandle"><%=meeting.Members[0].name%></a>
+          <span class="tutoring">tutoring</span> <a href="/user/<%=meeting.Members[1].handle%>" class="meetingHandle"><%=meeting.Members[1].name%></a> </h3>
         <%} else{%>
           <h3 class="membersTitle">Members</h3>
           <ul class="membersList">
             <%for(x in meeting.Members){%>
              
               <li>
-                <a href="/User/<%=meeting.Members[0].handle%>" class="memberImage" data-toggle="tooltip" data-placement="top"
+                <a href="/user/<%=meeting.Members[0].handle%>" class="memberImage" data-toggle="tooltip" data-placement="top"
                   title="<%=meeting.Members[0].handle%>">
                 <img class="meetingImg2" src="../<%=meeting.Members[x].image%>" />
                 </a>
@@ -113,7 +113,7 @@
             <%}%>
           </ul>
           <h3 class="hostName">
-            <span class="tutoring">Host: </span> <a href="/User/<%=meeting.Members[0].handle%>" class="meetingHandle"><%=meeting.Members[0].name%></a> </h3>
+            <span class="tutoring">Host: </span> <a href="/user/<%=meeting.Members[0].handle%>" class="meetingHandle"><%=meeting.Members[0].name%></a> </h3>
           
         <%}%>
               <%if(meeting.date < new Date() && !meeting.LeftReview){%>

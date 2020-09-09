@@ -39,7 +39,7 @@ router.use(session({
         maxAge:  6*60*60*1000 },
 }));
 //render the UserProfile page
-router.get('/User/:Handle', function (req, res) {
+router.get('/user/:Handle', function (req, res) {
     if (req.session.userId) {
         var qs = req.query;
         users.getUserByHandle(req.params.Handle).exec((err, docs) => {
@@ -76,7 +76,7 @@ router.post("/setBio",
     function (req, res) {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            res.redirect('/Home');
+            res.redirect('/home');
         }
         users.getUserByHandle(req.body.handle).then(function (docs) {
             for (i in docs[0].myCourses) {
@@ -96,7 +96,7 @@ router.post("/sendDirectMessage",
     function (req, res) {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            res.redirect('/Home');
+            res.redirect('/home');
         }
         let messageId = "";
         messages.newThread(req.body.host, req.body.hostImg, [
@@ -122,7 +122,7 @@ router.post("/getCourses",
     function (req, res) {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            res.redirect('/Home');
+            res.redirect('/home');
         }
         users.getUserByHandle(req.body.userHandle).exec((err, docs) => {
             res.status(202).json({
@@ -135,7 +135,7 @@ router.post("/getTutorListings",
     function (req, res) {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            res.redirect('/Home');
+            res.redirect('/home');
         }
         listings.getListingsByHandle(req.body.userHandle).exec((err, docs) => {
             res.status(202).json({
@@ -148,7 +148,7 @@ router.post("/getReviews",
     function (req, res) {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            res.redirect('/Home');
+            res.redirect('/home');
         }
         reviews.getReviewsByHandle(req.body.userHandle).exec((err, docs) => {
             res.status(202).json({
@@ -161,7 +161,7 @@ router.post("/getGroups",
     function (req, res) {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            res.redirect('/Home');
+            res.redirect('/home');
         }
         users.getUserByHandle(req.body.userHandle).exec((err, docs) => {
             res.status(202).json({

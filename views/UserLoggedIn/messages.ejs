@@ -33,7 +33,7 @@
                 </svg>
             </button> -->
             <h1 id="pageTitle" class="pageTitleDark">
-                <a href="/Home" class="text-dark"><img src="../assets/img/degreeMeLogo.svg" alt="logo" class="logo"
+                <a href="/home" class="text-dark"><img src="../assets/img/degreeMeLogo.svg" alt="logo" class="logo"
                         width="20" /></a>
                 <div>
                     <ul class="headerContainer">
@@ -168,7 +168,7 @@
             <div class="messageHandle-container">
             <% for(x in messages.userHandles){%>
             <div class='messageHandle '>
-                <a href="/User/<%=messages.userHandles[x][0]%>">
+                <a href="/user/<%=messages.userHandles[x][0]%>">
                     <div class="online"></div>
                     <img class="messageSideBarImg" src="<%=messages.userHandles[x][1]%>" />
                     <span class="userHandleTxt"><%=messages.userHandles[x][0]%></span>

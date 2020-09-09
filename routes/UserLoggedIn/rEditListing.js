@@ -66,7 +66,7 @@ router.post('/editListing',
     function (req, res) {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            res.redirect('/Home');
+            res.redirect('/home');
         }
         listings.updateListing(req.body.listingId, req.body.price, req.body.duration, req.body.Schedule, req.body.expirationDate);
         res.status(202).json({
@@ -79,7 +79,7 @@ router.post('/DisabledListing',
     function (req, res) {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            res.redirect('/Home');
+            res.redirect('/home');
         }
         listings.disableListing(req.body.listingId);
         res.status(202).json({
@@ -91,7 +91,7 @@ router.post('/ActiveListing',
     function (req, res) {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            res.redirect('/Home');
+            res.redirect('/home');
         }
         listings.activateListing(req.body.listingId);
         res.status(202).json({

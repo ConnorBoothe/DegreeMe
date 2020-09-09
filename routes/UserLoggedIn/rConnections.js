@@ -39,7 +39,7 @@ router.post("/tutorResults/searchCourse",
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             //redirect to index if error
-            res.redirect('/Home');
+            res.redirect('/home');
         }
         res.redirect("/tutorResults/" + req.body.course);
     })
@@ -49,7 +49,7 @@ router.post("/searchCourse",
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             //redirect to index if error
-            res.redirect('/Home');
+            res.redirect('/home');
         }
         res.redirect("/tutorResults/" + req.body.course);
     })

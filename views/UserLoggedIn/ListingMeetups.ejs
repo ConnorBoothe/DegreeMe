@@ -59,7 +59,7 @@
                                         <td class="text-light"><%=meetups[x].room%></td>
                                         <td>
                                             <%for(i in meetups[x].Members){%>
-                                            <a href="/User/<%= meetups[x].Members[i].handle%>" class="memberImage"
+                                            <a href="/user/<%= meetups[x].Members[i].handle%>" class="memberImage"
                                                 data-toggle="tooltip" title="<%= meetups[x].Members[i].handle%>">
                                                 <img class="meetupsImg" src="../<%=meetups[x].Members[i].image%>" />
                                             </a>

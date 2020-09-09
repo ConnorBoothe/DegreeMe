@@ -109,7 +109,7 @@ router.post("/attend",
   function (req, res) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      res.redirect('/Home');
+      res.redirect('/home');
     }
     if (req.session.userId) {
       new Promise((resolve, reject) => {

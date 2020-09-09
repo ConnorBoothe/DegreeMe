@@ -22,7 +22,7 @@ router.use(bodyParser.urlencoded({
     extended: true
 }));
 
-router.get('/CourseSearch', function (req, res) {
+router.get('/courseSearch', function (req, res) {
     connectionsDB.getTutorArrayByCourse(req.query.course.trim()).exec((err, docs) => { //Get tutor list for the inputted course
         var tutorArray = new Array;
         if (docs) {
@@ -54,7 +54,7 @@ router.get('/CourseSearch', function (req, res) {
 });
 //post route that handles course search on index page
 router.post('/SearchCourses', function (req, res) {
-    res.redirect("/CourseSearch?course=" + req.body.course);
+    res.redirect("/courseSearch?course=" + req.body.course);
 
 });
 module.exports = router;

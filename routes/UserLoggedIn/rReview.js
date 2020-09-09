@@ -54,10 +54,10 @@ router.get('/Review/:meetingId', function (req, res) {
         });
       }
       else{
-        res.redirect("/Home");
+        res.redirect("/home");
       }
     } else{
-      res.redirect("/Home");
+      res.redirect("/home");
     }
     })
   } else {

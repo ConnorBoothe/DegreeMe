@@ -32,7 +32,7 @@ router.use(session({
   cookie: { secure: true,
       maxAge:  6*60*60*1000 },
 }));
-router.get('/AcceptedBids', function (req, res) {
+router.get('/acceptedBids', function (req, res) {
     acceptedBids.getAllAcceptedBids(req.session.handle).exec((err, docs)=>{
         res.render("UserLoggedIn/displayAllBids",{
             session: req.session,

@@ -102,7 +102,7 @@ router.get('/discover', function (req, res) {
 //follow user account
 router.post("/follow",
   check('handle').isString().trim().escape(),
-  check('image').isString().trim().escape(),
+  check('image').isString().trim(),
   function (req, res) {
     //stores validation errors
     const errors = validationResult(req);
@@ -115,7 +115,7 @@ router.post("/follow",
           // addFollow(follower_handle, handle, image, callback)
           users.addFollow(req.session.handle, req.body.handle, req.session.img, req.body.image, function (suc) {
             //add follow notification
-            notifications.addNotification(req.body.handle, req.session.name, "followed you", req.session.img, "/User/" + req.session.handle);
+            notifications.addNotification(req.body.handle, req.session.name, "followed you", req.session.img, "/user/" + req.session.handle);
             if (suc) {
               resolve();
             } else {

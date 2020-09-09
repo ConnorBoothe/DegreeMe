@@ -5,7 +5,6 @@ const express = require('express');
 const router = express.Router();
 const stripe = require('stripe')(process.env.STRIPE_KEY);
 const nodemailer = require("nodemailer");
-const sgTransport = require('nodemailer-sendgrid-transport');
 var unirest = require('unirest');
 const CronJob = require('cron').CronJob;
 //require DBs

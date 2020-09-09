@@ -6,7 +6,6 @@ const session = require('express-session');
 const nodemailer = require("nodemailer");
 const bodyParser = require("body-parser");
 const bcrypt = require('bcryptjs');
-const sgTransport = require('nodemailer-sendgrid-transport');
 var unirest = require('unirest');
 //DBs used
 const userDB = require('../../models/Database/UserDB');

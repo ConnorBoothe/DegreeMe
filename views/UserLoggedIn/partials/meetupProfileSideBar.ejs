@@ -4,7 +4,7 @@
         <h2 class="meetupSideBarTitle"><%=memberCount%> Students Attending</h2>
         <ul class="sideBarMenu">
             <% for(x in meetup.Attendees){%>
-                <li class="sideBarItemMenu"><a href="/User/<%= meetup.Attendees[x].handle%>"><img class="attendeeImg" src="../<%= meetup.Attendees[x].userImage%>"/><%= meetup.Attendees[x].handle%></a></li>
+                <li class="sideBarItemMenu"><a href="/user/<%= meetup.Attendees[x].handle%>"><img class="attendeeImg" src="../<%= meetup.Attendees[x].userImage%>"/><%= meetup.Attendees[x].handle%></a></li>
             <%}%>
         </ul>
     </div>

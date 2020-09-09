@@ -23,8 +23,11 @@ router.get('/logout', function (req, res) {
         if (err) {
             res.negotiate(err);
         }
+        else{
+             //redirect to index
+            res.redirect('/');
+        }
     });
-    //redirect to index
-    res.redirect('/');
+   
 });
 module.exports = router;
