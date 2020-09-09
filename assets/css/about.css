@@ -7,7 +7,6 @@
 .scrollArrow {
     color: #d4d4d4;
     position: absolute;
-    top: 44%;
     left: 55%;
     margin-left: -100px;
     cursor: pointer;
@@ -15,7 +14,7 @@
 
 .aboutContainer2{
     background-color: #191919;
-    padding-top: 50px;
+    padding-top: 200px;
     min-height: 100vh;
     background-size: 100% 95%;
     background-repeat: no-repeat;
@@ -151,56 +150,61 @@
 @media only screen and (max-width: 750px) { 
 
 .aboutTxt{
-  font-size:16px!important;
+  font-size:17px!important;
   font-family:"Verdana";
+  font-weight:300;
+  margin-left:auto;
+  margin-right:auto;
+  text-align:left;
+  display:inline-block;
+  width:80%;
+  padding-top:10px!important;
 }
-
+.aboutUs-title, .iconAbout3{
+  text-align:center!important;
+  padding-top:15px!important;
+}
+.iconAbout2{
+  margin-top:100px;
+}
 /* end of nav bar design for mobile */
 .aboutUsTitle img {
   width: 70%;
   float: none!important;
   position: relative;
   }
-  .aboutUsTitle {
-    display: inline-block;
-    position: relative;
-    margin-right: auto;
-    margin-left: auto;
-    top: 50px;
-    left: 0px!important;
-  }
-  #aboutContainer {
+  #aboutContainr {
     background-color: #191919;
     padding-top: 0px;
-    height: 91.6vh;
     background-size: cover;
     background-repeat: no-repeat;
     margin-right: auto;
     margin-left: auto;
  }
+ .about-item-info{
+   color:white;
+   text-align:left;
+   margin-left:auto;
+   margin-right:auto;
+   width:80%;
+   font-family: "Verdana";
+   font-size:16px;
+ }
  /*styling the children of the parent div */
  .aboutChild p {
   color: white;
-  height: 150px;
-  text-shadow: 1px 1px white;
-  text-align: left!important;
+  text-align: left;
   padding-top: 60px; 
   font-size:35px;
 }
-
-  .betaVersion {
-    position: fixed;
-    color: #585757;
-    right: 0;
-    font-family: 'Open Sans', sans-serif;
-    margin-top: 18px;
-    margin-right: 10px!important;
-  }
+.aboutContainer2{
+  padding-bottom:50px;
+}
+  
   .scrollArrow {
-    color: #007bff;
-    position: absolute;
-    top: 44%;
+    color: #d4d4d4;
     left: 43%;
+    margin-top:70px;
     margin-left: auto;
     margin-right: auto;
     cursor: pointer;
