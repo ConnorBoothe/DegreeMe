@@ -26,7 +26,7 @@ function formatBid(post){
             if(post.anonymous == false){
                 bid += '<img class="timelinePost-Image" src="'+post.userImage+'" />'+
                 '<p class="timelinePost-help"><a'+
-                    'class="userNameLink" href="/User/'+post.userHandle+'">'+post.userName+
+                    'class="userNameLink" href="/user/'+post.userHandle+'">'+post.userName+
                     '</a>'+
                     '<p class="text-light helpReqTxt"><span class="badge badge-success">Help Request</span></p>'+
                 '</div>'+
@@ -105,7 +105,7 @@ function formatTutorListing(post){
                  '</div>'+
                 '<img class="timelinePost-Image" src="'+post.userImage+'" />'+
                 '<p class="timelinePost-username">'+post.userName+
-                '<p class="postHandle"><a href="/User/'+post.userHandle+'">'+post.userHandle+'</a></p></p>'+
+                '<p class="postHandle"><a href="/user/'+post.userHandle+'">'+post.userHandle+'</a></p></p>'+
             '</div>'+
             '<p class="caption">'+post.caption+'</p>'+
             '<p class="price-nonhelp badge badge-warning">Price: $'+post.price+'</p>'+
@@ -158,7 +158,7 @@ function formatStudyGroup(post){
             '</div>'+
             '<img class="timelinePost-Image" src="'+post.userImage+'" />'+
             '<p class="timelinePost-username">'+post.userName+'<span class="postHandle">'+
-            '<p class="postHandle"><a href="/User/'+post.userHandle+'">'+post.userHandle+'</a></span></p></p>'+
+            '<p class="postHandle"><a href="/user/'+post.userHandle+'">'+post.userHandle+'</a></span></p></p>'+
         '</div>'+
         '<p class="caption">'+post.caption+'<a href="/Group/'+post.url+'" class="btn btn-primary view-timeline-btn">View</a></p>'+
         '<ul class="postDetailsList">'+

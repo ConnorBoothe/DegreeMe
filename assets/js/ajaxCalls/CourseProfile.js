@@ -152,10 +152,10 @@ function populateDiscussion(res, subject){
       '<p class="questionText">'+res[x].post+'</p>';
       if(parseInt(res[x].commentCount) === 1){
         
-        discussion += '<p><a class="responseLink" href="/Course/'+res[x].courseName+'?discussion='+res[x]._id+'">'+res[x].commentCount+' Comment</a></p>';
+        discussion += '<p><a class="responseLink" href="/course/'+res[x].courseName+'?discussion='+res[x]._id+'">'+res[x].commentCount+' Comment</a></p>';
       }
       else{
-        discussion += '<p><a class="responseLink" href="/Course/'+res[x].courseName+'?discussion='+res[x]._id+'">'+res[x].commentCount+' Comments</a></p>';
+        discussion += '<p><a class="responseLink" href="/course/'+res[x].courseName+'?discussion='+res[x]._id+'">'+res[x].commentCount+' Comments</a></p>';
       }
       discussion +=
       '<form action="removeDiscussion" method="POST">'+
@@ -177,14 +177,14 @@ function populateStudents(students){
       +"<input type='hidden' value ='"+students[x][0].handle+"'/>"
       +"<input type='hidden' value ='"+students[x][0].image+"'/>"
       +"<button id='"+noAtHandle+"'data-status='unfollow' type='button' class='btn btn-secondary followingButton'data-handle='"+students[x][0].handle+"'>Following</button>"
-      +"<a href='../User/"+students[x][0].handle+"'><h3><img class='studentImage' src='../"+students[x][0].image+"'/>"+students[x][0].first_name+" "+students[x][0].last_name+"</h3><h5>"+students[x][0].handle+"</h5></a>"
+      +"<a href='../user/"+students[x][0].handle+"'><h3><img class='studentImage' src='../"+students[x][0].image+"'/>"+students[x][0].first_name+" "+students[x][0].last_name+"</h3><h5>"+students[x][0].handle+"</h5></a>"
       +"<p class='bioTxt'>"+students[x][0].Bio+"</p></li>"  
     }else{
       student+= "<li>"
       +"<input type='hidden' value ='"+students[x][0].handle+"'/>"
       +"<input type='hidden' value ='"+students[x][0].image+"'/>"
       +"<button id=\""+noAtHandle+"\" data-status=\"follow\" type=\"button\" class=\"btn btn-primary followingButton\">Follow</button>"
-      +"<a href='../User/"+students[x][0].handle+"'><h3><img class='studentImage' src='../"+students[x][0].image+"'/>"+students[x][0].first_name+" "+students[x][0].last_name+"</h3><h5>"+students[x][0].handle+"</h5></a>";
+      +"<a href='../user/"+students[x][0].handle+"'><h3><img class='studentImage' src='../"+students[x][0].image+"'/>"+students[x][0].first_name+" "+students[x][0].last_name+"</h3><h5>"+students[x][0].handle+"</h5></a>";
       if(students[x][0].Bio != "Tell the world a bit about yourself"){
         student += "<p class='bioTxt'>"+students[x][0].Bio+"</p></li>";  
       }
@@ -233,11 +233,11 @@ $(document).ready(function(){
               '<p class="questionText">'+res.discussion[x].post+'</p>';
               if(parseInt(res.discussion[x].commentCount) === 1){
                 discussion +=
-              '<p><a class="responseLink" href="/Course/'+res.discussion[x].courseName+'?discussion='+res.discussion[x]._id+'">'+res.discussion[x].commentCount+' Comment</a></p>';
+              '<p><a class="responseLink" href="/course/'+res.discussion[x].courseName+'?discussion='+res.discussion[x]._id+'">'+res.discussion[x].commentCount+' Comment</a></p>';
               }
               else{
                 discussion +=
-                '<p><a class="responseLink" href="/Course/'+res.discussion[x].courseName+'?discussion='+res.discussion[x]._id+'">'+res.discussion[x].commentCount+' Comments</a></p>';
+                '<p><a class="responseLink" href="/course/'+res.discussion[x].courseName+'?discussion='+res.discussion[x]._id+'">'+res.discussion[x].commentCount+' Comments</a></p>';
                 
               }
               if(handle === res.discussion[x].userHandle){
@@ -259,18 +259,18 @@ $(document).ready(function(){
             else if(res.discussion[x].anonymous === false){
               discussion +=  '<div class="question">'+
               '<div class="question-container1">'+
-              '<a href="/User/'+res.discussion[x].userHandle+'">'+
+              '<a href="/user/'+res.discussion[x].userHandle+'">'+
               '<img class="discImg" src="../'+res.discussion[x].userImg+'"/>'+
               '<span class="discName">'+res.discussion[x].userHandle+'</span></a>'+
               '<p class="dateText">'+formatDate(new Date(res.discussion[x].date))+"</p>"+
               '<p class="questionText">'+res.discussion[x].post+'</p>';
               if(parseInt(res.discussion[x].commentCount) === 1){
                 discussion +=
-              '<p><a class="responseLink" href="/Course/'+res.discussion[x].courseName+'?discussion='+res.discussion[x]._id+'">'+res.discussion[x].commentCount+' Comment</a></p>';
+              '<p><a class="responseLink" href="/course/'+res.discussion[x].courseName+'?discussion='+res.discussion[x]._id+'">'+res.discussion[x].commentCount+' Comment</a></p>';
               }
               else{
                 discussion +=
-                '<p><a class="responseLink" href="/Course/'+res.discussion[x].courseName+'?discussion='+res.discussion[x]._id+'">'+res.discussion[x].commentCount+' Comments</a></p>';
+                '<p><a class="responseLink" href="/course/'+res.discussion[x].courseName+'?discussion='+res.discussion[x]._id+'">'+res.discussion[x].commentCount+' Comments</a></p>';
                 
               }
               if(handle === res.discussion[x].userHandle){
@@ -303,7 +303,7 @@ $(document).ready(function(){
                error:function(err,str){
                }
                }).done(function(res) { 
-                 var studyGroups = "<div class='question-container'><a href='/StartAGroup' type='button' class='btn btn-primary' >"+
+                 var studyGroups = "<div class='question-container'><a href='/startAGroup' type='button' class='btn btn-primary' >"+
                              "Create a Group</a><div class='discussion-container'>";
                  var noGroups = true;
                   for(var x = res.length-1; x>=0; x--){
@@ -313,11 +313,19 @@ $(document).ready(function(){
                         memberCount++;
                     }
                     noGroups = false;
-                     studyGroups +=  '<div class="checkout-container"><div class="checkout-header"><img class="sg-img" src="../'+res[x].HostImage+ '"/>' +
+                     studyGroups +=  '<div class="checkout-container"><a href="/user/'+res[x].HostHandle+'" class="memberImage"'+
+                     'data-toggle="tooltip" data-placement="top"'+
+                     'title="Created By '+res[x].HostHandle+'"><div class="checkout-header"><img class="sg-img" src="../'+res[x].HostImage+ '"/></a>' +
                      '<p class="group-name">'+res[x].GroupName+'</p></div>'+
-                     '<div class="p-container"><p>'+res[x].GroupDescription+'</p>'+
-                     '<p>Prof. '+res[x].Professor+'</p>'+
-                     '<p>'+memberCount+ ' members</p></div></div>';
+                     '<div class="p-container"><p class="descriptionLabel">Description</p><p class="group-description">'+res[x].GroupDescription+'</p>'+
+                     '<p class="badge badge-warning prof-badge">Prof. '+res[x].Professor+'</p>';
+                     if(memberCount === 1){
+                      studyGroups += '<p class="badge badge-primary">'+memberCount+ ' member</p></div></div>';
+                     }
+                     else{
+                      studyGroups += '<p class="badge badge-primary">'+memberCount+ ' members</p></div></div>';
+                     }
+                    
                     
                  }
                  
