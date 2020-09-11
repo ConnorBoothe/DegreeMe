@@ -1,5 +1,6 @@
     //handles messages front end functionality
-    var socket = io.connect('https://degreeme.io',{transports: ['websocket']});
+    var socket = io.connect({transports: ['websocket']});
+    socket.connect();
     //var socket = io.connect('http://67.202.55.10:8080');
     var messageForm = $("#messageForm");
     var chat = $('#messagesContainer');
@@ -31,8 +32,6 @@
             e.preventDefault();
             if ($(".msgInput input").val().trim() != "") {
 
-
-
                 window.scrollTo(0, $(document).height());
                 socket.emit('send message', {
                     userHandle: $(".userId").val().substring(1),
@@ -48,10 +47,10 @@
         })
         socket.on('new message', function (data) {
             $('audio#pop')[0].play();
+            alert("YO");
             var iterator = $(".chatName").length;
             for (var x = 0; x < iterator; x++) {
                 var href = $(".chatName").eq(x).parent().parent().attr("href");
-
                 href = href.split("=")[1];
                 if (data.msg.id === href && x != 0) {
                     var move = $(".messageSideBarContainer").children().eq(x);
@@ -61,16 +60,15 @@
             }
             //route message to correct locations
             var messageQueryId = window.location.toString().split("=");
+            
             if (data.msg.id === messageQueryId[1]) {
                 if (data.msg.sender === $(".userProfileName").text()) {
                     chat.append('<div class="sent-wrapper"><div class="containMessageSent">' +
-
                         '<div class="msg_ ">' +
                         '<p class="messageBody sentMsg bg-primary">' + data.msg
                         .message + '</p></div>' +
                         '<p class="msg-date msg-date-sent">' + displayTimeSince(data.msg.date) + '</p>' +
                         '</div></div>');
-
                 } else {
                     chat.append('<div class="containMessageReceived">' +
                         '<img class="messageImg" src="' + data.msg.senderImg +
@@ -106,7 +104,10 @@
                         );
                     }
                 }
-
             }
         })
+        socket.on('disconnect', function(){
+            console.log('user disconnected');
+            alert("disconnected")
+        });
     })

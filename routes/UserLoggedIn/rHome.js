@@ -116,7 +116,7 @@ router.get('/home', function (req, res) {
                     }
                     if (docs1.length > 0) {
                         acceptedBids.getUserBids(req.session.handle).exec((err, bids)=>{
-                        res.render('UserLoggedIn/home', {
+                        res.render('UserLoggedIn/Home', {
                             session: req.session,
                             qs: req.query,
                             timeline: timeLineArray,

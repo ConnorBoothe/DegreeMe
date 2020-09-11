@@ -105,7 +105,7 @@ router.get('/course/:CourseName', function (req, res) {
                 console.log(req.params.CourseName)
                 coursesDB.getCourseByName(req.params.CourseName).exec((err, docs) => {
                     if(docs.length > 0){
-                        res.render('UserLoggedIn/courseProfile', {
+                        res.render('UserLoggedIn/CourseProfile', {
                             qs: req.query,
                             session: req.session,
                             params: req.params,

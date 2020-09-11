@@ -1,7 +1,7 @@
 runtime: nodejs
 env: flex
 manual_scaling:
-  instances: 3
+  instances: 8
 # Update with Serverless VPC Access connector details
  
 # handlers:

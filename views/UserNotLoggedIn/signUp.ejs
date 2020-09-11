@@ -37,49 +37,49 @@
       <%-include ('partials/popout-menu.ejs') %>
     </div>
     <div class="signup-container">
-      <div id="signUpWrapper">
-        <div id="signup-form" class="">
+      <div class="signUpWrapper">
+        <div class="signup-form" class="">
           <h3 class="text-light">Join degreeMe</h3>
           <h2 class="signup-msg"><%=qs.msg%></h2>
-          <form method="POST" action="/SignUp" enctype="multipart/form-data" id="form">
+          <form method="POST" action="/SignUp" enctype="multipart/form-data" class="form">
             <div class="name">
               <div class="input-container3">
                 <p class="loginLabel1">First Name</p>
-                <input name="first_name" id="first" type="text" class="input-field1 focus:outline-none"
+                <input name="first_name" type="text" class="input-field1 focus:outline-none first"
                   spellcheck="false" autocomplete="autocomplete_off_hack_xfr4!k" style="text-transform: capitalize;"  />
-                <p id="firstTxt"></p>
+                <p class="firstTxt"></p>
               </div>
               <div class="input-container4 ">
                 <p class="loginLabel1">Last Name</p>
-                <input name="last_name" id="last" type="text" class="input-field1" spellcheck="false"
+                <input name="last_name" type="text" class="input-field1 last" spellcheck="false"
                   autocomplete="autocomplete_off_hack_xfr4!k" style="text-transform: capitalize;" />
-                <p id="lastTxt"></p>
+                <p class="lastTxt"></p>
               </div>
             </div>
             <div class="name">
               <div class=" input-container3">
                 <p class="loginLabel1">School</p>
-                <input id="schoolSignUp" name="school" type="text" class="input-field1" value="UNC Charlotte"
+                <input name="school" type="text" class="input-field1 schoolSignUp" value="UNC Charlotte"
                   spellcheck="false" readonly autocomplete="autocomplete_off_hack_xfr4!k" />
-                <div id="schoolSuggestions" class="input-container2 text-dark">
+                <!-- <div class="input-container2 text-dark schoolSuggestions">
                   <ul>
                     <li><span class="schoolTxt btn btn-light">University of North Carolina at Charlotte</span></li>
                   </ul>
-                </div>
+                </div> -->
               </div>
               <div class="input-container4">
                 <p class="loginLabel1">University Email</p>
-                <input id="emailSignUp" name="email" type="email" class=" input-field1"
+                <input name="email" type="email" class="input-field1 emailSignUp"
                   autocomplete="autocomplete_off_hack_xfr4!k" />
-                <p id="emailTxt"></p>
+                <p class="emailTxt"></p>
               </div>
             </div>
             <div class="name">
               <div class="input-container3 majorContainer">
                 <p class="loginLabel1">Major</p>
-                <input name="major" id="major" type="text" class=" input-field1 focus:outline-none" spellcheck="false"
+                <input name="major" type="text" class=" input-field1 focus:outline-none major" spellcheck="false"
                   autocomplete="off" />
-                <p id="majorTxt"></p>
+                <p class="majorTxt"></p>
                 <div class="major-autocomplete">
                   <ul class="major-list">
                     <p class='emptySearch'>Search Majors</p>
@@ -96,7 +96,7 @@
                   <option>Senior</option>
                   <option>Graduate Student</option>
                 </select>
-                <p id="classTxt"></p>
+                <p class="classTxt"></p>
                 <div class="standing-autocomplete">
                   <ul class="major-list">
                     <p class='emptySearch'>Search Majors</p>
@@ -106,41 +106,41 @@
             </div>
             <div class=" input-container2">
               <p class="loginLabel1">Username</p>
-              <input name="handle" id="handle" type="text" class="input-field1 " spellcheck="false"
+              <input name="handle" type="text" class="input-field1 handle" spellcheck="false"
                 autocomplete="off" />
-              <p id="handleTxt"></p>
+              <p class="handleTxt"></p>
             </div>
             <div class="form-group">
               <div class="input-container2">
                 <p class="loginLabel1">Password</p>
-                <input autocomplete="off" name="password" id="passwordSignUp" type="password" class=" input-field1">
-                <p id="pwTxt"></p>
+                <input autocomplete="off" name="password" type="password" class=" input-field1 passwordSignUp">
+                <p class="pwTxt"></p>
               </div>
             </div>
             <div class="form-group">
               <div class="input-container2">
                 <p class="loginLabel1">Retype Password</p>
-                <input id="retypePasswordSignUp" name="retypePW" type="password" class=" input-field1">
-                <p id="ReTypeTxt"></p>
+                <input name="retypePW" type="password" class=" input-field1 retypePasswordSignUp">
+                <p class="ReTypeTxt"></p>
               </div>
             </div>
             <div class="fileUpload">
             </div>
             <div class="img-btn-container">
-              <div class="btn btn-info" id="img-btn">Upload Photo</div>
-              <div id="result1"></div>
+              <div class="img-btn btn btn-info " >Upload Photo</div>
+              <div class="result1"></div>
             </div>
-            <small id="imgTxt"></small>
-            <div id="img-upload-container">
-              <div id="img-secondary-wrapper">
-                <input type='hidden' name='img1' id='croppedImg' value="" required />
-                <input type="file" id="upload" class="upload-file" value="Upload an Image"
+            <small class="imgTxt"></small>
+            <div class="img-upload-container">
+              <div class="img-secondary-wrapper">
+                <input type='hidden' name='img1' class='croppedImg' value="" required />
+                <input type="file" class="upload-file upload" value="Upload an Image"
                   accept="image/gif, image/jpeg, image/png"><span class="picX"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
                     <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
                   </svg></span>
-                <div id="upload-demo"></div>
-                <input type="hidden" id="imagebase64" name="imagebase64">
+                <div class="upload-demo"></div>
+                <input type="hidden" class="imagebase64" name="imagebase64">
                 <div class="upload-result btn-primary">Use</div>
               </div>
             </div>
@@ -150,60 +150,59 @@
                 and protected.
               </h3>
             </div>
-            <button type="submit" class="btn btn-primary createAccount" id="loginBtnSignUp">Create Account</button>
+            <button type="submit" class="btn btn-primary createAccount loginBtnSignUp">Create Account</button>
           </form>
           <br>
           <br>
           <br>
           <br>
-          <input style="display:none" id="session" value="<%=session.theme%>" />
         </div>
       </div>
     </div>
     <div class="signup-container-mobile">
-      <div id="signUpWrapper">
-        <div id="signup-form" class="">
+      <div class="signUpWrapper">
+        <div class="signup-form" class="">
           <h3 class="text-light">Join degreeMe</h3>
           <h2 class="signup-msg"><%=qs.msg%></h2>
-          <form method="POST" action="/SignUp" enctype="multipart/form-data" id="form">
+          <form method="POST" action="/SignUp" enctype="multipart/form-data" class="form">
             <div class="name">
               <div class="input-container2">
                 <p class="loginLabel1">First Name</p>
-                <input name="first_name" id="first" type="text" class="input-field1 focus:outline-none"
+                <input name="first_name"  type="text" class="input-field1 focus:outline-none first"
                   spellcheck="false" autocomplete="autocomplete_off_hack_xfr4!k" style="text-transform: capitalize;"  />
-                <p id="firstTxt"></p>
+                <p class="firstTxt"></p>
               </div>
               <div class="input-container2 ">
                 <p class="loginLabel1">Last Name</p>
-                <input name="last_name" id="last" type="text" class="input-field1" spellcheck="false"
+                <input name="last_name" type="text" class="input-field1 last" spellcheck="false"
                   autocomplete="autocomplete_off_hack_xfr4!k" style="text-transform: capitalize;" />
-                <p id="lastTxt"></p>
+                <p class="lastTxt"></p>
               </div>
             </div>
             <div class="name">
               <div class=" input-container2">
                 <p class="loginLabel1">School</p>
-                <input id="schoolSignUp" name="school" type="text" class="input-field1" value="UNC Charlotte"
+                <input name="school" type="text" class="input-field1 schoolSignUp" value="UNC Charlotte"
                   spellcheck="false" readonly autocomplete="autocomplete_off_hack_xfr4!k" />
-                <div id="schoolSuggestions" class="input-container2 text-dark">
+                <!-- <div class="input-container2 text-dark schoolSuggestions">
                   <ul>
                     <li><span class="schoolTxt btn btn-light">University of North Carolina at Charlotte</span></li>
                   </ul>
-                </div>
+                </div> -->
               </div>
               <div class="input-container2">
                 <p class="loginLabel1">University Email</p>
-                <input id="emailSignUp" name="email" type="email" class=" input-field1"
+                <input name="email" type="email" class=" input-field1 emailSignUp"
                   autocomplete="autocomplete_off_hack_xfr4!k" />
-                <p id="emailTxt"></p>
+                <p class="emailTxt"></p>
               </div>
             </div>
             <div class="name">
               <div class="input-container2 majorContainer">
                 <p class="loginLabel1">Major</p>
-                <input name="major" id="major" type="text" class=" input-field1 focus:outline-none" spellcheck="false"
+                <input name="major" type="text" class=" input-field1 major" spellcheck="false"
                   autocomplete="off" />
-                <p id="majorTxt"></p>
+                <p class="majorTxt"></p>
                 <div class="major-autocomplete">
                   <ul class="major-list">
                     <p class='emptySearch'>Search Majors</p>
@@ -220,7 +219,7 @@
                   <option>Senior</option>
                   <option>Graduate Student</option>
                 </select>
-                <p id="classTxt"></p>
+                <p class="classTxt"></p>
                 <div class="standing-autocomplete">
                   <ul class="major-list">
                     <p class='emptySearch'>Search Majors</p>
@@ -230,41 +229,41 @@
             </div>
             <div class=" input-container2">
               <p class="loginLabel1">Username</p>
-              <input name="handle" id="handle" type="text" class="input-field1 " spellcheck="false"
+              <input name="handle" type="text" class="input-field1 handle" spellcheck="false"
                 autocomplete="off" />
-              <p id="handleTxt"></p>
+              <p class="handleTxt"></p>
             </div>
             <div class="form-group">
               <div class="input-container2">
                 <p class="loginLabel1">Password</p>
-                <input autocomplete="off" name="password" id="passwordSignUp" type="password" class=" input-field1">
-                <p id="pwTxt"></p>
+                <input autocomplete="off" name="password" type="password" class=" input-field1 passwordSignUp">
+                <p class="pwTxt"></p>
               </div>
             </div>
             <div class="form-group">
               <div class="input-container2">
                 <p class="loginLabel1">Retype Password</p>
-                <input id="retypePasswordSignUp" name="retypePW" type="password" class=" input-field1">
-                <p id="ReTypeTxt"></p>
+                <input name="retypePW" type="password" class="input-field1 retypePasswordSignUp">
+                <p class="ReTypeTxt"></p>
               </div>
             </div>
             <div class="fileUpload">
             </div>
             <div class="img-btn-container">
-              <div class="btn btn-info" id="img-btn">Upload Photo</div>
-              <div id="result1"></div>
+              <div class="img-btn btn btn-info ">Upload Photo</div>
+              <div class="result1"></div>
             </div>
-            <small id="imgTxt"></small>
-            <div id="img-upload-container">
-              <div id="img-secondary-wrapper">
-                <input type='hidden' name='img1' id='croppedImg' value="" required />
-                <input type="file" id="upload" class="upload-file" value="Upload an Image"
+            <small class="imgTxt"></small>
+            <div class="img-upload-container">
+              <div class="img-secondary-wrapper">
+                <input type='hidden' name='img1' class='croppedImg' value="" required />
+                <input type="file" class="upload-file upload" value="Upload an Image"
                   accept="image/gif, image/jpeg, image/png"><span class="picX"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
                     <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
                   </svg></span>
-                <div id="upload-demo"></div>
-                <input type="hidden" id="imagebase64" name="imagebase64">
+                <div class="upload-demo"></div>
+                <input type="hidden" class="imagebase64" name="imagebase64">
                 <div class="upload-result btn-primary">Use</div>
               </div>
             </div>
@@ -274,13 +273,12 @@
                 and protected.
               </h3>
             </div>
-            <button type="submit" class="btn btn-primary createAccount" id="loginBtnSignUp">Create Account</button>
+            <button type="submit" class="btn btn-primary createAccount loginBtnSignUp" >Create Account</button>
           </form>
           <br>
           <br>
           <br>
           <br>
-          <input style="display:none" id="session" value="<%=session.theme%>" />
         </div>
       </div>
     </div>

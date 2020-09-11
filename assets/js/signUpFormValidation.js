@@ -16,7 +16,6 @@ function filterResults(res, searchValue){
             $(".major-list").html("<p class='emptySearch'>Search Majors</p>");
     }
     else{
-            
             for(x in majorList){
                 var major = (majorList[x]).toLowerCase();
                 if(major.includes(searchValue.toLowerCase())){
@@ -38,18 +37,19 @@ function filterResults(res, searchValue){
 }
 
 $(document).ready(function(){
+
 $(".picX").on("click", function(){
-    $("#img-upload-container").hide();
+    $(".img-upload-container").hide();
     $(".overlay").hide();
 })
 $(".overlay").on("click", function(){
-    $("#img-upload-container").hide();
+    $(".img-upload-container").hide();
     $(".overlay").hide();
 })
     $(".major-autocomplete").hide();
     $(".standing-autocomplete").hide();
     $(".major-autocomplete").on("click", ".major-list-item", function(){
-        $("#major").val($(this).text());
+        $(".major").val($(this).text());
         $(".major-autocomplete").hide();
 
     })
@@ -60,7 +60,7 @@ $(".overlay").on("click", function(){
         $(".major-autocomplete").hide();
     })
     
-    $("#major").on("focus", function(){
+    $(".major").on("focus", function(){
         $(".major-autocomplete").show();
         $(".blocker").show();
         $.ajax({
@@ -69,152 +69,151 @@ $(".overlay").on("click", function(){
             error:function(err,str){
             }
             }).done(function(res) {
-                $("#major").on("keyup", function(){
+                $(".major").on("keyup", function(){
                     $(".major-list").html(filterResults(res,$(this).val()))
                 })
               
                 
         });
     })
-
-    $("#classStanding").on("focus", function(){
-        $(".standing-autocomplete").show();
-
+    $(".classStanding-select").on("click", function(){
+        $(".classTxt").text("");
     })
         //login form validation
-        $("#loginBtnSignUp").on("click",function(e){
+        $(".loginBtnSignUp").on("click",function(e){
             e.preventDefault();
             var submit = true;
-            var email = $("#emailSignUp").val();
-            var password = $("#passwordSignUp").val();
+            if(window.innerWidth > 750){
+
+
+            var email = $(".emailSignUp").eq(0).val();
+            var password = $(".passwordSignUp").eq(0).val();
             var emailRegEx =/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       
             var match = emailRegEx.test(email);
-            
-            if($("#handle").val().includes(' ')){
+        
+            if($(".handle").eq(0).val().includes(' ')){
                 submit = false;
-                $("#handle").css("border-bottom","2px solid #dc3545");
-                $("#handleTxt").text("Username can't contain spaces");
+                $(".handle").eq(0).css("border-bottom","2px solid #dc3545");
+                $(".handleTxt").eq(0).text("Username can't contain spaces");
                }
-            else if($("#handle").val().length > 12){
+            else if($(".handle").eq(0).val().length > 12){
                 submit = false;
-                $("#handle").css("border-bottom","2px solid #dc3545");
-                $("#handleTxt").text("Username can't be longer than 12 characters");
+                $(".handle").eq(0).css("border-bottom","2px solid #dc3545");
+                $(".handleTxt").eq(0).text("Username can't be longer than 12 characters");
             }
-            else if($("#handle").val().length < 4){
+            else if($(".handle").eq(0).val().length < 4){
                 submit = false;
-                $("#handle").css("border-bottom","2px solid #dc3545");
-                $("#handleTxt").text("Username can't be longer than 12 characters");
+                $(".handle").eq(0).css("border-bottom","2px solid #dc3545");
+                $(".handleTxt").eq(0).text("Username can't be longer than 12 characters");
             }
-            else if($("#handle").val().length === 0){
+            else if($(".handle").eq(0).val().length === 0){
                 submit = false;
-                $("#handle").css("border-bottom","2px solid #dc3545");
-                $("#handleTxt").text("Enter a Handle");
+                $(".handle").eq(0).css("border-bottom","2px solid #dc3545");
+                $(".handleTxt").eq(0).text("Enter a Handle");
             }
 
-           if($("#first").val() === ""){
+           if($(".first").eq(0).val() === ""){
             submit = false;
-            $("#first").css("border-bottom","2px solid #dc3545");
-            $("#firstTxt").text("Enter your first name");
+            $(".first").eq(0).css("border-bottom","2px solid #dc3545");
+            $(".firstTxt").eq(0).text("Enter your first name");
            }
            else{
-            $("#firstTxt").text("");
+            $(".firstTxt").eq(0).text("");
            }
 
-           if($("#last").val() === ""){
+           if($(".last").eq(0).val() === ""){
             submit = false;
-            $("#last").css("border-bottom","2px solid #dc3545");
-            $("#lastTxt").text("Enter your last name");
+            $(".last").eq(0).css("border-bottom","2px solid #dc3545");
+            $(".lastTxt").eq(0).text("Enter your last name");
            }
            else{
-            $("#lastTxt").text("");
+            $(".lastTxt").eq(0).text("");
            }
 
-           if($("#emailSignUp").val() === ""){
+           if($(".emailSignUp").eq(0).val() === ""){
             submit = false;
-            $("#emailSignUp").css("border-bottom","2px solid #dc3545");
-            $("#emailTxt").text("Enter an email");
+            $(".emailSignUp").eq(0).css("border-bottom","2px solid #dc3545");
+            $(".emailTxt").eq(0).text("Enter an email");
            }
            else if(!match){
             submit = false;
-            $("#emailSignUp").css("border-bottom","2px solid #dc3545");
-            $("#emailTxt").text("Email not valid");
+            $(".emailSignUp").eq(0).css("border-bottom","2px solid #dc3545");
+            $(".emailTxt").eq(0).text("Email not valid");
             
            }
-           else if(!$("#emailSignUp").val().includes("@uncc.edu")){
+           else if(!$(".emailSignUp").eq(0).val().includes("@uncc.edu")){
             submit = false;
-            $("#emailSignUp").css("border-bottom","2px solid #dc3545");
-            $("#emailTxt").text("Not a UNCC email");
+            $(".emailSignUp").eq(0).css("border-bottom","2px solid #dc3545");
+            $(".emailTxt").eq(0).text("Not a UNCC email");
             
            }
            else{
-            $("#emailTxt").text("");
+            $(".emailTxt").eq(0).text("");
            }
 
-           if($("#schoolSignUp").val() === ""){
+           if($(".schoolSignUp").eq(0).val() === ""){
             submit = false;
-            $("#schoolSignUp").css("border-bottom","2px solid #dc3545");
-            $("#schoolTxt").text("Enter your school");
+            $(".schoolSignUp").eq(0).css("border-bottom","2px solid #dc3545");
+            $(".schoolTxt").eq(0).text("Enter your school");
            }
            else{
-            $("#schoolTxt").text("");
+            $(".schoolTxt").eq(0).text("");
            }
 
-           if($("#passwordSignUp").val() === ""){
+           if($(".passwordSignUp").eq(0).val() === ""){
             submit = false;
-            $("#passwordSignUp").css("border-bottom","2px solid #dc3545");
-            $("#pwTxt").text("Enter a password");
+            $(".passwordSignUp").eq(0).css("border-bottom","2px solid #dc3545");
+            $(".pwTxt").eq(0).text("Enter a password");
            }
            else if(password.length < 6){
             submit = false;
-            $("#passwordSignUp").css("border-bottom","2px solid #dc3545");
-            $("#pwTxt").text("Password must be 6 characters or more");
+            $(".passwordSignUp").eq(0).css("border-bottom","2px solid #dc3545");
+            $(".pwTxt").eq(0).text("Password must be 6 characters or more");
            }
            else{
-            $("#pwTxt").text("");
+            $(".pwTxt").eq(0).text("");
            }
 
-           if($("#retypePasswordSignUp").val() === ""){
+           if($(".retypePasswordSignUp").eq(0).val() === ""){
             submit = false;
-            $("#retypePasswordSignUp").css("border-bottom","2px solid #dc3545");
-            $("#ReTypeTxt").text("Re-enter password");
+            $(".retypePasswordSignUp").eq(0).css("border-bottom","2px solid #dc3545");
+            $(".ReTypeTxt").eq(0).text("Re-enter password");
            }
-           else if ($("#retypePasswordSignUp").val() != password){
+           else if ($(".retypePasswordSignUp").eq(0).val() != password){
             submit = false;
-            $("#passwordSignUp").parent().css("border-bottom","2px solid #dc3545");
-            $("#retypePasswordSignUp").parent().css("border-bottom","2px solid #dc3545");
-            $("#ReTypeTxt").text("Passwords don't match");
+            $(".passwordSignUp").eq(0).parent().css("border-bottom","2px solid #dc3545");
+            $(".retypePasswordSignUp").eq(0).parent().css("border-bottom","2px solid #dc3545");
+            $(".ReTypeTxt").eq(0).text("Passwords don't match");
            }
         
            else{
           
-            $("#ReTypeTxt").text("");
+            $(".ReTypeTxt").eq(0).text("");
            }
       
-           if(!$("#userImage").attr("src")){
+           if(!$(".userImage").attr("src")){
                submit = false;
-               $("#imgTxt").text("Upload a Profile Picture");
+               $(".imgTxt").text("Upload a Profile Picture");
            }
            
-           else if ($("#userImage").attr("src")){
-            $("#imgTxt").text("");
+           else if ($(".userImage").eq(0).attr("src")){
+            $(".imgTxt").text("");
            }
-           if($("#major").val() === ""){
+           if($(".major").eq(0).val() === ""){
             submit = false;
-            $("#major").css("border-bottom","2px solid #dc3545");
-            $("#majorTxt").text("Enter your major")
+            $(".major").eq(0).css("border-bottom","2px solid #dc3545");
+            $(".majorTxt").eq(0).text("Enter your major")
            }
            else{
 
            }
 
-           if($("#classStanding").val() == ""){
+           if($(".classStanding-select").eq(0).val() == ""){
             submit = false;
-            $("#classStanding").css("border-bottom","2px solid #dc3545");
-            $("#classTxt").text("Enter Class Standing")
+            $(".classStanding-select").eq(0).css("border-bottom","2px solid #dc3545");
+            $(".classTxt").eq(0).text("Enter Class Standing")
            }
-
-           
            //ajax call to check if handle and email exist
            $.ajax({
             url: '/API/Users' ,
@@ -225,33 +224,185 @@ $(".overlay").on("click", function(){
         
             for(x in res[0]){
                 
-                if($("#handle").val() === res[0][x]){
+                if($(".handle").eq(0).val() === res[0][x]){
                     submit = false;
-                    alert(res[0][x])
-                    $("#handle").css("border-bottom","2px solid #dc3545");
-                    $("#handleTxt").text("Handle already in use");
+                    $(".handle").eq(0).css("border-bottom","2px solid #dc3545");
+                    $(".handleTxt").eq(0).text("Handle already in use");
                 }
                 
             }
             for(x in res[1]){
-                
                 if( email === res[1][x]){
                     submit = false;
-                   
-                    $("#emailSignUp").css("border-bottom","2px solid #dc3545");
-                    $("#emailTxt").text("Email already in use");
-                    
+                    $(".emailSignUp").eq(0).css("border-bottom","2px solid #dc3545");
+                    $(".emailTxt").eq(0).text("Email already in use"); 
+                }
+            }
+            if(submit){
+                $(".form").eq(0).submit();
+            }  
+        });
+        }
+        else{
+            var email = $(".emailSignUp").eq(1).val();
+            var password = $(".passwordSignUp").eq(1).val();
+            var emailRegEx =/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      
+            var match = emailRegEx.test(email);
+        
+            if($(".handle").eq(1).val().includes(' ')){
+                submit = false;
+                $(".handle").eq(1).css("border-bottom","2px solid #dc3545");
+                $(".handleTxt").eq(1).text("Username can't contain spaces");
+               }
+            else if($(".handle").eq(1).val().length > 12){
+                submit = false;
+                $(".handle").eq(1).css("border-bottom","2px solid #dc3545");
+                $(".handleTxt").eq(1).text("Username can't be longer than 12 characters");
+            }
+            else if($(".handle").eq(1).val().length < 4){
+                submit = false;
+                $(".handle").eq(1).css("border-bottom","2px solid #dc3545");
+                $(".handleTxt").eq(1).text("Username can't be longer than 12 characters");
+            }
+            else if($(".handle").eq(1).val().length === 0){
+                submit = false;
+                $(".handle").eq(1).css("border-bottom","2px solid #dc3545");
+                $(".handleTxt").eq(1).text("Enter a Handle");
+            }
+
+           if($(".first").eq(1).val() === ""){
+            submit = false;
+            $(".first").eq(1).css("border-bottom","2px solid #dc3545");
+            $(".firstTxt").eq(1).text("Enter your first name");
+           }
+           else{
+            $(".firstTxt").eq(1).text("");
+           }
+
+           if($(".last").eq(1).val() === ""){
+            submit = false;
+            $(".last").eq(1).css("border-bottom","2px solid #dc3545");
+            $(".lastTxt").eq(1).text("Enter your last name");
+           }
+           else{
+            $(".lastTxt").eq(1).text("");
+           }
+
+           if($(".emailSignUp").eq(1).val() === ""){
+            submit = false;
+            $(".emailSignUp").eq(1).css("border-bottom","2px solid #dc3545");
+            $(".emailTxt").eq(1).text("Enter an email");
+           }
+           else if(!match){
+            submit = false;
+            $(".emailSignUp").eq(11).css("border-bottom","2px solid #dc3545");
+            $(".emailTxt").eq(1).text("Email not valid");
+            
+           }
+           else if(!$(".emailSignUp").eq(1).val().includes("@uncc.edu")){
+            submit = false;
+            $(".emailSignUp").eq(1).css("border-bottom","2px solid #dc3545");
+            $(".emailTxt").eq(1).text("Not a UNCC email");
+            
+           }
+           else{
+            $(".emailTxt").eq(1).text("");
+           }
+
+           if($(".schoolSignUp").eq(1).val() === ""){
+            submit = false;
+            $(".schoolSignUp").eq(1).css("border-bottom","2px solid #dc3545");
+            $(".schoolTxt").eq(1).text("Enter your school");
+           }
+           else{
+            $(".schoolTxt").eq(1).text("");
+           }
+
+           if($(".passwordSignUp").eq(1).val() === ""){
+            submit = false;
+            $(".passwordSignUp").eq(1).css("border-bottom","2px solid #dc3545");
+            $(".pwTxt").eq(1).text("Enter a password");
+           }
+           else if(password.length < 6){
+            submit = false;
+            $(".passwordSignUp").eq(1).css("border-bottom","2px solid #dc3545");
+            $(".pwTxt").eq(1).text("Password must be 6 characters or more");
+           }
+           else{
+            $(".pwTxt").eq(1).text("");
+           }
+
+           if($(".retypePasswordSignUp").eq(1).val() === ""){
+            submit = false;
+            $(".retypePasswordSignUp").eq(1).css("border-bottom","2px solid #dc3545");
+            $(".ReTypeTxt").eq(1).text("Re-enter password");
+           }
+           else if ($(".retypePasswordSignUp").eq(1).val() != password){
+            submit = false;
+            $(".passwordSignUp").eq(1).parent().css("border-bottom","2px solid #dc3545");
+            $(".retypePasswordSignUp").eq(1).parent().css("border-bottom","2px solid #dc3545");
+            $(".ReTypeTxt").eq(1).text("Passwords don't match");
+           }
+        
+           else{
+          
+            $(".ReTypeTxt").text("");
+           }
+      
+           if(!$(".userImage").eq(1).attr("src")){
+               submit = false;
+               $(".imgTxt").text("Upload a Profile Picture");
+           }
+           
+           else if ($(".userImage").eq(1).attr("src")){
+            $(".imgTxt").text("");
+           }
+           if($(".major").eq(1).val() === ""){
+            submit = false;
+            $(".major").eq(1).css("border-bottom","2px solid #dc3545");
+            $(".majorTxt").eq(1).text("Enter your major")
+           }
+           else{
+
+           }
+
+           if($(".classStanding-select").eq(1).val() == ""){
+            submit = false;
+            $(".classStanding-select").eq(1).css("border-bottom","2px solid #dc3545");
+            $(".classTxt").eq(1).text("Enter Class Standing")
+           }
+           //ajax call to check if handle and email exist
+           $.ajax({
+            url: '/API/Users' ,
+            method: 'GET',
+            error:function(err,str){
+            }
+            }).done(function(res) {
+        
+            for(x in res[0]){
+                
+                if($(".handle").eq(1).val() === res[0][x]){
+                    submit = false;
+                    $(".handle").eq(1).css("border-bottom","2px solid #dc3545");
+                    $(".handleTxt").eq(1).text("Handle already in use");
                 }
                 
             }
-
-            if(submit){
-                $("#form").submit();
+            for(x in res[1]){
+                if( email === res[1][x]){
+                    submit = false;
+                    $(".emailSignUp").eq(1).css("border-bottom","2px solid #dc3545");
+                    $(".emailTxt").eq(1).text("Email already in use"); 
+                }
             }
-         
-                
+            if(submit){
+                $(".form").eq(1).submit();
+            }  
         });
+        }
         });
+    
         $(".input-field1").focus(function(){
             $(this).css("border-bottom","2px solid #007bff")
             $(this).next().text("");
@@ -261,8 +412,9 @@ $(".overlay").on("click", function(){
         })
  
        $(".upload-result").on("click", function(){
-           $("#imgTxt").text("");
+           $(".imgTxt").text("");
        })
+    
     
 });
 

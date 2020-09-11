@@ -97,7 +97,6 @@ router.post("/sendPWEmail", function(req, res){
                                         "subject": "Password Reset",
                                         "code": activationCode,
                                         "email": req.body.email,
-                                
                                 },
                                     "subject": " "
                                 }
