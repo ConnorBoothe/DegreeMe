@@ -1,21 +1,9 @@
 
 
 $(document).ready(function(){
-    // var reader = new FileReader();
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $('#blah').attr('src', e.target.result);
-            }
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
- 
-    // $("#imgInp").change(function(){
-    //     readURL(this);
-    // });
-    
+    $("#imgInp").change(function(){
+        readFile(this);
+    });
     var $uploadCrop;
     function readFile(input) {
         if (input.files && input.files[0]) {
@@ -47,15 +35,14 @@ $(document).ready(function(){
             type: 'circle',
         },
         boundary: {
-            width: 400,
-            height: 400
+            width: 320,
+            height: 320
         }, 
-        url: defaultImg,
-        enableZoom:true
+        // url: defaultImg,
     });
-    $('.cr-slider').attr({'min':.5, 'max':1.5});
+    $('.cr-slider').attr({'min':.5, 'max':2});
     $uploadCrop.croppie('bind', defaultImg).then(function(){ 
-        // $uploadCrop.croppie('setZoom', 0.5)
+        $uploadCrop.croppie('setZoom', '.8');
       });
         // $(".cr-image").attr("src", $(".profile-img").attr("src"));
 $(".img-btn").on("click", function(){
@@ -68,12 +55,10 @@ $(".img-btn").on("click", function(){
             type: 'canvas',
             size: 'original',
         }).then(function (resp) {
-
-            if(window.location.href.toString().split("/")[3] === "User"){
+            if(window.location.href.toString().split("/")[3] === "user"){
                 payload = {
                     handle:$(".userProfileName ").text(),
                     img1:resp
-                    
                 }
                 $.ajax({
                     url: "/Settings",
@@ -97,6 +82,7 @@ $(".img-btn").on("click", function(){
             //if location == signUp, insert image
             if(window.location.href.toString().split("/")[3] === "SignUp"){
                 $(".result1").eq(1).html("<img class='userImage' name='userImage' src='"+$('.imagebase64').val()+"'/>");
+                $(".result1").eq(0).html("<img class='userImage' name='userImage' src='"+$('.imagebase64').val()+"'/>");
             }
             
             // }

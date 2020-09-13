@@ -14,13 +14,7 @@ const userDB = require('./models/Database/UserDB');
 //instantiate DBs for use
 var messages = new MessageDB();
 var users = new userDB();
-const {Storage} = require("@google-cloud/Storage");
 
-const gc = new Storage({
-  keyFilename: path.join(__dirname,"./degreeme1-727d561034e0.json"),
-  projectId:"degreeme1"
-});
-// gc.getBuckets().then(x=> console.log(x))
 //set limit size of file upload
 app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({
@@ -36,7 +30,7 @@ app.use(
         fontSrc:["'self'", "https://fonts.gstatic.com"],
         styleSrc:["'self'", "https://fonts.googleapis.com", "'unsafe-inline'"],
         scriptSrc: ["'self'", , "https://js.stripe.com/"],
-        imgSrc:["'self'", "data:"],
+        imgSrc:["'self'", "data:", "https://storage.googleapis.com/degreeme-images"],
         objectSrc: ["'none'"],
         upgradeInsecureRequests: [],
       },

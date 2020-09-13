@@ -14,13 +14,11 @@ input:-webkit-autofill:hover,
 input:-webkit-autofill:focus, 
 input:-webkit-autofill:active  {
     -webkit-box-shadow: 0 0 0 30px white inset !important;
-    background-color: #242526 !important;
+    box-shadow:200px 200px 100px #242526 inset!important; 
     background-image: none !important;
-
-
 }
 input:-webkit-autofill {
-    color: white !important; 
+    
 }
 #password1:-webkit-autofill, #email1:-webkit-autofill {
     -webkit-text-fill-color:white !important;
@@ -124,12 +122,11 @@ header{
     
 }
 .signup-container{
-    min-height:100vh;
     padding-top:120px;
     padding-left:200px;
     padding-right:200px;
     margin-bottom:0;
-    padding-bottom:0;
+    padding-bottom:0!important;
     color:#a9a9a9;
     background-color:#18191a;
     
@@ -1538,6 +1535,12 @@ border-bottom:2px solid #330099;
     }
     .form-group .label{
         text-align:left!important;
+    }
+    .fileUpload{
+        background-color: #18191a;
+        padding-left:15%;
+        padding-right:15%;
+        padding-bottom:50px;
     }
     .fileUpload input{
         

@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const sgMail = require('@sendgrid/mail');
 const stream = require('stream');
-const {Storage} = require("@google-cloud/Storage");
+const {Storage} = require("@google-cloud/storage");
 var multer = require("multer");
 const path = require('path');
 const nodemailer = require("nodemailer");
@@ -27,7 +27,6 @@ const gc = new Storage({
     keyFilename: path.join(__dirname,"../../degreeme1-727d561034e0.json"),
     projectId:"degreeme1"
   });
-gc.getBuckets().then(x=> console.log(x))
 //image bucket
 const degreemeImages = gc.bucket("degreeme-images");
 //use session and body parser
@@ -130,7 +129,14 @@ router.post('/SignUp', [
                     var activationCode = Math.floor(Math.random() * 10000);
 
                     bcrypt.genSalt(10, function (err, salt) {
-                        bcrypt.hash(req.body.password, 8, function (err, hash) {
+                        var pw = "";
+                        if(req.body.screenSize === "Desktop"){
+                            pw = req.body.password[0];
+                        }
+                        else{
+                            pw = req.body.password[1];
+                        }
+                        bcrypt.hash(pw, 8, function (err, hash) {
                             let base64String = req.body.img1; // Not a real image
                             // Remove header
                             let base64Image = base64String.split(';base64,').pop();
@@ -151,17 +157,30 @@ router.post('/SignUp', [
                                   console.log(err)
                               })
                               .on('finish', function(data) {
-                                  console.log(data)
                                 console.log("File uploaded")
-                                var fNameLetter = req.body.first_name.substring(0,1);
-                                fNameLetter = fNameLetter.toUpperCase();
-                                var first_name = fNameLetter + req.body.first_name.substring(1);
-                                var lNameLetter = req.body.last_name.substring(0,1);
-                                lNameLetter = lNameLetter.toUpperCase();
-                                var last_name = lNameLetter + req.body.last_name.substring(1);
-                                users.addUser("@" + req.body.handle, first_name, last_name, req.body.school, req.body.email, hash,
-                                    "https://storage.googleapis.com/degreeme-images/" + req.body.handle + ".jpg", "Inactive", activationCode,
-                                    "None", req.body.major);
+                                if(req.body.screenSize === "Desktop"){
+                                    var fNameLetter = req.body.first_name[0].substring(0,1);
+                                    fNameLetter = fNameLetter.toUpperCase();
+                                    var first_name = fNameLetter + req.body.first_name[0].substring(1);
+                                    var lNameLetter = req.body.last_name[0].substring(0,1);
+                                    lNameLetter = lNameLetter.toUpperCase();
+                                    var last_name = lNameLetter + req.body.last_name[0].substring(1);
+                                    users.addUser("@" + req.body.handle[0], first_name, last_name, req.body.school[0], req.body.email[0], hash,
+                                        "https://storage.googleapis.com/degreeme-images/" + req.body.handle[0] + ".jpg", "Inactive", activationCode,
+                                        "None", req.body.major[0]);
+                                }
+                                else if(req.body.screenSize === "Mobile") {
+                                    var fNameLetter = req.body.first_name[1].substring(0,1);
+                                    fNameLetter = fNameLetter.toUpperCase();
+                                    var first_name = fNameLetter + req.body.first_name[1].substring(1);
+                                    var lNameLetter = req.body.last_name[1].substring(0,1);
+                                    lNameLetter = lNameLetter.toUpperCase();
+                                    var last_name = lNameLetter + req.body.last_name[1].substring(1);
+                                    users.addUser("@" + req.body.handle[1], first_name, last_name, req.body.school[1], req.body.email[1], hash,
+                                        "https://storage.googleapis.com/degreeme-images/" + req.body.handle[1] + ".jpg", "Inactive", activationCode,
+                                        "None", req.body.major[1]);
+                                }
+                               
                               });
                             // fs.writeFile("assets/img/userImg/" + req.body.handle + ".jpg", base64Image, { encoding: 'base64' }, function (err, data) {
                            
