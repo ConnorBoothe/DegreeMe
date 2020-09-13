@@ -1,9 +1,6 @@
 
 
 $(document).ready(function(){
-   $("#showImgSelector").on("click",function(){
-    $(".image-selector").show();
-    })
     // var reader = new FileReader();
     function readURL(input) {
         if (input.files && input.files[0]) {
@@ -15,9 +12,9 @@ $(document).ready(function(){
         }
     }
  
-    $("#imgInp").change(function(){
-        readURL(this);
-    });
+    // $("#imgInp").change(function(){
+    //     readURL(this);
+    // });
     
     var $uploadCrop;
     function readFile(input) {
@@ -43,7 +40,7 @@ $(document).ready(function(){
     else if("User"){
         defaultImg = $(".profile-img").attr("src");
     }
-    $uploadCrop = $('#upload-demo').croppie({
+    $uploadCrop = $('.upload-demo').croppie({
         viewport: {
             width: 300,
             height: 300,
@@ -61,12 +58,11 @@ $(document).ready(function(){
         // $uploadCrop.croppie('setZoom', 0.5)
       });
         // $(".cr-image").attr("src", $(".profile-img").attr("src"));
-$("#img-btn").on("click", function(){
+$(".img-btn").on("click", function(){
     $(".overlay").show();
-    $("#img-upload-container").show();
+    $(".img-upload-container").show();
 })
-
-    $('#upload').on('change', function () { readFile(this); });
+    $('.upload').on('change', function () { readFile(this); });
     $('.upload-result').on('click', function (ev) {
         $uploadCrop.croppie('result', {
             type: 'canvas',
@@ -94,30 +90,29 @@ $("#img-btn").on("click", function(){
                       },
                     },
                   });
-            
             }
-            $('#imagebase64').val(resp);
-            $("#croppedImg").val(("src", $('#imagebase64').val()));
-            $("#userImage").attr("src",$('#imagebase64').val())
+            $('.imagebase64').val(resp);
+            $(".croppedImg").val(("src", $('.imagebase64').val()));
+            $(".userImage").attr("src",$('.imagebase64').val())
             //if location == signUp, insert image
             if(window.location.href.toString().split("/")[3] === "SignUp"){
-                $("#result1").html("<img id='userImage' name='userImage' src='"+$('#imagebase64').val()+"'/>");
+                $(".result1").eq(1).html("<img class='userImage' name='userImage' src='"+$('.imagebase64').val()+"'/>");
             }
             
             // }
            
-            $("#croppedImg").val() === $('#imagebase64').val();
+            $(".croppedImg").val() === $('.imagebase64').val();
             $(".overlay").hide();
-            $("#img-upload-container").hide();
+            $(".img-upload-container").hide();
         });
 
     });
     $(".picX").on("click", function(){
-        $("#img-upload-container").hide();
+        $(".img-upload-container").hide();
         $(".overlay").hide();
     })
     $(".overlay").on("click", function(){
-        $("#img-upload-container").hide();
+        $(".img-upload-container").hide();
         $(".overlay").hide();
     })
 })
