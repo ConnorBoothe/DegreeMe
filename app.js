@@ -4,6 +4,7 @@ const session = require('express-session');
 const helmet = require("helmet");
 const csp = require("helmet-csp");
 const ejs = require("ejs");
+const path = require('path');
 var app = module.exports = express(); 
 app.set('trust proxy', 1) // trust first proxy
 
@@ -13,33 +14,13 @@ const userDB = require('./models/Database/UserDB');
 //instantiate DBs for use
 var messages = new MessageDB();
 var users = new userDB();
-// client.auth('password', function (err) {
-//     if (err){
-//       console.log(err)
-//     } 
-// });
+const {Storage} = require("@google-cloud/Storage");
 
-// app.use(session({
-//   store: new MongoStore({
-//      mongooseConnection: mongoose.connection // prune expired entries every 24h
-//     }),
-//     secret: 'toolbox1217!',
-//     resave: true,
-//     saveUninitialized: true,
-//     cookie: { secure: true,
-//         maxAge:  6*60*60*1000 },
-//   }));
-//used to zero out courses in DB
-// const CourseDB = require('./models/Database/UNCC_CoursesDB');
-// var courses = new CourseDB();
-// courses.getAllCourses().exec((err,docs)=>{
-//   for(x in docs){
-//     docs[x].students = [];
-//         docs[x].studentCount  = 0;
-//     docs[x].save();
-//   }
-// })
-
+const gc = new Storage({
+  keyFilename: path.join(__dirname,"./degreeme1-727d561034e0.json"),
+  projectId:"degreeme1"
+});
+// gc.getBuckets().then(x=> console.log(x))
 //set limit size of file upload
 app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({
@@ -136,11 +117,13 @@ app.get('*', function(req, res) {
 var api = require('./routes/Websockets/MessageSocket.js'); // pass 'app'
 let server = app.listen(8080);
 const io = require('socket.io')(server);
-app.set("io", io);
 // console.log(app.get("io"))
 
 //create a websocket connection
+var connectCounter = 0;
 io.sockets.on('connection', function (socket) {
+  connectCounter++;
+  console.log(connectCounter)
   //catch the emitted 'send message' event
   socket.on('send message', function (data) {
       //add message to the db
@@ -160,3 +143,5 @@ io.sockets.on('connection', function (socket) {
       });
   });
 });
+
+

@@ -6,6 +6,8 @@ const bcrypt = require('bcryptjs');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const sgMail = require('@sendgrid/mail');
+const stream = require('stream');
+const {Storage} = require("@google-cloud/Storage");
 var multer = require("multer");
 const path = require('path');
 const nodemailer = require("nodemailer");
@@ -20,6 +22,14 @@ const {
 var UserDB = require('../../models/Database/UserDB');
 //instantiate DBs
 var users = new UserDB();
+
+const gc = new Storage({
+    keyFilename: path.join(__dirname,"../../degreeme1-727d561034e0.json"),
+    projectId:"degreeme1"
+  });
+gc.getBuckets().then(x=> console.log(x))
+//image bucket
+const degreemeImages = gc.bucket("degreeme-images");
 //use session and body parser
 router.use(session({
     secret: 'iloveu',
@@ -124,159 +134,81 @@ router.post('/SignUp', [
                             let base64String = req.body.img1; // Not a real image
                             // Remove header
                             let base64Image = base64String.split(';base64,').pop();
-                            fs.writeFile("assets/img/userImg/" + req.body.handle + ".jpg", base64Image, { encoding: 'base64' }, function (err, data) {
-
-                            });
-                            var fNameLetter = req.body.first_name.substring(0,1);
-                            fNameLetter = fNameLetter.toUpperCase();
-                            var first_name = fNameLetter + req.body.first_name.substring(1);
-                            var lNameLetter = req.body.last_name.substring(0,1);
-                            lNameLetter = lNameLetter.toUpperCase();
-                            var last_name = lNameLetter + req.body.last_name.substring(1);
-                            users.addUser("@" + req.body.handle, first_name, last_name, req.body.school, req.body.email, hash,
-                                "assets/img/userImg/" + req.body.handle + ".jpg", "Inactive", activationCode,
-                                "None", req.body.major);
-
+                            var bufferStream = new stream.PassThrough();
+                            bufferStream.end(Buffer.from(base64Image, 'base64'));
+                            var file = degreemeImages.file(req.body.handle + '.jpg');
+                            bufferStream.pipe(file.createWriteStream({
+                                metadata: {
+                                  contentType: 'image/jpeg',
+                                  metadata: {
+                                    custom: 'metadata'
+                                  }
+                                },
+                                public: true,
+                                validation: "md5"
+                              }))
+                              .on('error', function(err) {
+                                  console.log(err)
+                              })
+                              .on('finish', function(data) {
+                                  console.log(data)
+                                console.log("File uploaded")
+                                var fNameLetter = req.body.first_name.substring(0,1);
+                                fNameLetter = fNameLetter.toUpperCase();
+                                var first_name = fNameLetter + req.body.first_name.substring(1);
+                                var lNameLetter = req.body.last_name.substring(0,1);
+                                lNameLetter = lNameLetter.toUpperCase();
+                                var last_name = lNameLetter + req.body.last_name.substring(1);
+                                users.addUser("@" + req.body.handle, first_name, last_name, req.body.school, req.body.email, hash,
+                                    "https://storage.googleapis.com/degreeme-images/" + req.body.handle + ".jpg", "Inactive", activationCode,
+                                    "None", req.body.major);
+                              });
+                            // fs.writeFile("assets/img/userImg/" + req.body.handle + ".jpg", base64Image, { encoding: 'base64' }, function (err, data) {
+                           
+                            // });
                             // using Twilio SendGrid's v3 Node.js Library
                             // https://github.com/sendgrid/sendgrid-nodejs
-                            var mail = unirest("POST", "https://api.sendgrid.com/v3/mail/send");
+                            // var mail = unirest("POST", "https://api.sendgrid.com/v3/mail/send");
 
-                            mail.headers({
-                            "content-type": "application/json",
-                            "authorization": process.env.SENDGRID_API_KEY,
-                            });
+                            // mail.headers({
+                            // "content-type": "application/json",
+                            // "authorization": process.env.SENDGRID_API_KEY,
+                            // });
 
-                            mail.type("json");
-                            mail.send({
-                            "personalizations": [
-                                {
-                                    "to": [
-                                        {
-                                            "email": req.body.email,
-                                            "name": req.body.name
-                                        }
-                                ],
-                                    "dynamic_template_data": {
-                                        "subject": "Account Confirmation",
-                                        "name": req.body.first_name,
-                                        "code": activationCode,
-                                        "email": req.body.email,
+                            // mail.type("json");
+                            // mail.send({
+                            // "personalizations": [
+                            //     {
+                            //         "to": [
+                            //             {
+                            //                 "email": req.body.email,
+                            //                 "name": req.body.name
+                            //             }
+                            //     ],
+                            //         "dynamic_template_data": {
+                            //             "subject": "Account Confirmation",
+                            //             "name": req.body.first_name,
+                            //             "code": activationCode,
+                            //             "email": req.body.email,
                                 
-                                },
-                            }
-                            ],
-                                "from": {
-                                    "email": "notifications@degreeme.io",
-                                    "name": "DegreeMe"
-                            },
-                                "reply_to": {
-                                    "email": "noreply@degreeme.io",
-                                    "name": "No Reply"
-                            },
-                                "template_id": "d-e54827ff53514c15969d2e52db32e13d"
-                            });
-
-                            mail.end(function (res) {
-                                // if (res.error) throw new Error(res.error);
-
-                            console.log(res.body);
-                            });
-                            // var options = {
-                            //     auth: {
-                            //         api_key: process.env.SENDGRID_API_KEY
-                            //     }
+                            //     },
                             // }
-                            // var mailer = nodemailer.createTransport(sgTransport(options));
-                            // var email = {
-                            //     "from":{
-                            //         "email":"degreeMe <%notifications@degreeme.io%>"
-                            //      },
-                            //      "personalizations":[
-                            //         {
-                            //            "to":[
-                            //               {
-                            //                  "email":"chrisbred4s@gmail.com"
-                            //               }
-                            //            ],
-                            //         }
-                            //      ],
-                            //      "template_id":"d-e54827ff53514c15969d2e52db32e13d"
-                            //   };
-                            // //     to: 'chrisbred4s@gmail.com',
-                            // //     from: 'notifications@degreeme.io',
-                            // //     subject: 'Account Confirmation',
-                            // //     attachments: [{
-                            // //         filename: 'cheers.png',
-                            // //         path: 'assets/img/cheers.png',
-                            // //         cid: 'myimagecid'
-                            // //     }],
-                            // //     html: "<div style='width:100%; background-color:#18191a; text-align:center'><div style='background-color:#18191a;margin-left:auto;margin-right:auto;width:100%;padding-bottom:20px; padding-top:20px'><h1 class='text-light' style='color:white;'>Welcome to degreeMe!</h1><img src='cid:myimagecid' alt='cheers' /><h3 class='text-light' style='color:white'>Click confirm and enter the code below to confirm your account</h3><h1 style='color:white; font-size:30px;'><strong>" + activationCode + "</strong></h1><br><a href='http://127.0.0.1:3000/VerifyAccount?email=" + req.body.email + "'><button style='width:300px; font-size:20px; color:white; background-color:#007bff;" +
-                            // //     "border:none; border-radius:10px; font-family:Open Sans, sans-serif; width:50%;padding:5px; cursor:pointer; '>Confirm</button></a></div></div>",
-                            // // };
-                          
-                            // mailer.sendMail(email, function(err, res) {
-                            //     if (err) { 
-                            //         console.log(err);
-                            //     }
-                            //     console.log(res);
+                            // ],
+                            //     "from": {
+                            //         "email": "notifications@degreeme.io",
+                            //         "name": "DegreeMe"
+                            // },
+                            //     "reply_to": {
+                            //         "email": "noreply@degreeme.io",
+                            //         "name": "No Reply"
+                            // },
+                            //     "template_id": "d-e54827ff53514c15969d2e52db32e13d"
                             // });
-                            // sgMail.setApiKey("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");
-                            // var attachment = fs.readFileSync("assets/img/cheers.png").toString("base64");
-                            // const msg = {
-                            //     to: 'connorboothe@gmail.com',
-                            //     from: 'notifications@degreeme.io',
-                            //     subject: 'Account Confirmation',
-                            //     text: 'Welcome to DegreeMe!',
-                                // html: "<div style='width:100%; text-align:center'><div style='background-color:#18191a;margin-left:auto;margin-right:auto;width:50%;padding-bottom:20px; padding-top:20px'><h1 class='text-light' style='color:white;'>Welcome to degreeMe!</h1><img src='cid:myimg' alt='cheers' /><h3 class='text-light' style='color:white'>Click confirm and enter the code below to confirm your account</h3><h1 style='color:white; font-size:30px;'><strong>" + activationCode + "</strong></h1><br><a href='http://127.0.0.1:3000/VerifyAccount?email=" + req.body.email + "'><button style='width:300px; font-size:20px; color:white; background-color:#007bff;" +
-                                //         "border:none; border-radius:10px; font-family:Open Sans, sans-serif; width:50%;padding:5px;'>Confirm</button></a></div></div>",
-                            //             attachments: [
-                            //                 {
-                            //                   content: attachment,
-                            //                   filename: 'cheers.png',
-                            //                   type: 'image/png',
-                            //                   disposition: 'inline',
-                            //                   contentId: 'myimg',
-                            //                   cid: 'myimg'
-                            //                 },
-                            //               ],
-                            // };
-                            // sgMail.send(msg).then(() => {
-                            //     console.log('Message sent')
-                            // }).catch((error) => {
-                            //     console.log(error)
-                            //     // console.log(error.response.body.errors[0].message)
-                            // })
-                            //send account confirmation email
-                            //temporarily disabled until Amazon SES is approved
-                            // let transporter = nodemailer.createTransport({
-                            //     // host: 'smtp.zoho.eu',
-                            //     host: 'smtp.sendgrid.net',
-                            //     port: 465,
-                            //     secure: true,
-                            //     auth: {
-                            //         user: "apikey", //email
-                            //         pass: "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" //password
-                            //     }
-                            // });
-                            // transporter.sendMail({
-                            //     from: '"degreeMe Team" <notifications@degreeme.io>', // sender address
-                            //     to: "chrisbred4s@gmail.com", // list of receivers
-                            //     subject: "Account Confirmation", // Subject line
-                            //     html: "<div style='width:100%; text-align:center'><div style='background-color:#18191a;margin-left:auto;margin-right:auto;width:50%;padding-bottom:20px; padding-top:20px'><h1 class='text-light' style='color:white;'>Welcome to degreeMe!</h1><img src='cid:unique'/><h3 class='text-light' style='color:white'>Click confirm and enter the code below to confirm your account</h3><h1 style='color:white; font-size:30px;'><strong>" + activationCode + "</strong></h1><br><a href='http://127.0.0.1:3000/VerifyAccount?email=" + req.body.email + "'><button style='width:300px; font-size:20px; color:white; background-color:#007bff;" +
-                            //         "border:none; border-radius:10px; font-family:Open Sans, sans-serif; width:50%;padding:5px;'>Confirm</button></a></div></div>",
-                            //         attachments: [{
-                            //             filename: 'cheers.png',
-                            //             path: 'assets/img/cheers.png',
-                            //             cid: 'unique' //same cid value as in the html img src
-                            //         }]
-                            //         // html body
-                            // }
-                            // , function (err, info) {
-                            //     if (err) {
-                            //         console.log(err);
-                            //     } else {
-                            //         console.log(info);
-                            //     }
+
+                            // mail.end(function (res) {
+                            //     // if (res.error) throw new Error(res.error);
+
+                            // console.log(res.body);
                             // });
                         });
                     });

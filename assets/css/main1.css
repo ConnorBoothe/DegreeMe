@@ -2551,7 +2551,7 @@ display:inline-block!important      }
         font-size:18px;
     }
     
-    #signUpWrapper{
+    .signUpWrapper{
         width:100%;
         text-align:center;
        
@@ -2679,7 +2679,7 @@ display:inline-block!important      }
         
 
     }
-    #signup-form{
+    .signup-form{
         width:100%;
         padding-left:100px;
         padding-right:100px;
