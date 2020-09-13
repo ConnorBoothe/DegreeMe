@@ -51,7 +51,7 @@ $(".overlay").on("click", function(){
     $(".major-autocomplete").on("click", ".major-list-item", function(){
         $(".major").val($(this).text());
         $(".major-autocomplete").hide();
-
+        $(".blocker").hide();
     })
     
 

@@ -7,9 +7,12 @@
 }
 .majorContainer {
     position:relative;
-    z-index:2;
+    z-index:1;
 }
-
+.mobileHeaderLinkContainer{
+    position:relative;
+    z-index:1!important;
+}
 .image-selector {
     background-color:#d3d3d3;
     z-index:2;
@@ -17,7 +20,6 @@
 .input-field{
     font-family: "Helvetica Neue", Helvetica, sans-serif;
 }
-
 .input-field:focus {
     outline:none!important;
 }
