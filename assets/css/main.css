@@ -13,16 +13,17 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover, 
 input:-webkit-autofill:focus, 
 input:-webkit-autofill:active  {
-    -webkit-box-shadow: 0 0 0 30px #242526 inset !important;
-    background-color: #242526 !important;
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+    box-shadow:200px 200px 100px #242526 inset!important; 
     background-image: none !important;
-
-
 }
-
-/*Change text in autofill textbox*/
 input:-webkit-autofill {
-    -webkit-text-fill-color: white !important;
+    
+}
+#password1:-webkit-autofill, #email1:-webkit-autofill {
+    -webkit-text-fill-color:white !important;
+    box-shadow:200px 200px 100px #242526 inset!important; 
+    font-size:15px!important;
 }
 
 ::-webkit-scrollbar {
@@ -63,6 +64,7 @@ input:-webkit-autofill {
 
 #mainNav{
    position:fixed;
+   z-index:3!important;
     height:60px;
     width:100%;
     background-color:#242526;
@@ -121,12 +123,11 @@ header{
     
 }
 .signup-container{
-    min-height:100vh;
     padding-top:120px;
     padding-left:200px;
     padding-right:200px;
     margin-bottom:0;
-    padding-bottom:0;
+    padding-bottom:0!important;
     color:#a9a9a9;
     background-color:#18191a;
     
@@ -545,8 +546,8 @@ border-bottom:2px solid #330099;
         padding-top:30px;
     }
     
-    #img-btn{
-        border-radius:20px;
+    .img-btn{
+        border-radius:20px!important;
         font-family: 'Open Sans', sans-serif!important;
       
     }
@@ -1317,8 +1318,6 @@ border-bottom:2px solid #330099;
         height:40px!important;
 
         background-color:#242526;
-        
-        
       }
       .input-container3 {
        
@@ -1333,7 +1332,6 @@ border-bottom:2px solid #330099;
         background-color:#242526;
       }
       .input-container4 {
-       
         width: 47%;
         outline:none;
         margin-bottom: 20px!important;
@@ -1342,10 +1340,7 @@ border-bottom:2px solid #330099;
         padding-bottom:none!important;      
         margin-left:6%;
         height:40px!important;
-
         background-color:#242526;
-        
-        
       }
       .name div{
           display:inline-block;
@@ -1493,7 +1488,7 @@ border-bottom:2px solid #330099;
         margin-top:-21px;
         
     }
-    #lastTxt, #firstTxt, #handleTxt, #emailTxt, #majorTxt, #pwTxt, #ReTypeTxt, #classTxt{
+    .lastTxt, .firstTxt, .handleTxt, .emailTxt, .majorTxt, .pwTxt, .ReTypeTxt, .classTxt{
         color:#dc3545;
         position:absolute;
     }
@@ -1516,12 +1511,10 @@ border-bottom:2px solid #330099;
     .signup-icon{
         width:15px!important;
     }
-    #signup-form{
+    .signup-form{
         width:100%;
         padding-left:15%;
         padding-right:15%;
-   
-        
         border-radius:5px;
         display:inline-block;
         position:relative;
@@ -1537,12 +1530,18 @@ border-bottom:2px solid #330099;
         -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
         outline:none!important;
     }
-    #signup-form .form-group input {
+    .signup-form .form-group input {
         background-color:#e7e7e7;
         
     }
     .form-group .label{
         text-align:left!important;
+    }
+    .fileUpload{
+        background-color: #18191a;
+        padding-left:15%;
+        padding-right:15%;
+        padding-bottom:50px;
     }
     .fileUpload input{
         
@@ -1562,7 +1561,7 @@ border-bottom:2px solid #330099;
     #signup-form form{
         text-align:left;
     }
-    #signup-form .x{
+    .signup-form .x{
         
         float:right;
         color:black;
@@ -2231,7 +2230,7 @@ border-bottom:2px solid #330099;
     }  */
 }
 /** For mobile View **/
-@media only screen and (max-width: 750px) {
+@media only screen and (max-width: 1000px) {
     .tagline {
         font-size: 33px;
     }
@@ -2239,7 +2238,6 @@ border-bottom:2px solid #330099;
         padding-left: 30%;
         padding-right: 30%;
     }
-  
     /* .headerMenu{
         display:none!important;
     } 

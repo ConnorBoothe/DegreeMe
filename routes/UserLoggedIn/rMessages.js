@@ -70,7 +70,6 @@ router.get('/messages', function (req, res) {
                 }
                 else{
                     res.redirect('/home'); //redirect docs is null, redirect
- 
                 }
             })
         } else {

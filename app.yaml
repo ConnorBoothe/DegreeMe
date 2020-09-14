@@ -1,9 +1,8 @@
 runtime: nodejs
 env: flex
-manual_scaling:
-  instances: 8
+network:
+  session_affinity: true
 # Update with Serverless VPC Access connector details
- 
 # handlers:
 # - url: /.*
 #  script: auto

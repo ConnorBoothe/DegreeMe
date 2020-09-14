@@ -1,24 +1,9 @@
 
 
 $(document).ready(function(){
-   $("#showImgSelector").on("click",function(){
-    $(".image-selector").show();
-    })
-    // var reader = new FileReader();
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $('#blah').attr('src', e.target.result);
-            }
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
- 
     $("#imgInp").change(function(){
-        readURL(this);
+        readFile(this);
     });
-    
     var $uploadCrop;
     function readFile(input) {
         if (input.files && input.files[0]) {
@@ -43,41 +28,37 @@ $(document).ready(function(){
     else if("User"){
         defaultImg = $(".profile-img").attr("src");
     }
-    $uploadCrop = $('#upload-demo').croppie({
+    $uploadCrop = $('.upload-demo').croppie({
         viewport: {
             width: 300,
             height: 300,
             type: 'circle',
         },
         boundary: {
-            width: 400,
-            height: 400
+            width: 320,
+            height: 320
         }, 
-        url: defaultImg,
-        enableZoom:true
+        // url: defaultImg,
     });
-    $('.cr-slider').attr({'min':.5, 'max':1.5});
+    $('.cr-slider').attr({'min':.5, 'max':2});
     $uploadCrop.croppie('bind', defaultImg).then(function(){ 
-        // $uploadCrop.croppie('setZoom', 0.5)
+        $uploadCrop.croppie('setZoom', '.8');
       });
         // $(".cr-image").attr("src", $(".profile-img").attr("src"));
-$("#img-btn").on("click", function(){
+$(".img-btn").on("click", function(){
     $(".overlay").show();
-    $("#img-upload-container").show();
+    $(".img-upload-container").show();
 })
-
-    $('#upload').on('change', function () { readFile(this); });
+    $('.upload').on('change', function () { readFile(this); });
     $('.upload-result').on('click', function (ev) {
         $uploadCrop.croppie('result', {
             type: 'canvas',
             size: 'original',
         }).then(function (resp) {
-
-            if(window.location.href.toString().split("/")[3] === "User"){
+            if(window.location.href.toString().split("/")[3] === "user"){
                 payload = {
                     handle:$(".userProfileName ").text(),
                     img1:resp
-                    
                 }
                 $.ajax({
                     url: "/Settings",
@@ -94,30 +75,30 @@ $("#img-btn").on("click", function(){
                       },
                     },
                   });
-            
             }
-            $('#imagebase64').val(resp);
-            $("#croppedImg").val(("src", $('#imagebase64').val()));
-            $("#userImage").attr("src",$('#imagebase64').val())
+            $('.imagebase64').val(resp);
+            $(".croppedImg").val(("src", $('.imagebase64').val()));
+            $(".userImage").attr("src",$('.imagebase64').val())
             //if location == signUp, insert image
             if(window.location.href.toString().split("/")[3] === "SignUp"){
-                $("#result1").html("<img id='userImage' name='userImage' src='"+$('#imagebase64').val()+"'/>");
+                $(".result1").eq(1).html("<img class='userImage' name='userImage' src='"+$('.imagebase64').val()+"'/>");
+                $(".result1").eq(0).html("<img class='userImage' name='userImage' src='"+$('.imagebase64').val()+"'/>");
             }
             
             // }
            
-            $("#croppedImg").val() === $('#imagebase64').val();
+            $(".croppedImg").val() === $('.imagebase64').val();
             $(".overlay").hide();
-            $("#img-upload-container").hide();
+            $(".img-upload-container").hide();
         });
 
     });
     $(".picX").on("click", function(){
-        $("#img-upload-container").hide();
+        $(".img-upload-container").hide();
         $(".overlay").hide();
     })
     $(".overlay").on("click", function(){
-        $("#img-upload-container").hide();
+        $(".img-upload-container").hide();
         $(".overlay").hide();
     })
 })
