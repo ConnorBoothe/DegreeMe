@@ -30,7 +30,7 @@ app.use(
         fontSrc:["'self'", "https://fonts.gstatic.com"],
         styleSrc:["'self'", "https://fonts.googleapis.com", "'unsafe-inline'"],
         scriptSrc: ["'self'", , "https://js.stripe.com/"],
-        imgSrc:["'self'", "data:", "https://storage.googleapis.com/degreeme-images"],
+        imgSrc:["'self'", "data:", "https://storage.googleapis.com/"],
         objectSrc: ["'none'"],
         upgradeInsecureRequests: [],
       },

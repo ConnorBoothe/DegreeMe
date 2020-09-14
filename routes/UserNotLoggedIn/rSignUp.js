@@ -130,11 +130,14 @@ router.post('/SignUp', [
 
                     bcrypt.genSalt(10, function (err, salt) {
                         var pw = "";
+                        var handle = ""
                         if(req.body.screenSize === "Desktop"){
                             pw = req.body.password[0];
+                            handle = req.body.handle[0];
                         }
                         else{
                             pw = req.body.password[1];
+                            handle = req.body.handle[1];
                         }
                         bcrypt.hash(pw, 8, function (err, hash) {
                             let base64String = req.body.img1; // Not a real image
@@ -142,7 +145,7 @@ router.post('/SignUp', [
                             let base64Image = base64String.split(';base64,').pop();
                             var bufferStream = new stream.PassThrough();
                             bufferStream.end(Buffer.from(base64Image, 'base64'));
-                            var file = degreemeImages.file(req.body.handle + '.jpg');
+                            var file = degreemeImages.file(handle + '.jpg');
                             bufferStream.pipe(file.createWriteStream({
                                 metadata: {
                                   contentType: 'image/jpeg',

@@ -25,7 +25,7 @@ function hourDifference(date){
   return Math.ceil(diffTime / (1000 * 60 * 60));
 }
 //job runs every night at midnight
-var job = new CronJob('0 0 0 * * *', function() {
+var job = new CronJob('0 * * * * *', function() {
   console.log("Running")
     listings.getListings().exec((err,docs)=>{
         for(x in docs){
@@ -274,21 +274,25 @@ var job = new CronJob('0 0 0 * * *', function() {
         })
       //capture payment intents after the tutoring session has occurred
       meetups.getAllMeetups().exec((err,docs)=>{
+        console.log(docs.length)
         var curTime = new Date();
         for(var i in docs){
+            //if date is in the pat
            if(curTime>docs[i].date){
+             //get tutor doc from UserDB
             users.getUserByHandle(docs[i].tutorHandle).exec((err,tutor)=>{
               if(err){
                 console.log("something broke in capturing intents")
               }else{
                 for(var j in docs[i].Members){
-                  if(docs[i].Members[j].role === "Host" && docs[i].Members[j].intent != "none" ){
+                  if(docs[i].Members[j].role === "Student" && docs[i].Members[j].intent != "none" ){
                   
                     stripe.paymentIntents.capture(
                       docs[i].Members[j].intent,
                       { stripeAccount: tutor[0].StripeId}
                       ).then(function(intent){
                         //remove the payment intent
+                        console.log("SETTING INTENT TO NONE")
                         meetups.setIntentToNone(docs[i]._id);
                         mail.headers({
                           "content-type": "application/json",
@@ -342,12 +346,14 @@ var job = new CronJob('0 0 0 * * *', function() {
         for(x in docs){
           //if due date is in the past, capture the payment intent
           if(new Date() > docs[x].DueDate && docs[x].Intent != "none"){
+            console.log("ACCEPT DB INTENT RUN")
             //charge the intent
             stripe.paymentIntents.capture(
               docs[x].Intent,
               { stripeAccount: docs[x].StripeId}
               ).then(function(intent){
                  //set payment intent to none
+                 console.log("Set intent to noe acceptedBid")
                   acceptedBids.setIntentToNone(docs[x]._id);
                   users.getUserByHandle(docs[x].Bidder).exec((err, docs1)=>{
                     mail.headers({
@@ -390,6 +396,7 @@ var job = new CronJob('0 0 0 * * *', function() {
             })
             .catch(function(err){
               console.log(err)
+              console.log("HELP REQ ERROR")
             })
           }
           //if date is in the future and less than or equal to 24 hours away
