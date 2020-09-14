@@ -27,20 +27,28 @@
         
         <%if(!meeting.ZoomLink  && session.handle === meeting.Members[0].handle && meeting.Virtual){%>
         <div class="createZoomMeeting-container">
-          <p class="stepNumber">Step 1</p>
-          <h1 class="scheduleHeader">Schedule your Zoom meeting</h1>
-          <p class="zoomLinkMsg">Schedule your Zoom meeting with <%=meeting.Members[0].name%> by clicking the button
-            below. Ensure that the date/time of your Zoom meeting matches with the date/time of the
+         
+          <div  class="noZoom-div"> 
+            
+              <svg class="bi bi-exclamation-triangle" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M7.938 2.016a.146.146 0 0 0-.054.057L1.027 13.74a.176.176 0 0 0-.002.183c.016.03.037.05.054.06.015.01.034.017.066.017h13.713a.12.12 0 0 0 .066-.017.163.163 0 0 0 .055-.06.176.176 0 0 0-.003-.183L8.12 2.073a.146.146 0 0 0-.054-.057A.13.13 0 0 0 8.002 2a.13.13 0 0 0-.064.016zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/>
+                <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"/>
+              </svg>
+              <span class="noZoomText">You have not scheduled the Zoom meeting</span>
+           
+          </div>
+          <p class="noPay">You will not be paid unless you schedule the Zoom meeting and insert the invite link below. Ensure that the date/time of your Zoom meeting matches the date/time of the
             tutoring session.</p>
+          <p class="zoomLinkMsg"></p>
           <a target="_blank" href="https://zoom.us/meeting" class="scheduleMeeting btn btn-primary">Schedule Meeting</a>
 
-          <h3 class="zoomLinkMsg inviteLinkMsg">Once the Zoom meeting is scheduled, enter the 
-            invite link in the field below so <%=meeting.Members[0].name%> has access to it.
+          <h3 class="zoomLinkMsg inviteLinkMsg">Enter the 
+            invite link below so <%=meeting.Members[0].name%> has access to it.
           </h3>
           <form method="POST" action="addZoom" class="addZoom">
             <input type="text" name="zoomLink" class="zoomInput" placeholder="Enter Invite Link" />
             <input type="hidden" name="meetingId" value="<%=params.meetingId%>" />
-            <input type="submit" class="btn btn-primary" value="Add Invite Link" />
+            <input type="submit" class="btn btn-primary addMeeting" value="Add" />
           </form>
           
         </div>
@@ -83,16 +91,27 @@
             
           </div>
 
+          <%}else{%>
+            
+              <div  class="zoomCreated-div bg-success"> 
+            
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bookmark-check-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M4 0a2 2 0 0 0-2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4zm6.854 5.854a.5.5 0 0 0-.708-.708L7.5 7.793 6.354 6.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
+                </svg>
+                <span class="noZoomText">The Zoom session has been created.</span>
+                
+            </div>
+          
           <%}%>
         <div class="listingMeetupInfo">
         <%if(meeting.Members.length < 3){%>
         <a href="/user/<%=meeting.Members[0].handle%>" class="memberImage" data-toggle="tooltip" data-placement="top"
         title="<%=meeting.Members[0].handle%>">
-        <img class="meetingImg" src="../<%=meeting.Members[0].image%>" />
+        <img class="meetingImg" src="<%=meeting.Members[0].image%>" />
         </a>
         <a href="/user/<%=meeting.Members[1].handle%>" class="memberImage" data-toggle="tooltip" data-placement="top"
           title="<%=meeting.Members[1].handle%>">
-          <img class="meetingImg1" src="../<%=meeting.Members[1].image%>" />
+          <img class="meetingImg1" src="<%=meeting.Members[1].image%>" />
         </a>
         <img src="../assets/img/remote_arrows.svg" class="listingMeetupImg" />
         <%console.log(meeting.Members[0])%>
@@ -126,52 +145,13 @@
             </div>
         
           
-          <div class="memberJoined-container">
-            <%if(timeStampArr.length == 0){%>
-              <% for(x in meeting.Members){%>
-                <p class="meetingMembers">
-                  <img src="../<%=meeting.Members[1].image%>" class="joinMeetingImg" />
-                  <%=meeting.Members[x].handle%> has not joined
-                </p>
-              <%}%>
-            <%}else{%>
-              <%var joined = false;%>
-              <%console.log(timeStampArr)%>
-              <% for(x in timeStampArr){%>
-                <p class="meetingMembers">
-                  <img src="/<%=timeStampArr[x][1]%>" class="joinMeetingImg" />
-                  
-                  <%if((timeStampArr[x][3] === "joinMeeting") && timeStampArr[x][0] === session.handle){%>
-                    <%joined = true;%>
-                    <span class="joinedHandle"><%=timeStampArr[x][0]%></span> joined at <%=formatTime(new Date(timeStampArr[x][2]))%>
-                  <%}else{%>
-                    <span class="joinedHandle"><%=timeStampArr[x][0]%></span> left at <%=formatTime(new Date(timeStampArr[x][2]))%>
-                  <%}%>
-                </p>
-              <%}%>
-            <%}%>
-              
-          </div>
+          
         <div>
-          <p class="joinMeetingText">Click the join button below so we can verify that both parties were present during the meeting. Once the meeting is complete, click the leave button.
+          <!-- <p class="joinMeetingText">Click the join button below so we can verify that both parties were present during the meeting. Once the meeting is complete, click the leave button.
             This gives us data that we will use to make refund decisions if the session does not go as planned.
-          </p>
-          <%if(!joined){%>
-            <input type="hidden" name="status" value="joinMeeting" />
-            <input type="hidden" name="meetingId" value="<%=meeting._id%>" />
-            <input type="hidden" name="image" value="<%=session.img%>" />
-            <button class="btn btn-primary joinBtn">Join</button>
-          <%}else{%>
-            <input type="hidden" name="status" value="leaveMeeting" />
-            <input type="hidden" name="meetingId" value="<%=meeting._id%>" />
-            <input type="hidden" name="image" value="<%=session.img%>" />
-            <button class="btn btn-danger joinBtn">Leave</button>
-          <%}%>
+          </p> -->
          
         </div>
-       
-        
-        <h3>Details</h3>
           <ul class="meetingDetails-list">
             <li>
                   <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-book" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -209,17 +189,46 @@
             <path fill-rule="evenodd"
               d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z" />
           </svg>
-          <%=meeting.hours%> hour long
+          <%=meeting.hours%> hour
         </li>
         </ul>
         <%if(meeting.ZoomLink){%>
-          <a target="_blank" href="<%=meeting.ZoomLink%>" class="btn goTo btn-primary">Go to Zoom meeting</a>
+          <input type="hidden" name="status" value="joinMeeting" />
+          <input type="hidden" name="meetingId" value="<%=meeting._id%>" />
+          <input type="hidden" name="image" value="<%=session.img%>" />
+          <input type="hidden" name="zoomMeeting" value="<%=meeting.ZoomLink%>" />
+          <button class="btn btn-primary joinBtn goTo">Join Zoom Meeting</button>
+          <div class="memberJoined-container">
+            <%if(timeStampArr.length == 0){%>
+              <% for(x in meeting.Members){%>
+                <p class="meetingMembers">
+                  <img src="../<%=meeting.Members[1].image%>" class="joinMeetingImg" />
+                  <%=meeting.Members[x].handle%> has not joined
+                </p>
+              <%}%>
+            <%}else{%>
+              <%var joined = false;%>
+              <%console.log(timeStampArr)%>
+              <% for(x in timeStampArr){%>
+                <p class="meetingMembers">
+                  <img src="/<%=timeStampArr[x][1]%>" class="joinMeetingImg" />
+                  
+                  <%if((timeStampArr[x][3] === "joinMeeting") && timeStampArr[x][0] === session.handle){%>
+                    <%joined = true;%>
+                    <span class="joinedHandle"><%=timeStampArr[x][0]%></span> joined at <%=formatTime(new Date(timeStampArr[x][2]))%>
+                  <%}else{%>
+                    <span class="joinedHandle"><%=timeStampArr[x][0]%></span> left at <%=formatTime(new Date(timeStampArr[x][2]))%>
+                  <%}%>
+                </p>
+              <%}%>
+            <%}%>
+              
+          </div>
           <%}else if(meeting.Members[0].handle === session.handle){%>
   
           <%}else{%>
           <p class="zoomMsg">Zoom meeting not scheduled.</p>
           <button class="btn btn-primary">Send <%=meeting.tutorHandle%> a Reminder </button>
-  
           <%}%>
           <%}%>
       </div>

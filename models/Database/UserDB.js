@@ -331,8 +331,10 @@ module.exports = class UserDB {
     }
     //when message is sent, related thread should move to top of the list
     moveThread(threadId, handle, senderHandle){
+        console.log("HANDLE", handle)
         var UserDB = mongoose.model('UserDB',userDBSchema);
         UserDB.findOne({handle:handle}).exec((err,docs)=>{
+            console.log("MoveThread",docs)
             var tempThread = "";
             var index = "";
             for(x in docs.threads){
@@ -464,10 +466,14 @@ module.exports = class UserDB {
     }
 
     unseeMessage(handle, threadId){
+        console.log("UNSEE handle", handle)
+        console.log("UNSEE threadId", threadId)
         var UserDB = mongoose.model('UserDB',userDBSchema);
         UserDB.findOne({
             handle: handle
         }).exec((err,docs)=>{
+            
+            console.log(docs)
             var threadIndex = -1;
             for(var x = 0; x< docs.threads.length; x++){
                 if(docs.threads[x].threadId ==  threadId){

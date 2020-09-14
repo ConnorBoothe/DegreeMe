@@ -273,125 +273,128 @@ var job = new CronJob('0 * * * * *', function() {
           }
         })
       //capture payment intents after the tutoring session has occurred
-      meetups.getAllMeetups().exec((err,docs)=>{
-        var curTime = new Date();
-        for(var i in docs){
-           if(curTime>docs[i].date){
-            users.getUserByHandle(docs[i].tutorHandle).exec((err,tutor)=>{
-              if(err){
-                console.log("something broke in capturing intents")
-              }else{
-                for(var j in docs[i].Members){
-                  // if(docs[i].Members[j].role === "Host" && docs[i].Members[j].intent != "none" ){
+      // meetups.getAllMeetups().exec((err,docs)=>{
+      //   console.log(docs.length)
+      //   var curTime = new Date();
+      //   for(var i in docs){
+      //       //if date is in the pat
+      //      if(curTime>docs[i].date){
+      //        //get tutor doc from UserDB
+      //       users.getUserByHandle(docs[i].tutorHandle).exec((err,tutor)=>{
+      //         if(err){
+      //           console.log("something broke in capturing intents")
+      //         }else{
+      //           for(var j in docs[i].Members){
+      //             if(docs[i].Members[j].role === "Student" && docs[i].Members[j].intent != "none" ){
                   
-                  //   stripe.paymentIntents.capture(
-                  //     docs[i].Members[j].intent,
-                  //     { stripeAccount: tutor[0].StripeId}
-                  //     ).then(function(intent){
-                  //       //remove the payment intent
-                  //       meetups.setIntentToNone(docs[i]._id);
-
-                  //       // tutor listing 
-                  //       mail.headers({
-                  //         "content-type": "application/json",
-                  //         "authorization": process.env.SENDGRID_API_KEY,
-                  //         });
+      //               stripe.paymentIntents.capture(
+      //                 docs[i].Members[j].intent,
+      //                 { stripeAccount: tutor[0].StripeId}
+      //                 ).then(function(intent){
+      //                   //remove the payment intent
+      //                   console.log("SETTING INTENT TO NONE")
+      //                   meetups.setIntentToNone(docs[i]._id);
+      //                   mail.headers({
+      //                     "content-type": "application/json",
+      //                     "authorization": process.env.SENDGRID_API_KEY,
+      //                     });
               
-                  //         mail.type("json");
-                  //         mail.send({
-                  //         "personalizations": [
-                  //             {
-                  //                 "to": docs[i].email,
-                  //                 "dynamic_template_data": {
-                  //                     "subject": "You just got paid",
+      //                     mail.type("json");
+      //                     mail.send({
+      //                     "personalizations": [
+      //                         {
+      //                             "to": docs[i].email,
+      //                             "dynamic_template_data": {
+      //                                 "subject": "You just got paid",
                               
                               
-                  //             },
-                  //         }
-                  //         ],
-                  //             "from": {
-                  //                 "email": "notifications@degreeme.io",
-                  //                 "name": "DegreeMe"
-                  //         },
-                  //             "reply_to": {
-                  //                 "email": "noreply@degreeme.io",
-                  //                 "name": "No Reply"
-                  //         },
-                  //             "template_id": "d-8f8c5a2da15a4775b54b84a50b64066d"
-                  //         });
+      //                         },
+      //                     }
+      //                     ],
+      //                         "from": {
+      //                             "email": "notifications@degreeme.io",
+      //                             "name": "DegreeMe"
+      //                     },
+      //                         "reply_to": {
+      //                             "email": "noreply@degreeme.io",
+      //                             "name": "No Reply"
+      //                     },
+      //                         "template_id": "d-8f8c5a2da15a4775b54b84a50b64066d"
+      //                     });
               
-                  //         mail.end(function (res) {
-                  //             // if (res.error) throw new Error(res.error);
-                  //         console.log(res.body);
-                  //         })
-                  //   })
-                  //   .catch(function(err){
-                  //     console.log(err)
-                  //   })
-                  // }
+      //                     mail.end(function (res) {
+      //                         // if (res.error) throw new Error(res.error);
+      //                     console.log(res.body);
+      //                     })
+      //               })
+      //               .catch(function(err){
+      //                 console.log(err)
+      //               })
+      //             }
                  
-                }    
-              }
-            })
-          }
-        }
-      })
+      //           }    
+      //         }
+      //       })
+      //     }
+      //   }
+      // })
       //capture bid payment intents
       acceptedBids.getAll().exec((err, docs)=>{
         //  console.log(docs)
         for(x in docs){
           //if due date is in the past, capture the payment intent
-          // if(new Date() > docs[x].DueDate && docs[x].Intent != "none"){
-          //   //charge the intent
-          //   stripe.paymentIntents.capture(
-          //     docs[x].Intent,
-          //     { stripeAccount: docs[x].StripeId}
-          //     ).then(function(intent){
-          //        //set payment intent to none
-          //         acceptedBids.setIntentToNone(docs[x]._id);
-
-          //         //bids you just got paid 
-          //         users.getUserByHandle(docs[x].Bidder).exec((err, docs1)=>{
-          //           mail.headers({
-          //             "content-type": "application/json",
-          //             "authorization": process.env.SENDGRID_API_KEY,
-          //             });
+          if(new Date() > docs[x].DueDate && docs[x].Intent != "none"){
+            console.log("ACCEPT DB INTENT RUN")
+            //charge the intent
+            stripe.paymentIntents.capture(
+              docs[x].Intent,
+              { stripeAccount: docs[x].StripeId}
+              ).then(function(intent){
+                 //set payment intent to none
+                 console.log("Set intent to noe acceptedBid")
+                  acceptedBids.setIntentToNone(docs[x]._id);
+                  users.getUserByHandle(docs[x].Bidder).exec((err, docs1)=>{
+                    // mail.headers({
+                    //   "content-type": "application/json",
+                    //   "authorization": process.env.SENDGRID_API_KEY,
+                    //   });
           
-          //             mail.type("json");
-          //             mail.send({
-          //             "personalizations": [
-          //                 {
-          //                     "to": docs1[0].email,
-          //                     "dynamic_template_data": {
-          //                         "subject": "You just got paid",
+                    //   mail.type("json");
+                    //   mail.send({
+                    //   "personalizations": [
+                    //       {
+                    //           "to": docs1[0].email,
+                    //           "dynamic_template_data": {
+                    //               "subject": "You just got paid",
                                 
                           
-          //                 },
-          //             }
-          //             ],
-          //                 "from": {
-          //                     "email": "notifications@degreeme.io",
-          //                     "name": "DegreeMe"
-          //             },
-          //                 "reply_to": {
-          //                     "email": "noreply@degreeme.io",
-          //                     "name": "No Reply"
-          //             },
-          //                 "template_id": "d-e54827ff53514c15969d2e52db32e13d"
-          //             });
+                    //       },
+                    //   }
+                    //   ],
+                    //       "from": {
+                    //           "email": "notifications@degreeme.io",
+                    //           "name": "DegreeMe"
+                    //   },
+                    //       "reply_to": {
+                    //           "email": "noreply@degreeme.io",
+                    //           "name": "No Reply"
+                    //   },
+                    //       "template_id": "d-e54827ff53514c15969d2e52db32e13d"
+                    //   });
           
-          //             mail.end(function (res) {
-          //                 // if (res.error) throw new Error(res.error);
+                    //   mail.end(function (res) {
+                    //       // if (res.error) throw new Error(res.error);
           
-          //             console.log(res.body);
-          //             })
-          //         })
+                    //   console.log(res.body);
+                    //   })
+                  })
                  
-          //   })
-          //   .catch(function(err){
-          //     console.log(err)
-          //   })
-          // }
+            })
+            .catch(function(err){
+              console.log(err)
+              console.log("HELP REQ ERROR")
+            })
+          }
           //if date is in the future and less than or equal to 24 hours away
           if(new Date() > docs[x].DueDate && hourDifference(docs[x].DueDate) <= 24){
             users.getUserByHandle(docs[x].Bidder).exec((err, docs1)=>{

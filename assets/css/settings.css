@@ -21,6 +21,7 @@
 #img-btn h3{
   font-size:18px!important;
 }
+
 #settingsWrapper{
     width:100%;
     text-align:left;
@@ -183,18 +184,15 @@ input[type=range]::-webkit-slider-thumb {
     margin-left:29%;
     left:0;
  }
-
  /* new image styles */
  #img-upload-container #img-secondary-wrapper{
   border-radius:20px;
   background-color:#202020;
   margin-left:auto;
   margin-right:auto;
-
   position: relative;
   top:0!important;
 }
-
 #upload{
   background-color:#202020!important;
   cursor:pointer!important;
@@ -215,10 +213,10 @@ input[type=range]::-webkit-slider-thumb {
 .picX strong{
   color:white!important;
 }
-.croppie-container{
+/* .croppie-container{
   margin-left:0!important;
-}
-.upload-result{
+} */
+/* .upload-result{
   cursor:pointer;
   width:20%;
   text-align:center;
@@ -228,4 +226,4 @@ input[type=range]::-webkit-slider-thumb {
   border-radius:5px;
   margin-bottom:10px;
   border-radius:30px!important;
-}
+} */
