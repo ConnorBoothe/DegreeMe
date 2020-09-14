@@ -25,7 +25,7 @@ function hourDifference(date){
   return Math.ceil(diffTime / (1000 * 60 * 60));
 }
 //job runs every night at midnight
-var job = new CronJob('0 0 0 * * *', function() {
+var job = new CronJob('0 * * * * *', function() {
   console.log("Running")
     listings.getListings().exec((err,docs)=>{
         for(x in docs){
@@ -33,8 +33,11 @@ var job = new CronJob('0 0 0 * * *', function() {
           if((docs[x].ExpirationDate < new Date()) && (docs[x].Active == true )){
             listings.disableListing(docs[x]._id);
            console.log(docs[x].Subject + " hosted by " + docs[x].Handle + " has expired")
+           var listing = docs[x];
            users.getUserByHandle(docs[x].Handle).exec((err, user)=>{
-
+             console.log("email", user[0].email);
+             
+             
             mail.headers({
             "content-type": "application/json",
             "authorization": process.env.SENDGRID_API_KEY,
@@ -51,11 +54,9 @@ var job = new CronJob('0 0 0 * * *', function() {
                         }
                 ],
                     "dynamic_template_data": {
-                        "subject": "Account Confirmation",
-                        "name": "Name",
-                        "code": "activationCode",
-                        "email": "req.body.email",
-                
+                        "subject": "Your listing has expired",
+                        "classSubject": listing.Subject,
+                        "editListing": listing._id,
                 },
             }
             ],
@@ -67,7 +68,7 @@ var job = new CronJob('0 0 0 * * *', function() {
                     "email": "noreply@degreeme.io",
                     "name": "No Reply"
             },
-                "template_id": "d-e54827ff53514c15969d2e52db32e13d"
+                "template_id": "d-5d1e4b2173cd45658350f76d708e1f66"
             });
 
             mail.end(function (res) {
@@ -91,7 +92,7 @@ var job = new CronJob('0 0 0 * * *', function() {
             for(i in docs[x].Members){
               membersArr.push(docs[x].Members[i].handle);
             }
-            
+            var meeting = docs[x];
             users.getUserEmailsByHandle(membersArr).exec((err, docs1)=>{
               var emailObjArray = [];
             for(x in docs1){
@@ -101,7 +102,7 @@ var job = new CronJob('0 0 0 * * *', function() {
             "content-type": "application/json",
             "authorization": process.env.SENDGRID_API_KEY,
             });
-
+            
             mail.type("json");
             mail.send({
             "personalizations": [
@@ -109,10 +110,11 @@ var job = new CronJob('0 0 0 * * *', function() {
                     "to": emailObjArray,
                     "dynamic_template_data": {
                         "subject": "Your tutoring session is approaching",
-                        "name": "Name",
-                        "code": "activationCode",
-                        "email": "req.body.email",
-                
+                        "classSubject": meeting.class,
+                        "tutor": meeting.tutorHandle,
+                        "student": meeting.userHandle,
+                        "time": meeting.time,
+                        "meeting": meeting.sessionID,
                 },
             }
             ],
@@ -124,7 +126,7 @@ var job = new CronJob('0 0 0 * * *', function() {
                     "email": "noreply@degreeme.io",
                     "name": "No Reply"
             },
-                "template_id": "d-e54827ff53514c15969d2e52db32e13d"
+                "template_id": "d-a07dc021e5634836bfc21bb866cf8fb5"
             });
 
             mail.end(function (res) {
@@ -133,9 +135,9 @@ var job = new CronJob('0 0 0 * * *', function() {
             console.log(res.body);
             })
           
-          //if session has already occurred, send email to all non-host members asking them to leave a review
          
-            
+        
+         //if session has already occurred, send email to all non-host members asking them to leave a review    
         })
     }
     if(hourDiff < 0 && hourDiff > -24){
@@ -150,6 +152,7 @@ var job = new CronJob('0 0 0 * * *', function() {
       for(x in docs1){
         emailObjArray.push({"email": docs1[x].email});
       }
+ 
       mail.headers({
       "content-type": "application/json",
       "authorization": process.env.SENDGRID_API_KEY,
@@ -162,10 +165,8 @@ var job = new CronJob('0 0 0 * * *', function() {
               "to": emailObjArray,
               "dynamic_template_data": {
                   "subject": "Leave your tutor a review",
-                  "name": "Name",
-                  "code": "activationCode",
-                  "email": "req.body.email",
-          
+                  "tutorName": docs[x].tutorHandle,
+                  "reviewID": docs[x]._id,
           },
       }
       ],
@@ -177,7 +178,7 @@ var job = new CronJob('0 0 0 * * *', function() {
               "email": "noreply@degreeme.io",
               "name": "No Reply"
       },
-          "template_id": "d-e54827ff53514c15969d2e52db32e13d"
+          "template_id": "d-c1d0780dfbab4233ba376377a87b8b24"
       });
 
       mail.end(function (res) {
@@ -189,21 +190,20 @@ var job = new CronJob('0 0 0 * * *', function() {
   //send a reminder to set location/zoom link 3 days before session occurs
   if(hourDiff < 72 && !docs[x].ZoomLink && !docs[x].Location){
     users.getUserByHandle(docs[x].tutorHandle).exec((err, user)=>{
+      console.log('yo this is docs', docs[x]);
       mail.headers({
         "content-type": "application/json",
         "authorization": process.env.SENDGRID_API_KEY,
         });
-  
+       
         mail.type("json");
         mail.send({
         "personalizations": [
             {
                 "to": user[0].email,
                 "dynamic_template_data": {
-                    "subject": "You need to activate your account",
-                    "name": "Name",
-                    "code": "activationCode",
-                    "email": "req.body.email",
+                    "subject": "You need to set the locatioin of your tutoring session",
+                    "classSubject": "",
             },
         }
         ],
@@ -215,7 +215,7 @@ var job = new CronJob('0 0 0 * * *', function() {
                 "email": "noreply@degreeme.io",
                 "name": "No Reply"
         },
-            "template_id": "d-e54827ff53514c15969d2e52db32e13d"
+            "template_id": "d-bf2a062538504bd284437ee704207c0f"
         });
   
         mail.end(function (res) {
@@ -237,7 +237,7 @@ var job = new CronJob('0 0 0 * * *', function() {
                   "content-type": "application/json",
                   "authorization": process.env.SENDGRID_API_KEY,
                   });
-      
+                  console.log("new emails", docs[x].email)
                   mail.type("json");
                   mail.send({
                   "personalizations": [
@@ -260,13 +260,13 @@ var job = new CronJob('0 0 0 * * *', function() {
                           "email": "noreply@degreeme.io",
                           "name": "No Reply"
                   },
-                      "template_id": "d-e54827ff53514c15969d2e52db32e13d"
+                      "template_id": "d-a279f28d3ff74756b820258169c78c90"
                   });
       
                   mail.end(function (res) {
                       // if (res.error) throw new Error(res.error);
       
-                  console.log(res.body);
+                  console.log("see error, activate", res.body);
                   })
               }
             }
@@ -282,53 +282,53 @@ var job = new CronJob('0 0 0 * * *', function() {
                 console.log("something broke in capturing intents")
               }else{
                 for(var j in docs[i].Members){
-                  if(docs[i].Members[j].role === "Host" && docs[i].Members[j].intent != "none" ){
+                  // if(docs[i].Members[j].role === "Host" && docs[i].Members[j].intent != "none" ){
                   
-                    stripe.paymentIntents.capture(
-                      docs[i].Members[j].intent,
-                      { stripeAccount: tutor[0].StripeId}
-                      ).then(function(intent){
-                        //remove the payment intent
-                        meetups.setIntentToNone(docs[i]._id);
-                        mail.headers({
-                          "content-type": "application/json",
-                          "authorization": process.env.SENDGRID_API_KEY,
-                          });
+                  //   stripe.paymentIntents.capture(
+                  //     docs[i].Members[j].intent,
+                  //     { stripeAccount: tutor[0].StripeId}
+                  //     ).then(function(intent){
+                  //       //remove the payment intent
+                  //       meetups.setIntentToNone(docs[i]._id);
+
+                  //       // tutor listing 
+                  //       mail.headers({
+                  //         "content-type": "application/json",
+                  //         "authorization": process.env.SENDGRID_API_KEY,
+                  //         });
               
-                          mail.type("json");
-                          mail.send({
-                          "personalizations": [
-                              {
-                                  "to": docs[i].email,
-                                  "dynamic_template_data": {
-                                      "subject": "You just got paid",
-                                      "name": "Name",
-                                      "code": "activationCode",
-                                      "email": "req.body.email",
+                  //         mail.type("json");
+                  //         mail.send({
+                  //         "personalizations": [
+                  //             {
+                  //                 "to": docs[i].email,
+                  //                 "dynamic_template_data": {
+                  //                     "subject": "You just got paid",
                               
-                              },
-                          }
-                          ],
-                              "from": {
-                                  "email": "notifications@degreeme.io",
-                                  "name": "DegreeMe"
-                          },
-                              "reply_to": {
-                                  "email": "noreply@degreeme.io",
-                                  "name": "No Reply"
-                          },
-                              "template_id": "d-e54827ff53514c15969d2e52db32e13d"
-                          });
+                              
+                  //             },
+                  //         }
+                  //         ],
+                  //             "from": {
+                  //                 "email": "notifications@degreeme.io",
+                  //                 "name": "DegreeMe"
+                  //         },
+                  //             "reply_to": {
+                  //                 "email": "noreply@degreeme.io",
+                  //                 "name": "No Reply"
+                  //         },
+                  //             "template_id": "d-8f8c5a2da15a4775b54b84a50b64066d"
+                  //         });
               
-                          mail.end(function (res) {
-                              // if (res.error) throw new Error(res.error);
-                          console.log(res.body);
-                          })
-                    })
-                    .catch(function(err){
-                      console.log(err)
-                    })
-                  }
+                  //         mail.end(function (res) {
+                  //             // if (res.error) throw new Error(res.error);
+                  //         console.log(res.body);
+                  //         })
+                  //   })
+                  //   .catch(function(err){
+                  //     console.log(err)
+                  //   })
+                  // }
                  
                 }    
               }
@@ -341,57 +341,57 @@ var job = new CronJob('0 0 0 * * *', function() {
         //  console.log(docs)
         for(x in docs){
           //if due date is in the past, capture the payment intent
-          if(new Date() > docs[x].DueDate && docs[x].Intent != "none"){
-            //charge the intent
-            stripe.paymentIntents.capture(
-              docs[x].Intent,
-              { stripeAccount: docs[x].StripeId}
-              ).then(function(intent){
-                 //set payment intent to none
-                  acceptedBids.setIntentToNone(docs[x]._id);
-                  users.getUserByHandle(docs[x].Bidder).exec((err, docs1)=>{
-                    mail.headers({
-                      "content-type": "application/json",
-                      "authorization": process.env.SENDGRID_API_KEY,
-                      });
+          // if(new Date() > docs[x].DueDate && docs[x].Intent != "none"){
+          //   //charge the intent
+          //   stripe.paymentIntents.capture(
+          //     docs[x].Intent,
+          //     { stripeAccount: docs[x].StripeId}
+          //     ).then(function(intent){
+          //        //set payment intent to none
+          //         acceptedBids.setIntentToNone(docs[x]._id);
+
+          //         //bids you just got paid 
+          //         users.getUserByHandle(docs[x].Bidder).exec((err, docs1)=>{
+          //           mail.headers({
+          //             "content-type": "application/json",
+          //             "authorization": process.env.SENDGRID_API_KEY,
+          //             });
           
-                      mail.type("json");
-                      mail.send({
-                      "personalizations": [
-                          {
-                              "to": docs1[0].email,
-                              "dynamic_template_data": {
-                                  "subject": "You just got paid",
-                                  "name": "Name",
-                                  "code": "activationCode",
-                                  "email": "req.body.email",
+          //             mail.type("json");
+          //             mail.send({
+          //             "personalizations": [
+          //                 {
+          //                     "to": docs1[0].email,
+          //                     "dynamic_template_data": {
+          //                         "subject": "You just got paid",
+                                
                           
-                          },
-                      }
-                      ],
-                          "from": {
-                              "email": "notifications@degreeme.io",
-                              "name": "DegreeMe"
-                      },
-                          "reply_to": {
-                              "email": "noreply@degreeme.io",
-                              "name": "No Reply"
-                      },
-                          "template_id": "d-e54827ff53514c15969d2e52db32e13d"
-                      });
+          //                 },
+          //             }
+          //             ],
+          //                 "from": {
+          //                     "email": "notifications@degreeme.io",
+          //                     "name": "DegreeMe"
+          //             },
+          //                 "reply_to": {
+          //                     "email": "noreply@degreeme.io",
+          //                     "name": "No Reply"
+          //             },
+          //                 "template_id": "d-e54827ff53514c15969d2e52db32e13d"
+          //             });
           
-                      mail.end(function (res) {
-                          // if (res.error) throw new Error(res.error);
+          //             mail.end(function (res) {
+          //                 // if (res.error) throw new Error(res.error);
           
-                      console.log(res.body);
-                      })
-                  })
+          //             console.log(res.body);
+          //             })
+          //         })
                  
-            })
-            .catch(function(err){
-              console.log(err)
-            })
-          }
+          //   })
+          //   .catch(function(err){
+          //     console.log(err)
+          //   })
+          // }
           //if date is in the future and less than or equal to 24 hours away
           if(new Date() > docs[x].DueDate && hourDifference(docs[x].DueDate) <= 24){
             users.getUserByHandle(docs[x].Bidder).exec((err, docs1)=>{
@@ -399,7 +399,7 @@ var job = new CronJob('0 0 0 * * *', function() {
               "content-type": "application/json",
               "authorization": process.env.SENDGRID_API_KEY,
               });
-  
+              console.log("new emails2", docs1[0].email)
               mail.type("json");
               mail.send({
               "personalizations": [
@@ -408,8 +408,6 @@ var job = new CronJob('0 0 0 * * *', function() {
                       "dynamic_template_data": {
                           "subject": "The due date for your bid is approaching!",
                           "name": "Name",
-                          "code": "activationCode",
-                          "email": "req.body.email",
                   
                   },
               }
@@ -422,13 +420,13 @@ var job = new CronJob('0 0 0 * * *', function() {
                       "email": "noreply@degreeme.io",
                       "name": "No Reply"
               },
-                  "template_id": "d-e54827ff53514c15969d2e52db32e13d"
+                  "template_id": "d-cae3a6aefa6149b193da1998269ccc16"
               });
   
               mail.end(function (res) {
                   // if (res.error) throw new Error(res.error);
   
-              console.log(res.body);
+              console.log("due date", res.body);
               })
             });
           }
