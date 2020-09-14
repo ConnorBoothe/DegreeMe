@@ -6,6 +6,9 @@ var bodyParser = require('body-parser');
 var multer = require("multer");
 const mongoose = require("mongoose");
 var session = require('express-session');
+const stream = require('stream');
+const {Storage} = require("@google-cloud/storage");
+const path = require('path');
 var MongoStore = require('connect-mongo')(session);
 
 const {
@@ -41,6 +44,11 @@ router.use(bodyParser.urlencoded({
     limit: '50mb',
     extended: true
 }));
+const gc = new Storage({
+    keyFilename: path.join(__dirname,"../../degreeme1-727d561034e0.json"),
+    projectId:"degreeme1"
+  });
+const degreemeImages = gc.bucket("degreeme-images");
 const storage = multer.diskStorage({
     destination: './assets/img/userImg',
     filename: function (req, file, callback) {
@@ -204,19 +212,47 @@ router.post("/Settings",
             if (err) {
                 res.redirect('/Settings?error=' + err);
             }
+            console.log(req.body.img1)
+            console.log(req.session.handle)
+            // Remove header
             let base64String = req.body.img1; // Not a real image
             // Remove header
             let base64Image = base64String.split(';base64,').pop();
-            fs.writeFile("assets/img/userImg/" + req.body.handle.substring(1) + ".jpg", base64Image, {
-                encoding: 'base64'
-            }, function (err, data) {
-                if (!err) {
-                    req.session.img = data;
-                } else {
-                    console.log(err)
-                    res.redirect("/home")
+            var bufferStream = new stream.PassThrough();
+            bufferStream.end(Buffer.from(base64Image, 'base64'));
+            var file = degreemeImages.file(req.session.handle.toString().substring(1) + '.jpg');
+            bufferStream.pipe(file.createWriteStream({
+                metadata: {
+                contentType: 'image/jpeg',
+                metadata: {
+                custom: 'metadata'
                 }
+            },
+            public: true,
+            validation: "md5"
+            }))
+            .on('error', function(err) {
+                console.log(err)
+            })
+            .on('finish', function(data) {
+                req.session.img = "https://storage.googleapis.com/degreeme-images/"+ req.session.handle.toString().substring(1) +".jpg";
+                if(window.location.href.toString().split("/")[3] === "user"){
+                    res.status(202).json({
+                        img:"https://storage.googleapis.com/degreeme-images/"+ req.session.handle.toString().substring(1) +".jpg"
+                    }).end();
+                }
+     
             });
+            // fs.writeFile("assets/img/userImg/" + req.body.handle.substring(1) + ".jpg", base64Image, {
+            //     encoding: 'base64'
+            // }, function (err, data) {
+            //     if (!err) 
+            //         req.session.img = data;
+            //     } else {
+            //         console.log(err)
+            //         res.redirect("/home")
+            //     }
+            // });
             res.redirect("/home")
         });
     });

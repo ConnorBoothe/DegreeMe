@@ -92,24 +92,24 @@ $(".bell").on("click", function(){
 
                     if(res[x].seen === true){
                         if(res[x].type.includes("Congrats!")){
-                            notifications +=  '<a class="notifLink" href='+res[x].url+'><li class=" notifications"><img class="notifImg" src="../'+res[x].img+'"/><p class="notif">'+res[x].type+ '</p><div><p class="dateTxt1 text-secondary">'+displayTimeSince(res[x].date)+'</p></div></li></a>';
+                            notifications +=  '<a class="notifLink" href='+res[x].url+'><li class=" notifications"><img class="notifImg" src="'+res[x].img+'"/><p class="notif">'+res[x].type+ '</p><div><p class="dateTxt1 text-secondary">'+displayTimeSince(res[x].date)+'</p></div></li></a>';
                         }
                         else{
                             notifications += "<form method='POST' action='/seenNotif' class='seenNotif'>"+'<input type="hidden" name="url" value="'+res[x].url+'"/>'+
                             '<input type="hidden" name="notifId" value="'+res[x]._id+'"/>'+
-                             '<button class=" notifLink"><li class=" notifications"><img class="notifImg" src="../'+res[x].img+'"/><p class="notif">'+res[x].name+ ' '+res[x].type+ '</p><p class="dateTxt1 text-secondary">'+displayTimeSince(res[x].date)+'</p></li></button></form>';
+                             '<button class=" notifLink"><li class=" notifications"><img class="notifImg" src="'+res[x].img+'"/><p class="notif">'+res[x].name+ ' '+res[x].type+ '</p><p class="dateTxt1 text-secondary">'+displayTimeSince(res[x].date)+'</p></li></button></form>';
                                                 }
                     }
                     else{
                         if(res[x].type.includes("Congrats!")){
                             notifications += "<form method='POST' action='/seenNotif' class='seenNotif'>"+'<input type="hidden" name="url" value="'+res[x].url+'"/>'+
                              '<input type="hidden" name="notifId" value="'+res[x]._id+'"/>'+
-                            '<button class=" notifLink"><div class="blue-dot bg-primary"></div><li class=" notifications"><img class="notifImg" src="../'+res[x].img+'"/><p class="notif">'+res[x].type+ '</p><p class="dateTxt1 text-primary">'+displayTimeSince(res[x].date)+'</p></li></button></form>';
+                            '<button class=" notifLink"><div class="blue-dot bg-primary"></div><li class=" notifications"><img class="notifImg" src="'+res[x].img+'"/><p class="notif">'+res[x].type+ '</p><p class="dateTxt1 text-primary">'+displayTimeSince(res[x].date)+'</p></li></button></form>';
                         }
                         else{
                             notifications += "<form method='POST' action='/seenNotif' class='seenNotif'>"+'<input type="hidden" name="url" value="'+res[x].url+'"/>'+
                             '<input type="hidden" name="notifId" value="'+res[x]._id+'"/>'+
-                             '<button class=" notifLink"><div  class=" blue-dot bg-primary"></div><li class=" notifications"><img class="notifImg" src="../'+res[x].img+'"/><p class="notif">'+res[x].name+ ' '+res[x].type+ '</p><p class="dateTxt1 text-primary">'+displayTimeSince(res[x].date)+'</p></li></button></form>';
+                             '<button class=" notifLink"><div  class=" blue-dot bg-primary"></div><li class=" notifications"><img class="notifImg" src="'+res[x].img+'"/><p class="notif">'+res[x].name+ ' '+res[x].type+ '</p><p class="dateTxt1 text-primary">'+displayTimeSince(res[x].date)+'</p></li></button></form>';
                         
                         }
                     }

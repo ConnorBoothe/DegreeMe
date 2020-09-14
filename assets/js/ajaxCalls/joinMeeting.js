@@ -14,11 +14,12 @@ $(document).ready(function(){
               "Content-Type": "application/json"
             }, statusCode: {
               202: function (result) {
+                window.open(($("input[name='zoomMeeting']").val()));
                if(result.status === "joinMeeting"){
-                $(".joinBtn").removeClass("btn-primary")
-                $(".joinBtn").addClass("btn-danger");
-                $(".joinBtn").text("Leave")
-                $("input[name='status']").val("leaveMeeting");
+                // $(".joinBtn").removeClass("btn-primary")
+                // $(".joinBtn").addClass("btn-danger");
+                // $(".joinBtn").text("Leave")
+                // $("input[name='status']").val("leaveMeeting");
                 $(".joinedHandle").each(function(index){
                      if($(".joinedHandle").eq(index).text() === result.handle){
                          $(".joinedHandle").eq(index).parent().html('<img src="/'+result.image+'" class="joinMeetingImg" />'+
@@ -27,19 +28,19 @@ $(document).ready(function(){
                      }
                 })
                }
-               else if(result.status === "leaveMeeting"){
-                $(".joinBtn").removeClass("btn-danger");
-                $(".joinBtn").addClass("btn-primary")
-                $(".joinBtn").text("Join")
-                $("input[name='status']").val("joinMeeting");
-                $(".joinedHandle").each(function(index){
-                  if($(".joinedHandle").eq(index).text() === result.handle){
-                      $(".joinedHandle").eq(index).parent().html('<img src="/'+result.image+'" class="joinMeetingImg" />'+
-                      ' <span class="joinedHandle">'+result.handle+'</span> left at '+ result.time);
-                      return false;
-                  }
-             })
-               }
+            //    else if(result.status === "leaveMeeting"){
+            //     $(".joinBtn").removeClass("btn-danger");
+            //     $(".joinBtn").addClass("btn-primary")
+            //     $(".joinBtn").text("Join")
+            //     $("input[name='status']").val("joinMeeting");
+            //     $(".joinedHandle").each(function(index){
+            //       if($(".joinedHandle").eq(index).text() === result.handle){
+            //           $(".joinedHandle").eq(index).parent().html('<img src="/'+result.image+'" class="joinMeetingImg" />'+
+            //           ' <span class="joinedHandle">'+result.handle+'</span> left at '+ result.time);
+            //           return false;
+            //       }
+            //  })
+            //    }
               
               },
               500: function (result) {

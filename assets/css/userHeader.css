@@ -279,7 +279,6 @@ header{
 }
   .headerLinkTitle{
     font-family: 'Open Sans', sans-serif;
-    
       margin-left:20px;
       opacity:1;
       font-weight:500;
@@ -292,8 +291,6 @@ header{
   }
   .headerLinks a:hover{
     color:white!important;
-
-      
   }
   .headerLinks:hover{
     background-color:#343a40;
@@ -303,7 +300,6 @@ header{
   .headerLinks a:hover:after { 
     width: 100%; 
     left: 0; 
-
   }
   .dateTxt, .dateTxt1{
       font-size:14px;

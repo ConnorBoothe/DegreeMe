@@ -44,6 +44,7 @@ $(document).ready(function(){
              $(".payment-processing-container").show();
              //alert( "202" );
              //after intent ajax call (need secret and tutor StripeId)
+             
              stripe.confirmCardPayment(result.secret, {
                payment_method: {
                  card: card,
@@ -57,11 +58,15 @@ $(document).ready(function(){
                  console.log(result1.error.message);
                } else {
                  // The payment has been processed!
-                 console.log(result1.paymentIntent.status)
-                //  if (result1.paymentIntent.status === 'requires_capture') {
+                 console.log("STATUS", result1.paymentIntent.status)
+                 alert(result1.paymentIntent.status)
+                 if (result1.paymentIntent.status === 'requires_capture') {
                     $(".payment-status").text("Payment Success");
                     document.location.href = "/messages?messageId="+result.threadId;
-                  // }
+                   }
+                   else{
+                    $(".payment-status").text("Payment Error");
+                   }
                  
                }
              });
