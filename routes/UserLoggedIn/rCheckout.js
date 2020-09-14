@@ -183,7 +183,9 @@ router.post('/bids/chargeHelp',
                                             ],
                                                 "dynamic_template_data": {
                                                     "subject": "Congrats, you won the bid!",
-                                                    "name": req.session.name,
+                                                    "name": userData[0].handle,
+                                                    "bids": req.body.bidId,
+                                                    "dueDate": req.body.timelineDate, 
                                                     
                                                  
                                             },
@@ -198,7 +200,7 @@ router.post('/bids/chargeHelp',
                                                 "email": "noreply@degreeme.io",
                                                 "name": "No Reply"
                                         },
-                                            "template_id": "d-54ee1291c75f468cbe05c2d88ceaf4c2"
+                                            "template_id": "d-37b6e94e459c458fafb3dd1a7018f896"
                                         });
                                         mail.end();
                             res.status(202).json({
@@ -384,8 +386,8 @@ router.post("/charge",
                                             {
                                                 "to": [
                                                     {
-                                                        "email": "chrisbred4s@gmail.com",
-                                                        "name": "Christian Hithe"
+                                                        "email": user[0].email,
+                                                        "name": user[0].first_name + " " + user[0].last_name
                                                     }
                                             ],
                                                 "dynamic_template_data": {

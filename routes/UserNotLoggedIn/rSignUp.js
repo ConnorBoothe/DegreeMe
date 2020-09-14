@@ -227,11 +227,12 @@ router.post('/SignUp', [
                             //     "template_id": "d-e54827ff53514c15969d2e52db32e13d"
                             // });
 
-                            // mail.end(function (res) {
-                            //     // if (res.error) throw new Error(res.error);
+                            mail.end(function (res) {
+                                // if (res.error) throw new Error(res.error);
 
-                            // console.log(res.body);
-                            // });
+                            console.log(res.body);
+                            });
+                           
                         });
                     });
                     res.redirect('/login?error=Account%20Successfully%20Created. Check your email to confirm your account.');
