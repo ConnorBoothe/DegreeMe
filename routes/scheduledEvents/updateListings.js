@@ -147,6 +147,8 @@ var job = new CronJob('0 * * * * *', function() {
           membersArr.push(docs[x].Members[i].handle);
         }
       }
+      console.log("this is the new docs", docs[x]);
+      var occurred = docs[x];
       users.getUserEmailsByHandle(membersArr).exec((err, docs1)=>{
         var emailObjArray = [];
       for(x in docs1){
@@ -165,8 +167,8 @@ var job = new CronJob('0 * * * * *', function() {
               "to": emailObjArray,
               "dynamic_template_data": {
                   "subject": "Leave your tutor a review",
-                  "tutorName": docs[x].tutorHandle,
-                  "reviewID": docs[x]._id,
+                  "tutorName": occurred.tutorHandle,
+                  "reviewID": occurred._id,
           },
       }
       ],

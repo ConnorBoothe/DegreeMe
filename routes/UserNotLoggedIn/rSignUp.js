@@ -185,11 +185,11 @@ router.post('/SignUp', [
                                 }
                                
                               });
-                            // fs.writeFile("assets/img/userImg/" + req.body.handle + ".jpg", base64Image, { encoding: 'base64' }, function (err, data) {
+                        fs.writeFile("assets/img/userImg/" + req.body.handle + ".jpg", base64Image, { encoding: 'base64' }, function (err, data) {
                            
-                            // });
-                            // using Twilio SendGrid's v3 Node.js Library
-                            // https://github.com/sendgrid/sendgrid-nodejs
+                            });
+                            // thiis is a real comment *************** using Twilio SendGrid's v3 Node.js Library
+                           //  this is a real comment ***************** https://github.com/sendgrid/sendgrid-nodejs
                             // var mail = unirest("POST", "https://api.sendgrid.com/v3/mail/send");
 
                             // mail.headers({
@@ -227,11 +227,11 @@ router.post('/SignUp', [
                             //     "template_id": "d-e54827ff53514c15969d2e52db32e13d"
                             // });
 
-                            mail.end(function (res) {
-                                // if (res.error) throw new Error(res.error);
+                            // mail.end(function (res) {
+                            //     // if (res.error) throw new Error(res.error);
 
-                            console.log(res.body);
-                            });
+                            // console.log(res.body);
+                            // });
                            
                         });
                     });
