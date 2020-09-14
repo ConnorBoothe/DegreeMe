@@ -135,13 +135,16 @@ module.exports = class UserProfile {
     
     }
     setIntentToNone(id){
+        console.log("SET INTENT")
         var ConnectionDB = mongoose.model('ConnectionsDB',connectionDBSchema);
         ConnectionDB.find({_id:id}).exec((err,docs)=>{
+            console.log("SET INTENT", docs)
             if(err){
                 console.log("Something broke in getIntents");
             }else{
                 for(var i in docs[0].Members){
-                    if(docs[0].Members[i].role == "Host"){
+                    if(docs[0].Members[i].role == "Student"){
+                        console.log("FOUND")
                         docs[0].Members[i].intent = "none";
                         docs[0].save();
                         break;

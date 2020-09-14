@@ -105,7 +105,7 @@ $(document).ready(function(){
                             }
                             else if(result.Users.length > 0){
                                 for( x in result.Users){
-                                    users+= "<div class='courseCountainer'><a href='/user/"+result.Users[x].handle+"'><img class='searchUser' src=../"+result.Users[x].img+"><p class='searchName'>"+result.Users[x].first_name+ " "+
+                                    users+= "<div class='courseCountainer'><a href='/user/"+result.Users[x].handle+"'><img class='searchUser' src="+result.Users[x].img+"><p class='searchName'>"+result.Users[x].first_name+ " "+
                                         result.Users[x].last_name+"<p class='userHandle'>"+result.Users[x].handle+
                                         "</p></a></div></p>";
                                 }
