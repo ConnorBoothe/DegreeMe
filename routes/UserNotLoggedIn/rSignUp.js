@@ -182,6 +182,7 @@ router.post('/SignUp', [
                                     users.addUser("@" + req.body.handle[1], first_name, last_name, req.body.school[1], req.body.email[1], hash,
                                         "https://storage.googleapis.com/degreeme-images/" + req.body.handle[1] + ".jpg", "Inactive", activationCode,
                                         "None", req.body.major[1]);
+
                                 }
                                
                               });
@@ -227,11 +228,11 @@ router.post('/SignUp', [
                             //     "template_id": "d-e54827ff53514c15969d2e52db32e13d"
                             // });
 
-                            mail.end(function (res) {
-                                // if (res.error) throw new Error(res.error);
+                            // mail.end(function (res) {
+                            //     // if (res.error) throw new Error(res.error);
 
-                            console.log(res.body);
-                            });
+                            // console.log(res.body);
+                            // });
                            
                         });
                     });

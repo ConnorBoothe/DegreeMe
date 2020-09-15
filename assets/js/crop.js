@@ -17,17 +17,17 @@ $(document).ready(function(){
             reader.readAsDataURL(input.files[0]);
         }
     }
-    var defaultImg = "";
+    var defaultImg = "assets/img/croppieDefaultImage-100.jpg";
     var location = window.location.href.toString().split("/")[3];
-    if( location === "SignUp"){
-        defaultImg = "assets/img/croppieDefaultImage-100.jpg"
-    }
-    else if(location === "Settings"){
-        defaultImg = $(".editImg").attr("src");
-    }
-    else if("User"){
-        defaultImg = $(".profile-img").attr("src");
-    }
+    // if( location === "SignUp"){
+    //     defaultImg = "assets/img/croppieDefaultImage-100.jpg"
+    // }
+    // else if(location === "Settings"){
+    //     defaultImg = "assets/img/croppieDefaultImage-100.jpg";
+    // }
+    // else if("User"){
+    //     defaultImg = $(".profile-img").attr("src");
+    // }
     $uploadCrop = $('.upload-demo').croppie({
         viewport: {
             width: 300,
@@ -49,7 +49,8 @@ $(".img-btn").on("click", function(){
     $(".overlay").show();
     $(".img-upload-container").show();
 })
-    $('.upload').on('change', function () { readFile(this); });
+    $('.upload').on('change', function () { 
+        readFile(this); });
     $('.upload-result').on('click', function (ev) {
         $uploadCrop.croppie('result', {
             type: 'canvas',
@@ -58,7 +59,8 @@ $(".img-btn").on("click", function(){
             if(window.location.href.toString().split("/")[3] === "user"){
                 payload = {
                     handle:$(".userProfileName ").text(),
-                    img1:resp
+                    img1:resp,
+                    source:"profile"
                 }
                 $.ajax({
                     url: "/Settings",
@@ -68,7 +70,7 @@ $(".img-btn").on("click", function(){
                       "Content-Type": "application/json"
                     }, statusCode: {
                       202: function (result) {
-                            //window.location.href = "/messages?messageId=" + result.messageId;
+                          alert("Profile image updated. It may take several minutes for your changes to be visible.")
                       },
                       500: function (result) {
                         alert("500 " + result.responseJSON.err);
@@ -78,16 +80,15 @@ $(".img-btn").on("click", function(){
             }
             $('.imagebase64').val(resp);
             $(".croppedImg").val(("src", $('.imagebase64').val()));
-            $(".userImage").attr("src",$('.imagebase64').val())
+            $(".editImg").attr("src",$('.imagebase64').val())
             //if location == signUp, insert image
             if(window.location.href.toString().split("/")[3] === "SignUp"){
                 $(".result1").eq(1).html("<img class='userImage' name='userImage' src='"+$('.imagebase64').val()+"'/>");
                 $(".result1").eq(0).html("<img class='userImage' name='userImage' src='"+$('.imagebase64').val()+"'/>");
             }
-            
             // }
            
-            $(".croppedImg").val() === $('.imagebase64').val();
+            $(".croppedImg").val($('.imagebase64').val());
             $(".overlay").hide();
             $(".img-upload-container").hide();
         });

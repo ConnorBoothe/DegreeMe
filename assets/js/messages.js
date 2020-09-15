@@ -50,8 +50,6 @@
                 alert(err)
             }
             $('audio#pop')[0].play();
-            alert("YO");
-            alert("HO")
             var iterator = $(".chatName").length;
             for (var x = 0; x < iterator; x++) {
                 var href = $(".chatName").eq(x).parent().parent().attr("href");
