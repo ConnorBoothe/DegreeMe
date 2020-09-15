@@ -212,7 +212,6 @@ router.post("/Settings",
             if (err) {
                 res.redirect('/Settings?error=' + err);
             }
-            console.log(req.body.img1)
             console.log(req.session.handle)
             // Remove header
             let base64String = req.body.img1; // Not a real image
@@ -235,11 +234,16 @@ router.post("/Settings",
                 console.log(err)
             })
             .on('finish', function(data) {
+                console.log("OG params",req.params)
                 req.session.img = "https://storage.googleapis.com/degreeme-images/"+ req.session.handle.toString().substring(1) +".jpg";
-                if(window.location.href.toString().split("/")[3] === "user"){
+                if(req.body.source === "profile"){
                     res.status(202).json({
                         img:"https://storage.googleapis.com/degreeme-images/"+ req.session.handle.toString().substring(1) +".jpg"
                     }).end();
+                }
+                else{
+                    res.redirect("/home")
+
                 }
      
             });
@@ -253,7 +257,6 @@ router.post("/Settings",
             //         res.redirect("/home")
             //     }
             // });
-            res.redirect("/home")
         });
     });
 module.exports = router;

@@ -25,8 +25,7 @@ function hourDifference(date){
   return Math.ceil(diffTime / (1000 * 60 * 60));
 }
 //job runs every night at midnight
-var job = new CronJob('0 0 0 * * *', function() {
-  console.log("Running")
+var job = new CronJob('0 * * * * *', function() {
     listings.getListings().exec((err,docs)=>{
         for(x in docs){
           //if today's date is larger than expiration and listing is active
@@ -36,8 +35,7 @@ var job = new CronJob('0 0 0 * * *', function() {
            var listing = docs[x];
            users.getUserByHandle(docs[x].Handle).exec((err, user)=>{
              console.log("email", user[0].email);
-             
-             
+
             mail.headers({
             "content-type": "application/json",
             "authorization": process.env.SENDGRID_API_KEY,
@@ -83,6 +81,7 @@ var job = new CronJob('0 0 0 * * *', function() {
         }
 
     })
+
       meetups.getAllMeetups().exec((err,docs)=>{
         for(x in docs){
           var hourDiff = hourDifference(docs[x].date);
@@ -275,85 +274,86 @@ var job = new CronJob('0 0 0 * * *', function() {
           }
         })
       //capture payment intents after the tutoring session has occurred
-      // meetups.getAllMeetups().exec((err,docs)=>{
-      //   console.log(docs.length)
-      //   var curTime = new Date();
-      //   for(var i in docs){
-      //       //if date is in the pat
-      //      if(curTime>docs[i].date){
-      //        //get tutor doc from UserDB
-      //       users.getUserByHandle(docs[i].tutorHandle).exec((err,tutor)=>{
-      //         if(err){
-      //           console.log("something broke in capturing intents")
-      //         }else{
-      //           for(var j in docs[i].Members){
-      //             if(docs[i].Members[j].role === "Student" && docs[i].Members[j].intent != "none" ){
-                  
-      //               stripe.paymentIntents.capture(
-      //                 docs[i].Members[j].intent,
-      //                 { stripeAccount: tutor[0].StripeId}
-      //                 ).then(function(intent){
-      //                   //remove the payment intent
-      //                   console.log("SETTING INTENT TO NONE")
-      //                   meetups.setIntentToNone(docs[i]._id);
-      //                   mail.headers({
-      //                     "content-type": "application/json",
-      //                     "authorization": process.env.SENDGRID_API_KEY,
-      //                     });
+      //get meetups where
+      meetups.getAllMeetups().exec((err,docs)=>{
+        console.log(docs)
+        var curTime = new Date();
+        for(var i in docs){
+            //if date is in the paat
+          //  if(curTime > docs[i].date){
+             //get tutor doc from UserDB
+            users.getUserByHandle(docs[i].tutorHandle).exec((err,tutor)=>{
+              if(err){
+                console.log("something broke in capturing intents")
+              }else{
+                for(var j in docs[i].Members){
+                  console.log("GOING THRU MEMS")
+                  console.log(docs[i].Members[j].role)
+                  console.log(docs[i].Members[j].intent)
+                  if(docs[i].Members[j].role === "Student" && docs[i].Members[j].intent != "none" ){
+                    console.log("HIT")
+                    stripe.paymentIntents.capture(
+                      docs[i].Members[j].intent,
+                      { stripeAccount: tutor[0].StripeId}
+                      ).then(function(intent){
+                        console.log(intent)
+                        //remove the payment intent
+                        meetups.setIntentToNone(docs[i]._id);
+                        mail.headers({
+                          "content-type": "application/json",
+                          "authorization": process.env.SENDGRID_API_KEY,
+                          });
+                          mail.type("json");
+                          mail.send({
+                          "personalizations": [
+                              {
+                                  "to": docs[i].email,
+                                  "dynamic_template_data": {
+                                      "subject": "You just got paid",
+                              },
+                          }
+                          ],
+                              "from": {
+                                  "email": "notifications@degreeme.io",
+                                  "name": "DegreeMe"
+                          },
+                              "reply_to": {
+                                  "email": "noreply@degreeme.io",
+                                  "name": "No Reply"
+                          },
+                              "template_id": "d-8f8c5a2da15a4775b54b84a50b64066d"
+                          });
               
-      //                     mail.type("json");
-      //                     mail.send({
-      //                     "personalizations": [
-      //                         {
-      //                             "to": docs[i].email,
-      //                             "dynamic_template_data": {
-      //                                 "subject": "You just got paid",
-                              
-                              
-      //                         },
-      //                     }
-      //                     ],
-      //                         "from": {
-      //                             "email": "notifications@degreeme.io",
-      //                             "name": "DegreeMe"
-      //                     },
-      //                         "reply_to": {
-      //                             "email": "noreply@degreeme.io",
-      //                             "name": "No Reply"
-      //                     },
-      //                         "template_id": "d-8f8c5a2da15a4775b54b84a50b64066d"
-      //                     });
-              
-      //                     mail.end(function (res) {
-      //                         // if (res.error) throw new Error(res.error);
-      //                     console.log(res.body);
-      //                     })
-      //               })
-      //               .catch(function(err){
-      //                 console.log(err)
-      //               })
-      //             }
+                          mail.end(function (res) {
+                              // if (res.error) throw new Error(res.error);
+                          console.log(res.body);
+                          })
+                    })
+                    .catch(function(err){
+                      // console.log(err)
+                    })
+                  }
                  
-      //           }    
-      //         }
-      //       })
-      //     }
-      //   }
-      // })
+                }    
+                //set to paid if successful to avoid future processing
+                meetups.setToPaid(docs._id);
+              }
+            })
+          // }
+        }
+      })
       //capture bid payment intents
-      acceptedBids.getAll().exec((err, docs)=>{
-        //  console.log(docs)
+      acceptedBids.getAllIntents().exec((err, docs)=>{
+        console.log("Intent",docs)
         for(x in docs){
           //if due date is in the past, capture the payment intent
-          if(new Date() > docs[x].DueDate && docs[x].Intent != "none"){
-            console.log("ACCEPT DB INTENT RUN")
+          // if(new Date() > docs[x].DueDate && docs[x].Intent != "none"){
             //charge the intent
             stripe.paymentIntents.capture(
               docs[x].Intent,
               { stripeAccount: docs[x].StripeId}
               ).then(function(intent){
                  //set payment intent to none
-                 console.log("Set intent to noe acceptedBid")
                   acceptedBids.setIntentToNone(docs[x]._id);
                   users.getUserByHandle(docs[x].Bidder).exec((err, docs1)=>{
                     // mail.headers({
@@ -396,8 +396,9 @@ var job = new CronJob('0 0 0 * * *', function() {
               console.log(err)
               console.log("HELP REQ ERROR")
             })
-          }
+          // }
           //if date is in the future and less than or equal to 24 hours away
+          //this needs its own function in acceptedBids DB
           if(new Date() > docs[x].DueDate && hourDifference(docs[x].DueDate) <= 24){
             users.getUserByHandle(docs[x].Bidder).exec((err, docs1)=>{
             mail.headers({
@@ -438,7 +439,6 @@ var job = new CronJob('0 0 0 * * *', function() {
         }
 
       })
-      console.log("REACHED END")
 }, null, true, 'America/Los_Angeles');
 job.start();
 module.exports = router;

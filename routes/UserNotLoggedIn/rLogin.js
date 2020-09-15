@@ -92,7 +92,6 @@ router.post('/login', [
                         req.session.rating = 5;
                         req.session.mySchedule = user.getMySchedule();
                         req.session.myCourses = docs1[0].myCourses;
-                        console.log(req.session)
                         if(docs1[0].StripeId === "none"){
                             req.session.tutor = false;
                         }

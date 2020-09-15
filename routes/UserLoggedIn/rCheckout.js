@@ -144,6 +144,7 @@ router.post('/bids/chargeHelp',
                         stripeAccount: docs[0].StripeId
                     })
                 .then(function (paymentIntent) {
+                    console.log("INTENT", paymentIntent)
                     //generate message thread here
                     //// newThread(host, hostImg, userHandles, datetime, subject)
                     // bidder, bidderImg, userHandle, price, timelineId, BidId, StripeId, intent
