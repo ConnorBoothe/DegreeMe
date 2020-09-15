@@ -46,6 +46,14 @@ module.exports = class Bids {
         var AcceptedBidsDB = mongoose.model('AcceptedBidsDB',acceptedBidsDBSchema);
         return AcceptedBidsDB.find()
     }
+    //get all payment intents, where Intent != none and due date > date
+    getAllIntents(){
+        var AcceptedBidsDB = mongoose.model('AcceptedBidsDB',acceptedBidsDBSchema);
+        return AcceptedBidsDB.find({
+                Intent:{ $ne: "none"},
+                DueDate:{ $lt: new Date()}
+        }, "Intent");
+    }
     //get all user bids
     getAllAcceptedBids(userHandle){
         var AcceptedBidsDB = mongoose.model('AcceptedBidsDB',acceptedBidsDBSchema);

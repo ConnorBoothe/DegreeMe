@@ -39,6 +39,7 @@ var connectionDBSchema = new Schema({
     StudentsAttending:{type:String, required:true},
     Type:{type:String, required:true},
     Virtual: {type: Boolean,required: true},
+    Paid:{type: Boolean,required: true},
     SessionNotes:{type:String},
     Description:{type:String},
     Email:{type:String},
@@ -82,7 +83,7 @@ module.exports = class UserProfile {
             courseCode:connection.getCourseCode(),date:connection.getDate(), 
             time: connection.getTime(), building:connection.getBuilding(), room: connection.getRoom(),  hourlyRate:connection.getHourlyRate(), hours:connection.hours, 
              StudentsAttending: connection.studentsAttending, Type:connection.getType(), SessionNotes: connection.getSessionNotes(), LeftReview:false, Members:members,
-             Virtual:Virtual
+             Virtual:Virtual, Paid:false
             });
        return connect.save();
     }
@@ -159,6 +160,15 @@ module.exports = class UserProfile {
         ConnectionDB.findOne({_id:id}).updateOne({
             $set: {
               Location: {Building:building, Room:room}
+            }
+          }).exec();
+    }
+    //add location to the meetup
+    setToPaid(id){
+        var ConnectionDB = mongoose.model('ConnectionsDB',connectionDBSchema);
+        ConnectionDB.findOne({_id:id}).updateOne({
+            $set: {
+              Paid: true
             }
           }).exec();
     }
