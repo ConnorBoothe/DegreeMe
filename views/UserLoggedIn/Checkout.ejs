@@ -28,15 +28,7 @@
         <%- include ('partials/horizontalHeader.ejs')%>
 
         <div class="homeContainer1">
-            <div class="payment-processing-container">
-                <div class="d-flex justify-content-center">
-                    <div class="spinner-border" role="status">
-                        <span class="sr-only">Payment Processing</span>
-                    </div>
-                    <h3 class="payment-status">Payment Processing</h3>
-                </div>
-
-            </div>
+            
             <div class="contentBlock1">
 
                 <div class="checkout-container">
@@ -130,8 +122,9 @@
                                         <%if(tutor.Type === "Group Session"){%>
                                             <%if((parseInt(tutor.MaxStudents) - parseInt(tutor.Schedule[i].StudentsAttending)) === 1){%>
                                                 <span class="badge badge-warning openSeats"><%=(parseInt(tutor.MaxStudents) - parseInt(tutor.Schedule[i].StudentsAttending) )+ " open seat"%></span>
+                                            <%}else{%>
+                                                <span class="badge badge-warning openSeats"><%=(parseInt(tutor.MaxStudents) - parseInt(tutor.Schedule[i].StudentsAttending) )+ " open seats"%></span>
                                             <%}%>
-                                            <span class="badge badge-warning openSeats"><%=(parseInt(tutor.MaxStudents) - parseInt(tutor.Schedule[i].StudentsAttending) )+ " open seats"%></span>
                                         <%}%>
                                     </li>
                                 <%}%>
@@ -159,7 +152,17 @@
                         <div id="card-errors" role="alert"></div>
 
                         <button id="submit" class="btn stripe-submit">Checkout</button>
+                        <div class="payment-processing-container">
+                            <div class="d-flex justify-content-center">
+                                <div class="spinner-border" role="status">
+                                    <span class="sr-only">Payment Processing</span>
+                                </div>
+                                <h3 class="payment-status">Payment Processing</h3>
+                            </div>
+            
+                        </div>
                     </form>
+                   
             </div>
         </div>
         </div>

@@ -47,7 +47,7 @@ function populateTutors(data){
     for (x in data){
         sessions += "<div class='tutorBlock tutorBlockDark'>"+
              "<ul class='tutorBlockHeader'>"+
-                 "<li><img src='../"+data[x].Image+"' alt='Profile Pic' class='profile-pic' />"+
+                 "<li><img src='"+data[x].Image+"' alt='Profile Pic' class='profile-pic' />"+
                     " <h1 class='connectionName text-light'></h1>"+
             "</li>"+
              "<li class='starRating'>"+

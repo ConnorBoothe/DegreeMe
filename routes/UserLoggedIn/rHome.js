@@ -77,7 +77,6 @@ function sortTutoringSessions(tutorSeshArray) {
 //render the home page
 router.get('/home', function (req, res) {
     if (req.session.userId) {
-        console.log(req.session)
        timeline.getUserTimeline(req.session.following, 0, req).exec((err, docs1) => {
             if (err) {
                 console.log(err);

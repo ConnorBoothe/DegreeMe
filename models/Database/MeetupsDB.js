@@ -146,7 +146,7 @@ module.exports = class UserProfile {
                 for(var i in docs[0].Members){
                     if(docs[0].Members[i].role == "Student"){
                         console.log("FOUND")
-                        docs[0].Members[i].intent = "none";
+                        // docs[0].Members[i].intent = "none";
                         docs[0].save();
                         break;
                     }

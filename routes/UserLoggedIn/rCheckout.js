@@ -230,11 +230,11 @@ router.post("/charge",
             res.redirect('/home');
         }
         if (req.session.userId) {
+
             listings.getStudentsAttending(req.body.tutorSessionId).exec((err, docs) => {
                 //If the maximum student requirement has not been met, allow session to be added
-                    //function to remove time slot. Move if necessary
-                    listings.removeScheduleSlot(req.body.tutorSessionId, req.body.timeSlot, function () {});
                     users.getUserByHandle(docs.Handle).exec((err, tutor) => { //need to get tutor email
+                        var intentId = "";
                         const paymentIntent = stripe.paymentIntents.create({
                             payment_method_types: ['card'],
                             amount: parseInt(docs.HourlyRate * docs.NumHours * 100),
@@ -251,6 +251,8 @@ router.post("/charge",
                         }, {
                             stripeAccount: tutor[0].StripeId,
                         }).then(function (paymentIntent) {
+                            console.log("Payment intent", paymentIntent.id)
+                            intentId = paymentIntent.id;
                             //(id, tutorHandle, date, subject
                             new Promise((resolve, reject) => {
                             meetups.meetupExists(docs.id, docs.Handle,req.body.timeSlot, docs.Subject ).exec((err, docs)=>{
@@ -263,7 +265,6 @@ router.post("/charge",
                                }
                             })
                         }).then(function(data){
-                            console.log("DATA",data)
                            if(!data){
                             var connection = new Connection("0", docs.id, docs.Handle, req.session.handle, docs.Subject, docs.CourseCode, req.body.timeSlot, req.body.timeSlot, docs.Building, docs.Room,
                             docs.HourlyRate, docs.NumHours, docs.StudentsAttending + 1, docs.Type, false, req.body.sessionNotes);
@@ -282,7 +283,7 @@ router.post("/charge",
                                 name: req.session.name,
                                 handle: req.session.handle,
                                 image: req.session.img,
-                                intent: paymentIntent.id
+                                intent: intentId+" ASS"
                             } ], docs.Virtual)
                             .then(function (data) {
                                 var meetingId = data._id;
@@ -290,7 +291,6 @@ router.post("/charge",
                                     //add tutoring session to user profile of all members
                                     users.addTutoringSession(data.Members[x].handle, data._id, data.courseCode, data.date, data.Members[1].image, data.userHandle, data.Members[x].role);
                                 }
-                               
                                 // listings.addStudentAttending(req.body.tutorSessionId).exec();
                                 //Add a new notification
                                 notifications.addNotification(docs.Handle, req.body.Name, ("Congrats! You made a sale to " + req.body.Name + " for <span class='text-success'>$" + parseInt(docs.HourlyRate * docs.NumHours) + "</span"),
@@ -298,50 +298,48 @@ router.post("/charge",
                                 users.incrementNotificationCount(docs.Handle).then(function (data) {
                                     console.log(data)
                                 });
-                                listings.incrementStudentsAttending(req.body.tutorSessionId, req.body.timeId);
+                                //if individual, remove time slot. else increment student attending
+                                 listings.incrementStudentsAttending(req.body.tutorSessionId, req.body.timeId);
                                     users.getUserByHandle(docs.Handle).exec((err, user)=>{
-                                        var mail = unirest("POST", "https://api.sendgrid.com/v3/mail/send");
+                                    //     var mail = unirest("POST", "https://api.sendgrid.com/v3/mail/send");
+                                    //     mail.headers({
+                                    //         "content-type": "application/json",
+                                    //         "authorization": process.env.SENDGRID_API_KEY,
+                                    //     });
+                                    //     mail.type("json");
+                                    //     mail.send({
+                                    //     "personalizations": [
+                                    //         {
+                                    //             "to": [
+                                    //                 {
+                                    //                     "email": user[0].email,
+                                    //                     "name": user[0].first_name + " " + user[0].last_name
+                                    //                 }
+                                    //         ],
+                                    //             "dynamic_template_data": {
+                                    //                 "subject": "Congrats, you made a sale to " + req.body.Name + ".",
+                                    //                 "name": req.body.Name,
+                                    //                 "price": "$" + parseInt(docs.HourlyRate * docs.NumHours),
+                                    //                 "meeting": meetingId,
+                                    //         },
+                                    //             "subject": " "
+                                    //         }
+                                    //     ],
+                                    //         "from": {
+                                    //             "email": "notifications@degreeme.io",
+                                    //             "name": "DegreeMe"
+                                    //     },
+                                    //         "reply_to": {
+                                    //             "email": "noreply@degreeme.io",
+                                    //             "name": "No Reply"
+                                    //     },
+                                    //         "template_id": "d-54ee1291c75f468cbe05c2d88ceaf4c2"
+                                    //     });
+                                    //     mail.end(function (res) {
+                                    //     if (res.error) throw new Error(res.error);
 
-                                        mail.headers({
-                                            "content-type": "application/json",
-                                            "authorization": process.env.SENDGRID_API_KEY,
-                                        });
-                                        mail.type("json");
-                                        mail.send({
-                                        "personalizations": [
-                                            {
-                                                "to": [
-                                                    {
-                                                        "email": user[0].email,
-                                                        "name": user[0].first_name + " " + user[0].last_name
-                                                    }
-                                            ],
-                                                "dynamic_template_data": {
-                                                    "subject": "Congrats, you made a sale to " + req.body.Name + ".",
-                                                    "name": req.body.Name,
-                                                    "price": "$" + parseInt(docs.HourlyRate * docs.NumHours),
-                                                    "meeting": meetingId,
-                                            },
-                                                "subject": " "
-                                            }
-                                        ],
-                                            "from": {
-                                                "email": "notifications@degreeme.io",
-                                                "name": "DegreeMe"
-                                        },
-                                            "reply_to": {
-                                                "email": "noreply@degreeme.io",
-                                                "name": "No Reply"
-                                        },
-                                            "template_id": "d-54ee1291c75f468cbe05c2d88ceaf4c2"
-                                        });
-                                        mail.end(function (res) {
-                                        // if (res.error) throw new Error(res.error);
-
-                                    });
+                                    // });
                                     })
-                                    
-                                
                                 res.status(202).json({
                                     StripeId: tutor[0].StripeId,
                                     secret: paymentIntent.client_secret,
@@ -359,6 +357,7 @@ router.post("/charge",
                            else{
                            
                         //if group session and no meetup exists, create a new meetup
+                        console.log("THIS SHOULD NOT RUN OF IND")
                         meetups.addMember(data._id, req.session.name, req.session.handle, req.session.img, paymentIntent.id)
                                 var meetingId = data._id;
                                 console.log(data)
@@ -375,48 +374,49 @@ router.post("/charge",
                                     console.log(data)
                                 });
                                 listings.incrementStudentsAttending(req.body.tutorSessionId, req.body.timeId);
+                                users.getUserByHandle(docs.Handle).exec((err, user)=>{
+                                    console.log("Get user by handle", user)
+                                    // var mail = unirest("POST", "https://api.sendgrid.com/v3/mail/send");
 
-                                    var mail = unirest("POST", "https://api.sendgrid.com/v3/mail/send");
+                                    //     mail.headers({
+                                    //         "content-type": "application/json",
+                                    //         "authorization": process.env.SENDGRID_API_KEY,
+                                    //     });
+                                    //     mail.type("json");
+                                    //     mail.send({
+                                    //     "personalizations": [
+                                    //         {
+                                    //             "to": [
+                                    //                 {
+                                    //                     "email": user[0].email,
+                                    //                     "name": user[0].first_name + " " + user[0].last_name
+                                    //                 }
+                                    //         ],
+                                    //             "dynamic_template_data": {
+                                    //                 "subject": "Congrats, you made a sale to " + req.body.Name + ".",
+                                    //                 "name": req.body.Name,
+                                    //                 "price": "$" + parseInt(docs.HourlyRate * docs.NumHours),
+                                    //                 "meeting": meetingId,
+                                    //         },
+                                    //             "subject": " "
+                                    //         }
+                                    //     ],
+                                    //         "from": {
+                                    //             "email": "notifications@degreeme.io",
+                                    //             "name": "DegreeMe"
+                                    //     },
+                                    //         "reply_to": {
+                                    //             "email": "noreply@degreeme.io",
+                                    //             "name": "No Reply"
+                                    //     },
+                                    //         "template_id": "d-54ee1291c75f468cbe05c2d88ceaf4c2"
+                                    //     });
+                                    //     mail.end(function (res) {
+                                    //     // if (res.error) throw new Error(res.error);
 
-                                        mail.headers({
-                                            "content-type": "application/json",
-                                            "authorization": process.env.SENDGRID_API_KEY,
-                                        });
-                                        mail.type("json");
-                                        mail.send({
-                                        "personalizations": [
-                                            {
-                                                "to": [
-                                                    {
-                                                        "email": user[0].email,
-                                                        "name": user[0].first_name + " " + user[0].last_name
-                                                    }
-                                            ],
-                                                "dynamic_template_data": {
-                                                    "subject": "Congrats, you made a sale to " + req.body.Name + ".",
-                                                    "name": req.body.Name,
-                                                    "price": "$" + parseInt(docs.HourlyRate * docs.NumHours),
-                                                    "meeting": meetingId,
-                                            },
-                                                "subject": " "
-                                            }
-                                        ],
-                                            "from": {
-                                                "email": "notifications@degreeme.io",
-                                                "name": "DegreeMe"
-                                        },
-                                            "reply_to": {
-                                                "email": "noreply@degreeme.io",
-                                                "name": "No Reply"
-                                        },
-                                            "template_id": "d-54ee1291c75f468cbe05c2d88ceaf4c2"
-                                        });
-                                        mail.end(function (res) {
-                                        // if (res.error) throw new Error(res.error);
-
-                                    console.log(res.body);
-                                    });
-                                
+                                    // console.log(res.body);
+                                    // });
+                                });
                                 res.status(202).json({
                                     StripeId: tutor[0].StripeId,
                                     secret: paymentIntent.client_secret,

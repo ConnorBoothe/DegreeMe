@@ -92,7 +92,7 @@ $(document).ready(function(){
                 course:$("#courseName").val(),
                 professor:$("input[name='professor']").val(),
                 groupName:$("input[name='groupName']").val(),
-                groupDescription:$("input[name='groupDescription']").val(),
+                groupDescription:$("#group_description").val(),
                 groupImage:$(".userProfileImg").attr("src")
              }
              $.ajax({

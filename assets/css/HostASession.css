@@ -302,9 +302,20 @@
     font-size:14px!important;
     cursor:pointer;
   }
+  .hostSesh-button{
+    font-size:15px!important;
+    color:white;
+    border:2px solid #007bff!important;
+    border-radius:20px;
+    text-align:center;
+  }
+  .hostSesh-button:hover{
+    color:white;
+    background-color:#007bff!important;
+  }
   .typeInfo{
     text-align:left;
-    color:#a9a9a9;
+    color:#d4d4d4;
     font-family: 'Open Sans', sans-serif;
     font-size:14px;
     margin-right:20%;
@@ -313,7 +324,7 @@
   }
   .typeInfo1{
     text-align:left;
-    color:#a9a9a9;
+    color:#d4d4d4;
     font-family: 'Open Sans', sans-serif;
     font-size:14px;
     margin-right:20%;
@@ -347,15 +358,19 @@
     float:left;
     width:90%;
   }
+  .create-listing-button-container{
+    width:100%;
+    text-align:center;
+  }
   .disclaimer{
-    font-size:18px;
+    font-size:16px;
     color:#d4d4d4;
     margin-top:40px;
   }
   .dateTxtHostSession{
     color:#d4d4d4;
     margin-top:3px;
-    font-size:15px;
+    font-size:14px;
     margin-bottom:0!important;
   }
   .price-container{
@@ -390,12 +405,14 @@
     font-family: 'Open Sans', sans-serif;
     margin-top:50px;
   }
+  .timeSlotTxt{
+  }
   .userInfoHeading{
     text-align:left;
     font-size:22px;
     color:#d4d4d4;
     margin-bottom:20px;
-    margin-top:30px;
+    margin-top:50px;
   }
   .currentSchedule-container{
     text-align:left;
@@ -513,7 +530,7 @@
   z-index:2;
 }
 .today{
-  font-size:16px!important;
+  font-size:15px!important;
   margin-top: 5px;
 }
 .courseCountainer{
@@ -590,6 +607,8 @@
   text-align:left;
   font-family: 'Open Sans', sans-serif;
   padding-top:10px;
+  font-size:14px;
+  color:#d4d4d4;
 }
 .courseCode{
   text-align:left;

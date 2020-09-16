@@ -29,8 +29,8 @@
                             <div id="hostSession-form" class="">
                                 <form method="POST" action="StudyGroup">
                                        <div class="createStudyGroupDiv">
-                                          <h1 class="userInfoHead-SG">Create a Group    <span id="schoolSignUp-sg"><%=session.school%></span></h1>
-                                            <p class="groupTxt">Groups bring students together around various topics of interest.</p>
+                                          <h1 class="userInfoHead-SG">Start a Group    <span id="schoolSignUp-sg"><%=session.school%></span></h1>
+                                            <p class="groupTxt">Groups allow students of the same courses to communicate and create study sessions.</p>
                                           
                                         <div class="study-item-container">
                                             <p class="text-light loginLabel1">Group Name</p>
@@ -39,7 +39,7 @@
                                         </div>
                                         <div class="study-item-container">
                                             <p class="text-light loginLabel1">Group Description</p>
-                                            <input name="groupDescription" id="group_description" type="text" class="input-field-createStudyGroup" autocomplete="off" style="text-transform: capitalize;"/>
+                                            <textarea name="groupDescription" cols="3" id="group_description" type="text" class="input-field-createStudyGroup" autocomplete="off" style="text-transform: capitalize;"></textarea>
                                             <p id="groupDescriptionTxt"></p>
                                         </div>
                                         <div class="study-item-container">

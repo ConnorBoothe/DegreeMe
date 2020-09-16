@@ -11,6 +11,9 @@
     margin-top:50px;
 }
 .payment-processing-container{
+    width:100%;;
+    text-align:center;
+    padding-top:20px;
     display:none;
 }
 #card-element{
@@ -70,12 +73,12 @@
     text-align:left;
 }
 .d-flex {
-    position:fixed;
-    margin-left:50%;
-    margin-right:auto;
+    width:220px;
     text-align:center;
     z-index:3;
     color:black!important;
+    margin-left:auto;
+    margin-right:auto;
 }
 .overlay{
     position:absolute!important;
@@ -87,6 +90,10 @@
 }
 .payment-status{
     color:white!important;
+    font-size:18px;
+    padding-top:5px;
+    padding-left:5px;
+
 }
 .sessionNotes{
     width:90%;
@@ -212,8 +219,12 @@
     width:150px!important;
     padding-top:20px;
 }
+.tutorName a{
+    font-size:16px;
+    padding-left:5px;
+}
 .tutorName{
-    font-size:18px;
+    font-size:16px;
     padding-top:10px;
     font-family: 'Open Sans', sans-serif;
     color:white;
@@ -251,12 +262,18 @@
   .stripe-submit{
     font-family: 'Open Sans', sans-serif;
     margin-top:30px;
-    background-color:#007bff!important;
+    background-color:#242526!important;
+    border:2px solid #007bff!important;
     color:white!important;
     width:50%;
-    font-size:20px!important;
+    font-size:17px!important;
     margin-left:25%;
     margin-right:20px;
+    border-radius:20px;
+  }
+  .stripe-submit:hover{
+    background-color:#007bff!important;
+
   }
   .date-wrapper{
       margin-left:auto;

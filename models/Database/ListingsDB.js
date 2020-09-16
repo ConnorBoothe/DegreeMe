@@ -103,7 +103,7 @@ listingsAutocompleteByCourseCode(searchValue){
 
   }, '_id Image Name Subject').limit(10);
 }
-  addPhysicalGroupListing(UserID, Handle, Name, Subject, CourseCode, Grade, HourlyRate, NumHours, School, Type, Schedule, MaxStudents, Building, Room, Image, Active, StartDate, ExpirationDate, Virtual) {
+  addPhysicalGroupListing(UserID, Handle, Name, Subject, CourseCode, Grade, HourlyRate, NumHours, School, Type, Schedule, MaxStudents, Image, Active, StartDate, ExpirationDate, Virtual) {
     var ListingsDB = mongoose.model('ListingsDB', ListingsDBSchema);
     var listing = new ListingsDB({
       UserID: UserID,
@@ -235,7 +235,6 @@ listingsAutocompleteByCourseCode(searchValue){
   //listingId: _id attribute of listing document
   //timeSlot: time slot to remove
   removeScheduleSlot(listingId, timeSlot){
-    console.log("Testing ")
     var ListingsDB = mongoose.model('ListingsDB', ListingsDBSchema);
     ListingsDB.find({
       _id: listingId
@@ -244,11 +243,12 @@ listingsAutocompleteByCourseCode(searchValue){
     var tempSlot = "";
     //retrieve the proper time slot
     for(x in docs[0].Schedule){
+      console.log("X",x)
         if(docs[0].Schedule[x].timeSlot === timeSlot){
+          console.log("tempSlot")
             tempSlot  = docs[0].Schedule[x];
         }
     }
-    console.log("Time:" +tempSlot)
     //remove the time slot
     docs[0].Schedule.pull(tempSlot);
     return docs[0].save();
@@ -379,6 +379,7 @@ incrementStudentsAttending(listingId, dateId){
 
     console.log("DOCS", docs)
     if(docs.Type === "Group Session"){
+      console.log("GROUP")
       for(var x = 0; x <docs.Schedule.length;x++){
         if(dateId = docs.Schedule[x]._id){
           docs.Schedule[x].StudentsAttending++;
