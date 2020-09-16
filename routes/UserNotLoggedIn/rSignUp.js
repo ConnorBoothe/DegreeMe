@@ -171,6 +171,51 @@ router.post('/SignUp', [
                                     users.addUser("@" + req.body.handle[0], first_name, last_name, req.body.school[0], req.body.email[0], hash,
                                         "https://storage.googleapis.com/degreeme-images/" + req.body.handle[0] + ".jpg", "Inactive", activationCode,
                                         "None", req.body.major[0]);
+                                         // using Twilio SendGrid's v3 Node.js Library
+                            // https://github.com/sendgrid/sendgrid-nodejs
+                            var mail = unirest("POST", "https://api.sendgrid.com/v3/mail/send");
+
+                            mail.headers({
+                            "content-type": "application/json",
+                            "authorization": process.env.SENDGRID_API_KEY,
+                            });
+
+                            mail.type("json");
+                            mail.send({
+                            "personalizations": [
+                                {
+                                    "to": [
+                                        {
+                                            "email": req.body.email[0],
+                                            "name": req.body.name
+                                        }
+                                ],
+                                    "dynamic_template_data": {
+                                        "subject": "Account Confirmation",
+                                        "name": req.body.first_name,
+                                        "code": activationCode,
+                                        "email": req.body.email[0],
+                                
+                                },
+                            }
+                            ],
+                                "from": {
+                                    "email": "notifications@degreeme.io",
+                                    "name": "DegreeMe"
+                            },
+                                "reply_to": {
+                                    "email": "noreply@degreeme.io",
+                                    "name": "No Reply"
+                            },
+                                "template_id": "d-e54827ff53514c15969d2e52db32e13d"
+                            });
+
+                            mail.end(function (res) {
+                                // if (res.error) throw new Error(res.error);
+
+                            console.log(res.body);
+                            console.log("email sent", req.body.email[0])
+                            });
                                 }
                                 else if(req.body.screenSize === "Mobile") {
                                     var fNameLetter = req.body.first_name[1].substring(0,1);
@@ -182,57 +227,57 @@ router.post('/SignUp', [
                                     users.addUser("@" + req.body.handle[1], first_name, last_name, req.body.school[1], req.body.email[1], hash,
                                         "https://storage.googleapis.com/degreeme-images/" + req.body.handle[1] + ".jpg", "Inactive", activationCode,
                                         "None", req.body.major[1]);
+                                     // using Twilio SendGrid's v3 Node.js Library
+                            // https://github.com/sendgrid/sendgrid-nodejs
+                            var mail = unirest("POST", "https://api.sendgrid.com/v3/mail/send");
 
+                            mail.headers({
+                            "content-type": "application/json",
+                            "authorization": process.env.SENDGRID_API_KEY,
+                            });
+
+                            mail.type("json");
+                            mail.send({
+                            "personalizations": [
+                                {
+                                    "to": [
+                                        {
+                                            "email": req.body.email[1],
+                                            "name": req.body.name
+                                        }
+                                ],
+                                    "dynamic_template_data": {
+                                        "subject": "Account Confirmation",
+                                        "name": req.body.first_name,
+                                        "code": activationCode,
+                                        "email": req.body.email[1],
+                                
+                                },
+                            }
+                            ],
+                                "from": {
+                                    "email": "notifications@degreeme.io",
+                                    "name": "DegreeMe"
+                            },
+                                "reply_to": {
+                                    "email": "noreply@degreeme.io",
+                                    "name": "No Reply"
+                            },
+                                "template_id": "d-e54827ff53514c15969d2e52db32e13d"
+                            });
+
+                            mail.end(function (res) {
+                                // if (res.error) throw new Error(res.error);
+
+                            console.log(res.body);
+                            });
                                 }
                                
                               });
                             // fs.writeFile("assets/img/userImg/" + req.body.handle + ".jpg", base64Image, { encoding: 'base64' }, function (err, data) {
                            
                             // });
-                            // using Twilio SendGrid's v3 Node.js Library
-                            // https://github.com/sendgrid/sendgrid-nodejs
-                            // var mail = unirest("POST", "https://api.sendgrid.com/v3/mail/send");
-
-                            // mail.headers({
-                            // "content-type": "application/json",
-                            // "authorization": process.env.SENDGRID_API_KEY,
-                            // });
-
-                            // mail.type("json");
-                            // mail.send({
-                            // "personalizations": [
-                            //     {
-                            //         "to": [
-                            //             {
-                            //                 "email": req.body.email,
-                            //                 "name": req.body.name
-                            //             }
-                            //     ],
-                            //         "dynamic_template_data": {
-                            //             "subject": "Account Confirmation",
-                            //             "name": req.body.first_name,
-                            //             "code": activationCode,
-                            //             "email": req.body.email,
-                                
-                            //     },
-                            // }
-                            // ],
-                            //     "from": {
-                            //         "email": "notifications@degreeme.io",
-                            //         "name": "DegreeMe"
-                            // },
-                            //     "reply_to": {
-                            //         "email": "noreply@degreeme.io",
-                            //         "name": "No Reply"
-                            // },
-                            //     "template_id": "d-e54827ff53514c15969d2e52db32e13d"
-                            // });
-
-                            // mail.end(function (res) {
-                            //     // if (res.error) throw new Error(res.error);
-
-                            // console.log(res.body);
-                            // });
+                           
                            
                         });
                     });
