@@ -348,7 +348,7 @@ var job = new CronJob('0 * * * * *', function() {
         for(x in docs){
           //if due date is in the past, capture the payment intent
           // if(new Date() > docs[x].DueDate && docs[x].Intent != "none"){
-            //charge the intent
+            //charge the intent 
             stripe.paymentIntents.capture(
               docs[x].Intent,
               { stripeAccount: docs[x].StripeId}
