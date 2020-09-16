@@ -191,7 +191,6 @@ router.post('/MakeStripeAccount',
                                 console.log(bankAccount);
                                 //update the session
                                 req.session.tutor = true;
-                                console.log(req.session.tutor)
                                 res.redirect('MyFinances?msg=Seller%20Account%20Created!%20Create%20a%20Tutor%20Listing%20to%20Start%20Earning');
                             }
                         }
@@ -212,7 +211,6 @@ router.post("/Settings",
             if (err) {
                 res.redirect('/Settings?error=' + err);
             }
-            console.log(req.session.handle)
             // Remove header
             let base64String = req.body.img1; // Not a real image
             // Remove header

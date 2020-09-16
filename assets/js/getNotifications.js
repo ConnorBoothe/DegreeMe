@@ -236,7 +236,7 @@ $(".message").on("click", function(){
                 '<div class=" "><button  type="button" class="startConversation-button" data-toggle="modal" data-target="#exampleModal1"><h4 class="startConversation" >Start a Conversation</h4></button></div>';
                 for(var x=res.length-1; x>=0; x--){
                     if(res[x].unreadCount === 0){
-                        threads +=  '<a href=../messages?messageId='+res[x].threadId+'><li class=" notifications"><div><div class="blue-dot"></div> <img class="notifImg" src="../'+res[x].hostImg+'"/><p class="notif">'+res[x].subject+'</p><p class="text-secondary">Created '+displayTimeSince(res[x].timestamp)+'</p></div></a></li>';
+                        threads +=  '<a href=../messages?messageId='+res[x].threadId+'><li class=" notifications"><div><div class="blue-dot"></div> <img class="notifImg" src="'+res[x].hostImg+'"/><p class="notif">'+res[x].subject+'</p><p class="text-secondary">Created '+displayTimeSince(res[x].timestamp)+'</p></div></a></li>';
                     }
                     else{
                         threads +=  
@@ -246,7 +246,6 @@ $(".message").on("click", function(){
                        
                          '<button class="sawMessage"><div class="blue-dot bg-primary"></div> <img class="notifImg" src="'+res[x].hostImg+'"/><p class="notif">'+res[x].subject+'</p><p> '+ "<p class='text-primary'>"+res[x].unreadCount+" unread messages</p>"+'</p></div></button></li>';
                     }
-                 
                 }
                 threads+= "</form>";
                 $("#showNotifications ul").html(threads)
@@ -256,8 +255,6 @@ $(".message").on("click", function(){
         $("#showNotifications").hide();
         $(".blocker").hide();
     }
-
-
 })
 $.ajax({
     url: '/API/Threads' ,

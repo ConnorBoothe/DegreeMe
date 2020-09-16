@@ -167,18 +167,19 @@
                      <p class="expirationTxt">Once the session expires, you can re-activate it by navigating to My Tutor Listings.</p>
                      <p class="expirationErr">Select an expiration date</p>
                      <input type="hidden" value="" name="listingDuration" id="listingDuration" />
-                     <h1 class="userInfoHeading1 text-light">Click the time slots below to select your availability<span
+                     <h1 class="userInfoHeading timeSlotTxt text-light">Click the time slots below to select your availability<span
                            class="scheduleErr">No time slots selected</span></h1>
                      <!-- Display calendar rows -->
-                      
                         <div class="calendar-wrapper">
                            <%- include ('partials/calendarDisplay')%>
-                        
                         </div>
                      <h5 class="disclaimer">By clicking the button below, you are entering into a binding agreement with
                         DEGREEME LLC, stating that you have taken <span class="thisCourse">this course</span> and
                         received a B or higher. </h5>
-                     <button class="btn btn-primary loginLink" id="createListing">Create Listing</button>
+                     <div class="create-listing-button-container">
+                        <button class="btn loginLink hostSesh-button" id="createListing">Create Listing</button>
+
+                     </div>
                      
                      <br>
                      <p class="listingErrMsg"></p>

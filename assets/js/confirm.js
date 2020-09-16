@@ -4,7 +4,8 @@ var style = {
     backgroundColor:"#1d1d1d"
   }
 };
-
+var error="";
+$.session.set("error", "")
 $(document).ready(function () {
   $(".dateTimeText").on("click", function(){
     $(this).css("border", "none");
@@ -17,16 +18,25 @@ $(document).ready(function () {
   card.on('change', ({ error }) => {
     const displayError = document.getElementById('card-errors');
     if (error) {
-      displayError.textContent = error.message;
+      alert("ERRROR")
+      alert(error)
+      $.session.set("error", error) 
+        displayError.textContent = error.message;
     } else {
+      $.session.set("error", "") 
       displayError.textContent = '';
     }
-  });
+  })
 
   var form = document.getElementById('stripe-payment-form');
   form.addEventListener('submit', function (ev) {
     ev.preventDefault();
-
+    if($.session.get("error") != ""){
+      alert("errr")
+    }
+    else{
+   alert($.session.get("error"))
+    $(".stripe-submit").text("Checking out...")
     if($(".dateTimeText").text() === "Select Date/Time"){
       $(".date-container").css("border", "2px solid #dc3545");
       $(".toast-body").text("Payment not processed: No time selected.")
@@ -54,13 +64,12 @@ $(document).ready(function () {
         "Content-Type": "application/json"
       }, statusCode: {
         202: function (result) {
-          $(".overlay").show();
+          // $(".overlay").show();
           $(".payment-processing-container").show();
+          $(".stripe-submit").text("Checking out...")
           //alert( "202" );
           //after intent ajax call (need secret and tutor StripeId)
-
           stripe.confirmCardPayment(result.secret, {
-         
             payment_method: {
               card: card,
               billing_details: {
@@ -95,7 +104,8 @@ $(document).ready(function () {
       },
     });
     }
-    
+       
+  }
   })
 
 })

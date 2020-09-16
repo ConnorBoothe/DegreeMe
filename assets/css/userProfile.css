@@ -437,9 +437,21 @@ button.followingButton{
     background-color:#202020;
     margin-left:auto;
     margin-right:auto;
+    display:inline-block;
     /* border: 2px solid #a9a9a9; */
     position: relative;
     top: 75px!important;
     padding-bottom:20px;
   }
-  
+  .img-upload-container{
+    display:none;
+    position:relative;
+    top:0;
+    width:415px;
+    z-index:3;
+    margin-left:29%;
+    left:0;
+ }
+ .img{
+     width:150px!important;
+ }

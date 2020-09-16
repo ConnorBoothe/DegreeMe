@@ -45,6 +45,7 @@ app.set('view engine', 'ejs'); //set the view engine to ejs
 app.use('/assets', express.static('assets')); //use assets folder for static files
 //events scheduled to run on the server
 app.use(require('./routes/scheduledEvents/updateListings.js')); 
+app.use(require('./routes/scheduledEvents/chargePayments.js')); 
 //User not logged in routes
 app.use(require('./routes/UserNotLoggedIn/rIndex')); 
 app.use(require('./routes/UserLoggedIn/rConnections')); 

@@ -120,7 +120,6 @@ router.post('/login', [
                                         docs[x].class, docs[x].date, docs[x].time, docs[x].location));
                                 }
                             }
-                            console.log(req.session.id)
                             res.redirect('/home');
                         })
                     } else {
