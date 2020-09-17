@@ -1,5 +1,6 @@
 $(document).ready(function(){
     $(".date-container").on("click", function(){
+        $(this).css("border", "none");
         if($(".date-select").css("display") == "none"){
             $(".date-select").show();
             $(".blocker").show();

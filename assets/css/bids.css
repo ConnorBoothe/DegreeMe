@@ -16,9 +16,11 @@
 }
 .payment-processing-container{
     display:none;
-    z-index:3!important;
-    position:absolute;
-    margin-left:45%;
+    width:205px;
+    text-align:center;
+    margin-left:auto;
+    margin-right:auto;
+    padding-top:25px;
 }
 .bids-table{
     position:relative;
@@ -39,6 +41,10 @@
 }
 .payment-form-wrapper{
   
+}
+.payment-status{
+    font-size:18px;
+    padding-top:5px;
 }
 
 .payment-container{
@@ -102,14 +108,19 @@ table tr td{
   .stripe-submit{
     font-family: 'Open Sans', sans-serif;
     margin-top:30px;
-    background-color:#007bff!important;
+    background-color:#242526!important;
+    border:2px solid #007bff!important;
     color:white!important;
-    width:50%;
-    font-size:20px!important;
+    width:40%;
+    font-size:17px!important;
+    border-radius:20px;
+  }
+  .stripe-submit:hover{
+    background-color:#007bff!important;
 
   }
   .StripeElement--webkit-autofill {
-    background-color: #fefde5 !important;
+    background-color: #1d1d1d !important;
   }
   #card-errors{
       width:100%;
@@ -117,7 +128,8 @@ table tr td{
       color:#fa755a;
   }
   #card-element{
-      width:100%;
+    background-color:#1d1d1d!important;
+    width:400px!important;
   }
   .overlay{
     position:absolute!important;

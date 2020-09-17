@@ -1032,3 +1032,12 @@ input[name="searchType"]{
 .zoomLinkMsg{
     text-align:center;
 }
+.terms{
+    padding-right:25px!important;
+}
+.termsTxt{
+    font-size:14px;
+}
+.termsMsg{
+    padding-left:10px;
+}

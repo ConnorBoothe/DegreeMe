@@ -5,41 +5,42 @@ var style = {
   }
 };
 var error="";
-$.session.set("error", "")
 $(document).ready(function () {
+  
+  document.getElementById('submit').disabled = true;
   $(".dateTimeText").on("click", function(){
     $(this).css("border", "none");
   })
   var stripe = Stripe('pk_test_89vfyOdmTWo09jkpoyAnRy1l00ll36NLGn', { stripeAccount: $('input[name="StripeId"]')[0].value }); // Your Publishable Key
+
   var elements = stripe.elements();
   var card = elements.create('card', { style: style });
   card.mount('#card-element');
-
-  card.on('change', ({ error }) => {
+  card.on('change',function(event){
     const displayError = document.getElementById('card-errors');
-    if (error) {
-      alert("ERRROR")
-      alert(error)
-      $.session.set("error", error) 
-        displayError.textContent = error.message;
-    } else {
-      $.session.set("error", "") 
+    if(!event.complete){
+      document.getElementById('submit').disabled = true;
+    }
+    if(event.complete) {
+      document.getElementById('submit').disabled = false;
       displayError.textContent = '';
     }
-  })
-
-  var form = document.getElementById('stripe-payment-form');
-  form.addEventListener('submit', function (ev) {
-    ev.preventDefault();
-    if($.session.get("error") != ""){
-      alert("errr")
+    if(event.error){
+      document.getElementById('submit').disabled = true;
+      console.log(event.error)
+      displayError.textContent = event.error.message;
     }
-    else{
-   alert($.session.get("error"))
+  })
+  var form = document.getElementById('stripe-payment-form');
+  $(".stripe-submit").on('click', function (ev) {
+    ev.preventDefault();
+    document.getElementById('submit').disabled = true;
     $(".stripe-submit").text("Checking out...")
     if($(".dateTimeText").text() === "Select Date/Time"){
-      $(".date-container").css("border", "2px solid #dc3545");
+      $(".date-container").css("border", "1px solid #dc3545");
       $(".toast-body").text("Payment not processed: No time selected.")
+      $(".stripe-submit").text("Checkout")
+
       $('.toast').toast("show",{
           autohide: false
       });
@@ -47,7 +48,6 @@ $(document).ready(function () {
     else{
       document.getElementById('submit').disabled = true;
     //get intent ajax call
-    console.log("getting payment intent");
     payload = {
       tutorSessionId: $('input[name="tutorSessionId"]')[0].value,
       timeSlot: $('input[name="timeSlot"]')[0].value,
@@ -104,8 +104,6 @@ $(document).ready(function () {
       },
     });
     }
-       
-  }
   })
 
 })

@@ -1992,8 +1992,9 @@ border-bottom:2px solid #330099;
             border-right:none!important;
             border-top:none!important;
             border-left:none!important;
-            font-size:20px;
+            font-size:17px;
             color:white;
+            outline:none!important;
             padding-left:20px;
          }
          .input-field1::placeholder{

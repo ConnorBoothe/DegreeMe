@@ -58,6 +58,14 @@ module.exports = class UserProfile {
         var ConnectionDB = mongoose.model('ConnectionsDB',connectionDBSchema);
         return ConnectionDB.find({});
     }
+    //tutorhandle members paid _id
+    getMeetupsWherePaymentDue(){
+        var ConnectionDB = mongoose.model('ConnectionsDB',connectionDBSchema);
+        return ConnectionDB.find({
+            Paid:{ $ne: true},
+            // date:{ $lt: new Date()}
+        }, "tutorHandle Members Paid _id")
+    }
     getMeetupById(id){
         console.log("ID", id)
         var ConnectionDB = mongoose.model('ConnectionsDB',connectionDBSchema);
@@ -135,22 +143,16 @@ module.exports = class UserProfile {
     });
     
     }
-    setIntentToNone(id){
+    setIntentToNone(id, memberIndex){
         console.log("SET INTENT")
         var ConnectionDB = mongoose.model('ConnectionsDB',connectionDBSchema);
         ConnectionDB.find({_id:id}).exec((err,docs)=>{
             console.log("SET INTENT", docs)
             if(err){
-                console.log("Something broke in getIntents");
+                console.log("Something broke in set intent");
             }else{
-                for(var i in docs[0].Members){
-                    if(docs[0].Members[i].role == "Student"){
-                        console.log("FOUND")
-                        // docs[0].Members[i].intent = "none";
-                        docs[0].save();
-                        break;
-                    }
-                }
+                docs[0].Members[memberIndex].intent = "none";
+                docs[0].save();
             }
         });
     }
@@ -165,12 +167,15 @@ module.exports = class UserProfile {
     }
     //add location to the meetup
     setToPaid(id){
+        console.log("SETTING PAID")
         var ConnectionDB = mongoose.model('ConnectionsDB',connectionDBSchema);
         ConnectionDB.findOne({_id:id}).updateOne({
             $set: {
               Paid: true
             }
-          }).exec();
+          }).exec((err, docs)=>{
+              console.log(docs)
+          });
     }
     //determin if a meetup already exists
     meetupExists(id, tutorHandle, date, subject){

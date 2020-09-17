@@ -28,15 +28,7 @@
         <%- include ('partials/horizontalHeader.ejs')%>
 
         <div class="homeContainer">
-            <div class="payment-processing-container">
-                <div class="d-flex justify-content-center">
-                    <div class="spinner-border" role="status">
-                        <span class="sr-only">Payment Processing</span>
-                    </div>
-                    <h3 class="payment-status">Payment Processing</h3>
-                </div>
-
-            </div>
+            
             <div class="contentBlock1">
                 <%if(bidOpen){%>
                 <h3 class="bids-header">Select a bidder from the list below</h3>
@@ -99,6 +91,15 @@
                                 
                                 <button id="submit" class="btn btn-primary stripe-submit help-request-pay">Pay</button>
                             </form>    
+                            <div class="payment-processing-container">
+                                <div class="d-flex justify-content-center">
+                                    <div class="spinner-border" role="status">
+                                        <span class="sr-only">Payment Processing</span>
+                                    </div>
+                                    <h3 class="payment-status">Payment Processing</h3>
+                                </div>
+                
+                            </div>
                         </div>
                                
                     </div>

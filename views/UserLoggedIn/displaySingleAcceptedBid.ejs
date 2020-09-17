@@ -29,27 +29,17 @@
             <%- include ('partials/myCoursesSideBar.ejs')%>
             <div class="timeline">
                 <h1 class="text-light timeline-title">Bid Details</h1>
-               
                 <div class="timeline-container-status">
                     <div class="postHeader">
                         <div class="postRight">
-                            <a class="btn btn-primary viewThread-btn" href="/messages?messageId=<%=acceptedBid.ThreadId%>">View message thread</a>
-                    
-                            
+                            <a class="btn btn-primary viewThread-btn" href="/messages?messageId=<%=acceptedBid.ThreadId%>">View Message Thread</a>
                         </div>
-                        <p class="text-light winningBidder">Winning Bidder:<a href="/user/<%=acceptedBid.Bidder%>"><img class="winningBidderImg" src="../<%=acceptedBid.BidderImg%>" />
+                        <p class="text-light winningBidder">Winning Bidder:<a href="/user/<%=acceptedBid.Bidder%>"><img class="winningBidderImg" src="<%=acceptedBid.BidderImg%>" />
                         <span class="bidderHandle"><%=acceptedBid.Bidder%></span></a></p>
                         <p class="userHandleText">Post created by <a href="/user/<%=acceptedBid.UserHandle%>"><%=acceptedBid.UserHandle%></a></p>
+                        <p class="userHandleText">Amount Paid: $<%=acceptedBid.Price%> </p>
                     </div>
-                    <ul class="postDetailsList">
-                        <li class="postDetailsItem">
-                            <p class="badge badge-dark info-badge priceBadge">Amount Paid: $<%=acceptedBid.Price%> </p>
-                        </li>
-                        <li class="postDetailsItem">
-                         
-                        </li>
-                        
-                    </ul>
+                  
                    
                     <div class="">
                         <p class="text text-light fundsTxt">Funds will be released on <%=formatDate(acceptedBid.DueDate)%> at 12:00 AM</p>

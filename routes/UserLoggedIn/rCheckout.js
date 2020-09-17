@@ -157,12 +157,13 @@ router.post('/bids/chargeHelp',
                             //(id,sender, senderImg, msg,  dateTime
                             acceptedBids.addAcceptedBid(userData[0].handle, userData[0].img, req.session.handle, req.body.price, req.body.dueDate, req.body.description,
                                 thread._id,req.body.timelineId, req.body.bidId, docs[0].StripeId, paymentIntent.id )
+                            .then(function(bid){
                             messages.addMessage(thread._id, req.session.handle, req.session.img, "Congrats on winning the bid! This task must be completed by " +
                                 req.body.timelineDate, new Date());
                             users.addThread(req.session.handle, req.session.img, "Help Request", thread._id, userData[0].handle);
                             users.addThread(req.session.handle, req.session.img, "Help Request", thread._id, req.session.img);
                             //(userHandle ,name,type, img, url)
-                            notifications.addNotification(userData[0].handle, req.session.name, "Congrats! Your bid was selected", userData[0].img, "/messages?messageId=" + thread._id);
+                            notifications.addNotification(userData[0].handle, req.session.name, "Congrats! Your bid was selected", userData[0].img, "/acceptedBid/" + bid._id);
                             users.incrementNotificationCount(userData[0].handle);
                             //close the bid
                             timeline.closeBid(req.body.timelineId).exec();
@@ -209,11 +210,12 @@ router.post('/bids/chargeHelp',
                                 secret: paymentIntent.client_secret,
                                 student: req.session.name,
                                 winningBidder: req.body.name,
-                                threadId: thread._id
+                                threadId: thread._id,
+                                bidId: bid._id
                             }).end();
                         })
 
-
+                    })
                 })
         })
 
@@ -251,7 +253,10 @@ router.post("/charge",
                         }, {
                             stripeAccount: tutor[0].StripeId,
                         }).then(function (paymentIntent) {
-                            console.log("Payment intent", paymentIntent.id)
+                            if(paymentIntent.status === "requires_payment_method"){
+                                console.log("ERROR?")
+                            }
+                            console.log("Payment intent", paymentIntent)
                             intentId = paymentIntent.id;
                             //(id, tutorHandle, date, subject
                             new Promise((resolve, reject) => {
@@ -283,7 +288,7 @@ router.post("/charge",
                                 name: req.session.name,
                                 handle: req.session.handle,
                                 image: req.session.img,
-                                intent: intentId+" ASS"
+                                intent: intentId
                             } ], docs.Virtual)
                             .then(function (data) {
                                 var meetingId = data._id;

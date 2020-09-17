@@ -32,7 +32,6 @@ $(document).ready(function(){
                   else{
                     $(".bdge").text(result.notificationCount.toString())
                   }
-                
               },
               500: function (result) {
                 alert("500 " + result.responseJSON.err);

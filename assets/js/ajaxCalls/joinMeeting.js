@@ -48,8 +48,6 @@ $(document).ready(function(){
               },
             },
           });
-         
-         
     })
     $(".addLocation-btn").on("click", function(e){
       e.preventDefault();
@@ -61,6 +59,10 @@ $(document).ready(function(){
       if($("#room").val() === ""){
         submit = false;
         $("#room").css("border-bottom", "2px solid #dc3545");
+      }
+      if(!$(".terms").prop("checked")){
+        $(".termsMsg").css("color", "#dc3545");
+        submit = false;
       }
       if(submit){
         payload = {
