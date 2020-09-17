@@ -3,19 +3,35 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover, 
 input:-webkit-autofill:focus, 
 input:-webkit-autofill:active  {
-    -webkit-box-shadow: 0 0 0 30px #18191a inset !important;
+    -webkit-box-shadow: 0 0 0 30px #242526 inset !important;
+    border:none!important;
+    box-shadow: 2px 2px #191919;
 }
 .homeContainer{
   min-height:100vh!important;
   height:100%!important;
   margin-bottom:0;
   padding-bottom:0;
-  background-color:#191919;
+  background-color:#18191a;
 }
 .success-message{
   margin-left:250px!important;
   padding-left:10%;
   color:#d4d4d4;
+}
+.payment-processing-container{
+  display:none;
+  width:240px;
+  text-align:center;
+  margin-left:auto;
+  margin-right:auto;
+  padding-top:15px;
+  padding-bottom:15px;
+}
+.payment-processing-container h3{
+  font-size:18px;
+  padding-top:5px;
+
 }
 .startEarning{
   margin-left:250px;
@@ -199,7 +215,7 @@ input{
   background-color: #242526!important;
   border-radius: 4px;
   box-shadow:#131313 1px 2px;
-  border:none!important;
+  border:none;
 }
 .form-control:disabled{
   color:grey;

@@ -1,6 +1,8 @@
 //add frontend validation to Create Seller Account
-$(document).ready(function(){
-    $(".sellerAccount-form").on("submit", function(e){
+$(document).ready(function(e){
+
+    $(".createSeller-submit").on("click", function(e){
+        e.preventDefault()
         var submit = true;
         if($("#street_number").val() === ""){
             $("#street_number").css("border", "1px solid #dc3545")
@@ -39,9 +41,13 @@ $(document).ready(function(){
             $("#accNum").css("border", "1px solid #dc3545")
             submit = false;
         }
-    
-        if(!submit){
-            e.preventDefault()
+        if($("#dob").val() === "") {
+            $("#dob").css("border", "1px solid #dc3545")
+            submit = false;
+        }
+        if(submit){
+            $(".payment-processing-container").show();
+            $(".sellerAccount-form").submit();
         }
 
     })

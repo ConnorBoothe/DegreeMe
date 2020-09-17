@@ -34,7 +34,7 @@ function phone_formatting(ele, restore) {
     // prevent it from going to the end
     // UNLESS
     // cursor was at the end AND a dash was added
-    document.getElementById('msg').innerHTML = '<p>Selection is: ' + selection_end + ' and length is: ' + new_number.length + '</p>';
+    // document.getElementById('msg').innerHTML = '<p>Selection is: ' + selection_end + ' and length is: ' + new_number.length + '</p>';
 
     if (new_number.slice(-1) === '-' && restore === false
         && (new_number.length === 8 && selection_end === 7)

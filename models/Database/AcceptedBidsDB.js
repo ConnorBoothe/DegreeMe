@@ -52,7 +52,7 @@ module.exports = class Bids {
         return AcceptedBidsDB.find({
                 Intent:{ $ne: "none"},
                 DueDate:{ $lt: new Date()}
-        }, "Intent");
+        }, "Intent StripeId _id Bidder");
     }
     //get all user bids
     getAllAcceptedBids(userHandle){

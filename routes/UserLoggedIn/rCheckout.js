@@ -12,7 +12,7 @@ const {
     check,
     validationResult
 } = require('express-validator');
-const stripe = require('stripe')('sk_test_KLmOibLZEyhi7d6RA7CA42Bf00ZifUQEt7');
+const stripe = require('stripe')(process.env.STRIPE_KEY);
 //DBs used
 const ListingsDB = require('../../models/Database/ListingsDB');
 const Listing = require('../../models/classes/Tutor');
@@ -92,6 +92,7 @@ router.get('/Checkout', function (req, res) {
 //render the checkout page
 router.get('/bids/:timelineId', function (req, res) {
     if (req.session.userId) {
+        console.log(req.session)
         bids.getBidsByTimelineId(req.params.timelineId)
             .then(function (bids) {
                 timeline.getTimelineById(req.params.timelineId)
@@ -125,6 +126,7 @@ router.post('/bids/chargeHelp',
         //charge the person who started the help request
         //send funds to the bidder
         users.getUserByHandle(req.body.handle).exec((err, docs) => {
+            console.log("STripeID: " ,docs[0].StripeId)
             var userData = docs;
             const paymentIntent = stripe.paymentIntents.create({
                         payment_method_types: ['card'],
@@ -156,7 +158,7 @@ router.post('/bids/chargeHelp',
                         .then(function (thread) {
                             //(id,sender, senderImg, msg,  dateTime
                             acceptedBids.addAcceptedBid(userData[0].handle, userData[0].img, req.session.handle, req.body.price, req.body.dueDate, req.body.description,
-                                thread._id,req.body.timelineId, req.body.bidId, docs[0].StripeId, paymentIntent.id )
+                                thread._id,req.body.timelineId, req.body.bidId, docs[0].StripeId, paymentIntent.id)
                             .then(function(bid){
                             messages.addMessage(thread._id, req.session.handle, req.session.img, "Congrats on winning the bid! This task must be completed by " +
                                 req.body.timelineDate, new Date());
@@ -288,7 +290,7 @@ router.post("/charge",
                                 name: req.session.name,
                                 handle: req.session.handle,
                                 image: req.session.img,
-                                intent: intentId
+                                intent: paymentIntent.id
                             } ], docs.Virtual)
                             .then(function (data) {
                                 var meetingId = data._id;

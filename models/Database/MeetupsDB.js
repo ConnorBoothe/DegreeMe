@@ -62,7 +62,7 @@ module.exports = class UserProfile {
     getMeetupsWherePaymentDue(){
         var ConnectionDB = mongoose.model('ConnectionsDB',connectionDBSchema);
         return ConnectionDB.find({
-            Paid:{ $ne: true},
+            // Paid:{ $ne: true},
             // date:{ $lt: new Date()}
         }, "tutorHandle Members Paid _id")
     }

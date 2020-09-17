@@ -62,10 +62,10 @@ module.exports = class DateFunctions {
     var amPm = "";
     if (intHours === 12) {
       hours = 12;
-      amPm = "PM";
+      amPm = "AM";
     } else if (intHours === 0) {
       hours = 12;
-      amPm = "AM";
+      amPm = "PM";
     } else if (intHours < 12) {
     if(intHours<10){
         var splitHours = hours.split("");
