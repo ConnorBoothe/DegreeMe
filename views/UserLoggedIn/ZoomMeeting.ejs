@@ -37,20 +37,22 @@
               <span class="noZoomText">You have not scheduled the Zoom meeting</span>
            
           </div>
-          <p class="noPay">You will not be paid unless you schedule the Zoom meeting and insert the invite link below. Ensure that the date/time of your Zoom meeting matches the date/time of the
-            tutoring session.</p>
+          
           <p class="zoomLinkMsg"></p>
           <a target="_blank" href="https://zoom.us/meeting" class="scheduleMeeting btn btn-primary">Schedule Meeting</a>
 
           <h3 class="zoomLinkMsg inviteLinkMsg">Enter the 
             invite link below so <%=meeting.Members[0].name%> has access to it.
+            <br><br>You will not be paid unless you schedule the Zoom meeting and insert the invite link below.
           </h3>
+          <p class="noPay"></p>
+          <p class="termsTxt"> <input type="checkbox" name="terms" class="terms"/><span class="termsMsg">I agree to degreeMe's Terms and Conditions and Privacy Policy</span> </p>
           <form method="POST" action="addZoom" class="addZoom">
             <input type="text" name="zoomLink" class="zoomInput" placeholder="Enter Invite Link" />
             <input type="hidden" name="meetingId" value="<%=params.meetingId%>" />
             <input type="submit" class="btn btn-primary addMeeting" value="Add" />
           </form>
-          
+          <p class="zoomErr">Enter a valid Zoom invite link</p>
         </div>
 
         <%}else if(session.handle === meeting.Members[0].handle && !meeting.Virtual && meeting.Location.length < 1){%>
@@ -256,6 +258,7 @@
     <script src="../assets/js/popper.min.js"></script>
     <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../assets/js/SiteWideSearch.js"></script>
+    <script type="text/javascript" src="../assets/js/FormValidation/validate-zoom.js"></script>
     <script type="text/javascript" src="../assets/js/highlightCurrentMenuItem.js"></script>
     <script src="../assets/jquery/jquery.session/jquery.session.js"></script>
     <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>

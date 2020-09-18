@@ -1616,6 +1616,9 @@ Menu css
     }
     .inviteLinkMsg{
         margin-bottom:20px;
+        text-align:left!important;
+        padding-left:15%;
+        padding-right:15%;
     }
     .createZoomMeeting-container{
        

@@ -1033,6 +1033,11 @@ input[name="searchType"]{
 .zoomLinkMsg{
     text-align:center;
 }
+.zoomErr{
+    color:#dc3545;
+    font-size:14px;
+    display:none;
+}
 .terms{
     padding-right:25px!important;
 }
