@@ -11,4 +11,7 @@ router.use(session({
 router.get('/policies', function(req, res){
     res.render('UserNotLoggedIn/policies',{session:req.session});
 });
+router.get('/terms', function(req, res){
+    res.render('UserNotLoggedIn/TermsAndConditions',{session:req.session});
+});
 module.exports = router;

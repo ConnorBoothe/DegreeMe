@@ -13,7 +13,6 @@ router.get('/API/Threads', function(req, res){
             if(err){
                 res.send("An error occurred.")
             }
-            console.log("Threads", docs)
             res.send(docs.threads);
         });
     }

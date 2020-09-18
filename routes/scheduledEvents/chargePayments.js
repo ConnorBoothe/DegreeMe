@@ -1,5 +1,4 @@
 //Charge payment after service is rendered
-
 //packages used
 require('dotenv').config();
 const express = require('express');
@@ -53,6 +52,7 @@ var job = new CronJob('0 * * * * *', function() {
                       { stripeAccount: tutor[0].StripeId}
                       ).then(function(intent){
                         //remove the payment intent
+                        console.log("THEN RAN HOE")
                          meetups.setIntentToNone(meetupId, j);
                         // mail.headers({
                         //   "content-type": "application/json",
@@ -105,8 +105,9 @@ var job = new CronJob('0 * * * * *', function() {
               docs[x].Intent,
               { stripeAccount: docs[x].StripeId}
               ).then(function(intent){
-                 //set payment intent to none
+                 //set payment intent to none 
                  console.log(docs[x]._id);
+                 console.log("THEN RAN HOE")
                   acceptedBids.setIntentToNone(docs[x]._id);
                   users.getUserByHandle(docs[x].Bidder).exec((err, docs1)=>{
                     // mail.headers({

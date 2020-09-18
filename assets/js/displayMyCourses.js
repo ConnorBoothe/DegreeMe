@@ -323,9 +323,11 @@ $(document).ready(function(){
    })
     //request help AJAX POST call
     $(".requestHelpBtn").on("click",  function(e){
+        alert("YEAH")
         //input field validation
         var submit = true;
         if(parseInt($(".askingPrice").val()) < 5 || $(".askingPrice").val() == ""){
+            alert("NAH")
          $(".askingPrice").parent().css("border-bottom", "2px solid #dc3545");
          $(".priceError").text("Enter a price of $5 or greater");
          submit = false;
@@ -341,7 +343,7 @@ $(document).ready(function(){
         if($("input[name='requestType']:checked").val() === ""){
             submit = false;
         }
-        if(!$(".").prop("checked")){
+        if(!$(".terms").prop("checked")){
             $(".termsMsg").css("color", "#dc3545");
             submit = false;
             

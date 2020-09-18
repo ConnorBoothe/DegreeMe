@@ -35,6 +35,7 @@
     margin-bottom:30px;
     margin-top:30px;
     border-radius:8px;
+    border-bottom:2px solid #007bff!important;
     
 }
 
@@ -70,13 +71,8 @@
   .available {
     color: #d4d4d4;
     font-size: 18px!important;
-    padding-left: 35px;
     padding-bottom: 9px;
   }
-  .pending {
-    padding-left: 30px!important;
-  }
-  
   .twoBalances {
     display: inline-block;
     position: relative;
@@ -109,6 +105,7 @@
     margin-left:0!important;
     margin-right:20px;
     color: white;
+    padding-left:0!important;
 }
 .depositTxt1 {
     font-size:26px;

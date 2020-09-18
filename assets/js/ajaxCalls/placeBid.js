@@ -11,16 +11,20 @@ $(document).ready(function(){
     $(".bidErrTxt").hide();
   })
    $(".timeline").on("click", ".respondBtn", function(){
+    var button = $(this).parent();
+    var bidInput = button.children().eq(0).children().eq(4).val();
+    var removeComma = bidInput.replace(/,/g, "");
       payload = {
         timelineId: $(this).prev().children().eq(0).val(),
         bidder: $(this).prev().children().eq(1).val(),
-        price:  $(this).prev().children().eq(4).val(),
+        price:  removeComma,
         stripeId:  $(this).prev().children().eq(5).val(),
         description: $(this).prev().children().eq(6).val()
     }
     console.log(payload)
-    var button = $(this).parent();
-    if(parseInt($(".bid-input").val()) >= 5){
+   
+    alert(parseFloat(removeComma))
+    if(parseFloat(removeComma) >= 5){
       $.ajax({
         url: "/addBid",
         type: 'POST',

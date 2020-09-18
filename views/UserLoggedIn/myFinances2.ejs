@@ -42,7 +42,6 @@
                 <div class="timeline1">
                     <div class="timeline-container-status">
                         <div class="balanceText">
-                                <img src="/assets/img/card.svg">
                                     <h1 class="depositTxt">
                                         <p class="available">Available Balance</p>
                                         $<%=balance.available[0].amount/100%>
@@ -53,7 +52,7 @@
                 <div class="timeline1">
                     <div class="timeline-container-status">
                         <div class="balanceText">
-                            <img id="new-dollar" src="/assets/img/dollar.svg">
+                           
                             <h1 class="depositTxt">
                                 <p class="available pending">Pending Balance</p> $<%=balance.pending[0].amount/100%>
                             </h1>
@@ -61,6 +60,7 @@
                     </div>
                 </div>
             </div>
+            <p class="text-light">Earnings appear here after the due date of the task has passed.</p>
             <h1 class="depositTxt1">Transaction History</h1>
             <table class="table" color="#FFF">
                 <thead id="table2">
