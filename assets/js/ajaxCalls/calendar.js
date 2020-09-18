@@ -281,7 +281,7 @@ function createExpiration(expiration){
 function sendListing(button) {
     $(button).on("click", function (e) {
         e.preventDefault();
-        validateInputFields()
+        var errors = validateInputFields()
         var fourWeekSchedule = createSchedule();
        
         
@@ -298,61 +298,63 @@ function sendListing(button) {
               type = $(".listingTypeItem").eq(x).text();
             }
         }
-
-        var userId = $("#userId").val();
-        var handle = $("#handle").val();
-        var courseName = $("#courseName").val().trim();
-        var courseCode =  $(".thisCourse").text();
-        var grade = $("#grade").val();
-        var hourlyRate = $("#hourlyRate").val();
-        var school = $("#schoolSignUp").val();
-        var building = $("#building").val();
-        var room = $("#room").val();
-        var maxStudents = $("#maxStudents").val();
-        var image = $("#image").val();
-        var duration = $.session.get("duration");
-        var name = $("#name").val();
-        var expiration = expiration *7;
-        var startDate = new Date();
-        var expirationDate = createExpiration(expiration)
-    
-        payload = {
-            userId:userId,
-            handle: handle,
-            name:name,
-            courseName: courseName,
-            courseCode: courseCode,
-            grade: grade,
-            hourlyRate: hourlyRate,
-            duration:duration,
-            school: school,
-            building: building,
-            room:room,
-            maxStudents: maxStudents,
-            startDate: startDate,
-            expirationDate: expirationDate,
-            type:type,
-            image:image,
-            schedule: fourWeekSchedule,
-            virtual:virtual
+        if(!errors){
+            var userId = $("#userId").val();
+            var handle = $("#handle").val();
+            var courseName = $("#courseName").val().trim();
+            var courseCode =  $(".thisCourse").text();
+            var grade = $("#grade").val();
+            var hourlyRate = $("#hourlyRate").val();
+            var school = $("#schoolSignUp").val();
+            var building = $("#building").val();
+            var room = $("#room").val();
+            var maxStudents = $("#maxStudents").val();
+            var image = $("#image").val();
+            var duration = $.session.get("duration");
+            var name = $("#name").val();
+            var expiration = expiration *7;
+            var startDate = new Date();
+            var expirationDate = createExpiration(expiration)
+        
+            payload = {
+                userId:userId,
+                handle: handle,
+                name:name,
+                courseName: courseName,
+                courseCode: courseCode,
+                grade: grade,
+                hourlyRate: hourlyRate,
+                duration:duration,
+                school: school,
+                building: building,
+                room:room,
+                maxStudents: maxStudents,
+                startDate: startDate,
+                expirationDate: expirationDate,
+                type:type,
+                image:image,
+                schedule: fourWeekSchedule,
+                virtual:virtual
+            }
+            console.log(payload.schedule, "Payload Schedule")
+            $.ajax({
+                url: "/createSession",
+                type: 'POST',
+                data: JSON.stringify(payload),
+                headers: {
+                  "Content-Type": "application/json"
+                }, statusCode: {
+                  202: function (result) {
+                      listingAdded();
+                  },
+                  500: function (result) {
+                    alert("500 " + result.responseJSON.err);
+                  },
+                },
+              });
+        
         }
-        console.log(payload.schedule, "Payload Schedule")
-        $.ajax({
-            url: "/createSession",
-            type: 'POST',
-            data: JSON.stringify(payload),
-            headers: {
-              "Content-Type": "application/json"
-            }, statusCode: {
-              202: function (result) {
-                  listingAdded();
-              },
-              500: function (result) {
-                alert("500 " + result.responseJSON.err);
-              },
-            },
-          });
-    
+        
     })
 }
  function listingAdded() {
@@ -414,9 +416,14 @@ function validateInputFields(){
         $(".expirationErr").show();
         errors = true;
     }
+    if(!$(".terms").prop("checked")){
+        errors = true;
+        $(".termsMsg").css("color", "#dc3545");
+    }
     if(errors){
         $(".listingErrMsg").text("Errors exist in the form. Correct them and re-submit")
     }
+    return errors;
     
 }
 $(document).ready(function () {
@@ -566,5 +573,8 @@ $(document).ready(function () {
         $(".calendarContainer").hide();
         $("#calendar"+idArr[idArr.length-1]).fadeIn();
         $(this).addClass("bg-primary");
+    })
+    $(".terms").on("click", function(){
+       $(".termsMsg").css("color","white");
     })
 });

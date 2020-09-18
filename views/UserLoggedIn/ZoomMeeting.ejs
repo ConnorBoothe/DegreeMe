@@ -46,7 +46,7 @@
             <br><br>You will not be paid unless you schedule the Zoom meeting and insert the invite link below.
           </h3>
           <p class="noPay"></p>
-          <p class="termsTxt"> <input type="checkbox" name="terms" class="terms"/><span class="termsMsg">I agree to degreeMe's Terms and Conditions and Privacy Policy</span> </p>
+          <p class="termsTxt"> <input type="checkbox" name="terms" class="terms"/><span class="termsMsg">I have read and agree to degreeMe's Terms and Conditions and Privacy Policy</span> </p>
           <form method="POST" action="addZoom" class="addZoom">
             <input type="text" name="zoomLink" class="zoomInput" placeholder="Enter Invite Link" />
             <input type="hidden" name="meetingId" value="<%=params.meetingId%>" />
@@ -93,7 +93,7 @@
                
              </div>
               <input type="hidden" name="meetingId" class="meetingId" value="<%=params.meetingId%>" />
-              <p class="termsTxt"> <input type="checkbox" name="terms" class="terms"/><span class="termsMsg">I agree to degreeMe's Terms and Conditions and Privacy Policy</span> </p>
+              <p class="termsTxt"> <input type="checkbox" name="terms" class="terms"/><span class="termsMsg">I have read and agree to degreeMe's Terms and Conditions and Privacy Policy</span> </p>
              
               <input type="submit" class="btn btn-primary addLocation-btn" value="Add Location" />
             </form>

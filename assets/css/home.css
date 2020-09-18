@@ -193,18 +193,17 @@
 
 }
 .postBtn{
-
     position:relative;
-    float:right;
     right:0;
-    margin-left:60px;
     margin-right:10%;
-    margin-top:-40px;
 }
 .postBtn button{
     position:relative;
     right:0;
     width:100px;
+}
+.termsMsg{
+    color:white;
 }
 .requestHelp{
     width:80%;
@@ -303,7 +302,6 @@
 }
 
 .request-help-container{
-    padding-bottom:15px;
     min-height:75px;
     background-color:#37383b!important;
 }
@@ -950,6 +948,7 @@ input[name="searchType"]{
 .requestHelpBtn{
     font-family: 'Open Sans', sans-serif!important;
     font-size:14px;
+    margin-bottom:20px;
 }
 .viewBids-btn{
     padding-top:3px;
@@ -1046,4 +1045,7 @@ input[name="searchType"]{
 }
 .termsMsg{
     padding-left:10px;
+}
+.anonTxt{
+    display:none;
 }

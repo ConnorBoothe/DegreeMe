@@ -71,6 +71,9 @@
                             <label class="text-light secondLabel" for="anon">Post anonymously</label>
                             <input id="anon" name="requestType" type="radio" value="<%=session.userId%>" />
                         </div>
+                        <p class="anonTxt text-light">Your identity will be exposed once a bid is accepted.</p>
+                        <p class="termsTxt"> <input type="checkbox" name="terms" class="terms"/><span class="termsMsg">I have read and agree to degreeMe's Terms and Conditions and Privacy Policy</span> </p>
+
                         <div class="postBtn">
                             <input name="userName" type="hidden" value="<%=session.name%>"/>
                             <button class="btn btn-primary requestHelpBtn">Post</button>

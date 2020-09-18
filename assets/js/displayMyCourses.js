@@ -84,6 +84,15 @@ $(document).ready(function(){
         $(this).parent().css("border-bottom","none");
         $(".courseExists").text("");
     })
+    $("#anon").on("click", function(){
+        $(".anonTxt").show();
+    })
+    $("#yourself").on("click", function(){
+        $(".anonTxt").hide();
+    })
+    $(".terms").on("click", function(){
+        $(".termsMsg").css("color","white");
+    })
      $.ajax({
             url: '/API/MyCourses' ,
             method: 'GET',
@@ -332,6 +341,12 @@ $(document).ready(function(){
         if($("input[name='requestType']:checked").val() === ""){
             submit = false;
         }
+        if(!$(".").prop("checked")){
+            $(".termsMsg").css("color", "#dc3545");
+            submit = false;
+            
+          }
+        
         if(submit){
             var anon = false;
             if($("input[name='requestType']:checked").prev().text() === "Post anonymously"){

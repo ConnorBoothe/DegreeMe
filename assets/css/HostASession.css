@@ -613,3 +613,13 @@
 .courseCode{
   text-align:left;
 }
+.terms{
+  padding-right:25px!important;
+ 
+}
+.termsTxt{
+  font-size:14px;
+  font-family: 'Open Sans', sans-serif;
+  padding-top:30px;
+  padding-left:20px;
+}

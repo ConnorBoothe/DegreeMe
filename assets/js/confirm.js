@@ -30,6 +30,7 @@ $(document).ready(function () {
       console.log(event.error)
       displayError.textContent = event.error.message;
     }
+    
   })
   var form = document.getElementById('stripe-payment-form');
   $(".stripe-submit").on('click', function (ev) {
@@ -40,10 +41,15 @@ $(document).ready(function () {
       $(".date-container").css("border", "1px solid #dc3545");
       $(".toast-body").text("Payment not processed: No time selected.")
       $(".stripe-submit").text("Checkout")
-
+      document.getElementById('submit').disabled = false;
       $('.toast').toast("show",{
           autohide: false
       });
+    }
+    else if(!$(".terms").prop("checked")){
+      $(".termsMsg").css("color", "#dc3545");
+      $(".stripe-submit").text("Checkout")
+      document.getElementById('submit').disabled = false;
     }
     else{
       document.getElementById('submit').disabled = true;

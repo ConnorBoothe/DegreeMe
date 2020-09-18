@@ -25,7 +25,7 @@ function hourDifference(date){
   return Math.ceil(diffTime / (1000 * 60 * 60));
 }
 //job runs every night at midnight
-var job = new CronJob('0 0 0 * * *', function() {
+var job = new CronJob('0 * * * * *', function() {
       console.log("RUNNING")
       meetups.getMeetupsWherePaymentDue().exec((err,docs)=>{
         var curTime = new Date();

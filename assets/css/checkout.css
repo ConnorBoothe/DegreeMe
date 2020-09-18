@@ -261,7 +261,7 @@
   }
   .stripe-submit{
     font-family: 'Open Sans', sans-serif;
-    margin-top:30px;
+    margin-top:15px;
     background-color:#242526!important;
     border:2px solid #007bff!important;
     color:white!important;
@@ -352,3 +352,14 @@
   .checkoutImg{
       width:40px;
   }
+  .terms{
+    padding-right:25px!important;
+}
+.termsTxt{
+    font-size:14px;
+    padding-left:60px;
+    padding-top:40px;
+}
+.termsMsg{
+    padding-left:10px;
+}
