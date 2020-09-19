@@ -25,7 +25,7 @@ function hourDifference(date){
   return Math.ceil(diffTime / (1000 * 60 * 60));
 }
 //job runs every night at midnight
-var job = new CronJob('0 0 0 * * *', function() {
+var job = new CronJob('0 * * * * *', function() {
     listings.getListings().exec((err,docs)=>{
         for(x in docs){
           //if today's date is larger than expiration and listing is active
@@ -70,10 +70,14 @@ var job = new CronJob('0 0 0 * * *', function() {
             });
 
             mail.end(function (res) {
-                // if (res.error) throw new Error(res.error);
-
-            console.log(res.body);
-            });
+              if (res.error){
+                  console.log("this is the error listing expired", res.error);
+                  console.log(res.body);
+                  // throw new Error(res.error);
+              } else if (res.accepted) {
+                  console.log("email has sent listing expired");
+              }
+          });
            })
            
 
@@ -98,42 +102,46 @@ var job = new CronJob('0 0 0 * * *', function() {
             for(x in docs1){
               emailObjArray.push({"email": docs1[x].email});
             }
-            mail.headers({
-            "content-type": "application/json",
-            "authorization": process.env.SENDGRID_API_KEY,
-            });
+          //   mail.headers({
+          //   "content-type": "application/json",
+          //   "authorization": process.env.SENDGRID_API_KEY,
+          //   });
             
-            mail.type("json");
-            mail.send({
-            "personalizations": [
-                {
-                    "to": emailObjArray,
-                    "dynamic_template_data": {
-                        "subject": "Your tutoring session is approaching",
-                        "classSubject": meeting.class,
-                        "tutor": meeting.tutorHandle,
-                        "student": meeting.userHandle,
-                        "time": meeting.time,
-                        "meeting": meeting.sessionID,
-                },
-            }
-            ],
-                "from": {
-                    "email": "notifications@degreeme.io",
-                    "name": "DegreeMe"
-            },
-                "reply_to": {
-                    "email": "noreply@degreeme.io",
-                    "name": "No Reply"
-            },
-                "template_id": "d-a07dc021e5634836bfc21bb866cf8fb5"
-            });
+          //   mail.type("json");
+          //   mail.send({
+          //   "personalizations": [
+          //       {
+          //           "to": emailObjArray,
+          //           "dynamic_template_data": {
+          //               "subject": "Your tutoring session is approaching",
+          //               "classSubject": meeting.class,
+          //               "tutor": meeting.tutorHandle,
+          //               "student": meeting.userHandle,
+          //               "time": meeting.time,
+          //               "meeting": meeting._id,
+          //       },
+          //   }
+          //   ],
+          //       "from": {
+          //           "email": "notifications@degreeme.io",
+          //           "name": "DegreeMe"
+          //   },
+          //       "reply_to": {
+          //           "email": "noreply@degreeme.io",
+          //           "name": "No Reply"
+          //   },
+          //       "template_id": "d-a07dc021e5634836bfc21bb866cf8fb5"
+          //   });
 
-            mail.end(function (res) {
-                // if (res.error) throw new Error(res.error);
-
-            console.log(res.body);
-            })
+          //   mail.end(function (res) {
+          //     if (res.error){
+          //         console.log("this is the error for tutoring session coming", res.error);
+          //         console.log(res.body);
+          //         // throw new Error(res.error);
+          //     } else if (res.accepted) {
+          //         console.log("email has sent for tutoring session coming");
+          //     }
+          // });
           
          
         
@@ -184,9 +192,14 @@ var job = new CronJob('0 0 0 * * *', function() {
       });
 
       mail.end(function (res) {
-          // if (res.error) throw new Error(res.error);
-      console.log(res.body);
-      })
+        if (res.error){
+            console.log("this is the error leave a review ", res.error);
+            console.log(res.body);
+            // throw new Error(res.error);
+        } else if (res.accepted) {
+            console.log("email has sent leave a review");
+        }
+    });
     });
   }
   //send a reminder to set location/zoom link 3 days before session occurs
@@ -221,9 +234,14 @@ var job = new CronJob('0 0 0 * * *', function() {
         });
   
         mail.end(function (res) {
-            // if (res.error) throw new Error(res.error);
-        console.log(res.body);
-        })
+          if (res.error){
+              console.log("this is the error for set location", res.error);
+              console.log(res.body);
+              // throw new Error(res.error);
+          } else if (res.accepted) {
+              console.log("email has sent for set location");
+          }
+      });
     })
   }
 }
@@ -232,6 +250,7 @@ var job = new CronJob('0 0 0 * * *', function() {
           for(x in docs){
             if(docs[x].dateCreated){
               var hourDiff = Math.abs(hourDifference(docs[x].dateCreated));
+              console.log('this is docs duhh', docs[x]);
               //send a reminder to verify account if its been 24 hours or less since creation
               //and account is still inactive
               if(hourDiff < 24 && docs[x].status == "Inactive"){
@@ -266,10 +285,14 @@ var job = new CronJob('0 0 0 * * *', function() {
                   });
       
                   mail.end(function (res) {
-                      // if (res.error) throw new Error(res.error);
-      
-                  console.log("see error, activate", res.body);
-                  })
+                    if (res.error){
+                        console.log("this is the error for activate account", res.error);
+                        console.log(res.body);
+                        // throw new Error(res.error);
+                    } else if (res.accepted) {
+                        console.log("email has sent for activate account");
+                    }
+                });
               }
             }
           }
@@ -324,9 +347,14 @@ var job = new CronJob('0 0 0 * * *', function() {
                           });
               
                           mail.end(function (res) {
-                              // if (res.error) throw new Error(res.error);
-                          console.log(res.body);
-                          })
+                            if (res.error){
+                                console.log("this is the error for you just got paid", res.error);
+                                console.log(res.body);
+                                // throw new Error(res.error);
+                            } else if (res.accepted) {
+                                console.log("email has sent for you just got paid");
+                            }
+                        });
                     })
                     .catch(function(err){
                       // console.log(err)

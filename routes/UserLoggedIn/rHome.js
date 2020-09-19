@@ -406,52 +406,54 @@ router.post("/addBid",
                         // /(userHandle ,name,type, img, url)
                         notifications.addNotification(bid.Biddee, bid.Bidder, "bidded <span class='text-success'>$" + req.body.price + "</span>", timelineObj[0].userImage, "/bids/" + bid.TimelineId);
                         users.incrementNotificationCount(bid.Biddee);
+                        console.log("this is req.body.email",req)
+                        var mail = unirest("POST", "https://api.sendgrid.com/v3/mail/send");
 
-                        // var mail = unirest("POST", "https://api.sendgrid.com/v3/mail/send");
+                                mail.headers({
+                                "content-type": "application/json",
+                                "authorization": process.env.SENDGRID_API_KEY,
+                                });
 
-                        //         mail.headers({
-                        //         "content-type": "application/json",
-                        //         "authorization": process.env.SENDGRID_API_KEY,
-                        //         });
+                                mail.type("json");
+                                mail.send({
+                                "personalizations": [
+                                    {
+                                        "to": [
+                                            {
+                                                "email": req.session.email,
+                                                "name": req.session.name
+                                            }
+                                    ],
+                                        "dynamic_template_data": {
+                                            "subject": req.session.name + " placed a bid on your post.",
+                                            "name": req.session.name,
+                                            "price": "$" + req.body.price,
+                                            "timelineID": bid.TimelineId,
+                                    },
+                                        "subject": " "
+                                    }
+                                ],
+                                    "from": {
+                                        "email": "notifications@degreeme.io",
+                                        "name": "DegreeMe"
+                                },
+                                    "reply_to": {
+                                        "email": "noreply@degreeme.io",
+                                        "name": "No Reply"
+                                },
+                                    "template_id": "d-d501a18d8e95420fa3d0f35a0a1f3405"
+                                });
+                                mail.end(function (resp) {
+                                if (resp.error){
+                                    console.log("this is the error for placing bids", resp.error)
+                                    // res.redirect("/home")
+                                    // throw new Error(res.error);
+                                } else if (resp.accepted){
+                                    console.log("email was sent for placing bids")
+                                }
 
-                        //         mail.type("json");
-                        //         mail.send({
-                        //         "personalizations": [
-                        //             {
-                        //                 "to": [
-                        //                     {
-                        //                         "email": "connorboothe@gmail.com",
-                        //                         "name": req.session.name
-                        //                     }
-                        //             ],
-                        //                 "dynamic_template_data": {
-                        //                     "subject": req.session.name + " placed a bid on your post.",
-                        //                     "name": req.session.name,
-                        //                     "price": "$" + req.body.price,
-                        //                     "timelineID": bid.TimelineId,
-                        //             },
-                        //                 "subject": " "
-                        //             }
-                        //         ],
-                        //             "from": {
-                        //                 "email": "notifications@degreeme.io",
-                        //                 "name": "DegreeMe"
-                        //         },
-                        //             "reply_to": {
-                        //                 "email": "noreply@degreeme.io",
-                        //                 "name": "No Reply"
-                        //         },
-                        //             "template_id": "d-d501a18d8e95420fa3d0f35a0a1f3405"
-                        //         });
-                        //         mail.end(function (resp) {
-                        //         if (resp.error){
-                        //             console.log(resp.error)
-                        //             // res.redirect("/home")
-                        //             // throw new Error(res.error);
-                        //         } 
-
-                        //     console.log(resp.body);
-                        //     });
+                            console.log(resp.body);
+                            });
 
                         // var options = {
                         //     auth: {
