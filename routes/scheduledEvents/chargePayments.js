@@ -34,25 +34,22 @@ var job = new CronJob('0 * * * * *', function() {
             //if date is in the past
           //  if(curTime > docs[i].date){
              //get tutor doc from UserDB
-            users.getUserByHandle(docs[i].tutorHandle)
-            .then(function(tutor){
-              console.log("THEN RAN")
-              if(err){
-                console.log("something broke in capturing intents")
-              }else{
-                console.log("Looping mems")
-                console.log("MEMS", docs[i].Members)
+            // users.getUserByHandle(docs[i].tutorHandle)
+            // .then(function(tutor){
+              // if(false){
+              //   console.log("something broke in capturing intents")
+              // }else{
                 console.log("I: ", i)
+                console.log("MEMS", docs[i].Members)
                 for(var j in docs[i].Members){
-                 console.log("J: ", j)
-                  if(docs[i].Members[j].role === "Student" && docs[i].Members[j].intent != "none" ){
-                    console.log("INTENT", docs[i].Members)
+                 console.log("J: ", docs[i].Members[j].intent)
+                  if(docs[i].Members[j].role === "Student"){
                      stripe.paymentIntents.capture(
                       docs[i].Members[j].intent,
-                      { stripeAccount: tutor[0].StripeId}
+                      { stripeAccount:"acct_1HSVm2GfoT5Q4SAQ"}
                       ).then(function(intent){
                         //remove the payment intent
-                        console.log("THEN RAN HOE")
+                        console.log("THEN RAN MEETUPS")
                          meetups.setIntentToNone(meetupId, j);
                         // mail.headers({
                         //   "content-type": "application/json",
@@ -92,9 +89,9 @@ var job = new CronJob('0 * * * * *', function() {
                 }    
                 //set to paid if successful to avoid future processing
                
-              }
+              // }
           // }
-      })
+      // })
       meetups.setToPaid(docs[i]._id);
       }
       })
@@ -108,8 +105,8 @@ var job = new CronJob('0 * * * * *', function() {
                  //set payment intent to none 
                  console.log(docs[x]._id);
                  console.log("THEN RAN HOE")
-                  acceptedBids.setIntentToNone(docs[x]._id);
-                  users.getUserByHandle(docs[x].Bidder).exec((err, docs1)=>{
+                  // acceptedBids.setIntentToNone(docs[x]._id);
+                  // users.getUserByHandle(docs[x].Bidder).exec((err, docs1)=>{
                     // mail.headers({
                     //   "content-type": "application/json",
                     //   "authorization": process.env.SENDGRID_API_KEY,
@@ -140,52 +137,52 @@ var job = new CronJob('0 * * * * *', function() {
           
                     //   console.log(res.body);
                     //   })
-                  })
+                  // })
                  
             })
             .catch(function(err){
               // console.log(err)
               console.log("HELP REQ ERROR")
             })
-          //if date is in the future and less than or equal to 24 hours away
-          //this needs its own function in acceptedBids DB
-        //   if(new Date() > docs[x].DueDate && hourDifference(docs[x].DueDate) <= 24){
-        //     users.getUserByHandle(docs[x].Bidder).exec((err, docs1)=>{
-        //     mail.headers({
-        //       "content-type": "application/json",
-        //       "authorization": process.env.SENDGRID_API_KEY,
-        //       });
-        //       console.log("new emails2", docs1[0].email)
-        //       mail.type("json");
-        //       mail.send({
-        //       "personalizations": [
-        //           {
-        //               "to": docs1[0].email,
-        //               "dynamic_template_data": {
-        //                   "subject": "The due date for your bid is approaching!",
-        //                   "name": "Name",
+          // if date is in the future and less than or equal to 24 hours away
+          // this needs its own function in acceptedBids DB
+          // if(new Date() > docs[x].DueDate && hourDifference(docs[x].DueDate) <= 24){
+          //   users.getUserByHandle(docs[x].Bidder).exec((err, docs1)=>{
+          //   mail.headers({
+          //     "content-type": "application/json",
+          //     "authorization": process.env.SENDGRID_API_KEY,
+          //     });
+          //     console.log("new emails2", docs1[0].email)
+          //     mail.type("json");
+          //     mail.send({
+          //     "personalizations": [
+          //         {
+          //             "to": docs1[0].email,
+          //             "dynamic_template_data": {
+          //                 "subject": "The due date for your bid is approaching!",
+          //                 "name": "Name",
                   
-        //           },
-        //       }
-        //       ],
-        //           "from": {
-        //               "email": "notifications@degreeme.io",
-        //               "name": "DegreeMe"
-        //       },
-        //           "reply_to": {
-        //               "email": "noreply@degreeme.io",
-        //               "name": "No Reply"
-        //       },
-        //           "template_id": "d-cae3a6aefa6149b193da1998269ccc16"
-        //       });
+          //         },
+          //     }
+          //     ],
+          //         "from": {
+          //             "email": "notifications@degreeme.io",
+          //             "name": "DegreeMe"
+          //     },
+          //         "reply_to": {
+          //             "email": "noreply@degreeme.io",
+          //             "name": "No Reply"
+          //     },
+          //         "template_id": "d-cae3a6aefa6149b193da1998269ccc16"
+          //     });
   
-        //       mail.end(function (res) {
-        //           // if (res.error) throw new Error(res.error);
+          //     mail.end(function (res) {
+          //         // if (res.error) throw new Error(res.error);
   
-        //       console.log("due date", res.body);
-        //       })
-        //     });
-        //   }
+          //     console.log("due date", res.body);
+          //     })
+          //   });
+          // }
         }
 
       })
