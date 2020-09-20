@@ -315,44 +315,50 @@ router.post("/charge",
                                 //if individual, remove time slot. else increment student attending
                                  listings.incrementStudentsAttending(req.body.tutorSessionId, req.body.timeId);
                                     users.getUserByHandle(docs.Handle).exec((err, user)=>{
-                                    //     var mail = unirest("POST", "https://api.sendgrid.com/v3/mail/send");
-                                    //     mail.headers({
-                                    //         "content-type": "application/json",
-                                    //         "authorization": process.env.SENDGRID_API_KEY,
-                                    //     });
-                                    //     mail.type("json");
-                                    //     mail.send({
-                                    //     "personalizations": [
-                                    //         {
-                                    //             "to": [
-                                    //                 {
-                                    //                     "email": user[0].email,
-                                    //                     "name": user[0].first_name + " " + user[0].last_name
-                                    //                 }
-                                    //         ],
-                                    //             "dynamic_template_data": {
-                                    //                 "subject": "Congrats, you made a sale to " + req.body.Name + ".",
-                                    //                 "name": req.body.Name,
-                                    //                 "price": "$" + parseInt(docs.HourlyRate * docs.NumHours),
-                                    //                 "meeting": meetingId,
-                                    //         },
-                                    //             "subject": " "
-                                    //         }
-                                    //     ],
-                                    //         "from": {
-                                    //             "email": "notifications@degreeme.io",
-                                    //             "name": "DegreeMe"
-                                    //     },
-                                    //         "reply_to": {
-                                    //             "email": "noreply@degreeme.io",
-                                    //             "name": "No Reply"
-                                    //     },
-                                    //         "template_id": "d-54ee1291c75f468cbe05c2d88ceaf4c2"
-                                    //     });
-                                    //     mail.end(function (res) {
-                                    //     if (res.error) throw new Error(res.error);
-
-                                    // });
+                                        var mail = unirest("POST", "https://api.sendgrid.com/v3/mail/send");
+                                        mail.headers({
+                                            "content-type": "application/json",
+                                            "authorization": process.env.SENDGRID_API_KEY,
+                                        });
+                                        mail.type("json");
+                                        mail.send({
+                                        "personalizations": [
+                                            {
+                                                "to": [
+                                                    {
+                                                        "email": user[0].email,
+                                                        "name": user[0].first_name + " " + user[0].last_name
+                                                    }
+                                            ],
+                                                "dynamic_template_data": {
+                                                    "subject": "Congrats, you made a sale to " + req.body.Name + ".",
+                                                    "name": req.body.Name,
+                                                    "price": "$" + parseInt(docs.HourlyRate * docs.NumHours),
+                                                    "meeting": data._id,
+                                            },
+                                                "subject": " "
+                                            }
+                                        ],
+                                            "from": {
+                                                "email": "notifications@degreeme.io",
+                                                "name": "DegreeMe"
+                                        },
+                                            "reply_to": {
+                                                "email": "noreply@degreeme.io",
+                                                "name": "No Reply"
+                                        },
+                                            "template_id": "d-54ee1291c75f468cbe05c2d88ceaf4c2"
+                                        });
+                                    mail.end(function (res) {
+                                        if (res.error){
+                                            console.log("this is the error for making a sale", res.error);
+                                            console.log(res.body);
+                                            // throw new Error(res.error);
+                                        } else if (res.accepted) {
+                                            console.log("email has sent for making a sale");
+                                            console.log(req)
+                                        }
+                                    });
                                     })
                                 res.status(202).json({
                                     StripeId: tutor[0].StripeId,
@@ -390,46 +396,50 @@ router.post("/charge",
                                 listings.incrementStudentsAttending(req.body.tutorSessionId, req.body.timeId);
                                 users.getUserByHandle(docs.Handle).exec((err, user)=>{
                                     console.log("Get user by handle", user)
-                                    // var mail = unirest("POST", "https://api.sendgrid.com/v3/mail/send");
+                                    var mail = unirest("POST", "https://api.sendgrid.com/v3/mail/send");
 
-                                    //     mail.headers({
-                                    //         "content-type": "application/json",
-                                    //         "authorization": process.env.SENDGRID_API_KEY,
-                                    //     });
-                                    //     mail.type("json");
-                                    //     mail.send({
-                                    //     "personalizations": [
-                                    //         {
-                                    //             "to": [
-                                    //                 {
-                                    //                     "email": user[0].email,
-                                    //                     "name": user[0].first_name + " " + user[0].last_name
-                                    //                 }
-                                    //         ],
-                                    //             "dynamic_template_data": {
-                                    //                 "subject": "Congrats, you made a sale to " + req.body.Name + ".",
-                                    //                 "name": req.body.Name,
-                                    //                 "price": "$" + parseInt(docs.HourlyRate * docs.NumHours),
-                                    //                 "meeting": meetingId,
-                                    //         },
-                                    //             "subject": " "
-                                    //         }
-                                    //     ],
-                                    //         "from": {
-                                    //             "email": "notifications@degreeme.io",
-                                    //             "name": "DegreeMe"
-                                    //     },
-                                    //         "reply_to": {
-                                    //             "email": "noreply@degreeme.io",
-                                    //             "name": "No Reply"
-                                    //     },
-                                    //         "template_id": "d-54ee1291c75f468cbe05c2d88ceaf4c2"
-                                    //     });
-                                    //     mail.end(function (res) {
-                                    //     // if (res.error) throw new Error(res.error);
-
-                                    // console.log(res.body);
-                                    // });
+                                        mail.headers({
+                                            "content-type": "application/json",
+                                            "authorization": process.env.SENDGRID_API_KEY,
+                                        });
+                                        mail.type("json");
+                                        mail.send({
+                                        "personalizations": [
+                                            {
+                                                "to": [
+                                                    {
+                                                        "email": user[0].email,
+                                                        "name": user[0].first_name + " " + user[0].last_name
+                                                    }
+                                            ],
+                                                "dynamic_template_data": {
+                                                    "subject": "Congrats, you made a sale to " + req.body.Name + ".",
+                                                    "name": req.body.Name,
+                                                    "price": "$" + parseInt(docs.HourlyRate * docs.NumHours),
+                                                    "meeting": data._id,
+                                            },
+                                                "subject": " "
+                                            }
+                                        ],
+                                            "from": {
+                                                "email": "notifications@degreeme.io",
+                                                "name": "DegreeMe"
+                                        },
+                                            "reply_to": {
+                                                "email": "noreply@degreeme.io",
+                                                "name": "No Reply"
+                                        },
+                                            "template_id": "d-54ee1291c75f468cbe05c2d88ceaf4c2"
+                                        });
+                                        mail.end(function (res) {
+                                            if (res.error){
+                                                console.log("this is the error for making a sale", res.error);
+                                                console.log(res.body);
+                                                // throw new Error(res.error);
+                                            } else if (res.accepted) {
+                                                console.log("email has sent for making a sale", user[0].email);
+                                            }
+                                        });
                                 });
                                 res.status(202).json({
                                     StripeId: tutor[0].StripeId,

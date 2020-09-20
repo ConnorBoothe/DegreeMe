@@ -165,6 +165,7 @@ router.post('/course/addComment',
                 notifications.addNotification(discussion[0].userHandle ,req.body.commentHandle," answered your question", req.body.commentImg, "/course/"+req.body.course+"?discussion="+req.body.discId)
                 users.incrementNotificationCount(discussion[0].userHandle);
                 users.getUserByHandle(discussion[0].userHandle).exec((err, user)=>{
+                    
                     var mail = unirest("POST", "https://api.sendgrid.com/v3/mail/send");
 
                     mail.headers({
@@ -201,11 +202,14 @@ router.post('/course/addComment',
                         "template_id": "d-82f62439c48d4ca39527f769641396d0"
                     });
                     mail.end(function (res) {
-                    if (res.error){
-                        console.log(res);
-                        // throw new Error(res.error);
-                    } 
-                });
+                        if (res.error){
+                            console.log("this is the error for comments", res.error);
+                            console.log(res.body);
+                            // throw new Error(res.error);
+                        } else if (res.accepted) {
+                            console.log("email has sent for comments");
+                        }
+                    });
                 })
                 
             })

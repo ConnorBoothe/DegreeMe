@@ -211,10 +211,13 @@ router.post('/SignUp', [
                             });
 
                             mail.end(function (res) {
-                                // if (res.error) throw new Error(res.error);
-
-                            console.log(res.body);
-                            console.log("email sent", req.body.email[0])
+                                if (res.error){
+                                    console.log("this is the error for account confirmation", res.error);
+                                    console.log(res.body);
+                                    // throw new Error(res.error);
+                                } else if (res.accepted) {
+                                    console.log("email has sent for account confirmation");
+                                }
                             });
                                 }
                                 else if(req.body.screenSize === "Mobile") {
@@ -251,9 +254,8 @@ router.post('/SignUp', [
                                         "name": req.body.first_name,
                                         "code": activationCode,
                                         "email": req.body.email[1],
-                                
-                                },
-                            }
+                                    },
+                                }
                             ],
                                 "from": {
                                     "email": "notifications@degreeme.io",
@@ -267,9 +269,13 @@ router.post('/SignUp', [
                             });
 
                             mail.end(function (res) {
-                                // if (res.error) throw new Error(res.error);
-
-                            console.log(res.body);
+                                if (res.error){
+                                    console.log("this is the error for account confirmation", res.error);
+                                    console.log(res.body);
+                                    // throw new Error(res.error);
+                                } else if (res.accepted) {
+                                    console.log("email has sent for account confirmation");
+                                }
                             });
                                 }
                                

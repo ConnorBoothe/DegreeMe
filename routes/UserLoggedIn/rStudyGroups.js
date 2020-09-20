@@ -404,42 +404,14 @@ router.post("/meetup/addStudyGroupMeetup",
         "template_id": "d-000856c6896f43c88bf5ad54eb98ba9d"
     });
     mail.end(function (res) {
-      // if (res.error) throw new Error(res.error);
-
-  console.log(res.body);
+      if (res.error){
+          console.log("this is the error for inviting someone to join group", res.error);
+          console.log(res.body);
+          // throw new Error(res.error);
+      } else if (res.accepted) {
+          console.log("email has sent for inviting someone to join group");
+      }
   });
-  //   var options = {
-  //     auth: {
-  //         api_key: process.env.SENDGRID_API_KEY
-  //     }
-  // }
-  // var mailer = nodemailer.createTransport(sgTransport(options));
-  // var email = {
-  //     to: splitEmails,
-  //     from: 'notifications@degreeme.io',
-  //     subject: 'Group Invitation',
-  //     attachments: [{
-  //         filename: 'cheers.png',
-  //         path: 'assets/img/cheers.png',
-  //         cid: 'myimagecid'
-  //     }],
-  //     html: "<div style='width:100%; text-align:center'><div style='margin-left:auto;margin-right:auto;width:100%;padding-bottom:20px; padding-top:20px'><h2 class='text-light'>"+req.session.name+" invited you to join "+req.body.groupName+". </h2><img src='cid:myimagecid' alt='cheers' /><br><a href='http://127.0.0.1:3000/Group/"+req.body.groupId+"'><button style='width:200px; font-size:20px; color:white; background-color:#007bff;" +
-  //     "border:none; border-radius:10px; font-family:Open Sans, sans-serif;padding:5px; cursor:pointer; '>Join Group</button></a></div></div>",
-  // };
-
-  // mailer.send(mail, function(err, result) {
-  //     if (err) { 
-  //       res.status(202).json({
-  //         action: "invite sent error"
-  //       }).end();
-  //     }
-  //     else{
-  //       res.status(202).json({
-  //         action: "invite sent success"
-  //       }).end();
-  //     }
-     
-  // });
   
    console.log("EMAIL INVITE RAN")
   })
