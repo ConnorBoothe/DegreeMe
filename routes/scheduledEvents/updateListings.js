@@ -25,7 +25,7 @@ function hourDifference(date){
   return Math.ceil(diffTime / (1000 * 60 * 60));
 }
 //job runs every night at midnight
-var job = new CronJob('0 * * * * *', function() {
+var job = new CronJob('0 0 0 * * *', function() {
     listings.getListings().exec((err,docs)=>{
         for(x in docs){
           //if today's date is larger than expiration and listing is active
@@ -250,7 +250,6 @@ var job = new CronJob('0 * * * * *', function() {
           for(x in docs){
             if(docs[x].dateCreated){
               var hourDiff = Math.abs(hourDifference(docs[x].dateCreated));
-              console.log('this is docs duhh', docs[x]);
               //send a reminder to verify account if its been 24 hours or less since creation
               //and account is still inactive
               if(hourDiff < 24 && docs[x].status == "Inactive"){
