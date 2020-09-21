@@ -188,10 +188,19 @@ $(document).ready(function(){
                          $(".autocomplete-addCourse").html("<p class='emptySearch'>Search Courses</p>");
                      }
                      else if(result.Courses.length > 0){
-                        for(var x = 0; x< 5;x++){
-                            courses+= "<div class='addCourseCountainer'><input type='hidden' name='courseId' value='"+result.Courses[x]._id+"'/><p class='addCourseName'>"+result.Courses[x].CourseName+"</p><p class='addCourseCode'><span>"+result.Courses[x].Department + " " +
-                            result.Courses[x].CourseCode+"</span><button class='btn btn-primary addBtn'>Add</button></p></div>";
-                        } 
+                         if(result.Courses.length >=5){
+                            for(var x = 0; x< 5; x++){
+                                courses+= "<div class='addCourseCountainer'><input type='hidden' name='courseId' value='"+result.Courses[x]._id+"'/><p class='addCourseName'>"+result.Courses[x].CourseName+"</p><p class='addCourseCode'><span>"+result.Courses[x].Department + " " +
+                                result.Courses[x].CourseCode+"</span><button class='btn btn-primary addBtn'>Add</button></p></div>";
+                            }   
+                         }
+                         else{
+                            for(x in result.Courses){
+                                courses+= "<div class='addCourseCountainer'><input type='hidden' name='courseId' value='"+result.Courses[x]._id+"'/><p class='addCourseName'>"+result.Courses[x].CourseName+"</p><p class='addCourseCode'><span>"+result.Courses[x].Department + " " +
+                                result.Courses[x].CourseCode+"</span><button class='btn btn-primary addBtn'>Add</button></p></div>";
+                            } 
+                         }
+                        
                         //tag a course functionality (request a tutor)
                         $(".tagCourse-loading").text("Search Courses")
                         $(".tagCourse").on("keyup", function(){

@@ -364,6 +364,7 @@ router.post("/meetup/addStudyGroupMeetup",
     if (!errors.isEmpty()) {
       
     }
+    console.log("Group Name", req.body.groupName)
     var splitEmails = req.body.emails.split(",");
     console.log(splitEmails)
     var toEmails = [];
@@ -386,7 +387,7 @@ router.post("/meetup/addStudyGroupMeetup",
             "dynamic_template_data": {
                 "subject": "Group Invitation",
                 "name": req.session.name,
-                "group_name": req.body.groupName,
+                "group": req.body.groupName,
                 "group_id": req.body.groupId, 
         
         },

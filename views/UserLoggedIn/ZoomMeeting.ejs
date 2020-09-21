@@ -150,7 +150,7 @@
               <%}%>
           <%}else if(meeting.date > new Date()){%>
             <div class="meetingDateTime-container">
-              <p class="badge-warning meetingDateTime"><%=formatDate(meeting.date) + " @ " + formatTime(meeting.date)%></p>
+              <p class="badge-warning meetingDateTime"><%=formatDate(new Date(meeting.date)) + " @ " + formatTime(new Date(meeting.date))%></p>
             </div>
         
           
@@ -238,7 +238,9 @@
   
           <%}else{%>
           <p class="zoomMsg">Zoom meeting not scheduled.</p>
-          <button class="btn btn-primary">Send <%=meeting.tutorHandle%> a Reminder </button>
+          <input type="hidden" name="hostHandle" class="hostHandle" value="<%=meeting.Members[0].handle%>"/>
+          <input type="hidden" name="meetingId" class="meetingId" value="<%=meeting._id%>"/>
+          <button class="btn btn-primary sendReminder">Send <%=meeting.tutorHandle%> a Reminder </button>
           <%}%>
           <%}%>
           <div aria-live="polite" aria-atomic="true" style="position: fixed; bottom: 0; right: 0;min-height: 200px;margin-right:3%;" >
@@ -265,6 +267,7 @@
 
     <script type="text/javascript" src="../assets/js/Client-DateFunctions.js"></script>
     <script type="text/javascript" src="../assets/js/ajaxCalls/joinMeeting.js"></script>
+    <script type="text/javascript" src="../assets/js/ajaxCalls/zoomReminder.js"></script>
 </body>
 
 </html>

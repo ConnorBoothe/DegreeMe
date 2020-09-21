@@ -8,10 +8,13 @@ const bodyParser = require("body-parser");
 const stripe = require('stripe')(process.env.STRIPE_KEY);
 //DBs used
 const userDB = require('../../models/Database/UserDB');
+const paymentsDB = require('../../models/Database/PaymentsDB');
+
 
 //classes used
 const dateFunctions = require('../../models/classes/DateFunctions');
 var df = new dateFunctions();
+var payments = new paymentsDB();
 var {
   check,
   validationResult
@@ -50,10 +53,10 @@ router.get('/MyFinances', function (req, res) {
         }).then(function (balance) {
           new Promise((resolve, reject) => {
             stripe.balanceTransactions.list({
-              //stripe_account: user[0].stripeId,
+              // stripe_account: user[0].stripeId,
               //customer: user[0].stripeId,
-              //type:"charge",
-              //limit:99,
+              type:"charge",
+              limit:10,
             }, {
               stripeAccount: user[0].StripeId
             }, function (err, charges) {
@@ -65,18 +68,26 @@ router.get('/MyFinances', function (req, res) {
               }
             })
           }).then(function (charges) {
-            console.log(charges.data);
             //change to get userbyId
             users.getUserByHandle(req.session.handle).exec((err, docs) => {
-              res.render('UserLoggedIn/myFinances2', {
-                balance: balance,
-                history: charges.data,
-                qs: req.query,
-                session: req.session,
-                qs: req.query,
-                StripeId: docs.StripeId,
-                formatDate: df.displayDate
-              });
+              payments.getIntentByUserWherePaymentDue(req.session.handle)
+              .then(function(data){
+                var uncapturedEarnings = 0;
+                for(var i = 0; i < data.length; i++){
+                  uncapturedEarnings += data[i].PaymentAmt;
+                }
+                res.render('UserLoggedIn/myFinances2', {
+                  balance: balance,
+                  history: charges.data,
+                  qs: req.query,
+                  session: req.session,
+                  qs: req.query,
+                  StripeId: docs.StripeId,
+                  uncapturedEarnings: uncapturedEarnings,
+                  formatDate: df.displayDate,
+                });
+              })
+             
             });
           });
         });

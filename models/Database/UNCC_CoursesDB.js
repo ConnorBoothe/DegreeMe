@@ -39,8 +39,9 @@ module.exports = class Reviews {
    }
    getCourseAutocomplete(searchValue){
     var CourseDB = mongoose.model('UNCC_CoursesDB', courseDBSchema);
+    let regEx = new RegExp("^"+searchValue)
     return CourseDB.find({
-        CourseName:{$regex: searchValue, $options:"i"}
+        CourseName:{$regex: regEx, $options:"mi"}
 
     },'Department CourseCode CourseName').limit(10);
    }

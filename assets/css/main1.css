@@ -1212,7 +1212,8 @@ Menu css
         resize:none;
         position: relative;
         overflow:hidden;
-        height:30px;
+        min-height:60px;
+        max-height:400px;
       
     }
     .charCount{
