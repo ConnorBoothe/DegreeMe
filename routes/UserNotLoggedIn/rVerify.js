@@ -73,7 +73,7 @@ router.post("/updateStatus", function(req, res){
                     }
                 })    
             })
-            res.redirect("/Login?error=Account Confirmed");
+            res.redirect("/Login?message=Account Confirmed");
         }
         else{
             res.redirect("/VerifyAccount?error=Confirmation Code Incorrect");
