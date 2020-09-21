@@ -73,7 +73,7 @@ router.get('/meeting/:meetingId', function (req, res) {
           res.redirect("/home")
         }
       } else {
-        res.redirect('/login?error=Session%20Ended')
+        res.redirect('/login?message=Session%20Ended')
       }
     })
     .catch(function(){

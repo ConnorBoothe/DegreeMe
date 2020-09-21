@@ -157,7 +157,7 @@ router.get('/home', function (req, res) {
             }
         })
     } else {
-        res.redirect('/login?error=Session%20Ended')
+        res.redirect('/login?message=Session%20Ended')
     }
 });
 //post route that handles AJAX POST call to clear notifications

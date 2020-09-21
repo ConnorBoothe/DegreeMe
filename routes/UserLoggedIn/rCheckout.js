@@ -88,7 +88,7 @@ router.get('/Checkout', function (req, res) {
             }
         })
     } else {
-        res.redirect('/login?error=Session%20Ended');
+        res.redirect('/login?message=Session%20Ended');
     }
 });
 //render the checkout page
@@ -113,7 +113,7 @@ router.get('/bids/:timelineId', function (req, res) {
                     })
             })
     } else {
-        res.redirect('/login?error=Session%20Ended');
+        res.redirect('/login?message=Session%20Ended');
     }
 });
 //render the checkout page
@@ -454,7 +454,7 @@ router.post("/charge",
                     })
             })
         } else {
-            res.redirect('/login?error=Session%20Ended');
+            res.redirect('/login?message=Session%20Ended');
         }
     });
 

@@ -57,7 +57,7 @@ router.get('/TutoringSessions',
         });
       })
     } else {
-      res.redirect('/login?error=Session%20Ended');
+      res.redirect('/login?message=Session%20Ended');
     }
   });
 
@@ -88,7 +88,7 @@ router.get('/changeMeetupsViewing', function (req, res) {
       }).end();
     })
   } else {
-    res.redirect('/login?error=Session%20Ended');
+    res.redirect('/login?message=Session%20Ended');
   }
 })
 
@@ -133,7 +133,7 @@ router.post("/attend",
           }).end();
         });
     } else {
-      res.redirect('/login?error=Session%20Ended');
+      res.redirect('/login?message=Session%20Ended');
     }
   })
 

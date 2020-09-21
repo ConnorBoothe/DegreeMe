@@ -76,7 +76,7 @@ router.get('/messages', function (req, res) {
             res.redirect('/home'); //redirect if no query string is given
         }
     } else {
-        res.redirect('/login?error=Session%20Ended'); //redirect if user is not logged in
+        res.redirect('/login?message=Session%20Ended'); //redirect if user is not logged in
 
     }
 });

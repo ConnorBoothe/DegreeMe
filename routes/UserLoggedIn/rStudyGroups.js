@@ -161,7 +161,7 @@ router.get('/groups', function (req, res) {
       }
     })
   } else {
-    res.redirect('/login?error=Session%20Ended');
+    res.redirect('/login?message=Session%20Ended');
   }
 
 });
@@ -176,7 +176,7 @@ router.get('/startAGroup', function (req, res) {
     });
 
   } else {
-    res.redirect('/login?error=Session%20Ended');
+    res.redirect('/login?message=Session%20Ended');
   }
 });
 
@@ -223,7 +223,7 @@ router.post("/join",
           }).end();
         });
     } else {
-      res.redirect('/login?error=Session%20Ended');
+      res.redirect('/login?message=Session%20Ended');
     }
   })
 router.post("/unjoin",
@@ -260,7 +260,7 @@ router.post("/unjoin",
           }).end();
         });
     } else {
-      res.redirect('/login?error=Session%20Ended');
+      res.redirect('/login?message=Session%20Ended');
     }
   })
   router.post("/createGroup",
