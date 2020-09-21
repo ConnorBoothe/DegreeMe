@@ -78,6 +78,12 @@
     position: relative;
     width:100%;
   }
+  .available svg{
+    margin-left:10px;
+  }
+  .available a{
+    color:#d4d4d4;
+  }
   .timeline1{
     height:100%;
     width: 300px;

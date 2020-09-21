@@ -164,7 +164,7 @@ router.post('/bids/chargeHelp',
                                 thread._id,req.body.timelineId, req.body.bidId, docs[0].StripeId, paymentIntent.id)
                             .then(function(bid){
                                 // stripeId, intent, Date, PayTo
-                            payments.addIntent(docs[0].StripeId, paymentIntent.id, req.body.dueDate, userData[0].handle);
+                            payments.addIntent(docs[0].StripeId, paymentIntent.id, req.body.dueDate, userData[0].handle,  parseFloat(req.body.price), docs[0].email );
                             messages.addMessage(thread._id, req.session.handle, req.session.img, "Congrats on winning the bid! This task must be completed by " +
                                 req.body.timelineDate, new Date());
                             users.addThread(req.session.handle, req.session.img, "Help Request", thread._id, userData[0].handle);
@@ -193,7 +193,7 @@ router.post('/bids/chargeHelp',
                                                 "dynamic_template_data": {
                                                     "subject": "Congrats, you won the bid!",
                                                     "name": userData[0].handle,
-                                                    "bids": req.body.bidId,
+                                                    "bids": bid._id,
                                                     "dueDate": req.body.timelineDate, 
                                                     
                                                  
@@ -277,7 +277,7 @@ router.post("/charge",
                                }
                             })
                         }).then(function(data){
-                            payments.addIntent(tutor[0].StripeId, paymentIntent.id, req.body.timeSlot, docs.Handle);
+                            payments.addIntent(tutor[0].StripeId, paymentIntent.id, req.body.timeSlot, docs.Handle, parseFloat(docs.HourlyRate) * parseInt(docs.NumHours), tutor[0].email);
                            if(!data){
                             var connection = new Connection("0", docs.id, docs.Handle, req.session.handle, docs.Subject, docs.CourseCode, req.body.timeSlot, req.body.timeSlot, docs.Building, docs.Room,
                             docs.HourlyRate, docs.NumHours, docs.StudentsAttending + 1, docs.Type, false, req.body.sessionNotes);

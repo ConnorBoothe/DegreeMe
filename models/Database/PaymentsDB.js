@@ -12,6 +12,8 @@ var paymentsSchema = new Schema({
     Date:{type:String, required:true},
     Paid:{type:Boolean, required:true},
     PayTo: {type:String, required:true},
+    Email: {type:String, required:true},
+    PaymentAmt:{type:Number, required: true}
 }, {collection: 'PaymentsDB'});
 module.exports = class UserProfile {
     //get intents that need to be charged
@@ -19,12 +21,20 @@ module.exports = class UserProfile {
         var PaymentsDB = mongoose.model('PaymentsDB',paymentsSchema);
         return PaymentsDB.find({
                 Paid:{ $ne: true},
-            // date:{ $lt: new Date()}
+                // date:{ $lt: new Date()}
         });
     }
-    addIntent(stripeId, intent, Date, PayTo){
+    getIntentByUserWherePaymentDue(handle){
         var PaymentsDB = mongoose.model('PaymentsDB',paymentsSchema);
-        var intent = new PaymentsDB({stripeId: stripeId, intent:intent, Date: Date, Paid: false, PayTo: PayTo});
+        return PaymentsDB.find({
+                Paid:{ $ne: true},
+                // date:{ $lt: new Date()},
+                 PayTo: handle
+        });
+    }
+    addIntent(stripeId, intent, Date, PayTo, PaymentAmt, Email){
+        var PaymentsDB = mongoose.model('PaymentsDB',paymentsSchema);
+        var intent = new PaymentsDB({stripeId: stripeId, intent:intent, Date: Date, Paid: false, PayTo: PayTo, Email:Email, PaymentAmt: PaymentAmt});
         intent.save();
     }
     setPaid(id){

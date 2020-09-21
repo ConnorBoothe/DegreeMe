@@ -21,6 +21,7 @@ const CourseDB = require("../../models/Database/UNCC_CoursesDB");
 const BidsDB = require("../../models/Database/BidsDB");
 const Groups = require("../../models/Database/StudyGroupsDB");
 const AcceptedBids = require("../../models/Database/AcceptedBidsDB");
+const MeetupsDB = require("../../models/Database/MeetupsDB");
 //classes used
 var TimeLine = require('../../models/classes/TimeLine');
 var TimelinePost = require('../../models/classes/TimelinePost');
@@ -38,6 +39,8 @@ var notifications = new NotificationDB();
 var bids = new BidsDB();
 var groups = new Groups();
 var acceptedBids = new AcceptedBids();
+var meetups = new MeetupsDB();
+var mail = unirest("POST", "https://api.sendgrid.com/v3/mail/send");
 //register the session and use bodyParser
 
 router.use(session({
@@ -408,8 +411,9 @@ router.post("/addBid",
                         users.incrementNotificationCount(bid.Biddee);
                         console.log("this is req.body.email",req)
                         var mail = unirest("POST", "https://api.sendgrid.com/v3/mail/send");
-
-                                mail.headers({
+                        users.getUserByHandle(bid.Biddee)
+                        .then(function(user){
+                            mail.headers({
                                 "content-type": "application/json",
                                 "authorization": process.env.SENDGRID_API_KEY,
                                 });
@@ -420,8 +424,8 @@ router.post("/addBid",
                                     {
                                         "to": [
                                             {
-                                                "email": req.session.email,
-                                                "name": req.session.name
+                                                "email": user[0].email,
+                                                "name": bid.Biddee
                                             }
                                     ],
                                         "dynamic_template_data": {
@@ -455,6 +459,8 @@ router.post("/addBid",
                             console.log(resp.body);
                             });
 
+                        })
+                               
                         // var options = {
                         //     auth: {
                         //         api_key: process.env.SENDGRID_API_KEY
@@ -518,7 +524,7 @@ router.post("/siteWideSearch",
             res.redirect('/home');
         }
         if (req.body.type == "Courses") {
-            if (req.body.searchValue.split("")[4] == " ") {
+            if (req.body.searchValue.split("")[4] == " " && parseInt(req.body.searchValue.split("")[5]) == "NAN") {
                 courses.getCourseCodeAutocomplete(req.body.searchValue).exec((err, docs1) => {
                     res.status(202).json({
                         Courses: docs1,
@@ -530,10 +536,21 @@ router.post("/siteWideSearch",
                     if (err) {
                         console.log(err)
                     } else {
-                        res.status(202).json({
-                            Courses: docs,
-                            type: req.body.type
-                        }).end();
+                        if(docs.length < 1){
+                            courses.getCourseCodeAutocomplete(req.body.searchValue).exec((err, docs1) => {
+                                res.status(202).json({
+                                    Courses: docs1,
+                                    type: req.body.type
+                                }).end();
+                            })
+                        }
+                        else{
+                            res.status(202).json({
+                                Courses: docs,
+                                type: req.body.type
+                            }).end();
+                        }
+                       
                     }
                 })
             }
@@ -570,5 +587,66 @@ router.post("/siteWideSearch",
             })
         }
     });
+
+    router.post("/sendZoomReminder", function(req, res){
+        console.log(req.body)
+        users.getUserByHandle(req.body.handle)
+        .then(function(data){
+            meetups.getMeetupById(req.body.meetingId)
+            .then(function(meetup){
+                mail.headers({
+                    "content-type": "application/json",
+                    "authorization": process.env.SENDGRID_API_KEY,
+                    });
+        
+                    mail.type("json");
+                    mail.send({
+                    "personalizations": [
+                        {
+                            "to": [
+                                {
+                                    "email": data[0].email,
+                                    "name": data[0].first_name + " " + data[0].last_name
+                                }
+                        ],
+                            "dynamic_template_data": {
+                                "subject": "You need to schedule the Zoom session.",
+                                "classSubject": meetup.class,
+                                "location": meetup._id,
+                        },
+                            "subject": " "
+                        }
+                    ],
+                        "from": {
+                            "email": "notifications@degreeme.io",
+                            "name": "DegreeMe"
+                    },
+                        "reply_to": {
+                            "email": "noreply@degreeme.io",
+                            "name": "No Reply"
+                    },
+                        "template_id": "d-bf2a062538504bd284437ee704207c0f"
+                    });
+                    mail.end(function (resp) {
+                    if (resp.error){
+                        console.log("this is the error for placing bids", resp.error)
+                        // res.redirect("/home")
+                        // throw new Error(res.error);
+                    } else if (resp.accepted){
+                        console.log("email SENT")
+                        res.status(202).json({
+                        }).end();
+                    }
+        
+                console.log(resp.body);
+                });
+            })
+            })
+            
+        
+    });
+
+
+
 
 module.exports = router;

@@ -7,14 +7,12 @@ const ejs = require("ejs");
 const path = require('path');
 var app = module.exports = express(); 
 app.set('trust proxy', 1) // trust first proxy
-
 //classes used
 const MessageDB = require('./models/Database/MessagesDB');
 const userDB = require('./models/Database/UserDB');
 //instantiate DBs for use
 var messages = new MessageDB();
 var users = new userDB();
-
 //set limit size of file upload
 app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({
@@ -98,6 +96,7 @@ app.use(require('./routes/API/SendMajors.js'));
 app.use(require('./routes/API/sendNotificationCount.js')); 
 app.use(require('./routes/API/sendSortedStudyGroups.js')); 
 app.use(require('./routes/API/sendUsersAndImages.js')); 
+// app.use(require('./routes/ScrapeUNCC_Courses_2019_2020.js')); 
 //Wildcard route
 app.get('*', function(req, res) {
     //if user logged in, redirect to home
@@ -109,16 +108,10 @@ app.get('*', function(req, res) {
         res.redirect('/');
     }
 });
-var api = require('./routes/Websockets/MessageSocket.js'); // pass 'app'
 let server = app.listen(8080);
 const io = require('socket.io')(server);
-// console.log(app.get("io"))
-
 //create a websocket connection
-var connectCounter = 0;
 io.sockets.on('connection', function (socket) {
-  connectCounter++;
-  console.log(connectCounter)
   //catch the emitted 'send message' event
   socket.on('send message', function (data) {
       //add message to the db
