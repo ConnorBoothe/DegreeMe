@@ -118,13 +118,13 @@
                                         <div class="memberImage-container">
                                             <p class="attendTxt">Attendees</p>
                                         <% for(var y = 0; y < 3; y++){%>
-                                        <img class="memberImage" src="../<%=meetups[j].Attendees[y].userImage%>" />
+                                        <img class="memberImage" src="<%=meetups[j].Attendees[y].userImage%>" />
                                         <!-- <div class="memberImages"> -->
                                         <ul>
                                         <li>
                                             <a href="#" class="memberImage" data-toggle="tooltip" data-placement="top"
                                             title="<%=meetups[j].Attendees[y].handle%>">
-                                            <img class="memberImage" src="../<%=meetups[j].Attendees[y].userImage%>" />
+                                            <img class="memberImage" src="<%=meetups[j].Attendees[y].userImage%>" />
                                         </a>
                                         </li>
                                         
@@ -144,7 +144,7 @@
                                                         data-toggle="tooltip" data-placement="top"
                                                         title="<%=meetups[j].Attendees[y].handle%>">
                                                         <img class="memberImage"
-                                                            src="../<%=meetups[j].Attendees[y].userImage%>" />
+                                                            src="<%=meetups[j].Attendees[y].userImage%>" />
                                                     </a></li>
                                                 <%if(meetups[j].Attendees[y].handle == session.handle){%>
                                                     <%isMeetupMember = true%>

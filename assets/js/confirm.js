@@ -11,7 +11,7 @@ $(document).ready(function () {
   $(".dateTimeText").on("click", function(){
     $(this).css("border", "none");
   })
-  var stripe = Stripe('pk_test_89vfyOdmTWo09jkpoyAnRy1l00ll36NLGn', { stripeAccount: $('input[name="StripeId"]')[0].value }); // Your Publishable Key
+  var stripe = Stripe('pk_live_R3p2DniplzI8HZjeXSulk0T300ew3UY5cU', { stripeAccount: $('input[name="StripeId"]')[0].value }); // Your Publishable Key
 
   var elements = stripe.elements();
   var card = elements.create('card', { style: style });

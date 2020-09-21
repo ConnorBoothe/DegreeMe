@@ -287,7 +287,7 @@ router.post('/SignUp', [
                            
                         });
                     });
-                    res.redirect('/login?error=Account%20Successfully%20Created. Check your email to confirm your account.');
+                    res.redirect('/login?message=Account%20Successfully%20Created. Check your email to confirm your account.');
                 }
             })
         }

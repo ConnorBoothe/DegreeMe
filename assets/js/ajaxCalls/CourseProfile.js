@@ -135,9 +135,7 @@ function populateTutors(data, subject){
     else{
         return sessions;
     }
-    
 }
-
 function populateDiscussion(res, subject){
     var discussion = "";
 
@@ -177,14 +175,14 @@ function populateStudents(students){
       +"<input type='hidden' value ='"+students[x][0].handle+"'/>"
       +"<input type='hidden' value ='"+students[x][0].image+"'/>"
       +"<button id='"+noAtHandle+"'data-status='unfollow' type='button' class='btn btn-secondary followingButton'data-handle='"+students[x][0].handle+"'>Following</button>"
-      +"<a href='../user/"+students[x][0].handle+"'><h3><img class='studentImage' src='../"+students[x][0].image+"'/>"+students[x][0].first_name+" "+students[x][0].last_name+"</h3><h5>"+students[x][0].handle+"</h5></a>"
+      +"<a href='../user/"+students[x][0].handle+"'><h3><img class='studentImage' src='"+students[x][0].image+"'/>"+students[x][0].first_name+" "+students[x][0].last_name+"</h3><h5>"+students[x][0].handle+"</h5></a>"
       +"<p class='bioTxt'>"+students[x][0].Bio+"</p></li>"  
     }else{
       student+= "<li>"
       +"<input type='hidden' value ='"+students[x][0].handle+"'/>"
       +"<input type='hidden' value ='"+students[x][0].image+"'/>"
       +"<button id=\""+noAtHandle+"\" data-status=\"follow\" type=\"button\" class=\"btn btn-primary followingButton\">Follow</button>"
-      +"<a href='../user/"+students[x][0].handle+"'><h3><img class='studentImage' src='../"+students[x][0].image+"'/>"+students[x][0].first_name+" "+students[x][0].last_name+"</h3><h5>"+students[x][0].handle+"</h5></a>";
+      +"<a href='../user/"+students[x][0].handle+"'><h3><img class='studentImage' src='"+students[x][0].image+"'/>"+students[x][0].first_name+" "+students[x][0].last_name+"</h3><h5>"+students[x][0].handle+"</h5></a>";
       if(students[x][0].Bio != "Tell the world a bit about yourself"){
         student += "<p class='bioTxt'>"+students[x][0].Bio+"</p></li>";  
       }
