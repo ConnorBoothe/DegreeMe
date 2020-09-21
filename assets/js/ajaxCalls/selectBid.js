@@ -12,7 +12,7 @@ $(document).ready(function(){
         stripeAccount = $(this).parent().next().val();
         $("input[name='StripeId']").val($(this).parent().next().val());
         $("input[name='price']").val(($(this).parent().prev().children().eq(0).text().trim().substring(1)));
-        var stripe = Stripe('pk_test_89vfyOdmTWo09jkpoyAnRy1l00ll36NLGn', { stripeAccount: stripeAccount }); // Your Publishable Key
+        var stripe = Stripe('pk_live_R3p2DniplzI8HZjeXSulk0T300ew3UY5cU', { stripeAccount: stripeAccount }); // Your Publishable Key
         var elements = stripe.elements();
         var card = elements.create('card', { style: style });
         card.mount('#card-element');
