@@ -15,3 +15,10 @@ li{
     text-align:center;
     width:100%!important;
 }
+.setLocation{
+    font-size:12px!important;
+    padding-top:1px;
+    padding-bottom:1px;
+    padding-left:4px;
+    padding-right:4px;
+}

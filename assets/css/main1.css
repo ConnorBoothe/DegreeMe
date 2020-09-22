@@ -61,7 +61,7 @@ input:-webkit-autofill {
   }
 
   ::-webkit-scrollbar {
-    width: 1em;
+    width: .5em;
     height: 1em;
     margin-top:50px;
 
@@ -322,12 +322,12 @@ Menu css
         color:#d4d4d4!important;
       
      
-        margin-top:30px;
+        margin-top:20px;
     }
     .myCourseTitle{
         padding-left:40px;
-        margin-top:50px;
-        margin-bottom:20px;
+        margin-top:40px;
+        margin-bottom:0;
         font-size:22px;
     }
     .input-field-addCourse{
@@ -1212,8 +1212,7 @@ Menu css
         resize:none;
         position: relative;
         overflow:hidden;
-        min-height:60px;
-        max-height:400px;
+        min-height:100px;
       
     }
     .charCount{

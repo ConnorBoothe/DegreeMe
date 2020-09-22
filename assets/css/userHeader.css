@@ -77,6 +77,7 @@ header{
 #headerLinkContainer{
     list-style-type:none;
     text-align:left;
+    padding-bottom:30px;
     
  }
 #mainNav{

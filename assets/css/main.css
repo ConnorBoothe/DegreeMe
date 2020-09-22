@@ -1930,6 +1930,7 @@ border-bottom:2px solid #330099;
     width:300px;
     padding-left:20px;
     font-family: 'Open Sans', sans-serif!important;
+    padding-top:20px;
 }
 .verifyErr{
     font-size:20px!important;
@@ -1941,7 +1942,7 @@ border-bottom:2px solid #330099;
     color:white;
 }
 .confirmSubmit{
-    margin-top:-15px;
+    /* margin-top:-15px; */
 }
 
 /** Desktop **/
@@ -1961,6 +1962,9 @@ border-bottom:2px solid #330099;
         padding-bottom:0!important;
         font-family: 'Open Sans', sans-serif!important;
         -webkit-box-shadow: none!important;
+    }
+    .loginErr{
+        font-size:18px!important;
     }
         #mainImg img{
             padding-left:35%;
@@ -2230,14 +2234,28 @@ border-bottom:2px solid #330099;
         margin-top:100px;
     }  */
 }
+.index-page-container{
+    min-height:100vh!important;
+    
+}
+.paddingTop{
+    padding-top:80px;
+}
 /** For mobile View **/
 @media only screen and (max-width: 1000px) {
     .tagline {
         font-size: 33px;
     }
+    .confirmationHeader{
+        font-size:20px;
+    }
     #mainImg img{
         padding-left: 30%;
         padding-right: 30%;
+    }
+    .contentBlock{
+        width:100%!important;
+        position:relative!important;
     }
     /* .headerMenu{
         display:none!important;

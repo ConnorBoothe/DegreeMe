@@ -18,8 +18,6 @@ function formatMeetupDate(date){
     else{
       return  month + " " + dateArray[2];
     }
-    
-   
   }
   function formatMeetupTime(date){
     var date = new Date(date).toString().split(" ");
@@ -59,13 +57,18 @@ function filterMeetupResults(res, type){
                 '<td class="text-light">'+res[x].userHandle+'</td>'+
                 '<td class="text-light">'+res[x].class+'</td>'+
                 '<td class="text-light">'+formatMeetupDate(res[x].date)+'</td>'+
-                '<td class="text-light">'+ formatMeetupTime(res[x].date)+'</td>'+
-                '<td class="text-light">'+res[x].building+'</td>'+
-                '<td class="text-light">'+res[x].room+'</td>'+
-                '<td>';
+                '<td class="text-light">'+ formatMeetupTime(res[x].date)+'</td>';
+                if(res[x].Location.Building){
+                  meetups += '<td class="text-light">Building: '+res[x].Location.Building+' Room: '+ meetups[x].Location.Building +'</td><td>';
+
+              }else if(res[x].ZoomLink){
+                meetups +='<td class="text-light">Zoom Meeting</td><td>';
+              }else{
+                meetups += '<td class="text-light"><a class="btn btn-primary setLocation" href="meeting/'+res[x]._id+'">Set Location</a></td><td>';
+              }
                 for(i in res[x].Members){
                     meetups+= '<a href="/user/'+res[x].Members[i].handle+'" class="memberImage" data-toggle="tooltip" data-placement="top" title="'+res[x].Members[i].handle+'">'+
-                        '<img class="meetupsImg" src="../'+res[x].Members[i].image+'"/>'+
+                        '<img class="meetupsImg" src="'+res[x].Members[i].image+'"/>'+
                     '</a>';
                 }
             
@@ -85,19 +88,23 @@ function filterMeetupResults(res, type){
                 '<td class="text-light">'+res[x].userHandle+'</td>'+
                 '<td class="text-light">'+res[x].class+'</td>'+
                 '<td class="text-light">'+formatMeetupDate(res[x].date)+'</td>'+
-                '<td class="text-light">'+ formatMeetupTime(res[x].date)+'</td>'+
-                '<td class="text-light">'+res[x].building+'</td>'+
-                '<td class="text-light">'+res[x].room+'</td>'+
-                '<td>';
+                '<td class="text-light">'+ formatMeetupTime(res[x].date)+'</td>';
+              if(res[x].Location.Building){
+                  meetups += '<td class="text-light">Building: '+res[x].Location.Building+' Room: '+ meetups[x].Location.Building +'</td><td>';
+
+              }else if(res[x].ZoomLink){
+                meetups +='<td class="text-light">Zoom Meeting</td><td>';
+              }else{
+                meetups += '<td class="text-light"><a class="btn btn-primary setLocation" href="meeting/'+res[x]._id+'">Set Location</a></td><td>';
+              }
                 for(i in res[x].Members){
                     meetups+= '<a href="/user/'+res[x].Members[i].handle+'" class="memberImage" data-toggle="tooltip" data-placement="top" title="'+res[x].Members[i].handle+'">'+
-                        '<img class="meetupsImg" src="../'+res[x].Members[i].image+'"/>'+
+                        '<img class="meetupsImg" src="'+res[x].Members[i].image+'"/>'+
                     '</a>';
                 }
             
             meetups+= '</td>'+
          
-                '<td></td>'+
                
             '</tr>';
             }
@@ -111,13 +118,18 @@ function filterMeetupResults(res, type){
                 '<td class="text-light">'+res[x].userHandle+'</td>'+
                 '<td class="text-light">'+res[x].class+'</td>'+
                 '<td class="text-light">'+formatMeetupDate(res[x].date)+'</td>'+
-                '<td class="text-light">'+ formatMeetupTime(res[x].date)+'</td>'+
-                '<td class="text-light">'+res[x].building+'</td>'+
-                '<td class="text-light">'+res[x].room+'</td>'+
-                '<td>';
+                '<td class="text-light">'+ formatMeetupTime(res[x].date)+'</td>';
+                if(res[x].Location.Building){
+                  meetups += '<td class="text-light">Building: '+res[x].Location.Building+' Room: '+ meetups[x].Location.Building +'</td><td>';
+
+              }else if(res[x].ZoomLink){
+                meetups +='<td class="text-light">Zoom Meeting</td><td>';
+              }else{
+                meetups += '<td class="text-light"><a class="btn btn-primary setLocation" href="meeting/'+res[x]._id+'">Set Location</a></td><td>';
+              }
                 for(i in res[x].Members){
                     meetups+= '<a href="/user/'+res[x].Members[i].handle+'" class="memberImage" data-toggle="tooltip" data-placement="top" title="'+res[x].Members[i].handle+'">'+
-                        '<img class="meetupsImg" src="../'+res[x].Members[i].image+'"/>'+
+                        '<img class="meetupsImg" src="'+res[x].Members[i].image+'"/>'+
                     '</a>';
                 }
             

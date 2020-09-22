@@ -1,5 +1,9 @@
 module.exports = class DateFunctions {
+  convertUTCtoEastern(date){
+    var date = new Date(date);
 
+    date.setHours(date.getHours() - 4);
+  }
   displayTimeSince(date) {
     var difference = Math.abs(new Date() - (new Date(date)));
     var secDifference = parseInt(difference / 1000);
@@ -53,8 +57,9 @@ module.exports = class DateFunctions {
   }
   //takes date object as parameter
   formatTimeFromDate(date) {
-    var date = date.toString().split(" ");
-    
+    // var date = this.convertUTCtoEastern(date)
+    var date = new Date(date)
+    date = date.toString().split(" ");
     var timeArray = date[4].split(":");
     var minutes = timeArray[1];
     var hours = timeArray[0];

@@ -18,7 +18,6 @@
     display:none;
 }
 .calendar-wrapper{
-    height:730px;
     text-align:center;
 }
 .dateButtons{
@@ -41,7 +40,6 @@
     font-size:14px;
 }
 .calendarContainer{
-  
     font-family: 'Open Sans', sans-serif;
   font-size:16px;
 }

@@ -232,7 +232,7 @@ $(document).ready(function(){
         $("#changeBio").attr("readonly", true);
         $("#changeBio").css({
             backgroundColor: "#1d1d1d",
-            minHeight:"30px"
+            minHeight:"100px"
         })
         //reset to old bio
         $("#changeBio").val($.session.get('oldBio'));
@@ -258,7 +258,7 @@ $(document).ready(function(){
                 $("#changeBio").attr("readonly", true);
                 $("#changeBio").css({
                     backgroundColor: "#1d1d1d",
-                    minHeight:"30px"
+                    minHeight:"100px"
                 })
                 $("#changeBio").val(result.bio);
                 $(".editBio").show();

@@ -17,7 +17,7 @@ $(document).ready(function(){
             reader.readAsDataURL(input.files[0]);
         }
     }
-    var defaultImg = "assets/img/croppieDefaultImage-100.jpg";
+    var defaultImg = "../assets/img/croppieDefaultImage-100.jpg";
     var location = window.location.href.toString().split("/")[3];
     // if( location === "SignUp"){
     //     defaultImg = "assets/img/croppieDefaultImage-100.jpg"
