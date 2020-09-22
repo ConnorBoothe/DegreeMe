@@ -85,6 +85,27 @@
                                    </div>
                     <div class="connectionBody-container">   
             <div class="tutorMiddle">
+                <div class="followers-container">
+                    <ul class="followers-list">
+                        <li class="followers-item"> 
+                            <button type="button" class="followModal" data-toggle="modal" data-target="#followerModal" name = "New Message">  
+                            <h1><span><%=followerCount%></span> <span>
+                                    <% if(followerCount === 1){%>
+                                    Follower
+                                    <%}else{%>
+                                    Followers
+                                    <%}%>
+                               </span></h1>
+                            </button>
+                        </li>
+                        <li class="followers-item"> 
+                            <button type="button" class="followModal" data-toggle="modal" data-target="#followingModal">
+                                <h1><%=followingCount%> <span>Following</span>
+                                </h1>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
                 <%if(session.handle === user.handle){%>
                     <p class="profileBio"><textarea maxlength="150" id="changeBio" class=""
                         readonly><%=user.bio%> </textarea>
@@ -102,27 +123,7 @@
                     </p>
                     
                 <%}%>
-                <div class="followers-container">
-                    <ul class="followers-list">
-                        <li class="followers-item"> 
-                            <button type="button" class="followModal" data-toggle="modal" data-target="#followerModal" name = "New Message">  
-                            <h1><span><%=followerCount%></span> <span>
-                                    <% if(followerCount> 1){%>
-                                    Followers
-                                    <%}else{%>
-                                    Follower
-                                    <%}%>
-                               </span></h1>
-                            </button>
-                        </li>
-                        <li class="followers-item"> 
-                            <button type="button" class="followModal" data-toggle="modal" data-target="#followingModal">
-                                <h1><%=followingCount%> <span>Following</span>
-                                </h1>
-                            </button>
-                        </li>
-                    </ul>
-                </div>
+               
                         <div class="ProfileButtons">
                             <!-- Modal -->
                             <div class="modal fade" id="profileModal" tabindex="-1" role="dialog"

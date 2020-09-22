@@ -42,7 +42,9 @@ router.use(session({
 router.get('/user/:Handle', function (req, res) {
     if (req.session.userId) {
         var qs = req.query;
+        
         users.getUserByHandle(req.params.Handle).exec((err, docs) => {
+            if(docs.length > 0 ){
             var followerCount = 0;
             var followingCount = 0;
             //get followerCount
@@ -63,7 +65,10 @@ router.get('/user/:Handle', function (req, res) {
                     followingCount: followingCount
                 });
             })
-
+        }
+        else{
+            res.redirect("/home")
+        }
         })
 
     } else {

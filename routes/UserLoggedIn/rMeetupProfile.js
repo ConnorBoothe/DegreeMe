@@ -37,6 +37,7 @@ router.get('/meetup/:MeetupId', function (req, res) {
     if (req.session.userId) {
         studyGroupMeetups.getMeetupById(req.params.MeetupId).exec((err, docs) => {
             var memberCount = 0;
+            if(docs.length > 0 ){
             for (x in docs[0].Attendees) {
                 memberCount++;
             }
@@ -51,6 +52,10 @@ router.get('/meetup/:MeetupId', function (req, res) {
                 formatTime:dateFunctions.formatTimeFromDate,
                 formatDate:dateFunctions.displayDate
             })
+        }
+        else{
+            res.redirect("/home");
+        }
         })
 
     } else {

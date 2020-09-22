@@ -26,8 +26,11 @@
             <%-include ('partials/header.ejs') %>
             <%-include ('partials/popout-menu.ejs') %>
         </div>
-        <div class="homeContainer">
+        <div class="index-page-container paddingTop">
             <div class="contentBlock">
+                <%if(qs.error){%>
+                    <h1 class="badge badge-danger loginErr"><%=qs.error%></h1>
+                <%}%>
                 <h1 class="confirmationHeader">Enter your account confirmation code</h1><br>
                 <form method="POST" action="updateStatus">
                     <input name="code" type="text" class="confirmInput" />

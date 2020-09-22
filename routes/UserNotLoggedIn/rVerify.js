@@ -28,12 +28,13 @@ router.get('/VerifyAccount', function(req, res){
     if(req.query.email){
         UserDB.getUserByEmail(req.query.email).exec((err,docs)=>{
             //if the email exists render the page and the account is inactive
-            if(docs.length > 0 && docs[0].status != "Active"){
-                res.render('UserNotLoggedIn/verifyAccount',{session:req.session, qs:req.query});
-            }
-            else{
-                res.redirect("/");
-            }
+                if(docs.length > 0){
+                    res.render('UserNotLoggedIn/verifyAccount',{session:req.session, qs:req.query});
+                }
+                else{
+                    res.redirect("/");
+                }
+               
         })
        
     }
@@ -53,30 +54,37 @@ router.post("/updateStatus", function(req, res){
             //update status
             UserDB.updateStatus(req.body.email);
             UserDB.getUserByEmail(req.body.email).exec((err,docs) => {
-                stripe.customers.create({
-                    email:docs[0].email,
-                    name:docs[0].first_name + " " + docs[0].last_name,
-                    metadata:{
-                        school:docs[0].school,
-                        subscription:docs[0].subscription,
-                    }
-                },function(err, customer){
-                    if (err!=null){
-                        console.log(err);
-                    }else{
-                        //console.log(customer);
-                        //console.log(docs[0].id);
-                        UserDB.setCustomerId(docs[0].id,customer.id).then(function(data){
-                        }).catch(function(err){
+                if(docs.length < 0){
+                    stripe.customers.create({
+                        email:docs[0].email,
+                        name:docs[0].first_name + " " + docs[0].last_name,
+                        metadata:{
+                            school:docs[0].school,
+                            subscription:docs[0].subscription,
+                        }
+                    },function(err, customer){
+                        if (err!=null){
                             console.log(err);
-                        });    
-                    }
-                })    
+                        }else{
+                            //console.log(customer);
+                            //console.log(docs[0].id);
+                            UserDB.setCustomerId(docs[0].id,customer.id).then(function(data){
+                            }).catch(function(err){
+                                console.log(err);
+                            });    
+                        }
+                    })    
+                }
+                else{
+                    res.redirect("/")
+                }
+               
             })
             res.redirect("/Login?error=Account Confirmed");
         }
         else{
-            res.redirect("/VerifyAccount?error=Confirmation Code Incorrect");
+            console.log("YOOOO")
+            res.redirect("/VerifyAccount?email="+req.body.email+"&error=Incorrect Confirmation Code");
         }
     });
    
