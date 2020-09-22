@@ -361,6 +361,7 @@
   .create-listing-button-container{
     width:100%;
     text-align:center;
+    margin-top: 150px;
   }
   .disclaimer{
     font-size:16px;
@@ -622,4 +623,5 @@
   font-family: 'Open Sans', sans-serif;
   padding-top:30px;
   padding-left:20px;
-}
+} 
+
