@@ -409,7 +409,7 @@ function validateInputFields(){
         errors = true;
     }
     if($("#grade").val() === "Select Your Grade"){
-        $(".scheduleErr").show();
+        $(".gradeErr").show();
         errors = true;
     }
     if($(".expiration").val() === "0"){
@@ -497,6 +497,10 @@ $(document).ready(function () {
 
     $("#courseName").on("focus", function(){
         $(".course-autocomplete").show();
+        $(this).css("border-bottom", "none");
+    })
+    $("#grade").on("click",function(){
+        $(".gradeErr").hide();
     })
     //load courses for the course input autocomplete
     $("#courseName").on("keyup", function(){

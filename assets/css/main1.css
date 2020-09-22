@@ -61,7 +61,7 @@ input:-webkit-autofill {
   }
 
   ::-webkit-scrollbar {
-    width: 1em;
+    width: .5em;
     height: 1em;
     margin-top:50px;
 

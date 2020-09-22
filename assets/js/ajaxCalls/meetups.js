@@ -18,8 +18,6 @@ function formatMeetupDate(date){
     else{
       return  month + " " + dateArray[2];
     }
-    
-   
   }
   function formatMeetupTime(date){
     var date = new Date(date).toString().split(" ");

@@ -361,7 +361,7 @@
   .create-listing-button-container{
     width:100%;
     text-align:center;
-    margin-top: 150px;
+    margin-top: 20px;
   }
   .disclaimer{
     font-size:16px;
@@ -504,6 +504,9 @@
  font-size:16px;
  margin-left:10px;
   margin-bottom:10px;
+}
+.gradeErr{
+  display:none;
 }
 ::-webkit-input-placeholder{
   color:#a9a9a9!important;
