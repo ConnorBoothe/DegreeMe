@@ -61,7 +61,7 @@ router.get('/Review/:meetingId', function (req, res) {
     }
     })
   } else {
-    res.redirect('/login?error=Session%20Ended');
+    res.redirect('/login?message=Session%20Ended');
   }
 
 });
@@ -72,7 +72,7 @@ router.get('/FeedbackLeft', function (req, res) {
       session: req.session,
     });
   } else {
-    res.redirect('/login?error=Session%20Ended');
+    res.redirect('/login?message=Session%20Ended');
   }
 
 });

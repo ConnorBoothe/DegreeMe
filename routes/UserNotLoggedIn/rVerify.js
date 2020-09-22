@@ -80,7 +80,7 @@ router.post("/updateStatus", function(req, res){
                 }
                
             })
-            res.redirect("/Login?error=Account Confirmed");
+            res.redirect("/Login?message=Account Confirmed");
         }
         else{
             console.log("YOOOO")

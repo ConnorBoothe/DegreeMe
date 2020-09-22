@@ -17,7 +17,7 @@ router.get('/Store', function(req, res){
     res.render('UserLoggedIn/store', {qs:req.query,session:req.session,schoolArray:subjectList.schoolArray, querySchool: subjectList.querySchool,qs:req.query});
   }
   else{
-    res.redirect('/login?error=Session%20Ended');
+    res.redirect('/login?message=Session%20Ended');
   }
     
 });

@@ -170,7 +170,7 @@ router.post("/attendStudyGroup",
           }).end();
         });
     } else {
-      res.redirect('/login?error=Session%20Ended');
+      res.redirect('/login?message=Session%20Ended');
     }
   })
 router.post("/leaveStudyGroup",
@@ -201,7 +201,7 @@ router.post("/leaveStudyGroup",
           }).end();
         });
     } else {
-      res.redirect('/login?error=Session%20Ended');
+      res.redirect('/login?message=Session%20Ended');
     }
   })
 module.exports = router;

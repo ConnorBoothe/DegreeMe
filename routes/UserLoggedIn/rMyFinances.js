@@ -105,7 +105,7 @@ router.get('/MyFinances', function (req, res) {
       }
     })
   } else {
-    res.redirect('/login?error=Session%20Ended');
+    res.redirect('/login?message=Session%20Ended');
   }
 });
 

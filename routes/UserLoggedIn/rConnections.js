@@ -120,7 +120,7 @@ router.get('/tutorResults/:Course', function (req, res) {
     //if session doesn't exist, redirect to login
     else {
 
-        res.redirect('/login?error=Session%20Ended');
+        res.redirect('/login?message=Session%20Ended');
     }
 
 });
