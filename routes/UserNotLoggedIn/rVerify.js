@@ -54,7 +54,8 @@ router.post("/updateStatus", function(req, res){
             //update status
             UserDB.updateStatus(req.body.email);
             UserDB.getUserByEmail(req.body.email).exec((err,docs) => {
-                if(docs.length < 0){
+                if(docs.length > 0){
+                    console.log("Running")
                     stripe.customers.create({
                         email:docs[0].email,
                         name:docs[0].first_name + " " + docs[0].last_name,
@@ -69,6 +70,7 @@ router.post("/updateStatus", function(req, res){
                             //console.log(customer);
                             //console.log(docs[0].id);
                             UserDB.setCustomerId(docs[0].id,customer.id).then(function(data){
+                                res.redirect("/Login?message=Account Confirmed");
                             }).catch(function(err){
                                 console.log(err);
                             });    
@@ -76,14 +78,14 @@ router.post("/updateStatus", function(req, res){
                     })    
                 }
                 else{
-                    res.redirect("/")
+                    res.redirect("/Login?message=Account Confirmed");
                 }
                
             })
-            res.redirect("/Login?message=Account Confirmed");
+
+          
         }
         else{
-            console.log("YOOOO")
             res.redirect("/VerifyAccount?email="+req.body.email+"&error=Incorrect Confirmation Code");
         }
     });
