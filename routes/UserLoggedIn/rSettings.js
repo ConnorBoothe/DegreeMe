@@ -147,8 +147,7 @@ router.post('/MakeStripeAccount',
                     payouts: {
                         schedule: {
                             //delay_days: 0,
-                            interval: "weekly",
-                            weekly_anchor: "friday",
+                            interval: "daily",
                         }
                     }
                 }
