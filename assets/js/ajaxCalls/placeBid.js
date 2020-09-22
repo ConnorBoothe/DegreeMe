@@ -21,7 +21,6 @@ $(document).ready(function(){
         stripeId:  $(this).prev().children().eq(5).val(),
         description: $(this).prev().children().eq(6).val()
     }
-    console.log(payload)
    
     alert(parseFloat(removeComma))
     if(parseFloat(removeComma) >= 5){

@@ -94,7 +94,6 @@ $(document).ready(function () {
                 // execution. Set up a webhook or plugin to listen for the
                 // payment_intent.succeeded event that handles any business critical
                 // post-payment actions.
-                console.log(result1.paymentIntent.status);
                 $(".payment-status").text("Payment Success");
                 document.location.href = "/meeting/"+result.meetingId;
               }

@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    $("#maxStudents").parent().parent().hide();
     //hide max students field initially, because default is individual session
     if($(".listingTypeItem.bg-primary").text() == 'Individual Session'){
         $("#maxStudents").parent().parent().hide();
