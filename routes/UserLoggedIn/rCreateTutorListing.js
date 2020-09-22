@@ -81,6 +81,7 @@ router.post('/createSession', [
           // addPost(sendToHandle,userHandle, userName, type ,userImage,caption,date, name, price, taggedCourse, anonymous, professor,description,course, groupId,postImage){
           timeline.addTimelinePost(req.session.handle, req.session.handle, req.session.name, "Tutor Listing", req.session.img, "New tutor listing created in " + req.body.courseName, new Date(), "TutorListing",
             parseFloat(req.body.hourlyRate) * parseInt(req.body.duration), req.body.courseName, "/Checkout?id=" + response._id);
+            req.session.myListings = true;
           res.status(202).json({
             status: "Added Session"
           }).end();
@@ -95,6 +96,7 @@ router.post('/createSession', [
           true, req.body.startDate, req.body.expirationDate).then(response => {
           timeline.addTimelinePost(req.session.handle, req.session.handle, req.session.name, "Tutor Listing", req.session.img, "New tutor listing created in " + req.body.courseName, new Date(), "TutorListing",
             parseFloat(req.body.hourlyRate) * parseInt(req.body.duration), req.body.courseName, "/Checkout?id=" + response._id);
+            req.session.myListings = true;
           res.status(202).json({
             status: "Added Session"
           }).end();
@@ -112,6 +114,7 @@ router.post('/createSession', [
             true, req.body.startDate, req.body.expirationDate).then(response => {
             timeline.addTimelinePost(req.session.handle, req.session.handle, req.session.name, "Tutor Listing", req.session.img, "New tutor listing created in " + req.body.courseName, new Date(), "TutorListing",
               parseFloat(req.body.hourlyRate) * parseInt(req.body.duration), req.body.courseName, "/Checkout?id=" + response._id);
+              req.session.myListings = true;
             res.status(202).json({
               status: "Added Session"
             }).end();
@@ -126,6 +129,7 @@ router.post('/createSession', [
             true, req.body.startDate, req.body.expirationDate).then(response => {
             timeline.addTimelinePost(req.session.handle, req.session.handle, req.session.name, "Tutor Listing", req.session.img, "New tutor listing created in " + req.body.courseName, new Date(), "TutorListing",
               parseFloat(req.body.hourlyRate) * parseInt(req.body.duration), req.body.courseName, "/Checkout?id=" + response._id);
+              req.session.myListings = true;
             res.status(202).json({
               status: "Added Session"
             }).end();
