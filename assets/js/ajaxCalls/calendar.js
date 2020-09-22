@@ -302,7 +302,7 @@ function sendListing(button) {
             var userId = $("#userId").val();
             var handle = $("#handle").val();
             var courseName = $("#courseName").val().trim();
-            var courseCode =  $(".thisCourse").text();
+            var courseCode =  $(".thisCourse").val();
             var grade = $("#grade").val();
             var hourlyRate = $("#hourlyRate").val();
             var school = $("#schoolSignUp").val();
@@ -336,7 +336,6 @@ function sendListing(button) {
                 schedule: fourWeekSchedule,
                 virtual:virtual
             }
-            console.log(payload.schedule, "Payload Schedule")
             $.ajax({
                 url: "/createSession",
                 type: 'POST',
@@ -480,7 +479,7 @@ $(document).ready(function () {
     })
     $(".autocomplete-wrapper").on("click", ".courseCountainer", function(){
         $("#courseName").val($(this).children().eq(0).text());
-        $(".thisCourse").text($(this).children().eq(1).text())
+        $(".thisCourse").val($(this).children().eq(1).text())
         $(".course-autocomplete").hide();
         $(".blocker").hide();
     })

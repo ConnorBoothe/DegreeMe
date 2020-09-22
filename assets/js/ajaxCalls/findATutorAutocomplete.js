@@ -67,7 +67,6 @@ $(document).ready(function(){
                     $(".autocomplete-status").text("Search Courses");
                  }
                  else if(result.Courses.length > 0){
-                     console.log(result.Courses)
                     var courses = "";
 
                     for(x in result.Courses){

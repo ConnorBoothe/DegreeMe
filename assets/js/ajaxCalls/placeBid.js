@@ -21,8 +21,7 @@ $(document).ready(function(){
         stripeId:  $(this).prev().children().eq(5).val(),
         description: $(this).prev().children().eq(6).val()
     }
-   
-    alert(parseFloat(removeComma))
+  
     if(parseFloat(removeComma) >= 5){
       $.ajax({
         url: "/addBid",
