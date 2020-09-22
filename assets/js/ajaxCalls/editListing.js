@@ -9,6 +9,10 @@ function validateEditInputFields(){
         $("#duration").parent().parent().css("border-bottom", "2px solid #dc3545");
         errors = true;
     }
+    if(!$.session.get("schedule0") && !$.session.get("schedule1") && !$.session.get("schedule2") && !$.session.get("schedule3")){
+      $(".scheduleErr").show();
+      errors = true;
+  }
     if(errors){
         $(".listingErrMsg").text("Errors exist in the form. Correct them and re-submit")
     }
@@ -16,6 +20,10 @@ function validateEditInputFields(){
 }
 
 $(document).ready(function(){
+  $.session.remove('schedule0');
+  $.session.remove('schedule1');
+  $.session.remove('schedule2');
+  $.session.remove('schedule3');
   if($(".priceSlider").val() === "2"){
     $(".blocker").show();
   }
