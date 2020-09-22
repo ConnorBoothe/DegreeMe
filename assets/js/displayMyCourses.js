@@ -156,7 +156,7 @@ $(document).ready(function(){
                         '<a href="/course/'+result.course+'"><p class="myCoursesText">'+result.course+'</p>'+
                         '<p class="myCoursesText">'+result.code+'</p></a>'+
                         '<div class="courseActions">'+
-                        '  <span type="button" class="dots-btn" data-container="body" data-toggle="popover" data-placement="right" data-content="<ul class=popoverUl><li><a class=askQuestionBtn href=/course/'+removeSpace(result.course)+'>Ask a Question</a></li><li><form method=POST class=leaveCourseForm ><input class=courseName type=hidden name=course value='+removeSpace(result.course)+' /><button class=leaveCourse>Leave</button></form></li></ul>"><img class="dots" src="../assets/img/3dots.svg"/></span>'+
+                        '  <span class="dots-btn" data-container="body" data-toggle="popover" data-placement="right" data-content="<ul class=popoverUl><li><a class=askQuestionBtn href=/course/'+removeSpace(result.course)+'>Ask a Question</a></li><li><form method=POST class=leaveCourseForm ><input class=courseName type=hidden name=course value='+removeSpace(result.course)+' /><button class=leaveCourse>Leave</button></form></li></ul>"><img class="dots" src="../assets/img/3dots.svg"/></span>'+
                         '</div></div>');
                         
                       },
