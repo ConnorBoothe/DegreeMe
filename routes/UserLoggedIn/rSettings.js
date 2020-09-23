@@ -4,6 +4,7 @@ var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser');
 var multer = require("multer");
+var multerGoogleStorage = require("multer-google-storage");
 const mongoose = require("mongoose");
 var session = require('express-session');
 const stream = require('stream');
@@ -58,9 +59,9 @@ const storage = multer.diskStorage({
     }
 });
 const upload = multer({
-    storage: storage,
+    storage: multerGoogleStorage.storageEngine(),
     limits: {
-        fieldSize: 25 * 1024 * 1024
+        fieldSize: 100 * 1024 * 1024
     },
     fileFilter: function (req, file, callback) {
         checkFileType(file, callback);
@@ -239,10 +240,8 @@ router.post("/Settings",
                     }).end();
                 }
                 else{
-                    res.redirect("/home")
-
+                    res.redirect("/home");
                 }
-     
             });
             // fs.writeFile("assets/img/userImg/" + req.body.handle.substring(1) + ".jpg", base64Image, {
             //     encoding: 'base64'

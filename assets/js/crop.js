@@ -82,7 +82,7 @@ $(".img-btn").on("click", function(){
             $(".croppedImg").val(("src", $('.imagebase64').val()));
             $(".editImg").attr("src",$('.imagebase64').val())
             //if location == signUp, insert image
-            if(window.location.href.toString().split("/")[3] === "SignUp"){
+            if(window.location.href.toString().split("/")[3].includes("SignUp")){
                 $(".result1").eq(1).html("<img class='userImage' name='userImage' src='"+$('.imagebase64').val()+"'/>");
                 $(".result1").eq(0).html("<img class='userImage' name='userImage' src='"+$('.imagebase64').val()+"'/>");
             }

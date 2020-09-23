@@ -332,7 +332,6 @@ $(document).ready(function(){
    })
     //request help AJAX POST call
     $(".requestHelpBtn").on("click",  function(e){
-        alert("YEAH")
         //input field validation
         var submit = true;
         if(parseInt($(".askingPrice").val()) < 5 || $(".askingPrice").val() == ""){

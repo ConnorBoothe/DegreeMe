@@ -9,6 +9,7 @@ const sgMail = require('@sendgrid/mail');
 const stream = require('stream');
 const {Storage} = require("@google-cloud/storage");
 var multer = require("multer");
+var multerGoogleStorage = require("multer-google-storage");
 const path = require('path');
 const nodemailer = require("nodemailer");
 const fs = require("fs");
@@ -51,14 +52,13 @@ const storage = multer.diskStorage({
     destination: './assets/img/userImg',
     filename: function (req, file, callback) {
         console.log("File" + file)
-
         callback(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
     }
 });
 const upload = multer({
-    storage: storage,
+    storage: multerGoogleStorage.storageEngine(),
     limits: {
-        fieldSize: 25 * 1024 * 1024
+        fieldSize: 100 * 1024 * 1024
     },
     fileFilter: function (req, file, callback) {
         checkFileType(file, callback);
@@ -104,11 +104,12 @@ router.post('/SignUp', [
         min: 6
     })
 ], function (req, res) {
+    console.log("Uploading image");
     upload(req, res, (err) => {
         if (err) {
-            res.redirect('/signUp?error=' + err);
+            console.log(err)
+            res.redirect('/signUp?error=Image Too Large');
         } else {
-
             var emailExists = false;
             var handleExists = false;
             //will change to use function getUserByEmail()
@@ -279,7 +280,8 @@ router.post('/SignUp', [
                             });
                                 }
                                
-                              });
+                              })
+                            
                             // fs.writeFile("assets/img/userImg/" + req.body.handle + ".jpg", base64Image, { encoding: 'base64' }, function (err, data) {
                            
                             // });

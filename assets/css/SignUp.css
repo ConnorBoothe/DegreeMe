@@ -221,6 +221,20 @@ max-width: 100%;
 .page-container {
     background-color: #18191a!important;
 }
+.uploadingImg{
+    width:200px!important;
+}
+.payment-status{
+    font-size:18px;
+    margin-left:10px;
+    margin-top:5px;
+}
+.d-flex {
+    margin-top:15px;
+}
+.upload-spinner{
+    display:none;
+}
  /* mobile view */
 @media only screen and (max-width: 1000px) { 
     .input-field1{

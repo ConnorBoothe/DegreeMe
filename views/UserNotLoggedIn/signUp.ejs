@@ -36,9 +36,14 @@
       <%- include ('partials/header.ejs') %>
       <%-include ('partials/popout-menu.ejs') %>
     </div>
+    <%if(qs.error){%>
+   
+    <%}%>
     <div class="signup-container">
+     
       <div class="signUpWrapper">
         <div class="signup-form" class="">
+          <h3 class='badge badge-danger loginErr'><%=qs.error%></h3>
           <h3 class="text-light">Join degreeMe</h3>
           <h2 class="signup-msg"><%=qs.msg%></h2>
           <form method="POST" action="/SignUp" enctype="multipart/form-data" class="form">
@@ -129,7 +134,10 @@
     </div>
     <div class="signup-container-mobile">
       <div class="signUpWrapper">
+     
+      
         <div class="signup-form" class="">
+          
           <h3 class="text-light">Join degreeMe</h3>
           <h2 class="signup-msg"><%=qs.msg%></h2>
           <form method="POST" action="/SignUp" enctype="multipart/form-data" class="form">
@@ -250,6 +258,17 @@
     </div>
     
     <button type="submit" class="btn btn-primary createAccount loginBtnSignUp">Create Account</button>
+    <div class="upload-spinner">
+      <div class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Payment Processing</span>
+        </div>
+        <h3 class="payment-status text-light">Uploading Your Image</h3>
+    </div>
+    </div>
+    
+    
+    </div>
   </form>
   
 </div>

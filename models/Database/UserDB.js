@@ -334,7 +334,6 @@ module.exports = class UserDB {
         console.log("HANDLE", handle)
         var UserDB = mongoose.model('UserDB',userDBSchema);
         UserDB.findOne({handle:handle}).exec((err,docs)=>{
-            console.log("MoveThread",docs)
             var tempThread = "";
             var index = "";
             for(x in docs.threads){
@@ -535,7 +534,6 @@ module.exports = class UserDB {
     }
     //get list of emails given a list of user handles
     getUserEmailsByHandle(handleArray){
-        console.log(handleArray)
         var UserDB = mongoose.model('UserDB',userDBSchema);
         return UserDB.find({handle:{$in: handleArray}}, "email");
 

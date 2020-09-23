@@ -63,7 +63,7 @@ module.exports = class DateFunctions {
     var timeArray = date[4].split(":");
     var minutes = timeArray[1];
     var hours = timeArray[0];
-    var intHours = parseInt(hours)
+    var intHours = parseInt(hours);
     var amPm = "";
     if (intHours === 12) {
       hours = 12;
@@ -74,7 +74,7 @@ module.exports = class DateFunctions {
     } else if (intHours < 12) {
     if(intHours<10){
         var splitHours = hours.split("");
-        hours = splitHours[1];
+        hours = intHours;
       }
       hours = hours;
       amPm = "AM";

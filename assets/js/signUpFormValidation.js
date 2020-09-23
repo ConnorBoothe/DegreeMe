@@ -195,6 +195,9 @@ $(".overlay").on("click", function(){
           
             $(".ReTypeTxt").eq(0).text("");
            }
+           if(submit){
+            $(".upload-spinner").show();
+           }
       
         //    if(!$(".userImage").attr("src")){
         //        submit = false;
