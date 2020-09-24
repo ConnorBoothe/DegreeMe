@@ -125,7 +125,7 @@ router.post('/SignUp', [
                                     users.addUser("@" + req.body.handle, first_name, last_name, req.body.school, req.body.email, hash,
                                         req.body.imageURL, "Inactive", activationCode,
                                         "None", req.body.major).then(function(){
-                                                res.redirect('/login?message=Account%20Successfully%20Created. Check your email to confirm your account.');
+                                                res.redirect('/login?message=Account%20Successfully%20Created.');
                                         })
                                         .catch(function(err){
                                             res.redirect("/?error=" + err)
@@ -256,7 +256,7 @@ router.post('/SignUpMobile', [
                                     users.addUser("@" + req.body.handle, first_name, last_name, req.body.school, req.body.email, hash,
                                        req.body.imageURL, "Inactive", activationCode,
                                         "None", req.body.major).then(function(){
-                                    res.redirect('/login?message=Account%20Successfully%20Created. Check your email to confirm your account.');
+                                    res.redirect('/login?message=Account%20Successfully%20Created.');
 
                                         })
                                         .catch(function(err){

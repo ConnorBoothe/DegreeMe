@@ -30,7 +30,10 @@
                     <input class="btn btn-danger newEmailBtn" type="submit" value="Send another email" />
                 </form>
                 <%}else{%>
-                <%if(qs.message === "Account Successfully Created. Check your email to confirm your account." || qs.message == "Account Confirmed"){%>
+                <%if(qs.message === "Account Successfully Created" ){%>
+                    <h4 class='badge badge-success loginErr'><%=qs.message%></h4>
+                    <p class="text-light">Check your email to confirm your account.</p>
+                <%}else if (qs.message == "Account Confirmed") {%>
                     <h4 class='badge badge-success loginErr'><%=qs.message%></h4>
                 <%}else if (qs.message == "Session Ended") {%>
                     <h4 class='badge badge-danger loginErr'><%=qs.message%></h4>
