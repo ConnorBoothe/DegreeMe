@@ -37,6 +37,45 @@ function filterResults(res, searchValue){
 }
 
 $(document).ready(function(){
+    
+// Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+//   var firebaseConfig = {
+//     apiKey: "AIzaSyCdNXC20rfZy4WU_Yo0r1_jqurajcevaI0",
+//     authDomain: "degreeme-bd5c7.firebaseapp.com",
+//     databaseURL: "https://degreeme-bd5c7.firebaseio.com",
+//     projectId: "degreeme-bd5c7",
+//     storageBucket: "degreeme-bd5c7.appspot.com",
+//     messagingSenderId: "52205869765",
+//     appId: "1:52205869765:web:b577285fdc02f989616eac",
+//     measurementId: "G-W912PS5JG0"
+//   };
+
+//   // Initialize Firebase
+//   firebase.initializeApp(firebaseConfig);
+//   firebase.firestore()
+//   console.log(firebase)
+
+//   firebase.analytics();
+//   $(".upload-file").on("change",function(e){
+//     alert("YO")
+//     console.log(e.target)
+//     var file = e.target.file[0];
+//     var storageRef = firebase.storage().ref("userImages/"+file.name);
+//     var task = storageRef.put(file);
+
+//     task.on("state_changed", 
+//     function progress(snapshot){
+//         alert("snap")
+//     },
+//     function error(err){
+//         alert(err)
+//     }, 
+//     function complete(){
+//         alert("complete")
+//     }
+//     )
+// })
 
 $(".picX").on("click", function(){
     $(".img-upload-container").hide();

@@ -54,7 +54,8 @@ $(".img-btn").on("click", function(){
     $('.upload-result').on('click', function (ev) {
         $uploadCrop.croppie('result', {
             type: 'canvas',
-            size: 'original',
+            size: {width:250},
+            format : 'jpg',
         }).then(function (resp) {
             if(window.location.href.toString().split("/")[3] === "user"){
                 payload = {
@@ -81,6 +82,7 @@ $(".img-btn").on("click", function(){
             $('.imagebase64').val(resp);
             $(".croppedImg").val(("src", $('.imagebase64').val()));
             $(".editImg").attr("src",$('.imagebase64').val())
+            // console.log(resp.replace(/^data:image\/[a-z]+;base64,/, ""))
             //if location == signUp, insert image
             if(window.location.href.toString().split("/")[3].includes("SignUp")){
                 $(".result1").eq(1).html("<img class='userImage' name='userImage' src='"+$('.imagebase64').val()+"'/>");

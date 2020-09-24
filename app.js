@@ -5,6 +5,17 @@ const helmet = require("helmet");
 const csp = require("helmet-csp");
 const ejs = require("ejs");
 const path = require('path');
+// const COURSES = require("./models/Database/UNCC_CoursesDB");
+// var course = new COURSES();
+// course.getAllCourses().exec((err, docs)=>{
+//   for(x in docs){
+//     console.log(docs[x]);
+//     docs[x].students = [];
+//     docs[x].studentCount = 0;
+//     docs[x].save();
+//   }
+  
+// })
 var app = module.exports = express(); 
 app.set('trust proxy', 1) // trust first proxy
 //classes used
@@ -20,14 +31,15 @@ app.use(express.urlencoded({
     extended:true
 }));
 //set the Content Security Policy of thhe app
+ 
 app.use(
     csp({
       directives: {
         defaultSrc: ["'self'", "https://js.stripe.com/" ],
-        connectSrc:["'self'", "ws://degreeme.io/socket.io/","degreeme.io:8080"],
+        connectSrc:["'self'", "ws://degreeme.io/socket.io/","degreeme.io:8080", "https://firebasestorage.googleapis.com/"],
         fontSrc:["'self'", "https://fonts.gstatic.com"],
         styleSrc:["'self'", "https://fonts.googleapis.com", "'unsafe-inline'"],
-        scriptSrc: ["'self'", , "https://js.stripe.com/"],
+        scriptSrc: ["'self'", , "https://js.stripe.com/", "https://www.gstatic.com", "https://firebase.googleapis.com/", "https://*.googleapis.com", "https://cdn.jsdelivr.net/"],
         imgSrc:["'self'", "data:", "https://storage.googleapis.com/"],
         objectSrc: ["'none'"],
         upgradeInsecureRequests: [],
@@ -36,9 +48,9 @@ app.use(
     })
   );
 // add additional layers of security
-app.use(helmet({
-    contentSecurityPolicy:false //security policy already set above
-}));
+// app.use(helmet({
+//     contentSecurityPolicy:false //security policy already set above
+// }));
 app.set('view engine', 'ejs'); //set the view engine to ejs
 app.use('/assets', express.static('assets')); //use assets folder for static files
 //events scheduled to run on the server

@@ -10,6 +10,9 @@ const stream = require('stream');
 const {Storage} = require("@google-cloud/storage");
 var multer = require("multer");
 var multerGoogleStorage = require("multer-google-storage");
+const imagemin = require('imagemin');
+const imageminJpegtran = require('imagemin-jpegtran');
+const imageminPngquant = require('imagemin-pngquant');
 const path = require('path');
 const nodemailer = require("nodemailer");
 const fs = require("fs");
@@ -46,15 +49,14 @@ router.use(bodyParser.urlencoded({
     limit: '50mb',
     extended: true
 }));
-
 //multer package used for storing user profile photos. Not currently in use
 const storage = multer.diskStorage({
     destination: './assets/img/userImg',
     filename: function (req, file, callback) {
-        console.log("File" + file)
         callback(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
     }
 });
+
 const upload = multer({
     storage: multerGoogleStorage.storageEngine(),
     limits: {
@@ -106,7 +108,11 @@ router.post('/SignUp', [
 ], function (req, res) {
     console.log("Uploading image");
     upload(req, res, (err) => {
-        if (err) {
+        console.log("BYTE COUNT: " + req.socket.bytesRead)
+        if(req.socket.bytesRead > 1000000){
+            res.redirect('/signUp?error=Image Too Large');
+        }
+        else if (err) {
             console.log(err)
             res.redirect('/signUp?error=Image Too Large');
         } else {
@@ -135,6 +141,7 @@ router.post('/SignUp', [
                         if(req.body.screenSize === "Desktop"){
                             pw = req.body.password[0];
                             handle = req.body.handle[0];
+                            console.log("Handle: ",handle )
                         }
                         else{
                             pw = req.body.password[1];
@@ -142,10 +149,19 @@ router.post('/SignUp', [
                         }
                         bcrypt.hash(pw, 8, function (err, hash) {
                             let base64String = req.body.img1; // Not a real image
+
                             // Remove header
                             let base64Image = base64String.split(';base64,').pop();
                             var bufferStream = new stream.PassThrough();
-                            bufferStream.end(Buffer.from(base64Image, 'base64'));
+                            var buffer = Buffer.from(base64Image, 'base64');
+                            //compress the image
+                            imagemin.buffer(buffer, {
+                                plugins: [
+                                    imageminJpegtran(),
+                                   imageminPngquant({ quality: [0.5, 0.6]})
+                                ]
+                              }).then(function (file) {
+                            bufferStream.end(file);
                             var file = degreemeImages.file(handle + '.jpg');
                             bufferStream.pipe(file.createWriteStream({
                                 metadata: {
@@ -154,11 +170,14 @@ router.post('/SignUp', [
                                     custom: 'metadata'
                                   }
                                 },
+                                gzip: true,
+                                cacheControl:'no-cache',
                                 public: true,
                                 validation: "md5"
                               }))
                               .on('error', function(err) {
                                   console.log(err)
+                                  res.redirect("/?err="+err);
                               })
                               .on('finish', function(data) {
                                 console.log("File uploaded")
@@ -288,6 +307,9 @@ router.post('/SignUp', [
                            
                            
                         });
+                    }, function (err) {
+                        console.log(err);
+                      });
                     });
                     res.redirect('/login?message=Account%20Successfully%20Created. Check your email to confirm your account.');
                 }
