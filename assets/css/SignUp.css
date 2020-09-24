@@ -83,12 +83,18 @@ max-width: 100%;
     display:inline-block;
     width:100%;
 }
-.result1 img {
-      width:30px!important;
+.result1 {
       margin-left:150px;
       position:absolute;
       margin-top:-35px;
      
+  }
+  .uploadingImg{
+      color:white;
+  }
+  .result1 img{
+    width:30px!important;
+    margin-right:10px;
   }
   .imgTxt {
     color: #dc3545;

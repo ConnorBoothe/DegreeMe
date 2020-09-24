@@ -169,7 +169,7 @@ module.exports = class UserDB {
             school: school, email: email, password: password, img: img, activationCode: code,
             theme:'bg-dark', rating:0, status:status, subscription:subscription, StripeId: "none", CustomerId:"none", notificationCount:0,
              Major:major,  Tutor:false, dateCreated:new Date(), bio:"Tell the world a bit about yourself"});
-        user.save();
+        return user.save();
     }
     //add follower function adds a follower to the followers array,
     //and adds the account followed to following array

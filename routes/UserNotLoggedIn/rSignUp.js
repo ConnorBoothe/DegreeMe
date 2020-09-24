@@ -6,16 +6,9 @@ const bcrypt = require('bcryptjs');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const sgMail = require('@sendgrid/mail');
-const stream = require('stream');
 const {Storage} = require("@google-cloud/storage");
-var multer = require("multer");
-var multerGoogleStorage = require("multer-google-storage");
-const imagemin = require('imagemin');
-const imageminJpegtran = require('imagemin-jpegtran');
-const imageminPngquant = require('imagemin-pngquant');
+
 const path = require('path');
-const nodemailer = require("nodemailer");
-const fs = require("fs");
 var unirest = require('unirest');
 //const stripe = require('stripe')('sk_test_R9jRtcqaPjkvbrQkt7TaLIK8');
 const {
@@ -27,12 +20,6 @@ var UserDB = require('../../models/Database/UserDB');
 //instantiate DBs
 var users = new UserDB();
 
-const gc = new Storage({
-    keyFilename: path.join(__dirname,"../../degreeme1-727d561034e0.json"),
-    projectId:"degreeme1"
-  });
-//image bucket
-const degreemeImages = gc.bucket("degreeme-images");
 //use session and body parser
 router.use(session({
     secret: 'iloveu',
@@ -49,24 +36,9 @@ router.use(bodyParser.urlencoded({
     limit: '50mb',
     extended: true
 }));
-//multer package used for storing user profile photos. Not currently in use
-const storage = multer.diskStorage({
-    destination: './assets/img/userImg',
-    filename: function (req, file, callback) {
-        callback(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
-    }
-});
 
-const upload = multer({
-    storage: multerGoogleStorage.storageEngine(),
-    limits: {
-        fieldSize: 100 * 1024 * 1024
-    },
-    fileFilter: function (req, file, callback) {
-        checkFileType(file, callback);
-    }
 
-}).single('userImage');
+
 
 //Check file type function
 function checkFileType(file, callback) {
@@ -106,20 +78,22 @@ router.post('/SignUp', [
         min: 6
     })
 ], function (req, res) {
-    console.log("Uploading image");
-    upload(req, res, (err) => {
-        console.log("BYTE COUNT: " + req.socket.bytesRead)
-        if(req.socket.bytesRead > 1000000){
-            res.redirect('/signUp?error=Image Too Large');
-        }
-        else if (err) {
-            console.log(err)
-            res.redirect('/signUp?error=Image Too Large');
-        } else {
+    // console.log("Uploading image");
+    // upload(req, res, (err) => {
+        // console.log("BYTE COUNT: " + req.socket.bytesRead)
+        // if(req.socket.bytesRead > 1000000){
+        //     res.redirect('/signUp?error=Image Too Large');
+        // }
+        // else if (err) {
+        //     console.log(err)
+        //     res.redirect('/signUp?error=Image Too Large');
+        // } else {
             var emailExists = false;
             var handleExists = false;
             //will change to use function getUserByEmail()
+            console.log(req.body)
             users.getStudents().exec((err, docs) => {
+                console.log(req.body.email)
                 for (x in docs) {
                     if (req.body.email === docs[x].email) {
                         emailExists = true;
@@ -133,68 +107,32 @@ router.post('/SignUp', [
                 } else if (handleExists) {
                     res.redirect("/SignUp?msg=Handle%20Already%20In%20Use");
                 } else {
+                    console.log(req.body.screenSize)
                     var activationCode = Math.floor(Math.random() * 10000);
 
                     bcrypt.genSalt(10, function (err, salt) {
-                        var pw = "";
-                        var handle = ""
-                        if(req.body.screenSize === "Desktop"){
-                            pw = req.body.password[0];
-                            handle = req.body.handle[0];
-                            console.log("Handle: ",handle )
-                        }
-                        else{
-                            pw = req.body.password[1];
-                            handle = req.body.handle[1];
-                        }
+                        var pw = req.body.password;
+                        var handle = req.body.handle;
+                        
                         bcrypt.hash(pw, 8, function (err, hash) {
-                            let base64String = req.body.img1; // Not a real image
-
-                            // Remove header
-                            let base64Image = base64String.split(';base64,').pop();
-                            var bufferStream = new stream.PassThrough();
-                            var buffer = Buffer.from(base64Image, 'base64');
-                            //compress the image
-                            imagemin.buffer(buffer, {
-                                plugins: [
-                                    imageminJpegtran(),
-                                   imageminPngquant({ quality: [0.5, 0.6]})
-                                ]
-                              }).then(function (file) {
-                            bufferStream.end(file);
-                            var file = degreemeImages.file(handle + '.jpg');
-                            bufferStream.pipe(file.createWriteStream({
-                                metadata: {
-                                  contentType: 'image/jpeg',
-                                  metadata: {
-                                    custom: 'metadata'
-                                  }
-                                },
-                                gzip: true,
-                                cacheControl:'no-cache',
-                                public: true,
-                                validation: "md5"
-                              }))
-                              .on('error', function(err) {
-                                  console.log(err)
-                                  res.redirect("/?err="+err);
-                              })
-                              .on('finish', function(data) {
-                                console.log("File uploaded")
-                                if(req.body.screenSize === "Desktop"){
                                     var fNameLetter = req.body.first_name[0].substring(0,1);
                                     fNameLetter = fNameLetter.toUpperCase();
-                                    var first_name = fNameLetter + req.body.first_name[0].substring(1);
+                                    var first_name = fNameLetter + req.body.first_name.substring(1);
                                     var lNameLetter = req.body.last_name[0].substring(0,1);
                                     lNameLetter = lNameLetter.toUpperCase();
-                                    var last_name = lNameLetter + req.body.last_name[0].substring(1);
-                                    users.addUser("@" + req.body.handle[0], first_name, last_name, req.body.school[0], req.body.email[0], hash,
-                                        "https://storage.googleapis.com/degreeme-images/" + req.body.handle[0] + ".jpg", "Inactive", activationCode,
-                                        "None", req.body.major[0]);
+                                    var last_name = lNameLetter + req.body.last_name.substring(1);
+                                    // console.log("ADDDING USER")
+                                    users.addUser("@" + req.body.handle, first_name, last_name, req.body.school, req.body.email, hash,
+                                        req.body.imageURL, "Inactive", activationCode,
+                                        "None", req.body.major).then(function(){
+                                                res.redirect('/login?message=Account%20Successfully%20Created. Check your email to confirm your account.');
+                                        })
+                                        .catch(function(err){
+                                            res.redirect("/?error=" + err)
+                                        });
                                          // using Twilio SendGrid's v3 Node.js Library
                             // https://github.com/sendgrid/sendgrid-nodejs
                             var mail = unirest("POST", "https://api.sendgrid.com/v3/mail/send");
-
                             mail.headers({
                             "content-type": "application/json",
                             "authorization": process.env.SENDGRID_API_KEY,
@@ -206,15 +144,15 @@ router.post('/SignUp', [
                                 {
                                     "to": [
                                         {
-                                            "email": req.body.email[0],
-                                            "name": req.body.name
+                                            "email": req.body.email,
+                                            "name": req.body.first_name
                                         }
                                 ],
                                     "dynamic_template_data": {
                                         "subject": "Account Confirmation",
                                         "name": req.body.first_name,
                                         "code": activationCode,
-                                        "email": req.body.email[0],
+                                        "email": req.body.email,
                                 
                                 },
                             }
@@ -239,18 +177,92 @@ router.post('/SignUp', [
                                     console.log("email has sent for account confirmation");
                                 }
                             });
-                                }
-                                else if(req.body.screenSize === "Mobile") {
-                                    var fNameLetter = req.body.first_name[1].substring(0,1);
+                        });
+                    }, function (err) {
+                        console.log(err);
+                      });
+                    // });
+                }
+            })
+        // }
+    // })
+})
+
+router.post('/SignUpMobile', [
+    check('first_name').isString().trim().escape(),
+    check('last_name').isString().trim().escape(),
+    check('handle').isString().trim().escape(),
+    check('school').isString().trim().escape(),
+    check('email').isEmail().normalizeEmail().trim().escape(),
+    check('password').isString().trim().escape(),
+    check('password').isLength({
+        min: 6
+    }),
+    check('retypePW').isString().trim().escape(),
+    check('retypePW').isLength({
+        min: 6
+    })
+], function (req, res) {
+    // console.log("Uploading image");
+    // upload(req, res, (err) => {
+        // console.log("BYTE COUNT: " + req.socket.bytesRead)
+        // if(req.socket.bytesRead > 1000000){
+        //     res.redirect('/signUp?error=Image Too Large');
+        // }
+        // else if (err) {
+        //     console.log(err)
+        //     res.redirect('/signUp?error=Image Too Large');
+        // } else {
+            var emailExists = false;
+            var handleExists = false;
+            //will change to use function getUserByEmail()
+            console.log("SIGN UP MOBILE")
+            console.log(req.body)
+            users.getStudents().exec((err, docs) => {
+                console.log(req.body.email)
+                for (x in docs) {
+                    if (req.body.email === docs[x].email) {
+                        emailExists = true;
+                    }
+                    if (req.body.handle === docs[x].handle) {
+                        handleExists = true;
+                    }
+                }
+                if (emailExists) {
+                    res.redirect("/SignUp?msg=Email%20Already%20In%20Use");
+                } else if (handleExists) {
+                    res.redirect("/SignUp?msg=Handle%20Already%20In%20Use");
+                } else {
+                    console.log("RUNNING sign up post MOBILE")
+                    console.log(req.body.screenSize)
+                    var activationCode = Math.floor(Math.random() * 10000);
+
+                    bcrypt.genSalt(10, function (err, salt) {
+                        var pw = req.body.password;
+                        var handle = req.body.handle;
+                    
+                        bcrypt.hash(pw, 8, function (err, hash) {
+                                
+                                    console.log("Mobile")
+                                    var fNameLetter = req.body.first_name.substring(0,1);
                                     fNameLetter = fNameLetter.toUpperCase();
-                                    var first_name = fNameLetter + req.body.first_name[1].substring(1);
-                                    var lNameLetter = req.body.last_name[1].substring(0,1);
+                                    var first_name = fNameLetter + req.body.first_name.substring(1);
+                                    var lNameLetter = req.body.last_name.substring(0,1);
                                     lNameLetter = lNameLetter.toUpperCase();
-                                    var last_name = lNameLetter + req.body.last_name[1].substring(1);
-                                    users.addUser("@" + req.body.handle[1], first_name, last_name, req.body.school[1], req.body.email[1], hash,
-                                        "https://storage.googleapis.com/degreeme-images/" + req.body.handle[1] + ".jpg", "Inactive", activationCode,
-                                        "None", req.body.major[1]);
-                                     // using Twilio SendGrid's v3 Node.js Library
+                                    var last_name = lNameLetter + req.body.last_name.substring(1);
+                                    console.log(first_name)
+                                    console.log(last_name)
+                                    console.log("ADDDING USER")
+                                    users.addUser("@" + req.body.handle, first_name, last_name, req.body.school, req.body.email, hash,
+                                       req.body.imageURL, "Inactive", activationCode,
+                                        "None", req.body.major).then(function(){
+                                    res.redirect('/login?message=Account%20Successfully%20Created. Check your email to confirm your account.');
+
+                                        })
+                                        .catch(function(err){
+                                            res.redirect("/?error=" + err)
+                                        });
+                                         // using Twilio SendGrid's v3 Node.js Library
                             // https://github.com/sendgrid/sendgrid-nodejs
                             var mail = unirest("POST", "https://api.sendgrid.com/v3/mail/send");
 
@@ -265,17 +277,18 @@ router.post('/SignUp', [
                                 {
                                     "to": [
                                         {
-                                            "email": req.body.email[1],
-                                            "name": req.body.name
+                                            "email": req.body.email,
+                                            "name": req.body.first_name
                                         }
                                 ],
                                     "dynamic_template_data": {
                                         "subject": "Account Confirmation",
                                         "name": req.body.first_name,
                                         "code": activationCode,
-                                        "email": req.body.email[1],
-                                    },
-                                }
+                                        "email": req.body.email,
+                                
+                                },
+                            }
                             ],
                                 "from": {
                                     "email": "notifications@degreeme.io",
@@ -296,25 +309,15 @@ router.post('/SignUp', [
                                 } else if (res.accepted) {
                                     console.log("email has sent for account confirmation");
                                 }
-                            });
-                                }
-                               
-                              })
-                            
-                            // fs.writeFile("assets/img/userImg/" + req.body.handle + ".jpg", base64Image, { encoding: 'base64' }, function (err, data) {
-                           
-                            // });
-                           
-                           
+                            }); 
                         });
                     }, function (err) {
                         console.log(err);
                       });
-                    });
-                    res.redirect('/login?message=Account%20Successfully%20Created. Check your email to confirm your account.');
+                    // });
                 }
             })
-        }
-    })
+        // }
+    // })
 })
 module.exports = router;

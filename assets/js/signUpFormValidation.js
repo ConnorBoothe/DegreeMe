@@ -1,5 +1,3 @@
-
-
 function filterResults(res, searchValue){
     var majors = "";
     var count = 0;
@@ -38,44 +36,23 @@ function filterResults(res, searchValue){
 
 $(document).ready(function(){
     
-// Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-//   var firebaseConfig = {
-//     apiKey: "AIzaSyCdNXC20rfZy4WU_Yo0r1_jqurajcevaI0",
-//     authDomain: "degreeme-bd5c7.firebaseapp.com",
-//     databaseURL: "https://degreeme-bd5c7.firebaseio.com",
-//     projectId: "degreeme-bd5c7",
-//     storageBucket: "degreeme-bd5c7.appspot.com",
-//     messagingSenderId: "52205869765",
-//     appId: "1:52205869765:web:b577285fdc02f989616eac",
-//     measurementId: "G-W912PS5JG0"
-//   };
-
-//   // Initialize Firebase
-//   firebase.initializeApp(firebaseConfig);
-//   firebase.firestore()
-//   console.log(firebase)
-
-//   firebase.analytics();
-//   $(".upload-file").on("change",function(e){
-//     alert("YO")
-//     console.log(e.target)
-//     var file = e.target.file[0];
-//     var storageRef = firebase.storage().ref("userImages/"+file.name);
-//     var task = storageRef.put(file);
-
-//     task.on("state_changed", 
-//     function progress(snapshot){
-//         alert("snap")
-//     },
-//     function error(err){
-//         alert(err)
-//     }, 
-//     function complete(){
-//         alert("complete")
-//     }
-//     )
-// })
+    // var firebaseConfig = {
+    //     apiKey: "AIzaSyCdNXC20rfZy4WU_Yo0r1_jqurajcevaI0",
+    //     authDomain: "degreeme-bd5c7.firebaseapp.com",
+    //     databaseURL: "https://degreeme-bd5c7.firebaseio.com",
+    //     projectId: "degreeme-bd5c7",
+    //     storageBucket: "degreeme-bd5c7.appspot.com",
+    //     messagingSenderId: "52205869765",
+    //     appId: "1:52205869765:web:b577285fdc02f989616eac",
+    //     measurementId: "G-W912PS5JG0"
+    //   };
+    
+    //   // Initialize Firebase
+    //   firebase.initializeApp(firebaseConfig);
+    //   $(".createAccount").on("click", function(e){
+    //     // var blob = URL.createObjectURL(new Blob([image] , {type:'text/plain'}));
+      
+    // })
 
 $(".picX").on("click", function(){
     $(".img-upload-container").hide();
@@ -92,13 +69,10 @@ $(".overlay").on("click", function(){
         $(".major-autocomplete").hide();
         $(".blocker").hide();
     })
-    
-
     $(".blocker").on("click", function(){
         $(this).hide();
         $(".major-autocomplete").hide();
     })
-    
     $(".major").on("focus", function(){
         $(".major-autocomplete").show();
         $(".blocker").show();
@@ -120,14 +94,14 @@ $(".overlay").on("click", function(){
         $(".loginBtnSignUp").on("click",function(e){
             e.preventDefault();
             var submit = true;
-            if(!$(".userImage").attr("src")){
-                submit = false;
-                $(".imgTxt").text("Upload a Profile Picture");
-            }
+            // if(!$(".userImage").attr("src")){
+            //     submit = false;
+            //     $(".imgTxt").text("Upload a Profile Picture");
+            // }
             
-            else if ($(".userImage").eq(0).attr("src")){
-             $(".imgTxt").text("");
-            }
+            // else if ($(".userImage").eq(0).attr("src")){
+            //  $(".imgTxt").text("");
+            // }
             if(window.innerWidth > 1000){
             
             var email = $(".emailSignUp").eq(0).val();
@@ -135,6 +109,14 @@ $(".overlay").on("click", function(){
             var emailRegEx =/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             var match = emailRegEx.test(email);
             $("input[name='screenSize']").val("Desktop");
+            if($(".imageUploaded").val() == ""){
+                submit = false;
+                $(".imgTxt").text("Upload a Profile Picture");
+            }
+            
+            else if ($(".imageUploaded").val() != 0){
+             $(".imgTxt").text("");
+            }
             if($(".handle").eq(0).val().includes(' ')){
                 submit = false;
                 $(".handle").eq(0).css("border-bottom","2px solid #dc3545");
@@ -234,10 +216,6 @@ $(".overlay").on("click", function(){
           
             $(".ReTypeTxt").eq(0).text("");
            }
-           if(submit){
-            $(".upload-spinner").show();
-           }
-      
         //    if(!$(".userImage").attr("src")){
         //        submit = false;
         //        $(".imgTxt").text("Upload a Profile Picture");
@@ -284,6 +262,7 @@ $(".overlay").on("click", function(){
                 }
             }
             if(submit){
+                $(".upload-spinner").show();
                 $(".form").eq(0).submit();
             }
         });
@@ -294,6 +273,7 @@ $(".overlay").on("click", function(){
             var emailRegEx =/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             var match = emailRegEx.test(email);
             $("input[name='screenSize']").val("Mobile");
+            
             if($(".handle").eq(1).val().includes(' ')){
                 submit = false;
                 $(".handle").eq(1).css("border-bottom","2px solid #dc3545");
@@ -390,18 +370,15 @@ $(".overlay").on("click", function(){
            }
         
            else{
-          
             $(".ReTypeTxt").text("");
            }
-      
-        //    if(!$(".userImage").eq(1).attr("src")){
-        //        submit = false;
-        //        $(".imgTxt").text("Upload a Profile Picture");
-        //    }
-           
-        //    else if ($(".userImage").eq(1).attr("src")){
-        //     $(".imgTxt").text("");
-        //    }
+           if($(".imageUploaded").val() == ""){
+               submit = false;
+               $(".imgTxt").text("Upload a Profile Picture");
+           }
+           else if ($(".imageUploaded").val() != 0){
+            $(".imgTxt").text("");
+           }
            if($(".major").eq(1).val() === ""){
             submit = false;
             $(".major").eq(1).css("border-bottom","2px solid #dc3545");
@@ -440,10 +417,9 @@ $(".overlay").on("click", function(){
                     $(".emailTxt").eq(1).text("Email already in use"); 
                 }
             }
-            alert(submit)
             if(submit){
-
-                $(".form").eq(0).submit();
+                $(".upload-spinner").show();
+                $(".form").eq(1).submit();
             }  
         });
         }
