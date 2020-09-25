@@ -108,7 +108,7 @@ $(document).ready(function(){
             courses+='<div class="myCoursesWrapper">'+
             '<a href="/course/'+res[x].courseName+'"><p class="myCoursesText">'+res[x].courseName+'</p>'+
             '<p class="myCoursesSubText">'+res[x].courseCode+'</p></a>'+
-            '  <span type="button" class="dots-btn" data-container="body" data-toggle="popover" data-placement="right" data-content="<ul class=popoverUl><li><a class=askQuestionBtn href=/course/'+removeSpace(res[x].courseName)+'>Ask a Question</a></li><li><form method=POST class=leaveCourseForm ><input class=courseName type=hidden name=course value='+removeSpace(res[x].courseName)+' /><button class=leaveCourse>Leave</button></form></li></ul>"><img class="dots" src="../assets/img/3dots.svg"/></span>'+
+            '  <span class="dots-btn" data-container="body" data-toggle="popover" data-placement="right" data-content="<ul class=popoverUl><li><a class=askQuestionBtn href=/course/'+removeSpace(res[x].courseName)+'>Ask a Question</a></li><li><form method=POST class=leaveCourseForm ><input class=courseName type=hidden name=course value='+removeSpace(res[x].courseName)+' /><button class=leaveCourse>Leave</button></form></li></ul>"><img class="dots" src="../assets/img/3dots.svg"/></span>'+
             '</div>';   
         }
         $(".myCourse-container").html(courses);
