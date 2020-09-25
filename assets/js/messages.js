@@ -69,7 +69,7 @@
                         '<div class="msg_ ">' +
                         '<p class="messageBody sentMsg bg-primary">' + data.msg
                         .message + '</p></div>' +
-                        '<p class="msg-date msg-date-sent">' + displayTimeSince(data.msg.date) + '</p>' +
+                        '<p class="msg-date msg-date-sent"></p>' +
                         '</div></div>');
                 } else {
                     chat.append('<div class="containMessageReceived">' +

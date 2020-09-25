@@ -36,7 +36,7 @@ app.use(
     csp({
       directives: {
         defaultSrc: ["'self'", "https://js.stripe.com/" ],
-        connectSrc:["'self'", "ws://degreeme.io/socket.io/","degreeme.io:8080", "https://firebasestorage.googleapis.com/"],
+        connectSrc:["'self'", "ws://degreeme.io/socket.io/","ws://https://degreeme.io/socket.io/", "https://firebasestorage.googleapis.com/"],
         fontSrc:["'self'", "https://fonts.gstatic.com"],
         styleSrc:["'self'", "https://fonts.googleapis.com", "'unsafe-inline'"],
         scriptSrc: ["'self'", , "https://js.stripe.com/", "https://www.gstatic.com", "https://firebase.googleapis.com/", "https://*.googleapis.com", "https://cdn.jsdelivr.net/"],

@@ -11,9 +11,9 @@ router.get('/API/Tutors', function(req, res){
   
         listings.getAllListings().exec((err,docs)=>{
             if(err){
-                res.send("An error occurred.")
+                res.json("An error occurred.")
             }
-            res.send(docs);
+            res.json(docs);
         });
    
 });

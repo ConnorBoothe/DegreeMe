@@ -76,7 +76,7 @@ $(document).ready(function(){
               discussion +=  '<div class="question">'+
               '<div class="question-container1">'+
               '<a href="/user/'+res.discussion[x].userHandle+'">'+
-              '<img class="discImg" src="../'+res.discussion[x].userImg+'"/>'+
+              '<img class="discImg" src="'+res.discussion[x].userImg+'"/>'+
               '<span class="discName">'+res.discussion[x].userHandle+'</span></a>'+
               '<p class="dateText">'+formatDate(new Date(res.discussion[x].date))+"</p>"+
               '<p class="questionText">'+res.discussion[x].post+'</p>';

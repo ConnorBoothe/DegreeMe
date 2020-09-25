@@ -53,7 +53,91 @@ $(document).ready(function(){
     //     // var blob = URL.createObjectURL(new Blob([image] , {type:'text/plain'}));
       
     // })
-
+    $('input[name="handle"]').on("keyup", function(){
+    payload = {
+        handle: $('input[name="handle"]').val(),
+      }
+    $.ajax({
+        url: "/getHandle",
+        type: 'POST',
+        data: JSON.stringify(payload),
+        headers: {
+          "Content-Type": "application/json"
+        }, statusCode: {
+          202: function (result) {
+              //hide badge if 0 (should be zero)
+              console.log(result)
+              if(result.exists){
+                $(".handle").eq(0).css("border-bottom","2px solid #dc3545");
+                $(".handleTxt").eq(0).text("Username is taken");
+              }
+              else{
+                $(".handle").eq(0).css("border-bottom","2px solid #007bff");
+                $(".handleTxt").eq(0).text("");
+              }
+          },
+          500: function (result) {
+            alert("500 " + result.responseJSON.err);
+          },
+        },
+      });
+    })
+    $('input[name="handle"]').on("focus", function(){
+        payload = {
+            handle: $('input[name="handle"]').val(),
+          }
+        $.ajax({
+            url: "/getHandle",
+            type: 'POST',
+            data: JSON.stringify(payload),
+            headers: {
+              "Content-Type": "application/json"
+            }, statusCode: {
+              202: function (result) {
+                  //hide badge if 0 (should be zero)
+                  console.log(result)
+                  if(result.exists){
+                    $(".handle").eq(0).css("border-bottom","2px solid #dc3545");
+                    $(".handleTxt").eq(0).text("Username is taken");
+                  }
+                  else{
+                    $(".handleTxt").eq(0).text("");
+                  }
+              },
+              500: function (result) {
+                alert("500 " + result.responseJSON.err);
+              },
+            },
+          });
+        })
+        $('input[name="handle"]').on("focusout", function(){
+            payload = {
+                handle: $('input[name="handle"]').val(),
+              }
+            $.ajax({
+                url: "/getHandle",
+                type: 'POST',
+                data: JSON.stringify(payload),
+                headers: {
+                  "Content-Type": "application/json"
+                }, statusCode: {
+                  202: function (result) {
+                      //hide badge if 0 (should be zero)
+                      console.log(result)
+                      if(result.exists){
+                        $(".handle").eq(0).css("border-bottom","2px solid #dc3545");
+                        $(".handleTxt").eq(0).text("Username is taken");
+                      }
+                      else{
+            
+                      }
+                  },
+                  500: function (result) {
+                    alert("500 " + result.responseJSON.err);
+                  },
+                },
+              });
+            })
 $(".picX").on("click", function(){
     $(".img-upload-container").hide();
     $(".overlay").hide();
@@ -247,7 +331,7 @@ $(".overlay").on("click", function(){
             }).done(function(res) {
         
             for(x in res[0]){
-                if($(".handle").eq(0).val() === res[0][x]){
+                if($(".handle").eq(0).val() === res[0][x].substring(1)){
                     submit = false;
                     $(".handle").eq(0).css("border-bottom","2px solid #dc3545");
                     $(".handleTxt").eq(0).text("Handle already in use");

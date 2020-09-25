@@ -11,13 +11,13 @@ router.get('/API/Threads', function(req, res){
     if(req.session.email){
         users.getThreads(req.session.userId).exec((err,docs)=>{
             if(err){
-                res.send("An error occurred.")
+                res.json("An error occurred.")
             }
-            res.send(docs.threads);
+            res.json(docs.threads);
         });
     }
     else{
-        res.send("User not logged in");
+        res.json("User not logged in");
     }  
 });
 module.exports = router;

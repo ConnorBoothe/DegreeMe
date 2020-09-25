@@ -19,7 +19,7 @@ router.get('/API/SortedStudyGroups', function(req, res){
                 }
                 myCourses = myCourses.sort();
                 if(err){
-                    res.send("An error occurred.")
+                    res.json("An error occurred.")
                 }
                 var finalArr = [];
                 
@@ -42,7 +42,7 @@ router.get('/API/SortedStudyGroups', function(req, res){
                         finalArr.push(obj);
                     
                 }
-                res.send(finalArr)
+                res.json(finalArr)
             });
            
         });
@@ -50,7 +50,7 @@ router.get('/API/SortedStudyGroups', function(req, res){
        
     }
     else{
-        res.send("User not logged in");
+        res.json("User not logged in");
     }
       
 });

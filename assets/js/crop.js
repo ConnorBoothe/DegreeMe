@@ -105,8 +105,8 @@ $(document).ready(function(){
         // $(".cr-image").attr("src", $(".profile-img").attr("src"));
 $(".img-btn").on("click", function(){
     if(window.innerWidth > 1000){
-    if($(".handle").eq(0).val() === "" ){
-        $(".imgTxt").text("Enter username before uploading an image.");
+    if($(".handle").eq(0).val() === "" || $(".handleTxt").text() == "Username is taken" ){
+        $(".imgTxt").text("Enter a unique username before uploading an image.");
     }
     else{
         $(".overlay").show();
@@ -120,6 +120,7 @@ $(".img-btn").on("click", function(){
         else{
             $(".overlay").show();
             $(".img-upload-container").show();
+            $(".imgTxt").text("");
         }
     }
     

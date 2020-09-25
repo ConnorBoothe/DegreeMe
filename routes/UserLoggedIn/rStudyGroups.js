@@ -76,7 +76,7 @@ router.get('/groups', function (req, res) {
               }
               myCourses.sort();
               if (err) {
-                res.send("An error occurred");
+                res.json("An error occurred");
               }
               var finalArr = [];
               for (x in myCourses) {

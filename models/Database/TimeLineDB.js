@@ -82,7 +82,6 @@ module.exports = class Timeline {
     }
     //get the user's timeline
     getUserTimeline(followingList, blockNumber, req){
-        console.log("following list")
         var block = blockNumber * 5;
         var timelineDB = mongoose.model('TimelineDB',timelineDBSchema);
         var followingHandles = [];

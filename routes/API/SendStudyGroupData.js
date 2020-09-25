@@ -10,7 +10,7 @@ var StudyGroups = new StudyGroupsDB();
 //send list of all users to the browser
 router.get('/API/StudyGroups', function(req, res){
     StudyGroups.getAllStudyGroups().exec((err,docs)=>{
-        res.send(docs);
+        res.json(docs);
     });
 });
 module.exports = router;

@@ -11,13 +11,13 @@ router.get('/API/MyCourses', function(req, res){
     if(req.session.email){
         users.getUserByEmail(req.session.email).exec((err,docs)=>{
             if(err){
-                res.send("An error occurred.")
+                res.json("An error occurred.")
             }
-            res.send(docs[0].myCourses);
+            res.json(docs[0].myCourses);
         });
     }
     else{
-        res.send("User not logged in");
+        res.json("User not logged in");
     } 
 });
 module.exports = router;

@@ -6,7 +6,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="../assets/css/bootstrap.min.css">        <link href="../assets/css/main1.css" rel="stylesheet">
         <link href="../assets/css/home.css" rel="stylesheet">
-        <link href="../assets/css/courseProfile.css" rel="stylesheet">
+        <link href="../assets/css/CourseProfile.css" rel="stylesheet">
         <script src="../assets/jquery/dist/jquery.js"></script>
     </head>
         <body class="color-dark">
@@ -41,7 +41,7 @@
             <div class="comments-container">
                 <!-- (id, commenterImg, commenter, message1, date1) -->
                 <div class="comment-sub-container">
-                    <p class="userQuestion"><img class="discImg" src="../<%=discussion.userImg%>"/><span class="userName-text"><a href="../user/<%=discussion.userHandle%>"><%=discussion.userHandle%></a></span></p>
+                    <p class="userQuestion"><img class="discImg" src="<%=discussion.userImg%>"/><span class="userName-text"><a href="../user/<%=discussion.userHandle%>"><%=discussion.userHandle%></a></span></p>
                     <h3 class="text-light question-Header"><%=discussion.post%></h3>
                     <form method="POST" action="addComment">
                         <textarea class="commentMsg" name="commentMessage" placeholder="Write your response"></textarea>
@@ -59,7 +59,7 @@
                     <div class="comment-container">
                             <p class="text-light" id="text-date"><%=formatDate(discussion.comments[x].date)%></p>
                         <span>
-                            <img class="discImg" src="../<%=discussion.comments[x].commenterImg%>" />
+                            <img class="discImg" src="<%=discussion.comments[x].commenterImg%>" />
                             <a href= "../user/<%=discussion.comments[x].commenterHandle%>"><span class="text-light userName-text" ><%=discussion.comments[x].commenterHandle%></span></a>
                         </span>
 

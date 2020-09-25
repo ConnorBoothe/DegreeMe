@@ -10,9 +10,9 @@ var majors = new MajorsDB()
 router.get('/API/Majors', function(req, res){
     majors.getAllMajors().exec((err,docs)=>{
         if(err){
-            res.send("An error occurred.")
+            res.json("An error occurred.")
         }
-        res.send(docs);
+        res.json(docs);
     });
     
    

@@ -18,7 +18,7 @@ router.get('/API/NewConversation', function(req, res){
             userDetails.push(docs[x].first_name + " " + docs[x].last_name)
             users.push(userDetails);
         }
-        res.send(users);
+        res.json(users);
     });
 });
 module.exports = router;

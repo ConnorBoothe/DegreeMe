@@ -95,14 +95,17 @@ module.exports = class UserDB {
     //return all users
     getStudents(){
       var UserDB = mongoose.model('UserDB',userDBSchema);
-      return UserDB.find({});
-            
+      return UserDB.find({});    
     }
      //return all users
      getAllUsers(){
         var UserDB = mongoose.model('UserDB',userDBSchema);
         return UserDB.find({});
       }
+    getUserByHandle(handle){
+        var UserDB = mongoose.model('UserDB',userDBSchema);
+        return UserDB.find({}, "handle");
+    }
     getUserByEmail(email){
         var UserDB = mongoose.model('UserDB',userDBSchema);
         return UserDB.find({email:email});     

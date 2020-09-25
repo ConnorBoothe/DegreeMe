@@ -243,7 +243,7 @@ $(".message").on("click", function(){
                         "<input type= 'hidden' name='handle' value='"+$(".userProfileName").text()+"'/>"+
                         "<input type= 'hidden' name='threadId' value='"+res[x].threadId+"'/>"+
                        
-                         '<button class="sawMessage"><div class="blue-dot bg-primary"></div> <img class="notifImg" src="'+res[x].hostImg+'"/><p class="notif">'+res[x].subject+'</p><p> '+ "<p class='text-primary'>"+res[x].unreadCount+" unread messages</p>"+'</p></div></button></li>';
+                         '<button class="sawMessage"><div class="blue-dot bg-primary"></div> <img class="notifImg" src="'+res[x].hostImg+'"/><p class="notif">'+res[x].subject+'</p>'+ "<p class='text-primary'>"+res[x].unreadCount+" unread messages</p>"+'</div></button></li>';
                     }
                 }
                 threads+= "</form>";

@@ -16,7 +16,7 @@ router.get('/API/Users', function(req, res){
             userHandles.push(docs[x].handle.toLowerCase());
             userEmails.push(docs[x].email.toLowerCase())
         }
-        res.send([userHandles, userEmails]);
+        res.json([userHandles, userEmails]);
     });
 });
 module.exports = router;

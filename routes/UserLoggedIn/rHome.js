@@ -507,7 +507,7 @@ router.post("/loadMore",
         timeline.getUserTimeline(req.session.following, req.body.blockNum, req).exec((err, docs) => {
             if (err) {
                 console.log(err)
-                res.send(err)
+                res.json(err)
             } else {
                 res.status(202).json({
                     newItems: docs
@@ -646,7 +646,21 @@ router.post("/siteWideSearch",
         
     });
 
+    router.post("/getHandle", function(req, res){
+        users.getUserByHandle("@"+req.body.handle).exec((err, docs)=>{
+            if(docs.length > 0){
+                res.status(202).json({
+                    exists: true,
+                }).end();
+            }
+            else{
+                res.status(202).json({
+                    exists: false,
+                }).end();
+            }
 
+        })
+    });
 
 
 module.exports = router;

@@ -10,11 +10,11 @@ const discussion = new DiscussionDB();
 router.get('/API/Discussion', function(req, res){
         if(req.session.handle){
             discussion.getAllDiscussions().exec((err,docs)=>{
-                res.send({discussion:docs, currHandle:req.session.handle});
+                res.json({discussion:docs, currHandle:req.session.handle});
             })
         }
         else{
-            res.send("User not logged in")
+            res.json("User not logged in")
         }  
 });
 module.exports = router;
