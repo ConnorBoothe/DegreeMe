@@ -1,11 +1,11 @@
     //handles messages front end functionality
     var socket = io.connect({transports: ['websocket']});
     socket.connect();
-    //var socket = io.connect('http://67.202.55.10:8080');
     var messageForm = $("#messageForm");
     var chat = $('#messagesContainer');
     var userHandles = new Array;
     $(document).ready(function () {
+
         $(".check-icon").hide();
         $("#usersBtn").on("click", function () {
 
@@ -24,7 +24,7 @@
             addedArray.push($(".addedUsers").eq(x).text());
             x++;
         })
-        window.scrollTo(0, $(document).height() + 100);
+        
         $(".messageHandle").each(function (x) {
             userHandles.push($(this).text().trim());
         })
@@ -110,6 +110,5 @@
         })
         socket.on('disconnect', function(){
             console.log('user disconnected');
-            alert("disconnected")
         });
     })
