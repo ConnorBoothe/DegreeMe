@@ -80,6 +80,8 @@ function filterTagCourseResults(res, searchValue){
     }
 }
 $(document).ready(function(){
+    $("#dueDate").mask("99/99/9999");
+    // $("#dueDate").datepicker();
     $(".input-field-addCourse").on("focus", function(){
         $(this).parent().css("border-bottom","none");
         $(".courseExists").text("");
@@ -165,9 +167,7 @@ $(document).ready(function(){
                       },
                     },
                   });
-          
         })
-        
         })
         $(".myCourse-container").html("<p class='loadingCourses'>Loading Courses...</p>");
         $(".input-field-addCourse").on("keyup", function(){
@@ -335,7 +335,6 @@ $(document).ready(function(){
         //input field validation
         var submit = true;
         if(parseInt($(".askingPrice").val()) < 5 || $(".askingPrice").val() == ""){
-            alert("NAH")
          $(".askingPrice").parent().css("border-bottom", "2px solid #dc3545");
          $(".priceError").text("Enter a price of $5 or greater");
          submit = false;
@@ -347,6 +346,22 @@ $(document).ready(function(){
         if($(".dueDate").val() === ""){
             $(".dueDate").css("border-bottom", "2px solid #dc3545");
             submit = false;
+        }
+        else{
+            var dueDateArr = $(".dueDate").val().split("/")
+            if(parseInt(dueDateArr[0]) > 12){
+                //block submission
+                submit = false;
+                $(".dueDate").css("border-bottom", "2px solid #dc3545");
+            }
+            else if(parseInt(dueDateArr[1]) > 31){
+                submit = false;
+                $(".dueDate").css("border-bottom", "2px solid #dc3545");
+            }
+            else if(parseInt(dueDateArr[2]) < parseInt(new Date().getFullYear())){
+                submit = false;
+                $(".dueDate").css("border-bottom", "2px solid #dc3545");
+            }
         }
         if($("input[name='requestType']:checked").val() === ""){
             submit = false;
@@ -364,7 +379,7 @@ $(document).ready(function(){
             }
             var date = new Date($(".dueDate").val());
             //handle the offset (Eastern Standard only)
-            date.setDate(new Date(date.getDate()+ 1));
+            date.setDate(new Date(date.getDate()));
             
         payload = {
             sendToHandle: "All",

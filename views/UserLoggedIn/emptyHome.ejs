@@ -61,7 +61,7 @@
                                 </li>
                                 <li class="courseLi">
                                     <label class="text-light">Due Date</label>
-                                    <input type="date" class="dueDate" placeholder="Due Date" />
+                                    <input type="text" class="dueDate" id="dueDate" placeholder="Due Date" />
                                 </li>
     
                                
@@ -77,13 +77,13 @@
                                 <label class="text-light secondLabel" for="anon">Post anonymously</label>
                                 <input id="anon" name="requestType" type="radio" value="Anonymous" />
                             </div>
+                            <p class="termsTxt"> <input type="checkbox" name="terms" class="terms"/><span class="termsMsg">I have read and agree to degreeMe's <a href="/terms">Terms and Conditions</a> and <a href="/policies">Privacy Policy</a></span> </p>
+
                             <div class="postBtn">
                                 <input name="userName" type="hidden" value="<%=session.name%>"/>
                                 <button class="btn btn-primary requestHelpBtn">Post</button>
                             </div>
-                            
                         </div>
-    
                     </div>
                 </div>
                 <div class="timeline-container-status">
@@ -118,6 +118,7 @@
     </div>
   
     <script src="../assets/jquery/jquery.session/jquery.session.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
     <script type="text/javascript" src="../assets/js/displayMyCourses.js"></script>
     <script src="../assets/js/getNotifications.js"></script>
     <script src="../assets/js/popper.min.js"></script>

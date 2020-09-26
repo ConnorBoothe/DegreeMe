@@ -1,6 +1,10 @@
 //add frontend validation to Create Seller Account
+function validateDate(testdate) {
+    var date_regex = /^\d{2}\/\d{2}\/\d{4}$/ ;
+    return date_regex.test(testdate);
+}
 $(document).ready(function(e){
-
+    $('#dob').mask("99/99/9999");
     $(".createSeller-submit").on("click", function(e){
         e.preventDefault()
         var submit = true;
@@ -45,11 +49,14 @@ $(document).ready(function(e){
             $("#dob").css("border", "1px solid #dc3545")
             submit = false;
         }
+        if(!validateDate($("#dob").val())) {
+            $("#dob").css("border", "1px solid #dc3545")
+            submit = false;
+        }
+      
         if(submit){
             $(".payment-processing-container").show();
             $(".sellerAccount-form").submit();
         }
-
     })
-    
 })

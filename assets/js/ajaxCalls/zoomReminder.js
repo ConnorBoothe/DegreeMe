@@ -1,7 +1,6 @@
 $(document).ready(function(){
     
     $(".sendReminder").on("click", function(){
-        alert("AYEEE")
         payload = {
             handle:$(".hostHandle").val(),
             meetingId: $(".meetingId").val()

@@ -89,6 +89,10 @@ function phone_number_check(field, e) {
     }
 
 }
+function validateDate(testdate) {
+    var date_regex = /^\d{2}\/\d{2}\/\d{4}$/ ;
+    return date_regex.test(testdate);
+}
 $(document).ready(function () {
     document.getElementById('phone').onkeyup = function (e) {
         phone_number_check(this, e);

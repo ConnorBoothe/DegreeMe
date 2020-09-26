@@ -100,7 +100,7 @@ router.get('/Settings', function (req, res) {
 //Don't worry about the styling of the settings page. Focus solely on registering the user to Stripe.
 //Feel free to create additional files as needed.
 router.post('/MakeStripeAccount',
-    check('dob').trim().escape(),
+    // check('dob').trim(),
     check('phone').trim().escape(),
     function (req, res) {
         const errors = validationResult(req);
@@ -109,7 +109,8 @@ router.post('/MakeStripeAccount',
         }
         //logic goes here
         var namearr = (req.session.name).split(" ");
-        var dob = (req.body.dob).split('-');
+        var dob = (req.body.dob).split('/');
+        console.log(dob)
         var phone = (req.body.phone).replace(/-/g, "");
         //phone=phone.replaceAll("-","")
         stripe.account.create({
@@ -128,9 +129,9 @@ router.post('/MakeStripeAccount',
                     first_name: namearr[0],
                     last_name: namearr[1],
                     dob: {
-                        day: dob[2],
-                        month: dob[1],
-                        year: dob[0],
+                        day: dob[1],
+                        month: dob[0],
+                        year: dob[2],
                     },
                     address: {
                         line1: req.body.street_number,
@@ -160,14 +161,7 @@ router.post('/MakeStripeAccount',
                     // some error
                     // res.redirect('/oops');<-This page needs to be made
                 } else {
-                    //add the stripeId to user's account
-                    users.addStripeId(req.session.userId, account.id).then(function (data) {
-                        console.log("StripeId added to user account");
-                        //change tutor property to true in UserDB
-                        users.becomeTutor(req.session.handle);
-                    }).catch(function (error) {
-                        console.log(error);
-                    });
+                    
                     console.log(account.id);
                     //save account id to database
                     //create Bank Account
@@ -189,6 +183,14 @@ router.post('/MakeStripeAccount',
                                 //some error
                             } else {
                                 console.log(bankAccount);
+                                //add the stripeId to user's account
+                            users.addStripeId(req.session.userId, account.id).then(function (data) {
+                                console.log("StripeId added to user account");
+                                //change tutor property to true in UserDB
+                                users.becomeTutor(req.session.handle);
+                            }).catch(function (error) {
+                                console.log(error);
+                            });
                                 //update the session
                                 req.session.tutor = true;
                                 res.redirect('MyFinances?msg=Seller%20Account%20Created!%20Create%20a%20Tutor%20Listing%20to%20Start%20Earning');

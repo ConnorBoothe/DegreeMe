@@ -30,16 +30,15 @@ app.use(express.urlencoded({
     limit: '50mb',
     extended:true
 }));
-//set the Content Security Policy of thhe app
- 
+// set the Content Security Policy of the app
 app.use(
     csp({
       directives: {
-        defaultSrc: ["'self'", "https://js.stripe.com/" ],
-        connectSrc:["'self'", "ws://degreeme.io/socket.io/","ws://https://degreeme.io/socket.io/", "https://firebasestorage.googleapis.com/"],
+        defaultSrc: ["'self'", "https://js.stripe.com/",  "ws://degreeme.io/socket.io/" ],
+        connectSrc:["'self'", "ws://degreeme.io/socket.io/","wss://degreeme.io/socket.io/", "https://firebasestorage.googleapis.com/"],
         fontSrc:["'self'", "https://fonts.gstatic.com"],
-        styleSrc:["'self'", "https://fonts.googleapis.com", "'unsafe-inline'"],
-        scriptSrc: ["'self'", , "https://js.stripe.com/", "https://www.gstatic.com", "https://firebase.googleapis.com/", "https://*.googleapis.com", "https://cdn.jsdelivr.net/"],
+        styleSrc:["'self'", "https://fonts.googleapis.com", "'unsafe-inline'", "https://cdnjs.cloudflare.com/"],
+        scriptSrc: ["'self'", "https://cdnjs.cloudflare.com/", "https://js.stripe.com/", "https://www.gstatic.com", "https://firebase.googleapis.com/", "https://*.googleapis.com", "https://cdn.jsdelivr.net/"],
         imgSrc:["'self'", "data:", "https://storage.googleapis.com/", "https://firebasestorage.googleapis.com"],
         objectSrc: ["'none'"],
         upgradeInsecureRequests: [],
@@ -108,7 +107,6 @@ app.use(require('./routes/API/SendMajors.js'));
 app.use(require('./routes/API/sendNotificationCount.js')); 
 app.use(require('./routes/API/sendSortedStudyGroups.js')); 
 app.use(require('./routes/API/sendUsersAndImages.js')); 
-// app.use(require('./routes/ScrapeUNCC_Courses_2019_2020.js')); 
 //Wildcard route
 app.get('*', function(req, res) {
     //if user logged in, redirect to home

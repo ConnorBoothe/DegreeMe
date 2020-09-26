@@ -54,7 +54,6 @@ $(document).ready(function(){
         var userHandleArray = $.session.get("userHandles").split(",");
         //push current handles into the array
         var user = $(this).parent().children().eq(1).text();
-        alert(user)
         //find the index of the handle to remove
         var indexToRemove = userHandleArray.indexOf(user);
         //remove the index
@@ -68,7 +67,6 @@ $(document).ready(function(){
     $(".createThread").on("submit",function(e){
         e.preventDefault();
         var userHandles =$.session.get("userHandles").split(",");
-        alert(userHandles)
         var subject = userHandles[0];
         var userLengthMinus2 = parseInt(userHandles.length)-2;
         //create message title from userhandles

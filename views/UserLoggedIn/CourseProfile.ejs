@@ -21,6 +21,7 @@
         <%- include ('partials/sideBar.ejs')%>
         <%- include ('partials/horizontalHeader.ejs')%>
         <%- include ('partials/discussionModal.ejs')%>
+        <%- include ('partials/newMessageModal.ejs')%>
         <% var joined = false%>
 
         <% for(x in course.students){%>
@@ -141,6 +142,7 @@
     <script type="text/javascript" src="../assets/js/ajaxCalls/getDiscussion.js"></script>
     <script type="text/javascript" src="../assets/js/ajaxCalls/joinCourse.js"></script>
     <script type="text/javascript" src="../assets/js/Client-DateFunctions.js"></script>
+    <script type="text/javascript" src="../assets/js/CreateConversation_Autocomplete.js"></script>
     <script src="../assets/js/connect.js"></script>
     <script src="../assets/js/follow-client.js"></script>
 </body>

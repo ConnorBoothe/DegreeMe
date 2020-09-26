@@ -1,6 +1,6 @@
 $(document).ready(function(){
     if(window.location.href.toString().includes("discover")){
-        $(".modal-title").text("Invite classmates to degreeMe via email")
+        // $(".modal-title").text("Invite classmates to degreeMe via email")
     }
     $.session.set("sendToEmails", [])
     var emailRegEx =/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

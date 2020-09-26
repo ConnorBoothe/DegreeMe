@@ -12,6 +12,7 @@
   <link href="/assets/css/MyFinances.css" rel="stylesheet">
   <link href="/assets/css/userProfile.css" rel="stylesheet">
   <link href="/assets/css/home.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.9/datepicker.min.css" rel="stylesheet">
   <!-- <link href="/assets/css/financeChart.css" rel="stylesheet"> -->
   <!-- Scripts -->
   <script src="assets/jquery/dist/jquery.js"></script>
@@ -28,7 +29,8 @@
     <%- include ('partials/sideBar.ejs') %>
     <%- include ('partials/horizontalHeader.ejs')%>
     <%- include ('partials/newMessageButton.ejs')%>
-  
+    <%- include ('partials/newMessageModal.ejs')%>
+    
 
     <div class="homeContainer">
       <div class="contentBlock2">
@@ -57,7 +59,7 @@
                     <div class="row">
                       <div class="col-md-6">
                         <label class="control-label" for="routNum">Date of Birth</label>
-                        <input class="form-control" type="date" id="dob" name="dob" value="" required><br>
+                        <input class="form-control" type="text" id="dob" name="dob" value="" placeholder="mm/dd/yyyy" maxlength="10" required><br>
                       </div>
                       <div class="col-md-6">
                         <label class="control-label" for="accNum">Phone Number</label>
@@ -165,12 +167,14 @@
 </div>
 </div>
   <script src="../assets/jquery/jquery.session/jquery.session.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+  <script type="text/javascript" src="../assets/js/CreateConversation_Autocomplete.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.9/datepicker.min.js"></script>
   <script type="text/javascript" src="../assets/js/displayMyCourses.js"></script>
   <script src="../assets/js/getNotifications.js"></script>
   <script src="../assets/js/popper.min.js"></script>
   <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="../assets/js/SiteWideSearch.js"></script>
-  <script type="text/javascript" src="../assets/js/phoneFormat.js"></script>
   <script type="text/javascript" src="../assets/js/phoneFormat.js"></script>
   <script type="text/javascript" src="../assets/js/highlightCurrentMenuItem.js"></script>
   <script type="text/javascript" src="../assets/js/FormValidation/CreateSellerValidation.js"></script>
@@ -181,9 +185,9 @@
 
         <script type="text/javascript" src="/assets/js/showSideBar.js"></script>
       </body>
-      <script>
+      <!-- <script>
         // $(function () {
         //   $('[data-toggle="popover"]').popover()
         // })
-      </script>
+      </script> -->
 </html>
