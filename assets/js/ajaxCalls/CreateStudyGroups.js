@@ -8,14 +8,14 @@ function validateGroup(){
         $("#group_description").css("border-bottom", "2px solid #dc3545");
         submit = false;
     }
-    if($("#courseName").val() == ""){
-        $("#courseName").css("border-bottom", "2px solid #dc3545");
-        submit = false;
-    }
-    if($("#professor").val() == ""){
-        $("#professor").css("border-bottom", "2px solid #dc3545");
-        submit = false;
-    }
+    // if($("#courseName").val() == ""){
+    //     $("#courseName").css("border-bottom", "2px solid #dc3545");
+    //     submit = false;
+    // }
+    // if($("#professor").val() == ""){
+    //     $("#professor").css("border-bottom", "2px solid #dc3545");
+    //     submit = false;
+    // }
     return submit;
     
 }

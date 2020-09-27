@@ -43,16 +43,7 @@
                 <div class="comment-sub-container">
                     <p class="userQuestion"><img class="discImg" src="<%=discussion.userImg%>"/><span class="userName-text"><a href="../user/<%=discussion.userHandle%>"><%=discussion.userHandle%></a></span></p>
                     <h3 class="text-light question-Header"><%=discussion.post%></h3>
-                    <form method="POST" action="addComment">
-                        <textarea class="commentMsg" name="commentMessage" placeholder="Write your response"></textarea>
-                        <input type="hidden" name="commentImg" value="<%=session.img%>" />
-                        <input type="hidden" name="originalHandle" value="<%=discussion.userHandle%>" />
-                        <input type="hidden" name="commentHandle" value="<%=session.handle%>" />
-                        <input type="hidden" name="course" value="<%=discussion.courseName%>" />
-                        <input type="hidden" name="discId" value="<%=discussion._id%>" />
-                        <br>
-                        <input class="btn btn-primary" id="comments-button" type="submit" name="" value="Add Response" />
-                    </form>
+                   
                     <h3 class="text-light response-Header">Responses</h3>
                 <div class="commentTabs">
                     <% for(var x= discussion.comments.length-1; x>= 0 ; x--){%>
@@ -69,6 +60,16 @@
 
                     </div>
                     <%}%>
+                    <form method="POST" action="addComment">
+                        <textarea class="commentMsg" name="commentMessage" placeholder="Write your response"></textarea>
+                        <input type="hidden" name="commentImg" value="<%=session.img%>" />
+                        <input type="hidden" name="originalHandle" value="<%=discussion.userHandle%>" />
+                        <input type="hidden" name="commentHandle" value="<%=session.handle%>" />
+                        <input type="hidden" name="course" value="<%=discussion.courseName%>" />
+                        <input type="hidden" name="discId" value="<%=discussion._id%>" />
+                        <br>
+                        <input class="btn btn-primary" id="comments-button" type="submit" name="" value="Add Response" />
+                    </form>
                 </div>          
 
             </div>

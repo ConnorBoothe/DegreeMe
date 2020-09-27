@@ -30,7 +30,7 @@ function populateTutors(data, subject){
         sessions += "</h1>"+
         "<div class='tutorBlock tutorBlockDark'>"+
              "<ul class='tutorBlockHeader'>"+
-                 "<li><img src='../"+data[x].Image+"' alt='Profile Pic' class='profile-pic' />"+
+                 "<li><img src='"+data[x].Image+"' alt='Profile Pic' class='profile-pic' />"+
                     " <h1 class='connectionName text-light'></h1>"+
             "</li>"+
              "<li class='starRating'>"+
@@ -143,7 +143,7 @@ function populateDiscussion(res, subject){
     for(var x = res.length-1; x>=0; x--){
         if(res[x].courseName === subject){
       discussion +=  '<div class="question">'+
-      '<img class="discImg" src="../'+res[x].userImg+'"/>'+
+      '<img class="discImg" src="'+res[x].userImg+'"/>'+
       '<span>'+res[x].userHandle+'</span>'+
       '<p>'+res[x].date+'</p>'+
       
@@ -258,7 +258,7 @@ $(document).ready(function(){
               discussion +=  '<div class="question">'+
               '<div class="question-container1">'+
               '<a href="/user/'+res.discussion[x].userHandle+'">'+
-              '<img class="discImg" src="../'+res.discussion[x].userImg+'"/>'+
+              '<img class="discImg" src="'+res.discussion[x].userImg+'"/>'+
               '<span class="discName">'+res.discussion[x].userHandle+'</span></a>'+
               '<p class="dateText">'+formatDate(new Date(res.discussion[x].date))+"</p>"+
               '<p class="questionText">'+res.discussion[x].post+'</p>';
@@ -313,7 +313,7 @@ $(document).ready(function(){
                     noGroups = false;
                      studyGroups +=  '<div class="checkout-container"><a href="/user/'+res[x].HostHandle+'" class="memberImage"'+
                      'data-toggle="tooltip" data-placement="top"'+
-                     'title="Created By '+res[x].HostHandle+'"><div class="checkout-header"><img class="sg-img" src="../'+res[x].HostImage+ '"/></a>' +
+                     'title="Created By '+res[x].HostHandle+'"><div class="checkout-header"><img class="sg-img" src="'+res[x].HostImage+ '"/></a>' +
                      '<p class="group-name">'+res[x].GroupName+'</p></div>'+
                      '<div class="p-container"><p class="descriptionLabel">Description</p><p class="group-description">'+res[x].GroupDescription+'</p>'+
                      '<p class="badge badge-warning prof-badge">Prof. '+res[x].Professor+'</p>';

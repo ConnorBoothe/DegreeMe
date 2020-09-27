@@ -2,13 +2,11 @@
 function base64ImageToBlob(str) {
     // extract content type and base64 payload from original string
     var pos = str.indexOf(';base64,');
-    console.log(pos)
     var type = str.substring(5, pos);
     var b64 = str.substr(pos + 8);
   
     // decode base64
     var imageContent = atob(b64);
-  console.log(imageContent)
     // create an ArrayBuffer and a view (as unsigned 8-bit)
     var buffer = new ArrayBuffer(imageContent.length);
     var view = new Uint8Array(buffer);
@@ -26,8 +24,6 @@ function base64ImageToBlob(str) {
   function handleImageUpload(event) {
    
     var imageFile = event.target.files[0];
-    console.log('originalFile instanceof Blob', imageFile instanceof Blob); // true
-    console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`);
    
     var options = {
       maxSizeMB: 1,
@@ -36,8 +32,6 @@ function base64ImageToBlob(str) {
     }
     imageCompression(imageFile, options)
       .then(function (compressedFile) {
-        console.log('compressedFile instanceof Blob', compressedFile instanceof Blob); // true
-        console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
    
         return uploadToServer(compressedFile); // write your own logic
       })
@@ -114,7 +108,7 @@ $(".img-btn").on("click", function(){
     }
     }
     else{
-        if($(".handle").eq(1).val() === "" ){
+        if($(".handle").eq(1).val() === "" || $(".handleTxt").eq(1).text() == "Username is taken" ){
             $(".imgTxt").text("Enter username before uploading an image.");
         }
         else{
@@ -160,14 +154,18 @@ $(".loginBtnSignUp").attr("disabled", true);
             // $('.imagebase64').val(resp);
             $(".croppedImg").val(("src", resp));
             $(".editImg").attr("src",resp);
+            if(window.innerWidth > 1000){
             var storageRef = firebase.storage().ref("userImages/"+$("input[name='handle']").val());
-            console.log($(".imagebase64").val())
+            }
+            else{
+              var storageRef = firebase.storage().ref("userImages/"+$("input[name='handle1']").val());
+
+            }
             var image = base64ImageToBlob(resp);
             // console.log(image)
             var metadata = {
               contentType: 'image/jpeg',
             };
-            
             var task = storageRef.put(image, metadata);
             task.on("state_changed", function(){
              function error(error){
@@ -182,16 +180,16 @@ $(".loginBtnSignUp").attr("disabled", true);
                 $(".imageURL").val(url)
                 $(".imageUploaded").val(url)
                 $(".loginBtnSignUp").attr("disabled", false); 
-
-                
+                $(".imgTryAgain").hide();
               }).catch(function(error) {
                 // Handle any errors
               });
             // console.log(resp.replace(/^data:image\/[a-z]+;base64,/, ""))
             //if location == signUp, insert image
             if(window.location.href.toString().split("/")[3].includes("SignUp")){
-                $(".result1").eq(1).html("<img class='userImage' name='userImage' src='"+resp+"'/><span class='uploadingImg text-light'>Uploading...</span>");
-                $(".result1").eq(0).html("<img class='userImage' name='userImage' src='"+resp+"'/><span class='uploadingImg text-light'>Uploading...</span>");
+                $(".imgTryAgain").show();
+                $(".result1").eq(1).html("<img class='userImage' name='userImage' src='"+resp+"'/><span class='uploadingImg text-light'></span>>");
+                $(".result1").eq(0).html("<img class='userImage' name='userImage' src='"+resp+"'/><span class='uploadingImg text-light'></span>");
             }
             // }
            

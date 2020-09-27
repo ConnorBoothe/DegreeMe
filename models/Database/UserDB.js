@@ -9,7 +9,7 @@ db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 var Schema = mongoose.Schema;
 
-  var threads = new Schema({
+var threads = new Schema({
     threadId:{type:String, required:true},
     host:{type:String, required:true},
     hostImg:{type:String, required:true},
@@ -29,7 +29,7 @@ var myCoursesSchema = new Schema({
 var studyGroupsSchema = new Schema({
     studyGroupId: {type:String, required:true},
     studyGroupName: {type:String, required:true},
-    course:{type:String, required:true}
+    course:{type:String}
 }); 
 //version 2 
 var SearchHistorySchema = new Schema({
@@ -77,6 +77,7 @@ var userDBSchema = new Schema({
     notificationCount: {type:Number, required:true},
     dateCreated: {type:Date},
     bio: {type:String, required:true},
+    classification: {type:String},
     threads: [threads], 
     followers:[followSchema], 
     following:[followSchema],
@@ -90,7 +91,6 @@ var userDBSchema = new Schema({
 
 module.exports = class UserDB {
     constructor() {
-
     }
     //return all users
     getStudents(){
@@ -114,12 +114,28 @@ module.exports = class UserDB {
         var UserDB = mongoose.model('UserDB',userDBSchema);
         return UserDB.find({email:email},'email');     
       }
-    usersAutocomplete(searchValue){
+    usersByHandleAutocomplete(searchValue){
         var UserDB = mongoose.model('UserDB',userDBSchema);
         return UserDB.find({
             handle:{$regex: searchValue, $options:"i"}
     
         }, 'handle first_name last_name img').limit(10);
+    }
+    usersByNameAutocomplete(searchValue){
+        var UserDB = mongoose.model('UserDB',userDBSchema);
+        if(searchValue.includes(" ")){
+            var nameArr = searchValue.split(" ");
+            return UserDB.find({
+                first_name:{$regex: nameArr[0], $options:"i"},
+                last_name:{$regex: nameArr[1], $options:"i"},
+            }, 'handle first_name last_name img').limit(10);
+        }
+        else{
+            return UserDB.find({
+                first_name:{$regex: searchValue, $options:"i"}
+            }, 'handle first_name last_name img').limit(10);
+        }
+        
     }
       //get user by id
     getUserById(id){
@@ -134,7 +150,6 @@ module.exports = class UserDB {
       }
       getUserImgs(handleArray){
         var UserDB = mongoose.model('UserDB',userDBSchema);
-        
         return UserDB.find({handle:{$in: handleArray}});
     }
     //return all message handles
@@ -166,12 +181,12 @@ module.exports = class UserDB {
         });
     }
     //register a new user to UserDB
-    addUser(handle, first_name, last_name, school, email, password, img, status, code, subscription, major){
+    addUser(handle, first_name, last_name, school, email, password, img, status, code, subscription, major, classification){
         var UserDB = mongoose.model('UserDB',userDBSchema);
         var user =new UserDB({handle:handle,first_name: first_name, last_name: last_name,
             school: school, email: email, password: password, img: img, activationCode: code,
             theme:'bg-dark', rating:0, status:status, subscription:subscription, StripeId: "none", CustomerId:"none", notificationCount:0,
-             Major:major,  Tutor:false, dateCreated:new Date(), bio:"Tell the world a bit about yourself"});
+             Major:major, classification:classification, Tutor:false, dateCreated:new Date(), bio:"Tell the world a bit about yourself"});
         return user.save();
     }
     //add follower function adds a follower to the followers array,
@@ -397,11 +412,11 @@ module.exports = class UserDB {
         var UserDB = mongoose.model('UserDB',userDBSchema);
         UserDB.find({handle: handle}).exec((err,docs)=>{
             var index = "";
-            for(x in docs[0].myCourses){
+            for(var x = 0; x < docs[0].myCourses.length;x++){
                 if(docs[0].myCourses[x].courseName === courseName){
                     index = x;
                     docs[0].myCourses.splice(x,1);
-                    docs[0].save();
+                    return docs[0].save();
                     break;
                 }
             }

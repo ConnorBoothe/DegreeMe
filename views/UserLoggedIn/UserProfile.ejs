@@ -80,7 +80,11 @@
                         </li>
                     </ul>
                 </div>
-                <%if(session.handle === user.handle){%>
+                <div class="majorContainer">
+                    <p class="profileMajor badge badge-primary"><%=user.Major%></p>
+                </div>
+               
+                    <%if(session.handle === user.handle){%>
                     <p class="profileBio"><textarea maxlength="150" id="changeBio" class=""
                         readonly><%=user.bio%> </textarea>
                         <a class="memberImage" data-toggle="tooltip" data-placement="top" title="Edit Bio">

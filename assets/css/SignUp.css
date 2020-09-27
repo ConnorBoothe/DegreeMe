@@ -243,6 +243,9 @@ max-width: 100%;
 }
  /* mobile view */
 @media only screen and (max-width: 1000px) { 
+    .img-upload-container .img-secondary-wrapper{
+        top: 25px;
+      }
     .input-field1{
         width:100%;
         background-color:#242526!important;

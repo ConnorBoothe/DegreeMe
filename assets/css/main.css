@@ -16,6 +16,7 @@ input:-webkit-autofill:active  {
     -webkit-box-shadow: 0 0 0 30px white inset !important;
     box-shadow:200px 200px 100px #242526 inset!important; 
     background-image: none !important;
+    -webkit-appearance: none !important;
 }
 input:-webkit-autofill {
     
@@ -2049,8 +2050,14 @@ border-bottom:2px solid #330099;
 
 }
 .createAccount{
+    margin-top:20px!important;
     font-size:20px!important;
     border-radius:20px!important;
+}
+.imgTryAgain{
+    color:white;
+    margin-top:20px;
+    display:none;
 }
 /** For tablet view **/
 @media only screen and (max-width: 1000px) and (min-width: 750px) {

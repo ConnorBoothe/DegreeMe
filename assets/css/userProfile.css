@@ -9,6 +9,17 @@
 .cr-image{
     
 }
+.majorContainer{
+   width:300px;
+}
+.profileMajor{
+    left:0!important;
+    font-size:15px;
+    background-color:#007bff;
+    color:white;
+    font-family:"Open sans", "sans-serif";
+    margin-left:-140px;
+}
 .cr-vp-circle{
     display:block!important;
 }

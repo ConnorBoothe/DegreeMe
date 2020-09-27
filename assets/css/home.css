@@ -262,6 +262,9 @@
 .dueDate{
     border-bottom:2px solid #1d1d1d;
 }
+.captionEmptyHome{
+    padding-bottom:20px;
+}
 .userNameLink{
     color:white;
 }

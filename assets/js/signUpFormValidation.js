@@ -53,6 +53,8 @@ $(document).ready(function(){
     //     // var blob = URL.createObjectURL(new Blob([image] , {type:'text/plain'}));
       
     // })
+    if(window.innerWidth > 1000){
+
     $('input[name="handle"]').on("keyup", function(){
     payload = {
         handle: $('input[name="handle"]').val(),
@@ -138,6 +140,96 @@ $(document).ready(function(){
                 },
               });
             })
+        }
+        else{
+
+            $('input[name="handle1"]').on("keyup", function(){
+            payload = {
+                handle: $('input[name="handle1"]').val(),
+              }
+            $.ajax({
+                url: "/getHandle",
+                type: 'POST',
+                data: JSON.stringify(payload),
+                headers: {
+                  "Content-Type": "application/json"
+                }, statusCode: {
+                  202: function (result) {
+                      //hide badge if 0 (should be zero)
+                      console.log(result)
+                      if(result.exists){
+                        $(".handle").eq(1).css("border","2px solid #dc3545");
+                        $(".handleTxt").eq(1).text("Username is taken");
+                      }
+                      else{
+                        $(".handle").eq(1).css("border","2px solid #007bff");
+                        $(".handleTxt").eq(1).text("");
+                      }
+                  },
+                  500: function (result) {
+                    alert("500 " + result.responseJSON.err);
+                  },
+                },
+              });
+            })
+            $('input[name="handle1"]').on("focus", function(){
+                payload = {
+                    handle: $('input[name="handle1"]').val(),
+                  }
+                $.ajax({
+                    url: "/getHandle",
+                    type: 'POST',
+                    data: JSON.stringify(payload),
+                    headers: {
+                      "Content-Type": "application/json"
+                    }, statusCode: {
+                      202: function (result) {
+                          //hide badge if 0 (should be zero)
+                          console.log(result)
+                          if(result.exists){
+                            $(".handle").eq(1).css("border","2px solid #dc3545");
+                            $(".handleTxt").eq(1).text("Username is taken");
+                          }
+                          else{
+                            $(".handleTxt").eq(1).text("");
+                          }
+                      },
+                      500: function (result) {
+                        alert("500 " + result.responseJSON.err);
+                      },
+                    },
+                  });
+                })
+                $('input[name="handle1"]').on("focusout", function(){
+                    payload = {
+                        handle: $('input[name="handle1"]').val(),
+                      }
+                    $.ajax({
+                        url: "/getHandle",
+                        type: 'POST',
+                        data: JSON.stringify(payload),
+                        headers: {
+                          "Content-Type": "application/json"
+                        }, statusCode: {
+                          202: function (result) {
+                              //hide badge if 0 (should be zero)
+                              console.log(result)
+                              if(result.exists){
+                                $(".handle").eq().css("border","2px solid #dc3545");
+                                $(".handleTxt").eq(0).text("Username is taken");
+                              }
+                              else{
+                    
+                              }
+                          },
+                          500: function (result) {
+                            alert("500 " + result.responseJSON.err);
+                          },
+                        },
+                      });
+                    })
+                }
+       
 $(".picX").on("click", function(){
     $(".img-upload-container").hide();
     $(".overlay").hide();
@@ -368,6 +460,11 @@ $(".overlay").on("click", function(){
                 $(".handle").eq(1).css("border-bottom","2px solid #dc3545");
                 $(".handleTxt").eq(1).text("Username can't be longer than 12 characters");
             }
+            else if($(".handle").eq(1).val().length === 0 ){
+                submit = false;
+                $(".handle").eq(1).css("border-bottom","2px solid #dc3545");
+                $(".handleTxt").eq(1).text("Enter a username");
+            }
             else if($(".handle").eq(1).val().length < 4){
                 submit = false;
                 $(".handle").eq(1).css("border-bottom","2px solid #dc3545");
@@ -486,7 +583,6 @@ $(".overlay").on("click", function(){
             }).done(function(res) {
         
             for(x in res[0]){
-                
                 if($(".handle").eq(1).val() === res[0][x]){
                     submit = false;
                     $(".handle").eq(1).css("border-bottom","2px solid #dc3545");

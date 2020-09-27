@@ -25,9 +25,9 @@ var StudyGroupDBSchema = new Schema({
   HostHandle: {type: String, required: true},
   HostName: {type: String,required: true},
   HostImage: {type: String,required: true},
-  Subject: {type: String, required: true},
-  CourseId: {type: String,required: true},
-  Professor: {type: String,required: true},
+  Subject: {type: String},
+  CourseId: {type: String},
+  Professor: {type: String},
   School: {type: String,required: true},
   GroupName:{type: String,required: true},
   GroupDescription:{type: String,required: true},
@@ -66,6 +66,13 @@ module.exports = class StudyGroups {
         Subject:{$regex: searchValue, $options:"i"}
 
     }, '_id GroupName Subject').limit(10);
+}
+groupsAutocompleteByName(searchValue){
+  var StudyGroupDB = mongoose.model('StudyGroupDB', StudyGroupDBSchema);
+  return StudyGroupDB.find({
+    GroupName:{$regex: searchValue, $options:"i"}
+
+  }, '_id GroupName Subject').limit(10);
 }
   //get study groups related to a given course
   getStudyGroupByCourse(course) {

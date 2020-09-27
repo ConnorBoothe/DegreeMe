@@ -89,7 +89,13 @@ module.exports = class Reviews {
     var CourseDB = mongoose.model('UNCC_CoursesDB', courseDBSchema);
     CourseDB.findOne({CourseName:courseName}).exec((err,docs)=>{
         docs.students.push({Image:image, Handle:handle, Name:name, Bio:bio})
-        docs.save();
+        docs.save().then(function(){
+            CourseDB.findOne({CourseName:courseName}).updateOne({
+                $inc: {
+                    studentCount: +1
+                }
+              }).exec();
+        })
     })
    }
    //remove student from students array
@@ -105,7 +111,14 @@ module.exports = class Reviews {
         }
         if(index != -1){
             docs.students.splice(index,1);
-            docs.save();
+            docs.save().then(function(){
+                //decrement student count
+                CourseDB.findOne({CourseName:courseName}).updateOne({
+                    $inc: {
+                        studentCount: -1
+                    }
+                  }).exec();
+            })
         }
     });
    }

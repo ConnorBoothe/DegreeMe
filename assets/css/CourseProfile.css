@@ -167,6 +167,7 @@ input[name="anonymous"]{
 }
 .question-Header{
     font-size:24px;
+    text-align:left;
 }
 .userName-text{
     font-family:"Open Sans", "sans-serif";
@@ -179,7 +180,7 @@ input[name="anonymous"]{
 }
 .response-Header{
     font-size:22px;
-    margin-top:50px;
+    margin-top:50px!important;
     text-align: left; 
 }
 .commentMsg{

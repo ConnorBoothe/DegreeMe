@@ -90,8 +90,6 @@ router.post('/SignUp', [
         // } else {
             var emailExists = false;
             var handleExists = false;
-            //will change to use function getUserByEmail()
-            console.log(req.body)
             users.getStudents().exec((err, docs) => {
                 console.log(req.body.email)
                 for (x in docs) {
@@ -113,7 +111,6 @@ router.post('/SignUp', [
                     bcrypt.genSalt(10, function (err, salt) {
                         var pw = req.body.password;
                         var handle = req.body.handle;
-                        
                         bcrypt.hash(pw, 8, function (err, hash) {
                                     var fNameLetter = req.body.first_name[0].substring(0,1);
                                     fNameLetter = fNameLetter.toUpperCase();
@@ -124,59 +121,58 @@ router.post('/SignUp', [
                                     // console.log("ADDDING USER")
                                     users.addUser("@" + req.body.handle, first_name, last_name, req.body.school, req.body.email, hash,
                                         req.body.imageURL, "Inactive", activationCode,
-                                        "None", req.body.major).then(function(){
-                                                res.redirect('/login?message=Account%20Successfully%20Created.');
+                                        "None", req.body.major, req.body.classification).then(function(){
+                                            var mail = unirest("POST", "https://api.sendgrid.com/v3/mail/send");
+                                            mail.headers({
+                                            "content-type": "application/json",
+                                            "authorization": process.env.SENDGRID_API_KEY,
+                                            });
+                                            mail.type("json");
+                                            mail.send({
+                                            "personalizations": [
+                                                {
+                                                    "to": [
+                                                        {
+                                                            "email": req.body.email,
+                                                            "name": req.body.first_name
+                                                        }
+                                                ],
+                                                    "dynamic_template_data": {
+                                                        "subject": "Account Confirmation",
+                                                        "name": req.body.first_name,
+                                                        "code": activationCode,
+                                                        "email": req.body.email,
+                                                
+                                                },
+                                            }
+                                            ],
+                                                "from": {
+                                                    "email": "notifications@degreeme.io",
+                                                    "name": "DegreeMe"
+                                            },
+                                                "reply_to": {
+                                                    "email": "noreply@degreeme.io",
+                                                    "name": "No Reply"
+                                            },
+                                                "template_id": "d-e54827ff53514c15969d2e52db32e13d"
+                                            });
+                
+                                            mail.end(function (res) {
+                                                if (res.error){
+                                                    console.log("this is the error for account confirmation", res.error);
+                                                    console.log(res.body);
+                                                    // throw new Error(res.error);
+                                                } else if (res.accepted) {
+                                                    console.log("email has sent for account confirmation");
+                                                }
+                                            });
+                                                res.redirect('/login?message=Account%20Successfully%20Created');
                                         })
                                         .catch(function(err){
                                             res.redirect("/?error=" + err)
                                         });
                                          // using Twilio SendGrid's v3 Node.js Library
                             // https://github.com/sendgrid/sendgrid-nodejs
-                            var mail = unirest("POST", "https://api.sendgrid.com/v3/mail/send");
-                            mail.headers({
-                            "content-type": "application/json",
-                            "authorization": process.env.SENDGRID_API_KEY,
-                            });
-
-                            mail.type("json");
-                            mail.send({
-                            "personalizations": [
-                                {
-                                    "to": [
-                                        {
-                                            "email": req.body.email,
-                                            "name": req.body.first_name
-                                        }
-                                ],
-                                    "dynamic_template_data": {
-                                        "subject": "Account Confirmation",
-                                        "name": req.body.first_name,
-                                        "code": activationCode,
-                                        "email": req.body.email,
-                                
-                                },
-                            }
-                            ],
-                                "from": {
-                                    "email": "notifications@degreeme.io",
-                                    "name": "DegreeMe"
-                            },
-                                "reply_to": {
-                                    "email": "noreply@degreeme.io",
-                                    "name": "No Reply"
-                            },
-                                "template_id": "d-e54827ff53514c15969d2e52db32e13d"
-                            });
-
-                            mail.end(function (res) {
-                                if (res.error){
-                                    console.log("this is the error for account confirmation", res.error);
-                                    console.log(res.body);
-                                    // throw new Error(res.error);
-                                } else if (res.accepted) {
-                                    console.log("email has sent for account confirmation");
-                                }
-                            });
                         });
                     }, function (err) {
                         console.log(err);
@@ -224,7 +220,7 @@ router.post('/SignUpMobile', [
                     if (req.body.email === docs[x].email) {
                         emailExists = true;
                     }
-                    if (req.body.handle === docs[x].handle) {
+                    if (req.body.handle1 === docs[x].handle) {
                         handleExists = true;
                     }
                 }
@@ -253,17 +249,11 @@ router.post('/SignUpMobile', [
                                     console.log(first_name)
                                     console.log(last_name)
                                     console.log("ADDDING USER")
-                                    users.addUser("@" + req.body.handle, first_name, last_name, req.body.school, req.body.email, hash,
+                                    users.addUser("@" + req.body.handle1, first_name, last_name, req.body.school, req.body.email, hash,
                                        req.body.imageURL, "Inactive", activationCode,
-                                        "None", req.body.major).then(function(){
-                                    res.redirect('/login?message=Account%20Successfully%20Created.');
-
-                                        })
-                                        .catch(function(err){
-                                            res.redirect("/?error=" + err)
-                                        });
-                                         // using Twilio SendGrid's v3 Node.js Library
-                            // https://github.com/sendgrid/sendgrid-nodejs
+                                        "None", req.body.major, req.body.classification).then(function(){
+                                        res.redirect('/login?message=Account%20Successfully%20Created.');
+                                              // https://github.com/sendgrid/sendgrid-nodejs
                             var mail = unirest("POST", "https://api.sendgrid.com/v3/mail/send");
 
                             mail.headers({
@@ -310,6 +300,12 @@ router.post('/SignUpMobile', [
                                     console.log("email has sent for account confirmation");
                                 }
                             }); 
+                                        })
+                                        .catch(function(err){
+                                            res.redirect("/?error=" + err)
+                                        });
+                                         // using Twilio SendGrid's v3 Node.js Library
+                          
                         });
                     }, function (err) {
                         console.log(err);

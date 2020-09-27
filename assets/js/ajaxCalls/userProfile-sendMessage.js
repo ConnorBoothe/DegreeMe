@@ -2,8 +2,6 @@ $(document).ready(function(){
     $(".profileMessage").on("submit", function(e){
         e.preventDefault();
         //newThread(host, hostImg, userHandles, datetime, subject)
-        alert($("input[name='receiverHandle']").val())
-        alert($("input[name='receiverImg']").val())
         payload = {
             host:$("input[name='host']").val(),
             hostImg:$("input[name='hostImg']").val(),

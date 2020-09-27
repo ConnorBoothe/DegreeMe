@@ -221,7 +221,7 @@ router.post("/addCourse",
         }
         if (!req.body.exist) {
             users.addCourse(req.body.handle, req.body.course, req.body.courseId, req.body.courseCode);
-            courses.incrementStudents(req.body.course).exec();
+            // courses.incrementStudents(req.body.course).exec();
             courses.addStudent(req.body.course, req.session.img, req.session.handle, req.session.name, req.session.bio)
             res.status(202).json({
                 course: req.body.course,
@@ -252,7 +252,7 @@ router.post("/leaveCourse",
         } else {
             users.removeCourse(req.session.handle, req.body.course);
             //decrement course studentCount
-            courses.decrementStudents(req.body.course).exec();
+            // courses.decrementStudents(req.body.course).exec();
             //remove student from course
             courses.removeStudent(req.body.handle, req.body.course);
             res.status(202).json({
@@ -555,12 +555,26 @@ router.post("/siteWideSearch",
                 })
             }
         } else if (req.body.type == "Users") {
-            users.usersAutocomplete(req.body.searchValue).exec((err, docs) => {
-                res.status(202).json({
-                    Users: docs,
-                    type: req.body.type
-                }).end();
-            })
+            users.usersByNameAutocomplete(req.body.searchValue).exec((err, docs1) => {
+                
+                if(docs1.length < 1){
+                    console.log("Search by handle")
+                    users.usersByHandleAutocomplete(req.body.searchValue).exec((err, docs) => {
+                        res.status(202).json({
+                            Users: docs,
+                            type: req.body.type
+                        }).end();
+                    })
+                }
+                else{
+
+                    res.status(202).json({
+                        Users: docs1,
+                        type: req.body.type
+                    }).end();
+                }
+                
+        });
         } else if (req.body.type == "Tutors") {
             if (req.body.searchValue.split("")[4] == " ") {
                 listings.listingsAutocompleteByCourseCode(req.body.searchValue).exec((err, docs) => {
@@ -580,16 +594,24 @@ router.post("/siteWideSearch",
 
         } else if (req.body.type == "Groups") {
             groups.groupsAutocomplete(req.body.searchValue).exec((err, docs) => {
-                res.status(202).json({
-                    Groups: docs,
-                    type: req.body.type
-                }).end();
+                if(docs.length < 1){
+                    groups.groupsAutocompleteByName(req.body.searchValue).exec((err, docs1)=>{
+                        res.status(202).json({
+                            Groups: docs1,
+                            type: req.body.type
+                        }).end();
+                    })
+                }
+                else{
+                    res.status(202).json({
+                        Groups: docs,
+                        type: req.body.type
+                    }).end();
+                }
             })
         }
     });
-
     router.post("/sendZoomReminder", function(req, res){
-        console.log(req.body)
         users.getUserByHandle(req.body.handle)
         .then(function(data){
             meetups.getMeetupById(req.body.meetingId)

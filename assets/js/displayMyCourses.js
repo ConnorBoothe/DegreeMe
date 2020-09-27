@@ -80,8 +80,8 @@ function filterTagCourseResults(res, searchValue){
     }
 }
 $(document).ready(function(){
-    $("#dueDate").mask("99/99/9999");
-    // $("#dueDate").datepicker();
+    // $("#dueDate").mask("99/99/9999");
+
     $(".input-field-addCourse").on("focus", function(){
         $(this).parent().css("border-bottom","none");
         $(".courseExists").text("");
