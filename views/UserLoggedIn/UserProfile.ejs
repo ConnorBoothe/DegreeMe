@@ -81,7 +81,7 @@
                     </ul>
                 </div>
                 <div class="majorContainer">
-                    <p class="profileMajor badge badge-primary"><%=user.Major%></p>
+                    <p class="profileMajor badge badge-success"><%=user.Major%></p>
                 </div>
                
                     <%if(session.handle === user.handle){%>
@@ -128,11 +128,14 @@
                             <% var noAtHandle=user.handle.replace('@','')%>
 
                             <% if(session.handle != user.handle){%>
-
+                                <input name="email" type="hidden" value="<%=user.email%>" />
                             <% if(following){%>
                             <form action="/#" class="followForm" method="post" id="unfollow-form">
+                                
                                 <input name="followingHandle" type="hidden" value="<%=user.handle%>" />
+                                
                                 <input name="followingImg" type="hidden" value="<%=user.img%>" />
+                               
                                 <button id="<%=noAtHandle%>" data-status="unfollow" type="button"
                                         class="btn btn-sm followingButton following-class"
                                          data-handle='<%=user.handle%>'>
@@ -141,8 +144,11 @@
 
                             <%}else{%>
                             <form action="/#" class="followForm" method="post" id="follow-form">
+                               
                                 <input name="followingHandle" type="hidden" value="<%=user.handle%>" />
+                                
                                 <input name="followingImg" type="hidden" value="<%=user.img%>" />
+                               
                                 <button id="<%=noAtHandle%>" data-status="follow" type="button"
                                         class="btn btn-primary btn-sm followingButton follow-class">
                                         Follow</button>

@@ -111,6 +111,7 @@ router.post("/follow",
   check('handle').isString().trim().escape(),
   check('image').isString().trim(),
   function (req, res) {
+    console.log("EMAIL", req.body.email)
     //stores validation errors
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -143,14 +144,14 @@ router.post("/follow",
                   {
                       "to": [
                           {
-                              "email": "connorboothe@gmail.com",
+                              "email": req.body.email,
                           }
                   ],
                       "dynamic_template_data": {
                           "subject": "You have a new follower!",
                           "username": req.session.handle
                   },
-                      "subject": " "
+                      "subject": "You have a new follower!"
                   }
               ],
                   "from": {

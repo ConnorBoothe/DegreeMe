@@ -119,6 +119,7 @@ router.get('/home', function (req, res) {
                     }
                     if (docs1.length > 0) {
                         acceptedBids.getUserBids(req.session.handle).exec((err, bids)=>{
+                            console.log(docs3[0].StudyGroups)
                         res.render('UserLoggedIn/Home', {
                             session: req.session,
                             qs: req.query,
@@ -302,6 +303,7 @@ router.post("/addLike",
                 }
             });
     });
+    
 router.post("/removeLike",
     check('postId').isString().trim().escape(),
     check('handle').isString().trim().escape(),
@@ -352,6 +354,7 @@ router.post("User/Settings",
             });
         });
     });
+   
 router.post("/addHelpRequest",
     check('userHandle').isString().trim().escape(),
     check('sendToHandle').isString().trim().escape(),
@@ -372,17 +375,69 @@ router.post("/addHelpRequest",
         if (req.body.userHandle != req.session.handle) {
             users.getUserById(req.body.userHandle).exec((err, docs) => {
                 timeline.addPost(req.body.sendToHandle, docs.handle, req.body.userName, req.body.type, req.body.userImage, req.body.caption,
-                    req.body.date, req.body.name, req.body.price, req.body.course, req.body.anonymous);
-                res.status(202).json({
-                    status: "Help request sent"
-                }).end();
+                    req.body.date, req.body.name, req.body.price, req.body.course, req.body.anonymous)
+                    .then(function(){
+                        var emails = [];
+                        users.getAllEmails().exec((err, docs)=>{
+                            for(var x = 0; x< docs.length; x++){
+                                emails.push({"email": docs[x].email})
+                            }
+                            mail.headers({
+                                "content-type": "application/json",
+                                "authorization": process.env.SENDGRID_API_KEY,
+                                });
+                                mail.type("json");
+                                mail.send({
+                                "personalizations": [
+                                    {
+                                        "to": emails
+                                    ,
+                                        "dynamic_template_data": {
+                                            "price": req.body.price,
+                                            "task": req.body.caption,
+                                    },
+                                        "subject": "Someone needs help!"
+                                    }
+                                ],
+                                    "from": {
+                                        "email": "notifications@degreeme.io",
+                                        "name": "DegreeMe"
+                                },
+                                    "reply_to": {
+                                        "email": "noreply@degreeme.io",
+                                        "name": "No Reply"
+                                },
+                                    "template_id": "d-3211e341f77c42a7a80862aff724e708"
+                                });
+                                mail.end(function (resp) {
+                                if (resp.error){
+                                    console.log("this is the error for placing bids", resp.error)
+                                    // res.redirect("/home")
+                                    // throw new Error(res.error);
+                                } else if (resp.accepted){
+                                    console.log("email was sent for placing bids")
+                                }
+
+                            console.log(resp.body);
+                            });
+
+                            console.log(emails)
+                        })
+                        res.status(202).json({
+                            status: "Help request sent"
+                        }).end();
+                    })
+               
             })
         } else {
             timeline.addPost(req.body.sendToHandle, req.body.userHandle, req.body.userName, req.body.type, req.body.userImage, req.body.caption,
-                req.body.date, req.body.name, req.body.price, req.body.course, req.body.anonymous);
-            res.status(202).json({
-                status: "Help request sent"
-            }).end();
+                req.body.date, req.body.name, req.body.price, req.body.course, req.body.anonymous)
+                .then(function(){
+                    res.status(202).json({
+                        status: "Help request sent"
+                    }).end();
+                })
+           
 
         }
 

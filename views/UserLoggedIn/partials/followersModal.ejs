@@ -17,7 +17,7 @@
           <%for (x in user.followers){%>
           <div class="followersContainer">
             <a href="/user/<%=user.followers[x].user_handle%>">
-              <img class="userImage followersImage" src="../<%=user.followers[x].user_image%>"/>
+              <img class="userImage followersImage" src="<%=user.followers[x].user_image%>"/>
             <p class="followHandle"><%=user.followers[x].user_handle%></p>
             </a>
           </div>

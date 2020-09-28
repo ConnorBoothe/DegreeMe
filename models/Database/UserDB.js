@@ -104,7 +104,11 @@ module.exports = class UserDB {
       }
     getUserByHandle(handle){
         var UserDB = mongoose.model('UserDB',userDBSchema);
-        return UserDB.find({}, "handle");
+        return UserDB.find({handle: handle}, "handle");
+    }
+    getAllEmails(){
+        var UserDB = mongoose.model('UserDB',userDBSchema);
+        return UserDB.find({}, "email");
     }
     getUserByEmail(email){
         var UserDB = mongoose.model('UserDB',userDBSchema);
