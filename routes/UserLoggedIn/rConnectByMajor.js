@@ -6,7 +6,8 @@ const session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-
+var unirest = require('unirest');
+var mail = unirest("POST", "https://api.sendgrid.com/v3/mail/send");
 const {
   check,
   validationResult
@@ -130,7 +131,49 @@ router.post("/follow",
           });
         }).then(function () {
           users.incrementNotificationCount(req.body.handle).then(function (data) {
-            console.log(data)
+            // add follow email here
+            mail.headers({
+              "content-type": "application/json",
+              "authorization": process.env.SENDGRID_API_KEY,
+              });
+
+              mail.type("json");
+              mail.send({
+              "personalizations": [
+                  {
+                      "to": [
+                          {
+                              "email": "connorboothe@gmail.com",
+                          }
+                  ],
+                      "dynamic_template_data": {
+                          "subject": "You have a new follower!",
+                          "username": req.session.handle
+                  },
+                      "subject": " "
+                  }
+              ],
+                  "from": {
+                      "email": "notifications@degreeme.io",
+                      "name": "DegreeMe"
+              },
+                  "reply_to": {
+                      "email": "noreply@degreeme.io",
+                      "name": "No Reply"
+              },
+                  "template_id": "d-4d3bb2f9cd0747169169be2492054b3c"
+              });
+              mail.end(function (resp) {
+              if (resp.error){
+                  console.log("this is the error for placing bids", resp.error)
+                  // res.redirect("/home")
+                  // throw new Error(res.error);
+              } else if (resp.accepted){
+                  console.log("email was sent for placing bids")
+              }
+
+          console.log(resp.body);
+          });
         });
           res.status(202).json({
             action: "followed"
