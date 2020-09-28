@@ -42,6 +42,7 @@ function follow(b, handle, status, image, modalId){
         handle: handle,
         image:image,
         action: status,
+        email: $("input[name='email']").val()
     }
     $.ajax({
         url: "/"+payload.action,

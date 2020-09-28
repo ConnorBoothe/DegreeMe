@@ -15,7 +15,7 @@
 .profileMajor{
     left:0!important;
     font-size:15px;
-    background-color:#007bff;
+    background-color:#046A38;
     color:white;
     font-family:"Open sans", "sans-serif";
     margin-left:-140px;
@@ -434,6 +434,9 @@ button.followingButton{
 .followersContainer {
     width: 100%;
     padding-top: 10px;
+}
+#followerModal .modal-header, #followingModal .modal-header{
+    padding-bottom:0;
 }
 .followHandle:hover {
     color: #007bff;
