@@ -23,7 +23,9 @@ input:-webkit-autofill:active  {
     margin-top:10px;
     width:100%;
 }
-
+.memberHandle{
+    font-size:14px!important;
+}
 .subjectName{
     font-size: medium;
     color: #a9a9a9;
@@ -217,7 +219,7 @@ input:-webkit-autofill:active  {
 }
 .membersContainer img{
     float:left;
-    width:40px;
+    width:35px;
 }
 .membersContainer p{
     float:left;
@@ -342,6 +344,7 @@ button{
 .groupMemberCount{
     padding-left:20px;
     padding-top:10px;
+    font-size:14px!important;
     color:#a9a9a9;
     font-family: 'Open Sans', sans-serif!important;
 }

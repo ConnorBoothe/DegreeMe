@@ -84,6 +84,7 @@ router.post("/setBio",
             res.redirect('/home');
         }
         users.getUserByHandle(req.body.handle).then(function (docs) {
+            console.log(req.body.handle)
             for (i in docs[0].myCourses) {
                 courses.updateBio(req.body.handle, docs[0].myCourses[i].courseName, req.body.bio);
             }
