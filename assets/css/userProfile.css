@@ -10,15 +10,25 @@
     
 }
 .majorContainer{
-   width:300px;
+max-width:300px;
 }
 .profileMajor{
     left:0!important;
     font-size:15px;
-    background-color:#046A38;
+    
     color:white;
+    min-width:100px;
     font-family:"Open sans", "sans-serif";
-    margin-left:-140px;
+    text-align:left;
+   
+}
+.majorSpan{
+    background-color:#046A38;
+    padding:3px;
+    border-radius:5px;
+    padding-left:5px;
+    padding-right:5px;
+    box-shadow:1px 1px black;
 }
 .cr-vp-circle{
     display:block!important;
