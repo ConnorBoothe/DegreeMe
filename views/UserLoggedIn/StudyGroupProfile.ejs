@@ -59,13 +59,21 @@
                     <div class="studyGroupHeader-wrapper">
 
                         <div id="courseTitle" class="CourseTitle">
-                            <div class="groupName text-light">
-                                <h1 class="groupName text-light"><%=studyGroup.GroupName%></h1>
-                                <h1 class="subjectName text-light"><%=studyGroup.Subject%></h1>
-                            <p class="admin">Admin: <a href="../user/<%=studyGroup.HostHandle%>"><img class="adminImage" src="<%=studyGroup.HostImage%>" /><%=studyGroup.HostHandle%></p></a>
-                            
+                            <div class="group-title">
+                                <div class="groupName text-light">
+                                    <img class="groupAvatar" src="<%=studyGroup.HostImage%>" />
+                                    <h1 class="groupName text-light"><%=studyGroup.GroupName%></h1>
+                                    <h1 class="subjectName text-light"><%=studyGroup.Subject%></h1>
+                                    <%if(members.length == 1){%>
+                                        <p class="badge badge-primary memberCount"> <%=members.length%> Member</p>
+                                    <%}else{%>
+                                        <p class="badge badge-primary memberCount"> <%=members.length%> Members</p>
+                                    <%}%>
+                                
+                                </div>
                             </div>
-                            
+                           
+                            <p class="text-light groupDescription"><%=studyGroup.GroupDescription%></p>
                             <div class="studyGroupProfileButtons">
                                 <% var isMember = false;%>
                                 <% for (x in studyGroup.Members){%>
@@ -73,10 +81,8 @@
                                 <%isMember = true%>
                                 <%}%>
                                                 <%}%>
+                               
                                 <% if(isMember){%>
-                                <a href="../messages?messageId=<%=studyGroup.MessageId%>" class="btn btn-dark follow-btn groupMessage">Group Message Thread</a>
-                                <button id="makeSession" class="btn btn-primary follow-btn " data-toggle="modal"
-                                    data-target="#newMeetup">Create Study Session</button>
                                 <form action="/#" method="post" id="joinedGroup">
                                     <input name="joinGroup" type="hidden" value="<%=studyGroup._id%>" />
                                     <input name="joinGroup" type="hidden" value="<%=studyGroup.GroupName%>" />
@@ -90,9 +96,6 @@
                                     </button>
                                 </form>
                                 <% }else{%>
-                                <a href="../messages?messageId=<%=studyGroup.MessageId%>" class="btn btn-dark follow-btn groupMessage">Group Message Thread</a>
-                                <button id="makeSession" class="btn btn-primary follow-btn " data-toggle="modal"
-                                    data-target="#newMeetup">Create Study Session</button>
                                 <form action="/#" method="post" id="joinGroup">
                                     <input name="joinGroup" type="hidden" value="<%=studyGroup._id%>" />
                                     <input name="joinGroup" type="hidden" value="<%=studyGroup.GroupName%>" />
@@ -102,7 +105,23 @@
                                 </form>
 
                                 <%}%>
+                               
                             </div>
+                            <div class="profileBody">
+
+                                <div class="profileNav">
+                                    <ul class="profile-ul">
+                                        <li class="courseTab tab-selected">
+                                            <a href="../messages?messageId=<%=studyGroup.MessageId%>" class="groupMessage">Group Chat</a>
+                                        </li>
+                                       
+                                <li class="groupsTab">   
+                                    <p id="makeSession" class="" data-toggle="modal"
+                                    data-target="#newMeetup">Create Meetup</p></li>
+                            </ul>
+                        </div>
+                                
+                        </div>
                         </div> 
                     </div>
             </div>
@@ -203,10 +222,10 @@
     <script type="text/javascript" src="../assets/js/highlightCurrentMenuItem.js"></script>
     <script src="../assets/jquery/jquery.session/jquery.session.js"></script>
     <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
-                                    <script type="text/javascript" src="../assets/js/getStudyGroups.js"></script>
-                                    <script type="text/javascript" src="../assets/js/follow-client.js"></script>
-                                    <script type="text/javascript" src="../assets/js/createMeetup-client.js"></script>
-                                    <script type="text/javascript" src="../assets/js/Client-DateFunctions.js"></script>
+    <script type="text/javascript" src="../assets/js/getStudyGroups.js"></script>
+    <script type="text/javascript" src="../assets/js/follow-client.js"></script>
+    <script type="text/javascript" src="../assets/js/createMeetup-client.js"></script>
+    <script type="text/javascript" src="../assets/js/Client-DateFunctions.js"></script>
 
 </body>
 

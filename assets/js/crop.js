@@ -98,92 +98,105 @@ $(document).ready(function(){
       });
         // $(".cr-image").attr("src", $(".profile-img").attr("src"));
 $(".img-btn").on("click", function(){
+  if(location === "user"){
+    $(".overlay").show();
+    $(".img-upload-container").show();
+  }
+  else{
     if(window.innerWidth > 1000){
-    if($(".handle").eq(0).val() === "" || $(".handleTxt").text() == "Username is taken" ){
-        $(".imgTxt").text("Enter a unique username before uploading an image.");
-    }
-    else{
-        $(".overlay").show();
-        $(".img-upload-container").show();
-    }
-    }
-    else{
-        if($(".handle").eq(1).val() === "" || $(".handleTxt").eq(1).text() == "Username is taken" ){
-            $(".imgTxt").text("Enter username before uploading an image.");
-        }
-        else{
-            $(".overlay").show();
-            $(".img-upload-container").show();
-            $(".imgTxt").text("");
-        }
-    }
-    
+      if($(".handle").eq(0).val() === "" || $(".handleTxt").text() == "Username is taken" ){
+          $(".imgTxt").text("Enter a unique username before uploading an image.");
+      }
+      else{
+          $(".overlay").show();
+          $(".img-upload-container").show();
+      }
+      }
+      else{
+          if($(".handle").eq(1).val() === "" || $(".handleTxt").eq(1).text() == "Username is taken" ){
+              $(".imgTxt").text("Enter username before uploading an image.");
+          }
+          else{
+              $(".overlay").show();
+              $(".img-upload-container").show();
+              $(".imgTxt").text("");
+          }
+      }
+  } 
 })
 $(".loginBtnSignUp").attr("disabled", true); 
     $('.upload').on('change', function () { 
         readFile(this); });
     $('.upload-result').on('click', function (ev) {
-        
+      $(".profile-uploading-image").show();
         $uploadCrop.croppie('result', {
             type: 'canvas',
             size: {width:250},
             format : 'jpg',
         }).then(function (resp) {
-            if(window.location.href.toString().split("/")[3] === "user"){
-                payload = {
-                    handle:$(".userProfileName ").text(),
-                    img1:resp,
-                    source:"profile"
-                }
-                $.ajax({
-                    url: "/Settings",
-                    type: 'POST',
-                    data: JSON.stringify(payload),
-                    headers: {
-                      "Content-Type": "application/json"
-                    }, statusCode: {
-                      202: function (result) {
-                          alert("Profile image updated. It may take several minutes for your changes to be visible.")
-                      },
-                      500: function (result) {
-                        alert("500 " + result.responseJSON.err);
-                      },
-                    },
-                  });
-            }
-            // $('.imagebase64').val(resp);
             $(".croppedImg").val(("src", resp));
-            $(".editImg").attr("src",resp);
-            if(window.innerWidth > 1000){
-            var storageRef = firebase.storage().ref("userImages/"+$("input[name='handle']").val());
+            
+            if(location === "user"){
+              var storageRef = firebase.storage().ref("userImages/"+$(".userProfileHandle").text().trim().substring(1));
+              var image = base64ImageToBlob(resp);
+              // console.log(image)
+              var metadata = {
+                contentType: 'image/jpeg',
+              };
+              var task = storageRef.put(image, metadata);
+              task.on("state_changed", function(){
+               function error(error){
+                alert(error);
+               }
+              })
+              storageRef.getDownloadURL().then(function(url) {
+                  // Get the download URL for 'images/stars.jpg'
+                  // This can be inserted into an <img> tag
+                  // This can also be downloaded directly
+                  $(".editImg").attr("src",resp);
+                  $(".profile-uploading-image").text("Image Uploaded");
+                  $(".profile-uploading-image").removeClass("badge-warning");
+                  $(".profile-uploading-image").addClass("badge-success");
+                  setTimeout(function(){
+                    $(".profile-uploading-image").fadeOut();
+                  },1000)
+                }).catch(function(error) {
+                  // Handle any errors
+                });
             }
             else{
-              var storageRef = firebase.storage().ref("userImages/"+$("input[name='handle1']").val());
-
+              if(window.innerWidth > 1000){
+                var storageRef = firebase.storage().ref("userImages/"+$("input[name='handle']").val());
+                }
+                else{
+                  var storageRef = firebase.storage().ref("userImages/"+$("input[name='handle1']").val());
+    
+                }
+                var image = base64ImageToBlob(resp);
+                // console.log(image)
+                var metadata = {
+                  contentType: 'image/jpeg',
+                };
+                var task = storageRef.put(image, metadata);
+                task.on("state_changed", function(){
+                 function error(error){
+                  alert(error);
+                 }
+                })
+                storageRef.getDownloadURL().then(function(url) {
+                    // Get the download URL for 'images/stars.jpg'
+                    // This can be inserted into an <img> tag
+                    // This can also be downloaded directly
+                    $(".result1 .uploadingImg").text("Uploaded");
+                    $(".imageURL").val(url)
+                    $(".imageUploaded").val(url)
+                    $(".loginBtnSignUp").attr("disabled", false); 
+                    $(".imgTryAgain").hide();
+                  }).catch(function(error) {
+                    // Handle any errors
+                  });
             }
-            var image = base64ImageToBlob(resp);
-            // console.log(image)
-            var metadata = {
-              contentType: 'image/jpeg',
-            };
-            var task = storageRef.put(image, metadata);
-            task.on("state_changed", function(){
-             function error(error){
-              alert(error);
-             }
-            })
-            storageRef.getDownloadURL().then(function(url) {
-                // Get the download URL for 'images/stars.jpg'
-                // This can be inserted into an <img> tag
-                // This can also be downloaded directly
-                $(".result1 .uploadingImg").text("Uploaded");
-                $(".imageURL").val(url)
-                $(".imageUploaded").val(url)
-                $(".loginBtnSignUp").attr("disabled", false); 
-                $(".imgTryAgain").hide();
-              }).catch(function(error) {
-                // Handle any errors
-              });
+            
             // console.log(resp.replace(/^data:image\/[a-z]+;base64,/, ""))
             //if location == signUp, insert image
             if(window.location.href.toString().split("/")[3].includes("SignUp")){
