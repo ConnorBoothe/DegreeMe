@@ -167,11 +167,11 @@ router.post("/follow",
               });
               mail.end(function (resp) {
               if (resp.error){
-                  console.log("this is the error for placing bids", resp.error)
+                  console.log("this is the error for follow", resp.error)
                   // res.redirect("/home")
                   // throw new Error(res.error);
               } else if (resp.accepted){
-                  console.log("email was sent for placing bids")
+                  console.log("email was sent for follow")
               }
 
           console.log(resp.body);
