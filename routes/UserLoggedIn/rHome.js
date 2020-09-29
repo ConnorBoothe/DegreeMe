@@ -411,7 +411,7 @@ router.post("/addHelpRequest",
                                 });
                                 mail.end(function (resp) {
                                 if (resp.error){
-                                    console.log("this is the error for placing bids", resp.error)
+                                    console.log("this is the error for adding help requests", resp.error)
                                     // res.redirect("/home")
                                     // throw new Error(res.error);
                                 } else if (resp.accepted){
@@ -504,7 +504,7 @@ router.post("/addBid",
                                 });
                                 mail.end(function (resp) {
                                 if (resp.error){
-                                    console.log("this is the error for placing bids", resp.error)
+                                    console.log("this is the error for Adding bid", resp.error)
                                     // res.redirect("/home")
                                     // throw new Error(res.error);
                                 } else if (resp.accepted){
@@ -706,7 +706,7 @@ router.post("/siteWideSearch",
                     });
                     mail.end(function (resp) {
                     if (resp.error){
-                        console.log("this is the error for placing bids", resp.error)
+                        console.log("this is the error for sending zoom reminder", resp.error)
                         // res.redirect("/home")
                         // throw new Error(res.error);
                     } else if (resp.accepted){
