@@ -15,12 +15,17 @@ max-width:300px;
 .profileMajor{
     left:0!important;
     font-size:15px;
-    
     color:white;
     min-width:100px;
     font-family:"Open sans", "sans-serif";
     text-align:left;
    
+}
+.profile-uploading-image{
+    font-size:15px;
+    margin-top:10px;
+    display:none;
+    width:150px;
 }
 .majorSpan{
     background-color:#046A38;
