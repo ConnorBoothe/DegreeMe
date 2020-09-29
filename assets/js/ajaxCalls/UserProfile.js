@@ -122,7 +122,7 @@ function populateTutors(data){
      
      
      "<div class='tutorButtons'>"+
-         "<a type='submit' class='btn btn-primary tutorBtn text-light'"+
+         "<a class='btn btn-primary tutorBtn text-light'"+
              "name=''"+
              "href='/user/"+data[x].Handle+"'>View Profile"+
              "</a>"+

@@ -361,7 +361,7 @@ router.post("/addHelpRequest",
     check('userName').isString().trim().escape(),
     check('type').isString().trim().escape(),
     check('userImage').isString().trim(),
-    check('caption').isString().trim().escape(),
+    check('caption').isString().trim(),
     check('date').trim().escape(),
     check('name').isString().trim().escape(),
     check('price').trim().escape(),
@@ -611,23 +611,33 @@ router.post("/siteWideSearch",
             }
         } else if (req.body.type == "Users") {
             users.usersByNameAutocomplete(req.body.searchValue).exec((err, docs1) => {
-                
-                if(docs1.length < 1){
-                    console.log("Search by handle")
+                if(docs1){
+                    if(docs1.length < 1){
+                        console.log("Search by handle")
+                        users.usersByHandleAutocomplete(req.body.searchValue).exec((err, docs) => {
+                            res.status(202).json({
+                                Users: docs,
+                                type: req.body.type
+                            }).end();
+                        })
+                    }
+                    else{
+                        res.status(202).json({
+                            Users: docs1,
+                            type: req.body.type
+                        }).end();
+                    }
+                }
+                else{
                     users.usersByHandleAutocomplete(req.body.searchValue).exec((err, docs) => {
+                        if(docs)
                         res.status(202).json({
                             Users: docs,
                             type: req.body.type
                         }).end();
                     })
                 }
-                else{
-
-                    res.status(202).json({
-                        Users: docs1,
-                        type: req.body.type
-                    }).end();
-                }
+                
                 
         });
         } else if (req.body.type == "Tutors") {
@@ -737,6 +747,14 @@ router.post("/siteWideSearch",
             }
 
         })
+    });
+    //add status uppdate post
+    router.post("/addStatus", function(req, res){
+        //sendToHandle,userHandle, userName, type ,userImage,caption,date
+       timeline.addStatusPost(req.session.handle, req.session.handle, req.session.name, req.body.type, req.session.img, req.body.status, new Date())
+       .then(function(){
+            console.log("Added status post")
+       });
     });
 
 

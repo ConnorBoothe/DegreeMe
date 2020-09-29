@@ -1,14 +1,44 @@
 $(document).ready(function(){
   $(".input").on("focus", function(){
-      $(".requestHelpDetails").fadeIn();
-      if($(this).text() === "Request help from the degreeMe community..."  ){
+      if($(this).text() === "Request help from the DegreeMe community..."  ){
         $(".textarea[contenteditable]:empty::before").hide();
         $(this).html("")
+        $(".requestHelpDetails").fadeIn();
+        $(".status-update-container").fadeOut();
+      }
+      else if($(this).text() === "What's on your mind?"  ){
+        $(".textarea[contenteditable]:empty::before").hide();
+        $(this).html("")
+        $(".requestHelpDetails").fadeOut();
+        $(".status-update-container").fadeIn();
       }
   });
   $(".bid-input").on("focus", function(){
     $(this).parent().css("border-bottom", "none");
     $(".bidErrTxt").hide();
+  })  
+  //add new status to the TL
+  $(".postStatus").on("click", function(){
+    payload = {
+      status: $(".help-text-container").text().trim(),
+      type: "Status Update"
+  }
+  alert(payload.status)
+  // $.ajax({
+  //   url: "/addStatus",
+  //   type: 'POST',
+  //   data: JSON.stringify(payload),
+  //   headers: {
+  //     "Content-Type": "application/json"
+  //   }, statusCode: {
+  //     202: function (result) {
+       
+  //     },
+  //     500: function (result) {
+  //       alert("500 ");
+  //     },
+  //   },
+  // });
   })
    $(".timeline").on("click", ".respondBtn", function(){
     var button = $(this).parent();
