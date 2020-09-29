@@ -28,7 +28,6 @@
         <%- include ('partials/sideBar.ejs') %>
         <%- include ('partials/horizontalHeader.ejs')%>
         <%- include ('partials/newMessageModal.ejs')%>
-
         <div class="profileContainer">
             <div class="profile-header">
                 <div class="profileHeader">
@@ -83,7 +82,6 @@
                 <div class="majorContainer">
                     <p class="profileMajor badge badge-success"><%=user.Major%></p>
                 </div>
-               
                     <%if(session.handle === user.handle){%>
                     <p class="profileBio"><textarea maxlength="150" id="changeBio" class=""
                         readonly><%=user.bio%> </textarea>
