@@ -1,5 +1,9 @@
 require('dotenv').config();
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
+const unirest = require('unirest');
+var mail = unirest("POST", "https://api.sendgrid.com/v3/mail/send");
+const UserDB = require("./UserDB");
+const users = new UserDB();
 mongoose.Promise = global.Promise;
 mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost:27017/CollegeTutor', { useNewUrlParser: true,useUnifiedTopology: true },function(err){
     
@@ -35,16 +39,70 @@ module.exports = class Messages {
       var msgDB = mongoose.model('MessagesDB',thread);
       msgDB.find({_id:id}).exec((err, docs)=>{
         if(docs[0]){
-          console.log("From function :" +senderImg)
           docs[0].messages.push({sender:sender, senderImg:senderImg, message:msg, dateTime:dateTime });
           docs[0].save().then(function(data){
-          });
-          for(var x = 0; x < docs[0].userHandles.length; x++){
-            if(docs[0].userHandles[x] != sender){
-              // users.updateUnreadCount(docs[0].userHandles[x].substr(1), id);
-
+            new Promise((resolve, reject) => {
+              for(var x = 0; x < docs[0].userHandles.length; x++){
+                users.moveThread(id,docs[0].userHandles[x], sender)
+                .then(function(){
+                  console.log("Thread moved")
+                })
+              }
+              if(x === docs[0].userHandles.length){
+                resolve(true);
+              }
+          })
+          .then(function(){
+            //create an array of all handles to send email to
+            var handles = [];
+            for(var x = 0; x < docs[0].userHandles.length; x++){
+              //Do not add sender to the array
+              if(docs[0].userHandles[x][0] != sender){
+                handles.push(docs[0].userHandles[x][0])
+              }
             }
-          }
+            users.getEmailsFromHandleArray(handles)
+            .then(function(data){
+              //create email array
+              var emails = [];
+              for(var x = 0; x < data.length; x++){
+                //push using format required by unirest
+                emails.push({"email" :data[x].email})
+              }
+              //send the email
+              mail.headers({
+                "content-type": "application/json",
+                "authorization": process.env.SENDGRID_API_KEY,
+              });
+              mail.type("json");
+              mail.send({
+              "personalizations": [
+                  {
+                      "to": emails,
+                      "dynamic_template_data": {
+                          "subject": "You have a new message!",
+                          "sender": sender, 
+                          "messageId": id
+                          
+                      
+                  },
+                      "subject": "You have a new message!"
+                  }
+              ],
+                  "from": {
+                      "email": "notifications@degreeme.io",
+                      "name": "DegreeMe"
+              },
+                  "reply_to": {
+                      "email": "noreply@degreeme.io",
+                      "name": "No Reply"
+              },
+                  "template_id": "d-33e5fd187dba40e297f7c5dc45461ee3"
+              });
+              mail.end();
+            })
+          })
+          });
         }
         else{
          console.log("Messsage not added")

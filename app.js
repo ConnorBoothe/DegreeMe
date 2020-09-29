@@ -126,16 +126,6 @@ io.sockets.on('connection', function (socket) {
   socket.on('send message', function (data) {
       //add message to the db
       messages.addMessage(data.id, data.sender, data.senderImg, data.message, data.date);
-      messages.getConversation(data.id).exec((err, docs) => {
-          for (x in docs.userHandles) {
-            //move thread to top of the list
-              users.moveThread(data.id, docs.userHandles[x][0], data.sender);
-              //mark as unread for the receiver
-              if(docs.userHandles[x][0] !== data.sender){
-                  users.unseeMessage(docs.userHandles[x][0], docs._id)
-              }
-          }
-      })
       io.sockets.emit('new message', {
           msg: data
       });
