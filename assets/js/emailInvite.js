@@ -44,7 +44,32 @@ $(document).ready(function(){
                  }
              },
              500: function (result) {
-                 alert("500 ");
+                 alert("500");
+                 console.log(result)
+             },
+             },
+         });  
+    })
+    $(".sendPlatformEmail").on("click", function(){
+        payload = {
+            emails:$.session.get("sendToEmails"),
+            message:$(".inviteMsg").val(),
+            action:$(".emailAction").val()
+         }
+         $.ajax({
+             url: "/sendPlatformInvite",
+             type: 'POST',
+             data: JSON.stringify(payload),
+             headers: {
+             "Content-Type": "application/json"
+             }, statusCode: {
+             202: function (result) {
+                $(".inviteMsg").val("");
+                $(".addedEmails").html("");
+                $.session.set("sendToEmails", [])
+             },
+             500: function (result) {
+                 alert("500");
                  console.log(result)
              },
              },

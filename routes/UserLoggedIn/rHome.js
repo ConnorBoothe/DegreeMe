@@ -492,7 +492,6 @@ router.post("/addHelpRequest",
                                 } else if (resp.accepted){
                                     console.log("email was sent for placing bids")
                                 }
-
                             console.log(resp.body);
                             });
                             console.log(emails)
@@ -828,6 +827,63 @@ router.post("/siteWideSearch",
             }).end();
        });
     });
-
+    router.post("/sendPlatformInvite",
+    check('emails').isArray().trim().escape(),
+    function (req, res) {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        
+      }
+    //   console.log("Group Name", req.body.groupName)
+    console.log(req.body.message)
+      var splitEmails = req.body.emails.split(",");
+      console.log(splitEmails)
+      var toEmails = [];
+      for(x in splitEmails){
+        if(splitEmails[x] != ""){
+          toEmails.push({"email": splitEmails[x]});
+        }
+      }
+      var mail = unirest("POST", "https://api.sendgrid.com/v3/mail/send");
+      mail.headers({
+      "content-type": "application/json",
+      "authorization": process.env.SENDGRID_API_KEY,
+      });
+      mail.type("json");
+      mail.send({
+      "personalizations": [
+          {
+              "to": toEmails,
+              "dynamic_template_data": {
+                  "subject": "Group Invitation",
+                  "name": req.session.name,
+                  "message": req.body.message,
+          },
+              "subject": ""
+          }
+      ],
+          "from": {
+              "email": "notifications@degreeme.io",
+              "name": "DegreeMe"
+      },
+          "reply_to": {
+              "email": "noreply@degreeme.io",
+              "name": "No Reply"
+      },
+          "template_id": "d-fd46e3eb5ad84d8e971def6cb357e350"
+      });
+      mail.end(function (result) {
+        if (result.error){
+            console.log(res.body);
+            // throw new Error(res.error);
+        } else if (result.accepted) {
+            res.status(202).json({
+            }).end();
+            console.log("email has sent for inviting someone to join group");
+        }
+    });
+    
+     console.log("EMAIL INVITE RAN")
+    })
 
 module.exports = router;

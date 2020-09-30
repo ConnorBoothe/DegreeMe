@@ -25,6 +25,7 @@
         <%- include ('partials/horizontalHeader.ejs')%>
         <%- include ('partials/newMessageButton.ejs')%>
         <%- include ('partials/newMessageModal.ejs')%>
+        <%- include ('partials/platformInvite.ejs')%>
         <input type="hidden" name="handle" value="<%=session.handle%>"/>
         <input type="hidden" name="stripeId" value="<%=session.stripeId%>"/>
         <input type="hidden" name="userId" value="<%=session.userId%>"/>
@@ -400,7 +401,7 @@
     <script type="text/javascript" src="../assets/js/Client-DateFunctions.js"></script>
     <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../assets/js/togglePost.js"></script>
-
+    <script type="text/javascript" src="../assets/js/emailInvite.js"></script>
     <script type="text/javascript" src="/assets/js/UpdateTimeline.js"></script>
   
     <script type="text/javascript" src="/assets/js/ajaxCalls/placeBid.js"></script>

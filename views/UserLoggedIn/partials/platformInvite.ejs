@@ -1,0 +1,35 @@
+<!-- Modal -->
+<div class="modal fade " id="platformInviteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered " role="document">
+      <div class="modal-content color-dark">
+        <div class="modal-header">
+          <h5 class="modal-title text-light" id="exampleModalCenterTitle">Invite friends</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+                    <div class="searchPeople-container">
+                             <div class="input-container-message">
+                                <input type="text" name="email" class="emails" placeholder="Enter an email address here"/>
+                                <button class="addEmailBtn"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4a.5.5 0 0 0-1 0v3.5H4a.5.5 0 0 0 0 1h3.5V12a.5.5 0 0 0 1 0V8.5H12a.5.5 0 0 0 0-1H8.5V4z"/>
+                                  </svg></button>
+                        </div>
+                    </div>      
+        <br>
+        <p class="emailErr">Not a valid email</p>
+        <div class="addedEmails">
+
+        </div>
+        <label class="text-light">Enter a custom message (optional)</label>
+        <textarea name ="post" class="inviteMsg"></textarea>   
+        </div>
+        
+        <div class="modal-footer">
+            <input placeholder="Subject" value="Send Email" type="submit" class="btn btn-primary createThread sendPlatformEmail" data-dismiss="modal"/>
+      
+        </div>
+      </div>
+    </div>
+  </div>
