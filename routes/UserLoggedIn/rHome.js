@@ -86,6 +86,7 @@ router.get('/home', function (req, res) {
             } else {
                 var timeLineArray = [];
                 for (var x = 0; x < docs1.length; x++) {
+                    console.log(docs1);
                     var hasLiked = tl.likedBoolean(req.session.handle, docs1[x].likers);
                     //if bid is not open, don't display
                     if (docs1[x].type === "Help Request") {
