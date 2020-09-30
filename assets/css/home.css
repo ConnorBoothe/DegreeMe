@@ -364,6 +364,52 @@
     color:white;
     font-weight:500!important;
 }
+#inviteFriends{
+    cursor:pointer;
+}
+.inviteMsg{
+    width:100%;
+    background-color:#343a40;
+    height:70px;
+    border:none;
+    outline:none;
+    color:white;
+    padding-left:10px;
+    font-family: 'Open Sans', sans-serif;
+
+  }
+  .addEmailBtn{
+    background-color:#343a40;
+    color:white;
+    padding-right:20px;
+  }
+  .emails{
+    width:95%;
+    border:none;
+    color:white;
+    background-color:#343a40;
+    font-family: 'Open Sans', sans-serif;
+  }
+  .emailErr{
+    color:#dc3545;
+    margin-top:-20px!important;
+    font-size:14px;
+    display:none;
+    position:absolute;
+    font-family: 'Open Sans', sans-serif;
+  }
+  .appendEmails{
+    display:inline-block;
+    font-family: 'Open Sans', sans-serif;
+    background-color:#121212;
+    padding-left:5px;
+    padding-right:5px;
+    padding-top:2px;
+    padding-bottom:2px;
+    border-radius:10px;
+    color:white;
+    margin-left:5px;
+  }
 .spanSpace{
     display:none!important;
 }
