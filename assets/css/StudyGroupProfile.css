@@ -23,17 +23,61 @@ input:-webkit-autofill:active  {
     margin-top:10px;
     width:100%;
 }
-
+.memberHandle{
+    font-size:14px!important;
+}
+.adminHandle{
+    margin-bottom:0;
+    margin-top:0!important;
+}
 .subjectName{
     font-size: medium;
     color: #a9a9a9;
 }
+.groupAvatar{
+    width:110px;
+}
+.admin{
+    color:#d4d4d4;
+    font-style: italic;
+    font-size:13px!important;
+    margin-top:-30px!important;
+    margin-left:10px;
+}
+.groupDescription{
+    font-family: 'Open Sans', sans-serif;
+    font-size:15px!important;
+    margin-top:30px;
+    margin-right:50px!important;
+}
+.memberCount{
+    font-size:14px!important;
+}
+.profileBody{
+    margin-top:30px;
+}
+.courseTab{
+    width:250px!important;
+}
+.profileNav li:hover{
+    background-color:#1d1d1d;
+    
+ }
+ .profileNav li, .profileNav li a{
+     width:170px!important;
+     color:#d4d4d4!important;
+ }
+.group-title{
+    float:left;
+    text-align:center;
+
+}
 .groupName{
-    float:left!important;
     font-size:22px!important;
     font-family: 'Open Sans', sans-serif;
     margin-right:5px;
     min-width: 200px;
+    margin-top:10px;
 }
 .meetup-item-container{
     background-color:#121212;
@@ -180,7 +224,7 @@ input:-webkit-autofill:active  {
    
 }
 .studyGroupProfileButtons{
-   width:590px;
+   width:200px;
    margin-top:60px;
    margin-left:20px;
 }
@@ -217,7 +261,7 @@ input:-webkit-autofill:active  {
 }
 .membersContainer img{
     float:left;
-    width:40px;
+    width:35px;
 }
 .membersContainer p{
     float:left;
@@ -280,8 +324,7 @@ button{
     font-family: 'Open Sans', sans-serif!important;
 }
 #makeSession {
-    margin-right:30px;
-    margin-left:30px;
+
     
 }
 /* modal title */
@@ -333,7 +376,9 @@ button{
     background-color:#1d1d1d;
     height:100%;
     margin-top:55px;
-    width:200px;
+    width:220px;
+    padding-bottom:50px;
+    overflow-y: auto;
 }
 .groupMember-container{
     display:block;
@@ -342,6 +387,7 @@ button{
 .groupMemberCount{
     padding-left:20px;
     padding-top:10px;
+    font-size:14px!important;
     color:#a9a9a9;
     font-family: 'Open Sans', sans-serif!important;
 }

@@ -60,6 +60,12 @@ module.exports = class StudyGroups {
     }
     );
   }
+  addGroupImage(id, image){
+    var StudyGroupDB = mongoose.model('StudyGroupDB', StudyGroupDBSchema);
+    StudyGroupsDB.find({_id: id}).updateOne({
+      $set:{GroupImage:image}
+    }).exec();
+  }
   groupsAutocomplete(searchValue){
     var StudyGroupDB = mongoose.model('StudyGroupDB', StudyGroupDBSchema);
     return StudyGroupDB.find({

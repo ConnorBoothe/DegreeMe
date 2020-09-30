@@ -9,7 +9,7 @@ function likedBoolean(handle, likeArray){
     return false;
   }
 
-function formatBid(post){
+function formatBid(post, stripeId){
     var hasLiked = likedBoolean($(".userProfileName").text(), post.likers);
     if(post.BidOpen == true){
        
@@ -65,8 +65,7 @@ function formatBid(post){
                     '</button>';
                     }
     
-            
-            if($.session.get("tutor")){
+            if(stripeId != "none"){
                 bid+= '<div class="placeBid">'+
                     '<div class="bid-input-container">'+
                         '<input type="hidden" class="timelineId" value="'+post._id+'"/>'+
@@ -78,8 +77,9 @@ function formatBid(post){
                     '</div>'+
                     '<button type="button" class="btn btn-primary respondBtn">Place Bid</button>'+
                 '</div>';
-            }else{
-                 bid+= '<div class="placeBid">'
+            }
+            else{
+                 bid+= '<div class="placeBid">'+
                     '<a href="/MyFinances" type="button" class="addPaymentInfo">Add payment info to place a bid</a>'+
                 '</div>';
     
@@ -194,18 +194,61 @@ function formatStudyGroup(post){
         '<br></div></div>';
         return studyGroup;
 }
+function formatStatusUpdate(post){
+    var hasLiked = likedBoolean($(".userProfileName").text(), post.likers);
+    var status = "";
+    status += 
+    '<input class="postId" name="postId" type="hidden" value="'+post._id+'" />'+
+    '<div class="timeline-container-status">'+
+        '<div class="postHeader">'+
+            '<div class="postRight">'+
+                '<p class="postDate">'+displayDate(new Date(post.date))+'</p>'+
+            '</div>'+
+            '<img class="timelinePost-Image" src="'+post.userImage+'" />'+
+            '<p class="timelinePost-username">'+post.userName+'<span class="postHandle">'+
+            '<p class="postHandle"><a href="/user/'+post.userHandle+'">'+post.userHandle+'</a></span></p></p>'+
+        '</div>'+
+        '<p class="caption">'+post.caption+'</p>'+
+        '<div class="postActions">';
+        if (hasLiked == false){
+            status +=
+            '<button class="like-button">'+
+                '<span class="likeCount">'+post.likes+'</span>'+
+                '<svg class="bi bi-heart heartIcon" width="1em" height="1em" viewBox="0 0 16 16"'+
+                    'fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
+                    '<path fill-rule="evenodd"'+
+                        'd="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />'+
+                '</svg></button>';
+         }else{
+            status +=
+            '<button class="like-button hasLiked">'+
+                '<span class="likeCount">'+post.likes+'</span>'+
+                '<svg class="bi bi-heart heartIcon" width="1em" height="1em" viewBox="0 0 16 16"'+
+                    'fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
+                    '<path fill-rule="evenodd"'+
+                        'd="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />'+
+                '</svg></button><br>';
+            }
+            status+=
 
-function createTimeline(nextTen){
+        '<br></div></div>';
+        return status;
+}
+function createTimeline(nextTen, stripeId){
     var timeline = "";
     for(x in nextTen){
         if(nextTen[x].type === "Help Request"){
-            timeline += formatBid(nextTen[x]);
+            timeline += formatBid(nextTen[x], stripeId);
         }
         if(nextTen[x].type === "Tutor Listing"){
             timeline += formatTutorListing(nextTen[x]);
         }
         else if(nextTen[x].type === "Study Group"){
             timeline += formatStudyGroup(nextTen[x]);
+        }
+        //add status update
+        else if(nextTen[x].type === "Status Update"){
+            timeline += formatStatusUpdate(nextTen[x]);
         }
     }
     return timeline;
@@ -243,9 +286,7 @@ $(document).ready(function(){
             }, statusCode: {
               202: function (result) {
                 $(".spinner-container").fadeOut();
-                $(".timeline").append(createTimeline(result.newItems));
-               
-
+                $(".timeline").append(createTimeline(result.newItems, result.stripeId));
                 if(result.newItems.length < 5 && $.session.get("end") == "false"){
                     $.session.set("end", true);
                     $(".timeline").append('<p class="timelineItemsLoaded">All items loaded</p>');

@@ -65,7 +65,7 @@ function populateTutors(data){
     " </div>"+
    
      "<div class='tutorButtons'>"+
-         "<a type='submit' class='btn btn-primary tutorBtn text-light'"+
+         "<a class='btn btn-primary tutorBtn text-light'"+
              "name=''"+
              "href='/Tutor?handle="+data.sessions[x].Handle+"'>View Profile"+
              "</a>"+

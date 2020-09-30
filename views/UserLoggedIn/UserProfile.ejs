@@ -32,6 +32,35 @@
             <div class="profile-header">
                 <div class="profileHeader">
                     <div class="profile-img-container">
+                        <%if(session.handle === user.handle){%>
+                        <div class="img">
+                            <a class="img" href="#">
+                                <div class="img__overlay img-btn">Edit Photo</div>
+                                <img src="<%=session.img%>" width="120" alt="Profile Picture" class="profile-img editImg"
+                                     />
+                            </a>
+                            
+                        </div>
+
+                        <div class="img-upload-container">
+                            <div class="img-secondary-wrapper">
+                                <input type='hidden' name='img1' class='croppedImg' value="" required />
+                                <input type="file" class="upload-file upload" value="Upload an Image"
+                                    accept="image/gif, image/jpeg, image/png">
+                                <span class="text-dark picX"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
+                                    <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
+                                  </svg></span>
+                                <div class="upload-demo"></div>
+                                <input name="img1 imagebase64" type="hidden" />
+                                <div class="upload-result btn-primary">Use</div>
+                            </div>
+                        </div>
+                        <div class="profile-name">
+                            <h1 class="tutorName text-light"><%=user.first_name + ' '+ user.last_name%></h1>
+                            <h1 class="userProfileHandle"><%=user.handle%>
+                                
+                                <%}else{%>
                                 <div class="profile-img-container">
                                     <img src="<%=user.img%>" width="120" alt="Profile Picture" class="profile-img userImage editImg"
                                          />
@@ -39,8 +68,8 @@
                                 <div class="profile-name">
                                     <h1 class="tutorName text-light"><%=user.first_name + ' '+ user.last_name%></h1>
                                     <h1 class="userProfileHandle"><%= user.handle%>
-
-                                            <% if(user.Tutor === true){%>
+                                <%}%>
+                                        <% if(user.Tutor === true){%>
                                         <a class="memberImage" data-toggle="tooltip" data-placement="top"
                                             title="degreeMe Tutor">
                                             <img class="tutorBadge" src="../assets/img/tutorBadge.svg" />
@@ -54,8 +83,9 @@
                                             <!-- <h1 class="schoolNameProfile text-light" >UNC Charlotte</h1> -->
                                             
                                         <!-- If user is a tutor, display average rating and reviews -->
-                                        
+                                        <p class="badge badge-warning profile-uploading-image">Uploading Image...</p>
                                    </div>
+                                  
                     <div class="connectionBody-container">   
             <div class="tutorMiddle">
                 <div class="followers-container">
@@ -80,7 +110,7 @@
                     </ul>
                 </div>
                 <div class="majorContainer">
-                    <p class="profileMajor badge badge-success"><%=user.Major%></p>
+                    <p class="profileMajor"><span class="majorSpan"><%=user.Major%></span></p>
                 </div>
                     <%if(session.handle === user.handle){%>
                     <p class="profileBio"><textarea maxlength="150" id="changeBio" class=""
@@ -217,6 +247,9 @@
     <script src="../assets/jquery/jquery.session/jquery.session.js"></script>
     <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
         <script src="../assets/js/croppie/croppie.min.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-app.js"></script>
+     <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-storage.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/browser-image-compression@1.0.12/dist/browser-image-compression.js"></script>
         <script type="text/javascript" src="../assets/js/crop.js"></script>
         <!-- Use below script to get all tabs working -->
         <!-- <script type="text/javascript" src="../assets/js/Profile.js"></script> -->

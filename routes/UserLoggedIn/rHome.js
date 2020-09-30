@@ -105,6 +105,11 @@ router.get('/home', function (req, res) {
                             docs1[x].userImage, docs1[x].caption, docs1[x].likes, docs1[x].comments, dateFunctions.displayDate(new Date(docs1[x].date)),
                             docs1[x].name, docs1[x].course, docs1[x].professor, docs1[x].url, hasLiked));
                     }
+                    if (docs1[x].type == "Status Update") {
+                        timeLineArray.push(new TimelinePost(docs1[x]._id, docs1[x].sendToHandle, "Status Update", docs1[x].userHandle, docs1[x].userName,
+                            docs1[x].userImage, docs1[x].caption, docs1[x].likes, "", dateFunctions.displayDate(new Date(docs1[x].date)),
+                            "", "", "", "", ""));
+                    }
                 }
                 users.getUserByEmail(req.session.email).exec((err, docs3) => {
                     //sort current sessions and past sessions
@@ -361,7 +366,7 @@ router.post("/addHelpRequest",
     check('userName').isString().trim().escape(),
     check('type').isString().trim().escape(),
     check('userImage').isString().trim(),
-    check('caption').isString().trim().escape(),
+    check('caption').isString().trim(),
     check('date').trim().escape(),
     check('name').isString().trim().escape(),
     check('price').trim().escape(),
@@ -372,12 +377,16 @@ router.post("/addHelpRequest",
         if (!errors.isEmpty()) {
             res.redirect('/home');
         }
+        var newBidData = {};
         if (req.body.userHandle != req.session.handle) {
             users.getUserById(req.body.userHandle).exec((err, docs) => {
                 timeline.addPost(req.body.sendToHandle, docs.handle, req.body.userName, req.body.type, req.body.userImage, req.body.caption,
                     req.body.date, req.body.name, req.body.price, req.body.course, req.body.anonymous)
-                    .then(function(){
+                    .then(function(data){
+                        newBidData = data;
                         var emails = [];
+                        
+                        new Promise((resolve, reject) => {
                         users.getAllEmails().exec((err, docs)=>{
                             for(var x = 0; x< docs.length; x++){
                                 emails.push({"email": docs[x].email})
@@ -410,8 +419,9 @@ router.post("/addHelpRequest",
                                     "template_id": "d-3211e341f77c42a7a80862aff724e708"
                                 });
                                 mail.end(function (resp) {
+                                    resolve(true)
                                 if (resp.error){
-                                    console.log("this is the error for placing bids", resp.error)
+                                    console.log("this is the error for adding help requests", resp.error)
                                     // res.redirect("/home")
                                     // throw new Error(res.error);
                                 } else if (resp.accepted){
@@ -423,19 +433,79 @@ router.post("/addHelpRequest",
 
                             console.log(emails)
                         })
+                    })
+                    .then(function(){
                         res.status(202).json({
-                            status: "Help request sent"
+                            status: "Help request sent",
+                            bid:newBidData,
+                            stripeId: req.session.stripeId
                         }).end();
+                    })
+                       
                     })
                
             })
         } else {
             timeline.addPost(req.body.sendToHandle, req.body.userHandle, req.body.userName, req.body.type, req.body.userImage, req.body.caption,
                 req.body.date, req.body.name, req.body.price, req.body.course, req.body.anonymous)
-                .then(function(){
-                    res.status(202).json({
-                        status: "Help request sent"
-                    }).end();
+                .then(function(data){
+                    newBidData = data;
+                    var emails = [];
+                    new Promise((resolve, reject) => {
+                        users.getAllEmails().exec((err, docs)=>{
+                            for(var x = 0; x< docs.length; x++){
+                                emails.push({"email": docs[x].email})
+                            }
+                            mail.headers({
+                                "content-type": "application/json",
+                                "authorization": process.env.SENDGRID_API_KEY,
+                                });
+                                mail.type("json");
+                                mail.send({
+                                "personalizations": [
+                                    {
+                                        "to": emails
+                                    ,
+                                        "dynamic_template_data": {
+                                            "price": req.body.price,
+                                            "task": req.body.caption,
+                                    },
+                                        "subject": "Someone needs help!"
+                                    }
+                                ],
+                                    "from": {
+                                        "email": "notifications@degreeme.io",
+                                        "name": "DegreeMe"
+                                },
+                                    "reply_to": {
+                                        "email": "noreply@degreeme.io",
+                                        "name": "No Reply"
+                                },
+                                    "template_id": "d-3211e341f77c42a7a80862aff724e708"
+                                });
+                                mail.end(function (resp) {
+                                    resolve(true)
+                                if (resp.error){
+                                    console.log("this is the error for adding help requests", resp.error)
+                                    // res.redirect("/home")
+                                    // throw new Error(res.error);
+                                } else if (resp.accepted){
+                                    console.log("email was sent for placing bids")
+                                }
+
+                            console.log(resp.body);
+                            });
+                            console.log(emails)
+                        })
+                    })
+                    .then(function(){
+                        res.status(202).json({
+                            status: "Help request sent",
+                            bid:newBidData,
+                            stripeId: req.session.stripeId
+                        }).end();
+                    })
+                   
                 })
            
 
@@ -504,7 +574,7 @@ router.post("/addBid",
                                 });
                                 mail.end(function (resp) {
                                 if (resp.error){
-                                    console.log("this is the error for placing bids", resp.error)
+                                    console.log("this is the error for Adding bid", resp.error)
                                     // res.redirect("/home")
                                     // throw new Error(res.error);
                                 } else if (resp.accepted){
@@ -565,7 +635,8 @@ router.post("/loadMore",
                 res.json(err)
             } else {
                 res.status(202).json({
-                    newItems: docs
+                    newItems: docs,
+                    stripeId: req.session.stripeId
                 }).end();
             }
         });
@@ -611,23 +682,33 @@ router.post("/siteWideSearch",
             }
         } else if (req.body.type == "Users") {
             users.usersByNameAutocomplete(req.body.searchValue).exec((err, docs1) => {
-                
-                if(docs1.length < 1){
-                    console.log("Search by handle")
+                if(docs1){
+                    if(docs1.length < 1){
+                        console.log("Search by handle")
+                        users.usersByHandleAutocomplete(req.body.searchValue).exec((err, docs) => {
+                            res.status(202).json({
+                                Users: docs,
+                                type: req.body.type
+                            }).end();
+                        })
+                    }
+                    else{
+                        res.status(202).json({
+                            Users: docs1,
+                            type: req.body.type
+                        }).end();
+                    }
+                }
+                else{
                     users.usersByHandleAutocomplete(req.body.searchValue).exec((err, docs) => {
+                        if(docs)
                         res.status(202).json({
                             Users: docs,
                             type: req.body.type
                         }).end();
                     })
                 }
-                else{
-
-                    res.status(202).json({
-                        Users: docs1,
-                        type: req.body.type
-                    }).end();
-                }
+                
                 
         });
         } else if (req.body.type == "Tutors") {
@@ -706,7 +787,7 @@ router.post("/siteWideSearch",
                     });
                     mail.end(function (resp) {
                     if (resp.error){
-                        console.log("this is the error for placing bids", resp.error)
+                        console.log("this is the error for sending zoom reminder", resp.error)
                         // res.redirect("/home")
                         // throw new Error(res.error);
                     } else if (resp.accepted){
@@ -719,8 +800,6 @@ router.post("/siteWideSearch",
                 });
             })
             })
-            
-        
     });
 
     router.post("/getHandle", function(req, res){
@@ -737,6 +816,17 @@ router.post("/siteWideSearch",
             }
 
         })
+    });
+    //add status uppdate post
+    router.post("/addStatus", function(req, res){
+        //sendToHandle,userHandle, userName, type ,userImage,caption,date
+       timeline.addStatusPost(req.session.handle, req.session.handle, req.session.name, req.body.type, req.session.img, req.body.status, new Date())
+       .then(function(data){
+            res.status(202).json({
+                status: true,
+                post:data
+            }).end();
+       });
     });
 
 

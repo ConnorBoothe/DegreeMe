@@ -1,32 +1,48 @@
 <div class="groupSideBar">
     <%if(members){%>
-  
-    <%if(members.length == 1){%>
-        <p class="groupMemberCount"> <%=members.length%> Member</p>
-    <%}else{%>
-        <p class="groupMemberCount"> <%=members.length%> Members</p>
-    <%}%>
+        <p class="groupMemberCount"> Members</p>
     
     <% for(x in members){%>
         <div class="membersContainer">
-
-            <%if(session.handle==members[x][0].handle){%>
-            <div class="groupMember-container">
-              
-                <img src="<%=members[x][0].image%>"/>
-                <a href="../user/<%=members[x][0].handle%>">
-                    <p>You</p>
-                    <p><%=members[x][0].MemberRole%></p>
-                </a>
-            </div>
-           
-            <%}else{%>
+            <%if(members[x][0].handle === studyGroup.HostHandle){%>
+                <%if(session.handle==members[x][0].handle){%>
                 <div class="groupMember-container">
-                  <img src="<%=members[x][0].image%>"/>
+                
+                    <img src="<%=members[x][0].image%>"/>
                     <a href="../user/<%=members[x][0].handle%>">
-                        <p><%=members[x][0].handle%></p>
-                   </a>
+                        <p class="memberHandle adminHandle">You </p>
+                        <span class="admin">Admin</span>
+                       
+                    </a>
                 </div>
+            
+                <%}else{%>
+                    <div class="groupMember-container">
+                    <img src="<%=members[x][0].image%>"/>
+                        <a href="../user/<%=members[x][0].handle%>">
+                            <p class="memberHandle adminHandle"><%=members[x][0].handle%></p>
+                            <span class="admin">Admin</span>
+                    </a>
+                    </div>
+                <%}%>
+            <%}else{%>
+                <%if(session.handle==members[x][0].handle){%>
+                    <div class="groupMember-container">
+                    
+                        <img src="<%=members[x][0].image%>"/>
+                        <a href="../user/<%=members[x][0].handle%>">
+                            <p class="memberHandle">You</p>
+                        </a>
+                    </div>
+                
+                    <%}else{%>
+                        <div class="groupMember-container">
+                        <img src="<%=members[x][0].image%>"/>
+                            <a href="../user/<%=members[x][0].handle%>">
+                                <p class="memberHandle"><%=members[x][0].handle%></p>
+                        </a>
+                        </div>
+                    <%}%>
             <%}%>
         </div>
     <%}%>

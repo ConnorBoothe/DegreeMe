@@ -102,6 +102,10 @@ module.exports = class UserDB {
         var UserDB = mongoose.model('UserDB',userDBSchema);
         return UserDB.find({});
       }
+      getEmailsFromHandleArray(handleArray){
+        var UserDB = mongoose.model('UserDB',userDBSchema);
+        return UserDB.find({handle:{$in: handleArray}}, "email");
+      }
     getUserByHandle(handle){
         var UserDB = mongoose.model('UserDB',userDBSchema);
         return UserDB.find({handle: handle}, "handle");
@@ -276,7 +280,7 @@ module.exports = class UserDB {
     removeThread(handle, threadId){
         var UserDB = mongoose.model('UserDB',userDBSchema);
         UserDB.findOne({handle:handle}).exec((err,docs)=>{
-            for(x in docs.threads){
+            for(var x = 0; x < docs.threads.length;x++){
                 if( docs.threads[x].threadId === threadId){
                     docs.threads.splice(x,1);
                     docs.save();
@@ -292,7 +296,7 @@ module.exports = class UserDB {
         UserDB.findOne({handle:userHandle}).exec((err,docs)=>{
             if(docs){
                 var index = "";
-                for(x in docs.threads){
+                for(var x = 0; x < docs.threads.length; x++){
                     if(docs.threads[x].threadId === threadId){
                         index = x;
                     }
@@ -311,9 +315,8 @@ module.exports = class UserDB {
             var UserDB = mongoose.model('UserDB',userDBSchema);
             UserDB.findOne({handle:handle}).exec((err,docs)=>{
                 var tempThread = "";
-                for(x in docs.threads){
+                for(var x = 0; x < docs.threads.length;x++){
                     if(docs.threads[x].threadId === threadId){
-
                         docs.threads[x].unreadCount = 0;
                         tempThread  = docs.threads[x];
                     }
@@ -355,26 +358,33 @@ module.exports = class UserDB {
     moveThread(threadId, handle, senderHandle){
         console.log("HANDLE", handle)
         var UserDB = mongoose.model('UserDB',userDBSchema);
-        UserDB.findOne({handle:handle}).exec((err,docs)=>{
-            var tempThread = "";
-            var index = "";
-            for(x in docs.threads){
-                if(docs.threads[x].threadId === threadId){
-                    tempThread  = docs.threads[x];
+        return new Promise((resolve, reject) => {
+            UserDB.findOne({handle:handle}).exec((err,docs)=>{
+                var tempThread = "";
+                var index = "";
+                for(var x = 0; x< docs.threads.length; x++){
+                    if(docs.threads[x].threadId === threadId){
+                        tempThread  = docs.threads[x];
+                    }
                 }
-            }
-            docs.threads.pull(tempThread);
-            docs.threads.push(tempThread);
-            //if receiving the message, incremement count
-            if(docs.handle != senderHandle && tempThread != ""){
-                tempThread.unreadCount++;
-            }
-           
-            if(index != ""){
-                console.log("unread count: " + docs.threads[index].unreadCount )
-            }
-            return docs.save();
-        })
+                //if threadId was a match, pull then push the thread to move it to the top of the list
+                if(tempThread != ""){
+                    docs.threads.pull(tempThread);
+                    docs.threads.push(tempThread);
+                }
+               
+                //if receiving the message, incremement count
+                if(docs.handle != senderHandle && tempThread != ""){
+                    tempThread.unreadCount++;
+                }
+            
+                if(index != ""){
+                    console.log("unread count: " + docs.threads[index].unreadCount )
+                }
+                docs.save();
+                resolve(true);
+            })
+        });
     }
    //add stripeId to User Profile
     addStripeId(userId, stripeId){

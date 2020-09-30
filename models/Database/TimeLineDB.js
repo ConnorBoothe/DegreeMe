@@ -43,7 +43,7 @@ var timelineDBSchema = new Schema({
     likes: {type:Number, required:true},
     date:{type:Date, required:true},
     likers:[LikersSchema],
-    name:{type:String, required:true},
+    name:{type:String},
     postImage: {type:String},
     comments: [commentSchema],
     StudyGroupPost: [StudyGroupPostSchema],
@@ -166,10 +166,14 @@ module.exports = class Timeline {
             var timeline = new timelineDB({sendToHandle:sendToHandle, userHandle:userHandle, userName:userName, type:type,
                 userImage:userImage, caption:caption, likes:0, date:date, name:name, professor:professor, course: taggedCourse, url:url
             });
-        
-          
         return timeline.save();
-        
+    }
+    addStatusPost(sendToHandle,userHandle, userName, type ,userImage,caption,date){
+        var timelineDB = mongoose.model('TimelineDB',timelineDBSchema);
+            var timeline = new timelineDB({sendToHandle:sendToHandle, userHandle:userHandle, userName:userName, type:type,
+                userImage:userImage, caption:caption, likes:0, date:date
+            });
+        return timeline.save();
     }
     //increment likes
     incrementLikes(postId){

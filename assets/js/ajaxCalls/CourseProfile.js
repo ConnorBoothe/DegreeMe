@@ -301,7 +301,7 @@ $(document).ready(function(){
                error:function(err,str){
                }
                }).done(function(res) { 
-                 var studyGroups = "<div class='question-container'><a href='/startAGroup' type='button' class='btn btn-primary' >"+
+                 var studyGroups = "<div class='question-container'><a href='/startAGroup' class='btn btn-primary' >"+
                              "Create a Group</a><div class='discussion-container'>";
                  var noGroups = true;
                   for(var x = res.length-1; x>=0; x--){
