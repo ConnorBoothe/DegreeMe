@@ -8,7 +8,6 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 var unirest = require('unirest');
 var mail = unirest("POST", "https://api.sendgrid.com/v3/mail/send");
-
 const {
   check,
   validationResult

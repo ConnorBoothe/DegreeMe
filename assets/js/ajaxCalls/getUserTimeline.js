@@ -8,7 +8,8 @@ function likedBoolean(handle, likeArray){
     }
     return false;
   }
-function formatBid(post){
+
+function formatBid(post, stripeId){
     var hasLiked = likedBoolean($(".userProfileName").text(), post.likers);
     if(post.BidOpen == true){
        
@@ -64,8 +65,7 @@ function formatBid(post){
                     '</button>';
                     }
     
-            
-            if($.session.get("tutor")){
+            if(stripeId != "none"){
                 bid+= '<div class="placeBid">'+
                     '<div class="bid-input-container">'+
                         '<input type="hidden" class="timelineId" value="'+post._id+'"/>'+
@@ -77,8 +77,9 @@ function formatBid(post){
                     '</div>'+
                     '<button type="button" class="btn btn-primary respondBtn">Place Bid</button>'+
                 '</div>';
-            }else{
-                 bid+= '<div class="placeBid">'
+            }
+            else{
+                 bid+= '<div class="placeBid">'+
                     '<a href="/MyFinances" type="button" class="addPaymentInfo">Add payment info to place a bid</a>'+
                 '</div>';
     
@@ -191,7 +192,6 @@ function formatStudyGroup(post){
         '<br></div></div>';
         return studyGroup;
 }
-
 function formatStatusUpdate(post){
     var hasLiked = likedBoolean($(".userProfileName").text(), post.likers);
     var status = "";
@@ -232,11 +232,11 @@ function formatStatusUpdate(post){
         '<br></div></div>';
         return status;
 }
-function createTimeline(nextTen){
+function createTimeline(nextTen, stripeId){
     var timeline = "";
     for(x in nextTen){
         if(nextTen[x].type === "Help Request"){
-            timeline += formatBid(nextTen[x]);
+            timeline += formatBid(nextTen[x], stripeId);
         }
         if(nextTen[x].type === "Tutor Listing"){
             timeline += formatTutorListing(nextTen[x]);
@@ -284,9 +284,7 @@ $(document).ready(function(){
             }, statusCode: {
               202: function (result) {
                 $(".spinner-container").fadeOut();
-                $(".timeline").append(createTimeline(result.newItems));
-               
-
+                $(".timeline").append(createTimeline(result.newItems, result.stripeId));
                 if(result.newItems.length < 5 && $.session.get("end") == "false"){
                     $.session.set("end", true);
                     $(".timeline").append('<p class="timelineItemsLoaded">All items loaded</p>');

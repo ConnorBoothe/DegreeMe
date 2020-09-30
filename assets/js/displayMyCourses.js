@@ -111,7 +111,7 @@ $(document).ready(function(){
             '<a href="/course/'+res[x].courseName+'"><p class="myCoursesText">'+res[x].courseName+'</p>'+
             '<p class="myCoursesSubText">'+res[x].courseCode+'</p></a>'+
             '  <span class="dots-btn" data-container="body" data-toggle="popover" data-placement="right" data-content="<ul class=popoverUl><li><a class=askQuestionBtn href=/course/'+removeSpace(res[x].courseName)+'>Ask a Question</a></li><li><form method=POST class=leaveCourseForm ><input class=courseName type=hidden name=course value='+removeSpace(res[x].courseName)+' /><button class=leaveCourse>Leave</button></form></li></ul>"><img class="dots" src="../assets/img/3dots.svg"/></span>'+
-            '</div>';   
+            '</div>';
         }
         $(".myCourse-container").html(courses);
         $(function () {
@@ -129,8 +129,7 @@ $(document).ready(function(){
                     if(res[x].courseCode === $(this).prev().text()){
                         exists = true;
                         $(".course-wrapper").css("border-bottom", "1px solid #dc3545");
-                        $(".courseExists").text("Course already in your list")
-                       
+                        $(".courseExists").text("Course already in your list");
                     }
                 }
                 payload = {
@@ -245,6 +244,7 @@ $(document).ready(function(){
     })
 
     $(".tagCourse").on("keyup", function(){
+        alert("YO")
         $(".tagCourse-container").show();
         payload = {
             searchValue:$(".tagCourse").val(),
@@ -320,7 +320,7 @@ $(document).ready(function(){
    //ensure input gets focus
    $(".help-text-container").on("click", function(){
        $(this).children().eq(0).focus();
-       $(this).parent().css("border-bottom", "2px solid #3a3b3c");
+       $(this).parent().css("border", "2px solid #3a3b3c");
    })
    //remove error border on focus
    $(".dueDate").on("focus", function(){
@@ -403,14 +403,25 @@ $(document).ready(function(){
               "Content-Type": "application/json"
             }, statusCode: {
               202: function (result) {
-                $(".request-help-container").html("<div class='helpRequestSuccess'>"+
-                "<h3 class='text-light'>Help Request Posted</h3>"+
-                "<img class='helpRequestSuccessImg' src='../assets/img/undraw_game_day_ucx9.svg'/>"+
-                "<p class='text-light'>You will be notified when people respond to this request.<div>")
-                $(".request-help-container").css("height", "250px")
-                  $(".helpRequest-body").fadeOut();
-                  $(".helpRequestSuccess").fadeIn();
-                  
+                // $(".request-help-container").html("<div class='helpRequestSuccess'>"+
+                // "<h3 class='text-light'>Help Request Posted</h3>"+
+                // "<img class='helpRequestSuccessImg' src='../assets/img/undraw_game_day_ucx9.svg'/>"+
+                // "<p class='text-light'>You will be notified when people respond to this request.<div>")
+                // $(".request-help-container").css("height", "250px");
+                $(".requestHelpDetails").hide();
+                alert(result)
+                var htmlToInsert = "<div class='statusUpdateSuccess bg-success'>Help request posted!</div>" + formatBid(result.bid, result.stripeId);
+                $(".timeline-wrapper").prepend(htmlToInsert);
+                $(".textarea").text("Request help from the DegreeMe community...");
+                $(".askingPrice").val("");
+                $("#dueDate").val("");
+                $(".tagCourse").val("");
+                
+                setTimeout(function(){
+                  $('.statusUpdateSuccess').fadeOut();
+                },1500)
+                //   $(".helpRequest-body").fadeOut();
+                //   $(".helpRequestSuccess").fadeIn();
               },
               500: function (result) {
                 alert("500 " + result.responseJSON.err);
