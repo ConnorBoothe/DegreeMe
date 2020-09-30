@@ -263,7 +263,9 @@
     border-bottom:2px solid #28a745;
 }
 .post-container{
-    padding-bottom:7px;
+    margin-top:12px!important;
+    padding-bottom:5px;
+    margin-bottom:20px!important;
 }
 .dueDate{
     border-bottom:2px solid #1d1d1d;
@@ -279,7 +281,9 @@
     list-style-type:none;
     color:white;
     padding-left:20px;
+    padding-bottom:5px;
     cursor:pointer;
+    margin-bottom:10px;
 }
 .post-selection-menu{
     margin-left:50px;
@@ -310,6 +314,16 @@
 }
 .tagCourse-loading{
     text-align:center;
+}
+.statusUpdateSuccess{
+    text-align:center;
+    width:95%;
+    border-radius:7px;
+    box-shadow: 1px 2px black;
+    color:white;
+    padding-top:4px;
+    padding-bottom:4px;
+    font-family: 'Open Sans', sans-serif!important;
 }
 .tagCourse-container{
     background-color:#242526;
@@ -755,12 +769,32 @@ padding-right:10px;
     margin-left:20px;
     font-family: 'Open Sans', sans-serif!important;
 }
+.status-update-success{
+    color:white;
+    text-align:center;
+    font-size:16px;
+    margin-top:15px;
+    font-family: 'Open Sans', sans-serif!important;
+
+}
+.status-update-success svg{
+    margin-right:10px;
+}
 .caption{
     color:white!important;
     margin-left: 20px;
     margin-top:5px;
     font-size:17px;
     font-family: 'Open Sans', sans-serif!important;
+}
+.caption-status{
+    color:white!important;
+    margin-left: 30px;
+    margin-top:0px;
+    margin-bottom:5px;
+    font-size:17px;
+    font-weight:450;
+
 }
 .price-nonhelp{
     margin-left:20px;
