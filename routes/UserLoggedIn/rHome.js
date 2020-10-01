@@ -278,7 +278,6 @@ router.post("/addLike",
         }
         timeline.hasLiked(req.body.postId, req.body.handle)
             .then(function (data1) {
-                console.log(data1)
                 //determine if the user has liked the post
                 var hasLiked = false;
                 for (x in data1.likers) {
