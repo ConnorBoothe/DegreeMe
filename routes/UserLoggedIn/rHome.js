@@ -278,10 +278,12 @@ router.post("/addLike",
         }
         timeline.hasLiked(req.body.postId, req.body.handle)
             .then(function (data1) {
+                console.log(data1)
                 //determine if the user has liked the post
                 var hasLiked = false;
                 for (x in data1.likers) {
-                    if (data1.likers.likerHandle === data1.handle) {
+                    if (data1.likers.likerHandle === req.session.handle) {
+                        console.log("Found liker")
                         hasLiked = true;
                     }
                 }
@@ -289,7 +291,7 @@ router.post("/addLike",
                 if (!hasLiked) {
                     //increment like count
                     timeline.incrementLikes(req.body.postId)
-                        .then(function (data) {});
+                    .then(function (data) {
                     //add handle to liker array
                     new Promise((resolve, reject) => {
                             timeline.addLiker(req.body.postId, req.body.handle);
@@ -304,6 +306,7 @@ router.post("/addLike",
                                     }).end();
                                 })
                         })
+                    });
 
                 }
             });
@@ -319,7 +322,7 @@ router.post("/removeLike",
         }
         timeline.decrementLikes(req.body.postId)
             .then(function () {
-                timeline.removeLiker(req.body.postId, req.body.handle)
+                timeline.removeLiker(req.body.postId, req.session.handle)
                 timeline.getTimelineById(req.body.postId)
                     .then(function (data) {
                         res.status(202).json({
