@@ -137,7 +137,6 @@ router.post("/follow",
               "content-type": "application/json",
               "authorization": process.env.SENDGRID_API_KEY,
               });
-
               mail.type("json");
               mail.send({
               "personalizations": [
@@ -166,13 +165,12 @@ router.post("/follow",
               });
               mail.end(function (resp) {
               if (resp.error){
-                  console.log("this is the error for follow", resp.error)
+                  console.log("follow error: ", resp.error)
                   // res.redirect("/home")
                   // throw new Error(res.error);
               } else if (resp.accepted){
                   console.log("email was sent for follow")
               }
-
           console.log(resp.body);
           });
         });

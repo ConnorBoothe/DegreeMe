@@ -25,13 +25,8 @@ $(document).ready(function(){
               "Content-Type": "application/json"
             }, statusCode: {
               202: function (result) {
-                  //hide badge if 0 (should be zero)
-                  if(result.notificationCount === 0){
+                  //hide badge
                     $(".bdge").hide();
-                  }
-                  else{
-                    $(".bdge").text(result.notificationCount.toString())
-                  }
               },
               500: function (result) {
                 alert("500 " + result.responseJSON.err);
@@ -160,6 +155,7 @@ $("#showNotifications").on("click",".sawMessage", function(e){
         threadId:$(this).prev().val(),
         handle:$(this).prev().prev().val()
       }
+      console.log(payload)
     $.ajax({
         url: "/SeenMsg",
         type: 'POST',

@@ -176,12 +176,9 @@ router.post("/zeroNotifications",
         }
         users.clearNotificationCount(req.body.handle)
             .then(function (data) {
-                users.getUserByHandle(req.session.handle)
-                    .then(function (data) {
-                        res.status(202).json({
-                            notificationCount: data[0].notificationCount,
-                        }).end();
-                    })
+                res.status(202).json({
+                    status:"success",
+                }).end();
             })
             .catch(function (err) {
                 console.log(err)

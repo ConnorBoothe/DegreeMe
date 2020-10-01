@@ -480,16 +480,35 @@ module.exports = class UserDB {
             handle: handle
         }).then(function(data){
             var threadIndex = -1;
-            for(var x = 0; x< data.threads.length; x++){
-                if(data.threads[x].threadId ===  threadId){
-                    threadIndex = x;
-                    data.threads[x].seen = true;
-                    data.save()
-                }
+            console.log(data)
+            if(data){
+                console.log("data exists")
+                new Promise((resolve, reject) => {
+                    for(var x = 0; x< data.threads.length; x++){
+                        if(data.threads[x].threadId ===  threadId){
+                            console.log("set to true")
+                            threadIndex = x;
+                            data.threads[x].seen = true;
+                            data.save();
+                            resolve(true);
+                        }
+                    }
+                    if(threadIndex === -1){
+                        reject(true);
+                    }
+            })
+            .then(function(){
+                res.status(202).json({
+                    threadURL: "/messages?messageId="+ data.threads[threadIndex].threadId
+                }).end();
+            })
+            .catch(function(){
+                res.redirect("/home")
+            })
             }
-            res.status(202).json({
-                threadURL: "/messages?messageId="+ data.threads[threadIndex].threadId
-            }).end();
+            else{
+               res.redirect("/home");
+            }
         })
         .catch(function(err){
             console.log(err)

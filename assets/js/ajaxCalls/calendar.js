@@ -419,6 +419,11 @@ function validateInputFields(){
         errors = true;
         $(".termsMsg").css("color", "#dc3545");
     }
+    if($("#courseNameTxt").text()!= ""){
+        errors = true;
+        alert("COURSE DOESNT EXIST")
+    }
+    alert(errors)
     if(errors){
         $(".listingErrMsg").text("Errors exist in the form. Correct them and re-submit")
     }
@@ -426,6 +431,40 @@ function validateInputFields(){
     
 }
 $(document).ready(function () {
+    $("#courseName").on("focusout", function(){
+        payload = {
+            searchValue: $("#courseName").val(),
+            type:"Courses" 
+         }
+         $.ajax({
+             url: "/siteWideSearch",
+             type: 'POST',
+             data: JSON.stringify(payload),
+             headers: {
+             "Content-Type": "application/json"
+             }, statusCode: {
+             202: function (result) {
+                 var courses = "";
+                     if(($("#courseName").val() === "")){
+                         $("#courseName").css("border-bottom","2px solid #dc3545");
+                     }
+                     else if(result.Courses.length > 0 || result.Courses.length === 0){
+                        $("#courseName").css("border-bottom","2px solid #dc3545");
+                        $("#courseNameTxt").text("Course not found. If this is a mistake on our end, let us know!");
+                       
+                     }
+                     else{
+
+                     }
+                    
+             },
+             500: function (result) {
+                 alert("500 ");
+                 console.log(result)
+             },
+             },
+         });
+        });
     $.session.remove('schedule0');
         $.session.remove('schedule1');
         $.session.remove('schedule2');
