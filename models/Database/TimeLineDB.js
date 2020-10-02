@@ -122,6 +122,11 @@ module.exports = class Timeline {
         var timelineDB = mongoose.model('TimelineDB',timelineDBSchema);
         return timelineDB.find({_id:id});
     }
+    //same as above, but uses findOne. other function already in use so i cannot change
+    getPostById(id){
+        var timelineDB = mongoose.model('TimelineDB',timelineDBSchema);
+        return timelineDB.findOne({_id:id});
+    }
     addPost(sendToHandle,userHandle, userName, type ,userImage,caption,date, name, price, taggedCourse, anonymous, professor,description,course, groupId,postImage){
         var timelineDB = mongoose.model('TimelineDB',timelineDBSchema);
         if(postImage){
