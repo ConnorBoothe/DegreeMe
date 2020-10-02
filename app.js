@@ -93,6 +93,7 @@ app.use(require('./routes/UserLoggedIn/rMeetupProfile.js'));
 app.use(require('./routes/UserLoggedIn/rAddCourse.js')); 
 app.use(require('./routes/UserLoggedIn/rDisplayAllBids.js')); 
 app.use(require('./routes/UserLoggedIn/rDisplaySingleAcceptedBid.js')); 
+app.use(require('./routes/UserLoggedIn/rComments.js')); 
 
 //API Routes
 app.use(require('./routes/API/SendStudyGroupData.js')); 

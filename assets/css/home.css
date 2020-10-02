@@ -725,6 +725,13 @@ padding-right:10px;
     position:absolute;
     margin-left:60px;
 }
+.addComment{
+    margin-left:70px;
+    color:#d4d4d4;
+}
+.addComment:hover{
+    color:#d4d4d4;
+}
 .like-button{
     width:60px;
     border:none!important;

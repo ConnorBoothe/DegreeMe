@@ -27,8 +27,7 @@ module.exports = class NotificationList {
     //userhandle == the user who is receiving the notification
     addNotification(userHandle ,name,type, img, url){
             var notif = new notificationDB({userHandle:userHandle, name:name,type:type, img:img, url:url, seen:false, date:new Date()});
-            notif.save().then(function(data){
-      })
+            return notif.save()
     }
     //update seen field to true
     seenNotification(id){

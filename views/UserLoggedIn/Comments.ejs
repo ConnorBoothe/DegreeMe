@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+    <head>
+        <title> Comments| degreeMe </title>
+        <meta charset="UTF-8">
+        <link rel="icon" href="../assets/img/favicon.png" type="image/png" />
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="../assets/css/bootstrap.min.css">        <link href="../assets/css/main1.css" rel="stylesheet">
+        <link href="../assets/css/home.css" rel="stylesheet">
+        <link href="../assets/css/CourseProfile.css" rel="stylesheet">
+        <link href="../assets/css/comments.css" rel="stylesheet">
+        <script src="../assets/jquery/dist/jquery.js"></script>
+    </head>
+        <body class="color-dark">
+            <%- include ('partials/mobileComingSoon.ejs')%>
+            <div class="homeWrap">
+                <div class="page-container">
+            <%- include ('partials/sideBar.ejs')%>
+            <%- include ('partials/horizontalHeader.ejs')%>
+            <div class="comments-wrapper">
+            <div class="comments-container">
+                <!-- (id, commenterImg, commenter, message1, date1) -->
+                <div class="comment-sub-container">
+                    <p class="userQuestion"><img class="discImg" src="<%=post.userImage%>"/><span class="userName-text"><%=post.userHandle%><a href="../user/<%=post.userHandle%>"></a></span></p>
+                    <h3 class="text-light question-Header"><%=post.caption%></h3>
+                   
+                    <h3 class="text-light response-Header commentsHeader">Comments</h3>
+                <div class="commentTabs">
+                    <%for(var x =0;x < comments.length; x++){%>
+                        <div class="comment-container">
+                            <p class="text-light" id="text-date"><%=formatDate(comments[x].date)%></p>
+                        <span>
+                            <img class="discImg" src="<%=comments[x].commenterImg%>" />
+                            <a href= "../user/<%=comments[x].commenterHandle%>"><%=comments[x].commenterHandle%><span class="text-light userName-text" ></span></a>
+                        </span>
+
+
+                        <p class="text-light comments-text"><%=comments[x].message%></p>
+                        
+
+                    </div>
+                    <%}%>
+                    <form method="POST" action="/addComment">
+                        <textarea class="commentMsg" name="message" placeholder="Write your comment here"></textarea>
+                        <input type="hidden" name="course" value=""/>
+                        <input type="hidden" name="postId" value="<%=post._id%>" />
+                        <input type="hidden" name="handle" value="<%=post.userHandle%>" />
+                        <input type="hidden" name="name" value="<%=post.userName%>" />
+                        <input type="hidden" name="img" value="<%=post.userImage%>" />
+                        <br>
+                        <input class="btn btn-primary" id="comments-button" type="submit" name="" value="Add Comment" />
+                    </form>
+                </div>          
+
+            </div>
+            </div>
+        </div>
+        </div>   
+    </div>
+    
+   
+    <script src="../assets/jquery/jquery.session/jquery.session.js"></script>
+    <script type="text/javascript" src="../assets/js/displayMyCourses.js"></script>
+    <script src="../assets/js/getNotifications.js"></script>
+    <script src="../assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../assets/js/SiteWideSearch.js"></script>
+    <script type="text/javascript" src="../assets/js/highlightCurrentMenuItem.js"></script>
+    <script src="../assets/jquery/jquery.session/jquery.session.js"></script>
+    <script type="text/javascript" src="../assets/js/Client-DateFunctions.js"></script>
+    <script type="text/javascript" src="../assets/js/commentsValidation.js"></script>
+    <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
+
+    </body>
+</html>

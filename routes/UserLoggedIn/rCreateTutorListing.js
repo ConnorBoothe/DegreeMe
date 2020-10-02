@@ -50,7 +50,7 @@ router.get('/HostASession', function (req, res) {
 router.post('/createSession', [
     check('userId').isString().trim().escape(),
     check('handle').isString().trim().escape(),
-    check('name').isString().trim().escape(),
+    check('name').isString().trim(),
     check('courseName').isString().trim().escape(),
     check('courseCode').isString().trim().escape(),
     check('grade').isString().trim().escape(),

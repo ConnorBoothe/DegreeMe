@@ -10,9 +10,8 @@ $(document).ready(function(){
 })
    $(".timeline").on("click", ".like-button", function(){
      var likeButton = $(this);
-     
        if(!$(this).hasClass("hasLiked")){
-        likeButton.prop('disabled', true)
+         likeButton.prop('disabled', true)
         payload = {
             postId: $(this).parent().parent().prev().val(), 
             handle:$(".userProfileName").text()
