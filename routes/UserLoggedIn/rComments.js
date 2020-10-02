@@ -46,16 +46,14 @@ router.use(session({
 //render the checkout page
 router.get('/post/:timelineId', function (req, res) {
     if (req.session.userId) {
-        console.log(req.session)
-        timeline.getTimelineById(req.params.timelineId)
+        timeline.getPostById(req.params.timelineId)
             .then(function (post) {
-                
-                comments.getCommentsByPostId(post[0]._id)
+                comments.getCommentsByPostId(post._id)
                 .then(function(comments){
                     if(comments){
                         res.render('UserLoggedIn/Comments', {
                             session: req.session,
-                            post: post[0],
+                            post: post,
                             comments:comments,
                             formatDate:dateFunctions.displayTimeSince
                         });
