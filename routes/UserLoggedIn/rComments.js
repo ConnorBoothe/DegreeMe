@@ -127,7 +127,7 @@ function (req, res) {
                                 ],
                                     "dynamic_template_data": {
                                         "subject": req.body.name + " commented on your post!",
-                                        "handle": req.body.handle,
+                                        "handle": req.session.handle,
                                         "postId": req.body.postId,
                                         "message":req.body.message
                                 },
