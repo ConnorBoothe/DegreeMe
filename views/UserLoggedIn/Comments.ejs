@@ -25,27 +25,27 @@
                    
                     <h3 class="text-light response-Header commentsHeader">Comments</h3>
                 <div class="commentTabs">
-                   
-                    <div class="comment-container">
-                            <p class="text-light" id="text-date"></p>
+                    <%for(var x =0;x < comments.length; x++){%>
+                        <div class="comment-container">
+                            <p class="text-light" id="text-date"><%=formatDate(comments[x].date)%></p>
                         <span>
-                            <img class="discImg" src="" />
-                            <a href= "../user/"><span class="text-light userName-text" ></span></a>
+                            <img class="discImg" src="<%=comments[x].commenterImg%>" />
+                            <a href= "../user/<%=comments[x].commenterHandle%>"><%=comments[x].commenterHandle%><span class="text-light userName-text" ></span></a>
                         </span>
 
 
-                        <p class="text-light comments-text"></p>
+                        <p class="text-light comments-text"><%=comments[x].message%></p>
                         
 
                     </div>
-                    
-                    <form method="POST" action="addComment">
-                        <textarea class="commentMsg" name="commentMessage" placeholder="Write your response"></textarea>
-                        <input type="hidden" name="commentImg" value="" />
-                        <input type="hidden" name="originalHandle" value="" />
-                        <input type="hidden" name="commentHandle" value="" />
-                        <input type="hidden" name="course" value="" />
-                        <input type="hidden" name="discId" value="" />
+                    <%}%>
+                    <form method="POST" action="/addComment">
+                        <textarea class="commentMsg" name="message" placeholder="Write your comment here"></textarea>
+                        <input type="hidden" name="course" value=""/>
+                        <input type="hidden" name="postId" value="<%=post._id%>" />
+                        <input type="hidden" name="handle" value="<%=post.userHandle%>" />
+                        <input type="hidden" name="name" value="<%=post.userName%>" />
+                        <input type="hidden" name="img" value="<%=post.userImage%>" />
                         <br>
                         <input class="btn btn-primary" id="comments-button" type="submit" name="" value="Add Comment" />
                     </form>
@@ -55,9 +55,6 @@
             </div>
         </div>
         </div>   
-            
-            
-        
     </div>
     
    
@@ -70,7 +67,7 @@
     <script type="text/javascript" src="../assets/js/highlightCurrentMenuItem.js"></script>
     <script src="../assets/jquery/jquery.session/jquery.session.js"></script>
     <script type="text/javascript" src="../assets/js/Client-DateFunctions.js"></script>
-
+    <script type="text/javascript" src="../assets/js/commentsValidation.js"></script>
     <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
 
     </body>

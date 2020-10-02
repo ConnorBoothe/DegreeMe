@@ -276,53 +276,53 @@ var job = new CronJob('0 0 0 * * *', function() {
   }
 }
 });
-        users.getAllUsers().exec((err,docs)=>{
-          for(x in docs){
-            if(docs[x].dateCreated){
-              //send a reminder to verify account if its been 24 hours or less since creation
-              //and account is still inactive
-              if(docs[x].status == "Inactive"){
-                //This is working
-                mail.headers({
-                  "content-type": "application/json",
-                  "authorization": process.env.SENDGRID_API_KEY,
-                  });
-                  mail.type("json");
-                  mail.send({
-                  "personalizations": [
-                      {
-                          "to": [{ "email": docs[x].email}],
-                          "dynamic_template_data": {
-                              "subject": "You need to activate your account",
-                              "name": docs[x].first_name + " " + docs[x].last_name,
-                              "code": docs[x].activationCode,
-                      },
-                  }
-                  ],
-                      "from": {
-                          "email": "notifications@degreeme.io",
-                          "name": "DegreeMe"
-                  },
-                      "reply_to": {
-                          "email": "noreply@degreeme.io",
-                          "name": "No Reply"
-                  },
-                      "template_id": "d-a279f28d3ff74756b820258169c78c90"
-                  });
+        // users.getAllUsers().exec((err,docs)=>{
+        //   for(x in docs){
+        //     if(docs[x].dateCreated){
+        //       //send a reminder to verify account if its been 24 hours or less since creation
+        //       //and account is still inactive
+        //       if(docs[x].status == "Inactive"){
+        //         //This is working
+        //         mail.headers({
+        //           "content-type": "application/json",
+        //           "authorization": process.env.SENDGRID_API_KEY,
+        //           });
+        //           mail.type("json");
+        //           mail.send({
+        //           "personalizations": [
+        //               {
+        //                   "to": [{ "email": docs[x].email}],
+        //                   "dynamic_template_data": {
+        //                       "subject": "You need to activate your account",
+        //                       "name": docs[x].first_name + " " + docs[x].last_name,
+        //                       "code": docs[x].activationCode,
+        //               },
+        //           }
+        //           ],
+        //               "from": {
+        //                   "email": "notifications@degreeme.io",
+        //                   "name": "DegreeMe"
+        //           },
+        //               "reply_to": {
+        //                   "email": "noreply@degreeme.io",
+        //                   "name": "No Reply"
+        //           },
+        //               "template_id": "d-a279f28d3ff74756b820258169c78c90"
+        //           });
       
-                  mail.end(function (res) {
-                    if (res.error){
-                        console.log("this is the error for activate account", res.error);
-                        console.log(res.body);
-                        // throw new Error(res.error);
-                    } else if (res.accepted) {
-                        console.log("email has sent for activate account");
-                    }
-                });
-              }
-            }
-          }
-        })
+        //           mail.end(function (res) {
+        //             if (res.error){
+        //                 console.log("this is the error for activate account", res.error);
+        //                 console.log(res.body);
+        //                 // throw new Error(res.error);
+        //             } else if (res.accepted) {
+        //                 console.log("email has sent for activate account");
+        //             }
+        //         });
+        //       }
+        //     }
+        //   }
+        // })
 
 }, null, true, 'America/New_York');
 job.start();

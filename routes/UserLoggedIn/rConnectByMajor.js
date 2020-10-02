@@ -174,9 +174,9 @@ router.post("/follow",
           console.log(resp.body);
           });
         });
-          res.status(202).json({
-            action: "followed"
-          }).end();
+        res.status(202).json({
+          action: "followed"
+        }).end();
         })
         .catch(function () {
           console.log("ERROR")

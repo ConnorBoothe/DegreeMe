@@ -587,6 +587,9 @@ module.exports = class UserDB {
     getUserEmailsByHandle(handleArray){
         var UserDB = mongoose.model('UserDB',userDBSchema);
         return UserDB.find({handle:{$in: handleArray}}, "email");
-
+    }
+    getEmailByHandle(handle){
+        var UserDB = mongoose.model('UserDB',userDBSchema);
+        return UserDB.find({handle: handle}, "email");
     }
 }
