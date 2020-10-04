@@ -86,8 +86,8 @@ router.get('/home', function (req, res) {
             } else {
                 var timeLineArray = [];
                 for (var x = 0; x < docs1.length; x++) {
-                    console.log(docs1);
                     var hasLiked = tl.likedBoolean(req.session.handle, docs1[x].likers);
+                  
                     //if bid is not open, don't display
                     if (docs1[x].type === "Help Request") {
                         if (docs1[x].BidOpen) {
@@ -107,9 +107,10 @@ router.get('/home', function (req, res) {
                             docs1[x].name, docs1[x].course, docs1[x].professor, docs1[x].url, hasLiked));
                     }
                     if (docs1[x].type == "Status Update") {
+
                         timeLineArray.push(new TimelinePost(docs1[x]._id, docs1[x].sendToHandle, "Status Update", docs1[x].userHandle, docs1[x].userName,
                             docs1[x].userImage, docs1[x].caption, docs1[x].likes, "", dateFunctions.displayDate(new Date(docs1[x].date)),
-                            "", "", "", "", ""));
+                            "", "", "", "", hasLiked));
                     }
                 }
                 users.getUserByEmail(req.session.email).exec((err, docs3) => {

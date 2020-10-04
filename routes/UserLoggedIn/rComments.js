@@ -105,8 +105,7 @@ function (req, res) {
                 })
                 .then(function(){
                     //send email
-                    console.log("sending email")
-                    console.log(req.body.postId)
+
                     users.getEmailByHandle(req.body.handle)
                     
                     .then(function(data1){
