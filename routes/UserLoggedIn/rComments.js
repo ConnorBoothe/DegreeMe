@@ -77,10 +77,8 @@ router.get('/post/:timelineId', function (req, res) {
     }
     else{
         res.redirect("/home");
-    }
-                
+    }            
 });
-
 router.post('/addComment', 
 check('postId').isString().trim(),
 check('message').isString().trim(),
@@ -95,6 +93,10 @@ function (req, res) {
         comments.addComment(req.body.postId, req.session.handle, req.session.img, req.body.message)
         .then(function(data){
             //add notification
+            timeline.incrementCommentCount(req.body.postId)
+            .then(function(){
+
+           
             notifications.addNotification(req.body.handle ,req.body.name,"commented on your post", req.body.img, "/post/"+req.body.postId)
             .then(function(){
                 console.log("NOTIF added")
@@ -155,6 +157,7 @@ function (req, res) {
                         })
                     })
                 })
+            })
             })
             .catch(function(){
                 res.redirect("/post/"+req.body.postId)     

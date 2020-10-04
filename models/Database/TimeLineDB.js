@@ -46,6 +46,7 @@ var timelineDBSchema = new Schema({
     name:{type:String},
     postImage: {type:String},
     comments: [commentSchema],
+    commentCount: {type:Number},
     StudyGroupPost: [StudyGroupPostSchema],
     meetupPost: [meetupSchema],
     price:{type:Number}, 
@@ -133,23 +134,23 @@ module.exports = class Timeline {
             if(type === "Study Group"){
                 var timeline = new timelineDB({sendToHandle:sendToHandle, userHandle:userHandle, userName:userName,type:type,
                     userImage:userImage, caption:caption, postImage:postImage, likes:0, date:date, name:name,
-                    StudyGroupPost:[{professor:professor,  description:description, course:course, groupId: groupId}]});
+                    StudyGroupPost:[{professor:professor,  description:description, course:course, groupId: groupId}], commentCount:0});
             }
         } else {
             if(type === "Study Group"){
             var timeline = new timelineDB({sendToHandle:sendToHandle, userHandle:userHandle, userName:userName, type:type,
                 userImage:userImage, caption:caption, likes:0, date:date, name:name,
-                StudyGroupPost:[{professor:professor,  description:description, course:course, groupId: groupId}]});
+                StudyGroupPost:[{professor:professor,  description:description, course:course, groupId: groupId}], commentCount:0});
             }
             else if(type === "Help Request"){
                 var timeline = new timelineDB({sendToHandle:sendToHandle, userHandle:userHandle, userName:userName, type:type,
                     userImage:userImage, caption:caption, likes:0, date:date, name:name, price:price, course: taggedCourse,
-                    anonymous:anonymous,BidOpen:true
+                    anonymous:anonymous,BidOpen:true, commentCount:0
                 });
             }
             else if (type === "Tutor Listing" ){
                 var timeline = new timelineDB({sendToHandle:sendToHandle, userHandle:userHandle, userName:userName, type:type,
-                    userImage:userImage, caption:caption, likes:0, date:date, name:name, price:price, course: taggedCourse,
+                    userImage:userImage, caption:caption, likes:0, date:date, name:name, price:price, course: taggedCourse, commentCount:0
                 });
             }
         }
@@ -160,7 +161,7 @@ module.exports = class Timeline {
         var timelineDB = mongoose.model('TimelineDB',timelineDBSchema);
         if (type === "Tutor Listing" ){
             var timeline = new timelineDB({sendToHandle:sendToHandle, userHandle:userHandle, userName:userName, type:type,
-                userImage:userImage, caption:caption, likes:0, date:date, name:name, price:price, course: taggedCourse, url:url
+                userImage:userImage, caption:caption, likes:0, date:date, name:name, price:price, course: taggedCourse, url:url, commentCount:0
             });
         }
         return timeline.save();
@@ -169,16 +170,26 @@ module.exports = class Timeline {
         var timelineDB = mongoose.model('TimelineDB',timelineDBSchema);
       
             var timeline = new timelineDB({sendToHandle:sendToHandle, userHandle:userHandle, userName:userName, type:type,
-                userImage:userImage, caption:caption, likes:0, date:date, name:name, professor:professor, course: taggedCourse, url:url
+                userImage:userImage, caption:caption, likes:0, date:date, name:name, professor:professor, course: taggedCourse, url:url, commentCount:0
             });
         return timeline.save();
     }
     addStatusPost(sendToHandle,userHandle, userName, type ,userImage,caption,date){
         var timelineDB = mongoose.model('TimelineDB',timelineDBSchema);
             var timeline = new timelineDB({sendToHandle:sendToHandle, userHandle:userHandle, userName:userName, type:type,
-                userImage:userImage, caption:caption, likes:0, date:date
+                userImage:userImage, caption:caption, likes:0, date:date, commentCount:0
             });
         return timeline.save();
+    }
+    incrementCommentCount(postId){
+        var timelineDB = mongoose.model('TimelineDB',timelineDBSchema);
+        return timelineDB.findOne({
+            _id: postId
+          }).updateOne({
+            $inc: {
+              commentCount: +1
+            }
+          });
     }
     //increment likes
     incrementLikes(postId){
