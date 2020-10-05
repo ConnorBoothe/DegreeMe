@@ -11,7 +11,7 @@ router.get('/API/myListings', function(req, res){
     if(req.session.email){
         listings.getListingsByUserID(req.session.userId).exec((err,docs)=>{
             if(err){
-                res.send("An error occurred.")
+                res.json("An error occurred.")
             }
             var currListings = [];
             for(x in docs){
@@ -19,11 +19,11 @@ router.get('/API/myListings', function(req, res){
                     currListings.push(docs[x])
                 }
             }
-            res.send(currListings)
+            res.json(currListings)
         });
     }
     else{
-        res.send("User not logged in");
+        res.json("User not logged in");
     } 
 });
 module.exports = router;

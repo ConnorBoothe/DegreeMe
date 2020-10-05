@@ -15,14 +15,31 @@
     display:inline-block;
     position:relative;
     top:0!important;
+    margin-top:40px;
+    padding-top:20px;
 }
 .homeBody h2 {
     color: white;
-    
+}
+.home-ul li{
+    display:block!important;
+    color:white;
+    list-style-type: none;
+}
+.uncc{
+    color:#046A38!important
+}
+.index-details{
+    color:white;
+    text-align:left;
+    margin-top:0;
+    margin-bottom:5px;
+    font-size:17px;
+    font-family: 'Open Sans', sans-serif;
 }
 .app-description{
     font-family: 'Open Sans', sans-serif;
-    font-size:18px;
+    font-size:20px;
     color:#d4d4d4;
     text-align:left;
     width:600px;
@@ -35,7 +52,7 @@
     width:50%!important;
 }
 .loginLi{
-    margin-top:-30px;
+    margin-top:-10px;
 }
 .index-header{
     color: white;
@@ -78,10 +95,11 @@
     margin-right:auto;
     border-radius:30px;
     font-size:18px;
+    margin-top:30px;
 }
 /* login form */
 .formContainer {
-    padding-top:50px!important;
+    padding-top:0px!important;
     right:0;
     width: 300px;
 }
@@ -113,7 +131,7 @@
     
 }
 .logo{
-    width:130px;
+    width:140px;
     margin-right:50px;
 }
 .mobileHomeImg{
@@ -125,8 +143,17 @@
     .homeTitle{
         display:none!important;
     }
+    .description-container{
+        width:80%;
+        text-align:center;
+        margin-left:auto;
+        margin-right:auto;
+    }
     .index-container{
         display:none!important;
+    }
+    .index-details{
+        width:100%;
     }
 .login-nav{
     border-radius:20px!important;
@@ -190,7 +217,7 @@
 }
 .app-description{
     font-size:16px;
-    text-align:left;
+    text-align:center;
     width:100%;
     padding-left:40px;
     padding-right:40px;

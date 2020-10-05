@@ -9,7 +9,7 @@ const {
 
 router.get('/API/getAllUsers', function(req, res){
     userDB.getAllUsers().exec((err,docs2)=>{
-        res.send({Users:docs2});
+        res.json({Users:docs2});
 })
 });
 module.exports = router;

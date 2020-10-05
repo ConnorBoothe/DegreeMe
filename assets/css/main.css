@@ -21,6 +21,7 @@ input:-webkit-autofill:active  {
 input:-webkit-autofill {
     
 }
+
 #password1:-webkit-autofill, #email1:-webkit-autofill {
     -webkit-text-fill-color:white !important;
     box-shadow:200px 200px 100px #242526 inset!important; 

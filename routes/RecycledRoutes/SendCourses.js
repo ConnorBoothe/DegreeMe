@@ -8,13 +8,13 @@ const CoursesDB = require('../../models/Database/UNCC_CoursesDB');
 var courses = new CoursesDB();
 
 //send list of all users to the browser
-router.get('/API/Courses', function(req, res){
+router.get('/API/courses', function(req, res){
 
         courses.getAllCourses().exec((err,docs)=>{
             if(err){
-                res.send("An error occurred.")
+                res.json("An error occurred.")
             }
-            res.send(docs);
+            res.json(docs);
         });
 });
 module.exports = router;

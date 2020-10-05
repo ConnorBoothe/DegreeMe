@@ -14,11 +14,11 @@ router.get('/MyCourses', function(req, res){
                 
                 courses.push(docs[0].myCourses[x]);
             }
-            res.send(courses);
+            res.json(courses);
         });
     }
     else{
-        res.send("User Not Logged In");
+        res.json("User Not Logged In");
     }
        
     

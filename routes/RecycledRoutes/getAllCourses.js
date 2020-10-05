@@ -9,7 +9,7 @@ var courseDB = new CourseDB();
 router.get('/API/getAllCourses', function(req, res){
     //add discussion board once DB created
     courseDB.getAllCourses().exec((err,docs1)=>{
-        res.send({Courses: docs1});
+        res.json({Courses: docs1});
     })       
 });
 module.exports = router;

@@ -1,5 +1,7 @@
 require('dotenv').config();
 const mongoose = require("mongoose");
+const timelineDB = require("./TimeLineDB")
+var timeline = new timelineDB();
 mongoose.Promise = global.Promise;
 mongoose.connect(process.env.MONGO_URL|| 'mongodb://localhost:27017/CollegeTutor', { useNewUrlParser: true,useUnifiedTopology: true },function(err){
     
@@ -21,6 +23,10 @@ module.exports = class UserProfile {
     getCommentsByPostId(postId){
         var commentsDB = mongoose.model('CommentsDB',commentSchema);
         return commentsDB.find({postId:postId});
+    }
+    getCommentCount(postId){
+        var commentsDB = mongoose.model('CommentsDB',commentSchema);
+        return commentsDB.find({postId:postId},'_id');
     }
     addComment(postId, handle, img, message){
         var commentsDB = mongoose.model('CommentsDB',commentSchema);

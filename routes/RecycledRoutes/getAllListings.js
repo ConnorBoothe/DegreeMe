@@ -10,7 +10,7 @@ var listings = new ListingsDB();
 //send list of study groups, courses,users, and tutor listings
 router.get('/API/getAllListings', function(req, res){
     listings.getAllListings().exec((err, docs3)=>{
-        res.send({Listings: docs3});
+        res.json({Listings: docs3});
     })
 });
 module.exports = router;

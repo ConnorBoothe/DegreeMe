@@ -3,7 +3,7 @@
 
 module.exports = class TimeLine {
 
-    constructor(id, sendToHandle, type, userHandle, userName, userImage, caption, likes, comments,date, name, PostDetails, course, bids, anonymous, hasliked ) {
+    constructor(id, sendToHandle, type, userHandle, userName, userImage, caption, likes, comments,date, name, PostDetails, course, bids, anonymous, hasliked, commentCount ) {
       this.id = id;
       this.sendToHandle = sendToHandle;
       this.type = type;
@@ -20,6 +20,7 @@ module.exports = class TimeLine {
       this.course = course;
       this.anonymous = anonymous;
       this.bids = bids;
+      this.commentCount = commentCount;
     }
     //compute average tutor rating and return it along with review count
 
@@ -53,8 +54,9 @@ module.exports = class TimeLine {
     getComments(){
       return this.comments;
     }
-    getName(){
-      return this.comments;
+   
+    getCommentCount(){
+      return this.commentCount;
     }
     likedBoolean(handle, likeArray){
       if(likeArray.length > 0){

@@ -26,6 +26,8 @@ const MeetupsDB = require("../../models/Database/MeetupsDB");
 var TimeLine = require('../../models/classes/TimeLine');
 var TimelinePost = require('../../models/classes/TimelinePost');
 var DateFunctions = require('../../models/classes/DateFunctions');
+var CommentsDB = require('../../models/Database/CommentsDB');
+
 var unirest = require('unirest');
 //instantiate classes
 var tl = new TimeLine();
@@ -40,6 +42,7 @@ var bids = new BidsDB();
 var groups = new Groups();
 var acceptedBids = new AcceptedBids();
 var meetups = new MeetupsDB();
+var comments = new CommentsDB();
 var mail = unirest("POST", "https://api.sendgrid.com/v3/mail/send");
 //register the session and use bodyParser
 
@@ -80,39 +83,47 @@ function sortTutoringSessions(tutorSeshArray) {
 //render the home page
 router.get('/home', function (req, res) {
     if (req.session.userId) {
-       timeline.getUserTimeline(req.session.following, 0, req).exec((err, docs1) => {
-            if (err) {
-                console.log(err);
-            } else {
+       timeline.getUserTimeline(req.session.following, 0, req)
+       .then(function(docs1){
                 var timeLineArray = [];
+                new Promise((resolve, reject) => {
                 for (var x = 0; x < docs1.length; x++) {
-                    var hasLiked = tl.likedBoolean(req.session.handle, docs1[x].likers);
-                  
+
+              
+                    // .then(function(data){
+                        var hasLiked = tl.likedBoolean(req.session.handle, docs1[x].likers);
+                        // console.log(data.length)
                     //if bid is not open, don't display
                     if (docs1[x].type === "Help Request") {
                         if (docs1[x].BidOpen) {
                             timeLineArray.push(new TimeLine(docs1[x]._id, docs1[x].sendToHandle, docs1[x].type, docs1[x].userHandle, docs1[x].userName,
                                 docs1[x].userImage, docs1[x].caption, docs1[x].likes, docs1[x].comments, dateFunctions.displayDate(new Date(docs1[x].date)),
-                                docs1[x].name, docs1[x].price, docs1[x].course, docs1[x].bids, docs1[x].anonymous, hasLiked));
+                                docs1[x].name, docs1[x].price, docs1[x].course, docs1[x].bids, docs1[x].anonymous, hasLiked, docs1[x].commentCount));
                         }
                     }
                     if (docs1[x].type == "Tutor Listing") {
                         timeLineArray.push(new TimelinePost(docs1[x]._id, docs1[x].sendToHandle, docs1[x].type, docs1[x].userHandle, docs1[x].userName,
                             docs1[x].userImage, docs1[x].caption, docs1[x].likes, docs1[x].comments, dateFunctions.displayDate(new Date(docs1[x].date)),
-                            docs1[x].name, docs1[x].course, docs1[x].price, docs1[x].url, hasLiked));
+                            docs1[x].name, docs1[x].course, docs1[x].price, docs1[x].url, hasLiked, docs1[x].commentCount));
                     }
                     if (docs1[x].type == "Study Group") {
                         timeLineArray.push(new TimelinePost(docs1[x]._id, docs1[x].sendToHandle, "Study Group", docs1[x].userHandle, docs1[x].userName,
                             docs1[x].userImage, docs1[x].caption, docs1[x].likes, docs1[x].comments, dateFunctions.displayDate(new Date(docs1[x].date)),
-                            docs1[x].name, docs1[x].course, docs1[x].professor, docs1[x].url, hasLiked));
+                            docs1[x].name, docs1[x].course, docs1[x].professor, docs1[x].url, hasLiked,  docs1[x].commentCount));
                     }
                     if (docs1[x].type == "Status Update") {
 
                         timeLineArray.push(new TimelinePost(docs1[x]._id, docs1[x].sendToHandle, "Status Update", docs1[x].userHandle, docs1[x].userName,
                             docs1[x].userImage, docs1[x].caption, docs1[x].likes, "", dateFunctions.displayDate(new Date(docs1[x].date)),
-                            "", "", "", "", hasLiked));
+                            "", "", "", "",  hasLiked, docs1[x].commentCount));
                     }
                 }
+                if(x === docs1.length){
+                    resolve(true);
+                }
+                
+            })
+            .then(function(){
                 users.getUserByEmail(req.session.email).exec((err, docs3) => {
                     //sort current sessions and past sessions
                     var currSessions = [];
@@ -162,7 +173,7 @@ router.get('/home', function (req, res) {
 
                 })
 
-            }
+            })
         })
     } else {
         res.redirect('/login?message=Session%20Ended')
@@ -183,7 +194,7 @@ router.post("/zeroNotifications",
                 }).end();
             })
             .catch(function (err) {
-                console.log(err)
+                console.log(err);
             })
     })
 //post route that handles AJAX POST call to to change notification to seen

@@ -11,7 +11,7 @@ var StudyGroups = new StudyGroupsDB();
 router.get('/API/getAllGroups', function(req, res){
     //add discussion board once DB created
     StudyGroups.getAllStudyGroups().exec((err,docs)=>{
-         res.send({StudyGroups: docs});
+         res.json({StudyGroups: docs});
     })
     })
 module.exports = router;

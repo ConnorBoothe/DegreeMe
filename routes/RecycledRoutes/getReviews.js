@@ -11,13 +11,13 @@ router.get('/API/reviews', function(req, res){
     if(req.session.email){
         reviews.getReviewsByHandle(req.session.handle).exec((err,docs)=>{
             if(err){
-                res.send("An error occurred.")
+                res.json("An error occurred.")
             }
-            res.send(docs);
+            res.json(docs);
         });
     }
     else{
-        res.send("User not logged in");
+        res.json("User not logged in");
     } 
 });
 module.exports = router;

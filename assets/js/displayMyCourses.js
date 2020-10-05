@@ -244,7 +244,6 @@ $(document).ready(function(){
     })
 
     $(".tagCourse").on("keyup", function(){
-        alert("YO")
         $(".tagCourse-container").show();
         payload = {
             searchValue:$(".tagCourse").val(),

@@ -11,13 +11,13 @@ router.get('/API/myGroups', function(req, res){
     if(req.session.email){
         users.getUserByEmail(req.session.email).exec((err, user) => {
             if(err){
-                res.send("An error occurred.")
+                res.json("An error occurred.")
             }
-            res.send(user[0].StudyGroups)
+            res.json(user[0].StudyGroups)
         });
     }
     else{
-        res.send("User not logged in");
+        res.json("User not logged in");
     } 
 });
 module.exports = router;
