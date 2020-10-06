@@ -60,7 +60,7 @@ function formatBid(post, stripeId){
                     else if(post.commentCount === 1){
                         bid += '<a href="/post/'+post._id+'" class="addComment">'+post.commentCount+' Comment</a>';
                     }else{
-                        bid += '<a href="/post/'+post._id+'" class="addComment">Add Comment</a>';Y
+                        bid += '<a href="/post/'+post._id+'" class="addComment">Add Comment</a>';
                     }
                     }else{
                     bid+= '<button class="like-button like-help hasLiked">'+

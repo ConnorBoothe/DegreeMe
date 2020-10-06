@@ -1160,6 +1160,9 @@ input[name="searchType"]{
     font-size:14px;
     display:none;
 }
+/* .timeline-container-status{
+    width:80%;
+} */
 .terms{
     padding-right:25px!important;
 }
@@ -1171,4 +1174,152 @@ input[name="searchType"]{
 }
 .anonTxt{
     display:none;
+}
+.mobileLogo{
+    display:none;
+}
+.mobileMenu{
+    display:none;
+}
+.slider-container-header{
+    width:60px;
+    /* position:relative; */
+    margin-left:60px!important;
+    z-index:2;
+  }
+  
+  /* desktop only */
+  @media only screen and (min-width: 1000px) {
+    .searchLi, .slider-container-header{
+        display:none!important;
+    }
+  }
+@media only screen and (max-width: 1000px) {
+    #horizontalHeader{
+        background-color:#18191a!important;
+        position:relative!important;
+        border-bottom: 1px solid #242526;
+        height:60px!important;
+       
+    }
+    .timeline-title{
+        display:none;
+    }
+    .message{
+        background-color:#18191a!important;
+    }
+
+    .search-container{
+        position:absolute;
+        margin-right:30px;
+        margin-top:3px;
+
+    }
+    .searchLi{
+        margin-top:-30px!important;
+        height:1.5em;
+        margin-right:30px!important;
+    }
+    .mobileMenu{
+        display:block;
+        width:100%;
+        background-color:#242526;
+        color:#d4d4d4;
+        position:fixed;
+        bottom:0;
+        text-align:center;
+        padding-top:5px;
+        padding-bottom:5px;
+        
+    }
+    .home-wrapper{
+        padding-top:10px!important;
+    }
+    .mobileMenu ul li{
+        display:inline-block;
+        font-size:12px;
+        font-family: "Open sans","sans-serif";
+        padding-left:4%;
+        padding-right:4%;
+        cursor:pointer;
+    }
+    .mobileMenu ul{
+        width:100%;
+        margin-bottom:0!important;
+    }
+    .timeline{
+        width:80%;
+        height:100%;
+        margin-left:15%;
+        overflow-y:auto;
+    }
+    .desktopLogo{
+        display:none!important;
+    }
+    .mobileLogo{
+        display:block;
+        width:25px;
+        margin-top:-3px;
+    }
+    .headerLinkPageTitle{
+        width:10px!important;
+    }
+    .headerContainer{
+        right:0;
+        top:0;
+        width:400px!important;
+        margin-right:0px!important;
+        margin-top:5px;
+        z-index:2;
+        
+    }
+    .active{
+        position:absolute;
+        font-size:13px;
+        text-align:center;
+        width:69px;
+        margin-top:-5px;
+    }
+
+    .headerContainer li{
+        display:inline-block;
+        margin-right:20px!important;
+        color:#d4d4d4!important;
+        margin-left:20px;
+        padding-right:0!important;
+        
+     
+     }
+
+     #showNotifications{
+         width:100%!important;
+         height:84.5vh;
+         padding-left:10%;
+         position:fixed;
+         
+     }
+     #recentNotifications {
+         padding-left:5%!important;
+     }
+     .startConversation-button{
+         padding-left:0!important;
+     }
+    .logo{
+        margin-right:0;
+    }
+    .bell{
+        margin-right:10px!important;
+    }
+    .input-container-main, .homeSideBar, .img, .bell, .message, .headerLinkTitle{
+        display:none!important;
+    }
+    .slider-container-header{
+        width:60px;
+        position:relative;
+        padding:0!important;
+        z-index:2;
+      }
+.desktop-li{
+    display:none;
+}
 }

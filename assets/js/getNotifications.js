@@ -69,7 +69,7 @@ $(document).ready(function(){
     })
     
     //update notifications on click
-$(".bell").on("click", function(){
+$(".mobile-notifications").on("click", function(){
     //if menu is displaying account items, or if it is hidden
     if($("#showNotifications").children().eq(0).text() !== "Notifications" || $("#showNotifications").css("display") == "none"){
         $("#recentNotifications").text("Notifications");
@@ -124,6 +124,108 @@ $(".bell").on("click", function(){
     }
 })
 
+$(".mobile-message").on("click", function(){
+    if($("#recentNotifications").text() !== "Messages" || $("#showNotifications").css("display") == "none"){
+        $("#showNotifications").show();
+        var messageTitle = 'Messages<span  type="button" class="startConversation-button" data-toggle="modal" data-target="#exampleModal1"><h4 class="startConversation" >'+
+        '<a class="memberImage" data-toggle="tooltip" data-placement="top" title="New Message">'+
+        '<span class="addCourses">'+
+            '<svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-plus" fill="white" xmlns="http://www.w3.org/2000/svg">'+
+                '<path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"/>'+
+                '<path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"/>'+
+            '</svg>'+
+        '</span>'+
+        '</a>'+
+        '</span>';
+
+        $("#recentNotifications").html(messageTitle);
+        $.ajax({
+            url: '/API/Threads' ,
+            method: 'GET',
+            error:function(err,str){
+                alert(err)
+            }
+            }).done(function(res) {  
+                var threads =  "<form method='POST' action='/seenMsg' class='seenMsg'>" +
+                '<div class=" "></div>';
+                for(var x=res.length-1; x>=0; x--){
+                    if(res[x].unreadCount === 0){
+                        threads +=  '<a href=../messages?messageId='+res[x].threadId+'><li class=" notifications"><div><div class="blue-dot"></div> <img class="notifImg" src="'+res[x].hostImg+'"/><p class="notif">'+res[x].subject+'</p><p class="text-secondary">Created '+displayTimeSince(res[x].timestamp)+'</p></div></a></li>';
+                    }
+                    else{
+                        threads +=  
+                        '<li class=" notifications"><div>'+
+                        "<input type= 'hidden' name='handle' value='"+$(".userProfileName").text()+"'/>"+
+                        "<input type= 'hidden' name='threadId' value='"+res[x].threadId+"'/>"+
+                       
+                         '<button class="sawMessage"><div class="blue-dot bg-primary"></div> <img class="notifImg" src="'+res[x].hostImg+'"/><p class="notif">'+res[x].subject+'</p>'+ "<p class='text-primary'>"+res[x].unreadCount+" unread messages</p>"+'</div></button></li>';
+                    }
+                }
+                threads+= "</form>";
+                $("#showNotifications ul").html(threads)
+        });
+    }
+    else{
+        $("#showNotifications").hide();
+        $(".blocker").hide();
+    }
+})
+
+    //update notifications on click
+    $(".bell").on("click", function(){
+        //if menu is displaying account items, or if it is hidden
+        if($("#showNotifications").children().eq(0).text() !== "Notifications" || $("#showNotifications").css("display") == "none"){
+            $("#recentNotifications").text("Notifications");
+            $('#showNotifications').show();
+            $.ajax({
+                url: '/API/Notifications' ,
+                method: 'GET',
+                error:function(err,str){
+                    alert(err)
+                }
+                }).done(function(res) {    
+                    var notifications = "";
+                    for(var x=0; x < res.length; x++){
+    
+                        if(res[x].seen === true){
+                            if(res[x].type.includes("Congrats!")){
+                                notifications +=  '<a class="notifLink" href='+res[x].url+'><li class=" notifications"><img class="notifImg" src="'+res[x].img+'"/><p class="notif">'+res[x].type+ '</p><div><p class="dateTxt1 text-secondary">'+displayTimeSince(res[x].date)+'</p></div></li></a>';
+                            }
+                            else{
+                                notifications += "<form method='POST' action='/seenNotif' class='seenNotif'>"+'<input type="hidden" name="url" value="'+res[x].url+'"/>'+
+                                '<input type="hidden" name="notifId" value="'+res[x]._id+'"/>'+
+                                 '<button class=" notifLink"><li class=" notifications"><img class="notifImg" src="'+res[x].img+'"/><p class="notif">'+res[x].name+ ' '+res[x].type+ '</p><p class="dateTxt1 text-secondary">'+displayTimeSince(res[x].date)+'</p></li></button></form>';
+                                                    }
+                        }
+                        else{
+                            if(res[x].type.includes("Congrats!")){
+                                notifications += "<form method='POST' action='/seenNotif' class='seenNotif'>"+'<input type="hidden" name="url" value="'+res[x].url+'"/>'+
+                                 '<input type="hidden" name="notifId" value="'+res[x]._id+'"/>'+
+                                '<button class=" notifLink"><div class="blue-dot bg-primary"></div><li class=" notifications"><img class="notifImg" src="'+res[x].img+'"/><p class="notif">'+res[x].type+ '</p><p class="dateTxt1 text-primary">'+displayTimeSince(res[x].date)+'</p></li></button></form>';
+                            }
+                            else{
+                                notifications += "<form method='POST' action='/seenNotif' class='seenNotif'>"+'<input type="hidden" name="url" value="'+res[x].url+'"/>'+
+                                '<input type="hidden" name="notifId" value="'+res[x]._id+'"/>'+
+                                 '<button class=" notifLink"><div  class=" blue-dot bg-primary"></div><li class=" notifications"><img class="notifImg" src="'+res[x].img+'"/><p class="notif">'+res[x].name+ ' '+res[x].type+ '</p><p class="dateTxt1 text-primary">'+displayTimeSince(res[x].date)+'</p></li></button></form>';
+                            
+                            }
+                        }
+                    }
+                    if(notifications != ""){
+                        $("#showNotifications ul").html(notifications)
+                    }
+                    else{
+                        $("#showNotifications ul").html("<p class='emptyNotifications'>Notifications will display here.</p>")
+                    }
+                    
+            });
+        }
+         //hide menu on second click of same item
+         else if( $("#recentNotifications").text() == "Notifications" ){
+            $('#showNotifications').hide();
+            $(".blocker").hide();
+        }
+    })
 //mark notification as seen when clicked
 $("#showNotifications").on("submit",".seenNotif", function(e){
     e.preventDefault();

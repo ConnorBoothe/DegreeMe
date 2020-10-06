@@ -1,6 +1,9 @@
 @media only screen and (max-width: 1000px) {
-    .homeContainer, .homeWrap {
-      display:none!important;
+    #userHeaderContainer{
+        display:none;
+    }
+    .home-wrapper{
+        margin-left:0!important;
     }
     .mobileComingSoon{
         display:block!important;
@@ -1409,44 +1412,50 @@ Menu css
     input[type=range]::-webkit-slider-thumb {
         -webkit-appearance: none;
        
-        height: 30px;
-        width: 30px;
-        border-radius: 20px;
-        margin-top:1px;
+        height: 25px;
+        width:25px;
+        border-radius: 25px;
+        margin-top:3px;
+        margin-right:6px!important;
         background: white;
         cursor: pointer;
          /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
-        box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d; /* Add cool effects to your sliders! */
+         padding-top:15px!important;
       }
       
       /* All the same stuff for Firefox */
       input[type=range]::-moz-range-thumb {
-        box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-        border: 1px solid #000000;
+        box-shadow: 3px 3px 3px #000000, 0px 0px 1px #0d0d0d;
+        border: 2px solid #000000;
+        padding-top:5px!important;
         height: 36px;
         width: 16px;
-        border-radius: 50px;
+        border-radius: 30px;
         background: black;
         cursor: pointer;
+        
       }
       
       /* All the same stuff for IE */
       input[type=range]::-ms-thumb {
-        box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-        border: 1px solid #000000;
-        height: 60px!important;
+        box-shadow: 3px 3px 3px #000000, 0px 0px 1px #0d0d0d;
+        border: 2px solid #000000;
+        height: 30px!important;
         width: 16px;
+        padding-top:5px!important;
         border-radius: 50px;
         background: #d3d3d3;
         cursor: pointer;
       }
       input[type=range]::-webkit-slider-runnable-track {
        
-        height: 32px;
+        height: 31px;
         cursor: pointer;
         width:200px!important;
         background: #3f3f3f;
         border-radius: 50px;
+        padding-left:3px;
+        padding-right:3px;
 
       }
       
@@ -3007,13 +3016,14 @@ display:inline-block!important      }
     border-radius:20px;
     font-size:16px!important;
     padding-bottom:none!important;
-    margin-top:5px!important;
+    margin-top:-35px!important;
     height:40px;
     background-color:none;
     color:white!important;
-    margin-top:-7px!important;
+    margin-top:9px!important;
     position:absolute;
     z-index:3;
+    top:0;
     
   }
   .accountIcon{
@@ -3022,7 +3032,7 @@ display:inline-block!important      }
   }
   .headerLinkPageTitle{
       color:#d4d4d4;
-      float:left;
+      /* float:left; */
       margin-right:20px;
       font-family: 'Open Sans', sans-serif;
   }
