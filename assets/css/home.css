@@ -1198,6 +1198,9 @@ input[name="searchType"]{
     }
   }
 @media only screen and (max-width: 1000px) {
+    .mobileUserImg{
+        padding-top:10px;
+    }
     #horizontalHeader{
         background-color:#18191a!important;
         position:relative!important;
@@ -1242,23 +1245,32 @@ input[name="searchType"]{
     .home-wrapper{
         padding-top:10px!important;
     }
+    .requestHelp{
+        margin-left:50px;
+    }
     .mobileMenu ul li{
         display:inline-block;
         font-size:12px;
         font-family: "Open sans","sans-serif";
-        padding-left:4%;
-        padding-right:4%;
         cursor:pointer;
+        width:23%;
     }
     .mobileMenu ul{
         width:100%;
         margin-bottom:0!important;
         padding-bottom:10px;
     }
+    .timeline-container-status, .timeline-container-helprequest{
+        margin-left:8px;
+        margin-right:8px;
+    }
+    /* .tl-main-img{
+        display:none;
+    } */
     .timeline{
-        width:80%;
+        width:100%;
         height:100%;
-        margin-left:15%;
+        margin-left:0px;
         overflow-y:auto;
     }
     .desktopLogo{
@@ -1352,7 +1364,8 @@ input[name="searchType"]{
         display:none!important;
     }
     .userProfileImg{
-        width:47px!important;
+        width:40px!important;
+        padding-top:10px;
     }
    .userImgLi{
        display:none!important;
