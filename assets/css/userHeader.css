@@ -975,7 +975,7 @@ header{
     margin-top:20px!important;
 }
 .userProfileImg{
-    width:25px!important;
+    width:25px;
     padding-top:2px;
     float:left;
 }

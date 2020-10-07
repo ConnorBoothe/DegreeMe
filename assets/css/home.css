@@ -1190,15 +1190,17 @@ input[name="searchType"]{
   
   /* desktop only */
   @media only screen and (min-width: 1000px) {
-    .searchLi, .slider-container-header{
+    .searchLi, .slider-container-header, .mobileUserImg, .userHeader-mobile{
         display:none!important;
+    }
+    .userImgLi{
+        display:inline-block;
     }
   }
 @media only screen and (max-width: 1000px) {
     #horizontalHeader{
         background-color:#18191a!important;
         position:relative!important;
-        border-bottom: 1px solid #242526;
         height:60px!important;
        
     }
@@ -1223,13 +1225,18 @@ input[name="searchType"]{
     .mobileMenu{
         display:block;
         width:100%;
-        background-color:#242526;
+        background-color:#18191a;
         color:#d4d4d4;
         position:fixed;
         bottom:0;
         text-align:center;
         padding-top:5px;
-        padding-bottom:5px;
+        padding-bottom:5px;border-top: 1px solid #202020;
+
+        -webkit-box-shadow: 0px 1px 1px rgba(50, 50, 50, 0.75);
+        -moz-box-shadow:    0px 1px 1px rgba(50, 50, 50, 0.75);
+        box-shadow:         0px 1px 1px rgba(50, 50, 50, 0.75);
+
         
     }
     .home-wrapper{
@@ -1246,6 +1253,7 @@ input[name="searchType"]{
     .mobileMenu ul{
         width:100%;
         margin-bottom:0!important;
+        padding-bottom:10px;
     }
     .timeline{
         width:80%;
@@ -1256,13 +1264,36 @@ input[name="searchType"]{
     .desktopLogo{
         display:none!important;
     }
-    .mobileLogo{
-        display:block;
-        width:25px;
-        margin-top:-3px;
+    .mobile-logo-container{
+        position:absolute;
+        width:100%!important;
+        text-align:center!important;
     }
+    .mobile-logo-wrapper{
+        margin-left:auto;
+        margin-right:auto;
+        display:inline-block;
+    }
+    .mobileLogo{
+        margin-left:auto;
+        margin-right:auto;
+        display:inline-block;
+        width:28px;
+        margin-top:15px;
+    }
+    
+    
     .headerLinkPageTitle{
         width:10px!important;
+    }
+    #pageTitle{
+        margin-left:15px;
+        color:#a9a9a9;
+        font-size:20px;
+        padding-top:0px!important;
+        margin-top:0!important;
+      
+       
     }
     .headerContainer{
         right:0;
@@ -1293,9 +1324,16 @@ input[name="searchType"]{
 
      #showNotifications{
          width:100%!important;
-         height:84.5vh;
+         height:100vh;
          padding-left:10%;
          position:fixed;
+         top:0;
+         margin-top:0!important;
+         margin-left:5px!important;
+         margin-right:5px!important;
+         border-top-right-radius:20px!important;
+         border-top-left-radius:20px!important;
+
          
      }
      #recentNotifications {
@@ -1310,12 +1348,22 @@ input[name="searchType"]{
     .bell{
         margin-right:10px!important;
     }
-    .input-container-main, .homeSideBar, .img, .bell, .message, .headerLinkTitle{
+    .input-container-main, .homeSideBar, .img, .bell, .message, .headerLinkTitle, .userProfileName{
         display:none!important;
     }
+    .userProfileImg{
+        width:47px!important;
+    }
+   .userImgLi{
+       display:none!important;
+   }
     .slider-container-header{
         width:60px;
-        position:relative;
+        position:absolute;
+        right:0;
+        top:0;
+        margin-top:20px;
+        margin-right:15px;
         padding:0!important;
         z-index:2;
       }
