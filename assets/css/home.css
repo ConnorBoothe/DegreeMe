@@ -1237,7 +1237,8 @@ input[name="searchType"]{
         bottom:0;
         text-align:center;
         padding-top:5px;
-        padding-bottom:5px;border-top: 1px solid #202020;
+        padding-bottom:30px;
+        border-top: 1px solid #202020;
 
         -webkit-box-shadow: 0px 1px 1px rgba(50, 50, 50, 0.75);
         -moz-box-shadow:    0px 1px 1px rgba(50, 50, 50, 0.75);

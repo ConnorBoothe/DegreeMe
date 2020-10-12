@@ -9,8 +9,9 @@
     <meta name="viewport" content="initial-scale=1,user-scalable=no,viewport-fit=cover">
     <!-- StyleSheets -->
     <link rel="icon" href="assets/img/favicon.png" type="image/png" />
-    <link href="assets/css/main.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/login.css">
+    <link href="assets/css/main.css" rel="stylesheet">
+
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
     <link href="assets/css/header.css" rel="stylesheet">
@@ -20,7 +21,6 @@
     <script type="text/javascript" src="assets/js/formValidation_1.js"></script>
 </head>
 <body class="">
-    <div class="page-container">
         <div class="homeContainer1">
             <div class="contentBlock">
                 <% if(qs.email){%>
@@ -49,7 +49,7 @@
                     <div class="signInTitleContainer"><h1 class='signIn'>Login to degreeMe</h1></div>
                     <%- include ('partials/login.ejs')%>
                 <div class="disclaimerText2">
-                    <p>DegreeMe is not affiliated with any university. We will not share your data with any school admin. Your security is
+                    <p>DegreeMe is not affiliated with any university. We will not share your data with any third parties. Your security is
                         our top priority.
                     </p>
                     <br>

@@ -252,7 +252,7 @@ router.post('/SignUpMobile', [
                                     users.addUser("@" + req.body.handle1, first_name, last_name, req.body.school, req.body.email, hash,
                                        req.body.imageURL, "Inactive", activationCode,
                                         "None", req.body.major, req.body.classification).then(function(){
-                                        res.redirect('/login?message=Account%20Successfully%20Created.');
+                                        res.redirect('/login?message=Account%20Successfully%20Created');
                                               // https://github.com/sendgrid/sendgrid-nodejs
                             var mail = unirest("POST", "https://api.sendgrid.com/v3/mail/send");
 
