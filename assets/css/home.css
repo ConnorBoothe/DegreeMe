@@ -1107,8 +1107,11 @@ input[name="searchType"]{
     font-size:20px;
 }
 .hostName{
-    font-size:20px;
-    margin-top:10px;
+    font-size:18px;
+    margin-top:0px;
+    max-width:150px;
+    padding-bottom:10px;
+
 }
 .bidErrTxt{
     color:white;
