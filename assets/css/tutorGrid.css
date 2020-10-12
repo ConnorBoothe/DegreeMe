@@ -6,7 +6,7 @@
     
 }
 .tutorBlock{   
-    height:200px;
+    min-height:210px;
     margin-bottom:20px;
     display: -webkit-inline-box;
     margin-bottom:50px;
