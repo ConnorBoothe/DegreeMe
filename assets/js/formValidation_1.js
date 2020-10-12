@@ -2,8 +2,8 @@
 
 $(document).ready(function(){
     $("#email1").focusout(function(){
-        $(this).css("border-bottom", "2px solid #d4d4d4");
-        $(this).prev().css("color", "white");
+        $(this).css("border-bottom", "2px solid rgb(66, 66, 66)");
+        $(this).prev().css("color", "black");
     })
     $("#email1").focus(function(){
         $(this).css("border-bottom", "2px solid #007bff");
@@ -11,8 +11,8 @@ $(document).ready(function(){
         $("#emailMsg1").html("");
     })
     $("#password1").focusout(function(){
-        $(this).css("border-bottom", "2px solid #d4d4d4");
-        $(this).prev().css("color", "white");
+        $(this).css("border-bottom", "2px solid rgb(66, 66, 66)");
+        $(this).prev().css("color", "black");
     })
     $("#password1").focus(function(){
         $(this).css("border-bottom", "2px solid #007bff");

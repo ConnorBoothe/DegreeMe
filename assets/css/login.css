@@ -1,3 +1,21 @@
+#loginPage{
+    margin-left:auto;
+    margin-right:auto;
+    text-align:center;
+    width:600px!important;
+    margin-top:75px;
+}
+.homeContainer1{
+    width:100%!important;
+    text-align:center;
+    background-image: url('../img/bg-image.svg');
+    background-repeat:no-repeat;
+    background-position:fixed;
+    background-color:#2196f3;
+    height:130vh;
+    background-size:1980px;
+
+}
 @media only screen and (max-width: 1000px) {
     /* #loginPage {
         margin-left: auto;
@@ -8,9 +26,27 @@
     /* .p {
         width: 20em;
     } */
+    #loginPage{
+        margin-left:auto;
+        margin-right:auto;
+        text-align:center;
+        width:60%!important;
+        margin-top:75px;
+    }
+    .homeContainer1{
+        width:100%!important;
+        text-align:center;
+        background-image: url('../img/bg-image.svg');
+        background-repeat:no-repeat;
+        background-position:fixed;
+        background-color:#2196f3;
+        height:130vh;
+        background-size:1980px;
+
+    }
     .loginLabel {
         text-align: left;
-        color: white;
+        color: #d4d4d4;
         padding-left: 20px;
         background-color: #18191a!important;
         height: 100%;
@@ -20,21 +56,19 @@
         height: 25px;
         font-size: 13px;
         font-family: 'Open Sans', sans-serif;
-        padding-left:0!important;
+        padding-left:10px!important;
     }
      /*disclaimer on page */
      .disclaimerText2{
         color: #d4d4d4;
+        text-align:left;
      }
      .disclaimerText2 h3 strong{
         font-weight: 900;
      }
-     #loginPage{
-        margin-left:10px;
-        margin-right:10px;
-    }
+    
     .input-field{
-        background-color: #242526!important;
+        background-color: #d4d4d4!important;
         border:none!important;
         border-radius:0!important;
         font-family: 'Open Sans', sans-serif!important;

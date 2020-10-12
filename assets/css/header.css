@@ -6,21 +6,20 @@ header{
 }
   #headerLinkContainer li{
       display:inline-block;
-      margin-left:40px;
+      margin-left:20px;
   }
   #headerLinkContainer li .menu-item{
-    margin-left:40px;
-    font-size:15px;
+    margin-left:20px;
+ 
   }
   .headerLinks a {
     font-family: 'Open Sans', sans-serif;
-    font-size: 15px;
+    font-size: 17px;
     text-decoration: none;
     display: inline-block;
     position: relative;
     color:#d4d4d4;
     cursor:pointer;
-    margin-top:-5px;
   }
   .headerLinks a:hover {
     color:#a9a9a9;
@@ -47,28 +46,25 @@ header{
 #headerLinkContainer {
   list-style-type: none;
   height: 60px;
-  width: 1100px;
-  padding-top: 15px;
-  position:relative;
+  padding-top: 25px;
+  position:absolute;
+  left:0;
   text-align:center;
-  margin-left:auto;
-  margin-right:auto;
+width:100%;
   z-index:2;
+
 }
- #headerLinkContainer ul{
-   position: relative;
-   left:0;
- }
- #headerLinkContainer ul li a:hover{
-  color:#007bff;
+
+ .menu-item ul li a:hover{
+  border-bottom:4px solid #2e3192;
 }
 #headerLinkContainer ul li a{
   color:white;
 }
  .headerLinks{
-     margin-right:1%;
-     font-size:17px;
-     margin-left:20px!important;
+     margin-right:4%;
+     margin-left:10%;
+     font-size:20px;
      display:inline-block;
      list-style-type:none;
      text-align:left;
@@ -76,7 +72,7 @@ header{
 
  #headerLinks span{
      color:#a9a9a9;
-     padding-right:20px;
+     padding-right:10px;
  }
 
 

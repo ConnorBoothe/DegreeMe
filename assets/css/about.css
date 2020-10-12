@@ -11,9 +11,10 @@
     margin-left: -100px;
     cursor: pointer;
 }
-
+.contentBlock{
+  height:100%!important;
+}
 .aboutContainer2{
-    background-color: #191919;
     padding-top: 200px;
     min-height: 100vh;
     background-size: 100% 95%;
@@ -48,7 +49,16 @@
     display: table;
     clear: both;
   }
-  
+  .page-container1{
+   
+      width:100%!important;
+      background-image: url('../img/bg-image.svg');
+      background-repeat:no-repeat;
+      background-position:fixed;
+      background-color:#2196f3;
+      min-height:130vh;
+      background-size:1980px;
+  }
 
 
   /* change the size of the entire block content filled with the images */
@@ -68,7 +78,14 @@
   }
   /* ****** MAY DELETE ***** */
   .wholeScreen {
-      background-color: #191919;
+    
+      width:100%!important;
+      background-image: url('../img/bg-image.svg');
+      background-repeat:no-repeat;
+      background-position:fixed;
+      background-color:#2196f3;
+      min-height:130vh;
+      background-size:1980px;
   }
   /* styling the parent div for children aboutChild */
   /* .aboutParent {
@@ -203,14 +220,14 @@
   float: none!important;
   position: relative;
   }
-  #aboutContainr {
+  /* #aboutContainr {
     background-color: #191919;
     padding-top: 0px;
     background-size: cover;
     background-repeat: no-repeat;
     margin-right: auto;
     margin-left: auto;
- }
+ } */
  .about-item-info{
    color:white;
    text-align:left;
@@ -239,24 +256,9 @@
     margin-right: auto;
     cursor: pointer;
   }
-  footer {
-    text-align: center;
-    color: white;
-    background-color: #202020;
-    overflow: hidden;
-    width: 100%!important;
-    margin-top: auto;
-  }
   .column {
     flex: 100%;
     max-width: 100%;
   }
-  .wholeScreen {
-    background-color: #191919;
-    min-height: 100vh;
-  }
-  .page-container1 {
-    background-color: black;
-    min-height: 100vh;
-  }
+ 
 }

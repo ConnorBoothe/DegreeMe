@@ -15,6 +15,7 @@
   <link href="assets/css/schoolSuggestions.css" rel="stylesheet">
   <link href="assets/css/SignUp.css" rel="stylesheet">
   <link href="../assets/css/index.css" rel="stylesheet">
+  <link href="../assets/css/footer.css" rel="stylesheet">
   <link rel="stylesheet" href="../assets/js/croppie/croppie.css" />
   <!-- Scripts -->
   <script src="assets/jquery/dist/jquery.js"></script>
@@ -37,14 +38,14 @@
       <div class="signUpWrapper">
         <div class="signup-form" class="">
           <h3 class='badge badge-danger loginErr'><%=qs.error%></h3>
-          <h3 class="text-light">Join degreeMe</h3>
+          <h3 class="text-light">Welcome to the DegreeMe Community</h3>
           <h2 class="signup-msg"><%=qs.msg%></h2>
           <form method="POST" action="/SignUp" class="form">
              <input name="imageURL" type="hidden" class="imageURL"/>
             <div class="name">
               <div class="input-container3">
                 <p class="loginLabel1">First Name</p>
-                <input name="first_name" type="text" class="input-field1 focus:outline-none first"
+                <input name="first_name" type="text" class="input-field1 first"
                   spellcheck="false" autocomplete="autocomplete_off_hack_xfr4!k" style="text-transform: capitalize;"  />
                 <p class="firstTxt"></p>
               </div>
@@ -76,7 +77,7 @@
             <div class="name">
               <div class="input-container3 majorContainer">
                 <p class="loginLabel1">Major</p>
-                <input name="major" type="text" class=" input-field1 focus:outline-none major" spellcheck="false"
+                <input name="major" type="text" class=" input-field1 major" spellcheck="false"
                   autocomplete="off" />
                 <p class="majorTxt"></p>
                 <div class="major-autocomplete">
@@ -132,7 +133,7 @@
     <div class="signup-container-mobile">
       <div class="signUpWrapper">
         <div class="signup-form" class="">
-          <h3 class="text-light">Join degreeMe</h3>
+          <h3 class="text-light signup-title">Join DegreeMe</h3>
           <h2 class="signup-msg"><%=qs.msg%></h2>
         
           <form method="POST" action="/SignUpMobile" class="form">
@@ -140,7 +141,7 @@
             <div class="name">
               <div class="input-container2">
                 <p class="loginLabel1">First Name</p>
-                <input name="first_name"  type="text" class="input-field1 focus:outline-none first"
+                <input name="first_name"  type="text" class="input-field1"
                   spellcheck="false" autocomplete="autocomplete_off_hack_xfr4!k" style="text-transform: capitalize;"  />
                 <p class="firstTxt"></p>
               </div>
@@ -232,7 +233,7 @@
   
     <div class="img-btn-container">
      
-      <div class="img-btn btn btn-info">Upload Photo</div>
+      <div class="img-btn btn">Upload Photo</div>
       <div class="result1 text-light">Photo Required</div>
     </div>
     <small class="imgTxt"></small>
@@ -248,7 +249,7 @@
       </div>
     </div>
     <p class="imgTryAgain">If your image takes longer than 2 seconds to upload, try again!</p>
-    <button type="submit" class="btn btn-primary createAccount loginBtnSignUp">Create Account</button>
+    <button type="submit" class="btn createAccount loginBtnSignUp">Create Account</button>
     <div class="disclaimerText">
       <h3><strong>DegreeMe is not affiliated with any university.</strong> Your school email address
         is only required to create an university-centric environment.
@@ -265,6 +266,7 @@
     </div>
 </div>
   </div>
+  <%- include ('partials/footer.ejs') %>
     <!-- The core Firebase JS SDK is always required and must be listed first -->
 <!-- <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-app.js"></script> -->
 <!-- <script src="https://www.gstatic.com/firebasejs/6.2.3/firebase-storage.js"></script> -->
@@ -281,4 +283,5 @@
   <script type="text/javascript" src="assets/js/crop.js"></script>
   <script type="text/javascript" src="assets/js/showPopOutMenu.js"></script>
 </body>
+
 </html>

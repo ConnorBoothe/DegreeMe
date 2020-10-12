@@ -3121,22 +3121,7 @@ display:inline-block!important      }
   }
   
   
-  .input-container2{
-    display: -ms-flexbox; /* IE10 */
-    display: flex;
-    width: 30%;
-    height:30px;
-    margin-bottom: 0px!important;
-    border: 1px solid #343a40;
-    border-collapse: separate; 
-    position:absolute;
-    background-color:none;
-    z-index:4!important;
-    padding-bottom:none!important;
-    margin-right:100px;
-    outline:0!important;
-    
-  }
+  
   .input-container2 .icon {
     padding-top: 2px!important;
    padding-bottom:0;
