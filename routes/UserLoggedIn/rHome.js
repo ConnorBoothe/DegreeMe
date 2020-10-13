@@ -223,7 +223,7 @@ router.post("/SeenMsg",
         if (!errors.isEmpty()) {
             res.redirect('/home');
         }
-        users.sawMessage(req.body.handle, req.body.threadId, res);
+        users.sawMessage(req.session.handle, req.body.threadId, res);
     })
 router.post("/addCourse",
     check('handle').isString().trim().escape(),
