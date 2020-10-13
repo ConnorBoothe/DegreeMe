@@ -34,7 +34,7 @@ header{
     background-color:#18191a;
 }
 .bodyClass{
-    background-color:#202020!important;
+    background-color:#18191a!important;
 }
 .userHeaderDark{
     border-right: .5px solid #23272A;
@@ -1008,7 +1008,7 @@ header{
         height:96.6%;
         position:fixed;
         z-index:1;
-        background-color:#242526;
+        background-color:#18191a;
        
     }
     #recentNotifications{
