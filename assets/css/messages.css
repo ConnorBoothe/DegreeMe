@@ -351,6 +351,7 @@ input:-webkit-autofill:active {
     .homeContainer {
         margin-left: 0 !important;
         padding-top:20px!important;
+        padding-bottom:100px;
     }
 
     #messagesContainer {
@@ -374,8 +375,9 @@ input:-webkit-autofill:active {
         border: none;
         height: 40px;
         outline: none;
-        background-color: #3a3b3c;
+        background-color: #3a3b3c!important;
         box-shadow: 2px 3px #131313;
+        margin-bottom:80px;
     
     }
     .msgInput input {
