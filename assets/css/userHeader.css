@@ -849,7 +849,6 @@ header{
     padding-top:5px;	
     position:fixed;	    
     z-index:3;	   
-    background-color:#242526;
 
     
 }
@@ -1021,5 +1020,18 @@ header{
         text-align:center;
        padding-bottom:7px;
        background-color:#242526;
+    }
+    #horizontalHeader{
+       
+        background-color:#18191a!important;
+    
+        
+    }
+}
+@media only screen and (min-width: 1000px) {
+    #horizontalHeader{ 
+        background-color:#242526;
+    
+        
     }
 }

@@ -33,7 +33,12 @@ $(document).ready(function(){
               },
             },
           });
-        if($('#showNotifications').css("display") == "none"){
+        if($('#showNotifications').css("display") == "none" && window.innerWidth < 1000){
+            $($('#showNotifications').css("margin-top","100vh"));
+            $('#showNotifications').show();
+            $(".blocker").show();
+        }
+        else if($('#showNotifications').css("display") == "none"){
             $('#showNotifications').show();
             $(".blocker").show();
         }
@@ -42,10 +47,10 @@ $(document).ready(function(){
         }
     })
     $('.message').on("click",function(){
+        
         if($('#showNotifications').css("display") == "none"){
             $(".blocker").show();
         }
-        
     })
     $('.userProfileName ').on("click",function(){
         if($('#showNotifications').css("display") == "none"){
@@ -72,7 +77,7 @@ $(document).ready(function(){
 $(".mobile-notifications").on("click", function(){
     //if menu is displaying account items, or if it is hidden
     if($("#showNotifications").children().eq(0).text() !== "Notifications" || $("#showNotifications").css("display") == "none"){
-        $("#recentNotifications").html("Notifications<spanX</span>");
+        $("#recentNotifications").html("Notifications");
         $('#showNotifications').show();
         $.ajax({
             url: '/API/Notifications' ,

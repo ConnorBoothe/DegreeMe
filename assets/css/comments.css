@@ -5,9 +5,106 @@
     font-size:18px;
     color:#d4d4d4;
 }
-.question-Header{
-    font-size:21px;
-}
+
 .comment-container a{
     color:#d4d4d4;
+}
+
+.question-Header{
+    font-size:24px;
+    text-align:left;
+}
+.comments-wrapper{
+    background-color:#18191a!important;
+}
+.comment-container p {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    padding-right: 10px;
+  }
+   /* button */
+   #comments-button {
+    position: relative;
+    border-radius:20px;
+    margin-top:10px;
+    
+}
+@media only screen and (max-width: 1000px) {
+    .comments-container{
+        width:90%;
+        text-align:center;
+        background-color:#18191a!important;
+        margin-left:20px;
+        margin-right:20px;
+        min-height:100vh;
+    }
+    .comment-container{
+        text-align:left;
+        width:100%;
+        padding:10px;
+        padding-bottom: 10px;
+    }
+    /* button */
+    #comments-button {
+        position: relative;
+        
+    }
+    .comment-sub-container{
+        position: relative;
+        display:inline-block;
+        margin-top:0px!important;
+        width: 100%!important;
+    }
+    .question-Header{
+        font-size:18px;
+        font-family:"Helvetica";
+        line-height: 1.4;
+    }
+    .comment-sub-container{
+        position: relative;
+        display:inline-block;
+        margin-top:50px;
+        width: 100%;
+    }
+    /* format text */
+    .comments-text {
+    padding-left: 0px!important;
+    padding-top:10px;
+    margin-bottom:5px;
+ }
+}
+@media only screen and (min-width: 1000px) {
+    /* format text */
+    .comments-text {
+    padding-left: 55px!important;
+ }
+    .question-Header{
+        font-size:21px;
+    }
+    .comment-sub-container{
+        position: relative;
+        right: 130px;
+        display:inline-block;
+        margin-top:50px;
+        width: 800px;
+    }
+    .comments-container{
+        margin-left:250px;
+        width:100%;
+        min-height:100vh;
+        text-align:center;
+        background-color:#18191a;
+    }
+    
+    .comment-container{
+        text-align:left;
+        width:100%;
+        padding:10px;
+        padding-bottom: 30px;
+    }
+
+    #comments-button {
+        position: relative;
+        right: -334px;
+    }
 }

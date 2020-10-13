@@ -115,7 +115,7 @@ function formatTutorListing(post){
     '<input class="postId" name="postId" type="hidden" value="'+post._id+'" />'+
         '<div class="timeline-container-status">'+
             '<div class="postHeader">'+
-                '<div class="postRight">'+
+                '<div class="postRight1">'+
                     '<p class="postDate nonhelp-date">'+displayDate(new Date(post.date))+'</p>'+
                  '</div>'+
                 '<img class="timelinePost-Image" src="'+post.userImage+'" />'+
@@ -174,7 +174,7 @@ function formatStudyGroup(post){
     '<input class="postId" name="postId" type="hidden" value="'+post._id+'" />'+
     '<div class="timeline-container-status">'+
         '<div class="postHeader">'+
-            '<div class="postRight">'+
+            '<div class="postRight1">'+
                 '<p class="postDate">'+displayDate(new Date(post.date))+'</p>'+
             '</div>'+
             '<img class="timelinePost-Image" src="'+post.userImage+'" />'+
@@ -238,7 +238,7 @@ function formatStatusUpdate(post){
     '<input class="postId" name="postId" type="hidden" value="'+post._id+'" />'+
     '<div class="timeline-container-status">'+
         '<div class="postHeader">'+
-            '<div class="postRight">'+
+            '<div class="postRight1">'+
                 '<p class="postDate">'+displayDate(new Date(post.date))+'</p>'+
             '</div>'+
             '<img class="timelinePost-Image" src="'+post.userImage+'" />'+

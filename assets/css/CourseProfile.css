@@ -132,25 +132,8 @@ input[name="anonymous"]{
 .modal-footer{
     border-top:1px solid white!important;
 }
-.comments-container{
-    margin-left:250px;
-    width:100%;
-    min-height:100vh;
-    text-align:center;
-    background-color:#18191a;
-}
 
-.comment-container{
-    text-align:left;
-    width:100%;
-    padding:10px;
-    padding-bottom: 30px;
-}
-.comment-container p {
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  padding-right: 10px;
-}
+
 
 .profile-wrapper{
     background-color: #18191a;
@@ -158,17 +141,7 @@ input[name="anonymous"]{
     height:200px;
     position:relative;
 }
-.comment-sub-container{
-    position: relative;
-    right: 130px;
-    display:inline-block;
-    margin-top:50px;
-    width: 800px;
-}
-.question-Header{
-    font-size:24px;
-    text-align:left;
-}
+
 .userName-text{
     font-family:"Open Sans", "sans-serif";
     color:#d4d4d4!important;
@@ -248,15 +221,8 @@ input[name="anonymous"]{
     font-size: 12px;
     color: #808080!important;
 }
-/* formate text */
-.comments-text {
-   padding-left: 55px!important;
-}
-/* button */
-#comments-button {
-    position: relative;
-    right: -334px;
-}
+
+
 .modal-title{
     text-align:left;
     width:100%;
