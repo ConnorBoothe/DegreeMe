@@ -1290,7 +1290,7 @@ border-bottom:2px solid #330099;
         padding-top:5px;
         height:22px;
         font-size:14px;
-        margin-bottom:5px;
+        margin-bottom:0px;
         
     }
     .buttonContainer h2{
@@ -1366,7 +1366,17 @@ border-bottom:2px solid #330099;
         height:60px;
         border-radius:10px;
       }
-      
+      .input-container2 {
+       
+        display:block;
+        width: 100%;
+        margin-bottom: 0px!important;
+        margin-top:20px!important;
+        border-radius:0px!important;
+        padding-bottom:none!important;      
+        outline:none!important;
+        background-color:#d4d4d4;
+      }
       .icon {
         padding-top: 7px;
        padding-bottom:0;
@@ -1987,9 +1997,11 @@ border-bottom:2px solid #330099;
             border-top:none!important;
             border-left:none!important;
             font-size:17px;
-            color:rgb(66, 66, 66);;
+            color:rgb(66, 66, 66);
             outline:none!important;
             padding-left:20px;
+            padding-top:5px;
+            padding-bottom:5px!important;
             
          }
          .input-field1::placeholder{
