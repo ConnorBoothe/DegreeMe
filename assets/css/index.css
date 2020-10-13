@@ -126,6 +126,7 @@
     background-color:#2196f3;
     min-height:130vh;
     background-size:1980px;
+    margin-bottom:0;
 }
 
 .index-container1{
@@ -216,9 +217,11 @@
     padding-left:2px!important;
     padding-right:2px!important;
     width:70px!important;
-    font-size:16px!important;
+    font-size:13px!important;
     box-shadow:2px 2px solid black!important;
-    background-color:#2e3192!important;
+    background-color:white!important;
+    color:black!important;
+
  
     
 }
@@ -252,7 +255,9 @@
     right:0;
     width:100px;
     margin-right:15%;
-    background-color:#2e3192!important;
+    background-color:white!important;
+    color:black!important;
+
 }
 .right-mobile-menu{
     width:100px;

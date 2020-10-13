@@ -23,8 +23,8 @@ input:-webkit-autofill {
 }
 
 #password1:-webkit-autofill, #email1:-webkit-autofill {
-    -webkit-text-fill-color:white !important;
-    box-shadow:200px 200px 100px #242526 inset!important; 
+    -webkit-text-fill-color:black !important;
+    box-shadow:200px 200px 100px #d4d4d4 inset!important; 
     font-size:15px!important;
 }
 
@@ -374,13 +374,13 @@ border-bottom:2px solid #330099;
         color:#a9a9a9!important;
     }
     .login-button{
-        border:2px solid #007bff!important;
+        border:2px solid #330099!important;
         background-color:#330099!important;
         color:white!important;
         box-shadow:1px 2px #131313;
     }
     .login-button:hover{
-      background-color:#007bff!important;
+      opacity:.9;
     }
    .loginLink1{
     font-family: 'Open Sans', sans-serif;
@@ -1387,18 +1387,19 @@ border-bottom:2px solid #330099;
         border-radius:20px;
       }
      .login-nav{
-         border-radius:10px!important;
+         border-radius:20px!important;
          padding-top:3px!important;
          padding-bottom:3px!important;
          box-shadow:1px 2px #131313;
          font-family: 'Open Sans', sans-serif;
-         font-size:17px!important;
+         font-size:14px!important;
          margin-left:100px;
-         background-color:#2e3192!important;
+         background-color:white!important;
+         color:black!important;
 
      }
      .login-nav:hover{
-         color:white!important;
+         opacity:.9!important;
          
 
      }
@@ -2048,6 +2049,7 @@ border-bottom:2px solid #330099;
 }
 .page-container{
     background-image: url('../img/bg-image.svg');
+    margin-bottom:0;
 }
 .createAccount{
     margin-top:20px!important;
