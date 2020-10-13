@@ -1203,6 +1203,8 @@ input[name="searchType"]{
 @media only screen and (max-width: 1000px) {
     .mobileUserImg{
         padding-top:10px;
+        position:relative;
+        z-index:2;
     }
     #horizontalHeader{
         background-color:#18191a!important;
@@ -1265,8 +1267,35 @@ input[name="searchType"]{
         padding-bottom:10px;
     }
     .timeline-container-status, .timeline-container-helprequest{
+        margin-left:0px;
+        margin-right:0px;
+        margin-top:0;
+        margin-bottom:0;
+        border-radius:0!important;
+        background-color:#18191a!important;
+        border-bottom:1px solid #a9a9a9!important;
+    }
+    .request-help-container{
+        background-color:#2a2f33!important;
         margin-left:8px;
         margin-right:8px;
+        border-radius:20px!important;
+        border-bottom:none!important;
+        margin-top:10px;
+        margin-bottom:10px;
+
+    }
+    .helpRequest-body .timelinePost-Image{
+        display:none;
+    }
+    .requestHelp, .post-selection-menu{
+        margin-left:0!important;
+    }
+    .like-button{
+        background-color:#18191a!important;
+    }
+    .userNameLink{
+        font-size:14px!important;
     }
     /* .tl-main-img{
         display:none;
@@ -1341,8 +1370,8 @@ input[name="searchType"]{
      #showNotifications{
          width:100%!important;
          height:100vh;
-         padding-left:10%;
-         position:fixed;
+         /* padding-left:10%; */
+         position:fixed!important;
          top:0;
          margin-top:0!important;
          margin-left:5px!important;
@@ -1351,9 +1380,6 @@ input[name="searchType"]{
          border-top-left-radius:20px!important;
 
          
-     }
-     #recentNotifications {
-         padding-left:5%!important;
      }
      .startConversation-button{
          padding-left:0!important;

@@ -808,7 +808,7 @@ header{
 #showNotifications ul li{
     list-style-type:none;
     padding:5px;
-    padding-left:20px;
+    /* padding-left:20px; */
     padding-right:20px;
     height:60px;
     width:100%;
@@ -1002,7 +1002,7 @@ header{
     height:100%;
 }
 /* Message sent animation */
-@media only screen and (max-width: 1024px) and (min-width: 768px) {
+@media only screen and (max-width: 1000px) {
     #userHeaderContainer{
         margin-top:44.5px;
         width:250px;
@@ -1011,5 +1011,15 @@ header{
         z-index:1;
         background-color:#242526;
        
+    }
+    #recentNotifications{
+        color:white;
+        font-size:20px;
+        padding-top:10px;
+        padding-left:0px!important;
+    
+        text-align:center;
+       padding-bottom:7px;
+       background-color:#242526;
     }
 }

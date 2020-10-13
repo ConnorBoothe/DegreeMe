@@ -72,7 +72,7 @@ $(document).ready(function(){
 $(".mobile-notifications").on("click", function(){
     //if menu is displaying account items, or if it is hidden
     if($("#showNotifications").children().eq(0).text() !== "Notifications" || $("#showNotifications").css("display") == "none"){
-        $("#recentNotifications").text("Notifications");
+        $("#recentNotifications").html("Notifications<spanX</span>");
         $('#showNotifications').show();
         $.ajax({
             url: '/API/Notifications' ,

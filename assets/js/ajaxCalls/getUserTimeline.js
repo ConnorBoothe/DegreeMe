@@ -122,7 +122,7 @@ function formatTutorListing(post){
                 '<p class="timelinePost-username">'+post.userName+
                 '<p class="postHandle"><a href="/user/'+post.userHandle+'">'+post.userHandle+'</a></p></p>'+
             '</div>'+
-            '<p class="caption">'+post.caption+'</p>'+
+            '<p class="caption1">'+post.caption+'</p>'+
             '<p class="price-nonhelp badge badge-warning">Price: $'+post.price+'</p>'+
             '<a class="btn btn-primary view-timeline-btn" href="..'+post.url+'">View</a>'+
             '<div class="postActions">';
@@ -181,7 +181,7 @@ function formatStudyGroup(post){
             '<p class="timelinePost-username">'+post.userName+'<span class="postHandle">'+
             '<p class="postHandle"><a href="/user/'+post.userHandle+'">'+post.userHandle+'</a></span></p></p>'+
         '</div>'+
-        '<p class="caption">'+post.caption+'<a href="/Group/'+post.url+'" class="btn btn-primary view-timeline-btn">View</a></p>'+
+        '<p class="caption1">'+post.caption+'<a href="/Group/'+post.url+'" class="btn btn-primary view-timeline-btn">View</a></p>'+
         '<ul class="postDetailsList">'+
             '<li class="postDetailsItem">'+
                 '<p class="badge badge-primary info-badge">'+post.course+'</p>'+
@@ -245,7 +245,7 @@ function formatStatusUpdate(post){
             '<p class="timelinePost-username">'+post.userName+'<span class="postHandle">'+
             '<p class="postHandle"><a href="/user/'+post.userHandle+'">'+post.userHandle+'</a></span></p></p>'+
         '</div>'+
-        '<p class="caption">'+post.caption+'</p>'+
+        '<p class="caption1">'+post.caption+'</p>'+
         '<div class="postActions">';
         if (hasLiked == false){
             status +=

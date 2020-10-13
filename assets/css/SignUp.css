@@ -277,18 +277,7 @@ max-width: 100%;
         margin-right:0px;
     }
     
-    .input-container2 {
-       
-        display:block;
-        width: 100%;
-        margin-bottom: 15px!important;
-        margin-top:10px!important;
-        border-radius:0px!important;
-        padding-bottom:none!important;      
-        outline:none!important;
-
-        background-color:#d4d4d4;
-      }
+    
     .signup-form{
         padding-top:50px!important;
         text-align:center;
