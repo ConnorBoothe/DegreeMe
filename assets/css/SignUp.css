@@ -37,7 +37,7 @@ max-width: 100%;
     position:relative;
     z-index:3;
     min-height:200px;
-    background-color:#202020;
+    background-color:#d4d4d4;
     box-shadow: 1.5px 1.5px #161616;
     display:none;
 }
@@ -52,10 +52,10 @@ max-width: 100%;
 }
 .classStanding-select{
     width:100%;
-    background-color:#242526;
+    background-color:#d4d4d4;
     border-bottom: 2px solid #a9a9a9!important;
     border:none!important;
-    color:white!important;
+    color:rgb(66,66,66)!important;
     height:40px!important;
 }
 
@@ -224,8 +224,18 @@ max-width: 100%;
     margin-left:150px;
     margin-right:150px;
 }
-.page-container {
-    background-color: #18191a!important;
+.homeContainer1{
+   
+   
+    min-height:100vh;
+    padding-top:40px;
+    margin-bottom:0;
+    padding-bottom:0;
+    color:#a9a9a9;
+    background-image: url('../img/bg-image.svg'); 
+}
+.createAccount {
+    background-color:white;
 }
 .uploadingImg{
     width:200px!important;
@@ -243,18 +253,21 @@ max-width: 100%;
 }
  /* mobile view */
 @media only screen and (max-width: 1000px) { 
+    .signup-title{
+        margin-bottom:20px;
+    }
     .img-upload-container .img-secondary-wrapper{
         top: 25px;
       }
     .input-field1{
         width:100%;
-        background-color:#242526!important;
+        background-color:#d4d4d4!important;
         border:none!important;
-        color:white!important;
-        margin-top:5px!important;
-        padding-top:7px;
+        color:rgb(66,66,66)!important;
+        margin-top:1px!important;
+        padding-top:0px!important;
         padding-left:5px;
-        padding-bottom:7px;
+        padding-bottom:1px;
         outline:0!important;
     }
     .fileUpload{
@@ -263,10 +276,19 @@ max-width: 100%;
         margin-left:0px;
         margin-right:0px;
     }
-    .input-container2{
-        background-color:#18191a!important;
+    
+    .input-container2 {
+       
+        display:block;
+        width: 100%;
+        margin-bottom: 15px!important;
+        margin-top:10px!important;
+        border-radius:0px!important;
+        padding-bottom:none!important;      
+        outline:none!important;
 
-    }
+        background-color:#d4d4d4;
+      }
     .signup-form{
         padding-top:50px!important;
         text-align:center;
@@ -276,9 +298,9 @@ max-width: 100%;
        font-family:"Open sans",  "sans-serif";
     }
     .loginLabel1{
-        background-color:#18191a!important;
-        padding-left:0!important;
-        padding-bottom:20px!important;
+        background-color:#d4d4d4!important;
+        padding-left:5px!important;
+        padding-bottom:0px!important;
         font-family:"Open sans", "sans-serif";
     }
 
@@ -287,9 +309,7 @@ max-width: 100%;
         font-size:15px;
         text-align:left;
     }
-    .signup-container-mobile {
-        background-color:#18191a!important;
-    }
+
     .signup-container{
         padding-bottom:0!important;
     }
