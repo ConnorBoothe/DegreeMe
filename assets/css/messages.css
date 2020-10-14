@@ -68,26 +68,7 @@ input:-webkit-autofill:active {
     overflow-y: auto;
 }
 
-.containMessageSent {
 
-    min-height: 40px;
-    min-width: 100px !important;
-
-    border-radius: 40px;
-    text-align: left;
-    color: white;
-    padding-left: 20px;
-    text-justify: inter-word;
-    position: relative;
-    font-family: 'Mulish', sans-serif;
-    word-wrap: break-word;
-    margin-left: 40%;
-    display: inline-block;
-    right: 0 !important;
-    max-width: 80% !important;
-    text-align: left;
-
-}
 
 .msg-send-btn {
     background-color: #3a3b3c;
@@ -104,25 +85,7 @@ input:-webkit-autofill:active {
     margin-bottom: 6px;
 }
 
-.containMessageReceived {
-    min-height: 40px;
-    border-radius: 40px;
-    text-align: left;
-    color: white;
-    padding-left: 20px;
-    padding-top: 10px;
-    text-align: left;
-    text-justify: inter-word;
-    font-family: 'Open Sans', sans-serif;
-    word-wrap: break-word !important;
-    position: relative;
-    right: 0 !important;
-    margin-right: 60%;
-    display: inline-block;
-    max-width: 60%;
 
-
-}
 
 .msg_1 {
     left: 0 !important;
@@ -381,13 +344,13 @@ input:-webkit-autofill:active {
     
     }
     .msgInput input {
-        width: 85%;
+        width: 80%;
         margin-top: 8px;
         margin-bottom: 4px;
         color: white;
         font-family: 'Open Sans', sans-serif;
         border-radius: 10px;
-        border: 0px solid #6d6d6d;
+        border: 0px solid #353030;
         outline: none;
         background-color: #3a3b3c;
         font-size: 16px;
@@ -421,6 +384,44 @@ input:-webkit-autofill:active {
     }
     #horizontalHeader{
         background-color:#18191a!important;
+    }
+    .containMessageReceived {
+        min-height: 40px;
+        border-radius: 40px;
+        text-align: left;
+        color: white;
+        padding-left: 20px;
+        padding-top: 10px;
+        text-align: left;
+        text-justify: inter-word;
+        font-family: 'Open Sans', sans-serif;
+        word-wrap: break-word !important;
+        position: relative;
+        right: 0 !important;
+        margin-right: 40%;
+        display: inline-block;
+        max-width: 80%;
+    
+    
+    }
+    .containMessageSent {
+
+        min-height: 40px;
+        min-width: 100px !important;
+    
+        border-radius: 40px;
+        text-align: left;
+        color: white;
+        padding-left: 20px;
+        text-justify: inter-word;
+        position: relative;
+        font-family: 'Mulish', sans-serif;
+        word-wrap: break-word;
+        display: inline-block;
+        right: 0 !important;
+        max-width: 80% !important;
+        text-align: left;
+    
     }
 }
 
@@ -495,6 +496,45 @@ input:-webkit-autofill:active {
         bottom: 0;
         font-size: 20px;
         background-color: #18191a;
+    
+    }
+    .containMessageReceived {
+        min-height: 40px;
+        border-radius: 40px;
+        text-align: left;
+        color: white;
+        padding-left: 20px;
+        padding-top: 10px;
+        text-align: left;
+        text-justify: inter-word;
+        font-family: 'Open Sans', sans-serif;
+        word-wrap: break-word !important;
+        position: relative;
+        right: 0 !important;
+        margin-right: 60%;
+        display: inline-block;
+        max-width: 60%;
+    
+    
+    }
+    .containMessageSent {
+
+        min-height: 40px;
+        min-width: 100px !important;
+    
+        border-radius: 40px;
+        text-align: left;
+        color: white;
+        padding-left: 20px;
+        text-justify: inter-word;
+        position: relative;
+        font-family: 'Mulish', sans-serif;
+        word-wrap: break-word;
+        margin-left: 40%;
+        display: inline-block;
+        right: 0 !important;
+        max-width: 80% !important;
+        text-align: left;
     
     }
 }
