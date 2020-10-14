@@ -224,7 +224,7 @@ $(document).ready(function(){
        "</a></h1>")
         }
         else{
-            $(".mobile-logo-wrapper").html("<h1 class='userProfileHandle'>"+handle+"</h1>")
+            $(".mobile-logo-wrapper").html("<h1 class='userProfileHandle1'>"+handle+"</h1>")
         }
        
         
