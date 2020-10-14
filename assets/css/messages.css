@@ -370,7 +370,7 @@ input:-webkit-autofill:active {
     
     }
     .message-title, .headerLinkPageTitle{
-        text-align:left;
+        text-align:center;
         margin-top:70px;
         margin-left:5px;
         background-color:#18191a!important;

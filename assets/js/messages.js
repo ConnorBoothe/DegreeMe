@@ -36,7 +36,7 @@
                 socket.emit('send message', {
                     userHandle: $(".userId").val().substring(1),
                     id: $(".threadId").val(),
-                    sender: $(".userProfileName").text(),
+                    sender: $(".userProfileName").eq(0).text(),
                     senderImg: $(".userProfileImg").attr("src"),
                     userHandles: userHandles,
                     message: $(".msgInput input").val(),
@@ -64,7 +64,7 @@
             var messageQueryId = window.location.toString().split("=");
             
             if (data.msg.id === messageQueryId[1]) {
-                if (data.msg.sender === $(".userProfileName").text()) {
+                if (data.msg.sender === $(".userProfileName").eq(0).text()) {
                     chat.append('<div class="sent-wrapper"><div class="containMessageSent">' +
                         '<div class="msg_ ">' +
                         '<p class="messageBody sentMsg bg-primary">' + data.msg

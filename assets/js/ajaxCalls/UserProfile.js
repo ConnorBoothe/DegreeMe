@@ -215,7 +215,21 @@ else{
 }
 }
 $(document).ready(function(){
-
+    if(window.innerWidth < 1000){
+        var handle = window.location.href.split("/")[4];
+        if($("input[name='isTutor']").val() == "true"){
+            $(".mobile-logo-wrapper").html("<h1 class='userProfileHandle1'>"+handle+"<a class='memberImage' data-toggle='tooltip' data-placement='top'"+
+            "title='Verified Tutor'>"+
+            "<img class='tutorBadge' src='../assets/img/tutorBadge.svg' />"+
+       "</a></h1>")
+        }
+        else{
+            $(".mobile-logo-wrapper").html("<h1 class='userProfileHandle'>"+handle+"</h1>")
+        }
+       
+        
+    }
+   
     $(".profile-ul li").on("click", function(){
         $(".profile-ul li").removeClass("tab-selected");
         $(this).addClass("tab-selected");

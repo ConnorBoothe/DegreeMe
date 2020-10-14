@@ -5,7 +5,8 @@
     <link rel="icon" href="../assets/img/favicon.png" type="image/png" />
     <!-- Stylesheets -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">    <link rel="stylesheet" href="../assets/js/croppie/croppie.css" />
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">   
+    <link rel="stylesheet" href="../assets/js/croppie/croppie.css" />
     <link href="../assets/css/main1.css" rel="stylesheet">
     <link href="../assets/css/home.css" rel="stylesheet">
     <link href="../assets/css/userProfile.css" rel="stylesheet">
@@ -19,7 +20,6 @@
 </head>
 <body class="color-dark">
     <div class="overlay"></div>
-    <%- include ('partials/mobileComingSoon.ejs')%>
     <div class="homeWrap">
     <div class="page-container">
         <%- include ('partials/followersModal.ejs') %>
@@ -30,16 +30,15 @@
         <%- include ('partials/newMessageModal.ejs')%>
         <div class="profileContainer">
             <div class="profile-header">
+                <div class="header-wrapper">
                 <div class="profileHeader">
                     <div class="profile-img-container">
                         <%if(session.handle === user.handle){%>
                         <div class="img">
                             <a class="img" href="#">
                                 <div class="img__overlay img-btn">Edit Photo</div>
-                                <img src="<%=session.img%>" width="120" alt="Profile Picture" class="profile-img editImg"
-                                     />
+                                <img src="<%=session.img%>" width="120" alt="Profile Picture" class="profile-img editImg"/>
                             </a>
-                            
                         </div>
 
                         <div class="img-upload-container">
@@ -67,18 +66,28 @@
                                 </div>
                                 <div class="profile-name">
                                     <h1 class="tutorName text-light"><%=user.first_name + ' '+ user.last_name%></h1>
-                                    <h1 class="userProfileHandle"><%= user.handle%>
+                                    <h1 class="userProfileHandle"><%=user.handle%>
                                 <%}%>
-                                        <% if(user.Tutor === true){%>
-                                        <a class="memberImage" data-toggle="tooltip" data-placement="top"
-                                            title="degreeMe Tutor">
-                                            <img class="tutorBadge" src="../assets/img/tutorBadge.svg" />
-                                        </a>
-                                        <%}%>
+                               
+                                <% if(user.Tutor === true){%>
+                                    <input type="hidden" name="isTutor" value="true"/>
+                                    <a class="memberImage" data-toggle="tooltip" data-placement="top"
+                                        title="degreeMe Tutor">
+                                        <img class="tutorBadge" src="../assets/img/tutorBadge.svg" />
+                                    </a>
+                                    <%}else{%>
+                                        <input type="hidden" name="isTutor" value="false"/>
+                                    <%}%>
                                                 
                                             </h1>
+                                           
+                                               
                                            </div>
+                                           <div class="majorContainer mobileMajorSpan">
+                                            <p class="profileMajor"><span class="majorSpan"><%=user.Major%></span></p>
                                         </div>
+                                        </div>
+                                        
                                              <!-- Make sure you re-enter dynamic school once UNCC school name changed at sign up tutor.School-->
                                             <!-- <h1 class="schoolNameProfile text-light" >UNC Charlotte</h1> -->
                                             
@@ -92,7 +101,8 @@
                     <ul class="followers-list">
                         <li class="followers-item"> 
                             <button type="button" class="followModal" data-toggle="modal" data-target="#followerModal" name = "New Message">  
-                            <h1><span><%=followerCount%></span> <span>
+                            <h1 class="mobileCount"><%=followerCount%></h1>
+                            <h1><span class="desktopFollow"><%=followerCount%></span> <span>
                                     <% if(followerCount === 1){%>
                                     Follower
                                     <%}else{%>
@@ -102,33 +112,37 @@
                             </button>
                         </li>
                         <li class="followers-item"> 
-                            <button type="button" class="followModal" data-toggle="modal" data-target="#followingModal">
-                                <h1><%=followingCount%> <span>Following</span>
+                            <button type="button" class="followModal following-modal" data-toggle="modal" data-target="#followingModal">
+                                <h1 class="mobileCount"><%=followingCount%></h1>
+                                <h1><span class="desktopFollow"><%=followingCount%></span> <span>Following</span>
                                 </h1>
                             </button>
                         </li>
                     </ul>
                 </div>
-                <div class="majorContainer">
+                <div class="majorContainer desktopMajor">
                     <p class="profileMajor"><span class="majorSpan"><%=user.Major%></span></p>
                 </div>
+                <div class="desktopBio">
                     <%if(session.handle === user.handle){%>
-                    <p class="profileBio"><textarea maxlength="150" id="changeBio" class=""
-                        readonly><%=user.bio%> </textarea>
-                        <a class="memberImage" data-toggle="tooltip" data-placement="top" title="Edit Bio">
-                            <span class="btn btn-primary editBio">Edit Bio
-                            </span>
-                        </a>
-                    </p>
-                <%}else{%>
-                    <%if(user.bio === "Tell the world a bit about yourself"){%>
-                        <p class="profileBio"><%=user.handle%> has not set a bio.
+                        <p class="profileBio"><textarea maxlength="150" id="changeBio" class=""
+                            readonly><%=user.bio%> </textarea>
+                            <a class="memberImage" data-toggle="tooltip" data-placement="top" title="Edit Bio">
+                                <span class="btn btn-primary editBio">Edit Bio
+                                </span>
+                            </a>
+                        </p>
                     <%}else{%>
-                    <p class="profileBio"><%=user.bio%>
+                        <%if(user.bio === "Tell the world a bit about yourself"){%>
+                            <p class="profileBio"><%=user.handle%> has not set a bio.
+                        <%}else{%>
+                        <p class="profileBio"><%=user.bio%>
+                        <%}%>
+                        </p>
+                        
                     <%}%>
-                    </p>
-                    
-                <%}%>
+                </div>
+                   
                
                         <div class="ProfileButtons">
                             <!-- Modal -->
@@ -183,7 +197,7 @@
                             </form>
                             <%}%>
                     <button type="button" class="btn-primary sendMessage" data-toggle="modal" data-target="#profileMessageModal">
-                        Send Message
+                        Message
                       </button>
                     <%}%>
                         </div>
@@ -191,7 +205,25 @@
                     </div>
 
                 </div>
-
+                <div class="mobileBio">
+                    <%if(session.handle === user.handle){%>
+                        <p class="profileBio"><textarea maxlength="150" id="changeBio" class=""
+                            readonly><%=user.bio%> </textarea>
+                            <a class="memberImage" data-toggle="tooltip" data-placement="top" title="Edit Bio">
+                                <span class="btn btn-primary editBio">Edit Bio
+                                </span>
+                            </a>
+                        </p>
+                    <%}else{%>
+                        <%if(user.bio === "Tell the world a bit about yourself"){%>
+                            <p class="profileBio"><%=user.handle%> has not set a bio.
+                        <%}else{%>
+                        <p class="profileBio"><%=user.bio%>
+                        <%}%>
+                        </p>
+                    <%}%>
+    
+                </div>
                 <div class="profileBody">
 
                     <div class="profileNav">
@@ -207,6 +239,7 @@
                     
             </div>
             </div>
+            
         </div>
        
         <div class="profile-info">
@@ -234,6 +267,7 @@
                             <%}%>
             </ul>
         </div>
+    </div>
     </div>
 </div>
 </div>
