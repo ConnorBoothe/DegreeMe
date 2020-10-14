@@ -70,10 +70,13 @@
                                     <h1 class="userProfileHandle"><%= user.handle%>
                                 <%}%>
                                         <% if(user.Tutor === true){%>
+                                        <input type="hidden" name="isTutor" value="true"/>
                                         <a class="memberImage" data-toggle="tooltip" data-placement="top"
                                             title="degreeMe Tutor">
                                             <img class="tutorBadge" src="../assets/img/tutorBadge.svg" />
                                         </a>
+                                        <%}else{%>
+                                            <input type="hidden" name="isTutor" value="fa;lse"/>
                                         <%}%>
                                                 
                                             </h1>
@@ -112,6 +115,7 @@
                 <div class="majorContainer">
                     <p class="profileMajor"><span class="majorSpan"><%=user.Major%></span></p>
                 </div>
+                    
                     <%if(session.handle === user.handle){%>
                     <p class="profileBio"><textarea maxlength="150" id="changeBio" class=""
                         readonly><%=user.bio%> </textarea>
