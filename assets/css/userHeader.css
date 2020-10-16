@@ -976,6 +976,7 @@ header{
     width:25px;
     padding-top:2px;
     float:left;
+    cursor:pointer;
 }
 .userProfileName{
     font-family: 'Open Sans', sans-serif;

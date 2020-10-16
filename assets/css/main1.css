@@ -1202,22 +1202,7 @@ Menu css
         font-size:14px!important;
         
     }
-    #changeBio{
-        outline:none!important;
-        padding:5px;
-        font-size:16px;
-        text-align:left;
-        color:white;
-        background-color:#1d1d1d;
-        border:none;
-        font-family: 'Open Sans', sans-serif;
-        width:450px;
-        resize:none;
-        position: relative;
-        overflow:hidden;
-        min-height:100px;
-      
-    }
+   
     .charCount{
         
         width:450px;
