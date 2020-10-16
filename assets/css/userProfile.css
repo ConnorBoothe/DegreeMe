@@ -291,25 +291,7 @@ max-width:300px;
     text-decoration:none!important;
     
 }
-button.followButton {
-    border-radius: 25px;
-    background-color: #007bff;
-    color: white;
-    border-style: none;
-    font-family: open sans, sans-serif;
-    padding-right: 25px;
-    padding-left: 25px;
-    float:left;
-}
-button.followingButton{
-    border-radius: 25px;
-    color: white;
-    font-family: open sans, sans-serif;
-    padding-right: 25px;
-    padding-left: 25px;
-    float:left;
-    
-}
+
 .following-class{
     border: 2px solid #007bff!important;
     background-color:#1d1d1d;
@@ -329,18 +311,7 @@ button.followingButton{
     margin-top:8px;
  
  }
-.sendMessage{
-    font-family: 'Open Sans', sans-serif;
-    border-radius:20px;
-    border-style: none;
-    padding-right: 15px;
-    padding-left: 15px;
-    padding-top:3px;
-    padding-bottom:3px;
-    margin-left:10px;
-    border: 2px solid #007bff!important;
 
-}
 .messageText{
     width:100%;
     background-color:#1d1d1d;
@@ -428,9 +399,7 @@ button.followingButton{
 .noTutorSesh{
     text-align:center;
 }
-.profile-item-list{
-    width:700px;
-}
+
 .similarStudentsImg{
     width:30px;
     margin-right:10px;
@@ -485,3 +454,386 @@ button.followingButton{
      width:150px!important;
      height:150px!important;
  }
+ .page-container{
+     background-color:#18191a!important;
+ }
+ @media only screen and (max-width: 1000px) {
+    .profileHeader{
+        width:100%!important;
+        text-align:left;
+
+    }
+    .header-wrapper{
+        margin-left:auto;
+        margin-right:auto;
+        text-align:center;
+        width:400px;
+    }
+ .profileContainer{
+    margin-left:0px!important;
+    padding-top:20px!important;
+    padding-left:0!important;
+    background-color:#1d1d1d;
+    width:100%!important;
+    text-align:center;
+ }
+ .profile-info{
+    color:white!important;
+    font-size:20px;
+    font-family: 'Open Sans', sans-serif;
+    width:100%!important;
+    padding-left:0;
+    padding-top:50px;
+    background-color:#18191a;
+}
+.profile-img{
+    width:75px!important;
+}
+.profile-img-container{
+    text-align:center;
+    margin-left:auto;
+    margin-right:auto;
+    display:inline-block;
+}
+.profile-img-container .img {
+    border-radius: 100%;
+    display: flex;
+    flex: 0 0 150px;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+ 
+.userProfileHandle1{
+    font-size:16px!important;
+    font-family: 'Open Sans', sans-serif;
+    color:#d4d4d4;
+    text-align:center;
+    width:100%!important;
+    margin-bottom:0px!important;
+    margin-top:20px!important;
+    
+}
+.userProfileHandle{
+    display:none!important;
+}
+.profile-name{
+    text-align:left!important;
+    position:relative!important;
+    left:0!important;
+    width:170px;
+}
+.tutorName{
+    font-size:16px!important;
+    padding-top:10px;
+    font-family: 'Open Sans', sans-serif;
+    color:white;
+    text-align:center;
+    width:100%!important;
+}
+.profileContainer{
+    margin-left:0px;
+    padding-top:80px;
+    padding-left:15%;
+    background-color:#18191a;
+    width:100%;
+ }
+ .connectionBody-container{
+    width:400px;
+    margin-left:150px!important;
+    text-align:left!important;
+    left:0!important;
+    
+}
+.desktopBio{
+    display:none;
+}
+.mobileBio{
+    margin-left:20px;
+    margin-top:50px;
+    width:100%;
+    background-color:#18191a;
+    text-align:left;
+}
+.profileBio{
+    font-size:17px;
+    text-align:left;
+    color:white;
+    background-color:#18191a;
+    border:none;
+    font-family: 'Open Sans', sans-serif;
+    width:100%;
+    resize:none;
+    position: relative;
+}
+.ProfileButtons{
+    text-align:left;
+    width:200px!important;
+    display:inline-block;
+         
+}
+.desktopMajor{
+    display:none;
+}
+.followModal{
+    background-color:#18191a!important;
+    border:none!important;
+    color:white!important;
+}
+.following-modal{
+    padding-left:15px;
+}
+.modal-content-follow{
+    background-color:#18191a!important;
+    color:white!important;
+    width:300px!important;
+    margin-left:50px!important;
+    margin-top:100px!important;
+}
+.sendMessage{
+    font-family: 'Open Sans', sans-serif;
+    border-radius:20px;
+    border-style: none;
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-top:3px;
+    padding-bottom:3px;
+    margin-left:70px;
+    font-size:13px;
+    border: 2px solid #007bff!important;
+
+}
+button.followButton {
+    border-radius: 25px;
+    background-color: #007bff;
+    color: white;
+    border-style: none;
+    font-family: open sans, sans-serif;
+    padding-right: 10px;
+    padding-left: 10px;
+    float:left;
+    font-size:13px;
+}
+button.followingButton{
+    border-radius: 25px;
+    color: white;
+    font-family: open sans, sans-serif;
+    padding-right: 10px;
+    padding-left: 10px;
+    float:none;
+    font-size:13px;
+    
+}
+.mobileCount{
+    font-size:22px!important;
+}
+.desktopFollow{
+    display:none;
+}
+.mobileMajorSpan{
+    text-align:center;
+    margin-top:10px;
+}
+.mobileMajorSpan p{
+    text-align:center;
+    font-size:14px!important;
+}
+.followForm{
+    width:30px!important;
+    margin-right:0!important;
+    float:left;
+
+}
+.profileBody{
+    margin-top:30px!important;
+
+}
+.courseTab{
+    width:100px!important;
+}
+.profile-ul{
+    margin-bottom:0!important;
+    height:100%;
+    text-align:left;
+    color:#d4d4d4;
+    position:relative;
+    left:0!important;
+   
+}
+.profile-ul li{
+    font-family: 'Open Sans', sans-serif;
+    width:100px!important;
+    font-size:14px!important;
+    text-align:center;
+    padding-left:5px!important;
+    padding-right:5px!important;
+
+    
+}
+.profile-item-list{
+    width:100%!important;
+}
+.spinner-container1{
+    width:100%!important;
+    text-align:center;
+    display:none;
+}
+.followers-text, .following-text{
+    font-size:14px!important;
+}
+}
+@media only screen and (min-width: 1000px) {
+    .tutorMiddle
+{
+   width:500px!important;
+   padding-top:20px!important;
+   text-align:left;
+}
+    .editBio{
+        position:absolute;
+        float:right;
+        cursor:pointer;
+        /* padding:5px;
+        width:80px; */
+        font-size:14px!important;
+        
+    }
+    
+    .profileBody{
+        margin-top:80px!important;
+
+    }
+    .profile-ul{
+        margin-bottom:0!important;
+        height:100%;
+        text-align:left;
+        color:#d4d4d4;
+        position:relative;
+        left:0!important;
+        margin-top:50px;
+       
+    }
+    .mobileCount{
+        display:none!important;
+    }
+    .userProfileHandle1{
+        display:none;
+    }
+    .profile-item-list{
+        width:700px;
+    }
+    .sendMessage{
+        font-family: 'Open Sans', sans-serif;
+        border-radius:20px;
+        border-style: none;
+        padding-right: 15px;
+        padding-left: 15px;
+        padding-top:3px;
+        padding-bottom:3px;
+        margin-left:10px;
+        border: 2px solid #007bff!important;
+    
+    }
+    .mobileMajorSpan{
+        display:none;
+    }
+    .profileBio{
+        font-size:18px!important;
+        text-align:left;
+        color:white;
+        background-color:#1d1d1d;
+        border:none;
+        font-family: 'Helvetica';
+        width:100%;
+        resize:none;
+        position: relative;
+    }
+    
+    .mobileBio{
+        display:none;
+    }
+    .profileContainer{
+        margin-left:250px!important;
+        
+       
+        background-color:#18191a;
+        width:100%;
+     }
+     .profile-header{
+         background-color:#1d1d1d!important;
+         padding-left:10%;
+         padding-top:80px;
+     }
+    .tutorName{
+        font-size:18px;
+        padding-top:10px;
+        font-family: 'Open Sans', sans-serif;
+        color:white;
+        text-align:center;
+        width:100%!important;
+    }
+    .profile-name{
+        text-align:left!important;
+        position:relative!important;
+        left:0!important;
+        width:170px;
+    }
+    .userProfileHandle{
+        font-size:16px!important;
+        font-family: 'Open Sans', sans-serif;
+        color:#d4d4d4;
+        text-align:center;
+        width:100%!important;
+        margin-bottom:0px!important;
+        margin-top:20px!important;
+        
+    }
+    
+    .profile-info{
+        color:white!important;
+        font-size:20px;
+        font-family: 'Open Sans', sans-serif;
+        width:100%;
+        padding-top:50px;
+        background-color:#18191a;
+        min-height:100vh;
+        padding-left:10%;
+    }
+    .profile-img{
+        width:150px!important;
+    }
+    .profile-img-container{
+        text-align:center;
+        margin-left:auto;
+        margin-right:auto;
+        display:inline-block;
+    }
+    .profile-img-container .img {
+        border-radius: 100%;
+        display: flex;
+        flex: 0 0 150px;
+        justify-content: center;
+        overflow: hidden;
+        position: relative;
+      }
+      button.followButton {
+        border-radius: 25px;
+        background-color: #007bff;
+        color: white;
+        border-style: none;
+        font-family: open sans, sans-serif;
+        padding-right: 25px;
+        padding-left: 25px;
+        float:left;
+    }
+    button.followingButton{
+        border-radius: 25px;
+        color: white;
+        font-family: open sans, sans-serif;
+        padding-right: 25px;
+        padding-left: 25px;
+        float:left;
+        
+    }
+
+}

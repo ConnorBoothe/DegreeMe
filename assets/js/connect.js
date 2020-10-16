@@ -66,12 +66,18 @@ function follow(b, handle, status, image, modalId){
                 $(button).attr("data-handle",handle);
                 var likeCount = parseInt($(".followers-list").children().eq(0).children().eq(0).children().eq(0).text());
                 likeCount++;
-                if(likeCount == 1){
-                  $(".followers-list").children().eq(0).children().eq(0).children().eq(0).text(likeCount + " Follower")
+                if(window.innerWidth > 1000){
+                  if(likeCount == 1){
+                    $(".desktopFollow").eq(0).text(likeCount)
+                  }
+                  else{
+                    $(".followers-list").children().eq(0).children().eq(0).children().eq(0).text(likeCount + " Followers")
+                  }
                 }
                 else{
-                  $(".followers-list").children().eq(0).children().eq(0).children().eq(0).text(likeCount + " Followers")
+                    $(".mobileCount").eq(0).text(likeCount)
                 }
+                
                
               }else{
                 $(button).html("Follow");
@@ -90,12 +96,17 @@ function follow(b, handle, status, image, modalId){
 
                 var likeCount = parseInt($(".followers-list").children().eq(0).children().eq(0).children().eq(0).text());
                 likeCount--;
-                if(likeCount == 1){
-                  $(".followers-list").children().eq(0).children().eq(0).children().eq(0).text(likeCount + " Follower")
-                }
-                else{
-                  $(".followers-list").children().eq(0).children().eq(0).children().eq(0).text(likeCount + " Followers")
-                }
+                if(window.innerWidth > 1000){
+                  if(likeCount == 1){
+                    $(".desktopFollow").eq(0).text(likeCount)
+                  }
+                  else{
+                    $(".desktopFollow").eq(0).text(likeCount)
+                  }
+              }
+              else{
+                $(".mobileCount").eq(0).text(likeCount)
+              }
               }
             },
             500:  function(action, msg) {
