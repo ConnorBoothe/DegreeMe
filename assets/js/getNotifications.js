@@ -1,4 +1,85 @@
+function generateMobileProfileMenu(){
+    var profileHTML = "<div class='displayMobileInfo'></div><div class='mobileProfileMenu'><img class='mobileMenuProfileImg' src='"+$(".userProfileImg").attr("src")+"'/>";
+    //if tutor
+    profileHTML += 
+    "<ul>"+
+        "<li class='mobileBalanceLi'><span><h1 class='mobileBalance'>$100.00</h1><span class='sub-balance-text'> Available</span> </span></li>"+
+        "<li class='mobileBalanceLi'><span><h1 class='mobileBalance'>$199.00</h1><span class='sub-balance-text'> Pending</span></span></li>"+
+    "</ul>"+
+    "<div class='mobileProfileMenuBody'>"+
+        "<ul class='body-ul'>"+
+            "<li class='myCourses'>"+
+                '<svg width="1.25em" height="1.25em" viewBox="0 0 16 16" class="bi bi-bookmark-star-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
+                '<path fill-rule="evenodd" d="M4 0a2 2 0 0 0-2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4zm4.16 4.1a.178.178 0 0 0-.32 0l-.634 1.285a.178.178 0 0 1-.134.098l-1.42.206a.178.178 0 0 0-.098.303L6.58 6.993c.042.041.061.1.051.158L6.39 8.565a.178.178 0 0 0 .258.187l1.27-.668a.178.178 0 0 1 .165 0l1.27.668a.178.178 0 0 0 .257-.187L9.368 7.15a.178.178 0 0 1 .05-.158l1.028-1.001a.178.178 0 0 0-.098-.303l-1.42-.206a.178.178 0 0 1-.134-.098L8.16 4.1z"/>'+
+                '</svg>'+
+                "<span class='mobileMenuText'>My Courses</span>"+
+            "</li>"+
+            "<li>"+
+                '<svg width="1.25em" height="1.25em" viewBox="0 0 16 16" class="bi bi-people-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
+                '<path fill-rule="evenodd" d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>'+
+                '</svg>'+
+                "<span class='mobileMenuText'>My Groups</span>"+
+            "</li>"+
+            "<li>"+
+            '<svg width="1.25em" height="1.25em" viewBox="0 0 16 16" class="bi bi-hourglass-split" fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
+            '<path fill-rule="evenodd" d="M2.5 15a.5.5 0 1 1 0-1h1v-1a4.5 4.5 0 0 1 2.557-4.06c.29-.139.443-.377.443-.59v-.7c0-.213-.154-.451-.443-.59A4.5 4.5 0 0 1 3.5 3V2h-1a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1h-1v1a4.5 4.5 0 0 1-2.557 4.06c-.29.139-.443.377-.443.59v.7c0 .213.154.451.443.59A4.5 4.5 0 0 1 12.5 13v1h1a.5.5 0 0 1 0 1h-11zm2-13v1c0 .537.12 1.045.337 1.5h6.326c.216-.455.337-.963.337-1.5V2h-7zm3 6.35c0 .701-.478 1.236-1.011 1.492A3.5 3.5 0 0 0 4.5 13s.866-1.299 3-1.48V8.35zm1 0c0 .701.478 1.236 1.011 1.492A3.5 3.5 0 0 1 11.5 13s-.866-1.299-3-1.48V8.35z"/>'+
+            '</svg>'+
+            "<span class='mobileMenuText'>Upcoming Tutoring Sessions</span></li>"+
+            "<li>"+
+                '<svg width="1.25em" height="1.25em" viewBox="0 0 16 16" class="bi bi-briefcase-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
+                '<path fill-rule="evenodd" d="M0 12.5A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5V6.85L8.129 8.947a.5.5 0 0 1-.258 0L0 6.85v5.65z"/>'+
+                '<path fill-rule="evenodd" d="M0 4.5A1.5 1.5 0 0 1 1.5 3h13A1.5 1.5 0 0 1 16 4.5v1.384l-7.614 2.03a1.5 1.5 0 0 1-.772 0L0 5.884V4.5zm5-2A1.5 1.5 0 0 1 6.5 1h3A1.5 1.5 0 0 1 11 2.5V3h-1v-.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5V3H5v-.5z"/>'+
+                '</svg>'+
+                "<span class='mobileMenuText'>Courses I'm Tutoring In"+
+            "</li>"+
+            "<li>"+
+                '<svg width="1.25em" height="1.25em" viewBox="0 0 16 16" class="bi bi-calendar-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
+                '<path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V5h16V4H0V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5z"/>'+
+                '</svg>'+
+                "<span class='mobileMenuText'>My Schedule</span>"+
+            "</li>"+
+            "<li>"+
+                '<svg width="1.25em" height="1.25em" viewBox="0 0 16 16" class="bi bi-star-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
+                '<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>'+
+                '</svg>'+
+                "<span class='mobileMenuText'>My Reviews</span>"+
+            "</li>"+
+
+        "</ul>"+
+        "<ul class='bottom-ul-mobile'>"+
+            "<li><button class='btn btn-primary'>Customer Support</button></li>"+
+            "<li><a href='/logout' class='btn btn-danger'>Logout</a></li>"+
+        "</ul>"+
+    "</div>";
+    profileHTML += "</div>";
+    return profileHTML;
+
+}
+
 $(document).ready(function(){
+    //get my courses and groups on mobile
+    $("#showNotifications").on("click",".myCourses",function(){
+        payload = {
+            userId:$("input[name='userId']").val()
+        }
+        $.ajax({
+            url: "/mobileCourses",
+            type: 'POST',
+            data: JSON.stringify(payload),
+            headers: {
+              "Content-Type": "application/json"
+            }, statusCode: {
+              202: function (result) {
+                  console.log(result.courses)
+              },
+              500: function (result) {
+                alert("500 " + result.responseJSON.err);
+              },
+            },
+          });
+        $(".displayMobileInfo").show();
+
+    })
     $.ajax({
         url: '/API/notificationCount' ,
         method: 'GET',
@@ -13,6 +94,14 @@ $(document).ready(function(){
                 $(".bdge").text(res);  
             } 
     });
+    //get user settings mobile view
+    $(".userProfileImg").on("click", function(){
+        if(window.innerWidth < 1000){
+            //get users courses
+            $('#showNotifications').html(generateMobileProfileMenu());
+            $('#showNotifications').show();
+        }
+    })
     $('.bell').on("click",function(){
         payload = {
             handle: $('.userProfileName').text(),

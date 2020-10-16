@@ -592,4 +592,8 @@ module.exports = class UserDB {
         var UserDB = mongoose.model('UserDB',userDBSchema);
         return UserDB.find({handle: handle}, "email");
     }
+    getMyCourses(id){
+        var UserDB = mongoose.model('UserDB',userDBSchema);
+        return UserDB.findOne({_id: id}, "myCourses");
+    }
 }
