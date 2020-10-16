@@ -14,7 +14,7 @@ function generateMobileProfileMenu(){
                 '</svg>'+
                 "<span class='mobileMenuText'>My Courses</span>"+
             "</li>"+
-            "<li>"+
+            "<li class='myGroups'>"+
                 '<svg width="1.25em" height="1.25em" viewBox="0 0 16 16" class="bi bi-people-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
                 '<path fill-rule="evenodd" d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>'+
                 '</svg>'+
@@ -56,6 +56,43 @@ function generateMobileProfileMenu(){
 
 }
 
+function formatCourses(courses){
+    var courseData = courses.myCourses;
+    var courses = "<div class='mobileCourses'><h1>"+
+    '<span class="backToMenu"><svg width="1.25em" height="1.25em" viewBox="0 0 16 16" class="bi bi-arrow-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
+    '<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>'+
+    '</svg></span>'+
+    "My Courses</h1>";
+    courses += "<div class='mobile-courses-container'>"+
+                    "<ul>";
+    for(x in courseData){
+        courses += "<li>"+
+        '<a href="/course/'+courseData[x].courseName+'"><p class="myCoursesText">'+courseData[x].courseName+'</p>'+
+            '<p class="myCoursesSubText">'+courseData[x].courseCode+'</p></a>'+
+        "</li>";
+    }
+    courses+="</ul></div></div>";
+    return courses;
+}
+function formatMobileGroups(groups){
+    var groupData = groups.StudyGroups;
+    console.log(groupData)
+    var groups = "<div class='mobileCourses'><h1>"+
+    '<span class="backToMenu"><svg width="1.25em" height="1.25em" viewBox="0 0 16 16" class="bi bi-arrow-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
+    '<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>'+
+    '</svg></span>'+
+    "My Groups</h1>";
+    groups += "<div class='mobile-courses-container'>"+
+                    "<ul class='mobileGroupsList'>";
+    for(x in groupData){
+        groups += "<li>"+
+        '<a href="/Group/'+groupData[x].studyGroupId+'">'+groupData[x].studyGroupName+'</a>'+
+        "</li>";
+    }
+    groups+="</ul></div></div>";
+    return groups;
+}
+
 $(document).ready(function(){
     //get my courses and groups on mobile
     $("#showNotifications").on("click",".myCourses",function(){
@@ -70,16 +107,48 @@ $(document).ready(function(){
               "Content-Type": "application/json"
             }, statusCode: {
               202: function (result) {
-                  console.log(result.courses)
+               
+                $(".displayMobileInfo").html(formatCourses(result.courses))
+                  $(".displayMobileInfo").show();
               },
               500: function (result) {
                 alert("500 " + result.responseJSON.err);
               },
             },
           });
-        $(".displayMobileInfo").show();
+       
 
     })
+
+    $("#showNotifications").on("click",".myGroups",function(){
+        payload = {
+            userId:$("input[name='userId']").val()
+        }
+        $.ajax({
+            url: "/mobileGroups",
+            type: 'POST',
+            data: JSON.stringify(payload),
+            headers: {
+              "Content-Type": "application/json"
+            }, statusCode: {
+              202: function (result) {
+               console.log(result.groups)
+                 $(".displayMobileInfo").html(formatMobileGroups(result.groups))
+                $(".displayMobileInfo").show();
+              },
+              500: function (result) {
+                alert("500 " + result.responseJSON.err);
+              },
+            },
+          });
+       
+
+    })
+    //go back to mobile menu
+    
+    $("#showNotifications").on("click",".backToMenu",function(){
+        $('#showNotifications').html(generateMobileProfileMenu());
+    });
     $.ajax({
         url: '/API/notificationCount' ,
         method: 'GET',

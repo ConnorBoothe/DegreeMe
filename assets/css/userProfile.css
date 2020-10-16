@@ -458,6 +458,25 @@ max-width:300px;
      background-color:#18191a!important;
  }
  @media only screen and (max-width: 1000px) {
+     .mobile-courses-container{
+         margin-top:25px;
+     }
+     .mobileGroupsList{
+         margin-left:20px!important;
+     }
+     .mobileGroupsList li a{
+         color:white!important;
+     }
+     .backToMenu{
+         margin-right:10px;
+         cursor:pointer;
+     }
+     .mobileCourses h1{
+         font-size:22px;
+         color:white;
+         margin-top:20px;
+         margin-left:20px;
+     }
     .profileHeader{
         width:100%!important;
         text-align:left;

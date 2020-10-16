@@ -907,5 +907,14 @@ router.post("/siteWideSearch",
         })
         
     })
+      router.post("/mobileGroups", function(req, res){
+        users.getMyGroups(req.body.userId)
+        .then(function(groups){
+            res.status(202).json({
+                groups: groups,
+            }).end();
+        })
+        
+    })
 
 module.exports = router;
