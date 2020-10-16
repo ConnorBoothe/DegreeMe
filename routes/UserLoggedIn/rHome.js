@@ -898,4 +898,14 @@ router.post("/siteWideSearch",
      console.log("EMAIL INVITE RAN")
     })
 
+    router.post("/mobileCourses", function(req, res){
+        users.getMyCourses(req.body.userId)
+        .then(function(courses){
+            res.status(202).json({
+                courses: courses,
+            }).end();
+        })
+        
+    })
+
 module.exports = router;
