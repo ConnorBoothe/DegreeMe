@@ -13,13 +13,13 @@ $(document).ready(function(){
       }
     }
     if( todayArray[1] == dateArray[1] & todayArray[2] == dateArray[2] ){
-      return "Published Today";
+      return "Today";
     }
     else if(month == ""){
       return "";
     }
     else{
-      return "Published " + month + " " + dateArray[2];
+      return month + " " + dateArray[2];
     }
     
    

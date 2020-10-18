@@ -11,6 +11,7 @@
     display: -webkit-inline-box;
     margin-bottom:50px;
     border-radius:10px;
+    margin-left:0;
     
 }
 .reviewBlock{  
@@ -33,11 +34,7 @@
 .courseText {
     top: 6px;
 }
-.infoItem{
-    width:50%;
-    margin-right:0!important;
-    margin-bottom:10px;
-}
+
 .hostName{
     color:white;
     
@@ -47,12 +44,40 @@
     width:10%!important;
     position:absolute;
 }
-.tutorBlockBody{
-    text-align: left;
-    width: 65%;
-    margin-bottom: 0;
-    margin-top:25px;
-    margin-left:0;
-    float: right;
-    color: #a3a3a3;
+
+@media only screen and (max-width: 1000px) {
+    .courseText{
+        font-size:14px!important;
+    }
+    .tutorBlockBody{
+        text-align: left;
+        width: 55%;
+        margin-bottom: 0;
+        margin-top:15px;
+        margin-left:0;
+        float: right;
+        color: #a3a3a3;
+    }
+    .infoItem{
+        width:100%;
+        margin-right:0!important;
+        margin-bottom:10px;
+    }
+}
+@media only screen and (min-width: 1000px) {
+    .tutorBlockBody{
+        text-align: left;
+        width: 65%;
+        margin-bottom: 0;
+        margin-top:25px;
+        margin-left:0;
+        float: right;
+        color: #a3a3a3;
+    }
+    .infoItem{
+        width:50%;
+        margin-right:0!important;
+        margin-bottom:10px;
+    }
+
 }

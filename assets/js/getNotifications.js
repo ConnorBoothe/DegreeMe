@@ -1,3 +1,55 @@
+function orderDays(currDay, dayArray){
+   
+    var days = [];
+    for(var x = 0; x< dayArray.length; x++){
+      days.push((dayArray[(x+currDay)%7]))
+    }
+    return days;
+ }
+ function staggerDates(stagger){
+    var currDate = new Date();
+    currDate.setDate(currDate.getDate()+(stagger*7));
+  }
+  
+  function orderDates(stagger){
+     var dates = [];
+     var datesFinal = [];
+     var currDate = new Date();
+     currDate.setDate(currDate.getDate()+(stagger*7));
+     for(var x = 0; x< 7; x++){
+        if( x == 0){
+           currDate.setDate(currDate.getDate());
+           var prettyDateArr = currDate.toString().split(" ");
+            if(prettyDateArr[2].split("")[0] === "0"){
+            dates.push(prettyDateArr[1] + " " +prettyDateArr[2].split("")[1] )
+          }else{
+            dates.push(prettyDateArr[1] + " " +prettyDateArr[2])
+          }
+        }else{
+     
+           currDate.setDate(currDate.getDate() +  1);
+           var prettyDateArr = currDate.toString().split(" ");
+           if(prettyDateArr[2].split("")[0] === "0"){
+            dates.push(prettyDateArr[1] + " " +prettyDateArr[2].split("")[1] )
+          }else{
+            dates.push(prettyDateArr[1] + " " +prettyDateArr[2])
+          }
+        }
+      
+     }
+     return dates;
+  }
+  
+  function orderTimes(currDay, dayArray){
+     
+     var days = [];
+        for(var x = 0; x< dayArray.length; x++){
+  
+       days.push(((x+currDay)%7))
+     }
+     return days;
+  }
+
 function generateMobileProfileMenu(){
     var profileHTML = "<div class='displayMobileInfo'></div><div class='mobileProfileMenu'><img class='mobileMenuProfileImg' src='"+$(".userProfileImg").attr("src")+"'/>";
     //if tutor
@@ -32,7 +84,7 @@ function generateMobileProfileMenu(){
                 '</svg>'+
                 "<span class='mobileMenuText'>Courses I'm Tutoring In"+
             "</li>"+
-            "<li>"+
+            "<li class='mySchedule'>"+
                 '<svg width="1.25em" height="1.25em" viewBox="0 0 16 16" class="bi bi-calendar-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
                 '<path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V5h16V4H0V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5z"/>'+
                 '</svg>'+
@@ -141,11 +193,8 @@ $(document).ready(function(){
               },
             },
           });
-       
-
     })
     //go back to mobile menu
-    
     $("#showNotifications").on("click",".backToMenu",function(){
         $('#showNotifications').html(generateMobileProfileMenu());
     });

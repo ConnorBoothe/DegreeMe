@@ -1201,6 +1201,57 @@ input[name="searchType"]{
     }
   }
 @media only screen and (max-width: 1000px) {
+    .daySelect-container{
+        margin-top:20px;
+        margin-bottom:20px;
+    }
+    .daySelect-container select{
+        background-color:#3a3b3c;
+        font-family:"Open sans","sans-serif";
+        outline:0;
+        color:white;
+        border-radius:10px;
+        border:none!important;
+        font-size:15px;
+        padding-left:7px;
+        padding-right:7px!important;
+    }
+    .daySelect-container option{
+        padding-left:7px;
+        font-size:15px;
+        border:none!important;
+    }
+    .dateButtons{
+        font-size:15px;
+        margin-left:5px!important;
+        margin-right:5px!important;
+        margin-bottom:0px!important;
+        padding:5px!important;
+        cursor:pointer;
+        border-radius:10px;
+        font-family: 'Open Sans', sans-serif;
+    }
+    .dateButtons p{
+        margin-bottom:0!important;
+    }
+    .day-container div{
+        padding-left:20px;
+    }
+    .day-container label{
+        width:50px;
+    }
+    .dateBtn-container{
+        margin-left:auto;
+        margin-right:auto;
+        text-align:center;
+    }
+    .weekOfTxt{
+        font-size:16px!important;
+        text-align:center;
+    }
+    #calendarContainer td{
+        display:block!important;
+    }
     .post-selection-menu li{
         padding-bottom:0px!important;
         cursor:pointer;

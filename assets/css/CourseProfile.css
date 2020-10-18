@@ -1,52 +1,19 @@
-.hostName{
-    font-size:16px!important;
-}
 .studentImage{
      width:50px;
      margin-right:10px;
      padding-top:20px;
 
 }
-.student-container ul li{
-  list-style-type:none;
-    background-color:#242526;
-    padding:5px;
-    margin-bottom:15px;
-    padding-left:15px;
-    padding-right:15px;
-    border-radius:5px;
-    box-shadow: 1px 2px black;
-    cursor:pointer;
-}
-.bioTxt{
-    font-size:16px!important;
-    color:#d4d4d4;
-    padding-left:50px!important;
-}
+
+
 .student-container a{
     color:white;
 }
 .student-container a:hover{
     color:white;
 }
-.student-container{
-    text-align:left;
-    margin-left:auto;
-    margin-right:auto;
-    width:500px;
- 
-}
-.student-container h3{
-    font-size:18px;
-    margin-bottom:0!important;
-}
-.student-container h5{
-    font-size:16px;
-    padding-left:65px;
-    color:#d4d4d4;
-    margin-top:-20px;
 
-}
+
 .userQuestion{
     text-align:left;
     color:white;
@@ -58,16 +25,8 @@
 .disc-main-img{
     width:50px;
 }
-.questionText{
-    font-size:16px;
-    margin-top:20px;
-    margin-right:20px;
 
-}
-.course-profile-header{
-    padding-left:0;
-    width:800px;
-}
+
 .courseProfileContainer1{
     margin-left:250px;
     padding-top:20px;
@@ -100,13 +59,7 @@
     margin-left:20px;
 }
 
-.dateText{
-    font-size:14px;
-    float:right;
-    margin-right:40px;
-    color:#d4d4d4;
-    font-weight:100!important;
-}
+
 .question{
     margin-top:30px;
 }
@@ -131,15 +84,6 @@ input[name="anonymous"]{
 }
 .modal-footer{
     border-top:1px solid white!important;
-}
-
-
-
-.profile-wrapper{
-    background-color: #18191a;
-    padding-top:55px;
-    height:200px;
-    position:relative;
 }
 
 .userName-text{
@@ -186,20 +130,7 @@ input[name="anonymous"]{
     padding-left:15px;
     
 }
-.followButton{
-    float:right;
-    margin-top:25px;
-    border-radius:40px!important;   
-    font-size:14px!important;
-    font-family: 'Open Sans', sans-serif;
-}
-.followingButton{
-    float:right;
-    margin-top:25px;
-    border-radius:40px!important;   
-    font-size:14px!important;
-    font-family: 'Open Sans', sans-serif;
-}
+
 .color-dark{
     background-color:#18191a!important;
 }
@@ -297,4 +228,323 @@ input[name="anonymous"]{
 .course-noStudents, .noGroups{
     font-size:18px;
     color:#d4d4d4;
+}
+
+@media only screen and (max-width: 1000px) {
+    .profile-pic{
+        width:80px!important;
+        padding-top:10px;
+    }
+    .viewTutorMobile{
+        margin-top:10px;
+        font-size:14px!important;
+        border-radius:20px;
+    }
+    .tutorBlockHeader{
+        text-align:center;
+        margin-bottom:5px;
+        margin-top:10px;
+        float:left;
+        margin-left:10px!important;
+
+    }
+    .question{
+        padding-bottom:100px;
+    }
+    .joinCourse{
+        font-size:12px!important;
+        margin-right:20px;
+        margin-top:5px;
+    }
+    .course-profile-header{
+        padding-left:0;
+        width:100%;
+    }
+    .CourseHeader-wrapper{
+        width:100%;
+        text-align:left;
+        border-radius:10px;
+    }
+    .courseProfileContainer{
+        margin-left:0;
+        background-color: #18191a;
+        padding-left:0!important;
+        padding-right:0px!important;
+    }
+    
+    .desktopCount{
+        display:none;
+    }
+    .courseCodeTxt{
+        display:none;
+    }
+    .userProfileHandle1{
+        font-size:16px!important;
+        font-family: 'Open Sans', sans-serif;
+        color:#d4d4d4;
+        text-align:center;
+        width:100%!important;
+        margin-bottom:0px!important;
+        margin-top:20px!important;
+        
+    }
+    .CourseTitle{
+        margin-top:10px;
+    }
+    .profile-wrapper{
+        background-color: #18191a;
+        padding-top:0px;
+        height:200px;
+        position:relative;
+    }
+    .CourseTitle .courseName{
+        font-size:18px!important;
+        width:330px;
+    }
+    .course-profile-info{
+        color:white!important;
+        font-size:20px;
+        font-family: 'Open Sans', sans-serif;
+        width:100%;
+        text-align:center;
+        margin-left:0px;
+        padding-top:50px;
+        text-align:center;
+        
+    }
+    .profile-ul{
+        margin-bottom:0!important;
+        height:100%;
+        text-align:left;
+        color:#d4d4d4;
+        position:relative;
+        left:0!important;
+       
+    }
+    .profile-ul li{
+        font-family: 'Open Sans', sans-serif;
+        font-size:13px!important;
+        text-align:center;
+        padding-left:5px!important;
+        padding-right:5px!important;
+        display:inline-block;
+        width:85px;
+    
+        
+    }
+    .numStudents{
+        margin-left:5px;
+        font-size:12px!important;
+    }
+    .CourseTitle{
+        margin-top:30px;
+        width:100%!important;
+    }
+    .question-container{
+        margin-right:0!important;
+    }
+    .DiscussionTitle{
+        font-size:20px!important;
+        margin-bottom:25px;
+        margin-top:0px;
+        text-align:center;
+    }
+    .student-container{
+        text-align:left;
+        margin-left:auto;
+        margin-right:auto;
+        width:100%;
+        padding-bottom:75px;
+     
+    }
+    .student-container h3{
+        font-size:16px;
+        margin-bottom:0!important;
+    }
+    .student-container h5{
+        font-size:14px;
+        padding-left:65px;
+        color:#d4d4d4;
+        margin-top:-20px;
+    
+    }
+    .followButton{
+        float:right;
+        margin-top:25px;
+        border-radius:40px!important;   
+        font-size:12px!important;
+        font-family: 'Open Sans', sans-serif;
+    }
+    .followingButton{
+        float:right;
+        margin-top:25px;
+        border-radius:40px!important;   
+        font-size:12px!important;
+        font-family: 'Open Sans', sans-serif;
+    }
+    .bioTxt{
+        font-size:14px!important;
+        color:#d4d4d4;
+        padding-left:50px!important;
+    }
+    .student-container ul li{
+        list-style-type:none;
+          background-color:#18191a;
+          padding:5px;
+          margin-bottom:15px;
+          padding-left:15px;
+          padding-right:15px;
+          border-radius:0px;
+         border-bottom:1px solid #a9a9a9;
+          cursor:pointer;
+      }
+      .askQuestion{
+          font-size:14px;
+      }
+      .questionText{
+        font-size:14px;
+        margin-top:20px;
+        margin-right:20px;
+    
+    }
+    .dateText{
+        font-size:12px;
+        float:right;
+        margin-right:40px;
+        color:#d4d4d4;
+        font-weight:100!important;
+        margin-top:15px!important;
+    }
+    .responseLink{
+        font-size:14px!important;
+    }
+    .hostName{
+        font-size:14px!important;
+    }
+}
+@media only screen and (min-width: 1000px) {
+    .viewTutorMobile{
+       display:none;
+    }
+    .hostName{
+        font-size:16px!important;
+    }
+    .responseLink{
+        font-size:16px!important;
+    }
+    .dateText{
+        font-size:14px;
+        float:right;
+        margin-right:40px;
+        color:#d4d4d4;
+        font-weight:100!important;
+    }
+    .questionText{
+        font-size:16px;
+        margin-top:20px;
+        margin-right:20px;
+    
+    }
+    .student-container h3{
+        font-size:18px;
+        margin-bottom:0!important;
+    }
+    .student-container h5{
+        font-size:16px;
+        padding-left:65px;
+        color:#d4d4d4;
+        margin-top:-20px;
+    
+    }
+    .student-container{
+        text-align:left;
+        margin-left:auto;
+        margin-right:auto;
+        width:500px;
+     
+    }
+    .DiscussionTitle{
+        font-size:28px!important;
+        margin-bottom:25px;
+        margin-top:50px;
+        text-align:center;
+    }
+    .course-profile-info{
+        color:white!important;
+        font-size:20px;
+        font-family: 'Open Sans', sans-serif;
+        width:80%;
+        text-align:center;
+        margin-left:250px;
+        padding-left:15%;
+        padding-right:15%;
+        padding-top:50px;
+        padding-bottom:75px!important;
+        text-align:center;
+        
+    }
+    .question-container{
+        margin-right:10%!important;
+    }
+    .CourseTitle{
+        margin-top:30px;
+        max-width:900px!important;
+    }
+    .profile-wrapper{
+        background-color: #18191a;
+        padding-top:55px;
+        height:200px;
+        position:relative;
+    }
+    .CourseTitle .courseName{
+        font-size:24px!important;
+    }
+    .mobileCount{
+        display:none;
+    }
+    .numStudents{
+        margin-left:15px;
+        font-size:14px!important;
+        float:right;
+    }
+    .CourseHeader-wrapper{
+        width:550px;
+        text-align:left;
+        border-radius:10px;
+ 
+    }
+    .course-profile-header{
+        padding-left:0;
+        width:800px;
+    }
+    .followButton{
+        float:right;
+        margin-top:25px;
+        border-radius:40px!important;   
+        font-size:14px!important;
+        font-family: 'Open Sans', sans-serif;
+    }
+    .followingButton{
+        float:right;
+        margin-top:25px;
+        border-radius:40px!important;   
+        font-size:14px!important;
+        font-family: 'Open Sans', sans-serif;
+    }
+    .bioTxt{
+        font-size:16px!important;
+        color:#d4d4d4;
+        padding-left:50px!important;
+    }
+    .student-container ul li{
+        list-style-type:none;
+          background-color:#242526;
+          padding:5px;
+          margin-bottom:15px;
+          padding-left:15px;
+          padding-right:15px;
+          border-radius:5px;
+          box-shadow: 1px 2px black;
+          cursor:pointer;
+      }
 }

@@ -404,6 +404,7 @@ module.exports = class UserDB {
     }
     //add courses to my courses array
     addCourse(handle, course, courseId, courseCode, callback){
+        console.log("handle: ",  handle);
         var UserDB = mongoose.model('UserDB',userDBSchema);
         UserDB.find({handle: handle}).exec((err,docs)=>{
             var exists = false;
