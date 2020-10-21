@@ -26,17 +26,12 @@ input:-webkit-autofill:active  {
 .memberHandle{
     font-size:14px!important;
 }
-.adminHandle{
-    margin-bottom:0;
-    margin-top:0!important;
-}
+
 .subjectName{
     font-size: medium;
     color: #a9a9a9;
 }
-.groupAvatar{
-    width:110px;
-}
+
 .admin{
     color:#d4d4d4;
     font-style: italic;
@@ -44,18 +39,9 @@ input:-webkit-autofill:active  {
     margin-top:-30px!important;
     margin-left:10px;
 }
-.groupDescription{
-    font-family: 'Open Sans', sans-serif;
-    font-size:15px!important;
-    margin-top:30px;
-    margin-right:50px!important;
-}
-.memberCount{
-    font-size:14px!important;
-}
-.profileBody{
-    margin-top:30px;
-}
+
+
+
 .courseTab{
     width:250px;
 }
@@ -67,18 +53,8 @@ input:-webkit-autofill:active  {
      width:170px!important;
      color:#d4d4d4!important;
  }
-.group-title{
-    float:left;
-    text-align:center;
 
-}
-.groupName{
-    font-size:22px!important;
-    font-family: 'Open Sans', sans-serif;
-    margin-right:5px;
-    min-width: 200px;
-    margin-top:10px;
-}
+
 .meetup-item-container{
     background-color:#121212;
     margin-bottom:20px;
@@ -104,13 +80,7 @@ input:-webkit-autofill:active  {
     padding-left:7px;
     padding-top:3px;
 }
-.studyGroupProfileContainer{
-    margin-left:250px;
-    padding-top:20px;
-    padding-bottom:10px;
-    background-color:#1d1d1d;
-    margin-right:200px;
- }
+
  .studyGroupMeetupsHeader{
      font-size:24px;
      font-family: 'Open Sans', sans-serif;
@@ -228,10 +198,7 @@ input:-webkit-autofill:active  {
    margin-top:60px;
    margin-left:20px;
 }
-.course-profile-info{
-    text-align:left!important;
-    margin-right:200px!important;
-}
+
 .studyGroupProfileButtons button, .studyGroupProfileButtons form, .studyGroupProfileButtons a{
     display:inline-block;
     margin-top:-100px;
@@ -244,21 +211,8 @@ input:-webkit-autofill:active  {
     margin-top:7px;
     
 }
-.studyGroupHeader-wrapper{
-   
-    text-align:left;
-    margin-left:20%;
-    border-radius:10px;
 
-}
-.studyGroupHeader-wrapper div{
-    display:inline-block;
-}
-.membersContainer{
-    width:100%!important;
-    display:block!important;
-    margin-left:20px;
-}
+
 .membersContainer img{
     float:left;
     width:35px;
@@ -370,20 +324,8 @@ button{
 .zoomErrTxt{
     margin-left:20px;
 }
-.groupSideBar{
-    position:fixed;
-    right:0!important;
-    background-color:#1d1d1d;
-    height:100%;
-    margin-top:55px;
-    width:220px;
-    padding-bottom:50px;
-    overflow-y: auto;
-}
-.groupMember-container{
-    display:block;
-    margin-top:10px;
-}
+
+
 .groupMemberCount{
     padding-left:20px;
     padding-top:10px;
@@ -403,4 +345,206 @@ button{
 .location-item{
     color:#d4d4d4!important;
     display:inline-block;
+}
+@media only screen and (max-width: 1000px) {
+    .studyGroupProfileButtons{
+        margin-top:0px;
+     }
+    .joinButton{
+        font-family: 'Open Sans', sans-serif!important;
+        font-size:13px!important;
+        border-radius:20px!important;
+        padding-top:0px!important;
+        padding-bottom:0px!important;
+    }
+    .memberCount{
+        font-size:12px!important;
+        cursor:pointer;
+    }
+    .groupSideBar{
+        position:fixed;
+        top:0;
+        display:none;
+        background-color:#1d1d1d;
+        height:100%;
+        width:100%;
+        padding-bottom:50px;
+        overflow-y: auto;
+        z-index:3;
+    }
+    .studyGroupProfileContainer{
+        margin-left:0px;
+        padding-top:20px;
+        padding-bottom:10px;
+        background-color:#18191a;
+        margin-right:0;
+     }
+     .studyGroupHeader-wrapper{
+   
+        text-align:left;
+        margin-left:0;
+        border-radius:10px;
+    
+    }
+    .studyGroupHeader-wrapper div{
+        display:block;
+    }
+    .profile-wrapper{
+        background-color: #18191a;
+        padding-top:0px!important;
+        height:100vh;
+    }
+    .groupName{
+        font-size:16px!important;
+        font-family: 'Open Sans', sans-serif;
+        margin-right:5px;
+        min-width: 200px;
+        margin-top:10px;
+    }
+    .profile-ul{
+        margin-bottom:0!important;
+        height:100%;
+        text-align:left;
+        color:#d4d4d4;
+        position:relative;
+        left:0!important;
+       
+    }
+    .profile-ul li{
+        font-family: 'Open Sans', sans-serif;
+        font-size:13px!important;
+        text-align:center;
+        padding-left:5px!important;
+        padding-right:5px!important;
+        display:inline-block;
+        width:55px;
+    
+        
+    }
+    .profileBody{
+        margin-top:0px;
+    }
+    .course-profile-info{
+        text-align:left!important;
+    }
+    .groupAvatar{
+        width:90px;
+    }
+    .group-title{
+        text-align:center;
+        width:100%;
+    }
+    .groupDescription{
+        font-family: 'Open Sans', sans-serif;
+        font-size:14px!important;
+        margin-top:10px;
+        margin-right:0px!important;
+        padding-left:10%;
+        padding-right:10%;
+    }
+    .desktopJoin{
+        display:none!important;
+    }
+    .mobileJoin{
+        padding-top:15px;
+    }
+    .groupMember-container{
+        width:100%!important;
+        height:15px;
+    }
+    .membersContainer{
+        width:100%!important;
+        display:inline-block;
+        margin-left:20px;
+    }
+    .adminHandle{
+        padding-bottom:4px;
+        padding-top:1px!important;
+    }
+    .close-mobile-members{
+        position:absolute;
+        right:0;
+        top:0;
+        margin-top:10px;
+        margin-right:10px;
+        cursor:pointer;
+    }
+}
+@media only screen and (min-width: 1000px) {
+    .close-mobile-members{
+        display:none;
+    }
+    .adminHandle{
+        margin-bottom:0;
+        margin-top:0!important;
+    }
+    .membersContainer{
+        width:100%!important;
+        display:block!important;
+        margin-left:20px;
+    }
+    .groupMember-container{
+        display:block;
+        margin-top:10px;
+    }
+    .memberCount{
+        font-size:14px!important;
+    }
+    .groupDescription{
+        font-family: 'Open Sans', sans-serif;
+        font-size:15px!important;
+        margin-top:30px;
+        margin-right:50px!important;
+    }
+    .group-title{
+        float:left;
+        text-align:center;
+    
+    }
+    .profileBody{
+        margin-top:30px;
+    }
+    .groupSideBar{
+        position:fixed;
+        right:0!important;
+        background-color:#1d1d1d;
+        height:100%;
+        margin-top:55px;
+        width:220px;
+        padding-bottom:50px;
+        overflow-y: auto;
+    }
+    
+    
+    .studyGroupProfileContainer{
+        margin-left:250px;
+        padding-top:20px;
+        padding-bottom:10px;
+        background-color:#1d1d1d;
+        margin-right:200px;
+     }
+     .studyGroupHeader-wrapper{
+   
+        text-align:left;
+        margin-left:20%;
+        border-radius:10px;
+    
+    }
+    .studyGroupHeader-wrapper div{
+        display:inline-block;
+    }
+    .groupName{
+        font-size:22px!important;
+        font-family: 'Open Sans', sans-serif;
+        margin-right:5px;
+        min-width: 200px;
+        margin-top:10px;
+    }
+    .course-profile-info{
+        text-align:left!important;
+        margin-right:200px!important;
+    }
+    .groupAvatar{
+        width:110px;
+    }
 }

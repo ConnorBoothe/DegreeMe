@@ -16,11 +16,7 @@
     padding-top:20px;
     display:none;
 }
-#card-element{
-   background-color:#1d1d1d;
-   width:400px!important;
-   margin-left:100px;
-}
+
 .detailsImg{
     width: 25px;
     height: 25px;
@@ -57,17 +53,7 @@
     text-align:center;
     margin-bottom:15px;
 }
-.notes{
-    width:400px;
-    min-height:100px;
-    padding:10px;
-    margin-left:100px;
-    margin-right:75px;
-    background-color:#1d1d1d;
-    color:white;
-    margin-bottom:10px;
-    border:none;
-}
+
 .notesHeader{
     font-size:22px!important;
     text-align:left;
@@ -154,16 +140,7 @@
     margin-right:20px;
     float:right;
 }
-.checkout-container{
-    margin-left:auto;
-    margin-right: auto;
-    width:600px;
-    background-color:#242526;
-    text-align:left;
-    border-radius:10px;
-    box-shadow:1px 2px #131313;
-    padding-bottom:20px;
-}
+
 /* icon edits on checkout page */
 .rightSide ul li{
     list-style-type: none;
@@ -289,18 +266,7 @@
       font-size:14px!important;
       font-family:"Open sans","sans-serif"!important;
   }
-  .date-container{
-      background-color:#1d1d1d;
-      width:400px;
-        margin-top:20px;
-        padding-top:5px;
-        padding-bottom:5px;
-        padding-left:5px;
-        font-family:"Open sans","sans-serif";
-        cursor:pointer;
-        z-index:3;
-        margin-left:100px;
-  }
+ 
   .date-container:hover{
     background-color:#1f1f1f;
   }
@@ -313,26 +279,8 @@
       float:right;
       margin-right:20px;
   } 
-  .date-select{
-      font-family:"Open sans","sans-serif";
-      background-color:#1d1d1d;
-      width:400px;
-      display:none;
-      position:absolute;
-      z-index:2;
-      margin-left:100px;
-  }
-  .date-select ul li{
-      width:100%!important;
-      list-style-type:none;
-      padding-left:60px;
-      padding-top:10px;
-      padding-bottom:10px;
-      cursor:pointer;
-  }
-  .date-select ul li:hover{
-      background-color:#343a40;
-  }
+ 
+  
   .timeSlot{
     background-color:#1d1d1d!important;
     border:none!important;
@@ -362,4 +310,128 @@
 }
 .termsMsg{
     padding-left:10px;
+}
+/* desktop */
+@media only screen and (min-width: 1000px) {
+    .notes{
+        width:400px;
+        min-height:100px;
+        padding:10px;
+        margin-left:100px;
+        margin-right:75px;
+        background-color:#1d1d1d;
+        color:white;
+        margin-bottom:10px;
+        border:none;
+    }
+    .checkout-container{
+        margin-left:auto;
+        margin-right: auto;
+        width:600px;
+        background-color:#242526;
+        text-align:left;
+        border-radius:10px;
+        box-shadow:1px 2px #131313;
+        padding-bottom:20px;
+    }
+    .date-container{
+        background-color:#1d1d1d;
+        width:400px;
+          margin-top:20px;
+          padding-top:5px;
+          padding-bottom:5px;
+          padding-left:5px;
+          font-family:"Open sans","sans-serif";
+          cursor:pointer;
+          z-index:3;
+          margin-left:100px;
+    }
+    .date-select{
+        font-family:"Open sans","sans-serif";
+        background-color:#1d1d1d;
+        width:400px;
+        display:none;
+        position:absolute;
+        z-index:2;
+        margin-left:100px;
+    }
+    .date-select ul li{
+        width:100%!important;
+        list-style-type:none;
+        padding-left:60px;
+        padding-top:10px;
+        padding-bottom:10px;
+        cursor:pointer;
+    }
+    .date-select ul li:hover{
+        background-color:#343a40;
+    }
+    #card-element{
+        background-color:#1d1d1d;
+        width:400px!important;
+        margin-left:100px;
+     }
+}
+
+
+/* mobile */
+@media only screen and (max-width: 1000px) {
+    #card-element{
+        background-color:#1d1d1d;
+        width:100%!important;
+        margin-left:100px;
+     }
+    .notes{
+        width:100%;
+        min-height:100px;
+        padding:10px;
+        background-color:#1d1d1d;
+        color:white;
+        margin-bottom:10px;
+        border:none;
+    }
+    .contentBlock1{
+        margin-left:0!important;
+    }
+    .checkout-container{
+        margin-left:auto;
+        margin-right: auto;
+        width:100%;
+        background-color:#242526;
+        text-align:left;
+        border-radius:10px;
+        box-shadow:1px 2px #131313;
+        padding-bottom:20px;
+    }
+    .date-container{
+        background-color:#1d1d1d;
+        width:100%;
+          margin-top:20px;
+          padding-top:5px;
+          padding-bottom:5px;
+          padding-left:5px;
+          font-family:"Open sans","sans-serif";
+          cursor:pointer;
+          z-index:3;
+          margin-left:100px;
+    }
+    .date-select{
+        font-family:"Open sans","sans-serif";
+        background-color:#1d1d1d;
+        width:100%;;
+        display:none;
+        position:absolute;
+        z-index:2;
+    }
+    .date-select ul li{
+        width:100%!important;
+        list-style-type:none;
+        padding-left:60px;
+        padding-top:10px;
+        padding-bottom:10px;
+        cursor:pointer;
+    }
+    .date-select ul li:hover{
+        background-color:#343a40;
+    }
 }

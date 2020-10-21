@@ -1,4 +1,24 @@
 @media only screen and (max-width: 1000px) {
+    .followers-container{
+        width:100%;
+        text-align:right;
+    }
+    .ProfileButtons{
+        text-align:right;
+             
+    }
+   
+    .contentBlock1{
+        display: inline-block;
+        width:90%!important;
+        text-align:center;
+        position:relative;
+        padding-top:30px!important;
+        margin-left:0px;
+        padding-right:10%;
+        padding-bottom:50px;
+        background-color:#18191a;
+    }
     .follow-btn{
         
         font-size:12px!important;
@@ -50,8 +70,44 @@
         background-color:#18191a!important;
        
     }
+    .tutorMiddle{
+        width:90%;
+        font-size:13px!important;
+        padding-top:35px;
+        position:absolute;
+        right:0;
+        
+        
+    }
 }
 @media only screen and (min-width: 1000px) {
+    .ProfileButtons{
+        text-align:left;
+             
+    }
+   
+    .followers-container{
+        width:80%;
+        text-align:left;
+    }
+    .tutorMiddle{
+        width:100%;
+        font-size:15px!important;
+        padding-top:35px;
+        
+        
+    }
+    .contentBlock1{
+        display: inline-block;
+        width:90%!important;
+        text-align:center;
+        position:relative;
+        padding-top:30px!important;
+        margin-left:250px;
+        padding-right:10%;
+        padding-bottom:50px;
+        background-color:#18191a;
+    }
     .tutorBlockDark{
         background-color:#18191a;
        
@@ -438,17 +494,7 @@ Menu css
 
         
     }
-    .contentBlock1{
-        display: inline-block;
-        width:90%!important;
-        text-align:center;
-        position:relative;
-        padding-top:30px!important;
-        margin-left:250px;
-        padding-right:10%;
-        padding-bottom:50px;
-        background-color:#18191a;
-    }
+    
     
     .contentBlock img{
         width:100%;
@@ -1508,16 +1554,8 @@ Menu css
         font-family: 'Open Sans', sans-serif;
     }
     
-    .connectionBody-container{
-        width:500px;
-        margin-left:250px;
-        text-align:center;
-        
-    }
-    .followers-container{
-        width:80%;
-        text-align:left;
-    }
+  
+    
     .followers-item{
         list-style-type:none;
         display:inline-block;
@@ -1553,11 +1591,7 @@ Menu css
         margin-right:10px;
         color:#d4d4d4;
     }
-    .ProfileButtons{
-        text-align:left;
-             
-    }
-   
+    
     .meeting-info{
         color:white!important;
         font-size:20px;
@@ -1765,13 +1799,7 @@ Menu css
       
         width:100%;
     }
-    .tutorMiddle{
-        width:100%;
-        font-size:15px!important;
-        padding-top:35px;
-        
-        
-    }
+    
     .profile-wrapper{
         background-color: #18191a;
         padding-top:55px;

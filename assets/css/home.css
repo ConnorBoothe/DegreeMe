@@ -34,9 +34,7 @@
     color:#a9a9a9!important;
     margin-bottom:0!important;
 }
-.postHandle a{
-    color:#d4d4d4;
-}
+
 .timelinePost-Image{
     width:40px;
     float:left;
@@ -72,18 +70,8 @@
     left: 5px;
 }
 
-.info-badge{
-    font-family: 'Open Sans', sans-serif!important;
-}
-.postDate{
-    color:#a9a9a9;
-    font-size:14px;
-    padding-left:20px;
 
-    margin-right:10%;
-    margin-top:10px;
-    margin-bottom:5px;
-}
+
 .bidPlaced{
     text-align:left;
     font-family: 'Open Sans', sans-serif!important;
@@ -725,10 +713,7 @@ padding-right:10px;
     position:absolute;
     margin-left:60px;
 }
-.addComment{
-    margin-left:70px;
-    color:#d4d4d4;
-}
+
 .addComment:hover{
     color:#d4d4d4;
 }
@@ -801,13 +786,7 @@ padding-right:10px;
     font-family: 'Open Sans', sans-serif!important;
     font-size:14px;
 }
-.timelinePost-username{
-    color:white;
-    font-family: 'Open Sans', sans-serif!important;
-    margin-bottom:0!important;
-    margin-left:55px;
-    font-size:16px;
-}
+
 .timelinePost-help{
     color:white;
     font-family: 'Open Sans', sans-serif!important;
@@ -815,13 +794,7 @@ padding-right:10px;
     margin-left:55px;
     font-size:16px;
 }
-.view-timeline-btn{
-    padding-top:2px;
-    padding-bottom:2px;
-    font-size:14px!important;
-    margin-left:20px;
-    font-family: 'Open Sans', sans-serif!important;
-}
+
 .status-update-success{
     color:white;
     text-align:center;
@@ -833,22 +806,8 @@ padding-right:10px;
 .status-update-success svg{
     margin-right:10px;
 }
-.caption{
-    color:white!important;
-    margin-left: 20px;
-    margin-top:5px;
-    font-size:17px;
-    font-family: 'Open Sans', sans-serif!important;
-}
-.caption-status{
-    color:white!important;
-    margin-left: 30px;
-    margin-top:0px;
-    margin-bottom:5px;
-    font-size:17px;
-    font-weight:450;
 
-}
+
 .price-nonhelp{
     margin-left:20px;
     font-size:14px;
@@ -888,19 +847,10 @@ padding-right:10px;
     margin-right:5px!important;
     
 }
-.postDetailsItem p{
-    font-size:15px!important;
-}
+
 
 /* search css. move to different file */
-.courseName{
-    font-size:15px;
-    color:white;
-    padding-left:10px;
-    padding-right:10px;
-    margin-bottom:3px;
-    font-family: 'Open Sans', sans-serif!important;
-}
+
 .courseName1{
     font-size:14px!important;
     color:white;
@@ -942,17 +892,8 @@ padding-right:10px;
     padding-left:10px;
     
 }
-.courseCountainer{
-    padding-left:20px;
-    padding-top:10px;
-    padding-bottom:10px;
-   
-}
-.studyGroupSubject{
-    color:#a9a9a9;
-    font-size:14px;
-    padding-left:8px;
-}
+
+
 .noMatch{
     text-align:center;
     font-size:14px;
@@ -961,47 +902,14 @@ padding-right:10px;
 .courseCountainer:hover{
   background-color:black!important;
 }
-.searchUser{
-    width:27px;
-    margin-right:10px;
-    float:left;
-    margin-bottom:0!important;
-    margin-top:5px;
 
-}
-.userHandle{
-    font-size:14px!important;
-    padding-left:40px;
-    color:#a9a9a9;
-    margin-bottom:0!important;
-}
-.searchName{
-    font-size:16px;
-    color:white;
-    margin-bottom:2px;
-}
-.searchTab{
-    display:inline-block;
-    font-size:15px;
-    padding-bottom:5px;
-    margin-left:10px;
-    margin-right:10px;
-    cursor:pointer;
-    font-family: 'Open Sans', sans-serif!important;
-    color:white!important;
 
-}
+
 input[name="searchType"]{
     display:none!important;
 
 }
-.tab-container{
-    margin-left:auto;
-    margin-right:auto;
-    text-align:center;
-    margin-top:60px;
 
-}
 .statusAlert{
     position:absolute!important;
     padding-left:300px!important;
@@ -1193,14 +1101,301 @@ input[name="searchType"]{
   
   /* desktop only */
   @media only screen and (min-width: 1000px) {
+    .day-container div{
+        padding-left:20px;
+    }
+    .day-container label{
+        width:50px;
+    }
+    .connectionBody-container{
+        width:500px;
+        margin-left:250px;
+        text-align:center;
+        
+    }
+    .view-timeline-btn{
+        padding-top:2px;
+        padding-bottom:2px;
+        font-size:14px!important;
+        margin-left:20px;
+        font-family: 'Open Sans', sans-serif!important;
+    }
+    .postDate{
+        color:#a9a9a9;
+        font-size:14px;
+        padding-left:20px;
+    
+        margin-right:10%;
+        margin-top:10px;
+        margin-bottom:5px;
+    }
+    .caption-status{
+        color:white!important;
+        margin-left: 30px;
+        margin-top:0px;
+        margin-bottom:5px;
+        font-size:17px;
+        font-weight:450;
+    
+    }
+    .caption{
+        color:white!important;
+        margin-left: 20px;
+        margin-top:5px;
+        font-size:17px;
+        font-family: 'Open Sans', sans-serif!important;
+    }
+    .studyGroupSubject{
+        color:#a9a9a9;
+        font-size:14px;
+        padding-left:8px;
+    }
+    .courseName{
+        font-size:15px;
+        color:white;
+        padding-left:10px;
+        padding-right:10px;
+        margin-bottom:3px;
+        font-family: 'Open Sans', sans-serif!important;
+    }
+    .searchUser{
+        width:27px;
+        margin-right:10px;
+        float:left;
+        margin-bottom:0!important;
+        margin-top:5px;
+    
+    }
+    .courseCountainer{
+        padding-left:20px;
+        padding-top:10px;
+        padding-bottom:10px;
+       
+    }
+    .userHandle{
+        font-size:14px!important;
+        padding-left:40px;
+        color:#a9a9a9;
+        margin-bottom:0!important;
+    }
+    
+    .searchName{
+        font-size:16px;
+        color:white;
+        margin-bottom:2px;
+    }
+    .searchTab{
+        display:inline-block;
+        font-size:15px;
+        padding-bottom:5px;
+        margin-left:10px;
+        margin-right:10px;
+        cursor:pointer;
+        font-family: 'Open Sans', sans-serif!important;
+        color:white!important;
+    
+    }
+    .tab-container{
+        margin-left:auto;
+        margin-right:auto;
+        text-align:center;
+        margin-top:60px;
+    
+    }
     .searchLi, .slider-container-header, .mobileUserImg, .userHeader-mobile{
         display:none!important;
     }
     .userImgLi{
         display:inline-block;
     }
+    .timelinePost-username{
+        color:white;
+        font-family: 'Open Sans', sans-serif!important;
+        margin-bottom:0!important;
+        margin-left:55px;
+        font-size:16px;
+    }
+    .postHandle a{
+        color:#d4d4d4;
+    }
+    .mobile-search-container{
+        display:none;
+    }
+    .info-badge{
+        font-family: 'Open Sans', sans-serif!important;
+    }
+    .addComment{
+        margin-left:70px;
+        color:#d4d4d4;
+    }
   }
+  /* mobile */
+
 @media only screen and (max-width: 1000px) {
+    .day-container{
+        padding-left:20px;
+        padding-bottom:10px;
+    }
+    .day-wrapper{
+        padding-bottom:10px; 
+        padding-top:10px; 
+    }
+    .calendarLine{
+        width:75%;
+        background-color:#a9a9a9!important;
+        float:right;
+        height:.5px;
+        margin-top:15px;
+    }
+    .day-container label{
+
+        padding-left:10px;
+    }
+    .connectionBody-container{
+        text-align:left;
+        padding-top:20px!important;
+        width:100%;
+        top:0!important;
+        right:0;
+        margin-top:-200px!important;
+        margin-bottom:200px;
+    }
+    .addComment{
+        margin-left:70px;
+        color:#d4d4d4;
+        font-size:13px!important;
+    }
+    .view-timeline-btn{
+        padding-top:2px;
+        padding-bottom:2px;
+        padding-left:4px;
+        padding-right:4px;
+        font-size:12px!important;
+        margin-left:20px;
+        font-family: 'Open Sans', sans-serif!important;
+    }
+    .postDate{
+        color:#a9a9a9;
+        font-size:14px;
+        padding-left:20px;
+        float:right;
+        margin-right:3%;
+        margin-top:10px;
+        margin-bottom:5px;
+    }
+    .caption-status{
+        color:white!important;
+        margin-left: 30px;
+        margin-top:0px;
+        margin-bottom:5px;
+        font-size:15px;
+        font-weight:450;
+    
+    }
+    .info-badge{
+        font-family: 'Open Sans', sans-serif!important;
+        font-size:13px!important;
+    }
+    .caption{
+        color:white!important;
+        margin-left: 20px;
+        margin-top:5px;
+        font-size:14px;
+        font-family: 'Open Sans', sans-serif!important;
+    }
+    .studyGroupSubject{
+        color:#a9a9a9;
+        font-size:13px;
+        padding-left:8px;
+        text-align:left;
+    }
+    .courseName{
+        font-size:13px;
+        color:white;
+        padding-left:10px;
+        padding-right:10px;
+        margin-bottom:3px;
+        font-family: 'Open Sans', sans-serif!important;
+        text-align:left!important;
+    }
+    .searchUser{
+        width:33px;
+        margin-right:10px;
+        float:left;
+        margin-bottom:0!important;
+        margin-top:5px;
+    
+    }
+    .courseCountainer{
+        padding-left:20px;
+        padding-top:5px;
+        padding-bottom:3px;
+       
+    }
+    .userHandle{
+        font-size:13px!important;
+        padding-left:40px;
+        color:#a9a9a9;
+        margin-bottom:0!important;
+        text-align:left;
+    }
+    
+    .searchName{
+        font-size:14px;
+        color:white;
+        margin-bottom:2px;
+        text-align:left;
+    }
+    .searchTab{
+        display:inline-block;
+        font-size:13px;
+        padding-bottom:5px;
+        margin-left:5px;
+        margin-right:5px;
+        cursor:pointer;
+        font-family: 'Open Sans', sans-serif!important;
+        color:white!important;
+    
+    }
+    .tab-container{
+        margin-left:auto;
+        margin-right:auto;
+        text-align:center;
+        margin-top:30px;
+    
+    }
+    .mobile-search-container{
+        background-color:#242526;
+        width:100%;
+        height:100%;
+        position:fixed;
+        top:0;
+        z-index:3;
+        display:none;
+        text-align:center;
+    }
+    .mobile-home-link{
+        color:#a9a9a9;
+    }
+    .close-mobile-menu, .close-search{
+        position:absolute;
+        right:0;
+        top:0;
+        margin-top:10px;
+        margin-right:10px;
+        cursor:pointer;
+    }    
+    .postHandle a{
+        color:#d4d4d4;
+        font-size:14px;
+    }
+    .timelinePost-username{
+        color:white;
+        font-family: 'Open Sans', sans-serif!important;
+        margin-bottom:0!important;
+        margin-left:55px;
+        font-size:14px;
+    }
     .daySelect-container{
         margin-top:20px;
         margin-bottom:20px;
@@ -1234,20 +1429,15 @@ input[name="searchType"]{
     .dateButtons p{
         margin-bottom:0!important;
     }
-    .day-container div{
-        padding-left:20px;
-    }
-    .day-container label{
-        width:50px;
-    }
+    
     .dateBtn-container{
         margin-left:auto;
         margin-right:auto;
         text-align:center;
     }
     .weekOfTxt{
-        font-size:16px!important;
-        text-align:center;
+        font-size:14px!important;
+        text-align:left;
     }
     #calendarContainer td{
         display:block!important;
@@ -1309,6 +1499,7 @@ input[name="searchType"]{
         background-color:#18191a;
         color:#d4d4d4;
         position:fixed;
+        z-index:3;
         bottom:0;
         text-align:center;
         padding-top:5px;
@@ -1357,7 +1548,7 @@ input[name="searchType"]{
         margin-top:10px;
         margin-bottom:10px;
         box-shadow:none!important;
-
+        display:none;
     }
     .helpRequest-body .timelinePost-Image{
         display:none;
@@ -1462,6 +1653,27 @@ input[name="searchType"]{
     }
     .input-container-main, .homeSideBar, .img, .bell, .message, .headerLinkTitle, .userProfileName{
         display:none!important;
+    }
+    .mobile-input-container-main{
+        display: -ms-flexbox; /* IE10 */
+    display: inline-block;
+    width: 270px;
+    background-color:#3a3b3c!important;
+    margin-left:auto;;
+    margin-right:auto;
+    border-radius:20px;
+    font-size:16px!important;
+    padding-bottom:none!important;
+    height:40px;
+    background-color:none;
+    color:white!important;
+    margin-top:15px!important;
+    position:relative;
+    top:0;
+    
+    }
+    .searchForm{
+        height:40px!important;
     }
     .userProfileImg{
         width:40px!important;
