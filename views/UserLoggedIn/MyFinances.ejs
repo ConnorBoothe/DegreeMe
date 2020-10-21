@@ -23,7 +23,6 @@
 </head>
 
 <body>
-  <%- include ('partials/mobileComingSoon.ejs')%>
   <div class="homeWrap">
   <div class="page-container ">
     <%- include ('partials/sideBar.ejs') %>
@@ -42,7 +41,7 @@
         <!-- NO STRIPE SELLER ACCOUNT -->
         <div id="settings-form">
           <form method="POST" action="/MakeStripeAccount" class="sellerAccount-form">
-            <h1>Create a Seller Account</h1>
+            <h1 class="createSellerTitle">Create a Seller Account</h1>
             <p class="create-seller-text">We do not save any sensitive data on our servers. All credit card information is safely stored with Stripe, the leading internet payments processor.</p>
             <p>
               <script type="text/javascript" src=""></script>

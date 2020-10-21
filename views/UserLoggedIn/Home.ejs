@@ -32,13 +32,38 @@
         <input type="hidden" name="stripeId" value="<%=session.stripeId%>"/>
         <input type="hidden" name="userId" value="<%=session.userId%>"/>
         <input type="hidden" name="tutor" value="<%=session.tutor%>"/>
-       
         <div class="home-wrapper">
             <%-include ('partials/myCoursesSideBar.ejs')%>
             <div class="timeline">
                 <!-- <p class="badge badge-danger">Mobile version of DegreeMe is under construction</p> -->
                 <h1 class="text-light timeline-title">Timeline</h1>
-                
+                <div class="mobile-actions">
+                    <ul>
+                        <li><div class="mobile-actions-item">
+
+                            <svg class="" width="1.5em" height="1.5em"
+                                        viewBox="0 0 16 16" class="bi bi-search" fill="white"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
+                                        <path fill-rule="evenodd"
+                                            d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
+                                    </svg>
+                        </div>
+                        <p class="text-light mobile-actions-text">Find a Tutor</p></li>
+                        <li><div class="mobile-actions-item">
+
+                            <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-chat-left-quote-fill" fill="white" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4.414a1 1 0 0 0-.707.293L.854 15.146A.5.5 0 0 1 0 14.793V2zm7.194 2.766c.087.124.163.26.227.401.428.948.393 2.377-.942 3.706a.446.446 0 0 1-.612.01.405.405 0 0 1-.011-.59c.419-.416.672-.831.809-1.22-.269.165-.588.26-.93.26C4.775 7.333 4 6.587 4 5.667 4 4.747 4.776 4 5.734 4c.271 0 .528.06.756.166l.008.004c.169.07.327.182.469.324.085.083.161.174.227.272zM11 7.073c-.269.165-.588.26-.93.26-.958 0-1.735-.746-1.735-1.666 0-.92.777-1.667 1.734-1.667.271 0 .528.06.756.166l.008.004c.17.07.327.182.469.324.085.083.161.174.227.272.087.124.164.26.228.401.428.948.392 2.377-.942 3.706a.446.446 0 0 1-.613.01.405.405 0 0 1-.011-.59c.42-.416.672-.831.81-1.22z"/>
+                              </svg>
+                        </div><p class="text-light mobile-actions-text">Ask a Question</p></li>
+                        <li><div class="mobile-actions-item">
+                            <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-pencil" fill="white" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5L13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175l-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                              </svg>
+                        </div><p class="text-light mobile-actions-text">Post a Status</p></li>
+                    </ul>
+                </div>
                 <div class="timeline-container-status request-help-container">
                     <div class="helpRequest-body">
                     <img class="timelinePost-Image tl-main-img" src="<%=session.img%>" />

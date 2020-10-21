@@ -7,13 +7,7 @@ input:-webkit-autofill:active  {
     border:none!important;
     box-shadow: 2px 2px #191919;
 }
-.homeContainer{
-  min-height:100vh!important;
-  height:100%!important;
-  margin-bottom:0;
-  padding-bottom:0;
-  background-color:#18191a;
-}
+
 .success-message{
   margin-left:250px!important;
   padding-left:10%;
@@ -81,14 +75,7 @@ input:-webkit-autofill:active  {
   width:100%;
   text-align:left;
 }
-#settings-form{
-position: relative;
-display:inline-block;
-border-radius:5px;
-margin-left:auto;
-margin-right:auto;
-width:800px;
-}
+
 .checkout-container{
   margin-left:auto;
   margin-right: auto;
@@ -326,3 +313,60 @@ left: 0;
   top: -63px;
 }
 
+  /* mobile only */
+  @media only screen and (max-width: 1000px) {
+    .contentBlock2{
+      text-align: center;
+      margin-left:0px!important;
+      background-color:#18191a;
+      width:100%;
+      padding-left:20px;
+      padding-right:20px;
+      padding-bottom:100px;
+    }
+    #settings-form{
+      position: relative;
+      display:inline-block;
+      border-radius:5px;
+      margin-left:auto;
+      margin-right:auto;
+      width:100%;
+      }
+      .homeContainer{
+        min-height:100vh!important;
+        height:100%!important;
+        margin-bottom:0;
+        padding-bottom:0;
+        padding-top:35px!important;
+        background-color:#18191a;
+      }
+      .createSellerTitle{
+        font-size:26px;
+      }
+  }
+  /* desktop only */
+  @media only screen and (min-width: 1000px) {
+    .contentBlock2{
+      text-align: center;
+      margin-left:250px!important;
+      background-color:#18191a;
+      width:80%;
+    
+      padding-bottom:100px;
+    }
+    #settings-form{
+      position: relative;
+      display:inline-block;
+      border-radius:5px;
+      margin-left:auto;
+      margin-right:auto;
+      width:800px;
+      }
+      .homeContainer{
+        min-height:100vh!important;
+        height:100%!important;
+        margin-bottom:0;
+        padding-bottom:0;
+        background-color:#18191a;
+      }
+  }
