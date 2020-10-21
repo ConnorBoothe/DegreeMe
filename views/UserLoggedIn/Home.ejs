@@ -27,6 +27,7 @@
         <%- include ('partials/newMessageButton.ejs')%>
         <%- include ('partials/newMessageModal.ejs')%>
         <%- include ('partials/platformInvite.ejs')%>
+        <%- include ('partials/mobile-search.ejs')%>
         <input type="hidden" name="handle" value="<%=session.handle%>"/>
         <input type="hidden" name="stripeId" value="<%=session.stripeId%>"/>
         <input type="hidden" name="userId" value="<%=session.userId%>"/>
@@ -37,6 +38,7 @@
             <div class="timeline">
                 <!-- <p class="badge badge-danger">Mobile version of DegreeMe is under construction</p> -->
                 <h1 class="text-light timeline-title">Timeline</h1>
+                
                 <div class="timeline-container-status request-help-container">
                     <div class="helpRequest-body">
                     <img class="timelinePost-Image tl-main-img" src="<%=session.img%>" />
@@ -307,10 +309,10 @@
                     
                     <ul class="postDetailsList">
                         <li class="postDetailsItem">
-                            <p class="badge badge-primary info-badge"><%=timeline[x].course%></p>
+                            <p class="badge badge-primary info-badge help-course"><%=timeline[x].course%></p>
                         </li>
                         <li class="postDetailsItem">
-                            <p class="badge badge-warning info-badge">Prof. <%=timeline[x].price%></p>
+                            <p class="badge badge-warning info-badge help-course">Prof. <%=timeline[x].price%></p>
                         </li>
                     </ul>
                     <div class="postActions">

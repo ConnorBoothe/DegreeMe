@@ -1,4 +1,14 @@
 $(document).ready(function () {
+    if(window.innerWidth < 1000){
+        $(".memberCount").on("click", function(){
+           $(".groupSideBar").show();
+        })
+        $(".close-mobile-members").on("click", function(){
+            $(".groupSideBar").hide();
+         })
+
+    }
+  
     if($(".joinButton").text() == "Join Group"){
         $("#makeSession").hide();
         $(".groupMessage").show();

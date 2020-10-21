@@ -10,13 +10,13 @@ function formatDate(date){
       }
     }
     if( todayArray[1] == dateArray[1] & todayArray[2] == dateArray[2] ){
-      return "Published Today";
+      return "Today";
     }
     else if(month == ""){
       return "";
     }
     else{
-      return "Published " + month + " " + dateArray[2];
+      return month + " " + dateArray[2];
     }
   }
 
@@ -26,7 +26,6 @@ function populateTutors(data, subject){
         
         if(data[x].Subject === subject){
          
-        
         sessions += "</h1>"+
         "<div class='tutorBlock tutorBlockDark'>"+
              "<ul class='tutorBlockHeader'>"+
@@ -103,7 +102,7 @@ function populateTutors(data, subject){
             "</div>"+
       " </div>"+
    
-     
+     "<a href='/Checkout?id="+data[x]._id+"' class='btn btn-primary viewTutorMobile'>View Listing</a>"+
      "<div class='tutorButtons'>"+
          "<a type='submit' class='btn btn-primary tutorBtn text-light'"+
              "name=''"+
@@ -197,6 +196,12 @@ function populateStudents(students){
   }
 }
 $(document).ready(function(){
+  //if mobile, make page title the course code
+  if(window.innerWidth < 1000){
+    $("input[name='screenSize'").val("mobile")
+    var courseCode = $("input[name='courseCode']").val();
+        $(".mobile-logo-wrapper").html("<h1 class='userProfileHandle1'>"+courseCode+"</h1>"); 
+}
     $(".tutorTab").on("click", function(){
         $.ajax({
             url: '/API/Tutors' ,
@@ -218,7 +223,7 @@ $(document).ready(function(){
         }
         }).done(function(res) { 
           var discussion = "<div class='question-container'><h1 class='DiscussionTitle'>"+"Questions asked in "+ $(".courseCodeTxt").text()+
-                    "</h1><button type='button' class='btn btn-primary' data-toggle='modal' data-target='#exampleModalCenter'>"+
+                    "</h1><button type='button' class='btn btn-primary askQuestion' data-toggle='modal' data-target='#exampleModalCenter'>"+
                       "Ask a Question</button><div class='discussion-container'>";
           var handle = res.currHandle;
           for(var x = res.discussion.length-1; x>=0; x--){

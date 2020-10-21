@@ -608,14 +608,14 @@ $(document).ready(function () {
         }
       
     })
-
     $(".dateButtons").on("click", function(){
         $(".dateButtons").removeClass("bg-primary");
-        var idArr = $(this).attr("id").split("")
+        var idArr = $(this).attr("id").split("");
         $(".calendarContainer").hide();
         $("#calendar"+idArr[idArr.length-1]).fadeIn();
         $(this).addClass("bg-primary");
     })
+  
     $(".terms").on("click", function(){
        $(".termsMsg").css("color","white");
     })

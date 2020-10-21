@@ -16,7 +16,6 @@
 </head>
 
 <body class="color-dark">
-    <%- include ('partials/mobileComingSoon.ejs')%>
     <div class="homeWrap">
     <div class="page-container">
         <%- include ('partials/newMeetupModal.ejs') %>
@@ -80,8 +79,12 @@
                                 <%if(studyGroup.Members[x].MemberHandle == session.handle){%>
                                 <%isMember = true%>
                                 <%}%>
-                                                <%}%>
                                
+                                <%}%>
+                                <input type="hidden" value="<%=isMember%>" name="isMember"/>
+                                <input name="groupId" type="hidden" value="<%=studyGroup._id%>" />
+                                <input name="groupName" type="hidden" value="<%=studyGroup.GroupName%>" />
+                                <div class="desktopJoin">
                                 <% if(isMember){%>
                                 <form action="/#" method="post" id="joinedGroup">
                                     <input name="joinGroup" type="hidden" value="<%=studyGroup._id%>" />
@@ -105,7 +108,7 @@
                                 </form>
 
                                 <%}%>
-                               
+                            </div>
                             </div>
                             <div class="profileBody">
 
@@ -215,6 +218,7 @@
 </div>
     <script src="../assets/jquery/jquery.session/jquery.session.js"></script>
     <script type="text/javascript" src="../assets/js/displayMyCourses.js"></script>
+    <script type="text/javascript" src="../assets/js/group-mobile.js"></script>
     <script src="../assets/js/getNotifications.js"></script>
     <script src="../assets/js/popper.min.js"></script>
     <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>

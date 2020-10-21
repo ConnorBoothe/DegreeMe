@@ -54,7 +54,11 @@ function generateMobileProfileMenu(){
     var profileHTML = "<div class='displayMobileInfo'></div><div class='mobileProfileMenu'><img class='mobileMenuProfileImg' src='"+$(".userProfileImg").attr("src")+"'/>";
     //if tutor
     profileHTML += 
-    "<ul>"+
+    "<div class='close-mobile-menu'>"+
+    '<svg width="1.25em" height="1.25em" viewBox="0 0 16 16" class="bi bi-x" fill="white" xmlns="http://www.w3.org/2000/svg">'+
+    '<path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>'+
+    '</svg>'+
+    '</div><ul>'+
         "<li class='mobileBalanceLi'><span><h1 class='mobileBalance'>$100.00</h1><span class='sub-balance-text'> Available</span> </span></li>"+
         "<li class='mobileBalanceLi'><span><h1 class='mobileBalance'>$199.00</h1><span class='sub-balance-text'> Pending</span></span></li>"+
     "</ul>"+
@@ -90,7 +94,7 @@ function generateMobileProfileMenu(){
                 '</svg>'+
                 "<span class='mobileMenuText'>My Schedule</span>"+
             "</li>"+
-            "<li>"+
+            "<li class='myReviews'>"+
                 '<svg width="1.25em" height="1.25em" viewBox="0 0 16 16" class="bi bi-star-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
                 '<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>'+
                 '</svg>'+
@@ -126,6 +130,14 @@ function formatCourses(courses){
     courses+="</ul></div></div>";
     return courses;
 }
+function formatReviews(){
+    var reviews = "<div class='mobileCourses'><h1>"+
+    '<span class="backToMenu"><svg width="1.25em" height="1.25em" viewBox="0 0 16 16" class="bi bi-arrow-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
+    '<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>'+
+    '</svg></span>'+
+    "My Reviews</h1></div>";
+    return reviews;
+}
 function formatMobileGroups(groups){
     var groupData = groups.StudyGroups;
     console.log(groupData)
@@ -146,6 +158,15 @@ function formatMobileGroups(groups){
 }
 
 $(document).ready(function(){
+
+    //close mobile menu
+    $("#showNotifications").on("click",".close-mobile-menu", function(){
+        $("#showNotifications").hide();
+    })
+     // show calendar
+     $("#showNotifications").on("click",".myReviews",function(){
+        $('#showNotifications').html(formatReviews());
+    });
     //get my courses and groups on mobile
     $("#showNotifications").on("click",".myCourses",function(){
         payload = {
@@ -284,8 +305,14 @@ $(document).ready(function(){
 $(".mobile-notifications").on("click", function(){
     //if menu is displaying account items, or if it is hidden
     if($("#showNotifications").children().eq(0).text() !== "Notifications" || $("#showNotifications").css("display") == "none"){
-        $("#recentNotifications").html("Notifications");
+        $("#recentNotifications").html("Notifications<div class='close-mobile-menu'>"+
+        '<svg width="1.25em" height="1.25em" viewBox="0 0 16 16" class="bi bi-x" fill="white" xmlns="http://www.w3.org/2000/svg">'+
+        '<path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>'+
+        '</svg>'+
+        '</div>');
+       
         $('#showNotifications').show();
+        $('#showNotifications').css("margin-top","100px");
         $.ajax({
             url: '/API/Notifications' ,
             method: 'GET',
@@ -339,7 +366,11 @@ $(".mobile-notifications").on("click", function(){
 $(".mobile-message").on("click", function(){
     if($("#recentNotifications").text() !== "Messages" || $("#showNotifications").css("display") == "none"){
         $("#showNotifications").show();
-        var messageTitle = 'Messages<span  type="button" class="startConversation-button" data-toggle="modal" data-target="#exampleModal1"><h4 class="startConversation" >'+
+        var messageTitle = 'Messages<div class="close-mobile-menu">'+
+        '<svg width="1.25em" height="1.25em" viewBox="0 0 16 16" class="bi bi-x" fill="white" xmlns="http://www.w3.org/2000/svg">'+
+        '<path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>'+
+        '</svg>'+
+        '</div><span  type="button" class="startConversation-button" data-toggle="modal" data-target="#exampleModal1"><h4 class="startConversation" >'+
         '<a class="memberImage" data-toggle="tooltip" data-placement="top" title="New Message">'+
         '<span class="addCourses">'+
             '<svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-plus" fill="white" xmlns="http://www.w3.org/2000/svg">'+

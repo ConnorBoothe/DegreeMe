@@ -236,7 +236,7 @@ router.post("/addCourse",
             res.redirect('/home');
         }
         if (!req.body.exist) {
-            users.addCourse(req.body.handle, req.body.course, req.body.courseId, req.body.courseCode);
+            users.addCourse(req.session.handle, req.body.course, req.body.courseId, req.body.courseCode);
             // courses.incrementStudents(req.body.course).exec();
             courses.addStudent(req.body.course, req.session.img, req.session.handle, req.session.name, req.session.bio)
             res.status(202).json({
@@ -261,6 +261,7 @@ router.post("/leaveCourse",
             courses.decrementStudents(course).exec();
             //remove student from course
             courses.removeStudent(req.session.handle, course);
+            //need .then() here
             res.status(202).json({
                 status: "left",
                 course: course
@@ -271,6 +272,7 @@ router.post("/leaveCourse",
             // courses.decrementStudents(req.body.course).exec();
             //remove student from course
             courses.removeStudent(req.body.handle, req.body.course);
+            //need .then() here
             res.status(202).json({
                 status: "left",
                 course: req.body.course

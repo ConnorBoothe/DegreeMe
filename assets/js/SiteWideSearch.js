@@ -1,4 +1,12 @@
 $(document).ready(function(){
+    //display mobile search
+    $(".search-mobile-li").on("click", function(){
+        $(".mobile-search-container").show();
+    })
+    //close mobile search
+    $(".close-search").on("click", function(){
+        $(".mobile-search-container").hide();
+    })
     //hide border bottom on help request form
     $(".timeline-container-status").eq(0).css("border-bottom", "none");
     $("body").show();
@@ -17,10 +25,21 @@ $(document).ready(function(){
         $(".blocker").hide();
         $(".main-search-input").attr("placeholder", "Search");
     })
-    $("input[name= 'searchType']").on("click", function(){
-        $("input[name= 'searchType']").prev().removeClass("searchMenuUnderLine");
-        $(this).prev().addClass("searchMenuUnderLine");
-    })
+    if(window.innerWidth > 1000){
+        $("input[name='searchType']").on("click", function(){
+
+            console.log($(this).prev().attr("class"))
+            $("input[name='searchType']").prev().removeClass("searchMenuUnderLine");
+            $(this).prev().addClass("searchMenuUnderLine");
+        })
+    }
+    else{
+        $(".mobileTab").on("click", function(){
+             $(".mobileTab").removeClass("searchMenuUnderLine");
+             $(this).addClass("searchMenuUnderLine");
+        })
+    }
+   
     if(window.location.href.toString().split("/")[3] === "StudyGroups_New"){
         $(".main-search-input").attr("placeholder", "Search Study Groups");
     }
@@ -47,10 +66,12 @@ $(document).ready(function(){
 
     
     });
+    //desktop
     $(".main-search-input").on("keyup", function(){
+        var searchVal = $(this).val();
         if($.session.get("type") === "Courses"){
                 payload = {
-                   searchValue:$(".main-search-input").val(),
+                   searchValue:$(this).val(),
                    type:"Courses" 
                 }
                 $.ajax({
@@ -62,7 +83,7 @@ $(document).ready(function(){
                     }, statusCode: {
                     202: function (result) {
                         if(result.type === "Courses"){
-                            if(($(".main-search-input").val() === "")){
+                            if((searchVal === "")){
                                 $(".resultsContainer").html("<p class='emptySearch'>Search Courses</p>");
                             }
                             else if(result.Courses.length > 0){
@@ -88,7 +109,7 @@ $(document).ready(function(){
         }
         else if($.session.get("type") === "Users"){
                 payload = {
-                   searchValue:$(".main-search-input").val(),
+                   searchValue:$(this).val(),
                    type:"Users" 
                 }
                 $.ajax({
@@ -99,17 +120,23 @@ $(document).ready(function(){
                     "Content-Type": "application/json"
                     }, statusCode: {
                     202: function (result) {
+                        console.log(result)
                             var users = "";
-                            if(($(".main-search-input").val() === "")){
+                            if((searchVal === "")){
                                  $(".resultsContainer").html("<p class='emptySearch'>Search Users</p>");
                             }
                             else if(result.Users.length > 0){
                                 for( x in result.Users){
                                     users+= "<div class='courseCountainer'><a href='/user/"+result.Users[x].handle+"'><img class='searchUser' src="+result.Users[x].img+"><p class='searchName'>"+result.Users[x].first_name+ " "+
                                         result.Users[x].last_name+"<p class='userHandle'>"+result.Users[x].handle+
-                                        "</p></a></div></p>";
+                                        "</p></a></p></div>";
                                 }
-                                $(".resultsContainer").html(users);
+                                if(window.innerWidth > 1000){
+                                    $(".resultsContainer").eq(0).html(users);
+                                }
+                                else{
+                                    $(".resultsContainer").eq(1).html(users);
+                                }
                             }
                             else{
                                 $(".resultsContainer").html("<p class='noMatch'>No matching Results</p>");
@@ -124,7 +151,7 @@ $(document).ready(function(){
         }
         else if($.session.get("type") === "Tutors"){
                 payload = {
-                   searchValue:$(".main-search-input").val(),
+                   searchValue:$(this).val(),
                    type:"Tutors" 
                 }
                 $.ajax({
@@ -136,12 +163,12 @@ $(document).ready(function(){
                     }, statusCode: {
                     202: function (result) {
                             var listing = "";
-                            if(($(".main-search-input").val() === "")){
+                            if((searchVal === "")){
                                 $(".resultsContainer").html("<p class='emptySearch'>Search Tutors</p>");
                             }
                             else if(result.Listings.length > 0){
                                 for(x in result.Listings){
-                                    listing+= "<div class='courseCountainer'><a href='/Checkout?id="+result.Listings[x]._id+"'><img class='searchUser' src=../"+result.Listings[x].Image+"><p class='searchName'>"+result.Listings[x].Name+ " "+
+                                    listing+= "<div class='courseCountainer'><a href='/Checkout?id="+result.Listings[x]._id+"'><img class='searchUser' src="+result.Listings[x].Image+"><p class='searchName'>"+result.Listings[x].Name+ " "+
                                     "<p class='userHandle'>"+result.Listings[x].Subject+
                                     "</p></a></div></p>";                        
                             }
@@ -160,7 +187,7 @@ $(document).ready(function(){
         }
         else if($.session.get("type") === "Groups"){
                 payload = {
-                   searchValue:$(".main-search-input").val(),
+                   searchValue:$(this).val(),
                    type:"Groups" 
                 }
                 $.ajax({
@@ -172,7 +199,7 @@ $(document).ready(function(){
                     }, statusCode: {
                     202: function (result) {
                             var groups = "";
-                            if(($(".main-search-input").val() === "")){
+                            if((searchVal === "")){
                                 $(".resultsContainer").html("<p class='emptySearch'>Search Groups</p>");
                             }
                             else if(result.Groups.length > 0){

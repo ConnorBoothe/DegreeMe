@@ -184,10 +184,10 @@ function formatStudyGroup(post){
         '<p class="caption1">'+post.caption+'<a href="/Group/'+post.url+'" class="btn btn-primary view-timeline-btn">View</a></p>'+
         '<ul class="postDetailsList">'+
             '<li class="postDetailsItem">'+
-                '<p class="badge badge-primary info-badge">'+post.course+'</p>'+
+                '<p class="badge badge-primary info-badge help-course">'+post.course+'</p>'+
             '</li>'+
             '<li class="postDetailsItem">'+
-                '<p class="badge badge-warning info-badge">Prof. '+post.professor+'</p>'+
+                '<p class="badge badge-warning info-badge help-course">Prof. '+post.professor+'</p>'+
             '</li>'+
         '</ul>'+
         '<div class="postActions">';
