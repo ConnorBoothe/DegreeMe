@@ -373,24 +373,7 @@ header{
 .searchLight{
     background-color:white;
 }
-#searchInput{
-    font-family:Helvetica Neue, Helvetica, sans-serif;
-    height:100%;
-    border:none!important;
-    width:100%;
-   font-size:16px!important;
-   background-color:#2c2f33;
-   border-radius:20px;
 
-    
-}
-#searchInput::placeholder{
-    font-size:16px;
-    padding-top:100px;
-    padding-top:5px!important;
-
-
-}
 #searchInput1{
     font-family: 'Open Sans', sans-serif;
     height:25px;
