@@ -43,7 +43,6 @@ function generateMobileCalendar(){
      return calendar;
 }
 }
-  
   $(document).ready(function(){
     // show calendar
     $("#showNotifications").on("click",".mySchedule",function(){
