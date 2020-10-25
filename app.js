@@ -87,6 +87,7 @@ app.use(require('./routes/UserLoggedIn/rCourseProfile.js'));
 app.use(require('./routes/UserLoggedIn/rUserProfile.js')); 
 app.use(require('./routes/UserLoggedIn/rAddZoomMeeting.js')); 
 app.use(require('./routes/UserLoggedIn/rHome.js')); 
+app.use(require('./routes/UserLoggedIn/rTutorSchedule.js')); 
 app.use(require('./routes/UserLoggedIn/rEditListing.js')); 
 app.use(require('./routes/UserLoggedIn/rStudyGroupProfile.js')); 
 app.use(require('./routes/UserLoggedIn/rMeetupProfile.js')); 

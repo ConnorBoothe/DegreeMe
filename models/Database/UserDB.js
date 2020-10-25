@@ -72,6 +72,7 @@ var userDBSchema = new Schema({
     subscription:{type:String, required:true},
     Major: {type:String, required:true},
     Tutor:{type:Boolean, required:true},
+    ActiveTutor:{type:Boolean},
     StripeId: {type:String, required:true},
     CustomerId: {type:String, required:true},
     notificationCount: {type:Number, required:true},
@@ -86,7 +87,8 @@ var userDBSchema = new Schema({
     SearchHistory: [SearchHistorySchema],
     StudyGroups: [studyGroupsSchema],
     TutoringSessions: [tutoringSessionSchema],
-    bids:[bidSchema]
+    bids:[bidSchema],
+   
 }, {collection: 'UserDB'});
 
 module.exports = class UserDB {
@@ -602,5 +604,19 @@ module.exports = class UserDB {
      getMyGroups(id){
         var UserDB = mongoose.model('UserDB',userDBSchema);
         return UserDB.findOne({_id: id}, "StudyGroups");
+    }
+    //set active tutor
+    setActiveTutor(id, value){
+        var UserDB = mongoose.model('UserDB',userDBSchema);
+        return new Promise((resolve, reject) => {
+            UserDB.findOne({_id: id})
+            .then(function(data){
+                console.log(data)
+
+                data.ActiveTutor = value;
+                data.save();
+                resolve(data);
+            });
+        });
     }
 }

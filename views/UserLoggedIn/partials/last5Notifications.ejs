@@ -22,13 +22,16 @@
               </div>
              
               <div class="slider-container-header">
-                <input class="priceSlider" name="theme" type="range" min="1" max="2" value="2" class="" id="">
-                 <p class="active text-success">Active</p> 
+                  <% if(session.activeTutor === true){%>
+                    <input id="priceSlider" class="priceSlider" name="theme" type="range" min="1" max="2" value="2" class="" id="">
+                    <p class="active text-success">Active</p> 
+                  <%}else{%>
+                    <input id="priceSlider" class="priceSlider" name="theme" type="range" min="1" max="2" value="1" class="" id="">
+                    <p class="active text-danger">Inactive</p> 
+                <%}%>
+               
           </div> 
-         
-          
            </div>
-           
         <a href="/home" class="text-dark"><img src="../assets/img/degreeMeLogo.svg" alt="logo" class="logo desktopLogo" width="20"/></a>
        
                  <div>

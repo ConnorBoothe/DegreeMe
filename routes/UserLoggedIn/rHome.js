@@ -918,5 +918,15 @@ router.post("/siteWideSearch",
         })
         
     })
-
+    router.post("/setActive", function(req, res){
+        users.setActiveTutor(req.session.userId, req.body.value)
+        .then(function(data){
+            console.log(data.ActiveTutor);
+            req.session.activeTutor = data.ActiveTutor;
+            res.status(202).json({
+                data: data,
+            }).end();
+        })
+        
+    })
 module.exports = router;
