@@ -95,7 +95,8 @@ app.use(require('./routes/UserLoggedIn/rAddCourse.js'));
 app.use(require('./routes/UserLoggedIn/rDisplayAllBids.js')); 
 app.use(require('./routes/UserLoggedIn/rDisplaySingleAcceptedBid.js')); 
 app.use(require('./routes/UserLoggedIn/rComments.js')); 
-
+app.use(require('./routes/UserLoggedIn/rAdmin.js')); 
+app.use(require('./routes/UserLoggedIn/rAskQuestion.js')); 
 //API Routes
 app.use(require('./routes/API/SendStudyGroupData.js')); 
 app.use(require('./routes/API/sendMeetups.js'));  

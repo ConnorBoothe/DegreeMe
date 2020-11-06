@@ -1,7 +1,9 @@
 $(document).ready(function(){
     $("#hourlyRate").maskMoney();
     $(".bid-input").maskMoney();
-    $(".askingPrice").maskMoney();
+    $("#showNotifications").on("focus", ".add-tutoring-input1", function(){
+        $(this).maskMoney();
+    })
     $(".timeline").on("focus", ".bid-input", function(){
         $(this).maskMoney();
     })

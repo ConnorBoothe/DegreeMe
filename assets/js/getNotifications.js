@@ -81,7 +81,7 @@ function generateMobileProfileMenu(){
             '<path fill-rule="evenodd" d="M2.5 15a.5.5 0 1 1 0-1h1v-1a4.5 4.5 0 0 1 2.557-4.06c.29-.139.443-.377.443-.59v-.7c0-.213-.154-.451-.443-.59A4.5 4.5 0 0 1 3.5 3V2h-1a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1h-1v1a4.5 4.5 0 0 1-2.557 4.06c-.29.139-.443.377-.443.59v.7c0 .213.154.451.443.59A4.5 4.5 0 0 1 12.5 13v1h1a.5.5 0 0 1 0 1h-11zm2-13v1c0 .537.12 1.045.337 1.5h6.326c.216-.455.337-.963.337-1.5V2h-7zm3 6.35c0 .701-.478 1.236-1.011 1.492A3.5 3.5 0 0 0 4.5 13s.866-1.299 3-1.48V8.35zm1 0c0 .701.478 1.236 1.011 1.492A3.5 3.5 0 0 1 11.5 13s-.866-1.299-3-1.48V8.35z"/>'+
             '</svg>'+
             "<span class='mobileMenuText'>Upcoming Tutoring Sessions</span></li>"+
-            "<li>"+
+            "<li class='coursesTutoring'>"+
                 '<svg width="1.25em" height="1.25em" viewBox="0 0 16 16" class="bi bi-briefcase-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
                 '<path fill-rule="evenodd" d="M0 12.5A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5V6.85L8.129 8.947a.5.5 0 0 1-.258 0L0 6.85v5.65z"/>'+
                 '<path fill-rule="evenodd" d="M0 4.5A1.5 1.5 0 0 1 1.5 3h13A1.5 1.5 0 0 1 16 4.5v1.384l-7.614 2.03a1.5 1.5 0 0 1-.772 0L0 5.884V4.5zm5-2A1.5 1.5 0 0 1 6.5 1h3A1.5 1.5 0 0 1 11 2.5V3h-1v-.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5V3H5v-.5z"/>'+
@@ -124,10 +124,40 @@ function formatCourses(courses){
     for(x in courseData){
         courses += "<li>"+
         '<a href="/course/'+courseData[x].courseName+'"><p class="myCoursesText">'+courseData[x].courseName+'</p>'+
-            '<p class="myCoursesSubText">'+courseData[x].courseCode+'</p></a>'+
+            '<p class="myCoursesSubText">'+courseData[x].courseCode+'</p><span>'+courseData[x].courseCode+'</span></a>'+
         "</li>";
     }
     courses+="</ul></div></div>";
+    return courses;
+}
+function formatCoursesTutoring(courses){
+    var courseData = courses;
+    var courses = "<div class='mobileCourses'><h1>"+
+    '<span class="backToMenu"><svg width="1.25em" height="1.25em" viewBox="0 0 16 16" class="bi bi-arrow-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
+    '<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>'+
+    '</svg></span>'+
+    "Tutoring Courses</h1>";
+    courses += "<div class='mobile-courses-container'>"+
+                    "<ul>";
+    if(courseData.length > 0 ){
+        for(x in courseData){
+            courses += "<li>"+
+            '<a href="/course/'+courseData[x].course+'"><p class="myCoursesText">'+courseData[x].course+'</p></a>'+
+                '<p class="myCoursesSubText">'+courseData[x].courseCode;
+                if(!courseData[x].approved){
+                    courses +='<span class="badge badge-warning pending-tutor-course"> Pending</span></p>';
+                }
+                else{
+                    courses +='<img class="dots dots-tutor-courses" src="../assets/img/3dots.svg"/><button class="btn btn-danger remove-tutor-course">Remove</button>';
+                }
+            courses += "<input type='hidden' class='appId' value='"+courseData[x]._id+"'</li>";
+        }
+    }
+    else{
+        courses += "<li><h1>You aren't a tutor in any course</h1></li>";
+    }
+    
+    courses+="</ul><button class='btn btn-primary add-tutoring-course'>Add Course</button></div></div>";
     return courses;
 }
 function formatReviews(){
@@ -189,10 +219,24 @@ $(document).ready(function(){
               },
             },
           });
-       
-
     })
-
+    $("#showNotifications").on("click",".coursesTutoring",function(){
+        payload = {
+            userId:""
+        }
+        $.ajax({
+            url: "/getTutoringCourses",
+            type: 'POST',
+            data: JSON.stringify(payload),
+            headers: {
+              "Content-Type": "application/json"
+            }, statusCode: {
+              202: function (result) {
+                $("#showNotifications").html(formatCoursesTutoring(result.data));
+              },
+            },
+          });
+    });
     $("#showNotifications").on("click",".myGroups",function(){
         payload = {
             userId:$("input[name='userId']").val()
@@ -236,7 +280,6 @@ $(document).ready(function(){
     //get user settings mobile view
     $(".userProfileImg").on("click", function(){
         if(window.innerWidth < 1000){
-            //get users courses
             $('#showNotifications').html(generateMobileProfileMenu());
             $('#showNotifications').show();
         }
@@ -348,6 +391,7 @@ $(".mobile-notifications").on("click", function(){
                     }
                 }
                 if(notifications != ""){
+                    $("#showNotifications").html("")
                     $("#showNotifications ul").html(notifications)
                 }
                 else{
@@ -617,4 +661,118 @@ $.ajax({
             $(".bdge1").hide();
         } 
 });
+
+//add tutoring course button on click
+$("#showNotifications").on("click", ".add-tutoring-course", function(){
+    $("#showNotifications").html("<div class='mobileBlocker'></div><div class='mobileCourses'><h1>"+
+    '<span class="backToMenu1"><svg width="1.25em" height="1.25em" viewBox="0 0 16 16" class="bi bi-arrow-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
+    '<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>'+
+    '</svg></span>'+
+    "Add Tutoring Course</h1><div class='add-tutoring-wrapper'><div class='add-tutoring-sub-wrapper'><form class='add-tutoring-form'>"+
+    "<p class='add-tutoring-label'>Select a Course</p>"+
+    "<div class='input-container-add-tutoring'>"+
+    '<span class="icon-add-tutoring"><svg class="" width=".75em" height=".75em"'+
+                                        'viewBox="0 0 16 16" class="bi bi-search" fill="white"'+
+                                        'xmlns="http://www.w3.org/2000/svg">'+
+                                        '<path fill-rule="evenodd"'+
+                                            'd="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />'+
+                                        '<path fill-rule="evenodd"'+
+                                            'd="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />'+
+                            '</svg></span>'+
+    "<input class='add-tutoring-input' type='text' placeholder='Enter Course'/><div class='tutor-add-autocomplete'></div></div>"+
+    "<p class='add-tutoring-label'>Enter Your Hourly Pay Rate</p>"+
+    "<div class='input-container-add-tutoring'>"+
+    '<span class="icon-add-tutoring"><img class="add-tutoring-dollar" src="../assets/img/dollarWhite.svg"/></span>'+
+    "<input name='add-tutor-price' class='add-tutoring-input1' type='text' placeholder='0.00'/></div>"+
+    "<input class='add-tutor-courseCode' type='hidden'/>"+
+    "<p class='add-tutoring-label'>Upload a screenshot of your transcript</p><input class='transcript-upload' type='file'/><input type='submit' class='btn btn-primary add-tutoring-btn' value='Add Course'/></form>"+
+    '<div class="spinner-container1 add-tutor-loading">'+
+    '<div class="spinner-border" role="status">'+
+        '<span class="sr-only"></span>'+
+    '</div>'+
+    '<span class="loading-span">Loading</span>'+
+'</div>'+
+    "</div></div>");
+});
+$("#showNotifications").on("click",".backToMenu1",function(){
+    payload = {
+        userId:""
+    }
+    $.ajax({
+        url: "/getTutoringCourses",
+        type: 'POST',
+        data: JSON.stringify(payload),
+        headers: {
+          "Content-Type": "application/json"
+        }, statusCode: {
+          202: function (result) {
+            $("#showNotifications").html(formatCoursesTutoring(result.data));
+          },
+        },
+      });
+});
+//add tutoring course autocomplete
+ //mobile find tutor autocomplete
+ $("#showNotifications").on("keyup",".add-tutoring-input", function(){
+    var inputVal = $(this).val();
+payload = {
+    searchValue:$(this).val(),
+    type:"Courses" 
+ }
+ $.ajax({
+     url: "/siteWideSearch",
+     type: 'POST',
+     data: JSON.stringify(payload),
+     headers: {
+     "Content-Type": "application/json"
+     }, statusCode: {
+     202: function (result) {
+         if(result.type === "Courses"){
+             if((inputVal === "")){
+                $(".tutor-add-autocomplete").html("<p class='emptySearch'>Search Courses</p>");
+             }
+             else if(result.Courses.length > 0){
+                var courses = "";
+                 for( x in result.Courses){
+                     courses+= "<div class='courseCountainer add-tutor-course-item'><p class='courseName'>"+result.Courses[x].CourseName+"</p><p class='courseCode'>"+result.Courses[x].Department + " " +
+                     result.Courses[x].CourseCode+"</p></div>";
+                 }
+                 $(".tutor-add-autocomplete").html(courses);
+             }
+            
+             else if(result.Courses.length == 0){
+                $(".tutor-add-autocomplete").html("<p class='noMatch'>No matching Results</p>");
+             }
+         } 
+     },
+     500: function (result) {
+         alert("500 ");
+         console.log(result)
+     },
+     },
+ });
+})
+
+//show add tutoring course autocomplete
+$("#showNotifications").on("focus",".add-tutoring-input", function(){
+    $(".tutor-add-autocomplete").show();
+    $(".mobileBlocker").show();
+});
+// $("#showNotifications").on("focusout",".add-tutoring-input", function(){
+//     $(".tutor-add-autocomplete").hide();
+// });
+//select add tutoring course item
+$("#showNotifications").on("click", ".add-tutor-course-item", function(){
+    $(".add-tutor-courseCode").val($(this).children().eq(1).text())
+    $(".add-tutoring-input").val($(this).children().eq(0).text());
+    $(".tutor-add-autocomplete").hide();
+    $(".blocker").hide();
+})
+$("#showNotifications").on("click",".mobileBlocker", function(){
+    $(".tutor-add-autocomplete").hide();
+    $(".mobileBlocker").hide();
+})
+
+
+
 })

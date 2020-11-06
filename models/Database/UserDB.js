@@ -104,10 +104,16 @@ module.exports = class UserDB {
         var UserDB = mongoose.model('UserDB',userDBSchema);
         return UserDB.find({});
       }
+      //get user email by id
+      getEmailById(id){
+        var UserDB = mongoose.model('UserDB',userDBSchema);
+        return UserDB.findOne({_id:id}, "email");
+      }
       getEmailsFromHandleArray(handleArray){
         var UserDB = mongoose.model('UserDB',userDBSchema);
         return UserDB.find({handle:{$in: handleArray}}, "email");
       }
+
     getUserByHandle(handle){
         var UserDB = mongoose.model('UserDB',userDBSchema);
         return UserDB.find({handle: handle}, "handle");
@@ -526,7 +532,6 @@ module.exports = class UserDB {
             handle: handle
         }).exec((err,docs)=>{
             
-            console.log(docs)
             var threadIndex = -1;
             for(var x = 0; x< docs.threads.length; x++){
                 if(docs.threads[x].threadId ==  threadId){
@@ -611,8 +616,6 @@ module.exports = class UserDB {
         return new Promise((resolve, reject) => {
             UserDB.findOne({_id: id})
             .then(function(data){
-                console.log(data)
-
                 data.ActiveTutor = value;
                 data.save();
                 resolve(data);

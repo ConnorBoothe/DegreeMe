@@ -62,7 +62,6 @@ router.get('/Group/:GroupId', function (req, res) {
                     memberCount++;
                     users.getUserByHandle(docs2[0].Members[x].MemberHandle).exec((err, docs3) => {
                       users.isFollowing(req.session.handle, docs3[0], null, function (obj, folstat) {
-                        console.log(req.session.handle);
                         console.log(docs)
                         members.push([{
                           handle: docs3[0].handle,

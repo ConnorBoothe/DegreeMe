@@ -24,7 +24,18 @@ module.exports = class TutorSchedules {
         }]
     }).sort({time:1});
    }
-
+   getUserScheduleByDayAndTime(userId, day, time){
+       console.log(userId)
+       console.log(time)
+       console.log(day)
+    return schedule.find({
+        $and : [{
+            userId:userId,
+            day:day,
+            time:time
+        }]
+    });
+   }
    //get tutors available at given day and time
    getAvailableTutors(day, time){
     return schedule.find({

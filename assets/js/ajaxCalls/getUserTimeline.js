@@ -339,7 +339,7 @@ $(document).ready(function(){
             }, statusCode: {
               202: function (result) {
                 $(".spinner-container").fadeOut();
-                $(".timeline").append(createTimeline(result.newItems, result.stripeId));
+                $(".timeline-wrapper").append(createTimeline(result.newItems, result.stripeId));
                 if(result.newItems.length < 5 && $.session.get("end") == "false"){
                     $.session.set("end", true);
                     $(".timeline").append('<p class="timelineItemsLoaded">All items loaded</p>');

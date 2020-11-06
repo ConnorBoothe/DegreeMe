@@ -94,12 +94,10 @@ router.get('/Checkout', function (req, res) {
 //render the checkout page
 router.get('/bids/:timelineId', function (req, res) {
     if (req.session.userId) {
-        console.log(req.session)
         bids.getBidsByTimelineId(req.params.timelineId)
             .then(function (bids) {
                 timeline.getTimelineById(req.params.timelineId)
                     .then(function (timeline) {
-                        console.log(bids)
                         res.render('UserLoggedIn/bids', {
                             session: req.session,
                             bids: bids,

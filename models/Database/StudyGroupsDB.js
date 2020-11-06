@@ -136,7 +136,6 @@ groupsAutocompleteByName(searchValue){
             docs1.save();
           }else{
             console.log("could not find handle");
-            console.log(handle);
             callback(false);
           }
         })
@@ -165,20 +164,17 @@ groupsAutocompleteByName(searchValue){
                     for (var j=0;j<docs1.StudyGroups.length;j++){
                         if (docs1.StudyGroups[j].studyGroupName.valueOf()==docs.GroupName.valueOf()){
                             docs1.StudyGroups.splice(j,1);
-                            console.log('removed '+docs.GroupName+' from user');
                         }
                     }
                     docs1.save();
                     callback(true);
                 }else{
                     console.log("handle does not exists");
-                    console.log(handle);   
                     callback(false);     
                 }
             });
         }else{
             console.log("Study Session does not exists");
-            console.log(sessionID);
             callback(false);
         }
     })
@@ -200,7 +196,6 @@ groupsAutocompleteByName(searchValue){
             callback(group,false);
         }else{
             console.log("follower_handle does not exists");
-            console.log(follower_handle);
             callback(group,false);
         }
     })

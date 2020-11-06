@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+    <head>
+        <title> Comments| degreeMe </title>
+        <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="../assets/img/favicon.png" type="image/png" />
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="../assets/css/bootstrap.min.css">       
+         <link href="../assets/css/main1.css" rel="stylesheet">
+        <link href="../assets/css/home.css" rel="stylesheet">
+        <link href="../assets/css/CourseProfile.css" rel="stylesheet">
+        <link href="../assets/css/admin.css" rel="stylesheet">
+        <script src="../assets/jquery/dist/jquery.js"></script>
+        
+    </head>
+        <body class="color-dark">
+            <div class="homeWrap">
+                <div class="page-container">
+            <%- include ('partials/sideBar.ejs')%>
+            <%- include ('partials/horizontalHeader.ejs')%>
+            <div class="admin-container">
+                <h2 class="text-light pendingTutorTitle">Pending Tutors</h2>
+                <%for(var i = 0 ; i < pendingTutors.length; i++){%>
+                    <div class="courses-tutoring">
+                        <p class="text-light">User Id: <%=pendingTutors[i].userId%></p>
+                        <p class="text-light">Course: <%=pendingTutors[i].course%></p>
+
+                        <p>
+                            <input type="hidden" name="userId" value = "<%=pendingTutors[i].course%>"/>
+                            <input type="hidden" name="course" value = "<%=pendingTutors[i].userId%>"/>
+                            <input type="hidden" name="appId" value = "<%=pendingTutors[i]._id%>"/>
+                            <button class="btn btn-primary reviewAppBtn">Accept</button>
+                            <button class = "btn btn-danger reviewAppBtn">Reject</button>
+                         </p>
+                         <%console.log(pendingTutors[i].transcriptImg)%>
+                        <img src="<%=pendingTutors[i].transcriptImg%>" class="transcript-img"/>
+                    </div>
+                <%}%>
+            </div>
+        </div>   
+    </div>
+    
+   
+    <script src="../assets/jquery/jquery.session/jquery.session.js"></script>
+    <script type="text/javascript" src="../assets/js/displayMyCourses.js"></script>
+    <script src="../assets/js/getNotifications.js"></script>
+    <script src="../assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="../assets/js/ajaxCalls/admin.js"></script>
+    <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../assets/js/SiteWideSearch.js"></script>
+    <script type="text/javascript" src="../assets/js/highlightCurrentMenuItem.js"></script>
+    <script src="../assets/jquery/jquery.session/jquery.session.js"></script>
+    <script type="text/javascript" src="../assets/js/Client-DateFunctions.js"></script>
+
+
+    </body>
+</html>

@@ -137,7 +137,6 @@ router.get('/home', function (req, res) {
                     }
                     if (docs1.length > 0) {
                         acceptedBids.getUserBids(req.session.handle).exec((err, bids)=>{
-                            console.log(docs3[0].StudyGroups)
                         res.render('UserLoggedIn/Home', {
                             session: req.session,
                             qs: req.query,
@@ -205,7 +204,6 @@ router.post("/Seen",
         if (!errors.isEmpty()) {
             res.redirect('/home');
         }
-        console.log(req.body.notifId)
         notifications.seenNotification(req.body.notifId)
             .exec((err, docs) => {
                 res.status(202).json({
@@ -508,7 +506,6 @@ router.post("/addHelpRequest",
                                 }
                             console.log(resp.body);
                             });
-                            console.log(emails)
                         })
                     })
                     .then(function(){
@@ -547,7 +544,6 @@ router.post("/addBid",
                         // /(userHandle ,name,type, img, url)
                         notifications.addNotification(bid.Biddee, bid.Bidder, "bidded <span class='text-success'>$" + req.body.price + "</span>", timelineObj[0].userImage, "/bids/" + bid.TimelineId);
                         users.incrementNotificationCount(bid.Biddee);
-                        console.log("this is req.body.email",req)
                         var mail = unirest("POST", "https://api.sendgrid.com/v3/mail/send");
                         users.getUserByHandle(bid.Biddee)
                         .then(function(user){
@@ -851,7 +847,6 @@ router.post("/siteWideSearch",
     //   console.log("Group Name", req.body.groupName)
     console.log(req.body.message)
       var splitEmails = req.body.emails.split(",");
-      console.log(splitEmails)
       var toEmails = [];
       for(x in splitEmails){
         if(splitEmails[x] != ""){
@@ -921,7 +916,6 @@ router.post("/siteWideSearch",
     router.post("/setActive", function(req, res){
         users.setActiveTutor(req.session.userId, req.body.value)
         .then(function(data){
-            console.log(data.ActiveTutor);
             req.session.activeTutor = data.ActiveTutor;
             res.status(202).json({
                 data: data,

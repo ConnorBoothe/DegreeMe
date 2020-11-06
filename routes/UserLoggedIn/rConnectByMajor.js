@@ -47,8 +47,6 @@ router.get('/discover', function (req, res) {
         searchMajor = curUser[0].Major;
       }
       users.getUsersByMajor(searchMajor.trim()).exec((err, docs) => {
-        console.log(searchMajor.trim());
-        console.log(docs)
         if (err != null) {
           console.log(err);
         } else {
@@ -65,11 +63,8 @@ router.get('/discover', function (req, res) {
                     docs[x].email, docs[x].password, docs[x].img, docs[x].theme, docs[x].handle, docs[x].myCourses,
                     docs[x].status, docs[x].subscription, null, docs[x].threads, docs[x].Major, docs[x].bio);
                   //console.log("calling isFollowing:"+docs[x].handle);
-                  console.log("RUNNING FOLLOW")
                   users.isFollowing(req.session.handle, docs[x], temp, function (student, folstat) {
-                    console.log(student)
                     students.push([student, folstat]);
-                    console.log()
                     if (students.length == numInMajor) {
                       resolve(students);
                     }
@@ -90,7 +85,6 @@ router.get('/discover', function (req, res) {
               })
             });
           } else {
-            console.log("RUNNING")
             res.render('UserLoggedIn/ConnectByMajor', {
               qs: req.query,
               session: req.session,

@@ -91,7 +91,6 @@ module.exports = class Timeline {
         }
         followingHandles.push("All");
         followingHandles.push(req.session.handle);
-        console.log(followingHandles)
         var length = "";
         timelineDB.find({
             sendToHandle: { $in: followingHandles

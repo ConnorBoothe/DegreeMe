@@ -24,6 +24,7 @@ var discussionDBSchema = new Schema({
     date:{type:Date, required:true},
     post:{type:String, required:true},
     commentCount:{type:Number, required:true},
+    image:{type:String, required:true},
     comments:[commentSchema],
     
 }, {collection: 'DiscussionBoardDB'});
@@ -41,12 +42,12 @@ module.exports = class UserProfile {
         var discussionDB = mongoose.model('DiscussionBoardDB',discussionDBSchema);
         return discussionDB.find({_id:id});
     }
-    postDiscussion(userHandle, userName, userImg, anonymous, courseName, date1, post1){
+    postDiscussion(userHandle, userName, userImg, anonymous, courseName, date1, post1, img){
         var discussionDB = mongoose.model('DiscussionBoardDB',discussionDBSchema);
 
         var discussion = new discussionDB({userHandle:userHandle, userName:userName, userImg:userImg, anonymous:anonymous, courseName:courseName, 
-            date:date1, post:post1, commentCount:0});
-            discussion.save();
+            date:date1, post:post1, commentCount:0, image:img});
+           return discussion.save();
     }
     deleteQuestion(id){
         var discussionDB = mongoose.model('DiscussionBoardDB',discussionDBSchema);
