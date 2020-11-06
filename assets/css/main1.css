@@ -1,4 +1,27 @@
 @media only screen and (max-width: 1000px) {
+    .profileNav{
+        width:100%;
+        
+        height:40px;
+        padding:0px!important;
+        margin:0!important;
+    }
+    .blocker{
+        position:fixed;
+        width:100%;
+        height:100vh;
+        margin-left:0px;
+        z-index:3!important;
+        display:none;
+    }
+    .mobileBlocker{
+        position:fixed;
+        width:100%;
+        height:100vh;
+        margin-left:0px;
+        z-index:3!important;
+        display:none;
+    }
     .input-container1Light {
         position:relative!important;
         width:80%!important;
@@ -29,6 +52,7 @@
         width:100%;
        background-color:#2c2f33;
        border-radius:20px;
+       border:none!important;
     
     }
     #searchInput::placeholder{
@@ -111,16 +135,53 @@
        
     }
     .tutorMiddle{
-        width:90%;
+        width:80%;
         font-size:13px!important;
         padding-top:35px;
         position:absolute;
-        right:0;
-        
-        
+        left:0;
+        margin-left:120px;
+    }
+
+    .profile-wrapper{
+        background-color: #18191a;
+        padding-top:55px;
+        height:100vh;
+        width:100%;
     }
 }
 @media only screen and (min-width: 1000px) {
+    .profileNav{
+        width:1000px;
+        
+        height:40px;
+        padding:0px!important;
+        margin:0!important;
+    }
+    .profile-wrapper{
+        background-color: #18191a;
+        padding-top:55px;
+        height:100vh;
+    }
+    #searchInput, .input-field{
+        font-family: "Open sans", "sans-serif"!important;
+        font-size:14px!important;
+        height:100%;
+        border:none!important;
+        width:100%;
+       background-color:#2c2f33;
+       border-radius:20px;
+       border:none!important;
+    
+    }
+    .blocker{
+        position:fixed;
+        width:100%;
+        height:100vh;
+        margin-left:250px;
+        display:none;
+        z-index:1;
+    }
     .input-container1Light {
         position:relative!important;
         width:646px!important;
@@ -368,6 +429,7 @@ header{
 }
 .color-dark{
     background-color:#18191a!important;
+    width:100%;
 }
 .homeContainer1{
     padding-top:80px;
@@ -1635,13 +1697,7 @@ Menu css
        background-color:#343a40;
        
     }
-    .profileNav{
-        width:1000px;
-        
-        height:40px;
-        padding:0px!important;
-        margin:0!important;
-    }
+    
     .followers-item h1{
         font-size:16px;
         margin-right:10px;
@@ -1856,11 +1912,7 @@ Menu css
         width:100%;
     }
     
-    .profile-wrapper{
-        background-color: #18191a;
-        padding-top:55px;
-        height:100vh;
-    }
+
    .meetingDateTime{
        margin-left:auto;
        margin-right:auto;
@@ -3584,14 +3636,7 @@ background-color:#2c2f33 ;
     .questionText{
         margin-bottom:0!important;
     }
-    .blocker{
-        position:fixed;
-        width:100%;
-        height:100vh;
-        margin-left:250px;
-        display:none;
-        z-index:1;
-    }
+  
     .blocker1{
         position:fixed;
         width:100%;

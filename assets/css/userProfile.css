@@ -337,10 +337,7 @@ max-width:300px;
     font-size:20px!important;
 }
 
-.courseCode2{
-    font-size:20px;
-    text-align:center;
-}
+
 
 .course-container2{
     background-color:#242526;
@@ -440,7 +437,27 @@ max-width:300px;
      background-color:#18191a!important;
  }
  @media only screen and (max-width: 1000px) {
+    .courseCode2{
+        font-size:16px;
+        text-align:center;
+    }
     .course-container{
+        background-color:#242526;
+        border-radius:10px;
+        width:120px;
+        height:120px;
+        padding-left:10px;
+        padding-right:10px;
+        padding-top:50px;
+        padding-bottom:10px;
+        margin-bottom:30px;
+        text-align:center;
+        display:inline-block;
+        margin-right:10px;
+        margin-left:10px;
+        color:#d4d4d4;
+    }
+    .course-container2{
         background-color:#242526;
         border-radius:10px;
         width:120px;
@@ -465,6 +482,8 @@ max-width:300px;
     }
     .profile-header{
         display:inline-block;
+        width:100%;
+        overflow-y: none;
     }
      .mobile-courses-container{
          margin-top:25px;
@@ -475,12 +494,12 @@ max-width:300px;
      .mobileGroupsList li a{
          color:white!important;
      }
-     .backToMenu{
+     .backToMenu, .backToMenu1{
          margin-right:10px;
          cursor:pointer;
      }
      .mobileCourses h1{
-         font-size:22px;
+         font-size:18px;
          color:white;
          margin-top:20px;
          margin-left:20px;
@@ -494,7 +513,7 @@ max-width:300px;
         margin-left:auto;
         margin-right:auto;
         text-align:center;
-        width:400px;
+        width:100%;
     }
  .profileContainer{
     margin-left:0px!important;
@@ -565,12 +584,12 @@ max-width:300px;
     background-color:#18191a;
     width:100%;
  }
- .connectionBody-container{
+ /* .connectionBody-container{
     width:220px;
     text-align:left!important;
     left:0!important;
     
-}
+} */
 .desktopBio{
     display:none;
 }
@@ -625,8 +644,8 @@ max-width:300px;
     padding-left: 15px;
     padding-top:3px;
     padding-bottom:3px;
-    margin-left:80px;
-    font-size:13px;
+    margin-left:85px;
+    font-size:12px;
     border: 2px solid #007bff!important;
 
 }
@@ -648,12 +667,13 @@ button.followingButton{
     padding-right: 10px;
     padding-left: 10px;
     float:none;
-    font-size:13px;
-    margin-left:20px;
+    font-size:12px;
+    margin-left:30px;
     
 }
 .mobileCount{
-    font-size:22px!important;
+    font-size:18px!important;
+    margin-bottom:0px;
 }
 .desktopFollow{
     display:none;
@@ -662,9 +682,12 @@ button.followingButton{
     text-align:center;
     margin-top:10px;
 }
+.followers-list{
+    margin-bottom:5;
+}
 .mobileMajorSpan p{
     text-align:center;
-    font-size:14px!important;
+    font-size:12px!important;
 }
 .followForm{
     width:30px!important;
@@ -704,7 +727,7 @@ button.followingButton{
 .spinner-container1{
     width:100%!important;
     text-align:center;
-    display:none;
+    /* display:none; */
 }
 .followers-text, .following-text{
     font-size:14px!important;
@@ -783,16 +806,22 @@ button.followingButton{
     bottom:0;
     margin-left:0!important;
     width:100%!important;
+    margin-bottom:75px;
 
 }
 .bottom-ul-mobile li{
     display:inline-block!important;
-    width:25%;
+    width:50px!important;
 }
 .mobileProfileMenu ul li{
     display:inline-block;
     margin-left:25px;
     margin-top:10px;
+   
+}
+.mobileProfileMenu ul li button, .mobileProfileMenu ul li a{
+    font-family: "Open sans", "sans-serif"!important;
+    font-size:14px;
    
 }
 .mobileProfileMenu ul{
@@ -817,6 +846,10 @@ button.followingButton{
 }
 }
 @media only screen and (min-width: 1000px) {
+    .courseCode2{
+        font-size:20px;
+        text-align:center;
+    }
     .course-container{
         background-color:#242526;
         border-radius:10px;

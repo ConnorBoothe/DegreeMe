@@ -384,6 +384,7 @@ button{
         text-align:left;
         margin-left:0;
         border-radius:10px;
+        width:100%;
     
     }
     .studyGroupHeader-wrapper div{

@@ -294,12 +294,12 @@ input[name="anonymous"]{
     .profile-wrapper{
         background-color: #18191a;
         padding-top:0px;
-        height:200px;
+        height:100%;
         position:relative;
     }
     .CourseTitle .courseName{
         font-size:18px!important;
-        width:330px;
+        width:100%;
     }
     .course-profile-info{
         color:white!important;
