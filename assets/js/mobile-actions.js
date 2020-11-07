@@ -1,3 +1,4 @@
+
 $(document).ready(function(){
     $(".mobile-actions ul li").on("click", function(){
         $(".mobile-actions ul li .mobile-actions-item").removeClass("bg-primary")
@@ -51,7 +52,8 @@ $(document).ready(function(){
             $(".timeline-wrapper").html('<div class="recentActivity-title">'+
             '<span class="text-light">Ask a Question</span></div>'+
             '<div class="askQuestion-container"><span class="text-light"><textarea class="askQuestion-textarea" placeholder="Write your question here"/></textarea></span>'+
-            '<input type="text" class="tagACourse" placeholder="Tag a course"/><div class="findTutorMobile-results"></div><input type="file" class="askQuestion-file"/><br><button class="btn btn-primary postQuestionBtn">Post</button></div>');
+            '<input type="text" class="tagACourse" placeholder="Tag a course"/><div class="findTutorMobile-results"></div><span class="text-light">Optional</span><input type="text" class="tagAGroup" placeholder="Tag a group"/>'+
+            '<p class="text-light attachFile">Attach a file</p><input type="file" class="askQuestion-file"/><br><button class="btn btn-primary postQuestionBtn">Post</button></div>');
         }
     })
 $(".timeline-wrapper").on("focus",".mobile-tutor-search", function(){
@@ -221,28 +223,84 @@ $(".timeline-wrapper").on("click",".tagCourse-item", function(){
     // $(".tagACourse").parent().prev().text($(this).children().eq(1).text());
 });
 $(".timeline-wrapper").on("click", ".postQuestionBtn", function(){
-var course = $(this).prev().prev().prev().prev().val();
-var message = $(this).prev().prev().prev().prev().prev().children().eq(0).val();
-payload = {
-    message:message,
-    course:course,
-    image:"" 
- }
- $.ajax({
-     url: "/askQuestion",
-     type: 'POST',
-     data: JSON.stringify(payload),
-     headers: {
-     "Content-Type": "application/json"
-     }, statusCode: {
-     202: function (result) {
-         console.log(result)
-     },
-     500: function (result) {
-         alert("500 ");
-         console.log(result)
-     },
-     },
- });
+    var course = $(this).prev().prev().prev().prev().prev().prev().prev();
+    var message = $(this).prev().prev().prev().prev().prev().prev().prev().prev().children().eq(0);
+    var storageRef = firebase.storage().ref("attachments/testAttach.pdf");
+    var image ="";
+    var metadata = {
+        contentType: 'application/pdf',
+    };
+    var image = $(".askQuestion-file")[0].files[0];
+    alert(image)
+    //input validation
+    if(course.val() == "" || message.val() == "") {
+
+        if(course.val() == ""){
+            course.css("border", "1px solid #dc3545")
+        }
+        if(message.val() == ""){
+            message.css("border", "1px solid #dc3545")
+        }
+    }
+   
+    else if(image != undefined) {
+    storageRef.put(image, metadata)
+    .then(function(){
+        storageRef.getDownloadURL().then(function(url) {
+            payload = {
+                message:message.val(),
+                course:course.val(),
+                image:url
+             }
+             $.ajax({
+                 url: "/askQuestion",
+                 type: 'POST',
+                 data: JSON.stringify(payload),
+                 headers: {
+                 "Content-Type": "application/json"
+                 }, statusCode: {
+                 202: function (result) {
+                     console.log(result)
+                 },
+                 500: function (result) {
+                     alert("500 ");
+                     console.log(result)
+                 },
+                 },
+             });
+        })
+    })
+    }
+    //post question without image
+    else {
+        payload = {
+            message:message.val(),
+            course:course.val(),
+            image:"none"
+         }
+        $.ajax({
+            url: "/askQuestion",
+            type: 'POST',
+            data: JSON.stringify(payload),
+            headers: {
+            "Content-Type": "application/json"
+            }, statusCode: {
+            202: function (result) {
+                console.log(result)
+            },
+            500: function (result) {
+                alert("500 ");
+                console.log(result)
+            },
+            },
+        });
+    }
+})
+//remove red border on focus
+$(".timeline-wrapper").on("focus",".askQuestion-textarea", function(){
+    $(this).css("border", "0px solid #dc3545")
+})
+$(".timeline-wrapper").on("focus",".tagACourse", function(){
+    $(this).css("border", "0px solid #dc3545")
 })
 })

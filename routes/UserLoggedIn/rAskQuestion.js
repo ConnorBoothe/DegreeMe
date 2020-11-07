@@ -47,11 +47,13 @@ router.use(session({
 
 router.post('/askQuestion', 
 function (req, res) {
+    console.log(req.body)
     console.log("Asking question")
     //replace last param with file attachment
-    var fileAttachment = "";
+    var fileAttachment = [];
     discussion.postDiscussion(req.session.handle, req.session.name, req.session.img, false, req.body.course, new Date(), req.body.message, fileAttachment)
     .then(function(){
+        console.log("ADDED Question")
         //post to timeline
         //post to group discussion board if group is tagged
     });

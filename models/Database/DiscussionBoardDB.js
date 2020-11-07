@@ -15,6 +15,11 @@ var commentSchema = new Schema({
     date:{type:Date, required:true}
     
 });
+var attachments = new Schema({
+    file:{type:String, required:true}
+    
+});
+
 var discussionDBSchema = new Schema({
     userHandle:{type:String, required:true},
     userImg:{type:String, required:true},
@@ -24,7 +29,7 @@ var discussionDBSchema = new Schema({
     date:{type:Date, required:true},
     post:{type:String, required:true},
     commentCount:{type:Number, required:true},
-    image:{type:String, required:true},
+    attachments:[attachments],
     comments:[commentSchema],
     
 }, {collection: 'DiscussionBoardDB'});
@@ -42,12 +47,21 @@ module.exports = class UserProfile {
         var discussionDB = mongoose.model('DiscussionBoardDB',discussionDBSchema);
         return discussionDB.find({_id:id});
     }
-    postDiscussion(userHandle, userName, userImg, anonymous, courseName, date1, post1, img){
+    postDiscussion(userHandle, userName, userImg, anonymous, courseName, date1, post1, attachments){
         var discussionDB = mongoose.model('DiscussionBoardDB',discussionDBSchema);
-
-        var discussion = new discussionDB({userHandle:userHandle, userName:userName, userImg:userImg, anonymous:anonymous, courseName:courseName, 
-            date:date1, post:post1, commentCount:0, image:img});
-           return discussion.save();
+        if(attachments.length > 0){
+            var attach = [];
+            for(var i = 0; i < attachments.length; i++){
+                attach.push({file: attachments[i]});
+            }
+            var discussion = new discussionDB({userHandle:userHandle, userName:userName, userImg:userImg, anonymous:anonymous, courseName:courseName, 
+                date:date1, post:post1, commentCount:0, attachments: attach});
+        }
+        else{
+            var discussion = new discussionDB({userHandle:userHandle, userName:userName, userImg:userImg, anonymous:anonymous, courseName:courseName, 
+                date:date1, post:post1, commentCount:0});
+        }
+        return discussion.save();
     }
     deleteQuestion(id){
         var discussionDB = mongoose.model('DiscussionBoardDB',discussionDBSchema);
