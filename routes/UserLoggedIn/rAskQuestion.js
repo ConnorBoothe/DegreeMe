@@ -57,7 +57,17 @@ function (req, res) {
         //post to timeline
         //post to group discussion board if group is tagged
     });
-
-        
+});
+//get 
+// user groups for tag group autocomplete
+router.post('/userGroups', 
+function (req, res) {
+    users.getMyGroups(req.session.userId)
+    .then(function(groups){
+        console.log(groups)
+        res.status(202).json({
+            groups:groups,
+        }).end(); 
+    })
 });
 module.exports = router;

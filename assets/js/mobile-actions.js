@@ -52,7 +52,7 @@ $(document).ready(function(){
             $(".timeline-wrapper").html('<div class="recentActivity-title">'+
             '<span class="text-light">Ask a Question</span></div>'+
             '<div class="askQuestion-container"><span class="text-light"><textarea class="askQuestion-textarea" placeholder="Write your question here"/></textarea></span>'+
-            '<input type="text" class="tagACourse" placeholder="Tag a course"/><div class="findTutorMobile-results"></div><span class="text-light">Optional</span><input type="text" class="tagAGroup" placeholder="Tag a group"/>'+
+            '<input type="text" class="tagACourse" placeholder="Tag a course"/><div class="findTutorMobile-results"></div><span class="text-light optional">Optional</span><input type="text" class="tagAGroup" placeholder="Tag a group"/><div class="findTutorMobile-results-group"></div>'+
             '<p class="text-light attachFile">Attach a file</p><input type="file" class="askQuestion-file"/><br><button class="btn btn-primary postQuestionBtn">Post</button></div>');
         }
     })
@@ -219,12 +219,48 @@ payload = {
 //on click event for tag course item
 $(".timeline-wrapper").on("click",".tagCourse-item", function(){
     $(this).parent().prev().val($(this).children().eq(0).text());
-    $(".findTutorMobile-results").hide();
+    $(".findTutorMobile-results").html("");
     // $(".tagACourse").parent().prev().text($(this).children().eq(1).text());
 });
+$(".timeline-wrapper").on("keyup",".tagAGroup", function(){
+    $(".findTutorMobile-results-group").show();
+    var inputVal = $(this).val();
+ $.ajax({
+     url: "/userGroups",
+     type: 'POST',
+     headers: {
+     "Content-Type": "application/json"
+     }, statusCode: {
+     202: function (result) {
+         console.log(result.groups.StudyGroups[0])
+             if((inputVal === "")){
+                $(".findTutorMobile-results-group").html("<p class='emptySearch'>Search Your Groups</p>");
+             }
+             else if(result.groups.StudyGroups.length > 0){
+                var groups = "";
+                 for(x in result.groups.StudyGroups){
+                     if(result.groups.StudyGroups[x].studyGroupName.includes(inputVal)){
+                        groups+= "<div class='courseCountainer'><p class='courseName group-item'>"+result.groups.StudyGroups[x].studyGroupName+"</p></div>";
+
+                     }
+                 }
+                 $(".findTutorMobile-results-group").html(groups);
+             }
+            
+             else if(result.groups.StudyGroups.length == 0){
+                $(".findTutorMobile-results-group").html("<p class='noMatch'>No matching groups</p>");
+             }
+     },
+     500: function (result) {
+         alert("500 ");
+         console.log(result)
+     },
+     },
+ });
+})
 $(".timeline-wrapper").on("click", ".postQuestionBtn", function(){
-    var course = $(this).prev().prev().prev().prev().prev().prev().prev();
-    var message = $(this).prev().prev().prev().prev().prev().prev().prev().prev().children().eq(0);
+    var course = $(this).prev().prev().prev().prev().prev().prev().prev().prev();
+    var message = $(this).prev().prev().prev().prev().prev().prev().prev().prev().prev().children().eq(0);
     var storageRef = firebase.storage().ref("attachments/testAttach.pdf");
     var image ="";
     var metadata = {
@@ -295,6 +331,10 @@ $(".timeline-wrapper").on("click", ".postQuestionBtn", function(){
             },
         });
     }
+})
+$(".timeline-wrapper").on("click", ".group-item", function(){
+    $(this).parent().parent().prev().val($(this).text())
+    $(".findTutorMobile-results-group").html("");
 })
 //remove red border on focus
 $(".timeline-wrapper").on("focus",".askQuestion-textarea", function(){

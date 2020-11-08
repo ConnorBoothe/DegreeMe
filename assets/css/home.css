@@ -1595,8 +1595,11 @@ input[name="searchType"]{
     .findTutor-course{
         cursor:pointer;
     }
-    .findTutorMobile-results{
+    .findTutorMobile-results, .findTutorMobile-results{
         padding-top:20px;
+    }
+    .optional{
+        margin-top:20px!important;
     }
     .day-container label{
 
