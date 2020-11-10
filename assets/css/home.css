@@ -15,6 +15,7 @@
 
 .timeline{
     width:40%;
+    max-width:600px;
     height:100%;
     margin-left:15%;
     overflow-y:auto;
@@ -33,6 +34,7 @@
     padding-left:55px!important;
     color:#a9a9a9!important;
     margin-bottom:0!important;
+    text-align:left;
 }
 
 .timelinePost-Image{
@@ -696,13 +698,7 @@ padding-right:10px;
 .addComment:hover{
     color:#d4d4d4;
 }
-.like-button{
-    width:60px;
-    border:none!important;
-    position:absolute;
-    background-color:#242526;  
-    
-}
+
 .like-help{
     background-color:#242526;  
 }
@@ -734,7 +730,6 @@ padding-right:10px;
     width:100%;
     padding-left:20px;
     padding-top:10px;
-    padding-bottom:10px!important;
 }
 .helpRequestSuccess{
     margin-left:auto;
@@ -799,6 +794,7 @@ padding-right:10px;
     padding-left: 30px;
     margin-top:10px;
     font-size:17px;
+    text-align:left;
 }
 .captionAnon{
     color:white!important;
@@ -820,6 +816,7 @@ padding-right:10px;
     padding-bottom:20px;
     padding-top:10px;
     padding-left:20px;
+    text-align:left;
 }
 .postDetailsItem{
     display:inline-block;
@@ -841,6 +838,7 @@ padding-right:10px;
 .postDetailsList{
     padding-left:20px!important;
     margin-bottom:0!important;
+    width:100px;
 }
 .description{
     font-size:16px;
@@ -1076,9 +1074,8 @@ input[name="searchType"]{
 .mobileLogo{
     display:none;
 }
-.mobileMenu{
-    display:none;
-}
+
+
 .slider-container-header{
     width:60px;
     /* position:relative; */
@@ -1088,6 +1085,200 @@ input[name="searchType"]{
   
   /* desktop only */
   @media only screen and (min-width: 1000px) {
+    .rate-container p{
+        font-family: "Open sans", "sans-serif";
+        font-size:20px;
+        color:#a9a9a9;
+    }
+    .left-container{
+        text-align:center;
+
+    }
+    .bookTutor{
+        font-family: "Open sans", "sans-serif";
+        font-size:15px;
+        padding-top:5px;
+        padding-bottom:5px;
+        padding-left:8px;
+        padding-right:8px;
+    }
+    .tutorList {
+        width:100%;
+        text-align:center;
+    }
+    .tutorList li {
+        display:inline-block;
+        width:40%;
+        margin-left:20px;
+    }
+    .tutor-name{
+        font-family: "Open sans", "sans-serif";
+        margin-bottom:5px;
+        margin-top:5px;
+        font-size: 16px;
+    }
+    .mobile-availability{
+        margin-left:10px;
+        margin-right:auto;
+        padding-left:20px;
+        padding-bottom:20px;
+        text-align:center;
+    }
+    .mobile-availability li {
+        display:inline-block;
+        margin-left:5px;
+        margin-right:5px;
+        color:white;
+    }
+    .findTutorMobile-results, .findTutorMobile-results{
+        padding-top:20px;
+        cursor:pointer;
+    }
+    .mobile-tutor-search{
+        background-color:#18191a;
+        color:white;
+        border-right:none!important;
+        border-top:none!important;
+        border-bottom:none;
+        border-left:none!important;
+    }
+    .course-search-sub-container{
+        border-bottom:2px solid #a9a9a9;
+        width:250px;
+        display:inline-block;
+        margin-left:auto;
+        margin-right:auto;
+    }
+    .course-search-container{
+        text-align:center!important;
+        width:100%;
+        margin-top:20px;
+    }
+    .askQuestion-textarea{
+        width:90%;
+        height:80px;
+        outline:none;
+        margin-left:auto;
+        margin-right:auto;
+        text-align:left;
+        padding-left:5px;
+        background-color:#343a40;
+        color:white;
+        border:none;
+    }
+    .recentActivity-title{
+        font-size:16px;
+        padding-left:20px;
+        text-align:center;
+        font-family: "Open sans", "sans-serif";
+        text-align:center;
+    }
+    .tagACourse, .tagAGroup{
+        background-color:#343a40;
+        border:none;
+        color:white;
+        margin-top:10px;
+        width:90%;
+        height:35px!important;
+    }
+.attachFile{
+    margin-top:25px;
+    text-align:left;
+    margin-left:30px;
+}
+    .askQuestion-file{
+        margin-top:5px;
+        margin-right:20px;
+        margin-left:30px;
+        color:white!important;
+        padding-left:0px;
+    }
+    .askQuestion-container{
+        text-align:center;
+        left:0!important;
+        margin-top:40px;
+        overflow-x: hidden;
+    }
+    .postQuestionBtn{
+        margin-top:10px!important;
+        font-family:"Open sans", "sans-serif";
+        font-size:14px;
+        width:90%;
+        margin-top:20px!important;
+    }
+      .mobileMenu{
+    display:none!important;
+}
+    .mobile-actions{
+        width:100%;
+        margin-left:auto;
+        margin-right:auto;
+        text-align:center;
+        margin-top:45px;
+        margin-bottom:0px;
+    }
+    .mobile-actions-bottom-border{
+        border-bottom: 2px solid #007bff;
+    }
+    .mobile-actions ul {
+        margin-bottom:0;
+    }
+    .mobile-actions li {
+        display:inline-block;
+        margin-left:3.5%;
+        margin-right:3.5%;
+        cursor:pointer;
+        height:32px;
+        font-family:"Open sans","sans-serif";
+    }
+    .like-button{
+        width:70px;
+        border:none!important;
+        position:absolute;
+        background-color:#242526!important;  
+        
+    }
+    .hashtag{
+        color:white;
+        text-align:left;
+        margin-left:30px;
+    }
+    .pdf-link, .pdf-link:hover{
+        text-align:center;
+        width:100%!important;
+        color:#d4d4d4;
+        padding-top:10px;
+    }
+    .name-link, .name-link:hover{
+        color:white;
+        font-size:14px;
+    }
+    .questionLabel{
+        margin-left:20px;
+        margin-bottom:0;
+        text-align:left!important;
+    }
+    .pdf-iframe{
+        width:350px;
+        height:350px;
+        margin-top:30px!important;
+    }
+    .question-label-container{
+        width:120px;
+    }
+    .badge-info, .badge{
+        text-align:left!important;
+    }
+    .question-img{
+        width:300px!important;
+        margin-top:20px;
+    }
+    .question-img-container{
+        margin-left:auto;
+        margin-right:auto;
+        display:inline-block;
+        text-align:center;
+    }
     .timeline-container-helprequest{
         min-height:100px;
         background-color:#242526;
@@ -1101,11 +1292,24 @@ input[name="searchType"]{
         
     }
     .recentActivity-title{
-        display:none;
+        margin-top:30px;
+        text-align: center;
     }
-    .mobile-actions{
-        display:none;
+    .backToMenu{
+        cursor:pointer;
     }
+    .find-tutor-course-title{
+        font-size:24px;
+        margin-left:10px;
+    }
+    /* .mobile-actions{
+        width:100%;
+        margin-left:auto;
+        margin-right:auto;
+        text-align:center;
+        margin-top:15px;
+        margin-bottom:0px;
+    } */
     .day-container div{
         padding-left:20px;
     }
@@ -1140,7 +1344,10 @@ input[name="searchType"]{
         margin-top:0px;
         margin-bottom:5px;
         font-size:17px;
+        text-align:left;
         font-weight:450;
+        font-family: 'Open Sans', sans-serif!important;
+        white-space: pre-wrap;
     
     }
     .caption{
@@ -1219,6 +1426,7 @@ input[name="searchType"]{
         margin-bottom:0!important;
         margin-left:55px;
         font-size:16px;
+        text-align:left;
     }
     .postHandle a{
         color:#d4d4d4;
@@ -1238,20 +1446,43 @@ input[name="searchType"]{
     }
     .timeline-container-status{
         min-height:100px;
-        border-bottom: 2px solid #007bff;
-        box-shadow:1px 2px #131313;
+        /* border-bottom: 2px solid #007bff; */
+        /* box-shadow:1px 2px #131313; */
         margin-right:5%;
         margin-bottom:30px;
         margin-top:30px;
         border-radius:8px;
         background-color:#242526;
+        text-align:center;
         
+    }
+    .available-selected{
+        background-color:#007bff;
+        padding-left:6px;
+        padding-right:6px;
+        border-radius:10px;
+    }
+    .tutor-results-img{
+        width:80px;
+    }
+    .stars-container span{
+        font-size:24px;
     }
   }
   /* mobile */
 
 @media only screen and (max-width: 1000px) {
-
+ 
+    .findTutor-course{
+        cursor:pointer;
+    }
+    .like-button{
+        width:70px;
+        border:none!important;
+        position:absolute;
+        background-color:#18191a!important;  
+        
+    }
     .stars-container span{
         font-size:20px;
     }
@@ -1315,8 +1546,8 @@ input[name="searchType"]{
     }
     .timeline-container-status{
         min-height:100px;
-        border-bottom: 2px solid #007bff;
-        box-shadow:1px 2px #131313;
+        /* border-bottom: 2px solid #007bff;
+        box-shadow:1px 2px #131313; */
         margin-right:5%;
         margin-bottom:30px;
         margin-top:30px;
@@ -1339,7 +1570,7 @@ input[name="searchType"]{
         border:none;
     }
     .timeline-wrapper{
-        background-color:#242526!important;
+        /* background-color:#242526!important; */
         padding-top:10px;
         border-radius:20px;
         padding-bottom:20px;
@@ -1360,6 +1591,7 @@ input[name="searchType"]{
         padding-left:20px;
         text-align:left;
         font-family: "Open sans", "sans-serif";
+        text-align:center;
     }
     .tagACourse, .tagAGroup{
         background-color:#343a40;
@@ -1371,18 +1603,21 @@ input[name="searchType"]{
     }
 .attachFile{
     margin-top:25px;
+    text-align:left;
+    margin-left:30px;
 }
     .askQuestion-file{
         margin-top:5px;
         margin-right:20px;
-        color:white;
+        margin-left:30px;
+        color:white!important;
         padding-left:0px;
     }
     .askQuestion-container{
-        text-align:left;
+        text-align:center;
         left:0!important;
-        margin-left:20px!important;
-        margin-top:20px;
+        margin-top:40px;
+        overflow-x: hidden;
     }
     .postQuestionBtn{
         margin-top:10px!important;
@@ -1427,27 +1662,40 @@ input[name="searchType"]{
         margin-left:auto;
         margin-right:auto;
         text-align:center;
-        margin-top:30px;
-        margin-bottom:20px;
+        margin-top:15px;
+        margin-bottom:0px;
+    }
+    .mobile-actions-bottom-border{
+        border-bottom: 2px solid #007bff;
+    }
+    .mobile-actions ul {
+        margin-bottom:0;
     }
     .mobile-actions li {
         display:inline-block;
-        margin-left:4.5%;
-        margin-right:4.5%;
+        margin-left:3.5%;
+        margin-right:3.5%;
+    }
+    .hashtag{
+        color:white;
+        margin-left:30px;
+        text-align:left;
     }
     .mobile-actions-text{
         font-size:13px;
         text-align:center;
         margin-top:5px;
         font-family:"Open sans", "sans-serif";
+        margin-bottom:0;
     }
     .mobile-actions-item{
-        width:60px;
-        height:60px;
+        width:40px;
+        height:40px;
         border-radius:60px;
         background-color:#2a2f33;
         margin-left:auto;
         margin-right:auto;
+        display:none;
     }
     .mobile-actions-item svg{
       margin-top:15px;
@@ -1475,14 +1723,25 @@ input[name="searchType"]{
         margin-top:15px;
     }
     .mobile-tutor-search{
-        background-color:#242526;
+        background-color:#18191a;
         color:white;
         border-right:none!important;
         border-top:none!important;
+        border-bottom:none;
         border-left:none!important;
-        border-bottom:2px solid #a9a9a9;
     }
-  
+    .course-search-container{
+        text-align:center!important;
+        width:100%;
+        margin-top:20px;
+    }
+    .course-search-sub-container{
+        border-bottom:2px solid #a9a9a9;
+        width:250px;
+        display:inline-block;
+        margin-left:auto;
+        margin-right:auto;
+    }
     .tutor-add-autocomplete{
         width:100%;
         background-color:#2a2f33!important;
@@ -1595,11 +1854,24 @@ input[name="searchType"]{
     .findTutor-course{
         cursor:pointer;
     }
+.questionLabel{
+    margin-left:20px;
+    margin-bottom:0;
+    text-align:left!important;
+}
+
     .findTutorMobile-results, .findTutorMobile-results{
         padding-top:20px;
     }
     .optional{
         margin-top:20px!important;
+        text-align:left;
+        margin-left:30px;
+    }
+    .pdf-iframe{
+        width:100%;
+        height:400px;
+        margin-top:0!important;
     }
     .day-container label{
 
@@ -1616,7 +1888,7 @@ input[name="searchType"]{
         margin-right:20px;
     }
     .addComment{
-        margin-left:70px;
+        margin-left:90px;
         color:#d4d4d4;
         font-size:13px!important;
     }
@@ -1629,22 +1901,46 @@ input[name="searchType"]{
         margin-left:20px;
         font-family: 'Open Sans', sans-serif!important;
     }
+    .name-link, .name-link:hover{
+        color:white;
+    }
+    .pdf-link, .pdf-link:hover{
+        text-align:center;
+        width:100%!important;
+        color:#d4d4d4;
+        padding-top:10px;
+    }
+    .question-img{
+        width:100%!important;
+    }
     .postDate{
         color:#a9a9a9;
         font-size:14px;
         padding-left:20px;
         float:right;
-        margin-right:3%;
+        margin-right:7%;
+        margin-top:10px;
+        margin-bottom:5px;
+    }
+    .postDate1{
+        color:#a9a9a9;
+        font-size:13px;
+        padding-left:15px;
+        margin-right:7%;
         margin-top:10px;
         margin-bottom:5px;
     }
     .caption-status{
         color:white!important;
         margin-left: 30px;
+        margin-right: 30px;
         margin-top:0px;
         margin-bottom:5px;
         font-size:15px;
         font-weight:450;
+        text-align:left;
+        font-family: 'Open Sans', sans-serif!important;
+        white-space: pre-wrap;
     
     }
     .info-badge{
@@ -1749,6 +2045,7 @@ input[name="searchType"]{
         font-family: 'Open Sans', sans-serif!important;
         margin-bottom:0!important;
         margin-left:55px;
+        text-align:left;
         font-size:14px;
     }
     .daySelect-container{
@@ -1861,7 +2158,7 @@ input[name="searchType"]{
         bottom:0;
         text-align:center;
         padding-top:10px;
-        padding-bottom:20px;
+        padding-bottom:10px;
         border-top: 1px solid #202020;
 
         -webkit-box-shadow: 0px 1px 1px rgba(50, 50, 50, 0.75);
@@ -1894,7 +2191,7 @@ input[name="searchType"]{
         margin-top:0;
         margin-bottom:0;
         border-radius:0!important;
-        border-bottom:1px solid #a9a9a9!important;
+        /* border-bottom:1px solid #a9a9a9!important; */
     }
     .request-help-container{
         background-color:#18191a!important;
@@ -1914,7 +2211,7 @@ input[name="searchType"]{
         margin-left:0!important;
     }
     .like-button{
-        background-color:#242526;
+        background-color:#18191a;
     }
     .userNameLink{
         font-size:14px!important;

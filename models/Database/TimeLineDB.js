@@ -33,6 +33,10 @@ var bidSchema = new Schema({
     bidder: {type:String, required:true},
     price: {type:String, required:true}
 }); 
+//bid schema
+var attachments = new Schema({
+    file: {type:String, required:true}
+}); 
 var timelineDBSchema = new Schema({
     sendToHandle:{type:String, required:true},
     userHandle: {type:String, required:true},
@@ -56,7 +60,9 @@ var timelineDBSchema = new Schema({
     BidOpen:{type:Boolean},
     professor:{type:String},
     url: {type:String},
-    courseCode:{String}
+    courseCode:{type: String},
+    discussionId:{type: String},
+    files: [attachments]
 }, {collection: 'TimelineDB'});
 module.exports = class Timeline {
     //get timeline by handle, and get timeline with sendtoHandle 'All'
@@ -177,6 +183,18 @@ module.exports = class Timeline {
         var timelineDB = mongoose.model('TimelineDB',timelineDBSchema);
             var timeline = new timelineDB({sendToHandle:sendToHandle, userHandle:userHandle, userName:userName, type:type,
                 userImage:userImage, caption:caption, likes:0, date:date, commentCount:0
+            });
+        return timeline.save();
+    }
+    addQuestionPost(sendToHandle,userHandle, userName, type ,userImage,caption,date, discussionId, attachments, course){
+        console.log("Discussion ID: " +discussionId)
+        var files = [];
+        for(var i = 0; i < attachments.length; i++){
+            files.push({file: attachments[i] })
+        }
+        var timelineDB = mongoose.model('TimelineDB',timelineDBSchema);
+            var timeline = new timelineDB({sendToHandle:sendToHandle, userHandle:userHandle, userName:userName, type:type,
+                userImage:userImage, caption:caption, likes:0, date:date, commentCount:0, discussionId:discussionId, files: files, course:course
             });
         return timeline.save();
     }

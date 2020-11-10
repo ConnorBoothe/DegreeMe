@@ -36,6 +36,7 @@ app.use(
       directives: {
         defaultSrc: ["'self'", "https://js.stripe.com/",  "ws://degreeme.io/socket.io/" ],
         connectSrc:["'self'", "ws://degreeme.io/socket.io/","wss://degreeme.io/socket.io/", "https://firebasestorage.googleapis.com/"],
+        frameSrc:["https://firebasestorage.googleapis.com"],
         fontSrc:["'self'", "https://fonts.gstatic.com", "https://cdnjs.cloudflare.com"],
         styleSrc:["'self'", "https://fonts.googleapis.com", "'unsafe-inline'", "https://cdnjs.cloudflare.com/"],
         scriptSrc: ["'self'", "https://cdnjs.cloudflare.com/", "https://js.stripe.com/", "https://www.gstatic.com", "https://firebase.googleapis.com/", "https://*.googleapis.com", "https://cdn.jsdelivr.net/"],
@@ -97,6 +98,7 @@ app.use(require('./routes/UserLoggedIn/rDisplaySingleAcceptedBid.js'));
 app.use(require('./routes/UserLoggedIn/rComments.js')); 
 app.use(require('./routes/UserLoggedIn/rAdmin.js')); 
 app.use(require('./routes/UserLoggedIn/rAskQuestion.js')); 
+app.use(require('./routes/UserLoggedIn/rVideoChat.js')); 
 //API Routes
 app.use(require('./routes/API/SendStudyGroupData.js')); 
 app.use(require('./routes/API/sendMeetups.js'));  
@@ -110,6 +112,7 @@ app.use(require('./routes/API/SendMajors.js'));
 app.use(require('./routes/API/sendNotificationCount.js')); 
 app.use(require('./routes/API/sendSortedStudyGroups.js')); 
 app.use(require('./routes/API/sendUsersAndImages.js')); 
+
 //Wildcard route
 app.get('*', function(req, res) {
     //if user logged in, redirect to home
@@ -123,6 +126,8 @@ app.get('*', function(req, res) {
 });
 let server = app.listen(8080);
 const io = require('socket.io')(server);
+const rooms = {};
+let broadcaster;
 //create a websocket connection
 io.sockets.on('connection', function (socket) {
   //catch the emitted 'send message' event
@@ -133,6 +138,49 @@ io.sockets.on('connection', function (socket) {
           msg: data
       });
   });
+  socket.on("broadcaster", () => {
+    broadcaster = socket.id;
+    socket.broadcast.emit("broadcaster");
+  });
+  socket.on("watcher", () => {
+    socket.to(broadcaster).emit("watcher", socket.id);
+  });
+  socket.on("disconnect", () => {
+    socket.to(broadcaster).emit("disconnectPeer", socket.id);
+  });
+  socket.on("offer", (id, message) => {
+    socket.to(id).emit("offer", socket.id, message);
+});
+socket.on("answer", (id, message) => {
+  socket.to(id).emit("answer", socket.id, message);
+});
+socket.on("candidate", (id, message) => {
+  socket.to(id).emit("candidate", socket.id, message);
+});
+  // //join video chat room
+  // socket.on('join room', function (roomId) {
+  //   if(rooms[roomId]){
+  //     rooms[roomId].push(socket.id);
+  //   }
+  //   else{
+  //     rooms[roomId] = [socket.id]
+  //   }
+  //   const otherUser = rooms[roomId].find(id=> id !== socket.id);
+  //   if(otherUser){
+  //     socket.emit("other user",otherUser);
+  //     socket.to(otherUser).emit("user joined", socket.id);
+  //   }
+  //   socket.on("offer", payload=>{
+  //     io.to(payload.target).emit("offer", payload);
+  //   })
+  //   socket.on("answer", payload => {
+  //     io.to(payload.target).emit("answer", payload);
+  //   })
+  //   //both parties agree on a candidate to use
+  //   socket.on("ice-candidate", incoming => {
+  //     io.to(incoming.candidate).emit("ice-candidate", incoming.candidate);
+  //   })
+// });
 });
 
 

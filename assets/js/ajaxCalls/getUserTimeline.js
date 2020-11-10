@@ -115,9 +115,6 @@ function formatTutorListing(post){
     '<input class="postId" name="postId" type="hidden" value="'+post._id+'" />'+
         '<div class="timeline-container-status">'+
             '<div class="postHeader">'+
-                '<div class="postRight1">'+
-                    '<p class="postDate nonhelp-date">'+displayDate(new Date(post.date))+'</p>'+
-                 '</div>'+
                 '<img class="timelinePost-Image" src="'+post.userImage+'" />'+
                 '<p class="timelinePost-username">'+post.userName+
                 '<p class="postHandle"><a href="/user/'+post.userHandle+'">'+post.userHandle+'</a></p></p>'+
@@ -163,7 +160,9 @@ function formatTutorListing(post){
                 }
 
             }
-            tutorListing+= "</div></div></div></div>" 
+            tutorListing+= 
+            '<p class="postDate nonhelp-date">'+displayDate(new Date(post.date))+'</p>'+
+            "</div></div></div></div>" 
             return tutorListing;
 }
 
@@ -174,9 +173,6 @@ function formatStudyGroup(post){
     '<input class="postId" name="postId" type="hidden" value="'+post._id+'" />'+
     '<div class="timeline-container-status">'+
         '<div class="postHeader">'+
-            '<div class="postRight1">'+
-                '<p class="postDate">'+displayDate(new Date(post.date))+'</p>'+
-            '</div>'+
             '<img class="timelinePost-Image" src="'+post.userImage+'" />'+
             '<p class="timelinePost-username">'+post.userName+'<span class="postHandle">'+
             '<p class="postHandle"><a href="/user/'+post.userHandle+'">'+post.userHandle+'</a></span></p></p>'+
@@ -227,7 +223,7 @@ function formatStudyGroup(post){
                 }
             }
             studyGroup+=
-
+            '<p class="postDate">'+displayDate(new Date(post.date))+'</p>'+
         '<br></div></div>';
         return studyGroup;
 }
@@ -238,9 +234,6 @@ function formatStatusUpdate(post){
     '<input class="postId" name="postId" type="hidden" value="'+post._id+'" />'+
     '<div class="timeline-container-status">'+
         '<div class="postHeader">'+
-            '<div class="postRight1">'+
-                '<p class="postDate">'+displayDate(new Date(post.date))+'</p>'+
-            '</div>'+
             '<img class="timelinePost-Image" src="'+post.userImage+'" />'+
             '<p class="timelinePost-username">'+post.userName+'<span class="postHandle">'+
             '<p class="postHandle"><a href="/user/'+post.userHandle+'">'+post.userHandle+'</a></span></p></p>'+
@@ -283,9 +276,77 @@ function formatStatusUpdate(post){
                 }
             }
             status+=
-
+            '<p class="postDate">'+displayDate(new Date(post.date))+'</p>'+
         '<br></div></div>';
         return status;
+}
+function formatQuestion(post){
+    var hasLiked = likedBoolean($(".userProfileName").text(), post.likers);
+    var question = "";
+    question += 
+    '<input class="postId" name="postId" type="hidden" value="'+post._id+'" />'+
+    '<div class="timeline-container-status">'+
+    '<div class="postHeader">'+
+    '<a href="/user/'+post.userHandle+'"><img class="timelinePost-Image" src="'+post.userImage+'" /></a>'+
+    '<p class="timelinePost-username"><a href="/user/'+post.userHandle+'" class="name-link">'+post.userName+'</a></p>'+
+        '<div class="question-label-container">'+
+        '<p class=" badge badge-info questionLabel">Question</p>'+
+        '</div>'+
+    '</div>';
+    if(post.files[0].file.includes(".pdf")){
+        question += '<div>'+
+            '<iframe class="pdf-iframe" src="'+post.files[0].file+'"></iframe>'+
+        '</div>';
+        
+    } 
+    else{
+        question += '<div>'+
+            '<img class="question-img" src="'+post.files[0].file+'"/>'+
+        '</div>';
+   }
+        question += '<p class="pdf-link"><a target="_blank" class="pdf-link" href="'+post.files[0].file+'">View Full Screen</a></p>'+
+        '<p class="caption-status">'+post.caption+'</p>'+
+        '<p class="hashtag"><a href="/course/'+post.course+'">#'+post.course.replace(/ /g, "")+'</a></p>'+
+        '<div class="postActions">';
+        if (hasLiked == false){
+            question +=
+            '<button class="like-button">'+
+                '<span class="likeCount">'+post.likes+'</span>'+
+                '<svg class="bi bi-heart heartIcon" width="1em" height="1em" viewBox="0 0 16 16"'+
+                    'fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
+                    '<path fill-rule="evenodd"'+
+                        'd="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />'+
+                '</svg></button>';
+                if(post.commentCount > 1){
+                    question += '<a href="/post/'+post._id+'" class="addComment">'+post.commentCount+' Comments</a>';
+                }
+                else if(post.commentCount === 1){
+                    question += '<a href="/post/'+post._id+'" class="addComment">'+post.commentCount+' Comment</a>';
+                }else{
+                    question += '<a href="/post/'+post._id+'" class="addComment">Add Comment</a>';
+                }
+         }else{
+            question +=
+            '<button class="like-button hasLiked">'+
+                '<span class="likeCount">'+post.likes+'</span>'+
+                '<svg class="bi bi-heart heartIcon" width="1em" height="1em" viewBox="0 0 16 16"'+
+                    'fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
+                    '<path fill-rule="evenodd"'+
+                        'd="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />'+
+                '</svg></button><br>';
+                if(post.commentCount > 1){
+                    status += '<a href="/post/'+post._id+'" class="addComment">'+post.commentCount+' Comments</a>';
+                }
+                else if(post.commentCount === 1){
+                    status += '<a href="/post/'+post._id+'" class="addComment">'+post.commentCount+' Comment</a>';
+                }else{
+                    status += '<a href="/post/'+post._id+'" class="addComment">Add Comment</a>';
+                }
+            }
+            question+=
+
+        '<p class="postDate1">'+displayDate(new Date(post.date))+'</p><br></div></div>';
+        return question;
 }
 function createTimeline(nextTen, stripeId){
     var timeline = "";
@@ -302,6 +363,9 @@ function createTimeline(nextTen, stripeId){
         //add status update
         else if(nextTen[x].type === "Status Update"){
             timeline += formatStatusUpdate(nextTen[x]);
+        }
+        else if(nextTen[x].type === "Question"){
+            timeline += formatQuestion(nextTen[x]);
         }
     }
     return timeline;

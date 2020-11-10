@@ -3,7 +3,7 @@
 
 module.exports = class TimeLinePost {
 
-    constructor(id, sendToHandle, type, userHandle, userName, userImage, caption, likes, comments,date, name, course, price, url, hasLiked, commentCount) {
+    constructor(id, sendToHandle, type, userHandle, userName, userImage, caption, likes, comments,date, name, course, price, url, hasLiked, commentCount, discussionId, files) {
       this.id = id;
       this.sendToHandle = sendToHandle;
       this.type = type;
@@ -20,7 +20,8 @@ module.exports = class TimeLinePost {
       this.url = url;
       this.hasLiked = hasLiked;
       this.commentCount = commentCount;
-      
+      this.discussionId = discussionId;
+      this.files = files;
     }
     //compute average tutor rating and return it along with review count
 

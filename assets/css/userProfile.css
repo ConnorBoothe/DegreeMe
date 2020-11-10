@@ -802,7 +802,6 @@ button.followingButton{
     cursor:pointer;
 }
 .bottom-ul-mobile{
-    position:absolute!important;
     bottom:0;
     margin-left:0!important;
     width:100%!important;

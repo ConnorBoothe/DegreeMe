@@ -50,13 +50,20 @@ function (req, res) {
     console.log(req.body)
     console.log("Asking question")
     //replace last param with file attachment
-    var fileAttachment = [];
+    var fileAttachment = [req.body.image];
+    //post to group discussion board
     discussion.postDiscussion(req.session.handle, req.session.name, req.session.img, false, req.body.course, new Date(), req.body.message, fileAttachment)
-    .then(function(){
-        console.log("ADDED Question")
+    .then(function(data){
+        console.log("DATA ID : " + data._id)
         //post to timeline
-        //post to group discussion board if group is tagged
-    });
+        timeline.addQuestionPost(req.session.handle,req.session.handle, req.session.name, "Question" ,req.session.img,req.body.message,new Date(), data._id, fileAttachment, req.body.course )
+        .then(function(data1){
+            console.log(data1)
+        })
+    })
+    .catch(function(err){
+        console.log(err)
+    })
 });
 //get 
 // user groups for tag group autocomplete

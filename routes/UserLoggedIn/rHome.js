@@ -117,6 +117,12 @@ router.get('/home', function (req, res) {
                             docs1[x].userImage, docs1[x].caption, docs1[x].likes, "", dateFunctions.displayDate(new Date(docs1[x].date)),
                             "", "", "", "",  hasLiked, docs1[x].commentCount));
                     }
+                    if (docs1[x].type == "Question") {
+
+                        timeLineArray.push(new TimelinePost(docs1[x]._id, docs1[x].sendToHandle, "Question", docs1[x].userHandle, docs1[x].userName,
+                            docs1[x].userImage, docs1[x].caption, docs1[x].likes, "", dateFunctions.displayDate(new Date(docs1[x].date)),
+                            "", docs1[x].course, "", "",  hasLiked, docs1[x].commentCount, docs1[x].discussionId, docs1[x].files));
+                    }
                 }
                 if(x === docs1.length){
                     resolve(true);
@@ -186,7 +192,7 @@ router.post("/zeroNotifications",
         if (!errors.isEmpty()) {
             res.redirect('/home');
         }
-        users.clearNotificationCount(req.body.handle)
+        users.clearNotificationCount(req.session.handle)
             .then(function (data) {
                 res.status(202).json({
                     status:"success",
