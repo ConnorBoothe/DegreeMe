@@ -2,7 +2,8 @@
   "requires": true,
   "lockfileVersion": 1,
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "devStart": "nodemon app.js"
   },
   "dependencies": {
     "@firebase/app": "^0.6.11",
@@ -37,6 +38,7 @@
     "nodemailer": "^6.4.6",
     "nouislider": "^14.6.2",
     "passport": "^0.4.1",
+    "peer": "^0.5.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "redis": "^3.0.2",
@@ -47,10 +49,13 @@
     "stripe": "^7.15.0",
     "stylus": "^0.54.7",
     "telnet": "0.0.1",
-    "unirest": "^0.6.0"
+    "unirest": "^0.6.0",
+    "uuid": "^8.3.1"
   },
   "engines": {
     "node": "10.x"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
 }
