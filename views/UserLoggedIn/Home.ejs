@@ -353,7 +353,9 @@
                             </div>
                             </p>
                         </div>
+                        <%if(timeline[x].files.length > 0){%>
                         
+                      
                         <%if(timeline[x].files[0].file.includes(".pdf")){%>
                             <div>
                                 <iframe class="pdf-iframe" src="<%=timeline[x].files[0].file%>"></iframe>
@@ -364,6 +366,7 @@
                                 <img class="question-img" src="<%=timeline[x].files[0].file%>"/>
                             </div>
                             <p class="pdf-link"><a target="_blank" class="pdf-link" href="<%=timeline[x].files[0].file%>">View Full Screen</a></p>
+                       <%}%>
                        <%}%>
                        <p class="caption-status"><%=timeline[x].caption%></p>
                        <p class="hashtag"><a href="/course/<%=timeline[x].course%>">#<%=timeline[x].course.replace(/ /g, "")%></a></p>
