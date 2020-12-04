@@ -1,5 +1,8 @@
 require('dotenv').config();
 const mongoose = require("mongoose");
+const DiscussionBoardDB = require("./DiscussionBoardDB");
+var discussion = new DiscussionBoardDB();
+
 mongoose.Promise = global.Promise;
 mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost:27017/CollegeTutor', { useNewUrlParser: true,useUnifiedTopology: true },function(err){
     
@@ -128,6 +131,19 @@ module.exports = class Timeline {
         var timelineDB = mongoose.model('TimelineDB',timelineDBSchema);
         return timelineDB.find({_id:id});
     }
+    getTimelineIdByDiscussionId(discussionId){
+        var timelineDB = mongoose.model('TimelineDB',timelineDBSchema);
+        return new Promise(function(rej ,res){
+            timelineDB.findOne({discussionId:discussionId}, "_id discussionId")
+            .then(function(data){
+                console.log(data)
+                if(data != null){
+                    discussion.addTimelineId(discussionId, data._id );
+                }
+              
+            })
+        }) 
+    }
     //same as above, but uses findOne. other function already in use so i cannot change
     getPostById(id){
         var timelineDB = mongoose.model('TimelineDB',timelineDBSchema);
@@ -186,27 +202,34 @@ module.exports = class Timeline {
             });
         return timeline.save();
     }
-    addQuestionPost(sendToHandle,userHandle, userName, type ,userImage,caption,date, discussionId, attachments, course){
-        console.log("Discussion ID: " +discussionId)
+    addQuestionPost(sendToHandle,userHandle, userName, type ,userImage,caption,date, attachments, course){
         var files = [];
         for(var i = 0; i < attachments.length; i++){
             files.push({file: attachments[i] })
         }
         var timelineDB = mongoose.model('TimelineDB',timelineDBSchema);
             var timeline = new timelineDB({sendToHandle:sendToHandle, userHandle:userHandle, userName:userName, type:type,
-                userImage:userImage, caption:caption, likes:0, date:date, commentCount:0, discussionId:discussionId, files: files, course:course
+                userImage:userImage, caption:caption, likes:0, date:date, commentCount:0, files: files, course:course
             });
         return timeline.save();
     }
     incrementCommentCount(postId){
         var timelineDB = mongoose.model('TimelineDB',timelineDBSchema);
-        return timelineDB.findOne({
-            _id: postId
-          }).updateOne({
-            $inc: {
-              commentCount: +1
-            }
-          });
+            return timelineDB.findOne({
+                _id: postId
+              }).updateOne({
+                $inc: {
+                  commentCount: +1
+                }
+              })
+              .then(function(){
+                 discussion.incrementCommentCount(postId).exec();
+              })
+              .catch((err)=>{
+                console.log(err)
+              })
+      
+        
     }
     //increment likes
     incrementLikes(postId){
@@ -263,6 +286,7 @@ module.exports = class Timeline {
        
     }
     //add a bid to TimelineDB
+    //remove
     addBid(biddee, timelineId, bidder, price){
         var timelineDB = mongoose.model('TimelineDB',timelineDBSchema);
         timelineDB.findOne({_id: timelineId}).exec((err,docs)=>{
@@ -270,6 +294,7 @@ module.exports = class Timeline {
             docs.save();
         })
     }
+    // remove
     closeBid(id){
         var timelineDB = mongoose.model('TimelineDB',timelineDBSchema);
         return timelineDB.findOne({_id:id}).updateOne({
@@ -277,6 +302,13 @@ module.exports = class Timeline {
                 BidOpen: false
               }
             })
+    }
+    //might have to reverse this
+    //save timelineId to discussionDB instead. 
+    //Then, remove _id by _id should work
+    removeDiscussionPost(discussionId){
+        var timelineDB = mongoose.model('TimelineDB',timelineDBSchema);
+        return timelineDB.deleteOne({discussionId:discussionId});
     }
 
 }

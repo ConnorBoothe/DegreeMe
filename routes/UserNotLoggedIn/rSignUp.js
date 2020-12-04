@@ -62,7 +62,7 @@ router.get('/SignUp', function (req, res) {
         qs: req.query
     });
 });
-
+//POST route that handles user sign up
 router.post('/SignUp', [
     check('first_name').isString().trim().escape(),
     check('last_name').isString().trim().escape(),
@@ -78,39 +78,25 @@ router.post('/SignUp', [
         min: 6
     })
 ], function (req, res) {
-    // console.log("Uploading image");
-    // upload(req, res, (err) => {
-        // console.log("BYTE COUNT: " + req.socket.bytesRead)
-        // if(req.socket.bytesRead > 1000000){
-        //     res.redirect('/signUp?error=Image Too Large');
-        // }
-        // else if (err) {
-        //     console.log(err)
-        //     res.redirect('/signUp?error=Image Too Large');
-        // } else {
+ 
             var emailExists = false;
             var handleExists = false;
-            users.getStudents().exec((err, docs) => {
-                console.log(req.body.email)
-                for (x in docs) {
-                    if (req.body.email === docs[x].email) {
-                        emailExists = true;
-                    }
-                    if (req.body.handle === docs[x].handle) {
-                        handleExists = true;
-                    }
+
+            users.getUserByEmail().exec((err, docs) => {
+
+                if(docs.length < 0){
+
                 }
+               
                 if (emailExists) {
                     res.redirect("/SignUp?msg=Email%20Already%20In%20Use");
                 } else if (handleExists) {
                     res.redirect("/SignUp?msg=Handle%20Already%20In%20Use");
                 } else {
-                    console.log(req.body.screenSize)
                     var activationCode = Math.floor(Math.random() * 10000);
-
+                    var randomImg = Math.floor(Math.random() * Math.floor(4));
                     bcrypt.genSalt(10, function (err, salt) {
                         var pw = req.body.password;
-                        var handle = req.body.handle;
                         bcrypt.hash(pw, 8, function (err, hash) {
                                     var fNameLetter = req.body.first_name[0].substring(0,1);
                                     fNameLetter = fNameLetter.toUpperCase();
@@ -177,13 +163,11 @@ router.post('/SignUp', [
                     }, function (err) {
                         console.log(err);
                       });
-                    // });
                 }
-            })
-        // }
-    // })
+            });
 })
-
+//POST route that handles mobile sign up
+//Two 
 router.post('/SignUpMobile', [
     check('first_name').isString().trim().escape(),
     check('last_name').isString().trim().escape(),

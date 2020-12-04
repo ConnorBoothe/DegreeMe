@@ -12,7 +12,7 @@ const {
   validationResult
 } = require('express-validator');
 //DBs used
-const AcceptedBidsDB = require('../../models/Database/AcceptedBidsDB.js');
+const AcceptedBidsDB = require('../../models/RecycledClasses/AcceptedBidsDB.js');
 //classes
 const DateFunctions = require('../../models/classes/DateFunctions.js');
 //instantiate DBs

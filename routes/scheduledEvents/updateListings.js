@@ -9,14 +9,10 @@ const CronJob = require('cron').CronJob;
 const ListingsDB = require('../../models/Database/ListingsDB');
 const MeetupsDB = require('../../models/Database/MeetupsDB');
 const UserDB = require('../../models/Database/UserDB');
-const ConnectionsDB = require('../../models/Database/MeetupsDB');
-const AcceptedBidsDB = require('../../models/Database/AcceptedBidsDB');
 // instantiate DBs
 var listings = new ListingsDB();
 var meetups = new MeetupsDB();
 var users = new UserDB();
-var connections = new ConnectionsDB();
-var acceptedBids = new AcceptedBidsDB();
 var mail = unirest("POST", "https://api.sendgrid.com/v3/mail/send");
 function hourDifference(date){
   var diffTime = date - new Date();

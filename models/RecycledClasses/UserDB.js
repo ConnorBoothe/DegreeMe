@@ -113,7 +113,7 @@ module.exports = class UserDB {
         var user =new UserDB({handle:handle,first_name: first_name, last_name: last_name,
             school: school, email: email, password: password, img: img, activationCode: code,
             theme:'bg-dark', rating:0, status:status, subscription:subscription, StripeId: "none", Major:major });
-        user.save();
+        return user.save();
     }
     //add follower function adds a follower to the followers array,
     //and adds the account followed to following array
@@ -186,7 +186,6 @@ module.exports = class UserDB {
                 callback(student,false);
             }else{
                 console.log("follower_handle does not exists");
-                console.log(follower_handle);
                 callback(student,false);
             }
         })
@@ -219,7 +218,6 @@ module.exports = class UserDB {
                         console.log("Unread count updated");
                     }
                 }
-                console.log("Index: " + index)
                 docs.threads[index].unreadCount++;
                 docs.save();
             }
@@ -232,7 +230,6 @@ module.exports = class UserDB {
       //updates unread count and moves thread to top of list
       unreadCountToZero(threadId, handle, req, res,  messages,  threads){
         console.log("UserDB messages")
-          console.log(messages)
             var UserDB = mongoose.model('UserDB',userDBSchema);
             UserDB.findOne({handle:handle}).exec((err,docs)=>{
                 var tempThread = "";
@@ -243,8 +240,6 @@ module.exports = class UserDB {
                     }
                 }
                 tempThread.unreadCount = 0;
-
-                console.log(tempThread)
                 docs.save(function(err,docs){
                     if(err){
                         console.log(err)
