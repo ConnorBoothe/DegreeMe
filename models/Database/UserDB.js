@@ -51,26 +51,24 @@ var tutoringSessionSchema = new Schema({
     role: {type:String, required:true},
     leftReview: {type:Boolean}
 });  
-//bid schema
-var bidSchema = new Schema({
-    timelineId: {type:String, required:true},
-    bidder: {type:String, required:true},
-    price: {type:String, required:true}
-});   
+
+//updates
+//make Name a single field
+//only require handle, name, email, password, school
 var userDBSchema = new Schema({
     handle: {type:String, required:true},
-    first_name:{type:String, required:true},
-    last_name:{type:String, required:true},
+    first_name:{type:String, required: true},
+    last_name:{type:String, required: true},
     school:{type:String, required:true},
     email:{type:String, required:true},
     password:{type:String, required:true},
     img:{type:String, required:true},
-    rating: {type:String, required:true},
-    theme:{type:String, required:true},  
+    rating: {type:String},
+    theme:{type:String},  
     status:{type:String, required:true},  
     activationCode:{type:String, required:true},  
-    subscription:{type:String, required:true},
-    Major: {type:String, required:true},
+    // subscription:{type:String, required:true},
+    Major: {type:String},
     Tutor:{type:Boolean, required:true},
     ActiveTutor:{type:Boolean},
     StripeId: {type:String, required:true},
@@ -86,14 +84,11 @@ var userDBSchema = new Schema({
     meetups: [myMeetupSchema],
     SearchHistory: [SearchHistorySchema],
     StudyGroups: [studyGroupsSchema],
-    TutoringSessions: [tutoringSessionSchema],
-    bids:[bidSchema],
+    TutoringSessions: [tutoringSessionSchema]
    
 }, {collection: 'UserDB'});
 
 module.exports = class UserDB {
-    constructor() {
-    }
     //return all users
     getStudents(){
       var UserDB = mongoose.model('UserDB',userDBSchema);
@@ -197,11 +192,12 @@ module.exports = class UserDB {
         });
     }
     //register a new user to UserDB
-    addUser(handle, first_name, last_name, school, email, password, img, status, code, subscription, major, classification){
+    //require name, email, password, handle,school
+    addUser(handle, first_name, last_name, school, email, password, img, status, code, major, classification){
         var UserDB = mongoose.model('UserDB',userDBSchema);
         var user =new UserDB({handle:handle,first_name: first_name, last_name: last_name,
             school: school, email: email, password: password, img: img, activationCode: code,
-            theme:'bg-dark', rating:0, status:status, subscription:subscription, StripeId: "none", CustomerId:"none", notificationCount:0,
+            theme:'bg-dark', rating:0, status:status, StripeId: "none", CustomerId:"none", notificationCount:0,
              Major:major, classification:classification, Tutor:false, dateCreated:new Date(), bio:"Tell the world a bit about yourself"});
         return user.save();
     }
@@ -621,5 +617,10 @@ module.exports = class UserDB {
                 resolve(data);
             });
         });
+    }
+     //set active tutor
+     updateMajor(id, major){
+        var UserDB = mongoose.model('UserDB',userDBSchema);
+        return UserDB.findOne({_id: id}).updateOne({$set:{Major: major}})
     }
 }
