@@ -203,7 +203,7 @@ router.post('/MakeStripeAccount',
     });
 router.post("/Settings",
     check('img1').isString().trim(),
-    check('handle').isString().trim().escape(),
+    check('handle').isString().trim(),
     function (req, res) {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -256,5 +256,13 @@ router.post("/Settings",
             //     }
             // });
         });
+    });
+
+    router.post("/updateMajor",function(req, res){
+        users.updateMajor(req.session.userId, req.body.major)
+        .then(function(){
+            res.redirect("/user/"+req.session.handle);
+        })
+       
     });
 module.exports = router;
