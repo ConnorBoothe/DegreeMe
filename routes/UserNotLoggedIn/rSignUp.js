@@ -19,7 +19,7 @@ const {
 } = require('express-validator');
 //Dbs used
 var UserDB = require('../../models/Database/UserDB');
-//instantiate DBs
+//instantiate DB
 var users = new UserDB();
 
 //use session and body parser
@@ -28,34 +28,19 @@ router.use(session({
     resave: true,
     saveUninitialized: true
 }));
+
 router.use(bodyParser.json({
     parameterLimit: 100000,
     limit: '50mb',
     extended: true
 }));
+
 router.use(bodyParser.urlencoded({
     parameterLimit: 100000,
     limit: '50mb',
     extended: true
 }));
 
-
-
-
-//Check file type function
-function checkFileType(file, callback) {
-    //Allowed Extensions
-    const filetypes = /jpeg|jpg|png|gif/;
-    //Check Extension
-    const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-    //Check Mimetype
-    const mimetype = filetypes.test(file.mimetype);
-    if (extname && mimetype) {
-        callback(null, true);
-    } else {
-        callback('Error: Images Only!');
-    }
-}
 //render the signup page
 router.get('/SignUp', function (req, res) {
     res.render('UserNotLoggedIn/signUp', {

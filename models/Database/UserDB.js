@@ -191,14 +191,13 @@ module.exports = class UserDB {
         return UserDB.findOne({email:email}).updateOne({$set:{password: pw}}).exec((err,docs)=>{
         });
     }
-    //register a new user to UserDB
-    //require name, email, password, handle,school
-    addUser(handle, first_name, last_name, school, email, password, img, status, code, major, classification){
+    //register a new user
+    addUser(handle, first_name, last_name, school, email, password, img, status, code){
         var UserDB = mongoose.model('UserDB',userDBSchema);
         var user =new UserDB({handle:handle,first_name: first_name, last_name: last_name,
             school: school, email: email, password: password, img: img, activationCode: code,
             theme:'bg-dark', rating:0, status:status, StripeId: "none", CustomerId:"none", notificationCount:0,
-             Major:major, classification:classification, Tutor:false, dateCreated:new Date(), bio:"Tell the world a bit about yourself"});
+             Tutor:false, dateCreated:new Date(), bio:"Tell the world a bit about yourself"});
         return user.save();
     }
     //add follower function adds a follower to the followers array,
