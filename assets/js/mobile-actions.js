@@ -269,7 +269,6 @@ $(".timeline-wrapper").on("click", ".postQuestionBtn", function(){
     var image = $(".askQuestion-file")[0].files[0];
     //input validation
     if(course.val() == "" || message.val() == "") {
-
         if(course.val() == ""){
             course.css("border", "1px solid #dc3545")
         }
@@ -295,7 +294,7 @@ $(".timeline-wrapper").on("click", ".postQuestionBtn", function(){
                  "Content-Type": "application/json"
                  }, statusCode: {
                  202: function (result) {
-                     console.log(result)
+                     location.href = "/";
                  },
                  500: function (result) {
                      alert("500 ");
@@ -321,7 +320,7 @@ $(".timeline-wrapper").on("click", ".postQuestionBtn", function(){
             "Content-Type": "application/json"
             }, statusCode: {
             202: function (result) {
-                console.log(result)
+                 location.href = "/";
             },
             500: function (result) {
                 alert("500 ");
