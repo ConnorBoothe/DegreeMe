@@ -13,7 +13,7 @@ mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost:27017/CollegeTuto
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.on('connected', function(){
-  console.log("Connected!")
+  
 });
 var Schema = mongoose.Schema;
 var Schedule = new Schema({
