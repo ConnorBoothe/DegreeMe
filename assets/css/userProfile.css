@@ -705,10 +705,9 @@ button.followingButton{
 .profile-ul{
     margin-bottom:0!important;
     height:100%;
-    text-align:left;
+    text-align:center;
     color:#d4d4d4;
     position:relative;
-    left:0!important;
    
 }
 .profile-ul li{

@@ -231,7 +231,19 @@ input[name="anonymous"]{
     font-size:18px;
     color:#d4d4d4;
 }
+#attachment{
+    display:none;
+}
+.fa-cloud-upload-alt{
+    margin-right:20px!important;
+}
+#imageUploadLabel{
+    border-radius:50px;
+    width:50px!important;
+    height:50px!important;
+    font-size:20px;
 
+}
 @media only screen and (max-width: 1000px) {
     .profile-pic{
         width:80px!important;
@@ -288,7 +300,6 @@ input[name="anonymous"]{
         width:100%!important;
         margin-bottom:0px!important;
         margin-top:20px!important;
-        
     }
     .CourseTitle{
         margin-top:10px;
@@ -299,9 +310,11 @@ input[name="anonymous"]{
         height:100%;
         position:relative;
     }
+   
     .CourseTitle .courseName{
         font-size:18px!important;
-        width:100%;
+        width:50%;
+        min-width:250px;
     }
     .course-profile-info{
         color:white!important;
@@ -317,10 +330,9 @@ input[name="anonymous"]{
     .profile-ul{
         margin-bottom:0!important;
         height:100%;
-        text-align:left;
+        text-align:center;
         color:#d4d4d4;
         position:relative;
-        left:0!important;
        
     }
     .profile-ul li{
