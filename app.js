@@ -1,11 +1,7 @@
 require('dotenv').config();
 const express = require('express');
-const session = require('express-session');
 const helmet = require("helmet");
 const csp = require("helmet-csp");
-const ejs = require("ejs");
-const path = require('path');
-
 var app = module.exports = express(); 
 app.set('trust proxy', 1) // trust first proxy
 //classes used
@@ -48,14 +44,18 @@ app.use('/assets', express.static('assets')); //use assets folder for static fil
 app.use(require('./routes/scheduledEvents/updateListings.js')); 
 app.use(require('./routes/scheduledEvents/chargePayments.js')); 
 //User not logged in routes
-app.use(require('./routes/UserNotLoggedIn/rIndex')); 
-app.use(require('./routes/UserLoggedIn/rConnections')); 
-app.use(require('./routes/Websockets/MessageSocket.js')); 
-app.use(require('./routes/UserNotLoggedIn/rAbout'));
-app.use(require('./routes/UserNotLoggedIn/rJobs'));
-app.use(require('./routes/UserNotLoggedIn/rSignUp')); 
-app.use(require('./routes/UserNotLoggedIn/rPrivacy')); 
-app.use(require('./routes/UserNotLoggedIn/rPolicies')); 
+app.use([require('./routes/UserNotLoggedIn/rIndex'),
+ require('./routes/UserNotLoggedIn/rAbout'),
+ require('./routes/UserLoggedIn/rConnections'),
+ require('./routes/Websockets/MessageSocket.js'),
+ require('./routes/UserLoggedIn/rConnections'),
+ require('./routes/UserNotLoggedIn/rJobs'),
+ require('./routes/UserNotLoggedIn/rSignUp'),
+ require('./routes/UserNotLoggedIn/rPrivacy'),
+ require('./routes/UserNotLoggedIn/rPolicies'),
+
+]); 
+
 app.use(require('./routes/UserLoggedIn/rMeeting.js')); 
 app.use(require('./routes/UserNotLoggedIn/rContact.js')); 
 app.use(require('./routes/UserNotLoggedIn/rCourseSearch.js')); 
@@ -84,8 +84,8 @@ app.use(require('./routes/UserLoggedIn/rEditListing.js'));
 app.use(require('./routes/UserLoggedIn/rStudyGroupProfile.js')); 
 app.use(require('./routes/UserLoggedIn/rMeetupProfile.js')); 
 app.use(require('./routes/UserLoggedIn/rAddCourse.js')); 
-app.use(require('./routes/UserLoggedIn/rDisplayAllBids.js')); 
-app.use(require('./routes/UserLoggedIn/rDisplaySingleAcceptedBid.js')); 
+// app.use(require('./routes/UserLoggedIn/rDisplayAllBids.js')); 
+// app.use(require('./routes/UserLoggedIn/rDisplaySingleAcceptedBid.js')); 
 app.use(require('./routes/UserLoggedIn/rComments.js')); 
 app.use(require('./routes/UserLoggedIn/rAdmin.js')); 
 app.use(require('./routes/UserLoggedIn/rAskQuestion.js')); 
