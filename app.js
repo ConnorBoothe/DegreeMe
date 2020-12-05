@@ -6,11 +6,9 @@ var app = module.exports = express();
 app.set('trust proxy', 1) // trust first proxy
 //classes used
 const MessageDB = require('./models/Database/MessagesDB');
-const userDB = require('./models/Database/UserDB');
 const { resolve } = require('path');
 //instantiate DBs for use
 var messages = new MessageDB();
-var users = new userDB();
 //set limit size of file upload
 app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({
@@ -44,7 +42,8 @@ app.use('/assets', express.static('assets')); //use assets folder for static fil
 app.use(require('./routes/scheduledEvents/updateListings.js')); 
 app.use(require('./routes/scheduledEvents/chargePayments.js')); 
 //User not logged in routes
-app.use([require('./routes/UserNotLoggedIn/rIndex'),
+app.use([
+ require('./routes/UserNotLoggedIn/rIndex'),
  require('./routes/UserNotLoggedIn/rAbout'),
  require('./routes/UserLoggedIn/rConnections'),
  require('./routes/Websockets/MessageSocket.js'),
@@ -53,56 +52,62 @@ app.use([require('./routes/UserNotLoggedIn/rIndex'),
  require('./routes/UserNotLoggedIn/rSignUp'),
  require('./routes/UserNotLoggedIn/rPrivacy'),
  require('./routes/UserNotLoggedIn/rPolicies'),
-
+ require('./routes/UserLoggedIn/rMeeting.js'),
+ require('./routes/UserNotLoggedIn/rContact.js'),
+ require('./routes/UserNotLoggedIn/rCourseSearch.js'),
+ require('./routes/UserNotLoggedIn/rCourseSearch.js'),
+ require('./routes/UserNotLoggedIn/rSearchStudents.js'),
+ require('./routes/UserNotLoggedIn/rVerify.js'),
+ require('./routes/UserNotLoggedIn/rUpdatePassword.js'),
 ]); 
-
-app.use(require('./routes/UserLoggedIn/rMeeting.js')); 
-app.use(require('./routes/UserNotLoggedIn/rContact.js')); 
-app.use(require('./routes/UserNotLoggedIn/rCourseSearch.js')); 
-app.use(require('./routes/UserNotLoggedIn/rSearchStudents.js')); 
-//User logged in routes
-app.use(require('./routes/UserLoggedIn/rSettings.js')); 
-app.use(require('./routes/UserLoggedIn/rMyConnections.js')); 
-app.use(require('./routes/UserLoggedIn/rMessages.js')); 
-app.use(require('./routes/UserLoggedIn/rMyFinances.js')); 
-app.use(require('./routes/UserLoggedIn/rStudyGroups.js')); 
-app.use(require('./routes/UserLoggedIn/rCreateTutorListing.js')); 
-app.use(require('./routes/UserLoggedIn/rMeetups.js')); 
-app.use(require('./routes/UserNotLoggedIn/rLogin.js'));
-app.use(require('./routes/UserLoggedIn/rLogout.js')); 
-app.use(require('./routes/UserLoggedIn/rCheckout.js')); 
-app.use(require('./routes/UserNotLoggedIn/rVerify.js')); 
-app.use(require('./routes/UserNotLoggedIn/rUpdatePassword.js')); 
-app.use(require('./routes/UserLoggedIn/rReview.js')); 
-app.use(require('./routes/UserLoggedIn/rConnectByMajor.js')); 
-app.use(require('./routes/UserLoggedIn/rCourseProfile.js')); 
-app.use(require('./routes/UserLoggedIn/rUserProfile.js')); 
-app.use(require('./routes/UserLoggedIn/rAddZoomMeeting.js')); 
-app.use(require('./routes/UserLoggedIn/rHome.js')); 
-app.use(require('./routes/UserLoggedIn/rTutorSchedule.js')); 
-app.use(require('./routes/UserLoggedIn/rEditListing.js')); 
-app.use(require('./routes/UserLoggedIn/rStudyGroupProfile.js')); 
-app.use(require('./routes/UserLoggedIn/rMeetupProfile.js')); 
-app.use(require('./routes/UserLoggedIn/rAddCourse.js')); 
+//UserLoggedIn routes
+app.use([
+  require('./routes/UserLoggedIn/rSettings.js'),
+  require('./routes/UserLoggedIn/rMyConnections.js'),
+  require('./routes/UserLoggedIn/rMessages.js'),
+  require('./routes/UserLoggedIn/rMyFinances.js'),
+  require('./routes/UserLoggedIn/rStudyGroups.js'),
+  require('./routes/UserLoggedIn/rCreateTutorListing.js'),
+  require('./routes/UserLoggedIn/rMeetups.js'),
+  require('./routes/UserNotLoggedIn/rLogin.js'),
+  require('./routes/UserLoggedIn/rLogout.js'),
+  require('./routes/UserLoggedIn/rCheckout.js'),
+  require('./routes/UserLoggedIn/rConnectByMajor.js'),
+  require('./routes/UserLoggedIn/rReview.js'),
+  require('./routes/UserLoggedIn/rCourseProfile.js'),
+  require('./routes/UserLoggedIn/rUserProfile.js'),
+  require('./routes/UserLoggedIn/rAddZoomMeeting.js'),
+  require('./routes/UserLoggedIn/rHome.js'),
+  require('./routes/UserLoggedIn/rTutorSchedule.js'),
+  require('./routes/UserLoggedIn/rEditListing.js'),
+  require('./routes/UserLoggedIn/rStudyGroupProfile.js'),
+  require('./routes/UserLoggedIn/rMeetupProfile.js'),
+  require('./routes/UserLoggedIn/rAddCourse.js'),
+  require('./routes/UserLoggedIn/rComments.js'),
+  require('./routes/UserLoggedIn/rAdmin.js'),
+  require('./routes/UserLoggedIn/rAskQuestion.js'),
+  require('./routes/UserLoggedIn/rVideoChat.js')
+]); 
+ //no longer using
 // app.use(require('./routes/UserLoggedIn/rDisplayAllBids.js')); 
 // app.use(require('./routes/UserLoggedIn/rDisplaySingleAcceptedBid.js')); 
-app.use(require('./routes/UserLoggedIn/rComments.js')); 
-app.use(require('./routes/UserLoggedIn/rAdmin.js')); 
-app.use(require('./routes/UserLoggedIn/rAskQuestion.js')); 
-app.use(require('./routes/UserLoggedIn/rVideoChat.js')); 
+
 //API Routes
-app.use(require('./routes/API/SendStudyGroupData.js')); 
-app.use(require('./routes/API/sendMeetups.js'));  
-app.use(require('./routes/API/sendUserHandles.js')); 
-app.use(require('./routes/API/SendNotifications.js'));   
-app.use(require('./routes/API/sendTutors.js'));
-app.use(require('./routes/API/getMyCourses.js')); 
-app.use(require('./routes/API/SendDiscussion.js'));   
-app.use(require('./routes/API/SendMessageThreads.js')); 
-app.use(require('./routes/API/SendMajors.js')); 
-app.use(require('./routes/API/sendNotificationCount.js')); 
-app.use(require('./routes/API/sendSortedStudyGroups.js')); 
-app.use(require('./routes/API/sendUsersAndImages.js')); 
+app.use([
+  require('./routes/API/SendStudyGroupData.js'),
+  require('./routes/API/sendMeetups.js'),
+  require('./routes/API/sendUserHandles.js'),
+  require('./routes/API/SendNotifications.js'),
+  require('./routes/API/sendTutors.js'),
+  require('./routes/API/getMyCourses.js'),
+  require('./routes/API/SendDiscussion.js'),
+  require('./routes/API/SendMessageThreads.js'),
+  require('./routes/API/SendMajors.js'),
+  require('./routes/API/sendNotificationCount.js'),
+  require('./routes/API/sendSortedStudyGroups.js'),
+  require('./routes/API/sendUsersAndImages.js')
+]); 
+
 
 //Wildcard route
 app.get('*', function(req, res) {

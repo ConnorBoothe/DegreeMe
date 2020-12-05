@@ -9,7 +9,7 @@ mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost:27017/CollegeTuto
 
 });
 db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
+// db.on('error', console.error.bind(console, 'connection error:'));
 var Schema = mongoose.Schema;
 var attendeeSchema = new Schema({
   handle: {
