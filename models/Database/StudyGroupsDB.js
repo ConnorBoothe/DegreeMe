@@ -8,10 +8,10 @@ mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost:27017/CollegeTuto
   console.log(err)
 });
 var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.on('connected', function(){
-  //console.log("Connected!")
-});
+// db.on('error', console.error.bind(console, 'connection error:'));
+// db.on('connected', function(){
+//   //console.log("Connected!")
+// });
 var Schema = mongoose.Schema;
 var membersSchema = new Schema({
   MemberHandle: {type:String, required: true},
