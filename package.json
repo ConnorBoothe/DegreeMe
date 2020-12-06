@@ -3,7 +3,8 @@
   "lockfileVersion": 1,
   "scripts": {
     "start": "node app.js",
-    "devStart": "nodemon app.js"
+    "devStart": "nodemon app.js",
+    "runPeer": "peerjs --port 3001" 
   },
   "dependencies": {
     "@firebase/app": "^0.6.11",

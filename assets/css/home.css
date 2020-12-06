@@ -1085,6 +1085,19 @@ input[name="searchType"]{
   
   /* desktop only */
   @media only screen and (min-width: 1000px) {
+      .desktop-li{
+          top:0;
+         
+      }
+      .headerContainer {
+          width:700px!important;
+          margin-top:0px!important;
+          position:absolute!important;
+          right:0!important;
+      }
+      .header-wrapper {
+          width:1000px;
+      }
     .rate-container p{
         font-family: "Open sans", "sans-serif";
         font-size:20px;
@@ -1419,6 +1432,7 @@ input[name="searchType"]{
     }
     .userImgLi{
         display:inline-block;
+        padding-top:3px;
     }
     .timelinePost-username{
         color:white;
@@ -1498,9 +1512,10 @@ input[name="searchType"]{
         text-align:center;
 
     }
+   
     .bookTutor{
         font-family: "Open sans", "sans-serif";
-        font-size:13px;
+        font-size:12px!important;
         padding-top:5px;
         padding-bottom:5px;
         padding-left:8px;
@@ -1532,6 +1547,8 @@ input[name="searchType"]{
     .homeWrap{
         width:100%;
         overflow-y:none;
+        background-color:#18191a!important;
+
     }
     .timeline-container-helprequest{
         min-height:100px;
@@ -2258,9 +2275,8 @@ input[name="searchType"]{
     .headerContainer{
         right:0;
         top:0;
-        width:400px!important;
+        width:600px!important;
         margin-right:0px!important;
-        margin-top:5px;
         z-index:2;
         
     }
@@ -2278,6 +2294,8 @@ input[name="searchType"]{
         margin-right:20px!important;
         color:#d4d4d4!important;
         margin-left:20px;
+        margin-top:0;
+        padding-top:0;
         padding-right:0!important;
         
      
@@ -2305,7 +2323,7 @@ input[name="searchType"]{
         margin-right:0;
     }
     .bell{
-        margin-right:10px!important;
+        margin-right:15px!important;
     }
     .input-container-main, .homeSideBar, .img, .bell, .message, .headerLinkTitle, .userProfileName{
         display:none!important;

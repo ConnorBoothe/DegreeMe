@@ -88,6 +88,7 @@ var userDBSchema = new Schema({
     StudyGroups: [studyGroupsSchema],
     TutoringSessions: [tutoringSessionSchema],
     bids:[bidSchema],
+    streamId: {type:String}
    
 }, {collection: 'UserDB'});
 
@@ -621,5 +622,13 @@ module.exports = class UserDB {
                 resolve(data);
             });
         });
+    }
+    addStreamId(id, streamId){
+        var UserDB = mongoose.model('UserDB',userDBSchema);
+        return UserDB.findOne({_id: id})
+        .then(function(user){
+            user.streamId = streamId;
+            user.save();
+        })
     }
 }

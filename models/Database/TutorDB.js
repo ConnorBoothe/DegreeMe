@@ -54,13 +54,17 @@ var scheduleSchema = new Schema({
         type: Boolean,
         required: true
     },
+    streamId: {
+        type: String,
+        required: true
+    }
 }, {
     collection: 'TutorDB'
 });
 var TutorDB = mongoose.model('TutorDB', scheduleSchema);
 module.exports = class TutorSchedules {
 
-    addTutor(userId, userName, handle, userImg, rating, course, courseCode, hourlyRate, transcriptImg) {
+    addTutor(userId, userName, handle, userImg, rating, course, courseCode, hourlyRate, transcriptImg, streamId) {
         var tutor = new TutorDB({
             userId: userId,
             userName: userName,
@@ -71,7 +75,8 @@ module.exports = class TutorSchedules {
             courseCode: courseCode,
             hourlyRate: hourlyRate,
             transcriptImg: transcriptImg,
-            approved: false
+            approved: false,
+            streamId: streamId
         });
         return tutor.save();
     }

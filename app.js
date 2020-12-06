@@ -5,6 +5,7 @@ const helmet = require("helmet");
 const csp = require("helmet-csp");
 const ejs = require("ejs");
 const path = require('path');
+const {v4: uuidV4 } = require("uuid");
 // const COURSES = require("./models/Database/UNCC_CoursesDB");
 // var course = new COURSES();
 // course.getAllCourses().exec((err, docs)=>{
@@ -21,9 +22,12 @@ app.set('trust proxy', 1) // trust first proxy
 //classes used
 const MessageDB = require('./models/Database/MessagesDB');
 const userDB = require('./models/Database/UserDB');
+const streamDB = require('./models/Database/StreamDB');
+const { arrayBufferToBinaryString } = require('blob-util');
 //instantiate DBs for use
 var messages = new MessageDB();
 var users = new userDB();
+var stream = new streamDB();
 //set limit size of file upload
 app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({
@@ -31,22 +35,22 @@ app.use(express.urlencoded({
     extended:true
 }));
 // set the Content Security Policy of the app
-app.use(
-    csp({
-      directives: {
-        defaultSrc: ["'self'", "https://js.stripe.com/",  "ws://degreeme.io/socket.io/" ],
-        connectSrc:["'self'", "ws://degreeme.io/socket.io/","wss://degreeme.io/socket.io/", "https://firebasestorage.googleapis.com/"],
-        frameSrc:["https://firebasestorage.googleapis.com"],
-        fontSrc:["'self'", "https://fonts.gstatic.com", "https://cdnjs.cloudflare.com"],
-        styleSrc:["'self'", "https://fonts.googleapis.com", "'unsafe-inline'", "https://cdnjs.cloudflare.com/"],
-        scriptSrc: ["'self'", "https://cdnjs.cloudflare.com/", "https://js.stripe.com/", "https://www.gstatic.com", "https://firebase.googleapis.com/", "https://*.googleapis.com", "https://cdn.jsdelivr.net/"],
-        imgSrc:["'self'", "data:", "https://storage.googleapis.com/", "https://firebasestorage.googleapis.com", "https://cdnjs.cloudflare.com"],
-        objectSrc: ["'none'"],
-        upgradeInsecureRequests: [],
-      },
-      reportOnly: false,
-    })
-  );
+// app.use(
+//     csp({
+//       directives: {
+//         defaultSrc: ["'self'", "https://js.stripe.com/",  "ws://degreeme.io/socket.io/" ],
+//         connectSrc:["'self'", "ws://degreeme.io/socket.io/","wss://degreeme.io/socket.io/", "https://firebasestorage.googleapis.com/"],
+//         frameSrc:["https://firebasestorage.googleapis.com"],
+//         fontSrc:["'self'", "https://fonts.gstatic.com", "https://cdnjs.cloudflare.com"],
+//         styleSrc:["'self'", "https://fonts.googleapis.com", "'unsafe-inline'", "https://cdnjs.cloudflare.com/"],
+//         scriptSrc: ["'self'", "https://cdnjs.cloudflare.com/", "https://js.stripe.com/", "https://www.gstatic.com", "https://firebase.googleapis.com/", "https://*.googleapis.com", "https://cdn.jsdelivr.net/"],
+//         imgSrc:["'self'", "data:", "https://storage.googleapis.com/", "https://firebasestorage.googleapis.com", "https://cdnjs.cloudflare.com"],
+//         objectSrc: ["'none'"],
+//         upgradeInsecureRequests: [],
+//       },
+//       reportOnly: false,
+//     })
+//   );
 // add additional layers of security
 app.use(helmet({
     contentSecurityPolicy:false //security policy already set above
@@ -124,12 +128,33 @@ app.get('*', function(req, res) {
         res.redirect('/');
     }
 });
-let server = app.listen(8080);
+let server = app.listen(3000);
 const io = require('socket.io')(server);
-const rooms = {};
-let broadcaster;
+// var members = [];
+// let broadcaster;
 //create a websocket connection
 io.sockets.on('connection', function (socket) {
+  console.log("Server socket connected")
+  // //join video chat room
+  socket.on('join-room', function (roomId, peerId, userHandle, userId) {
+    //join the room
+    socket.join(roomId);
+    //send message to everyone in room, but don't send back to me
+    socket.to(roomId).broadcast.emit("user-connected", peerId, userHandle);
+      stream.addMember(roomId, userId)
+      .then(function(userId){
+        console.log("added userId: " + userId);
+      })
+      socket.on("disconnect", () => {
+        console.log("Disconnecting")
+        stream.leaveStream(roomId, userId)
+        .then(function(){
+          console.log("LEFT that hoe")
+          socket.to(roomId).broadcast.emit("user-disconnected", peerId)
+        })
+      })
+    });
+    
   //catch the emitted 'send message' event
   socket.on('send message', function (data) {
       //add message to the db
@@ -138,49 +163,55 @@ io.sockets.on('connection', function (socket) {
           msg: data
       });
   });
-  socket.on("broadcaster", () => {
-    broadcaster = socket.id;
-    socket.broadcast.emit("broadcaster");
-  });
-  socket.on("watcher", () => {
-    socket.to(broadcaster).emit("watcher", socket.id);
-  });
-  socket.on("disconnect", () => {
-    socket.to(broadcaster).emit("disconnectPeer", socket.id);
-  });
-  socket.on("offer", (id, message) => {
-    socket.to(id).emit("offer", socket.id, message);
+  //handle new chat event
+  socket.on('new chat', function (data) {
+    //add message to the db
+    stream.addChat(data.id, data.sender, data.message, data.img)
+    .then(function(data){
+      io.sockets.emit('append chat', {
+        sender: data.sender,
+        message: data.message,
+        img: data.senderImg
+    });
+    })
 });
-socket.on("answer", (id, message) => {
-  socket.to(id).emit("answer", socket.id, message);
+ 
 });
-socket.on("candidate", (id, message) => {
-  socket.to(id).emit("candidate", socket.id, message);
-});
-  // //join video chat room
-  // socket.on('join room', function (roomId) {
-  //   if(rooms[roomId]){
-  //     rooms[roomId].push(socket.id);
-  //   }
-  //   else{
-  //     rooms[roomId] = [socket.id]
-  //   }
-  //   const otherUser = rooms[roomId].find(id=> id !== socket.id);
-  //   if(otherUser){
-  //     socket.emit("other user",otherUser);
-  //     socket.to(otherUser).emit("user joined", socket.id);
-  //   }
-  //   socket.on("offer", payload=>{
-  //     io.to(payload.target).emit("offer", payload);
-  //   })
-  //   socket.on("answer", payload => {
-  //     io.to(payload.target).emit("answer", payload);
-  //   })
-  //   //both parties agree on a candidate to use
-  //   socket.on("ice-candidate", incoming => {
-  //     io.to(incoming.candidate).emit("ice-candidate", incoming.candidate);
-  //   })
-// });
-});
+var empty = [];
+//return 2
+//return 1
+var arr1 = [2,2];
+//return 5
+var arr2 = [3,3,3,1,6,9,5,9];
+var arr3 = [5,6,7,5,4,4,3];
+//seen [3]
+function getUnique(arr){
+
+  var unique = [];
+  for(var x = 0; x < arr.length; x++) {
+    var match = false;
+    for(var y = x+1; y < arr.length; y++){
+      if(arr[x] == arr[y]){
+       match = true;
+      }
+    }
+    if(!match){
+      var found = false;
+
+      for(var y = 0 ; y <  unique.length; y++){
+        if(arr[x] == unique[y]){
+          found = true;
+        }
+        
+      }
+      if(!found){
+        unique.push(arr[x]);
+      }
+    }
+  }
+  return unique.length;
+}
+console.log(getUnique(arr3))
+console.log(getUnique(arr3))
 
 

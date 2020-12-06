@@ -22,6 +22,7 @@ const BidsDB = require("../../models/Database/BidsDB");
 const Groups = require("../../models/Database/StudyGroupsDB");
 const AcceptedBids = require("../../models/Database/AcceptedBidsDB");
 const MeetupsDB = require("../../models/Database/MeetupsDB");
+const StreamDB = require("../../models/Database/StreamDB");
 //classes used
 var TimeLine = require('../../models/classes/TimeLine');
 var TimelinePost = require('../../models/classes/TimelinePost');
@@ -43,6 +44,7 @@ var groups = new Groups();
 var acceptedBids = new AcceptedBids();
 var meetups = new MeetupsDB();
 var comments = new CommentsDB();
+var stream = new StreamDB();
 var mail = unirest("POST", "https://api.sendgrid.com/v3/mail/send");
 //register the session and use bodyParser
 
@@ -82,7 +84,16 @@ function sortTutoringSessions(tutorSeshArray) {
 }
 //render the home page
 router.get('/home', function (req, res) {
+    // stream.clearAllMembers("5fad920a6d292df74fb7493b");
     if (req.session.userId) {
+        // stream.getStream(req.session.userId).then(function(data){
+        //     console.log("stream", data)
+        //     users.addStreamId(req.session.userId, data._id );
+        // })
+        // users.getUserByHandle(req.session.handle)
+        // .then(function(data){
+        //     console.log(data)
+        // })
        timeline.getUserTimeline(req.session.following, 0, req)
        .then(function(docs1){
                 var timeLineArray = [];
