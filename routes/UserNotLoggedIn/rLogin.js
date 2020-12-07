@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require("mongoose");
 mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true,useUnifiedTopology: true },function(err){
-    console.log(err);
+
 });
 const session = require('express-session'); //used to manipulate the session
 var MongoStore = require('connect-mongo')(session);
