@@ -4,11 +4,10 @@ const e = require("express");
 mongoose.Promise = global.Promise;
 
 //mongodb url. Move this for security purposes
-mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost:27017/CollegeTutor', {
+mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }, function (err) {
-  console.log(err)
 });
 var db = mongoose.connection;
 // db.on('error', console.error.bind(console, 'connection error:'));
@@ -45,66 +44,57 @@ var ListingsDBSchema = new Schema({
 }, {
   collection: 'ListingsDB'
 });
-module.exports = class ListingsDB {
+var ListingsDB = mongoose.model('ListingsDB', ListingsDBSchema);
+module.exports = class Listings {
   //return all tutors from ListingsDB. delete this function and use one below bc better name
   getAllListings() {
-    var ListingsDB = mongoose.model('ListingsDB', ListingsDBSchema);
     return ListingsDB.find({});
   }
   getListings() {
-    var ListingsDB = mongoose.model('ListingsDB', ListingsDBSchema);
     return ListingsDB.find({});
   }
   getListingById(id) {
-    var ListingsDB = mongoose.model('ListingsDB', ListingsDBSchema);
     return ListingsDB.find({
       _id: id
     });
   }
   //will be used when additional schools are added
   getListingsBySchool(school) {
-    var ListingsDB = mongoose.model('ListingsDB', ListingsDBSchema);
     return ListingsDB.find({
       School: school
     });
   }
   //return tutor list by tutor ID
   getListingsByUserID(id) {
-    var ListingsDB = mongoose.model('ListingsDB', ListingsDBSchema);
     return ListingsDB.find({
       UserID: id
     }, 'Type CourseCode _id Active');
   }
   //return tutor by userID
   getListingsByHandle(handle) {
-    var ListingsDB = mongoose.model('ListingsDB', ListingsDBSchema);
     return ListingsDB.find({
       Handle: handle
     });
   }
   getTutorArrayByCourse(subject) {
-    var ListingsDB = mongoose.model('ListingsDB', ListingsDBSchema);
     return ListingsDB.find({
       Subject: subject,
       Active:true
     });
   }
   listingsAutocompleteBySubject(searchValue){
-    var ListingsDB = mongoose.model('ListingsDB',ListingsDBSchema);
     return ListingsDB.find({
         Subject:{$regex: searchValue, $options:"i"}
 
     }, '_id Image Name Subject').limit(10);
 }
 listingsAutocompleteByCourseCode(searchValue){
-  var ListingsDB = mongoose.model('ListingsDB',ListingsDBSchema);
   return ListingsDB.find({
       CourseCode:{$regex: searchValue, $options:"i"}
 
   }, '_id Image Name Subject').limit(10);
 }
   addPhysicalGroupListing(UserID, Handle, Name, Subject, CourseCode, Grade, HourlyRate, NumHours, School, Type, Schedule, MaxStudents, Image, Active, StartDate, ExpirationDate, Virtual) {
-    var ListingsDB = mongoose.model('ListingsDB', ListingsDBSchema);
     var listing = new ListingsDB({
       UserID: UserID,
       Handle: Handle,
@@ -132,7 +122,6 @@ listingsAutocompleteByCourseCode(searchValue){
    //add Virtual group listing
    addVirtualGroupListing(UserID, Handle, Name, Subject, CourseCode, Grade, HourlyRate, NumHours, MaxStudents, School, Type, Schedule, Image, 
     Active, StartDate, ExpirationDate) {
-    var ListingsDB = mongoose.model('ListingsDB', ListingsDBSchema);
     var listing = new ListingsDB({
       UserID: UserID,
       Name: Name,
@@ -161,7 +150,6 @@ listingsAutocompleteByCourseCode(searchValue){
   //adds a physical individual listing
   addPhysicalIndividualListing(UserID, Handle, Name, Subject, CourseCode, Grade, HourlyRate, NumHours, School, Type, Schedule,
     Image, Active, StartDate, ExpirationDate) {
-    var ListingsDB = mongoose.model('ListingsDB', ListingsDBSchema);
 
     var listing = new ListingsDB({
       UserID: UserID,
@@ -192,7 +180,6 @@ listingsAutocompleteByCourseCode(searchValue){
   addVirtualIndividualListing(UserID, Handle, Name, Subject, CourseCode, Grade, HourlyRate, NumHours, School, Type, Schedule, Image, 
     Active, StartDate, ExpirationDate) {
     console.log("ListingsDB", Schedule)
-    var ListingsDB = mongoose.model('ListingsDB', ListingsDBSchema);
     var listing = new ListingsDB({
       UserID: UserID,
       Name: Name,
@@ -220,7 +207,6 @@ listingsAutocompleteByCourseCode(searchValue){
   }
   //remove listing from ListingsDB
   removeListing(userId, subject) {
-    var ListingsDB = mongoose.model('ListingsDB', ListingsDBSchema);
     //find where tutor id = tutor id and subject name = subject name
     ListingsDB.deleteOne({
       UserID: userId,
@@ -235,7 +221,6 @@ listingsAutocompleteByCourseCode(searchValue){
   //listingId: _id attribute of listing document
   //timeSlot: time slot to remove
   removeScheduleSlot(listingId, timeSlot){
-    var ListingsDB = mongoose.model('ListingsDB', ListingsDBSchema);
     ListingsDB.find({
       _id: listingId
     })
@@ -257,7 +242,6 @@ listingsAutocompleteByCourseCode(searchValue){
 
   //increment students attending the session
   addStudentAttending(sessionID) {
-    var ListingsDB = mongoose.model('ListingsDB', ListingsDBSchema);
     return ListingsDB.findOne({
       _id: sessionID
     }).updateOne({
@@ -267,7 +251,6 @@ listingsAutocompleteByCourseCode(searchValue){
     });
   }
   getStudentsAttending(sessionID) {
-    var ListingsDB = mongoose.model('ListingsDB', ListingsDBSchema);
     return ListingsDB.findOne({
       _id: sessionID
     });
@@ -313,7 +296,6 @@ listingsAutocompleteByCourseCode(searchValue){
   //   });
   // }
   disableListing(id){
-    var ListingsDB = mongoose.model('ListingsDB', ListingsDBSchema);
     ListingsDB.findOne({_id:id}).updateOne({
       $set: {
         Active: false
@@ -321,7 +303,6 @@ listingsAutocompleteByCourseCode(searchValue){
     }).exec();
   }
   activateListing(id){
-    var ListingsDB = mongoose.model('ListingsDB', ListingsDBSchema);
     ListingsDB.findOne({_id:id}).updateOne({
       $set: {
         Active: true
@@ -330,7 +311,6 @@ listingsAutocompleteByCourseCode(searchValue){
   }
   //edit listing function
   updateListing(id, HourlyRate, NumHours, Schedule, ExpirationDate){
-    var ListingsDB = mongoose.model('ListingsDB', ListingsDBSchema);
     if(Schedule.length > 0){
       var newSchedule = [];
       for(x in Schedule){
@@ -371,7 +351,6 @@ listingsAutocompleteByCourseCode(searchValue){
   }
 
 incrementStudentsAttending(listingId, dateId){
-  var ListingsDB = mongoose.model('ListingsDB', ListingsDBSchema);
   console.log(
     "LISTING ID",listingId)
     console.log("TIME ID", dateId)

@@ -4,8 +4,8 @@ var mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
 
 //mongodb url. Move this for security purposes
-mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost:27017/CollegeTutor', {useNewUrlParser: true, useUnifiedTopology: true }, function (err) {
-  console.log(err)
+mongoose.connect(process.env.MONGO_URL, {useNewUrlParser: true, useUnifiedTopology: true }, function (err) {
+
 });
 var db = mongoose.connection;
 // db.on('error', console.error.bind(console, 'connection error:'));

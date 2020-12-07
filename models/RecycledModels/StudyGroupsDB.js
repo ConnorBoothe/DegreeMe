@@ -8,7 +8,6 @@ mongoose.connect(mongoDB_URL || 'mongodb://localhost:27017/degreeMe', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }, function (err) {
-  console.log(err)
 
 });
 var db = mongoose.connection;

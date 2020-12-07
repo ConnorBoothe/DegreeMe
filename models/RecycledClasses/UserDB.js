@@ -1,5 +1,4 @@
-
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
 const mongoDB_URL = "mongodb+srv://ConnorBoothe:degreeMe@cluster0-rfrg2.mongodb.net/test?retryWrites=true&w=majority";
 mongoose.connect(mongoDB_URL || 'mongodb://localhost:27017/CollegeTutor', { useNewUrlParser: true,useUnifiedTopology: true },function(err){

@@ -1,10 +1,11 @@
 require('dotenv').config();
 const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGO_URL|| 'mongodb://localhost:27017/CollegeTutor', { useNewUrlParser: true,useUnifiedTopology: true },function(err){
+mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true },function(err){
     
 });
 db = mongoose.connection;
+db.setMaxListeners(0)
 // db.on('error', console.error.bind(console, 'connection error:'));
 var Schema = mongoose.Schema;
 var commentSchema = new Schema({
@@ -19,18 +20,13 @@ var commentSchema = new Schema({
 var commentsDB = mongoose.model('CommentsDB',commentSchema);
 module.exports = class UserProfile {
     getCommentsByPostId(postId){
-        var commentsDB = mongoose.model('CommentsDB',commentSchema);
         return commentsDB.find({postId:postId});
     }
     getCommentCount(postId){
-        var commentsDB = mongoose.model('CommentsDB',commentSchema);
         return commentsDB.find({postId:postId},'_id');
     }
     addComment(postId, handle, img, message){
-        var commentsDB = mongoose.model('CommentsDB',commentSchema);
         var comments = new commentsDB({postId:postId, commenterHandle: handle, commenterImg:img, upvotes:0, message:message, date: new Date()});
         return comments.save();
     }
-    
-
 }
