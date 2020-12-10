@@ -30,7 +30,7 @@ router.use(session({
       secret: 'toolbox1217!',
       resave: true,
       saveUninitialized: true,
-      cookie: { secure: true,
+      cookie: { secure: false,
           maxAge:  6*60*60*1000 },
     }));
 router.use(bodyParser.json());
@@ -71,9 +71,10 @@ router.post('/login', [
                 docs1[0].bio);
                 bcrypt.compare(req.body.password, user.getPassword(), function (err, match) {
                 if (match) {
+                    console.log("Match")
                     //if account has been verified, start the session
                     if (user.status === "Active") {
-                        req.session.user = user;
+                        // req.session.user = user;
                         req.session.userId = user.getId();
                         req.session.name = user.getName();
                         req.session.school = user.getSchool();
@@ -93,6 +94,7 @@ router.post('/login', [
                         req.session.mySchedule = user.getMySchedule();
                         req.session.myCourses = docs1[0].myCourses;
                         req.session.activeTutor = false;
+                        req.session.streamId = docs1[0].streamId;
                         if(docs1[0].StripeId === "none"){
                             req.session.tutor = false;
                         }
@@ -107,6 +109,7 @@ router.post('/login', [
                                 req.session.myListings = false;
                             }
                         })
+                        console.log(req.session)
                         //get the users connections
                         meetups.getConnectionsByHandle(req.session.handle).exec((err, docs) => {
                             for (x in docs) {
