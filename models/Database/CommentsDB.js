@@ -8,6 +8,10 @@ db = mongoose.connection;
 db.setMaxListeners(0)
 // db.on('error', console.error.bind(console, 'connection error:'));
 var Schema = mongoose.Schema;
+var attachments = new Schema({
+    file:{type:String, required:true}
+    
+});
 var commentSchema = new Schema({
     postId:{type:String, required:true},
     commenterHandle:{type:String, required:true},
@@ -15,7 +19,8 @@ var commentSchema = new Schema({
     upvotes:{type:Number, required:true},
     message:{type:String, required:true},
     date:{type:Date, required:true},
-    commentCount: {type:Number}
+    commentCount: {type:Number},
+    attachments: [attachments]
 },  {collection: 'CommentsDB'});
 var commentsDB = mongoose.model('CommentsDB',commentSchema);
 module.exports = class UserProfile {
@@ -25,8 +30,12 @@ module.exports = class UserProfile {
     getCommentCount(postId){
         return commentsDB.find({postId:postId},'_id');
     }
-    addComment(postId, handle, img, message){
-        var comments = new commentsDB({postId:postId, commenterHandle: handle, commenterImg:img, upvotes:0, message:message, date: new Date()});
+    addComment(postId, handle, img, message, attachments){
+        var attachmentsArr = [];
+        for(var i = 0; i < attachments.length; i++) {
+            attachmentsArr.push({file: attachments[i]});
+        }
+        var comments = new commentsDB({postId:postId, commenterHandle: handle, commenterImg:img, upvotes:0, message:message, date: new Date(), attachments: attachmentsArr});
         return comments.save();
     }
 }
