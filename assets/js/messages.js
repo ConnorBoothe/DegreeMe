@@ -1,11 +1,32 @@
     //handles messages front end functionality
+    //read URL to display image upload preview
+    function readURL(input, imageArray) {
+        if (input.files && input.files[0]) {
+            var filename = $(".message-file").val().replace(/C:\\fakepath\\/i, '');
+            imageArray.push({name:filename, image: input.files[0]});
+            var reader = new FileReader();
+            var image = ""
+            reader.onload = function (e) {
+                image = "<div class='img-container'>"+
+                "<span class='delete-badge badge badge-secondary'>"+
+                '<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x" fill="white" xmlns="http://www.w3.org/2000/svg">'+
+                    '<path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>'+
+                '</svg>'+
+                '</span>'+
+                "<img name='"+filename+"' src='"+e.target.result+"'/></div>";
+                $(".image-attachments").append(image);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
     var socket = io.connect({transports: ['websocket']});
     socket.connect();
     var messageForm = $("#messageForm");
     var chat = $('#messagesContainer');
     var userHandles = new Array;
     $(document).ready(function () {
-
+        //initialize the image attachment array
+        var imageArray = [];
         $(".check-icon").hide();
         $("#usersBtn").on("click", function () {
 
@@ -30,20 +51,31 @@
         })
         messageForm.on("submit", function (e) {
             e.preventDefault();
-            if ($(".msgInput input").val().trim() != "") {
+            if(imageArray.length > 0){
+                var storageRef = firebase.storage().ref("attachments/" + imageArray[0].name);
+                storageRef.put(imageArray[0].image)
+                .then(function () {
+                  
+                    storageRef.getDownloadURL().then(function (url) {
+                        console.log(url)
+                        if ($(".msgInput input").val().trim() != "") {
 
-                window.scrollTo(0, $(document).height());
-                socket.emit('send message', {
-                    userHandle: $(".userId").val().substring(1),
-                    id: $(".threadId").val(),
-                    sender: $(".userProfileName").eq(0).text(),
-                    senderImg: $(".userProfileImg").attr("src"),
-                    userHandles: userHandles,
-                    message: $(".msgInput input").val(),
-                    date: new Date
-                });
-                $(".msgInput input").val('');
-            }
+                            window.scrollTo(0, $(document).height());
+                            socket.emit('send message', {
+                                userHandle: $(".userId").val().substring(1),
+                                id: $(".threadId").val(),
+                                sender: $(".userProfileName").eq(0).text(),
+                                senderImg: $(".userProfileImg").attr("src"),
+                                userHandles: userHandles,
+                                message: $(".msgInput input").val(),
+                                date: new Date
+                            });
+                            $(".msgInput input").val('');
+                        }
+                    })
+            })
+        }
+            
         })
         socket.on('new message', function (data, err) {
             if(err){
@@ -107,6 +139,22 @@
                     }
                 }
             }
+        })
+        //image upload to messages
+        $(".message-file").on("change", function(){
+           readURL($(".message-file")[0], imageArray);
+        })
+        //remove image upload
+        $(".image-attachments").on("click", ".delete-badge", function(){
+            var name = $(this).next().attr("name");
+            //remove image from image array
+            for(var i = 0; i < imageArray.length; i++) {
+               if(imageArray[i].name == name){
+                    imageArray.splice(i, 1);
+                    break;
+               }
+            }
+            $(this).parent().remove();
         })
         socket.on('disconnect', function(){
             console.log('user disconnected');

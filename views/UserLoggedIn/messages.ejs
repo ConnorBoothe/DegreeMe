@@ -99,6 +99,8 @@
         <div id="typeMsg" class="">
             <form id="messageForm" method='POST' action=' '>
                 <div class="msgInput">
+                   
+
                     <span class="sendMsg-btn">
                         <a class="memberImage" data-toggle="tooltip" data-placement="top" title="Send Message">
                             <button class="msg-send-btn"> 
@@ -111,11 +113,22 @@
                         </a>
                     
                     </span>
+                    
                     <input class="sendMsgInput" name="content" type="text" placeholder="Write your message here"
                         autocomplete="off" spellcheck="off"/>
+                        
+                        <a data-toggle="tooltip" data-placement="top"
+                                            title="File Upload">
+                        <label id="" for="attachment" class="">
+                          <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-earmark-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0H4zm5.5 1.5v2a1 1 0 0 0 1 1h2l-3-3z"/>
+                          </svg>
+                        </label>
+                      
+                        <input class="message-file" id="attachment" name="attachment" type="file" multiple />
+                        </a>
+                        <div class="image-attachments text-light"></div>
                 </div>
-
-
                 <input name="id" class="threadId" value="<%=qs.messageId%>" type="hidden"
         placeholder="Type your message here" />
         <input name="userId" class="userId" value="<%=session.handle%>" type="hidden" />
@@ -130,12 +143,15 @@
         <source src="assets/sounds/Blop-Mark_DiAngelo-79054334.mp3" type="audio/mpeg">
     </audio>
  <script src="../assets/js/socket.io.min.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-app.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-storage.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/browser-image-compression@1.0.12/dist/browser-image-compression.js"></script>
+ <script src="assets/js/firebaseConfig.js"></script>
  <script type="text/javascript" src="assets/js/messages.js"></script>
  <script type="text/javascript" src="assets/js/highlightCurrentMenuItem.js"></script>
  <script type="text/javascript" src="assets/js/Client-DateFunctions.js"></script>
  <script src="../assets/js/popper.min.js"></script>
  <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
-
  <script type="text/javascript" src="/assets/js/displayMyCourses.js"></script>
  <script src="../assets/jquery/jquery.session/jquery.session.js"></script>
  <script src="../assets/js/getNotifications.js"></script>
