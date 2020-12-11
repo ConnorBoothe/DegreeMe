@@ -4,7 +4,7 @@ mongoose.Promise = global.Promise;
 mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true,useUnifiedTopology: true },function(err){
     
 });
-// db = mongoose.connection;
+db = mongoose.connection;
 // db.on('error', console.error.bind(console, 'connection error:'));
 var Schema = mongoose.Schema;
 //bid schema

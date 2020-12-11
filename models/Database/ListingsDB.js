@@ -11,9 +11,9 @@ mongoose.connect(process.env.MONGO_URL, {
 });
 var db = mongoose.connection;
 // db.on('error', console.error.bind(console, 'connection error:'));
-// db.on('connected', function(){
-//   console.log("Connected!")
-// });
+db.on('connected', function(){
+  // console.log("Connected!")
+});
 var Schema = mongoose.Schema;
 var Schedule = new Schema({
   date:{type: String,required: true},

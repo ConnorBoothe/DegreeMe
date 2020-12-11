@@ -64,14 +64,13 @@ router.post('/login', [
     }
     //find the user associated with email input
     users.getUserByEmail(req.body.email).exec((err, docs1) => {
-        if (docs1.length>0) { //if email exists in the DB
+        if (docs1.length > 0) { //if email exists in the DB
             //create temporary user object from DB result
             var user = new User(docs1[0]._id, docs1[0].first_name, docs1[0].last_name, docs1[0].school, docs1[0].email, docs1[0].password,
                 docs1[0].img, docs1[0].theme, docs1[0].handle, [], docs1[0].status, docs1[0].subscription, docs1[0].creditCount, docs1[0].threads, docs1[0].major,
                 docs1[0].bio);
                 bcrypt.compare(req.body.password, user.getPassword(), function (err, match) {
                 if (match) {
-                    console.log("Match")
                     //if account has been verified, start the session
                     if (user.status === "Active") {
                         // req.session.user = user;
@@ -111,7 +110,6 @@ router.post('/login', [
                                 req.session.myListings = false;
                             }
                         })
-                        console.log(req.session)
                         //get the users connections
                         meetups.getConnectionsByHandle(req.session.handle).exec((err, docs) => {
                             for (x in docs) {

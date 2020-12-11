@@ -1,7 +1,7 @@
 require('dotenv').config();
 const mongoose = require("mongoose");
 const DiscussionBoardDB = require("./DiscussionBoardDB");
-var discussion = new DiscussionBoardDB();
+const discussion = new DiscussionBoardDB();
 
 mongoose.Promise = global.Promise;
 mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true,useUnifiedTopology: true },function(err){

@@ -31,10 +31,14 @@ module.exports = class UserProfile {
         return commentsDB.find({postId:postId},'_id');
     }
     addComment(postId, handle, img, message, attachments){
-        var attachmentsArr = [];
-        for(var i = 0; i < attachments.length; i++) {
-            attachmentsArr.push({file: attachments[i]});
+        //if files are attached
+        if(attachments){
+            var attachmentsArr = [];
+            for(var i = 0; i < attachments.length; i++) {
+                attachmentsArr.push({file: attachments[i]});
+            }
         }
+        
         var comments = new commentsDB({postId:postId, commenterHandle: handle, commenterImg:img, upvotes:0, message:message, date: new Date(), attachments: attachmentsArr});
         return comments.save();
     }
