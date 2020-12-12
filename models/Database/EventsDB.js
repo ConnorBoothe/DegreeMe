@@ -11,32 +11,34 @@ var memberSchema = new Schema({
     image: {type:String, required:true},
     role:{type:String, required:true}
 });
+//PS: changed DataCue to Date ask connor 
 var eventsSchema = new Schema({
     userId:{type:String, required:true},
-    date: {type:DataCue, required:true},
+    date: {type:Date, required:true},
     duration:{type: Number, required:true},
     title: {type:String, required:true},
     description: {type:String, required:true},
     type: {type:String, required:true},
     streamId: {type:String},
+    location: {type:String},
     members:[memberSchema]
 }, {collection: 'Events'});
 var events = mongoose.model('eventsSchema',eventsSchema);
 module.exports = class Events {
     //get all events by id
    getEventsByUserId(id){
-       return  events.find({_id: id})
+       return  events.find({userId: id})
    }
    //get events for a given day
-   getEventsByDay()
+   //getEventsByDay()
    //get the events for a given week
-   getEventsByWeek()
+   //getEventsByWeek()
    
    //add event to DB
    //pass in an array of member objects in format of :[{userId: userId, handle: handle, image:image, role:role}]
    //role should be either host or member
    //the person who creates the event is the host
-   addEvent(userId, date, duration, title, description, type, streamId, members){
+   addEvent(userId, date, duration, title, description, type, streamId,location, members){
        var event = new events({
            userId: userId, 
            date: date,
@@ -45,10 +47,26 @@ module.exports = class Events {
            description: description, 
            type: type, 
            steamId: streamId,
+           location: location,
            members: members
         });
-        return event.save();
+        return event;
    }
+   deleteEvent(id){
+       return events.deleteOne({_id:id});
+   }
+   updateEvent(id, date, duration, title, description, type, streamId,location){
+
+     return events.updateOne({_id:id},{
+        date: date,
+        duration: duration, 
+        title: title,
+        description: description, 
+        type: type, 
+        steamId: streamId,
+        location: location
+     })
+}
    //add a new member to an event document
    addMemberToEvent(id, userId, handle, image, role){
     return new Promise((resolve, reject)=>{

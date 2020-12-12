@@ -72,6 +72,7 @@ app.use([
   require('./routes/UserNotLoggedIn/rLogin.js'),
   require('./routes/UserLoggedIn/rLogout.js'),
   require('./routes/UserLoggedIn/rCheckout.js'),
+  require('./routes/UserLoggedIn/rEvents.js'),
   require('./routes/UserLoggedIn/rConnectByMajor.js'),
   require('./routes/UserLoggedIn/rReview.js'),
   require('./routes/UserLoggedIn/rCourseProfile.js'),
@@ -120,7 +121,7 @@ app.get('*', function(req, res) {
         res.redirect('/');
     }
 });
-let server = app.listen(8080);
+let server = app.listen(8088);
 const io = require('socket.io')(server);
 const rooms = {};
 let broadcaster;
