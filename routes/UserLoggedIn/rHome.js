@@ -51,7 +51,7 @@ router.use(session({
       secret: 'toolbox1217!',
       resave: true,
       saveUninitialized: true,
-      cookie: { secure: true,
+      cookie: { secure: false,
           maxAge:  6*60*60*1000 },
     }));
 router.use(bodyParser.json());
@@ -81,13 +81,12 @@ function sortTutoringSessions(tutorSeshArray) {
 //render the home page
 router.get('/home', function (req, res) {
     if (req.session.userId) {
+        //get user timeline
        timeline.getUserTimeline(req.session.following, 0, req)
        .then(function(docs1){
                 var timeLineArray = [];
                 new Promise((resolve, reject) => {
                 for (var x = 0; x < docs1.length; x++) {
-
-              
                     // .then(function(data){
                         var hasLiked = tl.likedBoolean(req.session.handle, docs1[x].likers);
                     //potentially removing this

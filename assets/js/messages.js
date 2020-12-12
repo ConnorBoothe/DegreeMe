@@ -52,12 +52,7 @@
         messageForm.on("submit", function (e) {
             e.preventDefault();
             if(imageArray.length > 0){
-                var storageRef = firebase.storage().ref("attachments/" + imageArray[0].name);
-                storageRef.put(imageArray[0].image)
-                .then(function () {
-                  
-                    storageRef.getDownloadURL().then(function (url) {
-                        console.log(url)
+                        
                         if ($(".msgInput input").val().trim() != "") {
 
                             window.scrollTo(0, $(document).height());
@@ -68,15 +63,32 @@
                                 senderImg: $(".userProfileImg").attr("src"),
                                 userHandles: userHandles,
                                 message: $(".msgInput input").val(),
-                                date: new Date
+                                date: new Date,
+                                hasImage:true
                             });
                             $(".msgInput input").val('');
                         }
-                    })
-            })
+        }
+        else {
+            if ($(".msgInput input").val().trim() != "") {
+
+                window.scrollTo(0, $(document).height());
+                socket.emit('send message', {
+                    userHandle: $(".userId").val().substring(1),
+                    id: $(".threadId").val(),
+                    sender: $(".userProfileName").eq(0).text(),
+                    senderImg: $(".userProfileImg").attr("src"),
+                    userHandles: userHandles,
+                    message: $(".msgInput input").val(),
+                    date: new Date,
+                    hasImage:false
+                });
+                $(".msgInput input").val('');
+            }
         }
             
         })
+        
         socket.on('new message', function (data, err) {
             if(err){
                 alert(err)
@@ -139,6 +151,34 @@
                     }
                 }
             }
+                //if images attached, save images to firebase and send the url to the server to be saved to MessagesDB
+                if(imageArray.length > 0 ) {
+                chat.append('<div class="sent-wrapper"><div class="containMessageSent">' +
+                '<div class="msg_">' +
+                '<div class="messageBody sentMsg bg-primary new-image">'+
+                '<div class="spinner-border" role="status">'+
+                    '<span class="sr-only"></span>'+
+                '</div>'+
+                '<span class="loading-span">Loading Image</span>'+
+            '</div>'+
+                '<p class="msg-date msg-date-sent"></p>' +
+                '</div></div>');
+                var storageRef = firebase.storage().ref("attachments/" + imageArray[0].name);
+                storageRef.put(imageArray[0].image)
+                    .then(function () {
+                         storageRef.getDownloadURL().then(function (url) {
+                            socket.emit("send image", 
+                            {
+                                id:$(".threadId").val(),
+                                image:url
+                            })
+                         })
+                        })
+                }
+            
+        })
+        socket.on("append image", function(data){
+            $(".new-image").html("<a href='"+data.image+"'><img src='"+data.image+"'/></a>");
         })
         //image upload to messages
         $(".message-file").on("change", function(){

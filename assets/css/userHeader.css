@@ -595,6 +595,7 @@ header{
 .input-container-message{
     position:relative;
     z-index:4;
+    border-radius:20px!important;
 
 }
 .addUserSearch{
@@ -665,6 +666,7 @@ header{
     width:100%;
     background-color:#343a40;
     min-height:30px;
+    border-radius:20px!important;
 }
 /* Chat sidebar section */
 .messageSideBar{
@@ -983,7 +985,7 @@ header{
         top:0;
         margin-left:15px;
         margin-top:2px;
-        width:18px;
+        width:12px!important;
         font-size:11px!important;
         border-radius:10px!important;
     }

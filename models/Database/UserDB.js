@@ -114,6 +114,7 @@ module.exports = class User {
         return UserDB.find({}, "email");
     }
     getUserByEmail(email){
+        console.log(email)
         return UserDB.find({email:email});     
       }
       checkIfEmailExists(email){
@@ -291,9 +292,9 @@ module.exports = class User {
         });
     }
       //updates unread count and moves thread to top of list
-      unreadCountToZero(threadId, handle, req, res,  messages, formatDate, formatTime){
+      unreadCountToZero(threadId, id, req, res,  messages, formatDate, formatTime){
         
-            UserDB.findOne({handle:handle}).exec((err,docs)=>{
+            UserDB.findOne({_id:id}).exec((err,docs)=>{
                 var tempThread = "";
                 for(var x = 0; x < docs.threads.length;x++){
                     if(docs.threads[x].threadId === threadId){

@@ -2,13 +2,34 @@ require('dotenv').config();
 const express = require('express');
 const helmet = require("helmet");
 const csp = require("helmet-csp");
+const mongoose = require("mongoose");
+mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true,useUnifiedTopology: true },function(err){
+
+});
+const session = require('express-session'); //used to manipulate the session
+var MongoStore = require('connect-mongo')(session);
+
 var app = module.exports = express(); 
+//set cookie to secure to true for production
+app.use(session({
+  store: new MongoStore({
+     mongooseConnection: mongoose.connection
+    }),
+    secret: 'toolbox1217!',
+    resave: true,
+    saveUninitialized: true,
+    cookie: { secure: false,
+        maxAge:  6*60*60*1000 },
+  }));
 app.set('trust proxy', 1) // trust first proxy
 //classes used
 const MessageDB = require('./models/Database/MessagesDB');
-const { resolve } = require('path');
+const Threads = require('./models/Database/Threads');
+const Messages = require('./models/Database/Messages');
 //instantiate DBs for use
+var msg = new Messages();
 var messages = new MessageDB();
+
 //set limit size of file upload
 app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({
@@ -45,16 +66,13 @@ app.use(require('./routes/scheduledEvents/chargePayments.js'));
 app.use([
  require('./routes/UserNotLoggedIn/rIndex'),
  require('./routes/UserNotLoggedIn/rAbout'),
- require('./routes/UserLoggedIn/rConnections'),
  require('./routes/Websockets/MessageSocket.js'),
- require('./routes/UserLoggedIn/rConnections'),
  require('./routes/UserNotLoggedIn/rJobs'),
  require('./routes/UserNotLoggedIn/rSignUp'),
  require('./routes/UserNotLoggedIn/rPrivacy'),
  require('./routes/UserNotLoggedIn/rPolicies'),
  require('./routes/UserLoggedIn/rMeeting.js'),
  require('./routes/UserNotLoggedIn/rContact.js'),
- require('./routes/UserNotLoggedIn/rCourseSearch.js'),
  require('./routes/UserNotLoggedIn/rCourseSearch.js'),
  require('./routes/UserNotLoggedIn/rSearchStudents.js'),
  require('./routes/UserNotLoggedIn/rVerify.js'),
@@ -64,7 +82,8 @@ app.use([
 app.use([
   require('./routes/UserLoggedIn/rSettings.js'),
   require('./routes/UserLoggedIn/rMyConnections.js'),
-  require('./routes/UserLoggedIn/rMessages.js'),
+  require('./routes/UserLoggedIn/Messages/rMessages.js'),
+  require('./routes/UserLoggedIn/Messages/rMessageMembers.js'),
   require('./routes/UserLoggedIn/rMyFinances.js'),
   require('./routes/UserLoggedIn/rStudyGroups.js'),
   require('./routes/UserLoggedIn/rCreateTutorListing.js'),
@@ -121,7 +140,10 @@ app.get('*', function(req, res) {
         res.redirect('/');
     }
 });
-let server = app.listen(8088);
+let server = app.listen(8080, function(){
+  console.log("Connected!")
+});
+
 const io = require('socket.io')(server);
 const rooms = {};
 let broadcaster;
@@ -135,6 +157,20 @@ io.sockets.on('connection', function (socket) {
           msg: data
       });
   });
+  socket.on('send image', function (data) {
+    //add message to the db
+   //add image to message DB
+   messages.attachImage(data.id,  data.image)
+   .then(function(success){
+     if(success){
+      socket.emit("append image", {image:data.image});
+     }
+   })
+   .catch(function(error){
+     console.log(error)
+   })
+  
+});
   socket.on("broadcaster", () => {
     broadcaster = socket.id;
     socket.broadcast.emit("broadcaster");

@@ -7,7 +7,7 @@
     <!-- Stylesheets -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@700&display=swap" rel="stylesheet">
-<link rel="icon" href="/assets/img/favicon.png" type="image/png" />
+    <link rel="icon" href="../assets/img/favicon.png" type="image/png" />
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
     <link href="../assets/css/main1.css" rel="stylesheet">
     <link href="../assets/css/userProfile.css" rel="stylesheet">
@@ -15,84 +15,102 @@
     <link href="../assets/css/messages.css" rel="stylesheet">
     <link href="../assets/css/home.css" rel="stylesheet">
     <!-- Scripts -->
-    <script src="assets/jquery/dist/jquery.js"></script>
-    <script src="assets/js/scrollMessages.js"></script>
+    <script src="../assets/jquery/dist/jquery.js"></script>
+    <script src="../assets/js/scrollMessages.js"></script>
 </head>
+
 <body class="bodyClass">
     <div class="homeWrap">
-    <div class="page-container">
-        
-        <%- include ('partials/sideBar.ejs') %>
-        <div id="horizontalHeader" class="horizontalDark">
-            <div class="blocker"></div>
-            <!-- <button class="navbar-toggler third-button" type="button" data-toggle="collapse"
-                data-target="#navbarSupportedContent22" aria-controls="navbarSupportedContent22" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <svg class="bi bi-list" viewBox="0 0 16 16" fill="#a9a9a9" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd"
-                        d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
-                </svg>
-            </button> -->
-            <%- include ('partials/messageHeader.ejs') %>
+        <div class="page-container">
 
-            <ul id="horizontalMenu">
-            </ul>
-            <div class="userHeaderWrapper">
-                <!-- <div id="versionTxt">
-                    <p class="text-light"><i>Version 1.0</i></p>
-                </div> -->
+            <%- include ('partials/sideBar.ejs') %>
+            <div id="horizontalHeader" class="horizontalDark">
+                <div class="blocker"></div>
+                <%- include ('partials/messageHeader.ejs') %>
+                <ul id="horizontalMenu">
+                </ul>
+                <div class="userHeaderWrapper">
+                </div>
             </div>
-        </div>
-        <div class="membersRightSideBar">
-            <p class="messageHeader">People</p>
-            <div class="messageHandle-container">
-            <% for(x in messages.userHandles){%>
-            <div class='messageHandle '>
-                <a href="/user/<%=messages.userHandles[x][0]%>">
-                    <div class="online"></div>
-                    <img class="messageSideBarImg" src="<%=messages.userHandles[x][1]%>" />
-                    <span class="userHandleTxt"><%=messages.userHandles[x][0]%></span>
-                </a>
-            </div>
-            <%}%>
-        </div>
-        </div>
+            <%- include ('partials/messageSideBar.ejs') %>
         <div class="homeContainer ">
             <div class="messageBlock" >    
                 <div id="messagesContainer">          
-                    <div id="convoTitle"><p><img class="hostImg" src="<%=messages.hostImg%>"/><span class="dateStarted"><%=messages.host%><%=formatDate(new Date(messages.datetime))%></span>
-            </p>
-        </div>
-        <%if(messages.messages.length > 0 ){%>
-        <% for(x in messages.messages){%>
-        <!-- check if session handle === sender -->
-        <%if(session.handle === messages.messages[x].sender){%>
-        <div class="sent-wrapper">
-        <div class="containMessageSent">
-            <div class="msg_">
-                <p class="msgSender">
+                    <div id="convoTitle"><p><img class="hostImg" src="<%=messages.hostImg%>"/><span
+                        class="dateStarted"><%=messages.host%><%=formatDate(new Date(messages.datetime))%></span>
+                    </p>
+                </div>
+                <%if(messages.length > 0 ){%>
+                <% for(x in messages){%>
+                <!-- check if session handle === sender -->
+                <%if(session.handle === messages[x].sender){%>
 
-                </p>
-                <p class="messageBody sentMsg bg-primary"><%=messages.messages[x].message%></p>
-            </div>
-            <p class="msg-date msg-date-sent"><%=formatTime(new Date(messages.messages[x].dateTime))%></p>
-        </div>
-    </div>
-        <% } else{%>
-        <div class="containMessageReceived">
-            <p class="sender_handle">
-            <img class="messageImg" src="<%=messages.messages[x].senderImg%>" />
-                <%=messages.messages[x].sender%>
-            </p>
-            
-            <div class="msg_1" style="left:0px">
-                <p class="messageBody receivedMsg"><%=messages.messages[x].message%></p>
-            </div>
-            <p class="msg-date"><%=formatTime(new Date(messages.messages[x].dateTime))%></p>
-        </div>
-        <%}%>
+                <div class="sent-wrapper">
+                    <div class="containMessageSent">
+                        <div class="msg_">
+                            <p class="msgSender">
+
+                            </p>
+                            <p class="messageBody sentMsg bg-primary"><%=messages[x].message%></p>
+                        </div>
+                        <p class="msg-date msg-date-sent"><%=formatTime(new Date(messages[x].dateTime))%></p>
+                    </div>
+                </div>
+                <%if(messages[x].attachments.length > 0){%>
+                <%for (var i = 0; i < messages[x].attachments.length; i++ ) {%>
+                <div class="sent-wrapper">
+                    <div class="containMessageSent">
+                        <div class="msg_">
+                            <p class="msgSender">
+
+                            </p>
+                            <p class="messageBody sentMsg bg-primary message-attachment">
+
+                                <%if(messages[x].attachments[i].file.includes(".pdf")){%>
+
+                                <iframe class="pdf-iframe" src="<%=messages[x].attachments[i].file%>"></iframe>
+                                <p class="text-center"><a target="_blank" class="text-light"
+                                        href="<%=messages[x].attachments[i].file%>">View Full Screen</a></p>
+                                <%}else{%>
+                                <a target="_blank" href="<%=messages[x].attachments[i].file%>">
+                                    <img src="<%=messages[x].attachments[i].file%>" />
+                                </a>
+                                <%}%>
+                            
+                            </p>
+                        </div>
+                        <p class="msg-date msg-date-sent"><%=formatTime(new Date(messages[x].dateTime))%>
+                            </p>
+                        </div>
+                    </div>
+                    <%}%>
             <%}%>
-        <%}%>
+                    <% } else{%>
+                    <div class="containMessageReceived">
+                        <p class="sender_handle">
+                            <img class="messageImg" src="<%=messages[x].senderImg%>" />
+                            <%=messages[x].sender%>
+                        </p>
+
+                        <div class="msg_1" style="left:0px">
+                            <p class="messageBody receivedMsg"><%=messages[x].message%></p>
+                        </div>
+                        <p class="msg-date"><%=formatTime(new Date(messages[x].dateTime))%></p>
+                    </div>
+                    <%if(messages[x].attachments.length > 0){%>
+                    <%for (var i = 0; i < messages[x].attachments.length; i++ ) {%>
+                    <div class="containMessageReceived">
+                        <div class="msg_">
+                            <p class="messageBody receivedMsg bg-primary message-attachment"><img
+                                    src="<%=messages[x].attachment[i]%>" /></p>
+                        </div>
+                        <p class="msg-date msg-date-sent"><%=formatTime(new Date(messages[x].dateTime))%></p>
+                    </div>
+                    <%}%>
+            <%}%>
+                    <%}%>
+            <%}%>
+                    <%}%>
         </div>
         <a name="bottom"></a>
         <div id="newMsg"></div>
@@ -129,33 +147,34 @@
                         </a>
                         <div class="image-attachments text-light"></div>
                 </div>
-                <input name="id" class="threadId" value="<%=qs.messageId%>" type="hidden"
-        placeholder="Type your message here" />
-        <input name="userId" class="userId" value="<%=session.handle%>" type="hidden" />
-        </form>
-    </div>
-    </div>
+                <input name="id" class="threadId" value="<%=threadId%>" type="hidden"/>
+                    <input name="userId" class="userId" value="<%=session.handle%>" type="hidden" />
+                    </form>
+                </div>
+            </div>
 
+        </div>
     </div>
     </div>
-</div>
     <audio id="pop">
-        <source src="assets/sounds/Blop-Mark_DiAngelo-79054334.mp3" type="audio/mpeg">
+        <source src="../assets/sounds/Blop-Mark_DiAngelo-79054334.mp3" type="audio/mpeg">
     </audio>
- <script src="../assets/js/socket.io.min.js"></script>
- <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-app.js"></script>
- <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-storage.js"></script>
- <script src="https://cdn.jsdelivr.net/npm/browser-image-compression@1.0.12/dist/browser-image-compression.js"></script>
- <script src="assets/js/firebaseConfig.js"></script>
- <script type="text/javascript" src="assets/js/messages.js"></script>
- <script type="text/javascript" src="assets/js/highlightCurrentMenuItem.js"></script>
- <script type="text/javascript" src="assets/js/Client-DateFunctions.js"></script>
- <script src="../assets/js/popper.min.js"></script>
- <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
- <script type="text/javascript" src="/assets/js/displayMyCourses.js"></script>
- <script src="../assets/jquery/jquery.session/jquery.session.js"></script>
- <script src="../assets/js/getNotifications.js"></script>
- <script type="text/javascript" src="../assets/js/SiteWideSearch.js"></script>
+    <script src="../assets/js/socket.io.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-storage.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/browser-image-compression@1.0.12/dist/browser-image-compression.js">
+    </script>
+    <script src="..assets/js/firebaseConfig.js"></script>
+    <script type="text/javascript" src="../assets/js/messages.js"></script>
+    <script type="text/javascript" src="../assets/js/Messages/getMemberHandles.js"></script>
+    <script type="text/javascript" src="../assets/js/highlightCurrentMenuItem.js"></script>
+    <script type="text/javascript" src="../assets/js/Client-DateFunctions.js"></script>
+    <script src="../assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../assets/js/displayMyCourses.js"></script>
+    <script src="../assets/jquery/jquery.session/jquery.session.js"></script>
+    <script src="../assets/js/getNotifications.js"></script>
+    <script type="text/javascript" src="../assets/js/SiteWideSearch.js"></script>
 
 </body>
 
