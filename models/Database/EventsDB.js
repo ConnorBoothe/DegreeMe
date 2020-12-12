@@ -13,7 +13,7 @@ var memberSchema = new Schema({
 });
 var eventsSchema = new Schema({
     userId:{type:String, required:true},
-    date: {type:DataCue, required:true},
+    date: {type:Date, required:true},
     duration:{type: Number, required:true},
     title: {type:String, required:true},
     description: {type:String, required:true},
@@ -31,7 +31,7 @@ module.exports = class Events {
    getEventsByDay()
    //get the events for a given week
    getEventsByWeek()
-   
+
    //add event to DB
    //pass in an array of member objects in format of :[{userId: userId, handle: handle, image:image, role:role}]
    //role should be either host or member

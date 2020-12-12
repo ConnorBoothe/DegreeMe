@@ -55,6 +55,7 @@ router.post('/removeEvent', function (req, res) {
 router.post('/addMemberToEvent', function (req, res) {
 
 });
+
 module.exports = router;
 
 
