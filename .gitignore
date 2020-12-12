@@ -1,0 +1,6 @@
+.vscode/
+degreeMe.code-workspace
+**/.DS_Store
+node_modules
+.env
+degreeme1-727d561034e0.json
