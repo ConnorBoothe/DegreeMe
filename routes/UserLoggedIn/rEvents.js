@@ -43,7 +43,6 @@ router.use(bodyParser.urlencoded({
 //render the calendar view
 router.get('/calendar', function (req, res) {
     //if user logged in, render calendarUI
-    console.log("we're here");
     if(req.session.userId){
         res.render('UserLoggedIn/Calendar', {
             qs: req.query,
@@ -51,8 +50,11 @@ router.get('/calendar', function (req, res) {
             params: req.params
         });
     }
-    //redirect to index
-
+    else{
+//redirect to index
+res.redirect('/home');
+    }
+    
 });
 router.get('/calendar/getEvents', function(req, res){
  events.getEventsByUserId(req.session.userId).exec(function(err,calendarEvents){

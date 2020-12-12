@@ -42,7 +42,7 @@ $(function() {
               
                 $('#modal-footer').html(`  <div class="row">
                 <div class="col-md-12 text-center">
-                <div class="btn-group btn-group-lg" role="group">
+                <div class="btn-group btn-group-md" role="group">
                 <button id="deleteEvent" class="btn btn-danger ">Delete</button>
                 <button id="enableEditEvent" class="btn btn-secondary" >Edit</button>
                 </div>
@@ -53,7 +53,7 @@ $(function() {
             else if(event.location){
                 $('#modal-footer').html(`  <div class="row">
                 <div class="col-md-12 text-center">
-                <div class="btn-group btn-group-lg" role="group">
+                <div class="btn-group btn-group-md" role="group">
                 <button id="deleteEvent" class="btn btn-danger ">Delete</button>
                 <button id="enableEditEvent" class="btn btn-secondary" >Edit</button>
                 </div>
@@ -63,7 +63,7 @@ $(function() {
             }else{
                 $('#modal-footer').html(`  <div class="row">
                 <div class="col-md-12 text-center">
-                <div class="btn-group btn-group-lg" role="group">
+                <div class="btn-group btn-group-md" role="group">
                 <button id="deleteEvent" class="btn btn-danger ">Delete</button>
                 <button id="enableEditEvent" class="btn btn-secondary" >Edit</button>
                 </div>
@@ -113,6 +113,20 @@ $(function() {
     function renderTitle(view, element) {
                 //The title isn't rendered until after this callback, so we need to use a timeout.
                 if(view.type === "month"){
+                    window.setTimeout(function(){
+                        $('.fc-toolbar .fc-center h2').empty().append(
+                            "<div>"+view.title+"</div>"
+                        );
+                    },0);
+                }
+                if(view.type === "agendaDay"){
+                    window.setTimeout(function(){
+                        $('.fc-toolbar .fc-center h2').empty().append(
+                            "<div>"+view.title+"</div>"
+                        );
+                    },0);
+                }
+                if(view.type === "agendaWeek"){
                     window.setTimeout(function(){
                         $('.fc-toolbar .fc-center h2').empty().append(
                             "<div>"+view.title+"</div>"
@@ -275,6 +289,7 @@ $('#calendar').fullCalendar({
               defaultDate: moment(),
               defaultView: 'month',
               height:"parent",
+              allDaySlot: false,
               viewRender:renderTitle ,
               eventRender:eventColorCode ,
               eventClick: showEditForm,
