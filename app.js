@@ -3,6 +3,7 @@ const express = require('express');
 const helmet = require("helmet");
 const csp = require("helmet-csp");
 const mongoose = require("mongoose");
+
 mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true,useUnifiedTopology: true },function(err){
 
 });
@@ -26,10 +27,11 @@ app.set('trust proxy', 1) // trust first proxy
 const MessageDB = require('./models/Database/MessagesDB');
 const Threads = require('./models/Database/Threads');
 const Messages = require('./models/Database/Messages');
-//instantiate DBs for use
-var msg = new Messages();
-var messages = new MessageDB();
 
+//instantiate DBs for use
+var messages = new Messages();
+// var messages = new MessageDB();
+var threads = new Threads();
 //set limit size of file upload
 app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({
@@ -84,6 +86,7 @@ app.use([
   require('./routes/UserLoggedIn/rMyConnections.js'),
   require('./routes/UserLoggedIn/Messages/rMessages.js'),
   require('./routes/UserLoggedIn/Messages/rMessageMembers.js'),
+  require('./routes/UserLoggedIn/Messages/rGetThreadImages.js'),
   require('./routes/UserLoggedIn/rMyFinances.js'),
   require('./routes/UserLoggedIn/rStudyGroups.js'),
   require('./routes/UserLoggedIn/rCreateTutorListing.js'),
@@ -150,19 +153,24 @@ let broadcaster;
 io.sockets.on('connection', function (socket) {
   //catch the emitted 'send message' event
   socket.on('send message', function (data) {
+    console.log("Adding message")
       //add message to the db
-      messages.addMessage(data.id, data.sender, data.senderImg, data.message, data.date);
-      io.sockets.emit('new message', {
-          msg: data
+      messages.addMessage(data.id, data.sender, data.senderImg, data.content, data.date, "text")
+      .then(function(message){
+        io.sockets.emit('new message', {
+          msg: message
       });
+      })
+      
   });
   socket.on('send image', function (data) {
-    //add message to the db
-   //add image to message DB
-   messages.attachImage(data.id,  data.image)
+  //   add message to the db
+  //  add image to message DB
+  //  (data.id, data.sender, data.senderImg, data.message, data.date, "text")
+   messages.addMessage(data.id, data.sender, data.senderImg, data.content, data.date, "file")
    .then(function(success){
      if(success){
-      socket.emit("append image", {image:data.image});
+      socket.emit("append image", {image:data.content});
      }
    })
    .catch(function(error){
