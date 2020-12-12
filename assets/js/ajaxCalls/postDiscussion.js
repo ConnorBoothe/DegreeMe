@@ -19,7 +19,6 @@ $(document).ready(function(){
         var message = $("#message");
         var filename = $(".askQuestion-file").val().replace(/C:\\fakepath\\/i, '')
         var storageRef = firebase.storage().ref("attachments/"+filename);
-        var image ="";
         var image = $(".askQuestion-file")[0].files[0];
         // alert( message.val());
         //input validation

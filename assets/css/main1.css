@@ -735,9 +735,9 @@ Menu css
     .searchBtn{
         border:none!important;
         background-color:#2c2f33;
-       
-        border-radius:20px;
-      }
+        border-radius:20px!important;
+        margin-left:10px;
+          }
       .searchBtn svg{
           font-size:19px!important;
           margin-left:10px;
@@ -1213,7 +1213,7 @@ Menu css
         outline:none!important;
         color:white!important;
         margin-bottom:0!important;
-        width:100%!important;
+        width:80%!important;
         height:80%;
         padding-top:12px;
         background-color:#343a40;
@@ -3131,7 +3131,7 @@ display:inline-block!important      }
     background-color:#343a40;
     font-family:"Helvetica Neue", Helvetica, sans-serif;   
     border-collapse: separate; 
-    border-radius:20px;
+    border-radius:20px!important;
     font-size:16px;
     padding-bottom:none!important;
     margin-bottom:0;
@@ -3208,9 +3208,9 @@ display:inline-block!important      }
     text-align: center;
     height:30px;
   }
-  .input-container2 .searchBtn:hover{
+  /* .input-container2 .searchBtn:hover{
       background-color:#343a40!important;
-  } 
+  }  */
  
   .input-container4{
     display: -ms-flexbox; /* IE10 */
