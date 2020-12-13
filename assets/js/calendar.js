@@ -355,6 +355,7 @@ $.getJSON("/calendar/getEvents", function(data){
 //this is for initializing the calendar
 $('#calendar').fullCalendar({
     // put your options and callbacks here
+              selectable : true,
               themeSystem:"standard",
               header: false,
               defaultDate: moment(),

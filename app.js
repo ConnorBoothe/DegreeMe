@@ -140,10 +140,7 @@ app.get('*', function(req, res) {
         res.redirect('/');
     }
 });
-let server = app.listen(8080, function(){
-  console.log("Connected!")
-});
-
+let server = app.listen(8080);
 const io = require('socket.io')(server);
 const rooms = {};
 let broadcaster;
