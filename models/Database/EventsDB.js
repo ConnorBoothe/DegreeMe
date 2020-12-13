@@ -32,7 +32,7 @@ module.exports = class Events {
    //get events for a given day
    //getEventsByDay()
    //get the events for a given week
-   getEventsByWeek()
+   //getEventsByWeek()
    
    //add event to DB
    //pass in an array of member objects in format of :[{userId: userId, handle: handle, image:image, role:role}]
