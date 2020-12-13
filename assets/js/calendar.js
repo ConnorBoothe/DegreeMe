@@ -222,7 +222,7 @@ $(function() {
                         <label for="start">Start</label>
                         <input class="form-control" name="start" type="datetime-local" required/>
                         <label for="duration">Duration</label>
-                        <input class="form-control" name="duration" type="number" step="0.1"  required/>
+                        <input class="form-control" name="duration" min="0" max="24" type="number" step="0.1"  required/>
                         <label for="type">Type</label>
                         <select class="form-control" name="type" required>
                         <option value="tutoring">tutoring</option>
