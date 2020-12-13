@@ -39,10 +39,27 @@ module.exports = class Events {
    //role should be either host or member
    //the person who creates the event is the host
    addEvent(userId, date, duration, title, description, type, streamId,location, members){
+       var hours = duration.substr(0,2);
+       var minutes = duration.substr(3,2);
+       var tempMinutes;
+
+       if(minutes==="15")
+        tempMinutes=25 
+       if(minutes==="30") 
+        tempMinutes=5
+       if(minutes==="45")
+        tempMinutes=75
+       if(minutes==="00")
+        tempMinutes=0
+
+       var tempDuration = hours+"."+tempMinutes;
+
+       var durationInNumbers = parseFloat(tempDuration);
+
        var event = new events({
            userId: userId, 
            date: date,
-           duration: duration, 
+           duration: durationInNumbers, 
            title: title,
            description: description, 
            type: type, 
