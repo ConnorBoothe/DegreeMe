@@ -207,33 +207,60 @@ $(function() {
     
 
 //this is to handle the onClik of the + button to add an event
+    function showAddEventModal(date, jsEvent, view){
+    $('#addEventTitle').html("Add an event");
+                      $('#addEventBody').html(`
+                      <form id="addEvent" class="form-control">
+                      <label for="title">Title</label>
+                      <input class="form-control" name="title" type="text" required/>
+                      <label for="description">Description</label>
+                      <input class="form-control" name="description" type="textarea" />
+                      <label for="stream">Stream link</label>
+                      <input class="form-control" name="stream" type="text" />
+                      <label for="location">Location</label>
+                      <input class="form-control" name="location" type="text" />
+                      <label for="start">Start</label>
+                      <input class="form-control" name="start" type="datetime-local" value="`+""+moment.utc(date.format(), "yyyy-MM-ddTHH:mm:ss")._i+"T00:00:00"+`" required/>
+                      <label for="duration">Duration</label>
+                      <input class="form-control" name="duration" min="0" max="24" type="number" step="0.1"  required/>
+                      <label for="type">Type</label>
+                      <select class="form-control" name="type" required>
+                      <option value="tutoring">tutoring</option>
+                      <option value="group session">group session</option>
+                      <option value="meetup">meetup</option>
+                      <option value="appointment">appointment</option>
+                      </select>
+                      <input id="addEventSubmit" class="form-control btn-secondary" type="submit" value="Add event" />
+                      </form>`);
+                      $('#addEventModal').modal();
+  }
     $("#addEventButton").click(function(e){
-      $('#addEventTitle').html("Add an event");
-                        $('#addEventBody').html(`
-                        <form id="addEvent" class="form-control">
-                        <label for="title">Title</label>
-                        <input class="form-control" name="title" type="text" required/>
-                        <label for="description">Description</label>
-                        <input class="form-control" name="description" type="textarea" />
-                        <label for="stream">Stream link</label>
-                        <input class="form-control" name="stream" type="text" />
-                        <label for="location">Location</label>
-                        <input class="form-control" name="location" type="text" />
-                        <label for="start">Start</label>
-                        <input class="form-control" name="start" type="datetime-local" required/>
-                        <label for="duration">Duration</label>
-                        <input class="form-control" name="duration" min="0" max="24" type="number" step="0.1"  required/>
-                        <label for="type">Type</label>
-                        <select class="form-control" name="type" required>
-                        <option value="tutoring">tutoring</option>
-                        <option value="group session">group session</option>
-                        <option value="meetup">meetup</option>
-                        <option value="appointment">appointment</option>
-                        </select>
-                        <input id="addEventSubmit" class="form-control btn-secondary" type="submit" value="Add event" />
-                        </form>`);
-                        $('#addEventModal').modal();
-    })
+        $('#addEventTitle').html("Add an event");
+        $('#addEventBody').html(`
+        <form id="addEvent" class="form-control">
+        <label for="title">Title</label>
+        <input class="form-control" name="title" type="text" required/>
+        <label for="description">Description</label>
+        <input class="form-control" name="description" type="textarea" />
+        <label for="stream">Stream link</label>
+        <input class="form-control" name="stream" type="text" />
+        <label for="location">Location</label>
+        <input class="form-control" name="location" type="text" />
+        <label for="start">Start</label>
+        <input class="form-control" name="start" type="datetime-local" required/>
+        <label for="duration">Duration</label>
+        <input class="form-control" name="duration" min="0" max="24" type="number" step="0.1"  required/>
+        <label for="type">Type</label>
+        <select class="form-control" name="type" required>
+        <option value="tutoring">tutoring</option>
+        <option value="group session">group session</option>
+        <option value="meetup">meetup</option>
+        <option value="appointment">appointment</option>
+        </select>
+        <input id="addEventSubmit" class="form-control btn-secondary" type="submit" value="Add event" />
+        </form>`);
+        $('#addEventModal').modal();
+    });
        //this is what we're going to use to send the event data to the server for adding an event
     $(document).on("submit","#addEvent",(function(e){
         e.preventDefault();
@@ -328,7 +355,6 @@ $.getJSON("/calendar/getEvents", function(data){
 //this is for initializing the calendar
 $('#calendar').fullCalendar({
     // put your options and callbacks here
-              selectable: true,
               themeSystem:"standard",
               header: false,
               defaultDate: moment(),
@@ -338,6 +364,7 @@ $('#calendar').fullCalendar({
               viewRender:renderTitle ,
               eventRender:eventColorCode ,
               eventClick: showEditForm,
+              dayClick : showAddEventModal,
               events: calendarEvents
   })
 })
