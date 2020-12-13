@@ -9,9 +9,9 @@ $(function() {
             var endtemp = new Date(e.date);
             
             endtemp.setTime(endtemp.getTime()+(e._doc.duration*1000*60*60));
-            console.log(endtemp);
+            
             var end = moment.utc(endtemp, "yyyy-MM-ddTHH:mm:ss")._i;
-            console.log(end);
+            
             var EventObj = {
                 id: e._doc._id,
                 title: e._doc.title,
@@ -35,7 +35,7 @@ $(function() {
         $.getJSON("/calendar/getEvents", function(data){
             
              refreshData(data, function(){
-                console.log(calendarEvents);
+                
                 $("#calendar").fullCalendar('addEventSource', calendarEvents);
                 $(modal).modal('toggle');
                 $('#calendar').fullCalendar('rerenderEvents');
@@ -206,8 +206,12 @@ $(function() {
     }))
     
 
-//this is to handle the onClik of the + button to add an event
-    function showAddEventModal(date, jsEvent, view){
+//this is to handle the onClick of the + button to add an event
+    function showAddEventModal(startDate, endDate, allDay, jsEvent, view){
+        var fillDate = "";
+        var tempDate = moment.utc(startDate.toISOString(), "yyyy-MM-ddTHH:mm:ss")._i;
+        tempDate.includes("T") ? fillDate=tempDate : fillDate=tempDate+"T00:00:00"
+        
     $('#addEventTitle').html("Add an event");
                       $('#addEventBody').html(`
                       <form id="addEvent" class="form-control">
@@ -220,9 +224,9 @@ $(function() {
                       <label for="location">Location</label>
                       <input class="form-control" name="location" type="text" />
                       <label for="start">Start</label>
-                      <input class="form-control" name="start" type="datetime-local" value="`+""+moment.utc(date.format(), "yyyy-MM-ddTHH:mm:ss")._i+"T00:00:00"+`" required/>
+                      <input class="form-control" name="start" type="datetime-local" value="`+fillDate+`" required/>
                       <label for="duration">Duration</label>
-                      <input class="form-control" name="duration" min="0" max="24" type="number" step="0.1"  required/>
+                      <input class="form-control" name="duration" type="time" step="900" required/>
                       <label for="type">Type</label>
                       <select class="form-control" name="type" required>
                       <option value="tutoring">tutoring</option>
@@ -249,7 +253,7 @@ $(function() {
         <label for="start">Start</label>
         <input class="form-control" name="start" type="datetime-local" required/>
         <label for="duration">Duration</label>
-        <input class="form-control" name="duration" min="0" max="24" type="number" step="0.1"  required/>
+        <input class="form-control" name="duration" type="time" step="900"  required/>
         <label for="type">Type</label>
         <select class="form-control" name="type" required>
         <option value="tutoring">tutoring</option>
@@ -305,7 +309,7 @@ $(function() {
         if (confirm('Are you sure you want to delete this event?')) {
             $("#fieldset").removeAttr("disabled");
         var formData = $("#editEvent").serialize();
-        console.log(formData);
+        
 
             $.ajax({
               url:"/calendar/removeEvent",
@@ -334,9 +338,9 @@ $.getJSON("/calendar/getEvents", function(data){
         var endtemp = new Date(e.date);
         
         endtemp.setTime(endtemp.getTime()+(e._doc.duration*1000*60*60));
-        console.log(endtemp);
+        
         var end = moment.utc(endtemp, "yyyy-MM-ddTHH:mm:ss")._i;
-        console.log(end);
+        
         var EventObj = {
             id: e._doc._id,
             title: e._doc.title,
@@ -362,10 +366,11 @@ $('#calendar').fullCalendar({
               defaultView: 'month',
               height:"parent",
               allDaySlot: false,
+              nowIndicator: true,
               viewRender:renderTitle ,
               eventRender:eventColorCode ,
               eventClick: showEditForm,
-              dayClick : showAddEventModal,
+              select : showAddEventModal,
               events: calendarEvents
   })
 })
