@@ -59,6 +59,10 @@ body{
     z-index: 10000;
 }
 
+.fc-event{
+    cursor: pointer;
+}
+
 .my-float{
     margin-top:20px;
     z-index: 100000;
