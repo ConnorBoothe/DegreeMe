@@ -2,7 +2,51 @@ $(function() {
     var calendarEvents = [];
 
 
-    // page is now ready, initialize the calendar...
+    // page is now ready
+
+    function refreshData(data, callback){
+        data.map(function(e){
+            var endtemp = new Date(e.date);
+            
+            endtemp.setTime(endtemp.getTime()+(e._doc.duration*1000*60*60));
+            console.log(endtemp);
+            var end = moment.utc(endtemp, "yyyy-MM-ddTHH:mm:ss")._i;
+            console.log(end);
+            var EventObj = {
+                id: e._doc._id,
+                title: e._doc.title,
+                description: e._doc.description,
+                start: e.date,
+                end: end,
+                duration: e._doc.duration,
+                type: e._doc.type,
+                url: e._doc.streamId,
+                location: e._doc.location
+            }
+    
+            calendarEvents.push(EventObj);
+        })
+        callback();
+}
+    function fetchAndRerender(modal){
+        calendarEvents = [];
+        $('#calendar').fullCalendar('removeEvents');
+   
+        $.getJSON("/calendar/getEvents", function(data){
+            
+             refreshData(data, function(){
+                console.log(calendarEvents);
+                $("#calendar").fullCalendar('addEventSource', calendarEvents);
+                $(modal).modal('toggle');
+                $('#calendar').fullCalendar('rerenderEvents');
+                
+             })
+            
+                
+      
+})
+     
+    }
 
            
    
@@ -192,7 +236,7 @@ $(function() {
     })
        //this is what we're going to use to send the event data to the server for adding an event
     $(document).on("submit","#addEvent",(function(e){
-        
+        e.preventDefault();
         var formData = $(this).serialize();
         $.ajax({
         url:"/calendar/addEvent",
@@ -201,6 +245,7 @@ $(function() {
         data: formData,
         success: function(result){
             alert("event added successfully!");
+            fetchAndRerender('#addEventModal')
         },
         error:function(xhr, resp, text){
             console.log(xhr, resp, text);
@@ -219,7 +264,7 @@ $(function() {
                 data: formData,
                 success: function(result){
                     alert(result.message);
-                    location.reload();
+                    fetchAndRerender('#fullCalModal');
                 },
                 error:function(xhr, resp, text){
                     console.log(xhr, resp, text);
@@ -229,7 +274,7 @@ $(function() {
                                     }))
      //this is what we're going to use to send the event data to the server for deleting an event
     $(document).on('click',"#deleteEvent",(function(e){
-        
+        e.preventDefault();
         if (confirm('Are you sure you want to delete this event?')) {
             $("#fieldset").removeAttr("disabled");
         var formData = $("#editEvent").serialize();
@@ -241,8 +286,8 @@ $(function() {
               dataType: "json",
               data: formData,
               success: function(result){
-                  alert(result.message)
-                  location.reload();
+                  alert(result.message);
+                  fetchAndRerender('#fullCalModal');
               },
               error:function(xhr, resp, text){
                 console.log(xhr, resp, text);
@@ -283,7 +328,7 @@ $.getJSON("/calendar/getEvents", function(data){
 //this is for initializing the calendar
 $('#calendar').fullCalendar({
     // put your options and callbacks here
-    
+              selectable: true,
               themeSystem:"standard",
               header: false,
               defaultDate: moment(),
