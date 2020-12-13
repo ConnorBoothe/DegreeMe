@@ -8,6 +8,25 @@ body{
     font-weight: 100;
     overflow: hidden; /* don't do scrollbars */
 }
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #464646; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #242526; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #131313; 
+  }
 #calendar-container {
     position: fixed;
     top: 0;
