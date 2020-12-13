@@ -9,7 +9,6 @@ mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true,useUnifiedTopolo
 });
 const session = require('express-session'); //used to manipulate the session
 var MongoStore = require('connect-mongo')(session);
-
 var app = module.exports = express(); 
 //set cookie to secure to true for production
 app.use(session({
@@ -87,6 +86,7 @@ app.use([
   require('./routes/UserLoggedIn/Messages/rMessages.js'),
   require('./routes/UserLoggedIn/Messages/rMessageMembers.js'),
   require('./routes/UserLoggedIn/Messages/rGetThreadImages.js'),
+  require('./routes/UserLoggedIn/Messages/rSendDirectMessage.js'),
   require('./routes/UserLoggedIn/rMyFinances.js'),
   require('./routes/UserLoggedIn/rStudyGroups.js'),
   require('./routes/UserLoggedIn/rCreateTutorListing.js'),
@@ -94,6 +94,7 @@ app.use([
   require('./routes/UserNotLoggedIn/rLogin.js'),
   require('./routes/UserLoggedIn/rLogout.js'),
   require('./routes/UserLoggedIn/rCheckout.js'),
+  require('./routes/UserLoggedIn/rEvents.js'),
   require('./routes/UserLoggedIn/rConnectByMajor.js'),
   require('./routes/UserLoggedIn/rReview.js'),
   require('./routes/UserLoggedIn/rCourseProfile.js'),
@@ -155,6 +156,7 @@ io.sockets.on('connection', function (socket) {
   socket.on('send message', function (data) {
     console.log("Adding message")
       //add message to the db
+      console.log("Adding message")
       messages.addMessage(data.id, data.sender, data.senderImg, data.content, data.date, "text")
       .then(function(message){
         io.sockets.emit('new message', {
@@ -167,7 +169,8 @@ io.sockets.on('connection', function (socket) {
   //   add message to the db
   //  add image to message DB
   //  (data.id, data.sender, data.senderImg, data.message, data.date, "text")
-   messages.addMessage(data.id, data.sender, data.senderImg, data.content, data.date, "file")
+   console.log("sending image")
+  messages.addMessage(data.id, data.sender, data.senderImg, data.content, data.date, "file")
    .then(function(success){
      if(success){
       socket.emit("append image", {image:data.content});

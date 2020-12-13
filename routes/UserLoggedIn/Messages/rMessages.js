@@ -60,8 +60,8 @@ router.get('/messages/:threadId', function (req, res) {
                             threadId: req.params.threadId,
                             messages: messages,
                             subject: thread.subject,
-                            formatDate: dateFunctions.formatMessageCreatedDate
-                            // dateFunctions.displayTimeSince
+                            formatDate: dateFunctions.formatMessageCreatedDate,
+                            formatTime: dateFunctions.displayTimeSince
                         });
                         // users.unreadCountToZero(req.params.threadId, req.session.userId, req, res, messages, 
                         //     dateFunctions.formatMessageCreatedDate, dateFunctions.displayTimeSince);
