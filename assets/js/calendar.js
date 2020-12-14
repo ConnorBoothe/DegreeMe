@@ -1,6 +1,9 @@
 $(function() {
     var calendarEvents = [];
-
+    var hourOptions = "";
+    for(var i=0;i<=24;i++){
+        hourOptions+="<option value=\""+i+"\">"+i+"</option>"
+    }
 
     // page is now ready
 
@@ -52,7 +55,18 @@ $(function() {
    
     //as the name suggests this is the function we're going to use to show the edit form in a modal
     function showEditForm(event, jsEvent, view){
-                 
+                 var hours = Math.floor(event.duration);
+                 var tempMinutes = (event.duration % 1).toFixed(2).substring(2);
+                 var minutes;
+                 if(tempMinutes==0)
+                    minutes=0;
+                 if(tempMinutes==25)
+                    minutes=15
+                 if(tempMinutes==50)
+                    minutes=30
+                 if(tempMinutes==75)
+                    minutes=45
+
             $('#modalTitle').html(event.title);
             $('#modalBody').html(`
             <form id="editEvent" class="form-control">
@@ -68,7 +82,20 @@ $(function() {
             <label for="start">Start</label>
             <input class="form-control" name="start" type="datetime-local" value="`+moment.utc(event.start, "yyyy-MM-ddTHH:mm:ss")._i+`" required/> 
             <label for="duration">Duration</label>
-            <input class="form-control" name="duration" type="number" step="0.1" value="`+event.duration+`" required/>
+            <div class="input-group">
+        
+            <select id="hours" class="form-control" name="hours" id="hours" required>
+            <option id="selectedHours" class="selectedOptions" value="`+hours+`" disabled selected>`+hours+`</option>
+            `+hourOptions+`
+            </select>
+            <select id="minutes" class="form-control" name="minutes" required>
+            <option id="selectedMinutes" class="selectedOptions" value="`+tempMinutes+`" disabled selected>`+minutes+`</option>
+            <option value="0">00</option>
+            <option value="25">15</option>
+            <option value="50">30</option>
+            <option value="75">45</option>
+            </select>
+                </div>
             <label for="type">Type</label>
             <select id="select-type" class="form-control" name="type" required>
                 <option value="tutoring">tutoring</option>
@@ -123,8 +150,25 @@ $(function() {
 
 //this is for enabling edit
     $(document).on("click","#enableEditEvent", function(e){
+
             $("#enableEditEvent").hide();
             $("#fieldset").removeAttr("disabled");
+            var myMinutes = $("#selectedMinutes").val();
+            var myHours = $("#selectedHours").val();
+            $(".selectedOptions").remove();
+            $('#minutes option').each(function(){
+               
+                if (this.value == myMinutes) {
+                    
+                    $(this).prop('selected',true);
+                }
+            });
+            $('#hours option').each(function(){
+               
+                if (this.value == myHours) {
+                    $(this).prop('selected',true);
+                }
+            });
             $("#update-button").attr("type","submit");
             $("#editEvent input,#editEvent select").not($("#update-button")).css("background","white");
             $("#editEvent input,#editEvent select").not($("#update-button")).css("color","black");
@@ -226,7 +270,20 @@ $(function() {
                       <label for="start">Start</label>
                       <input class="form-control" name="start" type="datetime-local" value="`+fillDate+`" required/>
                       <label for="duration">Duration</label>
-                      <input class="form-control" name="duration" type="time" step="900" required/>
+                      <div class="input-group">
+        
+                        <select class="form-control" name="hours" id="hours" required>
+                        <option value="" disabled selected>Hours</option>
+                        `+hourOptions+`
+                        </select>
+                        <select class="form-control" name="minutes" required>
+                        <option value="" disabled selected>Minutes</option>
+                        <option value="0">00</option>
+                        <option value="25">15</option>
+                        <option value="50">30</option>
+                        <option value="75">45</option>
+                        </select>
+                            </div>
                       <label for="type">Type</label>
                       <select class="form-control" name="type" required>
                       <option value="tutoring">tutoring</option>
@@ -253,7 +310,20 @@ $(function() {
         <label for="start">Start</label>
         <input class="form-control" name="start" type="datetime-local" required/>
         <label for="duration">Duration</label>
-        <input class="form-control" name="duration" type="time" step="900"  required/>
+        <div class="input-group">
+        
+        <select class="form-control" name="hours" id="hours" required>
+        <option value="" disabled selected>Hours</option>
+        `+hourOptions+`
+        </select>
+        <select class="form-control" name="minutes" required>
+        <option value="" disabled selected>Minutes</option>
+        <option value="00">00</option>
+        <option value="15">15</option>
+        <option value="30">30</option>
+        <option value="45">45</option>
+        </select>
+            </div>
         <label for="type">Type</label>
         <select class="form-control" name="type" required>
         <option value="tutoring">tutoring</option>
@@ -265,6 +335,8 @@ $(function() {
         </form>`);
         $('#addEventModal').modal();
     });
+    
+
        //this is what we're going to use to send the event data to the server for adding an event
     $(document).on("submit","#addEvent",(function(e){
         e.preventDefault();
