@@ -38,9 +38,8 @@ module.exports = class Events {
    //pass in an array of member objects in format of :[{userId: userId, handle: handle, image:image, role:role}]
    //role should be either host or member
    //the person who creates the event is the host
-   addEvent(userId, date, duration, title, description, type, streamId,location, members){
-       var hours = duration.substr(0,2);
-       var minutes = duration.substr(3,2);
+   addEvent(userId, date, hours,minutes, title, description, type, streamId,location, members){
+      
        var tempMinutes;
 
        if(minutes==="15")

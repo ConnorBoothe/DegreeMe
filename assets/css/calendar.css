@@ -15,17 +15,17 @@ body{
   
   /* Track */
   ::-webkit-scrollbar-track {
-    background: #464646; 
+    background:#242526; 
   }
    
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: #242526; 
+    background: #a9a9a9; 
   }
   
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background: #131313; 
+    background: #818181; 
   }
 #calendar-container {
     position: fixed;

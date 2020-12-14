@@ -77,7 +77,7 @@ router.get('/calendar/getEvents', function(req, res){
 })
 //add a new event to the calendar
 router.post('/calendar/addEvent', function (req, res) {
-    var eventDoc = events.addEvent(req.session.userId,req.body.start,req.body.duration,req.body.title,req.body.description,req.body.type,req.session.streamId,req.body.location);
+    var eventDoc = events.addEvent(req.session.userId,req.body.start,req.body.hours,req.body.minutes,req.body.title,req.body.description,req.body.type,req.session.streamId,req.body.location);
 
     eventDoc.save(function(err,event){
         if(err){
