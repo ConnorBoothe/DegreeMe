@@ -101,7 +101,7 @@ events.deleteEvent(req.body.id).then(function(err,event){
 
 //update event
 router.post('/calendar/updateEvent', function(req, res){
-    events.updateEvent(req.body.id,req.body.start,req.body.duration,req.body.title,req.body.description,req.body.type,req.session.streamId,req.body.location).then(function(err,event){
+    events.updateEvent(req.body.id,req.body.start,req.body.hours,req.body.minutes,req.body.title,req.body.description,req.body.type,req.session.streamId,req.body.location).then(function(err,event){
         if(err){
             console.log(err);
         }

@@ -40,18 +40,8 @@ module.exports = class Events {
    //the person who creates the event is the host
    addEvent(userId, date, hours,minutes, title, description, type, streamId,location, members){
       
-       var tempMinutes;
 
-       if(minutes==="15")
-        tempMinutes=25 
-       if(minutes==="30") 
-        tempMinutes=5
-       if(minutes==="45")
-        tempMinutes=75
-       if(minutes==="00")
-        tempMinutes=0
-
-       var tempDuration = hours+"."+tempMinutes;
+       var tempDuration = hours+"."+minutes;
 
        var durationInNumbers = parseFloat(tempDuration);
 
@@ -71,11 +61,15 @@ module.exports = class Events {
    deleteEvent(id){
        return events.deleteOne({_id:id});
    }
-   updateEvent(id, date, duration, title, description, type, streamId,location){
+   updateEvent(id, date,hours, minutes, title, description, type, streamId,location){
+       
+    var tempDuration = hours+"."+minutes;
+
+    var durationInNumbers = parseFloat(tempDuration);
 
      return events.updateOne({_id:id},{
         date: date,
-        duration: duration, 
+        duration: durationInNumbers, 
         title: title,
         description: description, 
         type: type, 
