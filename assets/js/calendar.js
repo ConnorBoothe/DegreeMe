@@ -1,6 +1,9 @@
 $(function() {
     var calendarEvents = [];
-
+    var hourOptions = "";
+    for(var i=0;i<=24;i++){
+        hourOptions+="<option value=\""+i+"\">"+i+"</option>"
+    }
 
     // page is now ready
 
@@ -68,7 +71,7 @@ $(function() {
             <label for="start">Start</label>
             <input class="form-control" name="start" type="datetime-local" value="`+moment.utc(event.start, "yyyy-MM-ddTHH:mm:ss")._i+`" required/> 
             <label for="duration">Duration</label>
-            <input class="form-control" name="duration" type="number" step="0.1" value="`+event.duration+`" required/>
+            <input class="form-control" name="duration" type="number" step="0.25" value="`+event.duration+`" required/>
             <label for="type">Type</label>
             <select id="select-type" class="form-control" name="type" required>
                 <option value="tutoring">tutoring</option>
@@ -226,7 +229,20 @@ $(function() {
                       <label for="start">Start</label>
                       <input class="form-control" name="start" type="datetime-local" value="`+fillDate+`" required/>
                       <label for="duration">Duration</label>
-                      <input class="form-control" name="duration" type="time" step="900" required/>
+                      <div class="input-group">
+        
+                        <select class="form-control" name="hours" id="hours" required>
+                        <option value="" disabled selected>Hours</option>
+                        `+hourOptions+`
+                        </select>
+                        <select class="form-control" name="minutes" required>
+                        <option value="" disabled selected>Minutes</option>
+                        <option value="00">00</option>
+                        <option value="15">15</option>
+                        <option value="30">30</option>
+                        <option value="45">45</option>
+                        </select>
+                            </div>
                       <label for="type">Type</label>
                       <select class="form-control" name="type" required>
                       <option value="tutoring">tutoring</option>
@@ -253,7 +269,20 @@ $(function() {
         <label for="start">Start</label>
         <input class="form-control" name="start" type="datetime-local" required/>
         <label for="duration">Duration</label>
-        <input class="form-control" name="duration" type="time" step="900"  required/>
+        <div class="input-group">
+        
+        <select class="form-control" name="hours" id="hours" required>
+        <option value="" disabled selected>Hours</option>
+        `+hourOptions+`
+        </select>
+        <select class="form-control" name="minutes" required>
+        <option value="" disabled selected>Minutes</option>
+        <option value="00">00</option>
+        <option value="15">15</option>
+        <option value="30">30</option>
+        <option value="45">45</option>
+        </select>
+            </div>
         <label for="type">Type</label>
         <select class="form-control" name="type" required>
         <option value="tutoring">tutoring</option>
@@ -265,6 +294,8 @@ $(function() {
         </form>`);
         $('#addEventModal').modal();
     });
+    
+
        //this is what we're going to use to send the event data to the server for adding an event
     $(document).on("submit","#addEvent",(function(e){
         e.preventDefault();
