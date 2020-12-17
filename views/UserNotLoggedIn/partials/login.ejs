@@ -1,24 +1,21 @@
-<form method="POST" action ="/login">
-        <div class="input-container">
-            <p class="loginLabel">Email</p>
-            
-            <input name="email" id="email1" type="text" class="form-control input-field" placeholder="" spellcheck="false" autocomplete="off" />
-            <p id="emailMsg1"></p>
-        </div>
-     
-      <small id="emailMsg1"></small>
+<div>
+    
+    <form method="POST" action ="/login">
+    <div class="field">
+        <p id="emailMsg1"></p>
+        <input class="Login--Input" name="email" id="email1" type="text" placeholder=" " spellcheck="false" autocomplete="off" />
+        <label class="Login--Label" for="email1">Email</label>
+    </div>
 
-            <div class="input-container">
-                <p class="loginLabel">Password</p>
-                    <input name ="password" id="password1" type="password" class="form-control input-field" placeholder="" autocomplete="off">
-                    <p id="pwMsg1"></p><br>
-            </div>
-    <button type="submit" class="btn login-button loginLink" id="loginBtn1">Log In</button>
-    <br>
-    <br>
+    <div class="field">
+        <p id="pwMsg1"></p>
+        <input class="Login--Input" name="password" id="password1" type="password" placeholder=" " autocomplete="off" />
+        <label class="Login--Label" for="password1">Password</label>
+    </div>
+    
+    <button type="submit" class="Login--Submit" id="loginBtn1">Log In</button>
     <ul class="loginLinkList">
-        <li> <a href="/SignUp" ><small class="forgotPW">Sign Up</small></a></li>
-        <li> <a href="/UpdatePassword"><small class="forgotPW">Forgot Password?</small></a></li>
+        <a href="/UpdatePassword"><small class="forgotPW">Forgot Password?</small></a>
     </ul>
-   
   </form>
+</div>

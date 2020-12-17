@@ -1,0 +1,465 @@
+@import url("https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Poppins:wght@500;600;800&display=swap");
+
+:root {
+  --landingButton: #007bff;
+}
+
+.landing {
+  display: flex;
+  flex-direction: column;
+  padding-top: 150px;
+  background-color: #202020;
+  color: #ffffff;
+  font-family: "Poppins", sans-serif;
+}
+
+.landing--text--big {
+  font-size: clamp(30px, 5vw, 100px);
+  font-weight: bold;
+}
+
+.landing--text--small {
+  font-size: clamp(16px, 2vw, 18px);
+  line-height: 2.2;
+  margin-bottom: 20px;
+}
+
+.landing--text--primary {
+  color: #007bff;
+}
+
+.landing--text--yellow {
+  color: #ffcc00;
+}
+
+.landing--text--red {
+  color: #e84d4d;
+}
+
+.landing--text--green {
+  color: #00cc88;
+}
+
+.font--curly {
+  font-family: "Gochi Hand", cursive;
+  font-size: xx-large;
+}
+
+.landing--margin {
+  margin: 0px 10vw 0px 15vw;
+}
+
+.landing--background2 {
+  background-color: #1a1a1a;
+}
+
+.landing--signup {
+  margin-top: 100px;
+  transition: all 0.35s ease-in-out;
+  background-color: #007bff;
+  border: none;
+  color: #ffffff;
+  padding: 5px 10px 5px 10px;
+  border-radius: 100px;
+  font-weight: bold;
+  font-size: xx-large;
+  cursor: pointer;
+  outline: none !important;
+  box-shadow: 0px 5px 10px 0px #0f0f0f;
+  align-self: center;
+}
+
+.landing--signup:hover {
+  transform: scale(1.2);
+}
+
+.landing--people {
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+  vertical-align: bottom !important;
+}
+
+.landing--people img {
+  max-width: calc(100% / 5);
+  overflow: hidden;
+  margin: 0px 5px;
+  vertical-align: bottom !important;
+}
+
+.landing--person1--animation--true {
+  opacity: 0;
+  animation: animatePerson forwards 1s;
+  animation-delay: 0.6s;
+}
+.landing--person2--animation--true {
+  opacity: 0;
+  animation: animatePerson forwards 1s;
+  animation-delay: 0.3s;
+}
+.landing--person3--animation--true {
+  opacity: 0;
+  animation: animatePerson forwards 1s;
+  animation-delay: 0s;
+}
+.landing--person4--animation--true {
+  opacity: 0;
+  animation: animatePerson forwards 1s;
+  animation-delay: 0.4s;
+}
+.landing--person5--animation--true {
+  opacity: 0;
+  animation: animatePerson forwards 1s;
+  animation-delay: 0.7s;
+}
+.landing--person6--animation--true {
+  animation: animateWoman forwards 1s;
+}
+
+.landing--person1--animation--false {
+  opacity: 0;
+}
+.landing--person2--animation--false {
+  opacity: 0;
+}
+.landing--person3--animation--false {
+  opacity: 0;
+}
+.landing--person4--animation--false {
+  opacity: 0;
+}
+.landing--person5--animation--false {
+  opacity: 0;
+}
+.landing--person6--animation--false {
+  opacity: 0;
+}
+
+@keyframes animatePerson {
+  0% {
+    opacity: 0;
+    transform: translateY(200px) rotate3d(1, 1, 0, 80deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px) rotate3d(0);
+  }
+}
+
+.landing--wave {
+  margin-top: -150px;
+  z-index: 10;
+  height: 300px;
+}
+
+.landing--wave--footer {
+  margin-top: -250px;
+  z-index: 10;
+  height: 300px;
+}
+
+.feature1 {
+  display: flex;
+  margin: 200px 10vw 200px 15vw;
+}
+
+.feature1 img {
+  margin: 0px 50px 0px 20px;
+  max-width: 700px;
+  width: 40%;
+  align-self: center;
+  animation: section1Image 10s infinite;
+}
+
+@keyframes section1Image {
+  from {
+    transform: rotate(0deg) scale(1);
+  }
+  20% {
+    transform: rotate(-5deg) scale(1.02);
+  }
+  40% {
+    transform: rotate(-2deg) scale(1.05);
+  }
+  60% {
+    transform: rotate(2deg) scale(1.05);
+  }
+  80% {
+    transform: rotate(5deg) scale(1.02);
+  }
+  to {
+    transform: rotate(0deg) scale(1);
+  }
+}
+
+.feature2 {
+  display: flex;
+  margin: 200px 20px 200px 150px;
+}
+
+.feature2 img {
+  transform: rotate(20deg);
+  position: absolute;
+  left: -10%;
+  width: 20%;
+  margin-top: -100px;
+}
+
+.feature3 {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  margin: 200px 10vw 200px 15vw;
+}
+
+.landing--image--container--true {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.landing--image--container--true img {
+  opacity: 0;
+  border-radius: 10px;
+  background-color: #202020;
+  margin: 10px;
+  max-width: 200px;
+  padding: 10px 10px 0px 10px;
+}
+
+.landing--image--container--true :nth-child(1) {
+  animation: groupAnimation 1s forwards;
+}
+
+.landing--image--container--true :nth-child(2) {
+  animation: groupAnimation 1s forwards;
+  animation-delay: 0.2s;
+}
+
+.landing--image--container--true :nth-child(3) {
+  animation: groupAnimation 1s forwards;
+  animation-delay: 0.4s;
+}
+
+.landing--image--container--true :nth-child(4) {
+  animation: groupAnimation 1s forwards;
+  animation-delay: 0.6s;
+}
+
+.landing--image--container--false {
+}
+
+.landing--image--container--false img {
+  border-radius: 10px;
+  background-color: #202020;
+  margin: 10px;
+  max-width: 200px;
+  padding: 10px 10px 0px 10px;
+}
+
+@keyframes groupAnimation {
+  0% {
+    transform: translateX(100px);
+  }
+  100% {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
+
+.landing--connected--true {
+  /* position: relative;
+  margin-left: calc(30vw);
+  top: min(-120px, -12vw);*/
+  width: clamp(120px, 18vw, 400px);
+  margin-left: -17%;
+}
+
+.landing--connected--true path {
+  stroke-dasharray: 500;
+  stroke-dashoffset: 500;
+  animation: pathAnimation 2s forwards linear;
+  stroke: var(--primary);
+}
+
+.landing--connected--true circle {
+  fill: var(--primary);
+}
+
+@keyframes pathAnimation {
+  to {
+    stroke-dasharray: 500;
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes circleAnimation {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.feature4 {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  margin: 200px 10vw 200px 15vw;
+}
+
+.feature4Container {
+  display: flex;
+}
+
+@keyframes animateWoman {
+  0% {
+    transform: translateX(-200px) rotate(20deg);
+  }
+  100% {
+    transform: translateX(0px) rotate(20deg);
+  }
+}
+
+.landing--footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #202020;
+  flex-direction: column;
+}
+
+.landing--footer--img--container {
+  perspective: 1000px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.landing--footer--img--true {
+  width: 80%;
+  border-radius: 10px;
+  animation: animateFooter forwards 1s;
+  margin: 100px;
+  transform: rotate3d(1, 0, 0, 10deg);
+  z-index: -10;
+  box-shadow: 0px 0px 10px 0px #0f0f0f;
+}
+
+.landing--footer--img--false {
+  width: 80%;
+  border-radius: 10px;
+  margin: 100px;
+  transform: rotate3d(1, 0, 0, 10deg);
+  z-index: -10;
+  box-shadow: 0px 0px 10px 0px #0f0f0f;
+  opacity: 0;
+}
+
+.landing--footer--logo {
+  max-width: 100px;
+  min-width: 50px;
+}
+
+.landing--footer--social {
+  margin-top: 50px;
+  display: flex;
+}
+
+.landing--footer--social a {
+  margin: 10px;
+}
+
+.landing--footer--text {
+  margin: 50px 0px;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+}
+
+@keyframes animateFooter {
+  0% {
+    opacity: 0;
+    transform: rotate3d(1, 0, 0, 40deg) perspective(400px);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate3d(0) perspective(0px);
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .landing {
+    display: flex;
+    flex-direction: column;
+    padding-top: 150px;
+    align-items: center;
+  }
+
+  .feature1 {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+  }
+
+  .feature1 img {
+    width: 100%;
+    align-self: center;
+    margin-top: 50px;
+  }
+
+  .feature2 {
+    display: flex;
+    margin: 200px 20px 200px 10vw;
+  }
+
+  .feature2 img {
+    transform: rotate(20deg);
+    position: absolute;
+    left: -10%;
+    width: 20%;
+    min-width: 75px;
+    margin-top: 50px;
+  }
+
+  .feature3 {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    margin: 200px 10vw 200px 10vw;
+  }
+
+  .feature4 {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    margin: 200px 10vw 200px 5vw;
+  }
+
+  .feature4 > .landing--text--big {
+    white-space: nowrap;
+  }
+
+  .landing--footer--img {
+    width: 80%;
+    border-radius: 10px;
+    animation: animateFooter forwards 1s;
+    margin: 100px;
+    transform: rotate3d(1, 0, 0, 10deg);
+    z-index: -10;
+    box-shadow: 0px 0px 10px 0px #0f0f0f;
+  }
+
+  .landing--image--container--true img {
+    border-radius: 10px;
+    background-color: #202020;
+    margin: 5px;
+    max-width: 100px;
+    padding: 10px 10px 0px 10px;
+  }
+
+  .landing--image--container--false img {
+    border-radius: 10px;
+    background-color: #202020;
+    margin: 5px;
+    max-width: 100px;
+    padding: 10px 10px 0px 10px;
+  }
+}
