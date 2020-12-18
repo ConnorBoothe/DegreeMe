@@ -1,159 +1,153 @@
 .page-container1 {
-    background-color: #191919;
+  background-color: #191919;
 }
-
 
 /* arrow on page */
 .scrollArrow {
-    color: #d4d4d4;
-    position: absolute;
-    left: 55%;
-    margin-left: -100px;
-    cursor: pointer;
+  color: #d4d4d4;
+  position: absolute;
+  left: 55%;
+  margin-left: -100px;
+  cursor: pointer;
 }
-.contentBlock{
-  height:100%!important;
+.contentBlock {
+  height: 100% !important;
 }
-.aboutContainer2{
-    padding-top: 200px;
-    min-height: 100vh;
-    background-size: 100% 95%;
-    background-repeat: no-repeat;
+.aboutContainer2 {
+  padding-top: 200px;
+  min-height: 100vh;
+  background-size: 100% 95%;
+  background-repeat: no-repeat;
 }
 /* text on aboutContainer2 */
 .aboutContainer2 h2 {
-    color: white;
-    text-align: center;
-    /* font-family: 'Quicksand', sans-serif; */
-    
+  color: white;
+  text-align: center;
+  /* font-family: 'Quicksand', sans-serif; */
 }
 /* grid */
 .row {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 0 4px;
-  }
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 4px;
+}
 
-  .column {
-    width: 33.33%;
-    text-align:center;
-  }
-  .column img{
-    margin-left:auto;
-    margin-right:auto;
-    display:inline-block;
-  }
-  /* Clear floats after the columns */
-  .row:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-  .page-container1{
-   
-      width:100%!important;
-      background-image: url('../img/bg-image.svg');
-      background-repeat:no-repeat;
-      background-position:fixed;
-      background-color:#2196f3;
-      min-height:130vh;
-      background-size:1980px;
-  }
+.column {
+  width: 33.33%;
+  text-align: center;
+}
+.column img {
+  margin-left: auto;
+  margin-right: auto;
+  display: inline-block;
+}
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.page-container1 {
+  width: 100% !important;
+  background-image: url("../img/bg-image.svg");
+  background-repeat: no-repeat;
+  background-position: fixed;
+  background-color: #2196f3;
+  min-height: 130vh;
+  background-size: 1980px;
+}
 
+/* change the size of the entire block content filled with the images */
+.rowParent {
+  width: 100%;
+  text-align: center;
+}
+.row {
+  margin-right: auto;
+  margin-left: auto;
+  display: inline;
+}
 
-  /* change the size of the entire block content filled with the images */
-  .rowParent {
-      width: 100%;
-      text-align: center;
-  }
-  .row {
-    margin-right: auto;
-    margin-left: auto; 
-    display: inline;
-  }
-
-
-  .page-container1 {
-      background-color: black;
-  }
-  /* ****** MAY DELETE ***** */
-  .wholeScreen {
-    
-      width:100%!important;
-      background-image: url('../img/bg-image.svg');
-      background-repeat:no-repeat;
-      background-position:fixed;
-      background-color:#2196f3;
-      min-height:130vh;
-      background-size:1980px;
-  }
-  /* styling the parent div for children aboutChild */
-  /* .aboutParent {
+.page-container1 {
+  background-color: black;
+}
+/* ****** MAY DELETE ***** */
+.wholeScreen {
+  width: 100% !important;
+  background-image: url("../img/bg-image.svg");
+  background-repeat: no-repeat;
+  background-position: fixed;
+  background-color: #2196f3;
+  min-height: 130vh;
+  background-size: 1980px;
+}
+/* styling the parent div for children aboutChild */
+/* .aboutParent {
     width: 580px;
   
     position: absolute;
     left: 70px;
     top: 20px;
   } */
-  .aboutUsTitle {
-    display: inline-block;
-    height: 600px;
-    position: relative;
-    left: 20px;
-    top: 50px;
-  }
-  .aboutUsTitle img {
-    width: 50%;
-    float: right;
-    position: relative;
+.aboutUsTitle {
+  display: inline-block;
+  height: 600px;
+  position: relative;
+  left: 20px;
+  top: 50px;
+}
+.aboutUsTitle img {
+  width: 50%;
+  float: right;
+  position: relative;
+}
 
-  }
-  
-  /*styling the children of the parent div */
+/*styling the children of the parent div */
 
-  .aboutChild h1 {
-    text-align: left;
-    font-size: 40px;
-    color: white; 
-    width: 13em;
-  }
+.aboutChild h1 {
+  text-align: left;
+  font-size: 40px;
+  color: white;
+  width: 13em;
+}
 
-  /* Icons */
-  .iconAbout1, .iconAbout {
-      width:100%;
-  }
-  .iconAbout1 img{
-    width:120px;
-  }
-  .iconAbout img{
-    width:150px;
-  }
-  .column h1 {
-      padding-top: 10px;
-      color: white;
-  }
+/* Icons */
+.iconAbout1,
+.iconAbout {
+  width: 100%;
+}
+.iconAbout1 img {
+  width: 120px;
+}
+.iconAbout img {
+  width: 150px;
+}
+.column h1 {
+  padding-top: 10px;
+  color: white;
+}
 
-  .column h2 {
-    padding-top: 10px;
-    text-align: left;
-    font-size: 20px;
-    margin-left: auto;
-    margin-right: auto;
-    width: 15em;
-    font-weight: lighter;
-    /* font-family:'Open Sans', sans-serif; */
-  }
-  .aboutTxt{
-    font-size:17px!important;
-    font-family:"Verdana";
-    font-weight:300;
-    margin-left:auto;
-    margin-right:auto;
-    text-align:left;
-    display:inline-block;
-    width:80%;
-    padding-top:10px!important;
-  }
+.column h2 {
+  padding-top: 10px;
+  text-align: left;
+  font-size: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 15em;
+  font-weight: lighter;
+  /* font-family:'Open Sans', sans-serif; */
+}
+.aboutTxt {
+  font-size: 17px !important;
+  font-family: "Verdana";
+  font-weight: 300;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  display: inline-block;
+  width: 80%;
+  padding-top: 10px !important;
+}
 /* 
   @media only screen and (max-width: 1024px) and (min-width: 768px) {
   
@@ -170,55 +164,56 @@
 0        }
        
     } */
-    .aboutUs-title, .iconAbout3{
-      text-align:center!important;
-      padding-top:15px!important;
-    }
-    .aboutUsTitle img {
-      width: 500px;
-      float: none!important;
-      position: relative;
-      }
-      .aboutUsTitle{
-        color:white;
-        font-size:30px;
-        height:70vh;
-      }
-
-      .about-item-info{
-        color:white;
-        text-align:left;
-        margin-left:auto;
-        margin-right:auto;
-        width:80%;
-        font-family: "Verdana";
-        font-size:16px;
-      }
-@media only screen and (max-width: 1000px) { 
-
-.aboutTxt{
-  font-size:17px!important;
-  font-family:"Verdana";
-  font-weight:300;
-  margin-left:auto;
-  margin-right:auto;
-  text-align:left;
-  display:inline-block;
-  width:80%;
-  padding-top:10px!important;
+.aboutUs-title,
+.iconAbout3 {
+  text-align: center !important;
+  padding-top: 15px !important;
 }
-.aboutUs-title, .iconAbout3{
-  text-align:center!important;
-  padding-top:15px!important;
-}
-.iconAbout2{
-  margin-top:100px;
-}
-/* end of nav bar design for mobile */
 .aboutUsTitle img {
-  width: 70%;
-  float: none!important;
+  width: 500px;
+  float: none !important;
   position: relative;
+}
+.aboutUsTitle {
+  color: white;
+  font-size: 30px;
+  height: 70vh;
+}
+
+.about-item-info {
+  color: white;
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  font-family: "Verdana";
+  font-size: 16px;
+}
+@media only screen and (max-width: 1000px) {
+  .aboutTxt {
+    font-size: 17px !important;
+    font-family: "Verdana";
+    font-weight: 300;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+    display: inline-block;
+    width: 80%;
+    padding-top: 10px !important;
+  }
+  .aboutUs-title,
+  .iconAbout3 {
+    text-align: center !important;
+    padding-top: 15px !important;
+  }
+  .iconAbout2 {
+    margin-top: 100px;
+  }
+  /* end of nav bar design for mobile */
+  .aboutUsTitle img {
+    width: 70%;
+    float: none !important;
+    position: relative;
   }
   /* #aboutContainr {
     background-color: #191919;
@@ -228,30 +223,30 @@
     margin-right: auto;
     margin-left: auto;
  } */
- .about-item-info{
-   color:white;
-   text-align:left;
-   margin-left:auto;
-   margin-right:auto;
-   width:80%;
-   font-family: "Verdana";
-   font-size:16px;
- }
- /*styling the children of the parent div */
- .aboutChild p {
-  color: white;
-  text-align: left;
-  padding-top: 60px; 
-  font-size:35px;
-}
-.aboutContainer2{
-  padding-bottom:50px;
-}
-  
+  .about-item-info {
+    color: white;
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    font-family: "Verdana";
+    font-size: 16px;
+  }
+  /*styling the children of the parent div */
+  .aboutChild p {
+    color: white;
+    text-align: left;
+    padding-top: 60px;
+    font-size: 35px;
+  }
+  .aboutContainer2 {
+    padding-bottom: 50px;
+  }
+
   .scrollArrow {
     color: #d4d4d4;
     left: 43%;
-    margin-top:70px;
+    margin-top: 70px;
     margin-left: auto;
     margin-right: auto;
     cursor: pointer;
@@ -260,5 +255,4 @@
     flex: 100%;
     max-width: 100%;
   }
- 
 }

@@ -32,8 +32,12 @@
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PTK9R96"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
-        <div class="homeContainer1">
+    <div id="headerContainer page-container">
+        <%- include ('partials/header.ejs') %>
+      </div>
+        <div class="homeContainer1--Login">
             <div class="contentBlock">
+                
                 <% if(qs.email){%>
                 <h4 class='badge badge-warning loginErr'><%=qs.message%></h4>
                 <form method="POST" action="/sendEmail">
@@ -58,12 +62,13 @@
                     </div>
                     
                     <div class="signInTitleContainer"><h1 class='signIn'>Login to degreeMe</h1></div>
+                    <div class="Login--Switch">Don't have an account? <a href="/SignUp">Sign up here</a></div>
                     <%- include ('partials/login.ejs')%>
                 <div class="disclaimerText2">
                     <p>DegreeMe is not affiliated with any university. We will not share your data with any third parties. Your security is
                         our top priority.
                     </p>
-                    <br>
+                    
                 </div>
             </div>
         </div>

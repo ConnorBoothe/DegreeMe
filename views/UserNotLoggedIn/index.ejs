@@ -11,9 +11,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
     <link href="../assets/css/main.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
-    <link href="../assets/css/header.css" rel="stylesheet">
+    <link href="../assets/css/landing/landing.css" rel="stylesheet">
     <link href="../assets/css/index.css" rel="stylesheet">
-    <link href="../assets/css/footer.css" rel="stylesheet">
+    <link href="../assets/css/landing/footer.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" integrity="sha512-yHknP1/AwR+yx26cB1y0cjvQUMvEa2PFzt1c9LlS4pRQ5NOTZFWbhBig+X9G9eYW/8m0/4OXNx8pxJ6z57x0dw==" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css" />
     
@@ -33,43 +33,138 @@
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PTK9R96"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
-    <h3 class="mobileMsg">Mobile and Tablet Versions Coming Soon</h3>
     <div class="page-container ">
-       
-        <div class="index-page-container">
-            
-            <div class="index-container  ">
-                <div id="headerContainer">
-                    <%-include ('partials/header.ejs') %>
+      <div>
+          <div id="headerContainer">
+              <%-include ('partials/header.ejs') %>
+          </div>
+            <div class="landing"> 
+                <div class="landing--text--big landing--margin">
+                    Welcome to the last <br />
+                    <span class="landing--text--primary">college tool </span>
+                    you'll ever need.
                 </div>
-                <div class="">
-                    <%-include ('partials/indexSlider.ejs') %>
+                <button class="landing--signup" id="landing--section0">Sign up</button>
 
-                </div>    
-        <div class="full-index-container1">
-        
-        </div>
-        </div>
-        <!-- Mobile version -->
-        <div class="index-container-mobile">
-            <div id="headerContainer">
-                <%-include ('partials/header.ejs') %>
-                <%-include ('partials/popout-menu.ejs') %>
-        </div>
-            
-    
-                    <%-include ('partials/indexSlider.ejs') %>
+                <div class="landing--people" id="landing--animation--1">
+                    <img
+                      id="landing--person1--animation"
+                      src="../assets/img/landing/person1.svg"
+                    ></img>
+                    <img
+                      id="landing--person2--animation"
+                      src="../assets/img/landing/person2.svg"
+                    ></img>
+                    <img
+                      id="landing--person3--animation"
+                      src="../assets/img/landing/person3.svg"
+                    ></img>
+                    <img
+                      id="landing--person4--animation"
+                      src="../assets/img/landing/person4.svg"
+                    ></img>
+                    <img
+                      id="landing--person5--animation"
+                      src="../assets/img/landing/person5.svg"
+                    ></img>
+                </div>
+                <svg class="landing--wave" width="100%" height="100%" version="1.1" xmlns="http://www.w3.org/2000/svg"><defs></defs><path id="wave1" d=""/></svg>
             </div>
-        
-    </div>
-</div>
+            <div class="landing landing--background2">
+              <div class="feature1">
+                <div>
+                    <div class="font--curly">Need extra cash?</div>
+                    <div class="landing--text--big">
+                    Earn on your <br />
+                    <span class="landing--text--yellow" id="landing--section1">own time</span>
+                    </div>
+                    <div class="landing--text--small">
+                    · Become a tutor for classes you've already taken. <br />· Set
+                    your hourly pay rate and earn money on your own time.
+                    </div>
 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-    <script src="assets/jquery/jquery.session/jquery.session.js"></script>
+                    <a class="landing--text--yellow">
+                    Start earning today >
+                    </a>
+                </div>
+                <img src="../assets/img/landing/feature1.png"></img>
+                </div>
+
+         <div class="feature2">
+          <img id="landing--person6--animation" src="../assets/img/landing/person6.svg"></img>
+          <div class="landing--margin">
+            <div class="landing--text--big">Get help from <br/> <span class="landing--text--green" id="landing--section2">a student</span></div>
+            <div class="landing--text--small">· Get tutored by a UNCC student who has already
+              taken the course you need help with.</div>
+          </div>
+        </div>
+
+        <div class="feature3">
+          <div class="landing--text--big">Create groups with <br/> 
+            <span class="landing--text--red" id="landing--section3">students like you</span></div>
+          <div class="landing--text--small">· Become a tutor for classes you've already taken. <br/> 
+            · Set your hourly pay rate and earn money on your own time.</div>
+          <div class="landing--image--container--true" id="landing--image--container">
+            <img src="../assets/img/landing/person7.png"></img>
+            <img src="../assets/img/landing/person8.png"></img>
+            <img src="../assets/img/landing/person9.png"></img>
+            <img src="../assets/img/landing/person10.png"></img>
+          </div>
+        </div>
+
+        <div class="feature4">
+          <div class="font--curly">and then…</div>
+          <div class="feature4Container">
+            <div class="landing--text--big" id="landing--section4">Stay connected <br/>
+              <span class="landing--text--primary">on campus</span>
+            </div> 
+   
+            <svg  class="landing--connected" id="landing--connected" viewBox="0 0 289.192 152">
+              <path id="Pfad_106" data-name="Pfad 106" d="M-133.39,0h31.552s15.525.88,23.656,7.081S-69.314,24.8-69.314,24.8v74.12s.225,5.96-8.868,15.064-23.656,8.58-23.656,8.58H-337.986" transform="translate(353.5 14.5)" fill="none" stroke="#09f" stroke-linecap="round" stroke-width="10"/>
+              <circle id="Ellipse_2" data-name="Ellipse 2" cx="15" cy="15" r="15" transform="translate(205)" fill="#09f"/>
+              <circle id="Ellipse_3" data-name="Ellipse 3" cx="15" cy="15" r="15" transform="translate(0 122)" fill="#09f"/>
+            </svg>
+          
+            <!-- <img class="landing--connected" src="../assets/img/landing/connected.svg"></img> -->
+          </div>
+          <div class="landing--text--small">· Make new connections with students on campus <br/>
+            · Follow students to see their actions in realtime<br/>
+            · Post to course discussion boards<br/>
+            · Find students in any major<br/>
+            · Send direct messages and create group chats.
+          </div>
+        </div>
+        <div class="landing--footer--img--container">
+          <img class="landing--footer--img--true" id="landing--footer--img" src="../assets/img/landing/screenshot.png"></img>
+        </div>
+      </div>
+      
+      <div class="landing--footer">
+        <svg class="landing--wave--footer" width="100%" height="100%" version="1.1" xmlns="http://www.w3.org/2000/svg"><defs></defs><path id="wave2" d=""/></svg>
+        <img class="landing--footer--logo"  src="../assets/img/landing/white_hashtag.png"></img>
+        <div class="landing--footer--social">
+          <a href="https://www.instagram.com/degreeme_/" target="_blank" rel="noopener noreferrer"><img src="../assets/img/landing/instagram.svg"></img></a>
+          <a href="https://www.instagram.com/degreeme_/" target="_blank" rel="noopener noreferrer"><img src="../assets/img/landing/twitter.svg"></img></a>
+          <a href="https://www.instagram.com/degreeme_/" target="_blank" rel="noopener noreferrer"><img src="../assets/img/landing/youtube.svg"></img></a>
+        </div>
+        <div class="landing--footer--text">Copyright © DegreeMe 2020 <br/> <a>Privacy</a> · <a>Policies</a></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/jquery/jquery.session/jquery.session.js"></script>
+  <!-- <script type="text/javascript" src="assets/js/formValidation_1.js"></script> -->
+  <script type="text/javascript" src="assets/js/showPopOutMenu.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TweenMax.min.js"></script>
+
+  <script type="text/javascript" src="../../assets/js/landing/jquery.wavify.js"></script> 
+  <script type="text/javascript" src="../../assets/js/landing/wavify.js"></script> 
+  <script type="text/javascript" src="../../assets/js/landing/landing.js"></script>    
+
     
-    <!-- <script type="text/javascript" src="assets/js/formValidation_1.js"></script> -->
-    <script type="text/javascript" src="assets/js/showPopOutMenu.js"></script>
-    <script type="text/javascript" src="assets/js/slider.js"></script>
+
 </body>
 
 <%- include ('partials/footer.ejs') %>
