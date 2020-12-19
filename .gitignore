@@ -1,11 +1,6 @@
-<<<<<<< HEAD
 .vscode/
 degreeMe.code-workspace
 **/.DS_Store
 node_modules
 .env
 degreeme1-727d561034e0.json
-=======
-node_modules
-.env
->>>>>>> 09f06278acef8ca05f8c445a7adf46e361c10a7b
