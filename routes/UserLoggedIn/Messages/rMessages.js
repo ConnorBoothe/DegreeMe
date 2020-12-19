@@ -36,12 +36,16 @@ const Messages = require('../../../models/Database/Messages');
 const Threads = require('../../../models/Database/Threads');
 //classes used
 const DateFunctions = require('../../../models/classes/DateFunctions');
+const UnescapeString = require('../../../models/classes/UnescapeString');
+
 //instantiate DBs
 var users = new UserDB();
 var messages = new Messages();
 var threads = new Threads();
 //instantiate classes
 var dateFunctions = new DateFunctions();
+var unescapeString = new UnescapeString();
+
 //get route to render the messages page
 
 router.get('/messages/:threadId', function (req, res) {
@@ -61,7 +65,8 @@ router.get('/messages/:threadId', function (req, res) {
                             messages: messages,
                             subject: thread.subject,
                             formatDate: dateFunctions.formatMessageCreatedDate,
-                            formatTime: dateFunctions.displayTimeSince
+                            formatTime: dateFunctions.displayTimeSince,
+                            unescapeApostrophe: unescapeString.unescapeApostrophe
                         });
                         // users.unreadCountToZero(req.params.threadId, req.session.userId, req, res, messages, 
                         //     dateFunctions.formatMessageCreatedDate, dateFunctions.displayTimeSince);

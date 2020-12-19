@@ -52,23 +52,22 @@ function (req, res) {
     let messageId = "";
     //create a new thread for the conversation
     threads.newThread(req.session.handle, req.session.img, [
-            [req.session.host, req.session.img],
+            [req.session.handle, req.session.img],
             [req.body.receiver, req.body.receiverImg]
         ],
         new Date(), req.body.host + ", " + req.body.receiver)
         .then(function (data) {
-            console.log("Added thread")
         //save the id
         messageId = data._id;
         //add first user to thread
         users.addThread(req.session.handle, req.session.img, req.session.handle + 
             ", " + req.body.receiver, data._id, req.body.host).then(function(){
                 //add second user to thread
-                users.addThread(req.body.host, req.body.hostImg, req.body.host 
+                users.addThread(req.session.handle, req.session.img, req.session.handle 
                     + ", " + req.body.receiver, data._id, req.body.receiver).then(function(){
                         //add the message to message DB
-                        messages.addMessage(data._id, req.body.host, req.body.hostImg, 
-                            req.body.message, data.datetime)
+                        messages.addMessage(data._id, req.session.handle, req.session.img, 
+                            req.body.message, data.datetime, "text")
                             .then(function(){
                                 //send response containing threadIdto the frontend
                                 res.status(202).json({
