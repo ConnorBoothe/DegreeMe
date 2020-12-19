@@ -4,7 +4,7 @@ mongoose.Promise = global.Promise;
 mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost:27017/CollegeTutor', { useNewUrlParser: true,useUnifiedTopology: true },function(err){
 });
 db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
+// db.on('error', console.error.bind(console, 'connection error:'));
 var Schema = mongoose.Schema;
 var paymentsSchema = new Schema({
     stripeId: {type:String, required:true},

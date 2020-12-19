@@ -13,13 +13,7 @@
     margin-left:250px;
 }
 
-.timeline{
-    width:40%;
-    max-width:600px;
-    height:100%;
-    margin-left:15%;
-    overflow-y:auto;
-}
+
 .timeline-container-image{
   
     min-height:300px;
@@ -814,7 +808,7 @@ padding-right:10px;
 }
 .postActions{
     padding-bottom:20px;
-    padding-top:10px;
+    padding-top:0px;
     padding-left:20px;
     text-align:left;
 }
@@ -1085,19 +1079,13 @@ input[name="searchType"]{
   
   /* desktop only */
   @media only screen and (min-width: 1000px) {
-      .desktop-li{
-          top:0;
-         
-      }
-      .headerContainer {
-          width:700px!important;
-          margin-top:0px!important;
-          position:absolute!important;
-          right:0!important;
-      }
-      .header-wrapper {
-          width:1000px;
-      }
+    .timeline{
+        width:40%;
+        max-width:600px;
+        height:100%;
+        margin-left:15%;
+        overflow-y:auto;
+    }
     .rate-container p{
         font-family: "Open sans", "sans-serif";
         font-size:20px;
@@ -1278,6 +1266,7 @@ input[name="searchType"]{
     }
     .question-label-container{
         width:120px;
+        text-align:left!important;
     }
     .badge-info, .badge{
         text-align:left!important;
@@ -1285,6 +1274,11 @@ input[name="searchType"]{
     .question-img{
         width:300px!important;
         margin-top:20px;
+    }
+    .question-img1{
+        width:200px!important;
+        margin-top:20px;
+        padding-bottom:5px;
     }
     .question-img-container{
         margin-left:auto;
@@ -1381,6 +1375,7 @@ input[name="searchType"]{
         padding-left:10px;
         padding-right:10px;
         margin-bottom:3px;
+        text-align:left;
         font-family: 'Open Sans', sans-serif!important;
     }
     .searchUser{
@@ -1565,10 +1560,15 @@ input[name="searchType"]{
         min-height:100px;
         /* border-bottom: 2px solid #007bff;
         box-shadow:1px 2px #131313; */
-        margin-right:5%;
+        margin-right:auto;
+        margin-right:auto;
         margin-bottom:30px;
         margin-top:30px;
         border-radius:8px;
+        width:85%;
+        min-width:350px;
+        display:inline-block;
+
         
     }
     #calendar1, #calendar2,#calendar3,#calendar4,#calendar5, #calendar6{
@@ -1588,10 +1588,10 @@ input[name="searchType"]{
     }
     .timeline-wrapper{
         /* background-color:#242526!important; */
-        padding-top:10px;
+        padding-top:20px;
         border-radius:20px;
         padding-bottom:20px;
-        /* text-align:center; */
+        text-align:center;
     }
     #findATutorMobile-wrapper{
         width:100%;
@@ -1927,8 +1927,11 @@ input[name="searchType"]{
         color:#d4d4d4;
         padding-top:10px;
     }
-    .question-img{
+    .question-img1{
         width:100%!important;
+    }
+    .question-img1{
+        width:50%!important;
     }
     .postDate{
         color:#a9a9a9;

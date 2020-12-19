@@ -19,10 +19,10 @@ const Listing = require('../../models/classes/Tutor');
 const MeetupsDB = require('../../models/Database/MeetupsDB.js');
 const NotificationDB = require('../../models/Database/NotificationDB');
 const UserDB = require('../../models/Database/UserDB');
-const BidsDB = require('../../models/Database/BidsDB');
+const BidsDB = require('../../models/RecycledClasses/BidsDB');
 const MessagesDB = require("../../models/Database/MessagesDB");
 const TimelineDB = require("../../models/Database/TimeLineDB");
-const AcceptedBidsDB = require("../../models/Database/AcceptedBidsDB");
+const AcceptedBidsDB = require("../../models/RecycledClasses/AcceptedBidsDB");
 const PaymentsDB = require("../../models/Database/PaymentsDB");
 //classes used
 var Connection = require('../../models/classes/Connection');

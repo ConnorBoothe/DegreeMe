@@ -60,7 +60,11 @@ function generateMobileProfileMenu(){
     '</svg>'+
     '</div><ul>'+
         "<li class='mobileBalanceLi'><span><h1 class='mobileBalance'>$0.00</h1><span class='sub-balance-text'> Available</span> </span></li>"+
+<<<<<<< HEAD
         "<li class='mobileBalanceLi'><span><h1 class='mobileBalance'>$199.00</h1><span class='sub-balance-text'> Pending</span></span></li>"+
+=======
+        "<li class='mobileBalanceLi'><span><h1 class='mobileBalance'>$0.00</h1><span class='sub-balance-text'> Pending</span></span></li>"+
+>>>>>>> 76240004810da197cc7ca3836229b66db47b0c0c
     "</ul>"+
     "<div class='mobileProfileMenuBody'>"+
         "<ul class='body-ul'>"+

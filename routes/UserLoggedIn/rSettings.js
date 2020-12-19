@@ -4,7 +4,6 @@ var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser');
 var multer = require("multer");
-var multerGoogleStorage = require("multer-google-storage");
 const mongoose = require("mongoose");
 var session = require('express-session');
 const stream = require('stream');
@@ -58,16 +57,6 @@ const storage = multer.diskStorage({
         callback(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
     }
 });
-const upload = multer({
-    storage: multerGoogleStorage.storageEngine(),
-    limits: {
-        fieldSize: 100 * 1024 * 1024
-    },
-    fileFilter: function (req, file, callback) {
-        checkFileType(file, callback);
-    }
-
-}).single('userImage');
 //Check file type function
 function checkFileType(file, callback) {
     //Allowed Extensions
@@ -201,60 +190,70 @@ router.post('/MakeStripeAccount',
             }
         );
     });
-router.post("/Settings",
-    check('img1').isString().trim(),
-    check('handle').isString().trim().escape(),
-    function (req, res) {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            res.redirect('/home');
-        }
-        upload(req, res, (err) => {
-            if (err) {
-                res.redirect('/Settings?error=' + err);
-            }
-            // Remove header
-            let base64String = req.body.img1; // Not a real image
-            // Remove header
-            let base64Image = base64String.split(';base64,').pop();
-            var bufferStream = new stream.PassThrough();
-            bufferStream.end(Buffer.from(base64Image, 'base64'));
-            var file = degreemeImages.file(req.session.handle.toString().substring(1) + '.jpg');
-            bufferStream.pipe(file.createWriteStream({
-                metadata: {
-                contentType: 'image/jpeg',
-                metadata: {
-                custom: 'metadata'
-                }
-            },
-            public: true,
-            validation: "md5"
-            }))
-            .on('error', function(err) {
-                console.log(err)
-            })
-            .on('finish', function(data) {
-                console.log("OG params",req.params)
-                req.session.img = "https://storage.googleapis.com/degreeme-images/"+ req.session.handle.toString().substring(1) +".jpg";
-                if(req.body.source === "profile"){
-                    res.status(202).json({
-                        img:"https://storage.googleapis.com/degreeme-images/"+ req.session.handle.toString().substring(1) +".jpg"
-                    }).end();
-                }
-                else{
-                    res.redirect("/home");
-                }
-            });
-            // fs.writeFile("assets/img/userImg/" + req.body.handle.substring(1) + ".jpg", base64Image, {
-            //     encoding: 'base64'
-            // }, function (err, data) {
-            //     if (!err) 
-            //         req.session.img = data;
-            //     } else {
-            //         console.log(err)
-            //         res.redirect("/home")
-            //     }
-            // });
-        });
+//no longer using this route
+//need an updated settings route
+// router.post("/Settings",
+//     check('img1').isString().trim(),
+//     check('handle').isString().trim(),
+//     function (req, res) {
+//         const errors = validationResult(req);
+//         if (!errors.isEmpty()) {
+//             res.redirect('/home');
+//         }
+//         upload(req, res, (err) => {
+//             if (err) {
+//                 res.redirect('/Settings?error=' + err);
+//             }
+//             // Remove header
+//             let base64String = req.body.img1; // Not a real image
+//             // Remove header
+//             let base64Image = base64String.split(';base64,').pop();
+//             var bufferStream = new stream.PassThrough();
+//             bufferStream.end(Buffer.from(base64Image, 'base64'));
+//             var file = degreemeImages.file(req.session.handle.toString().substring(1) + '.jpg');
+//             bufferStream.pipe(file.createWriteStream({
+//                 metadata: {
+//                 contentType: 'image/jpeg',
+//                 metadata: {
+//                 custom: 'metadata'
+//                 }
+//             },
+//             public: true,
+//             validation: "md5"
+//             }))
+//             .on('error', function(err) {
+//                 console.log(err)
+//             })
+//             .on('finish', function(data) {
+//                 console.log("OG params",req.params)
+//                 req.session.img = "https://storage.googleapis.com/degreeme-images/"+ req.session.handle.toString().substring(1) +".jpg";
+//                 if(req.body.source === "profile"){
+//                     res.status(202).json({
+//                         img:"https://storage.googleapis.com/degreeme-images/"+ req.session.handle.toString().substring(1) +".jpg"
+//                     }).end();
+//                 }
+//                 else{
+//                     res.redirect("/home");
+//                 }
+//             });
+//             // fs.writeFile("assets/img/userImg/" + req.body.handle.substring(1) + ".jpg", base64Image, {
+//             //     encoding: 'base64'
+//             // }, function (err, data) {
+//             //     if (!err) 
+//             //         req.session.img = data;
+//             //     } else {
+//             //         console.log(err)
+//             //         res.redirect("/home")
+//             //     }
+//             // });
+//         });
+//     });
+
+    router.post("/updateMajor",function(req, res){
+        users.updateMajor(req.session.userId, req.body.major)
+        .then(function(){
+            res.redirect("/user/"+req.session.handle);
+        })
+       
     });
 module.exports = router;

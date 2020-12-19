@@ -293,21 +293,26 @@ function formatQuestion(post){
         '<p class=" badge badge-info questionLabel">Question</p>'+
         '</div>'+
     '</div>';
-    if(post.files[0].file.includes(".pdf")){
-        question += '<div>'+
-            '<iframe class="pdf-iframe" src="'+post.files[0].file+'"></iframe>'+
-        '</div>';
-        
-    } 
-    else{
-        question += '<div>'+
-            '<img class="question-img" src="'+post.files[0].file+'"/>'+
-        '</div>';
-   }
-        question += '<p class="pdf-link"><a target="_blank" class="pdf-link" href="'+post.files[0].file+'">View Full Screen</a></p>'+
-        '<p class="caption-status">'+post.caption+'</p>'+
+    if(post.files.length > 0){
+        if(post.files[0].file.includes(".pdf")){
+            question += '<div>'+
+                '<iframe class="pdf-iframe" src="'+post.files[0].file+'"></iframe>'+
+            '</div>';
+            
+        } 
+        else{
+            question += '<div>'+
+                '<img class="question-img" src="'+post.files[0].file+'"/>'+
+            '</div>';
+       }
+   
+   
+        question += '<p class="pdf-link"><a target="_blank" class="pdf-link" href="'+post.files[0].file+'">View Full Screen</a></p>';
+    }
+        question += '<p></p><p class="caption-status">'+post.caption+'</p>'+
         '<p class="hashtag"><a href="/course/'+post.course+'">#'+post.course.replace(/ /g, "")+'</a></p>'+
         '<div class="postActions">';
+
         if (hasLiked == false){
             question +=
             '<button class="like-button">'+

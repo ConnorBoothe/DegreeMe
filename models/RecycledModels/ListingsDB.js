@@ -13,7 +13,7 @@ mongoose.connect(mongoDB_URL || 'mongodb://localhost:27017/CollegeTutor', {
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.on('connected', function(){
-  console.log("Connected!")
+  // console.log("Connected!")
 });
 var Schema = mongoose.Schema;
 var reviewsDBSchema = new Schema({
