@@ -9,7 +9,7 @@ db.setMaxListeners(0)
 // db.on('error', console.error.bind(console, 'connection error:'));
 var Schema = mongoose.Schema;
 var attachments = new Schema({
-    file:{type:String, required:true}
+    file:{type:Array, required:true},
     
 });
 var commentSchema = new Schema({
@@ -40,6 +40,21 @@ module.exports = class UserProfile {
         }
         
         var comments = new commentsDB({postId:postId, commenterHandle: handle, commenterImg:img, upvotes:0, message:message, date: new Date(), attachments: attachmentsArr});
+        return comments.save();
+    }
+    addYTComment(postId, handle, img, message, attachments, thumbnail, title){
+        //if files are attached
+        console.log("Running add yt comment")
+        if(attachments){
+            var attachmentsArr = [];
+            for(var i = 0; i < attachments.length; i++) {
+                attachmentsArr.push({file: attachments[i][0], 
+                thumbnail: thumbnail[i][1], title: title[i][2]
+             });
+            }
+        }
+        var comments = new commentsDB({postId:postId, commenterHandle: handle, commenterImg:img, upvotes:0, message:message, date: new Date(), attachments: attachmentsArr});
+
         return comments.save();
     }
 }
