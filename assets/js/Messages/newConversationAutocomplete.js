@@ -25,7 +25,7 @@ $(document).ready(function(){
              });
     });
     //initialize frontend session userHandle var to the current user
-    $.session.set("userHandles",[$(".userProfileName").text()]);
+    $.session.set("userHandles",[$(".userProfileName").eq(0).text()]);
 
     //append handle to searchPeople-container when clicked
     $(".conversation_Suggestions-list").on("click",".conversation_item", function(){

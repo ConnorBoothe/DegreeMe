@@ -278,8 +278,7 @@ input:-webkit-autofill {
   }
    
   ::-webkit-scrollbar-thumb {
-    background-color: darkgrey;
-    outline: 1px solid slategrey;
+    background-color: #242526;
   }
 
   ::-webkit-scrollbar {
@@ -289,7 +288,7 @@ input:-webkit-autofill {
 
 }
 ::-webkit-scrollbar-thumb {
-    background: #a9a9a9;
+    background: #242526;
     border-radius:10px;
     margin-top:50px;
     margin-left:5px!important;
@@ -1510,8 +1509,7 @@ Menu css
         padding-bottom:10px;
         margin-left:auto;
         margin-right:auto;
-        margin-bottom:60px;
-        padding-top:30px;
+ 
         font-size:24px;
     }
     .quiz label{
@@ -1611,7 +1609,7 @@ Menu css
         width: 16px;
         padding-top:5px!important;
         border-radius: 50px;
-        background: #d3d3d3;
+        background: #18191a;
         cursor: pointer;
       }
       input[type=range]::-webkit-slider-runnable-track {
@@ -3107,6 +3105,7 @@ display:inline-block!important      }
   .accountIcon{
       font-size:22px;
       margin-right:10px;
+      margin-left:10px;
   }
   .headerLinkPageTitle{
       color:#d4d4d4;

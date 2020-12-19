@@ -1,6 +1,6 @@
 body::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-    background-color: #F5F5F5;
+    background-color: #18191a;
 }
 header{
     margin:0;
@@ -858,6 +858,7 @@ header{
     text-align:center;
     border-radius:5px;
 }
+
 #horizontalMenu li{
     width:120px;
     display:inline-block;
@@ -1018,16 +1019,23 @@ header{
 @media only screen and (min-width: 1000px) {
     #horizontalHeader{ 
         background-color:#242526;
-    
-        
+    }
+    #messageHeader {
+        background-color:#242526;
+        width:85%;	    
+        height:45px;	    
+        padding-top:5px;	
+        position:fixed;	    
+        z-index:3;	
     }
     .bdge, .bdge1{
         position:absolute;
         top:0;
-        margin-left:15px;
-        width:24px;
-        font-size:12px!important;
-        border-radius:10px!important;
-       
+        margin-left:11px;
+        margin-top:2px;
+        width:18px;
+        padding-left:2px!important;
+        font-size:11px!important;
+        border-radius:18px!important;
     }
 }

@@ -38,11 +38,21 @@
 .tab-selected{
     border-bottom: 2px solid #007bff;
 }
+.img-container img {
+    width:50px;
+}
 .courseButtons{
     position:relative;
     top:0;
     margin-top:-30px;
  }
+ .comments-actions-list { 
+    position:relative!important;
+    margin-top:20px;
+    width:80%;
+    margin-right:20px;
+    margin-bottom:50px;
+}
 .questionTxt{
     overflow-wrap: break-word;
     width:100%;
@@ -52,6 +62,7 @@
     font-size:15px;
     min-height:150px;
     font-family: 'Open Sans', sans-serif;
+    outline:none;
 }
 .deleteDiscussion{
     border-radius:15px!important;
@@ -146,7 +157,7 @@ input[name="anonymous"]{
 /* container around the comments section */
 .commentTabs {
     margin-top: 20px;
-    margin-bottom: 100px;
+    margin-bottom: 10px;
 }
 /* format date */
 #text-date {
@@ -436,9 +447,13 @@ input[name="anonymous"]{
         font-size:14px!important;
     }
 }
+.delete-badge { 
+    cursor: pointer;
+}
 #postQuestion { 
     font-size:14px;
     font-family: "Open sans", "sans-serif";
+    margin-top:-40px;
 }
 @media only screen and (min-width: 1000px) {
     .viewTutorMobile{
@@ -482,8 +497,8 @@ input[name="anonymous"]{
      
     }
     .DiscussionTitle{
-        font-size:28px!important;
-        margin-bottom:25px;
+        font-size:24px!important;
+        margin-bottom:5px!important;
         margin-top:50px;
         text-align:center;
     }

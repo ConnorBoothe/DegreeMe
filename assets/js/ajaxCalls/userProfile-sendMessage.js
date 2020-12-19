@@ -17,7 +17,7 @@ $(document).ready(function(){
               "Content-Type": "application/json"
             }, statusCode: {
               202: function (result) {
-                    window.location.href = "/messages?messageId=" + result.messageId;
+                    window.location.href = "/messages/" + result.messageId;
               },
               500: function (result) {
                 alert("500 " + result.responseJSON.err);
