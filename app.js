@@ -3,7 +3,6 @@ const express = require('express');
 const helmet = require("helmet");
 const csp = require("helmet-csp");
 const mongoose = require("mongoose");
-
 mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true,useUnifiedTopology: true },function(err){
 
 });
@@ -42,12 +41,12 @@ app.use(
     csp({
       directives: {
         defaultSrc: ["'self'", "https://js.stripe.com/",  "ws://degreeme.io/socket.io/" ],
-        connectSrc:["'self'", "ws://degreeme.io/socket.io/","wss://degreeme.io/socket.io/", "https://firebasestorage.googleapis.com/"],
+        connectSrc:["'self'", "ws://degreeme.io/socket.io/","wss://degreeme.io/socket.io/", "https://firebasestorage.googleapis.com/", "https://www.googleapis.com/"],
         frameSrc:["https://firebasestorage.googleapis.com"],
         fontSrc:["'self'", "https://fonts.gstatic.com", "https://cdnjs.cloudflare.com", "https://use.fontawesome.com"],
-        styleSrc:["'self'", "https://fonts.googleapis.com", "'unsafe-inline'", "https://cdnjs.cloudflare.com/", "https://use.fontawesome.com"],
-        scriptSrc: ["'self'", "https://cdnjs.cloudflare.com/", "https://js.stripe.com/", "https://www.gstatic.com", "https://firebase.googleapis.com/", "https://*.googleapis.com", "https://cdn.jsdelivr.net/"],
-        imgSrc:["'self'", "data:", "https://storage.googleapis.com/", "https://firebasestorage.googleapis.com", "https://cdnjs.cloudflare.com"],
+        styleSrc:["'self'", "https://maxcdn.bootstrapcdn.com", "https://fonts.googleapis.com", "'unsafe-inline'", "https://cdnjs.cloudflare.com/", "https://use.fontawesome.com"],
+        scriptSrc: ["'self'", "https://cdnjs.cloudflare.com/","https://maxcdn.bootstrapcdn.com", "https://js.stripe.com/", "https://www.gstatic.com", "https://firebase.googleapis.com/", "https://*.googleapis.com", "https://cdn.jsdelivr.net/"],
+        imgSrc:["'self'", "https://i.ytimg.com/", "data:", "https://storage.googleapis.com/", "https://firebasestorage.googleapis.com", "https://cdnjs.cloudflare.com"],
         objectSrc: ["'none'"],
         upgradeInsecureRequests: [],
       },
@@ -83,8 +82,10 @@ app.use([
 app.use([
   require('./routes/UserLoggedIn/rSettings.js'),
   require('./routes/UserLoggedIn/rMyConnections.js'),
+  require('./routes/UserLoggedIn/rSetUserStatus.js'),
   require('./routes/UserLoggedIn/Messages/rMessages.js'),
   require('./routes/UserLoggedIn/Messages/rMessageMembers.js'),
+  require('./routes/UserLoggedIn/Messages/rGetMessageSet.js'),
   require('./routes/UserLoggedIn/Messages/rGetThreadImages.js'),
   require('./routes/UserLoggedIn/Messages/rSendDirectMessage.js'),
   require('./routes/UserLoggedIn/rMyFinances.js'),
@@ -164,18 +165,29 @@ io.sockets.on('connection', function (socket) {
   });
   socket.on('send image', function (data) {
   //   add message to the db
-  //  add image to message DB
-  //  (data.id, data.sender, data.senderImg, data.message, data.date, "text")
-   console.log("sending image")
+  //  add image to me   console.log("sending image")
   messages.addMessage(data.id, data.sender, data.senderImg, data.content, data.date, "file")
    .then(function(success){
      if(success){
-      socket.emit("append image", {image:data.content});
+      socket.emit("append image", {image:data.content, imageArray: data.imageArray });
      }
    })
    .catch(function(error){
      console.log(error)
    })
+  
+});
+socket.on('send youtube link', function (data) {
+  messages.addYoutubeData(data)
+  .then(()=>{
+    socket.emit("append youtube info", {
+      video: data
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+  })
+  
   
 });
   socket.on("broadcaster", () => {
