@@ -35,13 +35,15 @@ const UserDB = require('../../models/Database/UserDB');
 const MessageDB = require('../../models/Database/MessagesDB');
 //classes used
 const DateFunctions = require('../../models/classes/DateFunctions');
+const UnescapeString = require('../../models/classes/UnescapedString');
+
 //instantiate DBs
 var users = new UserDB();
 var messages = new MessageDB();
 //instantiate classes
 var dateFunctions = new DateFunctions();
+var unescapeString = new UnescapeString();
 //get route to render the messages page
-
 router.get('/messages', function (req, res) {
     //if the use is logged in, give user access
     if (req.session.userId) {
@@ -50,6 +52,7 @@ router.get('/messages', function (req, res) {
             //get messages by thread id
             messages.getAllMsg(req.query.messageId).exec((err, docs) => { //retrieve messages from DB
                 if(docs){
+                    console.log(docs.length)
                     var messages = docs[0]; //document containing messages
                     var userHandles = []; //store userhandles for the current thread
                     for (x in messages.userHandles) {
@@ -63,7 +66,10 @@ router.get('/messages', function (req, res) {
                         }
                     }
                     if (userInThread) {
-                        users.unreadCountToZero(req.query.messageId, req.session.handle, req, res, messages, dateFunctions.formatMessageCreatedDate, dateFunctions.displayTimeSince);
+                        users.unreadCountToZero(req.query.messageId, req.session.handle, req,
+                         res, messages, dateFunctions.formatMessageCreatedDate, dateFunctions.displayTimeSince,
+                         unescapeString.unescapeApostrophe
+                            );
                     } else {
                         res.redirect('/home')
                     }
@@ -122,4 +128,5 @@ router.post("/createThread",
         });
 
     });
+
 module.exports = router;
