@@ -13,17 +13,17 @@ input:-webkit-autofill:active {
     font-size: 15px;
     color: white !important;
 }
-
-.input-container-main {
-    margin-left: 500px;
+.message-file{
+    display:none;
 
 }
-
+.input-container-main {
+    margin-left: 500px;
+}
 .msgSender {
     font-size: 16px !important;
     text-align: left;
     margin-bottom: 4px !important;
-
     margin-right: 0 !important;
     margin-top: 20px;
 }
@@ -138,7 +138,7 @@ input:-webkit-autofill:active {
     color: #a3a3a3;
     font-size: 20px;
     border-radius: 25px;
-    height: 40px;
+    min-height: 40px;
     margin-left: 1%;
 }
 
@@ -283,15 +283,55 @@ input:-webkit-autofill:active {
 .sendMsgInput {
     font-family: 'Mulish', sans-serif;
     background-color: #3a3b3c;
+    width:85%!important;
+    text-align:left;
+    left:0!important;
+    position:absolute;
+}
+.image-attachments{
+   margin-left:50px;
+}
+.spinner-border{
+    width:20px!important;
+    height:20px!important;
+    margin-right:5px!important;
+}
+.new-image img, .message-attachment img{
+    width:220px!important;
+}
+.pdf-iframe{
+    height:440px!important;
+    width:250px!important;
+}
+.img-container {
+   display:inline-block;
+    width:50px;
+    margin-left:5px;
+    margin-right:5px;
 }
 
+.image-attachments img{
+    width:100%!important;
+    padding-bottom:10px;
+}
+.delete-badge {
+    border-radius:20px;
+    position:absolute;
+    padding:0px!important;
+    margin-left:30px;
+    border: 2px solid white;
+    margin-top:3px;
+    cursor:pointer;
+}
 .dateStarted {
     color: #d4d4d4;
     margin-bottom: 0;
     margin-top: 10px !important;
     height: 10px !important;
 }
-
+#imageUploadLabel{
+    right:0!important;
+}
 .message-title svg {
     margin-right: 6px;
 }
@@ -336,15 +376,16 @@ input:-webkit-autofill:active {
         margin-top: 5px;
         border-radius: 20px;
         border: none;
-        height: 40px;
+        min-height: 40px;
         outline: none;
         background-color: #3a3b3c!important;
         box-shadow: 2px 3px #131313;
         margin-bottom:80px;
+        text-align:left;
     
     }
     .msgInput input {
-        width: 80%;
+        width: 60%;
         margin-top: 8px;
         margin-bottom: 4px;
         color: white;
@@ -362,7 +403,7 @@ input:-webkit-autofill:active {
         width: 100%;
         padding-right:20px;
         padding-left:20px;
-        min-height: 60px;
+        min-height: 40px;
         position: fixed;
         bottom: 0;
         font-size: 20px;
@@ -423,6 +464,24 @@ input:-webkit-autofill:active {
         text-align: left;
     
     }
+    .containMessageSentPDF {
+
+        min-height: 40px;
+        min-width: 100px !important;
+        border-radius: 40px;
+        text-align: left;
+        color: white;
+        padding-left: 20px;
+        text-justify: inter-word;
+        position: relative;
+        font-family: 'Mulish', sans-serif;
+        word-wrap: break-word;
+        display: inline-block;
+        right: 0 !important;
+        max-width: 600px !important;
+        text-align: left;
+    
+    }
 }
 
 /* desktop only */
@@ -468,10 +527,12 @@ input:-webkit-autofill:active {
         margin-left: 15%;
         border-radius: 20px;
         border: none;
-        height: 40px;
+        min-height: 40px;
         outline: none;
         background-color: #3a3b3c;
         box-shadow: 2px 3px #131313;
+        text-align:left;
+        margin-bottom:20px;
     
     }
     .msgInput input {
@@ -491,7 +552,7 @@ input:-webkit-autofill:active {
     }
     #typeMsg {
         width: 100%;
-        min-height: 60px;
+        min-height: 40px;
         position: fixed;
         bottom: 0;
         font-size: 20px;

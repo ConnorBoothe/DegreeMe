@@ -12,11 +12,22 @@
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="../assets/css/connectByMajor.css">
+         <!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+		})(window,document,'script','dataLayer','GTM-PTK9R96');</script>
+		<!-- End Google Tag Manager -->
         <script src="assets/jquery/dist/jquery.js"></script>
         
         <!-- <script src="https://js.stripe.com/v3/"></script>    -->
     </head>
         <body>
+                 <!-- Google Tag Manager (noscript) -->
+ <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PTK9R96"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
           
             <div class="overlay"></div>
             <%- include ('partials/mobileComingSoon.ejs')%>
@@ -60,36 +71,7 @@
                           <input class="btn btn-primary" type="submit"/>
                         </form>
 
-                        <!-- <div id= "settingsWrapper">
-                          <div class="editProfile">
-                            <div>
-                              <img src="<%=session.img%>" class="editImg" id="userImage"/>
-                            </div>
-                          <div class="img-btn-container">
-                            <button class="img-btn">Change Profile Photo</button><div class="result1"></div>
-                        </div>
-                        <small class="imgTxt"></small>
-                        <p>It can take several minutes for your changes to be visible.</p>
-                        <div class="img-upload-container">
-                          <div class="img-secondary-wrapper">
-                        <input type='hidden' name='img1' class='croppedImg' value="" required/>
-                        <input type="file" class="upload upload-file" value="Upload an Image" accept="image/gif, image/jpeg, image/png">
-                        <span class="picX"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                          <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
-                          <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
-                        </svg></span>
-                    <div class="upload-demo"></div>
-                    <div  class="upload-result btn-primary">Use</div>
-                    </div>
-                      </div>
-                              </div>
-                          </div>
-                          <form method="POST" action="Settings" class="settings-form">
-                            <input name="img1" type="hidden" class="imagebase64" name="imagebase64">
-                            <input name="handle" type="hidden" id="" name="" value="<%=session.handle%>">
-                            <input type="submit" class="btn btn-primary" value="Update Profile"/>
-                        </form>
-                        <p class="noChangeTxt">No changes were made</p> -->
+                       
                 </div>
 
                         
@@ -112,7 +94,8 @@
         <script type="text/javascript" src="assets/js/crop.js"></script>
         <script type="text/javascript" src="assets/js/FormValidation/settings-validation.js"></script>
         <script type="text/javascript" src="../assets/js/Client-DateFunctions.js"></script>
-        <script type="text/javascript" src="../assets/js/CreateConversation_Autocomplete.js"></script>
-        
+        <script type="text/javascript" src="../assets/js/Messages/newConversationAutocomplete.js"></script> 
+        <script type="text/javascript" src="../assets/js/Messages/createThread.js"></script>
+       
     </body>
 </html>

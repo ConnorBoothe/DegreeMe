@@ -1,7 +1,7 @@
 require('dotenv').config();
 const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGO_URL|| 'mongodb://localhost:27017/CollegeTutor', { useNewUrlParser: true,useUnifiedTopology: true },function(err){
+mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true },function(err){
     
 });
 db = mongoose.connection;
@@ -27,24 +27,19 @@ var discussionDB = mongoose.model('DiscussionBoardDB',discussionDBSchema);
 
 module.exports = class DiscussionBoard {
     getDiscussionByCourse(courseName){
-        var discussionDB = mongoose.model('DiscussionBoardDB',discussionDBSchema);
         return discussionDB.find({courseName:courseName})
     }
     getAllDiscussions(){
-        var discussionDB = mongoose.model('DiscussionBoardDB',discussionDBSchema);
         return discussionDB.find();
     }
     //get all discussion ids
     getAllDiscussionIds(){
-        var discussionDB = mongoose.model('DiscussionBoardDB',discussionDBSchema);
         return discussionDB.find({},"_id");
     }
     getAllDiscussionById(id){
-        var discussionDB = mongoose.model('DiscussionBoardDB',discussionDBSchema);
         return discussionDB.find({_id:id})
     }
     postDiscussion(userHandle, userName, userImg, anonymous, courseName, date1, post1, attachments, timelineId){
-        var discussionDB = mongoose.model('DiscussionBoardDB',discussionDBSchema);
         if(attachments.length > 0){
             var attach = [];
             for(var i = 0; i < attachments.length; i++){
@@ -82,8 +77,6 @@ module.exports = class DiscussionBoard {
                  console.log(data)
              })
         
-        })
-         
-        
+        })  
     }
 }

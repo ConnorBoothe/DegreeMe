@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const TutorSchedule = require("./TutorSchedule");
 var schedule = new TutorSchedule();
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost:27017/CollegeTutor', {
+mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }, function (err) {

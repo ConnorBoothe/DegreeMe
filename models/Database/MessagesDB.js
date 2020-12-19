@@ -5,20 +5,23 @@ var mail = unirest("POST", "https://api.sendgrid.com/v3/mail/send");
 const UserDB = require("./UserDB");
 const users = new UserDB();
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost:27017/CollegeTutor', { useNewUrlParser: true,useUnifiedTopology: true },function(err){
+mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true,useUnifiedTopology: true },function(err){
     
 });
 db = mongoose.connection;
 // db.on('error', console.error.bind(console, 'connection error:'));
 var Schema = mongoose.Schema;
-
+var attachments = new Schema({
+  file:{type:String, required: true}
+});
 var messagesSchema = new Schema({
   sender:{type:String, required:true},
   senderImg: {type:String, required:true},
   message:{type:String, required:true},
-  dateTime:{type:Date, required:true}
-  
+  dateTime:{type:Date, required:true},
+  attachments: [attachments]
 });
+
 var thread = new Schema({
     host:{type:String, required:true},
     hostImg:{type:String, required:true},
@@ -32,11 +35,9 @@ var msgDB = mongoose.model('MessagesDB',thread);
 
 module.exports = class Messages {
     getAllThreads(){
-      var msgDB = mongoose.model('MessagesDB',thread);
       return msgDB.find();
     }
     addMessage(id,sender, senderImg, msg,  dateTime){
-      var msgDB = mongoose.model('MessagesDB',thread);
       msgDB.find({_id:id}).exec((err, docs)=>{
         if(docs[0]){
           docs[0].messages.push({sender:sender, senderImg:senderImg, message:msg, dateTime:dateTime });
@@ -147,7 +148,26 @@ module.exports = class Messages {
             break;
           }
         }
+      });
+    }
+    attachImage(id, image){
+      return new Promise((resolve, reject)=>{
+        msgDB.findOne({_id:id})
+        .then(function(thread){
+          if(thread.messages.attachments == undefined){
+            thread.messages[thread.messages.length-1].attachments = [{file: image}]
+          }
+          else {
+            thread.messages[thread.messages.length-1].attachments.push({file: image});
+          }
+          thread.save();
+            resolve(true)
+        })
+        .catch(function(error){
+          console.log(error)
+          reject(false);
+        })
       })
-      ;
+      
     }
 }

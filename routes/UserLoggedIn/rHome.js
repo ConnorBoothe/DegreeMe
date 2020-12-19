@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
 const mongoose = require("mongoose");
-mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true,useUnifiedTopology: true },function(err){console.log(err)});
+mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true,useUnifiedTopology: true },function(err){});
 const session = require('express-session'); //used to manipulate the session
 var MongoStore = require('connect-mongo')(session);
 const nodemailer = require("nodemailer");
@@ -53,7 +53,7 @@ router.use(session({
       secret: 'toolbox1217!',
       resave: true,
       saveUninitialized: true,
-      cookie: { secure: true,
+      cookie: { secure: false,
           maxAge:  6*60*60*1000 },
     }));
 router.use(bodyParser.json());
@@ -84,21 +84,12 @@ function sortTutoringSessions(tutorSeshArray) {
 router.get('/home', function (req, res) {
     // stream.clearAllMembers("5fad920a6d292df74fb7493b");
     if (req.session.userId) {
-        // stream.getStream(req.session.userId).then(function(data){
-        //     console.log("stream", data)
-        //     users.addStreamId(req.session.userId, data._id );
-        // })
-        // users.getUserByHandle(req.session.handle)
-        // .then(function(data){
-        //     console.log(data)
-        // })
+        //get user timeline
        timeline.getUserTimeline(req.session.following, 0, req)
        .then(function(docs1){
                 var timeLineArray = [];
                 new Promise((resolve, reject) => {
                 for (var x = 0; x < docs1.length; x++) {
-
-              
                     // .then(function(data){
                         var hasLiked = tl.likedBoolean(req.session.handle, docs1[x].likers);
                     //potentially removing this

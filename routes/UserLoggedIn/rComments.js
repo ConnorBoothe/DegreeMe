@@ -89,14 +89,15 @@ function (req, res) {
       res.redirect('/');
       console.log(errors)
     }
-
-        comments.addComment(req.body.postId, req.session.handle, req.session.img, req.body.message)
+    console.log(req.body)
+        //add comment to CommentsDB
+        console.log(req.body.attachments)
+        comments.addComment(req.body.postId, req.session.handle, req.session.img, req.body.message, req.body.attachments)
         .then(function(data){
+            console.log("Commment added")
             //add notification
             timeline.incrementCommentCount(req.body.postId)
             .then(function(){
-
-           
             notifications.addNotification(req.body.handle ,req.body.name,"commented on your post", req.body.img, "/post/"+req.body.postId)
             .then(function(){
                 console.log("NOTIF added")
@@ -151,15 +152,18 @@ function (req, res) {
                             } else if (resp.accepted){
                                 console.log("email was sent for follow")
                             }
-                        console.log(resp.body);
-                        res.redirect("/post/"+req.body.postId)
+                            res.status(202).json({
+                                postId:req.body.postId,
+                            }).end(); 
+                        // console.log(resp.body);
+                        // res.redirect("/post/"+req.body.postId)
                         })
                     })
                 })
             })
             })
             .catch(function(){
-                res.redirect("/post/"+req.body.postId)     
+                // res.redirect("/post/"+req.body.postId)     
              })
            
         })

@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require("mongoose");
 mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true,useUnifiedTopology: true },function(err){
-    console.log(err);
+
 });
 const session = require('express-session'); //used to manipulate the session
 var MongoStore = require('connect-mongo')(session);
@@ -30,7 +30,7 @@ router.use(session({
       secret: 'toolbox1217!',
       resave: true,
       saveUninitialized: true,
-      cookie: { secure: true,
+      cookie: { secure: false,
           maxAge:  6*60*60*1000 },
     }));
 router.use(bodyParser.json());
@@ -64,7 +64,7 @@ router.post('/login', [
     }
     //find the user associated with email input
     users.getUserByEmail(req.body.email).exec((err, docs1) => {
-        if (docs1.length>0) { //if email exists in the DB
+        if (docs1.length > 0) { //if email exists in the DB
             //create temporary user object from DB result
             var user = new User(docs1[0]._id, docs1[0].first_name, docs1[0].last_name, docs1[0].school, docs1[0].email, docs1[0].password,
                 docs1[0].img, docs1[0].theme, docs1[0].handle, [], docs1[0].status, docs1[0].subscription, docs1[0].creditCount, docs1[0].threads, docs1[0].major,
@@ -73,7 +73,7 @@ router.post('/login', [
                 if (match) {
                     //if account has been verified, start the session
                     if (user.status === "Active") {
-                        req.session.user = user;
+                        // req.session.user = user;
                         req.session.userId = user.getId();
                         req.session.name = user.getName();
                         req.session.school = user.getSchool();
@@ -93,11 +93,9 @@ router.post('/login', [
                         req.session.mySchedule = user.getMySchedule();
                         req.session.myCourses = docs1[0].myCourses;
                         req.session.activeTutor = false;
-                        req.session.showChat = false;
-                        if(docs1[0].streamId != null){
+                        if(docs1[0].streamId){
                             req.session.streamId = docs1[0].streamId;
                         }
-                        console.log("StreamId: " + req.session.streamId)
                         if(docs1[0].StripeId === "none"){
                             req.session.tutor = false;
                         }
