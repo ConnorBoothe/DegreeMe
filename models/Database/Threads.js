@@ -28,6 +28,7 @@ module.exports = class Messages {
     getAllThreads(){
       return threads.find();
     }
+    
     // addMessage(id,sender, senderImg, msg,  dateTime){
     //   msgDB.find({_id:id}).exec((err, docs)=>{
     //     if(docs[0]){
@@ -125,7 +126,6 @@ module.exports = class Messages {
     addUserToThread(id, user){
       return threads.findOne({_id: id})
       .exec((err, docs)=>{
-  
         docs.userHandles.push(user);
         docs.save();
       })

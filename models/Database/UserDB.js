@@ -67,7 +67,10 @@ var userDBSchema = new Schema({
     img:{type:String, required:true},
     rating: {type:String},
     theme:{type:String},  
+    //account status
     status:{type:String, required:true},  
+    //user status
+    active: {type:String, required:true},
     activationCode:{type:String, required:true},  
     // subscription:{type:String, required:true},
     Major: {type:String},
@@ -90,6 +93,8 @@ var userDBSchema = new Schema({
    
 }, {collection: 'UserDB'});
 var UserDB = mongoose.model('UserDB',userDBSchema);
+//Creating an index to retrieve users by id
+UserDB.ensureIndexes({"handle":1});
 module.exports = class User {
     //return all users
     getStudents(){
@@ -181,7 +186,7 @@ module.exports = class User {
         var user =new UserDB({handle:handle,first_name: first_name, last_name: last_name,
             school: school, email: email, password: password, img: img, activationCode: code,
             theme:'bg-dark', rating:0, status:status, StripeId: "none", CustomerId:"none", notificationCount:0,
-             Tutor:false, dateCreated:new Date(), bio:"Tell the world a bit about yourself"});
+             Tutor:false, dateCreated:new Date(), bio:"Tell the world a bit about yourself", active: false} );
         return user.save();
     }
     //add follower function adds a follower to the followers array,
@@ -251,15 +256,22 @@ module.exports = class User {
     }
 
     addThread(host, hostImg, subject, threadId, handle){
-        UserDB.findOne({handle:handle}).exec((err,docs)=>{
-            if(docs){
-                docs.threads.push({threadId:threadId, host:host, hostImg:hostImg, subject: subject, unreadCount:0, timestamp:new Date()});
-                docs.save();
-            }
-            else{
-                console.log("Handle doesn't match: " + handle);
-            }
-        });
+        return new Promise((resolve, reject)=>{
+            UserDB.findOne({handle:handle}).then((docs)=>{
+                if(docs){
+                    docs.threads.push({threadId:threadId, host:host, hostImg:hostImg, 
+                        subject: subject, unreadCount:0, timestamp: new Date()});
+                    docs.save();
+                    resolve(docs);
+                }
+                else{
+                    console.log("Handle doesn't match: " + handle);
+                }
+            })
+            .catch((err)=>{
+                reject(err);
+            })
+        })
     }
     removeThread(handle, threadId){
         UserDB.findOne({handle:handle}).exec((err,docs)=>{
@@ -292,7 +304,7 @@ module.exports = class User {
         });
     }
       //updates unread count and moves thread to top of list
-      unreadCountToZero(threadId, id, req, res,  messages, formatDate, formatTime){
+      unreadCountToZero(threadId, id, req, res,  messages, formatDate, formatTime, unescapeApostrophe){
         
             UserDB.findOne({_id:id}).exec((err,docs)=>{
                 var tempThread = "";
@@ -315,7 +327,8 @@ module.exports = class User {
                             qs: req.query,
                             messages: messages,
                             formatDate: formatDate,
-                            formatTime:formatTime
+                            formatTime:formatTime,
+                            unescapeApostrophe: unescapeApostrophe
                         });
                     }
                 });
@@ -334,6 +347,8 @@ module.exports = class User {
     }
     //when message is sent, related thread should move to top of the list
     moveThread(threadId, handle, senderHandle){
+        console.log("ID: "+ threadId)
+        console.log(handle)
         return new Promise((resolve, reject) => {
             UserDB.findOne({handle:handle}).exec((err,docs)=>{
                 var tempThread = "";
@@ -341,6 +356,7 @@ module.exports = class User {
                 for(var x = 0; x< docs.threads.length; x++){
                     if(docs.threads[x].threadId === threadId){
                         tempThread  = docs.threads[x];
+                        break;
                     }
                 }
                 //if threadId was a match, pull then push the thread to move it to the top of the list
@@ -569,5 +585,20 @@ module.exports = class User {
      //set active tutor
      updateMajor(id, major){
         return UserDB.findOne({_id: id}).updateOne({$set:{Major: major}})
+    }
+    //set user status to active or inactive
+    setUserStatus(id, status){
+        return UserDB.findOne({_id: id}, "active")
+            .updateOne({
+                $set: {
+                    active: status
+                }
+            })
+    }
+    //get user status to active or inactive
+    getUserStatus(handleArray){
+        return UserDB.find({
+            handle: {$in: handleArray}
+        }, "active");
     }
 }
