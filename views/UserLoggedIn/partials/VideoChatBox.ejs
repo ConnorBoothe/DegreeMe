@@ -1,0 +1,37 @@
+<div class="show-chat">
+    <div class="text-light collapse-chat">
+        <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-chat-right-dots-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M16 2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h9.586a1 1 0 0 1 .707.293l2.853 2.853a.5.5 0 0 0 .854-.353V2zM5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+          </svg>
+          <p class="show-chat-text">Chat</p>
+        </div>
+</div>
+<div class="chat-container">
+    <input type="hidden" name="streamId" value="<%=params.id%>" />
+    <input type="hidden" name="showChat" value="<%=session.showChat%>" />
+    <p class="text-light chat-label">
+        <a class="chat-tooltiip" data-toggle="tooltip" data-placement="top"
+            title="Collapse">
+            <span class="collapse-chat">
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-square-fill" fill="white" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm2.5 8.5a.5.5 0 0 1 0-1h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5z"/>
+              </svg>
+            </span>
+            </a>
+            
+        
+        <span class="chat-title text-light">Chat</span></p>
+    <div class="chat-wrapper">
+        <p class="text-light chat-message"><span class="chat-handle"><%=session.handle%>: </span>Can we go over #8?</p>
+    </div>
+    <div class="write-message">
+        <div class="send-chat-container">
+            <p contenteditable="true" placeholder="Write message here" class="chatbox">Write your message here</p>
+           
+        </div>
+       <button class="btn btn-primary chat-btn">Chat</button>
+
+    </div>
+    
+</div>
+
