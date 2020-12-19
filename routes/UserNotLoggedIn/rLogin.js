@@ -93,6 +93,11 @@ router.post('/login', [
                         req.session.mySchedule = user.getMySchedule();
                         req.session.myCourses = docs1[0].myCourses;
                         req.session.activeTutor = false;
+                        req.session.showChat = false;
+                        if(docs1[0].streamId != null){
+                            req.session.streamId = docs1[0].streamId;
+                        }
+                        console.log("StreamId: " + req.session.streamId)
                         if(docs1[0].StripeId === "none"){
                             req.session.tutor = false;
                         }
