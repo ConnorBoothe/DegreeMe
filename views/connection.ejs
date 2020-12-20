@@ -19,10 +19,9 @@
         <script type="text/javascript" src="./assets/js/main.js"></script>
     </head>
     <body class="<%=session.theme%>">
-              <!-- Google Tag Manager (noscript) -->
-              <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PTK9R96"
-                height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-                <!-- End Google Tag Manager (noscript) -->
+        <!-- Google Tag Manager (noscript) -->
+        <% include views/googleTagManager.ejs %>
+        <!-- End Google Tag Manager (noscript) -->
         <div class="page-container">
             <div id="headerContainer">
                 <% include partials/header.ejs %>
