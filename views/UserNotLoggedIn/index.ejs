@@ -25,13 +25,14 @@
     <script src="../assets/jquery/dist/jquery.js"></script>
 </head>
 <body class="">
+  
     <!-- Google Tag Manager (noscript) -->
-    <% include views/googleTagManager.ejs %>
+    <%- include('partials/googleTagManager.ejs') -%>
     <!-- End Google Tag Manager (noscript) -->
     <div class="page-container ">
       <div>
           <div id="headerContainer">
-              <%-include ('partials/header.ejs') %>
+              <%- include('partials/header.ejs'); -%>
           </div>
             <div class="landing"> 
                 <div class="landing--text--big landing--margin title--landing">
