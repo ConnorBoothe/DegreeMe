@@ -12,16 +12,20 @@
   color: #ffffff;
   font-family: "Poppins", sans-serif;
 }
-
+.title--landing {
+  text-align: center;
+}
 .landing--text--big {
   font-size: clamp(30px, 5vw, 100px);
+  line-height: 1.09;
   font-weight: bold;
 }
 
 .landing--text--small {
-  font-size: clamp(16px, 2vw, 18px);
+  font-size: clamp(25px, 2vw, 18px);
   line-height: 2.2;
   margin-bottom: 20px;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .landing--text--primary {
