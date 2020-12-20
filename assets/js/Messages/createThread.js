@@ -4,6 +4,7 @@ $(document).ready(function(){
         e.preventDefault();
         var userHandles =$.session.get("userHandles").split(",");
         var subject = userHandles[0];
+        alert(subject)
         var userLengthMinus2 = parseInt(userHandles.length)-2;
         //create message title from userhandles
         if(userHandles.length < 3){

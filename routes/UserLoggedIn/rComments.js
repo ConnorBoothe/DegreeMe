@@ -89,87 +89,168 @@ function (req, res) {
       res.redirect('/');
       console.log(errors)
     }
-    console.log(req.body)
         //add comment to CommentsDB
-        console.log(req.body.attachments)
-        comments.addComment(req.body.postId, req.session.handle, req.session.img, req.body.message, req.body.attachments)
-        .then(function(data){
-            console.log("Commment added")
-            //add notification
-            timeline.incrementCommentCount(req.body.postId)
-            .then(function(){
-            notifications.addNotification(req.body.handle ,req.body.name,"commented on your post", req.body.img, "/post/"+req.body.postId)
-            .then(function(){
-                console.log("NOTIF added")
-                new Promise((resolve, reject) => {
-                    users.incrementNotificationCount(req.body.handle);
-                    resolve(true);
-
-                })
+        if(req.body.thumbnail){
+            comments.addYTComment(req.body.postId, req.session.handle, req.session.img, req.body.message, req.body.attachments)
+            .then(function(data){
+                
+                console.log("Commment added")
+                //add notification
+                timeline.incrementCommentCount(req.body.postId)
                 .then(function(){
-                    //send email
-
-                    users.getEmailByHandle(req.body.handle)
-                    
-                    .then(function(data1){
-                        mail.headers({
-                            "content-type": "application/json",
-                            "authorization": process.env.SENDGRID_API_KEY,
-                            });
-                            mail.type("json");
-                            mail.send({
-                            "personalizations": [
-                                {
-                                    "to": [
-                                        {
-                                            "email": data1[0].email,
-                                        }
+                notifications.addNotification(req.body.handle ,req.body.name,"commented on your post", req.body.img, "/post/"+req.body.postId)
+                .then(function(){
+                    new Promise((resolve, reject) => {
+                        users.incrementNotificationCount(req.body.handle);
+                        resolve(true);
+    
+                    })
+                    .then(function(){
+                        //send email
+                        users.getEmailByHandle(req.body.handle)
+                        .then(function(data1){
+                            mail.headers({
+                                "content-type": "application/json",
+                                "authorization": process.env.SENDGRID_API_KEY,
+                                });
+                                mail.type("json");
+                                mail.send({
+                                "personalizations": [
+                                    {
+                                        "to": [
+                                            {
+                                                "email": data1[0].email,
+                                            }
+                                    ],
+                                        "dynamic_template_data": {
+                                            "subject": req.body.name + " commented on your post!",
+                                            "handle": req.session.handle,
+                                            "postId": req.body.postId,
+                                            "message":req.body.message
+                                    },
+                                        "subject": "You have a new follower!"
+                                    }
                                 ],
-                                    "dynamic_template_data": {
-                                        "subject": req.body.name + " commented on your post!",
-                                        "handle": req.session.handle,
-                                        "postId": req.body.postId,
-                                        "message":req.body.message
+                                    "from": {
+                                        "email": "notifications@degreeme.io",
+                                        "name": "DegreeMe"
                                 },
-                                    "subject": "You have a new follower!"
+                                    "reply_to": {
+                                        "email": "noreply@degreeme.io",
+                                        "name": "No Reply"
+                                },
+                                    "template_id": "d-293c46ac8fbb4242ba5d755baa045572"
+                                });
+                                mail.end(function (resp) {
+                                if (resp.error){
+                                    console.log("follow error: ", resp.error)
+                                    // res.redirect("/home")
+                                    // throw new Error(res.error);
+                                } else if (resp.accepted){
+                                    console.log(data)
+                                    console.log("email was sent for follow")
+                                    res.status(202).json({
+                                        post:data,
+                                    }).end(); 
                                 }
-                            ],
-                                "from": {
-                                    "email": "notifications@degreeme.io",
-                                    "name": "DegreeMe"
-                            },
-                                "reply_to": {
-                                    "email": "noreply@degreeme.io",
-                                    "name": "No Reply"
-                            },
-                                "template_id": "d-293c46ac8fbb4242ba5d755baa045572"
-                            });
-                            mail.end(function (resp) {
-                            if (resp.error){
-                                console.log("follow error: ", resp.error)
-                                // res.redirect("/home")
-                                // throw new Error(res.error);
-                            } else if (resp.accepted){
-                                console.log("email was sent for follow")
-                            }
-                            res.status(202).json({
-                                postId:req.body.postId,
-                            }).end(); 
-                        // console.log(resp.body);
-                        // res.redirect("/post/"+req.body.postId)
+                               
+                            // console.log(resp.body);
+                            // res.redirect("/post/"+req.body.postId)
+                            })
                         })
                     })
                 })
+                })
+                .catch(function(err){
+                    console.log(err)
+                })
+               
             })
+            .catch(function(err){
+                console.log(err);
+                res.redirect("/post/"+req.body.postId);
+            });
+        }
+        else{
+            comments.addComment(req.body.postId, req.session.handle, req.session.img, req.body.message, req.body.attachments)
+            .then(function(data){
+                console.log("Commment added")
+                //add notification
+                timeline.incrementCommentCount(req.body.postId)
+                .then(function(){
+                notifications.addNotification(req.body.handle ,req.body.name,"commented on your post", req.body.img, "/post/"+req.body.postId)
+                .then(function(){
+                    new Promise((resolve, reject) => {
+                        users.incrementNotificationCount(req.body.handle);
+                        resolve(true);
+    
+                    })
+                    .then(function(){
+                        //send email
+                        users.getEmailByHandle(req.body.handle)
+                        .then(function(data1){
+                            mail.headers({
+                                "content-type": "application/json",
+                                "authorization": process.env.SENDGRID_API_KEY,
+                                });
+                                mail.type("json");
+                                mail.send({
+                                "personalizations": [
+                                    {
+                                        "to": [
+                                            {
+                                                "email": data1[0].email,
+                                            }
+                                    ],
+                                        "dynamic_template_data": {
+                                            "subject": req.body.name + " commented on your post!",
+                                            "handle": req.session.handle,
+                                            "postId": req.body.postId,
+                                            "message":req.body.message
+                                    },
+                                        "subject": "You have a new follower!"
+                                    }
+                                ],
+                                    "from": {
+                                        "email": "notifications@degreeme.io",
+                                        "name": "DegreeMe"
+                                },
+                                    "reply_to": {
+                                        "email": "noreply@degreeme.io",
+                                        "name": "No Reply"
+                                },
+                                    "template_id": "d-293c46ac8fbb4242ba5d755baa045572"
+                                });
+                                mail.end(function (resp) {
+                                if (resp.error){
+                                    console.log("follow error: ", resp.error)
+                                    // res.redirect("/home")
+                                    // throw new Error(res.error);
+                                } else if (resp.accepted){
+                                    console.log(data)
+                                    console.log("email was sent for follow")
+                                    res.status(202).json({
+                                        post:data,
+                                    }).end(); 
+                                }
+                               
+                            // console.log(resp.body);
+                            // res.redirect("/post/"+req.body.postId)
+                            })
+                        })
+                    })
+                })
+                })
+                .catch(function(err){
+                    console.log(err)
+                })
+               
             })
-            .catch(function(){
-                // res.redirect("/post/"+req.body.postId)     
-             })
-           
-        })
-        .catch(function(err){
-            console.log(err);
-            res.redirect("/post/"+req.body.postId);
-        });       
+            .catch(function(err){
+                console.log(err);
+                res.redirect("/post/"+req.body.postId);
+            });
+        }
+             
 });
 module.exports = router;

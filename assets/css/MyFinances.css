@@ -171,7 +171,7 @@ input[type=range]::-webkit-slider-runnable-track {
   height: 25px;
   cursor: pointer;
   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-  background: #d3d3d3;
+  background: #18191a;
   border-radius: 50px;
   border: 0.2px solid #010101;
   -webkit-transition: width 2s; /* Safari prior 6.1 */

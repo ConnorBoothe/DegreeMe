@@ -1,5 +1,27 @@
 
 $(document).ready(function(){
+    var imageArray = [];
+    $(".timeline-wrapper").on("change","#attachment", function(){
+        var filename = $("#attachment").val().replace(/C:\\fakepath\\/i, '')
+        var acceptImage = validateImage(filename);
+        if(acceptImage){
+            readURL($(this)[0], imageArray, $(this));
+        }
+        else{
+            $('.toast-body').show();
+                setTimeout(function(){
+                    $('.toast-body').hide();
+                }, 1000)
+        }
+        console.log(imageArray)
+    })
+    $(".timeline-wrapper").on("click", ".delete-badge", function(){
+        var name = $(this).next().attr("name");
+        //remove attachment from array
+        removeAttachmentFromArray(name, imageArray);
+        //remove attachment from the DOM
+        $(this).parent().remove();
+    })
     $(".mobile-actions ul li").on("click", function(){
         $(".mobile-actions ul li").removeClass("mobile-actions-bottom-border")
         $(this).addClass("mobile-actions-bottom-border")
@@ -52,9 +74,34 @@ $(document).ready(function(){
         else if($(this).attr("class").split(" ")[0] == "askQuestion") {
             $(".timeline-wrapper").html('<div class="recentActivity-title">'+
             '</div>'+
-            '<div class="askQuestion-container"><span class="text-light"><textarea class="askQuestion-textarea" placeholder="Write your question here"/></textarea></span>'+
-            '<input type="text" class="tagACourse" placeholder="Tag a course"/><div class="findTutorMobile-results"></div><p class="text-light optional">Optional</p><input type="text" class="tagAGroup" placeholder="Tag a group"/><div class="findTutorMobile-results-group"></div>'+
-            '<p class="text-light attachFile">Attach a file</p><input type="file" class="form-control-file askQuestion-file text-light"/><br><button class="btn btn-primary postQuestionBtn">Post</button></div>');
+            '<div class="askQuestion-container"><span class="text-light"><textarea class="askQuestion-textarea" placeholder="Ask the DegreeMe community.."/></textarea></span>'+
+            '<ul class="question-tag-list" >'+
+            '<li><p class="text-light optional">Required</p><input type="text" class="tagACourse" placeholder="Tag a course"/><div class="findTutorMobile-results"></div></li>'+
+            '<li><p class="text-light optional">Optional</p><input type="text" class="tagAGroup" placeholder="Tag a group"/><div class="findTutorMobile-results-group"></div></li>'+
+            '</ul>'+
+            '<ul class="comments-actions-list">'+
+                    '<li class="attachment-li">'+
+                        '<div class="image-attachments">'+
+                            
+                        '</div>'+
+                    '</li>'+
+                    '<li>'+
+                            '<a data-toggle="tooltip" data-placement="top"'+
+                                            'title="File Upload">'+
+                        '<label id="imageUploadLabel" for="attachment" class=" btn-lg purple-file-upload darken-2 mt-0 float-left">'+
+                          '<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-earmark-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
+                            '<path fill-rule="evenodd" d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0H4zm5.5 1.5v2a1 1 0 0 0 1 1h2l-3-3z"/>'+
+                          '</svg>'+
+                        '</label>'+
+                    '</a>'+
+                        '<input class="comment-file" id="attachment" name="attachment" type="file" />'+
+                        
+                    '</li>'+
+                    '<li>'+
+                        '<input class="btn btn-primary postQuestionBtn" id="comments-button" type="submit" name="" value="Post" />'+
+                    '</li>'+
+               
+                '</ul>');
             $(".askQuestion-textarea").focus();
         }
 
@@ -67,6 +114,7 @@ $(".timeline-wrapper").on("focusout",".mobile-tutor-search", function(){
 })
     //mobile find tutor autocomplete
     $(".timeline-wrapper").on("keyup",".mobile-tutor-search", function(){
+         $(".findTutorMobile-results").show();
         var inputVal = $(this).val();
     payload = {
         searchValue:$(this).val(),
@@ -83,7 +131,7 @@ $(".timeline-wrapper").on("focusout",".mobile-tutor-search", function(){
              console.log(result)
              if(result.type === "Courses"){
                  if((inputVal === "")){
-                    $(".findTutorMobile-results").html("<p class='emptySearch'>Search Courses</p>");
+                    // $(".findTutorMobile-results").hide();
                  }
                  else if(result.Courses.length > 0){
                     var courses = "";
@@ -196,7 +244,7 @@ payload = {
          console.log(result)
          if(result.type === "Courses"){
              if((inputVal === "")){
-                $(".findTutorMobile-results").html("<p class='emptySearch'>Search Courses</p>");
+                $(".findTutorMobile-results").hide();
              }
              else if(result.Courses.length > 0){
                 var courses = "";
@@ -222,9 +270,10 @@ payload = {
 //on click event for tag course item
 $(".timeline-wrapper").on("click",".tagCourse-item", function(){
     $(this).parent().prev().val($(this).children().eq(0).text());
-    $(".findTutorMobile-results").html("");
+    $(".findTutorMobile-results").hide();
     // $(".tagACourse").parent().prev().text($(this).children().eq(1).text());
 });
+
 $(".timeline-wrapper").on("keyup",".tagAGroup", function(){
     $(".findTutorMobile-results-group").show();
     var inputVal = $(this).val();
@@ -237,7 +286,7 @@ $(".timeline-wrapper").on("keyup",".tagAGroup", function(){
      202: function (result) {
          console.log(result.groups.StudyGroups[0])
              if((inputVal === "")){
-                $(".findTutorMobile-results-group").html("<p class='emptySearch'>Search Your Groups</p>");
+                $(".findTutorMobile-results-group").hide();
              }
              else if(result.groups.StudyGroups.length > 0){
                 var groups = "";
@@ -261,12 +310,12 @@ $(".timeline-wrapper").on("keyup",".tagAGroup", function(){
  });
 })
 $(".timeline-wrapper").on("click", ".postQuestionBtn", function(){
-    var course = $(this).prev().prev().prev().prev().prev().prev().prev().prev();
-    var message = $(this).prev().prev().prev().prev().prev().prev().prev().prev().prev().children().eq(0);
-    var filename = $(".askQuestion-file").val().replace(/C:\\fakepath\\/i, '')
+    var course = $(this).parent().parent().prev().children().eq(0).children().eq(1);
+    var message = $(this).parent().parent().prev().prev().children().eq(0);
+    var filename = $("#attachment").val().replace(/C:\\fakepath\\/i, '')
     var storageRef = firebase.storage().ref("attachments/"+filename);
     var image ="";
-    var image = $(".askQuestion-file")[0].files[0];
+    var image = $("#attachment")[0].files[0];
     //input validation
     if(course.val() == "" || message.val() == "") {
         if(course.val() == ""){
@@ -276,42 +325,46 @@ $(".timeline-wrapper").on("click", ".postQuestionBtn", function(){
             message.css("border", "1px solid #dc3545")
         }
     }
-   
     else if(image != undefined) {
-    storageRef.put(image)
-    .then(function(){
-        storageRef.getDownloadURL().then(function(url) {
-            payload = {
-                message:message.val(),
-                course:course.val(),
-                image:url
-             }
-             $.ajax({
-                 url: "/askQuestion",
-                 type: 'POST',
-                 data: JSON.stringify(payload),
-                 headers: {
-                 "Content-Type": "application/json"
-                 }, statusCode: {
-                 202: function (result) {
-                     location.href = "/";
-                 },
-                 500: function (result) {
-                     alert("500 ");
-                     console.log(result)
-                 },
-                 },
-             });
+  
+        storageRef.put(image)
+        .then(function(){
+            storageRef.getDownloadURL().then(function(url) {
+                payload = {
+                    message:message.val(),
+                    course:course.val(),
+                    image:url
+                 }
+                 $.ajax({
+                     url: "/askQuestion",
+                     type: 'POST',
+                     data: JSON.stringify(payload),
+                     headers: {
+                     "Content-Type": "application/json"
+                     }, statusCode: {
+                     202: function (result) {
+                         location.href = "/";
+                     },
+                     500: function (result) {
+                         alert("500 ");
+                         console.log(result)
+                     },
+                     },
+                 });
+            })
         })
-    })
+
+  
     }
     //post question without image
     else {
+        alert("No image")
         payload = {
             message:message.val(),
             course:course.val(),
             image:"none"
          }
+         console.log(payload)
         $.ajax({
             url: "/askQuestion",
             type: 'POST',
@@ -320,6 +373,7 @@ $(".timeline-wrapper").on("click", ".postQuestionBtn", function(){
             "Content-Type": "application/json"
             }, statusCode: {
             202: function (result) {
+                alert("YO")
                  location.href = "/";
             },
             500: function (result) {
@@ -332,7 +386,7 @@ $(".timeline-wrapper").on("click", ".postQuestionBtn", function(){
 })
 $(".timeline-wrapper").on("click", ".group-item", function(){
     $(this).parent().parent().prev().val($(this).text())
-    $(".findTutorMobile-results-group").html("");
+    $(".findTutorMobile-results-group").hide();
 })
 //remove red border on focus
 $(".timeline-wrapper").on("focus",".askQuestion-textarea", function(){

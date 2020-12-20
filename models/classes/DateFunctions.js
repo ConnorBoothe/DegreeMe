@@ -84,7 +84,7 @@ module.exports = class DateFunctions {
     }
     return hours + ":" + minutes + " " + amPm;
   }
-  //takes miliary time as parameter
+  //takes military time as parameter
   formatTime(time){
     var timeArray = time.split(":");
     var minutes = timeArray[1];

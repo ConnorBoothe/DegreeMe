@@ -8,6 +8,7 @@
          <link href="../assets/css/main1.css" rel="stylesheet">
         <link href="../assets/css/home.css" rel="stylesheet">
         <link href="../assets/css/CourseProfile.css" rel="stylesheet">
+        <link href="../assets/css/messages.css" rel="stylesheet">
         <link href="../assets/css/comments.css" rel="stylesheet">
 
         <!-- Google Tag Manager -->
@@ -43,47 +44,73 @@
                             <img class="discImg" src="<%=comments[x].commenterImg%>" />
                             <a href= "../user/<%=comments[x].commenterHandle%>"><%=comments[x].commenterHandle%><span class="text-light userName-text" ></span></a>
                         </span>
-                        <p class="text-light comments-text"><%=comments[x].message%></p>
+                        
                         <%if(comments[x].attachments.length > 0){%>
-                            <a href="<%=comments[x].attachments[0].file%>">
-                            <img class="comment-img" src="<%=comments[x].attachments[0].file%>"/>
-                        </a>
+                            <%if(comments[x].attachments[0].file.length > 1){%>
+                                <a target="_blank" href="<%=comments[x].attachments[0].file[0]%>">
+                                    <div class="thumbnail-container"><img src="<%=comments[x].attachments[0].file[1]%>" class="yt-thumbnail"/></div>
+                                    <span class="text-light yt-title"><%=comments[x].attachments[0].file[2]%></span>
+                                    </a>
+                            <%}else{%>
+                                <%if(!comments[x].message.includes("http")) {%>
+                                    <p class="text-light comments-text"><%=comments[x].message%></p>
+                                    <a href="<%=comments[x].attachments[0].file%>">
+                                        <img class="comment-img" src="<%=comments[x].attachments[0].file%>"/>
+                                        </a>
+                                 <%}else {%>
+                                    <p class="text-light comments-text"></p>
+                                <a href="<%=comments[x].attachments[0].file%>">
+                                    <img class="comment-img" src="<%=comments[x].attachments[0].file%>"/>
+                                    </a>
+                                 <%}%>
+                                
+                            <%}%>
+
+                        <%}else{%>
+                            <p class="text-light comments-text"><%=comments[x].message%></p>
                         <%}%>
                     </div>
                     <%}%>
-                    <form method="POST" action="/addComment">
-                        
-                        <textarea class="commentMsg" name="message" placeholder="Write your comment here"></textarea>
-                        <ul class="comments-actions-list">
-                            
-                        <li>
-                            <div class="file-field big">
-                                <a data-toggle="tooltip" data-placement="top"
-                                                title="File Upload">
-                            <label id="imageUploadLabel" for="attachment" class="btn-floating btn-lg purple-file-upload darken-2 mt-0 float-left">
-                              <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-earmark-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0H4zm5.5 1.5v2a1 1 0 0 0 1 1h2l-3-3z"/>
-                              </svg>
-                            </label>
-                            <input class="comment-file" id="attachment" name="attachment" type="file" multiple />
-                            </a>
-                        </div>
-                        </li>
-                        <li>
-                            <!-- <input type="hidden" name="course" value=""/> -->
-                            <input type="hidden" name="postId" value="<%=post._id%>" />
-                            <input type="hidden" name="handle" value="<%=post.userHandle%>" />
-                            <input type="hidden" name="name" value="<%=post.userName%>" />
-                            <input type="hidden" name="img" value="<%=post.userImage%>" />
-                            
-                            <input class="btn btn-primary" id="comments-button" type="submit" name="" value="Add Comment" />
-                        </li>
-                   
-                    </ul>
-                        
-                    </form>
-                </div>          
+                    
+                </div>
+                <div class="addComment-form">
 
+                         
+                <form method="POST" action="/addComment" >
+                        
+                    <textarea class="commentMsg" name="message" placeholder="Write your comment here"></textarea>
+                    <ul class="comments-actions-list">
+                    <li class="attachment-li">
+                        <div class="image-attachments">
+                            
+                        </div>
+                    </li>
+                    <li>
+                            <a data-toggle="tooltip" data-placement="top"
+                                            title="File Upload">
+                        <label id="imageUploadLabel" for="attachment" class=" btn-lg purple-file-upload darken-2 mt-0 float-left">
+                          <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-earmark-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0H4zm5.5 1.5v2a1 1 0 0 0 1 1h2l-3-3z"/>
+                          </svg>
+                        </label>
+                    </a>
+                        <input class="comment-file" id="attachment" name="attachment" type="file" />
+                        
+                    </li>
+                    <li>
+                        <!-- <input type="hidden" name="course" value=""/> -->
+                        <input type="hidden" name="postId" value="<%=post._id%>" />
+                        <input type="hidden" name="handle" value="<%=post.userHandle%>" />
+                        <input type="hidden" name="name" value="<%=post.userName%>" />
+                        <input type="hidden" name="img" value="<%=post.userImage%>" />
+                        
+                        <input class="btn btn-primary" id="comments-button" type="submit" name="" value="Post" />
+                    </li>
+               
+                </ul>
+                    
+                </form>
+            </div> 
             </div>
             </div>
         </div>
@@ -108,6 +135,11 @@
     <script type="text/javascript" src="../assets/js/Client-DateFunctions.js"></script>
     <script type="text/javascript" src="../assets/js/commentsValidation.js"></script>
     <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../assets/js/tooltip.js"></script>
+
+    <script type="text/javascript" src="../assets/js/Messages/messageFunctions.js"></script>
+    <script type="text/javascript" src="../assets/js/Comments/addComment.js"></script>
+
 
     </body>
 </html>

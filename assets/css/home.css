@@ -3,6 +3,7 @@
     width: .5em;
     height: .5em;
     margin-top:50px;
+    background-color: #18191a;
 
 }
 
@@ -13,7 +14,40 @@
     margin-left:250px;
 }
 
-
+#attachment{
+    display:none;
+}
+.purple-file-upload{
+    background-color: #8a84ff;
+    color:white;
+    margin-top:30px;
+}
+#comments-button {
+    border-radius:20px;
+    font-family:"Open sans", "sans-serif";
+    font-size:16px!important;
+    margin-top:-50px;
+}
+#imageUploadLabel{
+    border-radius:50px;
+    width:45px!important;
+    height:45px!important;
+    font-size:17px;
+    cursor:pointer;
+}
+.comments-actions-list li{
+    list-style-type: none;
+    display:inline-block;
+    width:40px;
+    margin-right:20px;
+  
+}
+.comments-actions-list{
+    margin-bottom:50px;
+    margin-top:20px;
+    text-align:right;
+    margin-right:30px;
+}
 .timeline-container-image{
   
     min-height:300px;
@@ -70,7 +104,7 @@
     width:200px;
 }
 .homeSideBar{
-    width:250px;
+    width:180px;
     position:fixed;
     right:0;
     top:0;
@@ -79,6 +113,9 @@
     max-height:90%;
     overflow-y:auto;
     margin-right:20px;
+}
+.toast-body {
+    display:none;
 }
 .rateTutorBtn{
     font-size:12px!important;
@@ -411,6 +448,11 @@
     min-height:100px;
     border-bottom:.5px solid #a9a9a9;
     overflow-y: auto;
+    background-color:#242526;
+    padding:10px;
+    border-radius:10px;
+    text-align:center;
+    box-shadow: 2px 4px black;
 }
 .homeSideBar-container:last-of-type{
     border-bottom:none!important;
@@ -506,12 +548,12 @@ padding-right:10px;
     background-color:black!important;
 }
 .arrow::before, .arrow::after {
-    border-left-color:black!important; 
+    /* border-left-color:black!important; 
     -moz-transform: scaleX(-1);
     -webkit-transform: scaleX(-1);
     -o-transform: scaleX(-1);
     transform: scaleX(-1);
-    -ms-filter: fliph; /*IE*/
+    -ms-filter: fliph; IE */
 }
 .placeBid{
     float:right;
@@ -1076,9 +1118,41 @@ input[name="searchType"]{
     margin-left:60px!important;
     z-index:2;
   }
-  
+  .question-tag-list li{
+    width:50%!important;
+    display:inline-block;
+  }
+  .img-container {
+    display:inline-block;
+     width:50px;
+     margin-left:5px;
+     margin-right:5px;
+ }
+ .image-attachments img{
+    width:100%!important;
+    padding-bottom:10px;
+}
+.delete-badge {
+    border-radius:20px;
+    position:absolute;
+    padding:0px!important;
+    margin-left:30px;
+    border: 2px solid white;
+    margin-top:3px;
+    cursor:pointer;
+}
   /* desktop only */
   @media only screen and (min-width: 1000px) {
+    .course-search-sub-container span {
+        width: 100%!important;
+    }
+    .optional{
+        margin-top:20px!important;
+        text-align:left;
+        margin-left:30px;
+        font-size:14px;
+        margin-bottom:0!important;
+    }
     .timeline{
         width:40%;
         max-width:600px;
@@ -1131,9 +1205,15 @@ input[name="searchType"]{
         margin-right:5px;
         color:white;
     }
-    .findTutorMobile-results, .findTutorMobile-results{
+    .findTutorMobile-results, .findTutorMobile-results, .findTutorMobile-results-group{
         padding-top:20px;
         cursor:pointer;
+        position:absolute;
+        z-index:3;
+        width:16%!important;
+        background-color:#242526;
+        display:none;
+        margin-left:25px;
     }
     .mobile-tutor-search{
         background-color:#18191a;
@@ -1143,9 +1223,12 @@ input[name="searchType"]{
         border-bottom:none;
         border-left:none!important;
     }
+    .course-search-sub-container span {
+        width: 100%;
+    }
     .course-search-sub-container{
         border-bottom:2px solid #a9a9a9;
-        width:250px;
+        width:300px;
         display:inline-block;
         margin-left:auto;
         margin-right:auto;
@@ -1162,10 +1245,12 @@ input[name="searchType"]{
         margin-left:auto;
         margin-right:auto;
         text-align:left;
-        padding-left:5px;
-        background-color:#343a40;
+        padding-left:10px;
+        padding-top:5px;
+        background-color:#242526;
         color:white;
         border:none;
+        border-radius:10px;
     }
     .recentActivity-title{
         font-size:16px;
@@ -1175,12 +1260,15 @@ input[name="searchType"]{
         text-align:center;
     }
     .tagACourse, .tagAGroup{
-        background-color:#343a40;
+        background-color:#242526;
         border:none;
         color:white;
         margin-top:10px;
-        width:90%;
+        width:80%;
+        margin-right:5px;
         height:35px!important;
+        display:inline-block;
+        border-radius:10px;
     }
 .attachFile{
     margin-top:25px;
@@ -1200,13 +1288,7 @@ input[name="searchType"]{
         margin-top:40px;
         overflow-x: hidden;
     }
-    .postQuestionBtn{
-        margin-top:10px!important;
-        font-family:"Open sans", "sans-serif";
-        font-size:14px;
-        width:90%;
-        margin-top:20px!important;
-    }
+    
       .mobileMenu{
     display:none!important;
 }
@@ -1577,10 +1659,12 @@ input[name="searchType"]{
         margin-left:auto;
         margin-right:auto;
         text-align:left;
-        padding-left:5px;
+        padding-left:10px;
+        padding-top:5px;
         background-color:#343a40;
         color:white;
         border:none;
+
     }
     .timeline-wrapper{
         /* background-color:#242526!important; */
@@ -1607,7 +1691,7 @@ input[name="searchType"]{
         text-align:center;
     }
     .tagACourse, .tagAGroup{
-        background-color:#343a40;
+        background-color:#242526;
         border:none;
         color:white;
         margin-top:10px;
@@ -1632,13 +1716,7 @@ input[name="searchType"]{
         margin-top:40px;
         overflow-x: hidden;
     }
-    .postQuestionBtn{
-        margin-top:10px!important;
-        font-family:"Open sans", "sans-serif";
-        font-size:14px;
-        width:90%;
-        margin-top:20px!important;
-    }
+    
     .recentActivity-title svg{
         margin-right:10px;
     }
