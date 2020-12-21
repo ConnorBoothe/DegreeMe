@@ -282,6 +282,11 @@ text-align:center;
     margin-right:10px;
     outline:none;
 }
+.hostVid {
+    width:400px;
+    margin-right:10px;
+    outline:none;
+}
 .chat-members-container {
     position:fixed;
     left:0;

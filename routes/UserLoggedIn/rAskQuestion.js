@@ -53,6 +53,7 @@ function (req, res) {
         fileAttachment.push(req.body.image);
     }
     //post to group discussion board
+    console.log(req.body)
     timeline.addQuestionPost(req.session.handle,req.session.handle, req.session.name, "Question" ,req.session.img,req.body.message,new Date(), fileAttachment, req.body.course )
     .then(function(data){
         console.log("DATA ID : " + data._id)
@@ -60,7 +61,7 @@ function (req, res) {
         discussion.postDiscussion(req.session.handle, req.session.name, req.session.img, false, req.body.course, new Date(), req.body.message, fileAttachment, data._id)
         .then(function(data1){
             res.status(202).json({
-                result:"success",
+                result:data1,
             }).end(); 
         })
     })

@@ -223,9 +223,9 @@ $(document).ready(function(){
         }
         }).done(function(res) { 
           console.log(res.discussion)
-          var discussion = "<div class='question-container'><h1 class='DiscussionTitle'>"+"Questions asked in "+ $(".courseCodeTxt").text()+
-                    "</h1><button type='button' class='btn btn-primary askQuestion' data-toggle='modal' data-target='#exampleModalCenter'>"+
-                      "Ask a Question</button><div class='discussion-container'>";
+          var discussion = "<div class='question-container'><button type='button' class='btn btn-primary askQuestion' data-toggle='modal' data-target='#exampleModalCenter'>"+
+                      "Ask a Question</button><h1 class='DiscussionTitle'>"+"Questions asked in "+ $(".courseCodeTxt").text()+
+                      "</h1><div class='discussion-container'>";
           var handle = res.currHandle;
           for(var x = res.discussion.length-1; x>=0; x--){
            

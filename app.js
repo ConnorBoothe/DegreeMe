@@ -8,7 +8,6 @@ mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true,useUnifiedTopolo
 });
 const session = require('express-session'); //used to manipulate the session
 var MongoStore = require('connect-mongo')(session);
-
 var app = module.exports = express(); 
 //set cookie to secure to true for production
 app.use(session({
@@ -26,17 +25,19 @@ app.set('trust proxy', 1) // trust first proxy
 const MessageDB = require('./models/Database/MessagesDB');
 const StreamDB = require('./models/Database/StreamDB');
 const NotificationsDB = require('./models/Database/NotificationDB');
+const UserDB = require('./models/Database/UserDB');
+var users = new UserDB();
 var stream = new StreamDB();
 var notifications = new NotificationsDB();
 
 // const { resolve } = require('path');
 const Threads = require('./models/Database/Threads');
 const Messages = require('./models/Database/Messages');
-const { permittedCrossDomainPolicies } = require('helmet');
-//instantiate DBs for use
-var msg = new Messages();
-var messages = new Messages();
 
+//instantiate DBs for use
+var messages = new Messages();
+// var messages = new MessageDB();
+var threads = new Threads();
 //set limit size of file upload
 app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({
@@ -48,12 +49,12 @@ app.use(express.urlencoded({
 //     csp({
 //       directives: {
 //         defaultSrc: ["'self'", "https://js.stripe.com/",  "ws://degreeme.io/socket.io/" ],
-//         connectSrc:["'self'", "http://127.0.0.1:3001/peerjs", "https://unpkg.com","ws://degreeme.io/socket.io/","wss://degreeme.io/socket.io/", "https://firebasestorage.googleapis.com/"],
+//         connectSrc:["'self'", "ws://degreeme.io/socket.io/","wss://degreeme.io/socket.io/", "https://firebasestorage.googleapis.com/", "https://www.googleapis.com/"],
 //         frameSrc:["https://firebasestorage.googleapis.com"],
 //         fontSrc:["'self'", "https://fonts.gstatic.com", "https://cdnjs.cloudflare.com", "https://use.fontawesome.com"],
-//         styleSrc:["'self'", "https://fonts.googleapis.com", "'unsafe-inline'", "https://cdnjs.cloudflare.com/", "https://use.fontawesome.com"],
-//         scriptSrc: ["'self'", "https://unpkg.com", "https://cdnjs.cloudflare.com/", "https://js.stripe.com/", "https://www.gstatic.com", "https://firebase.googleapis.com/", "https://*.googleapis.com", "https://cdn.jsdelivr.net/"],
-//         imgSrc:["'self'", "data:", "https://storage.googleapis.com/", "https://firebasestorage.googleapis.com", "https://cdnjs.cloudflare.com"],
+//         styleSrc:["'self'", "https://maxcdn.bootstrapcdn.com", "https://fonts.googleapis.com", "'unsafe-inline'", "https://cdnjs.cloudflare.com/", "https://use.fontawesome.com"],
+//         scriptSrc: ["'self'", "https://cdnjs.cloudflare.com/","https://maxcdn.bootstrapcdn.com", "https://js.stripe.com/", "https://www.gstatic.com", "https://firebase.googleapis.com/", "https://*.googleapis.com", "https://cdn.jsdelivr.net/"],
+//         imgSrc:["'self'", "https://i.ytimg.com/", "data:", "https://storage.googleapis.com/", "https://firebasestorage.googleapis.com", "https://cdnjs.cloudflare.com"],
 //         objectSrc: ["'none'"],
 //         upgradeInsecureRequests: [],
 //       },
@@ -89,8 +90,12 @@ app.use([
 app.use([
   require('./routes/UserLoggedIn/rSettings.js'),
   require('./routes/UserLoggedIn/rMyConnections.js'),
+  require('./routes/UserLoggedIn/rSetUserStatus.js'),
   require('./routes/UserLoggedIn/Messages/rMessages.js'),
   require('./routes/UserLoggedIn/Messages/rMessageMembers.js'),
+  require('./routes/UserLoggedIn/Messages/rGetMessageSet.js'),
+  require('./routes/UserLoggedIn/Messages/rGetThreadImages.js'),
+  require('./routes/UserLoggedIn/Messages/rSendDirectMessage.js'),
   require('./routes/UserLoggedIn/rMyFinances.js'),
   require('./routes/UserLoggedIn/rStudyGroups.js'),
   require('./routes/UserLoggedIn/rCreateTutorListing.js'),
@@ -165,13 +170,15 @@ io.sockets.on('connection', function (socket) {
         // console.log("added userId: " + userId._id);
       })
       socket.on("disconnect", () => {
-        console.log("Disconnecting")
-        // 
-        console.log("Disconnecting")
-        console.log(peerId)
-        console.log(userId)
+        
         stream.getStreamHost(roomId).then(function(host){
-          notifications.addNotification(userHandle ,userHandle,"Leave"+ host.host + "a review", "img", "/review/"+host.host)
+          users.getUserImg(userHandle).then(function(user){
+            notifications.addNotification(userHandle ,userHandle,"Leave "+ host.host + " a review", user.img, "/review/"+host.host)
+            .then(()=>{
+              users.incrementNotificationCount(userHandle);
+            })
+
+          })
         })
         socket.to(roomId).broadcast.emit("user-disconnected", peerId)
 
@@ -183,11 +190,16 @@ io.sockets.on('connection', function (socket) {
     
   //catch the emitted 'send message' event
   socket.on('send message', function (data) {
+    console.log("Adding message")
       //add message to the db
-      messages.addMessage(data.id, data.sender, data.senderImg, data.message, data.date);
-      io.sockets.emit('new message', {
-          msg: data
+      console.log("Adding message")
+      messages.addMessage(data.id, data.sender, data.senderImg, data.content, data.date, "text")
+      .then(function(message){
+        io.sockets.emit('new message', {
+          msg: message
       });
+      })
+      
   });
   //handle new chat event
   socket.on('new chat', function (data) {
@@ -202,12 +214,12 @@ io.sockets.on('connection', function (socket) {
     })
   })
   socket.on('send image', function (data) {
-    //add message to the db
-   //add image to message DB
-   messages.attachImage(data.id,  data.image)
+  //   add message to the db
+  //  add image to me   console.log("sending image")
+  messages.addMessage(data.id, data.sender, data.senderImg, data.content, data.date, "file")
    .then(function(success){
      if(success){
-      socket.emit("append image", {image:data.image});
+      socket.emit("append image", {image:data.content, imageArray: data.imageArray });
      }
    })
    .catch(function(error){
@@ -215,7 +227,19 @@ io.sockets.on('connection', function (socket) {
    })
   
 });
-
+socket.on('send youtube link', function (data) {
+  messages.addYoutubeData(data)
+  .then(()=>{
+    socket.emit("append youtube info", {
+      video: data
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+  })
+  
+  
+});
   socket.on("broadcaster", () => {
     broadcaster = socket.id;
     socket.broadcast.emit("broadcaster");

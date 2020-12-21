@@ -1,5 +1,5 @@
 const dayArray = ["Sunday", "Monday","Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-function formatTime(rawTime){
+function formatCalendarTime(rawTime){
   if(rawTime === 12){
     return "12 PM";
   }
@@ -90,10 +90,10 @@ function formatMobileCalendar(data){
               calendar += '<div class="">';
                  for(var y = 0; y <24; y++){
                     if(data.includes(y)){
-                        calendar += '<div class="day-wrapper"><input class="calendar-checkbox" type="checkbox" value="'+y+'" checked/><label><p class="timeLabel">'+formatTime(y)+'</p><p class="newTime"></p></label><div class="calendarLine-selected"></div></div>';
+                        calendar += '<div class="day-wrapper"><input class="calendar-checkbox" type="checkbox" value="'+y+'" checked/><label><p class="timeLabel">'+formatCalendarTime(y)+'</p><p class="newTime"></p></label><div class="calendarLine-selected"></div></div>';
                     }
                     else{
-                      calendar += '<div class="day-wrapper"><input class="calendar-checkbox" type="checkbox" value="'+y+'"/><label><p class="timeLabel">'+formatTime(y)+'</p><p class="newTime"></p></label><div class="calendarLine"></div></div>';
+                      calendar += '<div class="day-wrapper"><input class="calendar-checkbox" type="checkbox" value="'+y+'"/><label><p class="timeLabel">'+formatCalendarTime(y)+'</p><p class="newTime"></p></label><div class="calendarLine"></div></div>';
 
                     } 
               }

@@ -11,7 +11,8 @@
     <link href="../assets/css/home.css" rel="stylesheet" type="text/css">
     <link href="../assets/css/CourseProfile.css" rel="stylesheet" type="text/css">
     <link href="../assets/css/tutorGrid.css" rel="stylesheet" type="text/css">
-    <!-- <link href="../node_modules/mdbootstrap/css" rel="stylesheet" type="text/css"> -->
+    <link href="../assets/css/comments.css" rel="stylesheet" type="text/css">
+
     <!-- Font Awesome -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 <!-- Google Fonts -->
@@ -19,7 +20,6 @@
 <!-- Bootstrap core CSS -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
 <!-- Material Design Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
    <!-- Google Tag Manager -->
    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -133,12 +133,13 @@
     
     <div class="course-profile-info">
             <div class="question-container">
-                        <h1 class="DiscussionTitle">
-                            Questions asked in <%=course.Department%> <%=course.CourseCode%>
-                    </h1>
+                        
                     <button type="button" class="btn btn-primary askQuestion" data-toggle="modal" data-target="#exampleModalCenter">
                         Ask a Question
                     </button>
+                    <h1 class="DiscussionTitle">
+                        Questions asked in <%=course.Department%> <%=course.CourseCode%>
+                </h1>
                     <div class="discussion-container">
                     </div>
                 </div>
@@ -146,7 +147,7 @@
             </div>
     <!-- Scripts -->
     <script src="../assets/jquery/jquery.session/jquery.session.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+    <script src="../assets/js/Messages/messageFunctions.js"></script>
 
     <script type="text/javascript" src="../assets/js/displayMyCourses.js"></script>
     <script src="../assets/js/getNotifications.js"></script>
@@ -160,11 +161,13 @@
     <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-storage.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/browser-image-compression@1.0.12/dist/browser-image-compression.js"></script>
+    <script type="text/javascript" src="../assets/js/firebaseConfig.js"></script>
+
     <script type="text/javascript" src="../assets/js/ajaxCalls/postDiscussion.js"></script>
     <script type="text/javascript" src="../assets/js/Client-DateFunctions.js"></script>
     <script type="text/javascript" src="../assets/js/Messages/newConversationAutocomplete.js"></script>    
     <script type="text/javascript" src="../assets/js/Messages/createThread.js"></script>
-
+    <script type="text/javascript" src="../assets/js/tooltip.js"></script>
     <script src="../assets/js/connect.js"></script>
     <script src="../assets/js/follow-client.js"></script>
 </body>

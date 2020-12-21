@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <head>
     <title>Home | degreeMe</title>
     <meta charset="UTF-8">
@@ -39,6 +38,9 @@
         <%- include ('partials/newMessageModal.ejs')%>
         <%- include ('partials/platformInvite.ejs')%>
         <%- include ('partials/mobile-search.ejs')%>
+        <%- include ('partials/addTutoringCourseModal.ejs')%>
+        <%- include ('partials/tutorAvailability.ejs')%>
+
         <input type="hidden" name="handle" value="<%=session.handle%>"/>
         <input type="hidden" name="stripeId" value="<%=session.stripeId%>"/>
         <input type="hidden" name="userId" value="<%=session.userId%>"/>
@@ -62,7 +64,11 @@
                 </div>
                 <!-- Include the timeline partial -->
                 <%- include ('partials/timeline.ejs')%> 
+                <div class="toast-body bg-danger text-light">
+                    Error: File type not allowed
+                  </div>
             </div>
+            
         </div>
     </div>
     <!-- Scripts -->
@@ -93,13 +99,19 @@
     <script type="text/javascript" src="../assets/js/togglePost.js"></script>
     <script type="text/javascript" src="../assets/js/emailInvite.js"></script>
     <script type="text/javascript" src="/assets/js/UpdateTimeline.js"></script>
+    <script type="text/javascript" src="../assets/js/ajaxCalls/postDiscussion.js"></script>
+
     <script type="text/javascript" src="/assets/js/mobileNotifications.js"></script>
     <script type="text/javascript" src="/assets/js/ajaxCalls/placeBid.js"></script>
     <script type="text/javascript" src="/assets/js/ajaxCalls/addTutoringCourse.js"></script>
     <script type="text/javascript" src="/assets/js/askQuestion-validation.js"></script>
     <script type="text/javascript" src="/assets/js/detectScrollDirection.js"></script>
     <script type="text/javascript" src="../assets/js/Messages/newConversationAutocomplete.js"></script>
+    <script type="text/javascript" src="../assets/js/Messages/messageFunctions.js"></script>
     <script type="text/javascript" src="../assets/js/Messages/createThread.js"></script>
+    <script type="text/javascript" src="../assets/js/tooltip.js"></script>
+    <script type="text/javascript" src="../assets/js/Tutoring/addTutoringCourse.js"></script>
+
 
     <!-- Below file was deleted. -->
     <!-- <script type="text/javascript" src="../assets/js/ajaxCalls/zeroNotificationCount.js"></script> -->

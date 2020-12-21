@@ -94,35 +94,7 @@ router.post("/setBio",
             bio: req.body.bio
         }).end();
     })
-router.post("/sendDirectMessage",
-    check('host').isString().trim(),
-    check('hostImg').trim(),
-    check('receiver').trim().escape(),
-    check('receiverImage').trim(),
-    function (req, res) {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            res.redirect('/home');
-        }
-        let messageId = "";
-        messages.newThread(req.body.host, req.body.hostImg, [
-                [req.body.host, req.body.hostImg],
-                [req.body.receiver, req.body.receiverImg]
-            ],
-            new Date(), req.body.host + ", " + req.body.receiver).then(function (data) {
-            //host, hostImg, subject, threadId, handle
-            messageId = data._id;
-            users.addThread(req.body.host, req.body.hostImg, req.body.host + ", " + req.body.receiver, data._id, req.body.host);
-            users.addThread(req.body.host, req.body.hostImg, req.body.host + ", " + req.body.receiver, data._id, req.body.receiver);
-            messages.addMessage(data._id, req.body.host, req.body.hostImg, req.body.message, data.datetime)
-            setTimeout(function () {
-                    res.status(202).json({
-                        messageId: messageId
-                    })
 
-                }, 100)
-        });
-    })
 router.post("/getCourses",
     check('userHandle').isString().trim().escape(),
     function (req, res) {
