@@ -1,0 +1,57 @@
+<!-- Modal -->
+<div class="modal fade" id="tutoringCourseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Add Tutoring Course</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class='mobileBlocker'></div>
+                <div class='mobileCourses'>
+    
+                    <div class='add-tutoring-wrapper'>
+                        <div class='add-tutoring-sub-wrapper'>
+                            <form class='add-tutoring-form'>
+                                <p class='add-tutoring-label'>Select a Course</p>
+                                <div class='input-container-add-tutoring'>
+                                    <span class="icon-add-tutoring"><svg class="" width=".75em" height=".75em"
+                                            viewBox="0 0 16 16" class="bi bi-search" fill="white"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd"
+                                                d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
+                                            <path fill-rule="evenodd"
+                                                d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
+                                        </svg></span>
+                                    <input class='add-tutoring-input' type='text' placeholder='Enter Course' />
+                                    <div class='tutor-add-autocomplete'></div>
+                                </div>
+                                <p class='add-tutoring-label'>Enter Your Hourly Pay Rate</p>
+                                <div class='input-container-add-tutoring'>
+                                    <span class="icon-add-tutoring"><img class="add-tutoring-dollar"
+                                            src="../assets/img/dollarWhite.svg" /></span>
+                                    <input name='add-tutor-price' class='add-tutoring-input1' type='text'
+                                        placeholder='0.00' />
+                                </div>
+                                <input class='add-tutor-courseCode' type='hidden' />
+                                <p class='add-tutoring-label'>Upload a screenshot of your transcript</p><input
+                                    class='transcript-upload' type='file' /><input type='submit'
+                                    class='btn btn-primary add-tutoring-btn' value='Add Course' />
+                            </form>
+                            <div class="spinner-container1 add-tutor-loading">
+                                <div class="spinner-border" role="status">
+                                    <span class="sr-only"></span>
+                                </div>
+                                <span class="loading-span">Loading</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
