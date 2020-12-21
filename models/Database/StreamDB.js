@@ -50,7 +50,7 @@ module.exports = class Stream {
         return streamDB.findOne({hostId: hostId});
     }
     getStreamHost(id){
-        return streamDB.findOne({_id: id}, "host");
+        return streamDB.findOne({_id: id});
     }
     //get host of the stream
     getHostByStreamId(id){

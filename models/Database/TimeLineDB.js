@@ -214,6 +214,7 @@ module.exports = class Timeline {
         return timeline.save();
     }
     incrementCommentCount(postId){
+        console.log("From timeline: " +postId)
         var timelineDB = mongoose.model('TimelineDB',timelineDBSchema);
             return timelineDB.findOne({
                 _id: postId

@@ -119,6 +119,8 @@ module.exports = class Messages {
       return threads.find({_id:id});
     }
     newThread(host, hostImg, userHandles, datetime, subject){
+      console.log("new thread")
+       console.log("User Handles")
       var thread = new threads({host: host, hostImg:hostImg, userHandles: userHandles, subject:subject, datetime:datetime });
       return thread.save();
   

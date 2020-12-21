@@ -11,7 +11,7 @@ var reviewsDBSchema = new Schema({
     SenderHandle: {type:String, required:true},
     SenderImg: {type:String, required:true},
     ReceiverHandle: {type:String, required:true},
-    Course: {type:String, required:true},
+    Course: {type:String},
     Rating: {type:String, required:true},
     Message: {type:String, required:true},
     

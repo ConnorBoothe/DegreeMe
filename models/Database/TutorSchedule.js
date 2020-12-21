@@ -25,6 +25,7 @@ module.exports = class TutorSchedules {
     }).sort({time:1});
    }
    getUserScheduleByDayAndTime(userId, day, time){
+       console.log("Get user schedule")
        console.log(userId)
        console.log(time)
        console.log(day)
