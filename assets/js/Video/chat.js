@@ -1,33 +1,37 @@
+function getChat(){
+  payload = {
+    streamId: $("input[name='streamId']").val()
+}
+$.ajax({
+    url: "/videoChat",
+    type: 'POST',
+    data: JSON.stringify(payload),
+    headers: {
+      "Content-Type": "application/json"
+    }, statusCode: {
+      202: function (result) {
+        $(".headerLinkTitle").text(result.host + "'s Room");
+        var messages = "";
+        for(var x = result.messages.length-1; x >0; x--){
+            messages += '<div class="text-light chat-message">'+
+            '<img class="chat-img" src="'+result.messages[x].senderImg+'"/><span class="chat-handle">'+result.messages[x].sender+' </span>'+
+            "<div class='chat-text-container'><p class='text-light chat-text'>"+result.messages[x].message+'</p></div></div>';
+        }
+        $(".chat-wrapper").html(messages);
+      },
+      500: function (result) {
+        alert("500 ");
+      },
+    },
+  });
+}
+
 function toggleChat(chatStatus){
     if(chatStatus){
         $(".chat-container").show()
         $(".show-chat").hide()
         $(".video-sub-container").css("width","76%");
-        payload = {
-            streamId: $("input[name='streamId']").val()
-        }
-        $.ajax({
-            url: "/videoChat",
-            type: 'POST',
-            data: JSON.stringify(payload),
-            headers: {
-              "Content-Type": "application/json"
-            }, statusCode: {
-              202: function (result) {
-                $(".headerLinkTitle").text(result.host + "'s Room");
-                var messages = "";
-                for(var x = result.messages.length-1; x >0; x--){
-                    messages += '<div class="text-light chat-message">'+
-                    '<img class="chat-img" src="'+result.messages[x].senderImg+'"/><span class="chat-handle">'+result.messages[x].sender+' </span>'+
-                    "<div class='chat-text-container'><p class='text-light chat-text'>"+result.messages[x].message+'</p></div></div>';
-                }
-                $(".chat-wrapper").html(messages);
-              },
-              500: function (result) {
-                alert("500 ");
-              },
-            },
-          });
+       getChat();
     }
     else{
         $(".chat-container").hide()
@@ -88,6 +92,7 @@ $(document).ready(function(){
 
         // toggleChat(chatVal);
         if(chatVal == "true"){
+          getChat();
             $(".chat-container").show();
             $(".show-chat").hide();
             $(".video-sub-container").css("width","74%");
@@ -124,7 +129,6 @@ $(document).ready(function(){
         }
     })
     socket.on('append chat', function (data, err) {
-        alert("Incoming chat")
         if(err){
             alert(err)
         }

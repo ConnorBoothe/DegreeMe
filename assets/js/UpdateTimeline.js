@@ -14,7 +14,8 @@ $(document).ready(function(){
          likeButton.prop('disabled', true)
         payload = {
             postId: $(this).parent().parent().prev().val(), 
-            handle:$(".userProfileName").text()
+            handle:$(".userProfileName").text(),
+            postHandle: $(this).parent().parent().prev().prev().val()
           }
         $.ajax({
             url: "/addLike",

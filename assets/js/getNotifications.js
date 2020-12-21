@@ -60,11 +60,7 @@ function generateMobileProfileMenu(){
     '</svg>'+
     '</div><ul>'+
         "<li class='mobileBalanceLi'><span><h1 class='mobileBalance'>$0.00</h1><span class='sub-balance-text'> Available</span> </span></li>"+
-<<<<<<< HEAD
-        "<li class='mobileBalanceLi'><span><h1 class='mobileBalance'>$199.00</h1><span class='sub-balance-text'> Pending</span></span></li>"+
-=======
         "<li class='mobileBalanceLi'><span><h1 class='mobileBalance'>$0.00</h1><span class='sub-balance-text'> Pending</span></span></li>"+
->>>>>>> 76240004810da197cc7ca3836229b66db47b0c0c
     "</ul>"+
     "<div class='mobileProfileMenuBody'>"+
         "<ul class='body-ul'>"+
@@ -136,11 +132,13 @@ function formatCourses(courses){
 }
 function formatCoursesTutoring(courses){
     var courseData = courses;
-    var courses = "<div class='mobileCourses'><h1>"+
-    '<span class="backToMenu"><svg width="1.25em" height="1.25em" viewBox="0 0 16 16" class="bi bi-arrow-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
-    '<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>'+
-    '</svg></span>'+
-    "Tutoring Courses</h1>";
+    var courses = "<div class='mobileCourses'>";
+    if(window.innerWidth < 1000) {
+        courses +='<h1><span class="backToMenu"><svg width="1.25em" height="1.25em" viewBox="0 0 16 16" class="bi bi-arrow-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
+        '<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>'+
+        '</svg></span>'+
+        "Tutoring Courses</h1>";
+    }
     courses += "<div class='mobile-courses-container'>"+
                     "<ul>";
     if(courseData.length > 0 ){
@@ -160,8 +158,14 @@ function formatCoursesTutoring(courses){
     else{
         courses += "<li><h1>You aren't a tutor in any course</h1></li>";
     }
-    
-    courses+="</ul><button class='btn btn-primary add-tutoring-course'>Add Course</button></div></div>";
+    if(window.innerWidth > 1000){
+        courses+="</ul><button class='btn btn-primary add-tutoring-course startGroup' data-toggle='modal' data-target='#tutoringCourseModal'>Add Course</button></div></div>";
+
+    }
+    else{
+        courses+="</ul><button class='btn btn-primary add-tutoring-course startGroup'>Add Course</button></div></div>";
+
+    }
     return courses;
 }
 function formatReviews(){
@@ -192,7 +196,22 @@ function formatMobileGroups(groups){
 }
 
 $(document).ready(function(){
-
+    //show tutor courses on desktop view
+    payload = {
+        userId:""
+    }
+    $.ajax({
+        url: "/getTutoringCourses",
+        type: 'POST',
+        data: JSON.stringify(payload),
+        headers: {
+          "Content-Type": "application/json"
+        }, statusCode: {
+          202: function (result) {
+            $(".tutoringCourses").html(formatCoursesTutoring(result.data));
+          },
+        },
+      });
     //close mobile menu
     $("#showNotifications").on("click",".close-mobile-menu", function(){
         $("#showNotifications").hide();
@@ -389,7 +408,7 @@ $(".mobile-notifications").on("click", function(){
                         else{
                             notifications += "<form method='POST' action='/seenNotif' class='seenNotif'>"+'<input type="hidden" name="url" value="'+res[x].url+'"/>'+
                             '<input type="hidden" name="notifId" value="'+res[x]._id+'"/>'+
-                             '<button class=" notifLink"><div  class=" blue-dot bg-primary"></div><li class=" notifications"><img class="notifImg" src="'+res[x].img+'"/><p class="notif">'+res[x].name+ ' '+res[x].type+ '</p><p class="dateTxt1 text-primary">'+displayTimeSince(res[x].date)+'</p></li></button></form>';
+                             '<button class=" notifLink"><div  class=" blue-dot bg-primary"></div><li class=" notifications"><img class="notifImg" src="'+res[x].img+'"/><p class="notif">'+res[x].name+ 'T '+res[x].type+ '</p><p class="dateTxt1 text-primary">'+displayTimeSince(res[x].date)+'</p></li></button></form>';
                         
                         }
                     }
@@ -483,10 +502,19 @@ $(".mobile-message").on("click", function(){
                                 notifications +=  '<a class="notifLink" href='+res[x].url+'><li class=" notifications"><img class="notifImg" src="'+res[x].img+'"/><p class="notif">'+res[x].type+ '</p><div><p class="dateTxt1 text-secondary">'+displayTimeSince(res[x].date)+'</p></div></li></a>';
                             }
                             else{
-                                notifications += "<form method='POST' action='/seenNotif' class='seenNotif'>"+'<input type="hidden" name="url" value="'+res[x].url+'"/>'+
-                                '<input type="hidden" name="notifId" value="'+res[x]._id+'"/>'+
-                                 '<button class=" notifLink"><li class=" notifications"><img class="notifImg" src="'+res[x].img+'"/><p class="notif">'+res[x].name+ ' '+res[x].type+ '</p><p class="dateTxt1 text-secondary">'+displayTimeSince(res[x].date)+'</p></li></button></form>';
-                                                    }
+                                if(res[x].type.includes("review")){
+                                    notifications += "<form method='POST' action='/seenNotif' class='seenNotif'>"+'<input type="hidden" name="url" value="'+res[x].url+'"/>'+
+                                    '<input type="hidden" name="notifId" value="'+res[x]._id+'"/>'+
+                                     '<button class=" notifLink"><li class=" notifications"><img class="notifImg" src="'+res[x].img+'"/><p class="notif">'+ ' '+res[x].type+ '</p><p class="dateTxt1 text-secondary">'+displayTimeSince(res[x].date)+'</p></li></button></form>';
+                                        
+                                }
+                                else{
+                                    notifications += "<form method='POST' action='/seenNotif' class='seenNotif'>"+'<input type="hidden" name="url" value="'+res[x].url+'"/>'+
+                                    '<input type="hidden" name="notifId" value="'+res[x]._id+'"/>'+
+                                     '<button class=" notifLink"><li class=" notifications"><img class="notifImg" src="'+res[x].img+'"/><p class="notif">'+res[x].name+ ' '+res[x].type+ '</p><p class="dateTxt1 text-secondary">'+displayTimeSince(res[x].date)+'</p></li></button></form>';
+                                        
+                                }
+                         }
                         }
                         else{
                             if(res[x].type.includes("Congrats!")){
@@ -495,10 +523,20 @@ $(".mobile-message").on("click", function(){
                                 '<button class=" notifLink"><div class="blue-dot bg-primary"></div><li class=" notifications"><img class="notifImg" src="'+res[x].img+'"/><p class="notif">'+res[x].type+ '</p><p class="dateTxt1 text-primary">'+displayTimeSince(res[x].date)+'</p></li></button></form>';
                             }
                             else{
-                                notifications += "<form method='POST' action='/seenNotif' class='seenNotif'>"+'<input type="hidden" name="url" value="'+res[x].url+'"/>'+
-                                '<input type="hidden" name="notifId" value="'+res[x]._id+'"/>'+
-                                 '<button class=" notifLink"><div  class=" blue-dot bg-primary"></div><li class=" notifications"><img class="notifImg" src="'+res[x].img+'"/><p class="notif">'+res[x].name+ ' '+res[x].type+ '</p><p class="dateTxt1 text-primary">'+displayTimeSince(res[x].date)+'</p></li></button></form>';
-                            
+                                if(res[x].type.includes("review")){
+                                    notifications += "<form method='POST' action='/seenNotif' class='seenNotif'>"+'<input type="hidden" name="url" value="'+res[x].url+'"/>'+
+                                    '<input type="hidden" name="notifId" value="'+res[x]._id+'"/>'+
+                                     '<button class=" notifLink"><div  class=" blue-dot bg-primary"></div><li class=" notifications"><img class="notifImg" src="'+res[x].img+'"/><p class="notif">'+res[x].type+ '</p><p class="dateTxt1 text-primary">'+displayTimeSince(res[x].date)+'</p></li></button></form>';
+                                
+                                }
+                                else{
+                                    notifications += "<form method='POST' action='/seenNotif' class='seenNotif'>"+'<input type="hidden" name="url" value="'+res[x].url+'"/>'+
+                                    '<input type="hidden" name="notifId" value="'+res[x]._id+'"/>'+
+                                     '<button class=" notifLink"><div  class=" blue-dot bg-primary"></div><li class=" notifications"><img class="notifImg" src="'+res[x].img+'"/><p class="notif">'+res[x].name+ ' '+res[x].type+ '</p><p class="dateTxt1 text-primary">'+displayTimeSince(res[x].date)+'</p></li></button></form>';
+                                
+                                }
+
+                               
                             }
                         }
                     }
@@ -756,15 +794,18 @@ payload = {
      },
  });
 })
-
+//mobile
 //show add tutoring course autocomplete
 $("#showNotifications").on("focus",".add-tutoring-input", function(){
     $(".tutor-add-autocomplete").show();
     $(".mobileBlocker").show();
+    alert("YO")
 });
+
 // $("#showNotifications").on("focusout",".add-tutoring-input", function(){
 //     $(".tutor-add-autocomplete").hide();
 // });
+//mobile
 //select add tutoring course item
 $("#showNotifications").on("click", ".add-tutor-course-item", function(){
     $(".add-tutor-courseCode").val($(this).children().eq(1).text())
@@ -776,6 +817,8 @@ $("#showNotifications").on("click",".mobileBlocker", function(){
     $(".tutor-add-autocomplete").hide();
     $(".mobileBlocker").hide();
 })
+//add tutoring input desktop
+
 
 
 

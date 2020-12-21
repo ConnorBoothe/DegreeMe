@@ -91,7 +91,6 @@ function addVideoStream(video, stream, handle){
     // });
 }
 function connectToNewUser(userId, stream){
-    alert("connect")
     const call = myPeer.call(userId, stream);
     const video = document.createElement('video');
     

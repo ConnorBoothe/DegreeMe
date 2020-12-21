@@ -177,8 +177,6 @@ $(".timeline-wrapper").on("click", ".findTutor-course", function(){
              '<ul class="mobile-availability">'+
                              '<li class="mobile-available-text">Available</li>'+
                              '<li class="available-selected">Now</li>'+
-                             '<li>Today</li>'+
-                             '<li>This Week</li>'+
              '</ul><div class="tutor-container">';
              for(var x = 0; x < result.tutors.length; x++){
                  var tutor = result.tutors[x];
