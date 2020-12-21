@@ -17,13 +17,11 @@
   <link href="../assets/css/index.css" rel="stylesheet">
   <link href="../assets/css/footer.css" rel="stylesheet">
   <link rel="stylesheet" href="../assets/js/croppie/croppie.css" />
-       <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-PTK9R96');</script>
+
+  <!-- Google Tag Manager -->
+  <script type="text/javascript" src="assets/js/googleTagManager.js"></script>
   <!-- End Google Tag Manager -->
+
   <!-- Scripts -->
   <script src="assets/jquery/dist/jquery.js"></script>
 
@@ -31,12 +29,11 @@
 
 <body class="bg-light">
     <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PTK9R96"
-  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
+    <%- include('partials/googleTagManager.ejs') -%>
+    <!-- End Google Tag Manager (noscript) -->
   <div class="blocker"></div>
   <div class="overlay"></div>
-  <div class="page-container ">
+  <div class="Signup--Background">
     <div id="headerContainer">
       <%- include ('partials/header.ejs') %>
       <%-include ('partials/popout-menu.ejs') %>
@@ -44,236 +41,63 @@
     <%if(qs.error){%>
    
     <%}%>
-    <div class="signup-container">
-     
+    <div class="signup-container" id="loginPage">
       <div class="signUpWrapper">
         <div class="signup-form" class="">
           <h3 class='badge badge-danger loginErr'><%=qs.error%></h3>
-          <h3 class="text-light">Welcome to the DegreeMe Community</h3>
           <h2 class="signup-msg"><%=qs.msg%></h2>
           <form method="POST" action="/SignUp" class="form">
-             <input name="imageURL" type="hidden" class="imageURL"/>
-            <div class="name">
-              <div class="input-container3">
-                <p class="loginLabel1">First Name</p>
-                <input name="first_name" type="text" class="input-field1 first"
-                  spellcheck="false" autocomplete="autocomplete_off_hack_xfr4!k" style="text-transform: capitalize;"  />
-                <p class="firstTxt"></p>
-              </div>
-              <div class="input-container4 ">
-                <p class="loginLabel1">Last Name</p>
-                <input name="last_name" type="text" class="input-field1 last" spellcheck="false"
-                  autocomplete="autocomplete_off_hack_xfr4!k" style="text-transform: capitalize;" />
-                <p class="lastTxt"></p>
-              </div>
-            </div>
-            <div class="name">
-              <div class=" input-container3">
-                <p class="loginLabel1">School</p>
-                <input name="school" type="text" class="input-field1 schoolSignUp" value="UNC Charlotte"
-                  spellcheck="false" readonly autocomplete="autocomplete_off_hack_xfr4!k" />
-                <!-- <div class="input-container2 text-dark schoolSuggestions">
-                  <ul>
-                    <li><span class="schoolTxt btn btn-light">University of North Carolina at Charlotte</span></li>
-                  </ul>
-                </div> -->
-              </div>
-              <div class="input-container4">
-                <p class="loginLabel1">University Email</p>
-                <input name="email" type="email" class="input-field1 emailSignUp"
-                  autocomplete="autocomplete_off_hack_xfr4!k" />
-                <p class="emailTxt"></p>
-              </div>
-            </div>
-            <div class="name">
-              <div class="input-container3 majorContainer">
-                <p class="loginLabel1">Major</p>
-                <input name="major" type="text" class=" input-field1 major" spellcheck="false"
-                  autocomplete="off" />
-                <p class="majorTxt"></p>
-                <div class="major-autocomplete">
-                  <ul class="major-list">
-                    <p class='emptySearch'>Search Majors</p>
-                  </ul>
-                </div>
-              </div>
-              <div class="input-container4">
-                <p class="loginLabel1">Class Standing</p>
-                <select class="classStanding-select">
-                  <option></option>
-                  <option>Freshman</option>
-                  <option>Sophomore</option>
-                  <option>Junior</option>
-                  <option>Senior</option>
-                  <option>Graduate Student</option>
-                  <option>Alumni</option>
-                </select>
-                <p class="classTxt"></p>
-                <div class="standing-autocomplete">
-                  <ul class="major-list">
-                    <p class='emptySearch'>Search Majors</p>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class=" input-container2">
-              <p class="loginLabel1">Username</p>
-              <input name="handle" type="text" class="input-field1 handle" spellcheck="false"
-                autocomplete="off" />
-              <p class="handleTxt"></p>
-            </div>
-            <div class="form-group">
-              <div class="input-container2">
-                <p class="loginLabel1">Password</p>
-                <input autocomplete="off" name="password" type="password" class=" input-field1 passwordSignUp">
-                <p class="pwTxt"></p>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="input-container2">
-                <p class="loginLabel1">Retype Password</p>
-                <input name="retypePW" type="password" class=" input-field1 retypePasswordSignUp">
-                <p class="ReTypeTxt"></p>
-              </div>
-            </div>
-        </div>
-       
-      </form>
-      </div>
-    </div>
-    <div class="signup-container-mobile">
-      <div class="signUpWrapper">
-        <div class="signup-form" class="">
-          <h3 class="text-light signup-title">Join DegreeMe</h3>
-          <h2 class="signup-msg"><%=qs.msg%></h2>
-        
-          <form method="POST" action="/SignUpMobile" class="form">
+            <input name="imageURL" type="hidden" class="imageURL"/>
 
-            <div class="name">
-              <div class="input-container2">
-                <p class="loginLabel1">First Name</p>
-                <input name="first_name"  type="text" class="input-field1"
-                  spellcheck="false" autocomplete="autocomplete_off_hack_xfr4!k" style="text-transform: capitalize;"  />
+            <div class="login-logo-link">
+              <a href="/" ><img src="/assets/img/hash.svg" class="loginLogo"/></a>
+          </div>
+            <div class="signInTitleContainer"><h1 class='signIn'>Register to degreeMe</h1></div>
+                    <div class="Login--Switch">Already have an account? <a href="/login">Sign in here</a></div>
+            <div class="SignUp--Field--Flex">
+              <div class="field--Small--Left">
                 <p class="firstTxt"></p>
-              </div>
-              <div class="input-container2 ">
-                <p class="loginLabel1">Last Name</p>
-                <input name="last_name" type="text" class="input-field1 last" spellcheck="false"
-                  autocomplete="autocomplete_off_hack_xfr4!k" style="text-transform: capitalize;" />
-                <p class="lastTxt"></p>
-              </div>
-            </div>
-            <div class="name">
-              <div class=" input-container2">
-                <p class="loginLabel1">School</p>
-                <input name="school" type="text" class="input-field1 schoolSignUp" value="UNC Charlotte"
-                  spellcheck="false" readonly autocomplete="autocomplete_off_hack_xfr4!k" />
-                <!-- <div class="input-container2 text-dark schoolSuggestions">
-                  <ul>
-                    <li><span class="schoolTxt btn btn-light">University of North Carolina at Charlotte</span></li>
-                  </ul>
-                </div> -->
-              </div>
-              <div class="input-container2">
-                <p class="loginLabel1">University Email</p>
-                <input name="email" type="email" class=" input-field1 emailSignUp"
-                  autocomplete="false" />
-                <p class="emailTxt"></p>
-              </div>
-            </div>
-            <div class="name">
-              <div class="input-container2 majorContainer">
-                <p class="loginLabel1">Major</p>
-                <input name="major" type="text" class=" input-field1 major" spellcheck="false"
-                  autocomplete="off" />
-                <p class="majorTxt"></p>
-                <div class="major-autocomplete">
-                  <ul class="major-list">
-                    <p class='emptySearch'>Search Majors</p>
-                  </ul>
-                </div>
-              </div>
-              <div class="input-container2">
-                <p class="loginLabel1">Class Standing</p>
-                <select name="classification" class="classStanding-select">
-                  <option>Freshman</option>
-                  <option>Sophomore</option>
-                  <option>Junior</option>
-                  <option>Senior</option>
-                  <option>Graduate Student</option>
-                  <option>Alumni</option>
-                </select>
-                <p class="classTxt"></p>
-                <div class="standing-autocomplete">
-                  <ul class="major-list">
-                    <p class='emptySearch'>Search Majors</p>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class=" input-container2">
-              <p class="loginLabel1">Username</p>
-              <input name="handle1" type="text" class="input-field1 handle" spellcheck="false"
-                autocomplete="off" />
-              <p class="handleTxt"></p>
-            </div>
-            <div class="form-group">
-              <div class="input-container2">
-                <p class="loginLabel1">Password</p>
-                <input autocomplete="off" name="password" type="password" class=" input-field1 passwordSignUp">
-                <p class="pwTxt"></p>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="input-container2">
-                <p class="loginLabel1">Retype Password</p>
-                <input name="retypePW" type="password" class="input-field1 retypePasswordSignUp">
-                <p class="ReTypeTxt"></p>
+                <input class="Login--Input" name="first_name" type="text" id="first_name"
+                  spellcheck="false" placeholder=" " autocomplete="autocomplete_off_hack_xfr4!k" style="text-transform: capitalize;"  />
+                <label class="Login--Label" for="first_name">First Name</label>
               </div>
 
+              <div class="field--Small--Right">
+                <p class="lastTxt"></p>
+                <input name="last_name" id="last_name" type="text" class="Login--Input" spellcheck="false"
+                  autocomplete="autocomplete_off_hack_xfr4!k" placeholder=" " style="text-transform: capitalize;" />
+                <label for="last_name" class="Login--Label">Last Name</label>
+              </div>
             </div>
-            
+
+            <div class="field">
+              <p class="emailTxt"></p>
+              <input name="email" type="email" class="Login--Input"
+                autocomplete="autocomplete_off_hack_xfr4!k" placeholder=" " />
+              <label for="email" class="Login--Label">University Email</label>
+            </div>
+
+            <div class="field">
+              <p class="pwTxt"></p>
+              <input  class="Login--Input" autocomplete="off" placeholder=" " name="password" type="password" class=" input-field1 passwordSignUp">
+              <label class="Login--Label">Password</label>
+            </div>
+
+            <div class="field">
+              <p class="ReTypeTxt"></p>
+              <input class="Login--Input" name="retypePW" placeholder=" " type="password" class=" input-field1 retypePasswordSignUp">
+              <label class="Login--Label">Retype Password</label>
+            </div>
+
+            <input type="submit" value="Create Account" class="Login--Submit"/>
+            <div class="disclaimerText">
+              <h3><strong>DegreeMe is not affiliated with any university.</strong> Your school email address
+                is only required to create an university-centric environment.
+              </h3>
+            </div>
+          </form>
         </div>
       </div>
-    </div>
-    <input name="imageURL" type="hidden" class="imageURL"/>
-  </form>
-  <input name="imageUploaded" type="hidden" class="imageUploaded"/>
-  <input name="screenSize" type="hidden">
-    <div class="fileUpload">
-  
-    <div class="img-btn-container">
-     
-      <div class="img-btn btn">Upload Photo</div>
-      <div class="result1 text-light">Photo Required</div>
-    </div>
-    <small class="imgTxt"></small>
-    <div class="img-upload-container">
-      <div class="img-secondary-wrapper">
-        <input type="file" class="upload-file upload" value="Upload an Image"
-          accept="image/gif, image/jpeg, image/png"><span class="picX"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
-            <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
-          </svg></span>
-        <div class="upload-demo"></div>
-        <div class="upload-result btn-primary">Use</div>
-      </div>
-    </div>
-    <p class="imgTryAgain">If your image takes longer than 2 seconds to upload, try again!</p>
-    <button type="submit" class="btn createAccount loginBtnSignUp">Create Account</button>
-    <div class="disclaimerText">
-      <h3><strong>DegreeMe is not affiliated with any university.</strong> Your school email address
-        is only required to create an university-centric environment.
-      </h3>
-    </div>
-    <div class="upload-spinner">
-      <div class="d-flex justify-content-center">
-        <div class="spinner-border" role="status">
-            <span class="sr-only">Payment Processing</span>
-        </div>
-        <h3 class="payment-status text-light">Creating Your Account</h3>
-    </div>
-    </div>
     </div>
 </div>
   </div>

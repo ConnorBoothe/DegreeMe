@@ -1,0 +1,193 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="653" height="683" viewBox="0 0 653 683">
+  <defs>
+    <filter id="Pfad_150" x="249.714" y="45.41" width="116.301" height="310.123" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.722"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Pfad_151" x="343.55" y="277.189" width="269.232" height="312.112" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-2"/>
+      <feFlood flood-opacity="0.722"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Pfad_152" x="174.068" y="332.52" width="269.232" height="312.112" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-3"/>
+      <feFlood flood-opacity="0.722"/>
+      <feComposite operator="in" in2="blur-3"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Pfad_153" x="41.906" y="243.988" width="326.202" height="201.76" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-4"/>
+      <feFlood flood-opacity="0.722"/>
+      <feComposite operator="in" in2="blur-4"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Pfad_154" x="317.144" y="153.72" width="326.202" height="201.76" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-5"/>
+      <feFlood flood-opacity="0.722"/>
+      <feComposite operator="in" in2="blur-5"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Ellipse_142" x="205" y="0" width="111" height="107" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-6"/>
+      <feFlood flood-opacity="0.722"/>
+      <feComposite operator="in" in2="blur-6"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Ellipse_143" x="208" y="575" width="110" height="108" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-7"/>
+      <feFlood flood-opacity="0.722"/>
+      <feComposite operator="in" in2="blur-7"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Ellipse_144" x="154" y="242" width="109" height="109" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-8"/>
+      <feFlood flood-opacity="0.722"/>
+      <feComposite operator="in" in2="blur-8"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Ellipse_145" x="0" y="288" width="110" height="109" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-9"/>
+      <feFlood flood-opacity="0.722"/>
+      <feComposite operator="in" in2="blur-9"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Ellipse_146" x="212" y="414" width="108" height="109" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-10"/>
+      <feFlood flood-opacity="0.722"/>
+      <feComposite operator="in" in2="blur-10"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Ellipse_148" x="454" y="241" width="106" height="108" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-11"/>
+      <feFlood flood-opacity="0.722"/>
+      <feComposite operator="in" in2="blur-11"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Ellipse_149" x="301" y="135" width="108" height="109" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-12"/>
+      <feFlood flood-opacity="0.722"/>
+      <feComposite operator="in" in2="blur-12"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Ellipse_150" x="390" y="413" width="109" height="109" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-13"/>
+      <feFlood flood-opacity="0.722"/>
+      <feComposite operator="in" in2="blur-13"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Ellipse_151" x="544" y="112" width="109" height="109" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-14"/>
+      <feFlood flood-opacity="0.722"/>
+      <feComposite operator="in" in2="blur-14"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Ellipse_152" x="544" y="469" width="109" height="107" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-15"/>
+      <feFlood flood-opacity="0.722"/>
+      <feComposite operator="in" in2="blur-15"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <pattern id="pattern" preserveAspectRatio="none" width="100%" height="100%" viewBox="0 0 364 434">
+      <image width="364" height="434" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAWwAAAGyCAMAAAD3dQ7UAAAAM1BMVEVMaXH////////////////////////////////////////////////////////////////x7/yuAAAAEHRSTlMAcCDQ4JAwgEDAYLBQoPAQBRgGMQAAAAlwSFlzAAALEgAACxIB0t1+/AAAC65JREFUeJztnW12HDcMBGX5Q5JlW7n/afPPyctzeiigFuq36DoByJ0ha0Bg+TDF8xPIYy1oMoSnsZkr8PMvkOdaDGQILx87nZoXcqRvpRCeyRBe56bu/XwhR1oL4QcZgvUyQg60+Ao/kTF8pycI5Bs50OIr/JWMobhtjICul8VX2GDbmMHhFTbYNmZweIXJED47Tzb6CtdCQLcNa83+DA70Vy0Eh21jBnKgDub3yXiuH8mB/qzFEPOr4GB+xVTYCJ/Igf6oRbzG/ND1MuaneSVHWgthj/mR62XM7wJyoMWnCt02nM3vjRxo0fwcto0R7s78vhlP9ndyoEXzIxMGMb8LyBC+zE3d+0GP1mshoAmDNeZXfKrQbeMrPUEkv8CBOpjfGs0uPlUxvwoxPw062cWnyuBcbgb0FS4+VWQI1uaHnpHUQkATBjE/DbqSFbMzM5BnJMWnCk0YxPw06LZRzM6MgH4pF58q9KhojWbH/DTol7KB+RXP5WZA18taxDG/CjG/C8gzkpjfBQYDXWN+6HpZrCFw6MIcIeY3CLpeFqtHyaOiPQnWYgxkCNbmR34pF6tH9zRSk+tl8ana00hNrpcO5ufcSI2ulzE/zd2Zn3MjNbpexvw0Mb9ByPUy5neBgfntaachj9YdzM+5nQZdL4uKu6aRGm0/dDA/50ZqdL0sKm4aqQcHSoZg3UhNTnZRRtJIXaGouHvMjzxaj/ldQA405qdBiypjfhoH81vTSI0erRdjIEOI+Wn2NFKTR+sO5mfdSE1uTkXzSyN1haL5rWmkRosqHcxvTSN1MYY15kcerVdbWcAQvBupY36DkEfrxVaWmF+FmN8FZClSsZVljfmhm1NxoGgjtbP5oQdSxRjWtNOQm5OD+a1ppC5a155GavJAysH8rBupDcxvTyM1mZZwMD/nRuq7M781R+vFGGJ+Bar5NnKurc2PTEtUrQsMwdv8yM2pmG+L+VUoWteeRmpysosikEbqCsV825pGajQt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"/>
+    </pattern>
+    <filter id="Ellipse_147" x="304" y="291" width="108" height="108" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-16"/>
+      <feFlood flood-opacity="0.722"/>
+      <feComposite operator="in" in2="blur-16"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Komponente_8_1" data-name="Komponente 8 – 1" transform="translate(9 9)">
+    <g transform="matrix(1, 0, 0, 1, -9, -9)" filter="url(#Pfad_150)">
+      <path id="Pfad_150-2" data-name="Pfad 150" d="M-62.85,169.949l93.513,132.2V457.284" transform="translate(324.35 -112.75)" fill="none" stroke="#161616" stroke-linecap="round" stroke-width="4"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, -9, -9)" filter="url(#Pfad_151)">
+      <path id="Pfad_151-2" data-name="Pfad 151" d="M0,0,93.513,132.2V287.335" transform="matrix(-0.81, 0.59, -0.59, -0.81, 599.89, 521.9)" fill="none" stroke="#161616" stroke-linecap="round" stroke-width="4"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, -9, -9)" filter="url(#Pfad_152)">
+      <path id="Pfad_152-2" data-name="Pfad 152" d="M0,0,93.513,132.2V287.335" transform="matrix(-0.81, -0.59, 0.59, -0.81, 261.98, 631.74)" fill="none" stroke="#161616" stroke-linecap="round" stroke-width="4"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, -9, -9)" filter="url(#Pfad_153)">
+      <path id="Pfad_153-2" data-name="Pfad 153" d="M0,0,93.513,132.2V287.335" transform="matrix(0.31, -0.95, 0.95, 0.31, 54.42, 344.69)" fill="none" stroke="#161616" stroke-linecap="round" stroke-width="4"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, -9, -9)" filter="url(#Pfad_154)">
+      <path id="Pfad_154-2" data-name="Pfad 154" d="M0,0,93.513,132.2V287.335" transform="matrix(0.31, 0.95, -0.95, 0.31, 602.18, 166.23)" fill="none" stroke="#161616" stroke-linecap="round" stroke-width="4"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, -9, -9)" filter="url(#Ellipse_142)">
+      <ellipse id="Ellipse_142-2" data-name="Ellipse 142" cx="46.5" cy="44.5" rx="46.5" ry="44.5" transform="translate(214 9)" fill="#202020"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, -9, -9)" filter="url(#Ellipse_143)">
+      <ellipse id="Ellipse_143-2" data-name="Ellipse 143" cx="46" cy="45" rx="46" ry="45" transform="translate(217 584)" fill="#202020"/>
+    </g>
+    <g id="Icon_ionic-ios-stats" data-name="Icon ionic-ios-stats" transform="translate(232.489 23.982)">
+      <path id="Pfad_109" data-name="Pfad 109" d="M13.247,46.352h5.232a.874.874,0,0,0,.872-.872V5.372a.874.874,0,0,0-.872-.872H13.247a.874.874,0,0,0-.872.872V45.48A.874.874,0,0,0,13.247,46.352Z" transform="translate(-1.912 -4.5)" fill="#fc0"/>
+      <path id="Pfad_110" data-name="Pfad 110" d="M6.5,37.688h5.232a.874.874,0,0,0,.872-.872V21.122a.874.874,0,0,0-.872-.872H6.5a.874.874,0,0,0-.872.872V36.817A.874.874,0,0,0,6.5,37.688Z" transform="translate(-5.625 4.164)" fill="#fc0"/>
+      <path id="Pfad_111" data-name="Pfad 111" d="M20.008,40.164h5.21a.879.879,0,0,0,.883-.883V16.633a.879.879,0,0,0-.883-.883h-5.21a.879.879,0,0,0-.883.883V39.281A.879.879,0,0,0,20.008,40.164Z" transform="translate(1.801 1.688)" fill="#fc0"/>
+      <path id="Pfad_112" data-name="Pfad 112" d="M25.875,9.883V42.994a.879.879,0,0,0,.883.883h5.21a.879.879,0,0,0,.883-.883V9.883A.879.879,0,0,0,31.968,9h-5.21A.879.879,0,0,0,25.875,9.883Z" transform="translate(5.514 -2.025)" fill="#fc0"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, -9, -9)" filter="url(#Ellipse_144)">
+      <circle id="Ellipse_144-2" data-name="Ellipse 144" cx="45.5" cy="45.5" r="45.5" transform="translate(163 251)" fill="#202020"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, -9, -9)" filter="url(#Ellipse_145)">
+      <ellipse id="Ellipse_145-2" data-name="Ellipse 145" cx="46" cy="45.5" rx="46" ry="45.5" transform="translate(9 297)" fill="#202020"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, -9, -9)" filter="url(#Ellipse_146)">
+      <ellipse id="Ellipse_146-2" data-name="Ellipse 146" cx="45" cy="45.5" rx="45" ry="45.5" transform="translate(221 423)" fill="#202020"/>
+    </g>
+    <path id="Icon_awesome-glasses" data-name="Icon awesome-glasses" d="M45.885,19.852,42.261,5.328A7.029,7.029,0,0,0,33.214.362L32,.768a1.278,1.278,0,0,0-.809,1.618l.4,1.213a1.279,1.279,0,0,0,1.617.809l1.053-.351a3.418,3.418,0,0,1,2.65.138,3.167,3.167,0,0,1,1.628,2.064l3.074,12.294a22.119,22.119,0,0,0-6.49-1,20.964,20.964,0,0,0-9.179,2.137H20.095a20.944,20.944,0,0,0-9.18-2.138,22.121,22.121,0,0,0-6.491,1L7.5,6.257A3.164,3.164,0,0,1,9.127,4.194a3.416,3.416,0,0,1,2.65-.138l1.053.351A1.279,1.279,0,0,0,14.446,3.6l.4-1.213A1.278,1.278,0,0,0,14.041.767L12.822.361A7.029,7.029,0,0,0,3.776,5.327L.152,19.852A5.133,5.133,0,0,0,0,21.09V26.7a9.156,9.156,0,0,0,9.207,9.1h2.967a9.165,9.165,0,0,0,9.182-8.422L21.59,24.3h2.857l.234,3.088a9.164,9.164,0,0,0,9.181,8.422H36.83a9.156,9.156,0,0,0,9.207-9.1V21.091A5.135,5.135,0,0,0,45.885,19.852ZM16.255,27a4.067,4.067,0,0,1-4.081,3.693H9.207A4.046,4.046,0,0,1,5.115,26.7v-3a17.351,17.351,0,0,1,5.8-1.033A15.682,15.682,0,0,1,16.505,23.7Zm24.667-.293a4.045,4.045,0,0,1-4.092,3.987H33.863A4.066,4.066,0,0,1,29.782,27l-.25-3.295a15.687,15.687,0,0,1,5.591-1.033,17.349,17.349,0,0,1,5.8,1.033v3Z" transform="matrix(0.985, 0.174, -0.174, 0.985, 234.154, 598.548)" fill="#fc0"/>
+    <path id="Icon_awesome-dollar-sign" data-name="Icon awesome-dollar-sign" d="M19.847,22.143l-10.246-3a2.8,2.8,0,0,1,.787-5.484h6.29a5.791,5.791,0,0,1,3.245,1,1.479,1.479,0,0,0,1.85-.19l3.3-3.226A1.538,1.538,0,0,0,24.9,8.918,13.415,13.415,0,0,0,16.7,6.072V1.518A1.522,1.522,0,0,0,15.179,0H12.143a1.522,1.522,0,0,0-1.518,1.518V6.072h-.237A10.4,10.4,0,0,0,.047,17.419,10.861,10.861,0,0,0,8,26.583l9.725,2.846a2.8,2.8,0,0,1-.787,5.484h-6.29a5.791,5.791,0,0,1-3.245-1,1.479,1.479,0,0,0-1.85.19l-3.3,3.226a1.538,1.538,0,0,0,.171,2.324A13.415,13.415,0,0,0,10.625,42.5v4.554a1.522,1.522,0,0,0,1.518,1.518h3.036A1.522,1.522,0,0,0,16.7,47.057V42.484a10.717,10.717,0,0,0,10.028-6.9A10.418,10.418,0,0,0,19.847,22.143Z" transform="translate(184.985 263.328)" fill="#fc0"/>
+    <g transform="matrix(1, 0, 0, 1, -9, -9)" filter="url(#Ellipse_148)">
+      <ellipse id="Ellipse_148-2" data-name="Ellipse 148" cx="44" cy="45" rx="44" ry="45" transform="translate(463 250)" fill="#202020"/>
+    </g>
+    <path id="Icon_awesome-book" data-name="Icon awesome-book" d="M39.845,32.019V2.135A2.129,2.129,0,0,0,37.711,0H8.538A8.541,8.541,0,0,0,0,8.538V37a8.541,8.541,0,0,0,8.538,8.538H37.711A2.129,2.129,0,0,0,39.845,43.4V41.98a2.151,2.151,0,0,0-.792-1.663,19.834,19.834,0,0,1,0-6.644A2.12,2.12,0,0,0,39.845,32.019Zm-28.461-20.1a.535.535,0,0,1,.534-.534H30.774a.535.535,0,0,1,.534.534V13.7a.535.535,0,0,1-.534.534H11.918a.535.535,0,0,1-.534-.534Zm0,5.692a.535.535,0,0,1,.534-.534H30.774a.535.535,0,0,1,.534.534v1.779a.535.535,0,0,1-.534.534H11.918a.535.535,0,0,1-.534-.534ZM33.922,39.845H8.538a2.846,2.846,0,0,1,0-5.692H33.922A32.02,32.02,0,0,0,33.922,39.845Z" transform="translate(472.15 266.265) rotate(-9)" fill="#fc0"/>
+    <g transform="matrix(1, 0, 0, 1, -9, -9)" filter="url(#Ellipse_149)">
+      <ellipse id="Ellipse_149-2" data-name="Ellipse 149" cx="45" cy="45.5" rx="45" ry="45.5" transform="translate(310 144)" fill="#202020"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, -9, -9)" filter="url(#Ellipse_150)">
+      <circle id="Ellipse_150-2" data-name="Ellipse 150" cx="45.5" cy="45.5" r="45.5" transform="translate(399 422)" fill="#202020"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, -9, -9)" filter="url(#Ellipse_151)">
+      <circle id="Ellipse_151-2" data-name="Ellipse 151" cx="45.5" cy="45.5" r="45.5" transform="translate(553 121)" fill="#202020"/>
+    </g>
+    <path id="Icon_awesome-pencil-alt" data-name="Icon awesome-pencil-alt" d="M44.68,12.75l-4.137,4.137a1.078,1.078,0,0,1-1.526,0L29.056,6.926a1.078,1.078,0,0,1,0-1.526l4.137-4.137a4.317,4.317,0,0,1,6.093,0L44.68,6.657A4.3,4.3,0,0,1,44.68,12.75ZM25.5,8.954,1.938,32.519l-1.9,10.9A2.156,2.156,0,0,0,2.53,45.917l10.9-1.911L37,20.441a1.078,1.078,0,0,0,0-1.526L27.037,8.954a1.089,1.089,0,0,0-1.535,0ZM11.136,30.5a1.251,1.251,0,0,1,0-1.777L24.955,14.9a1.256,1.256,0,0,1,1.777,1.777L12.913,30.5a1.251,1.251,0,0,1-1.777,0ZM7.9,38.047H12.2V41.3L6.416,42.319,3.625,39.528,4.639,33.74H7.9Z" transform="translate(566.564 135.541)" fill="#fc0"/>
+    <g transform="matrix(1, 0, 0, 1, -9, -9)" filter="url(#Ellipse_152)">
+      <ellipse id="Ellipse_152-2" data-name="Ellipse 152" cx="45.5" cy="44.5" rx="45.5" ry="44.5" transform="translate(553 478)" fill="#202020"/>
+    </g>
+    <g id="doktorhut" transform="translate(563.592 494.443)">
+      <path id="Pfad_113" data-name="Pfad 113" d="M25.563,52.292a1.538,1.538,0,0,0,1.075,0l19.345-7.254V61.763a6.054,6.054,0,0,1,3.059,0V43.891l2.169-.775a1.532,1.532,0,0,0,0-2.865L26.638,31.074a1.548,1.548,0,0,0-1.075,0L.99,40.251a1.532,1.532,0,0,0,0,2.865Z" transform="translate(-0.001 -30.978)" fill="#fc0"/>
+      <path id="Pfad_114" data-name="Pfad 114" d="M425.563,360.972c-2.615,0-4.588,3.287-4.588,7.647v3.059a1.529,1.529,0,0,0,1.529,1.529h6.118a1.528,1.528,0,0,0,1.529-1.529v-3.059C430.152,364.259,428.179,360.972,425.563,360.972Z" transform="translate(-378.051 -327.325)" fill="#fc0"/>
+      <path id="Pfad_115" data-name="Pfad 115" d="M123.613,215.859l-14.207,5.328a4.6,4.6,0,0,1-3.213,0l-14.218-5.331a29.082,29.082,0,0,0-1,8.678,1.531,1.531,0,0,0,2.1,1.42,22.335,22.335,0,0,1,7.081-1.42c3.228,0,6.66,2.7,6.694,2.726a1.537,1.537,0,0,0,1.909,0c.947-.759,4-2.724,6.691-2.724a22.333,22.333,0,0,1,7.081,1.42,1.531,1.531,0,0,0,2.1-1.42A29.3,29.3,0,0,0,123.613,215.859Z" transform="translate(-81.694 -197.008)" fill="#fc0"/>
+    </g>
+    <g id="Icon_ionic-md-time" data-name="Icon ionic-md-time" transform="translate(17.519 305.256)">
+      <path id="Pfad_107" data-name="Pfad 107" d="M31.706,3.375A28.358,28.358,0,1,0,60.092,31.733,28.348,28.348,0,0,0,31.706,3.375Zm.027,51.045A22.687,22.687,0,1,1,54.42,31.733,22.687,22.687,0,0,1,31.733,54.42Z" transform="translate(-3.375 -3.375)" fill="#fc0"/>
+      <path id="Pfad_108" data-name="Pfad 108" d="M21.009,10.687H16.537V28.572l15.649,9.387,2.236-3.669L21.009,26.336Z" transform="translate(8.426 2.881)" fill="#fc0"/>
+    </g>
+    <path id="Icon_ionic-ios-laptop" data-name="Icon ionic-ios-laptop" d="M50.78,37.24V9.84A1.989,1.989,0,0,0,48.8,7.875H8.623A1.982,1.982,0,0,0,6.646,9.84v27.4H1.118A3.337,3.337,0,0,0,3.29,39.849a15.25,15.25,0,0,0,5.655,1.126H48.482a15.224,15.224,0,0,0,5.551-1.011c1.092-.46,2.276-1.54,2.276-2.724H50.78ZM28.713,8.794a.46.46,0,1,1-.46.46A.461.461,0,0,1,28.713,8.794Zm-20,1.862h40a.231.231,0,0,1,.23.23V35.172a.231.231,0,0,1-.23.23h-40a.231.231,0,0,1-.23-.23V10.886A.223.223,0,0,1,8.715,10.656Zm24.86,27.5H23.852a1.369,1.369,0,0,1-1.115-.862H34.69A1.141,1.141,0,0,1,33.575,38.16Z" transform="translate(227.588 434.888)" fill="#fc0"/>
+    <path id="Icon_awesome-mobile" data-name="Icon awesome-mobile" d="M25.456,0H4.492A4.493,4.493,0,0,0,0,4.492V43.426a4.493,4.493,0,0,0,4.492,4.492H25.456a4.493,4.493,0,0,0,4.492-4.492V4.492A4.493,4.493,0,0,0,25.456,0ZM14.974,44.923a2.995,2.995,0,1,1,2.995-2.995A2.992,2.992,0,0,1,14.974,44.923Z" transform="translate(420.206 433.546)" fill="#fc0"/>
+    <rect id="white_hashtag-8" width="41" height="49" transform="translate(328 311)" fill="url(#pattern)"/>
+    <path id="Icon_awesome-hands-helping" data-name="Icon awesome-hands-helping" d="M38.125,15H26.25v4.375a5.625,5.625,0,0,1-11.25,0v-9.5L9.93,12.922A4.989,4.989,0,0,0,7.5,17.2v3.7L1.25,24.508a2.494,2.494,0,0,0-.914,3.414L6.586,38.75A2.5,2.5,0,0,0,10,39.664L18.078,35H28.75a5,5,0,0,0,5-5H35a2.5,2.5,0,0,0,2.5-2.5v-5h.625A1.871,1.871,0,0,0,40,20.625v-3.75A1.871,1.871,0,0,0,38.125,15Zm11.539-2.922L43.414,1.25A2.5,2.5,0,0,0,40,.336L31.922,5H23.938a5.038,5.038,0,0,0-2.648.758L18.672,7.39A2.483,2.483,0,0,0,17.5,9.508v9.867a3.125,3.125,0,0,0,6.25,0V12.5H38.125A4.378,4.378,0,0,1,42.5,16.875V19.1l6.25-3.609a2.5,2.5,0,0,0,.914-3.414Z" transform="translate(321.001 160)" fill="#fc0"/>
+    <g transform="matrix(1, 0, 0, 1, -9, -9)" filter="url(#Ellipse_147)">
+      <circle id="Ellipse_147-2" data-name="Ellipse 147" cx="45" cy="45" r="45" transform="translate(313 300)" fill="#202020"/>
+    </g>
+    <rect id="white_hashtag-8-2" data-name="white_hashtag-8" width="41" height="49" transform="translate(328 311)" fill="url(#pattern)"/>
+  </g>
+</svg>

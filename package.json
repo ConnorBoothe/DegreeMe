@@ -54,7 +54,8 @@
     "stylus": "^0.54.7",
     "telnet": "0.0.1",
     "unirest": "^0.6.0",
-    "uuid": "^8.3.1"
+    "uuid": "^8.3.1",
+    "wavify": "^1.0.0"
   },
   "engines": {
     "node": "10.x"
