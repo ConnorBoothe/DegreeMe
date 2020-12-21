@@ -4,17 +4,23 @@ const {
     check,
     validationResult
   } = require('express-validator');
-const ListingsDB = require('../../models/Database/ListingsDB');
-var listings = new ListingsDB();
+const TutorDB = require('../../models/Database/TutorDB');
+var tutors = new TutorDB();
 //send list of tutors
-router.get('/API/Tutors', function(req, res){
-  
-        listings.getAllListings().exec((err,docs)=>{
-            if(err){
-                res.json("An error occurred.")
-            }
+router.get('/API/Tutors/:Course', function(req, res){
+    if(req.params.Course) {
+        tutors.getAvailableTutorsByCourse(req.params.course).then((docs)=>{
+            console.log(docs)
             res.json(docs);
+        })
+        .catch(()=>{
+            res.json("An error occurred")
         });
+    }
+    else {
+        res.json("An error occurred.")
+    }
+        
    
 });
 module.exports = router;
