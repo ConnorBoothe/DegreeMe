@@ -19,14 +19,14 @@ const StudyGroupDB = require('../../models/Database/StudyGroupsDB');
 const TimelineDB = require('../../models/Database/TimeLineDB');
 const NotificationDB = require('../../models/Database/NotificationDB');
 const StudyGroupMeetupsDB = require('../../models/Database/StudyGroupMeetupsDB');
-const MessagesDB = require('../../models/Database/MessagesDB');
+const Threads = require('../../models/Database/Threads');
 //instantiate DBs
 var users = new userDB();
 var timeline = new TimelineDB();
 var notifications = new NotificationDB();
 var studyGroups = new StudyGroupDB();
 var studyGroupMeetups = new StudyGroupMeetupsDB();
-var messages = new MessagesDB();
+var threads = new Threads();
 //use body parser and session
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({
@@ -247,7 +247,7 @@ router.post("/unjoin",
         }).then(function () {
           studyGroups.getStudyGroupById(req.body.id)
           .then(function(data){
-            messages.leaveThread(data[0].MessageId, req.session.handle);
+            threads.leaveThread(data[0].MessageId, req.session.handle);
             users.removeThread(req.session.handle, data[0].MessageId);
           })
           res.status(202).json({
@@ -276,7 +276,7 @@ router.post("/unjoin",
     }
     studyGroups.getGroupNames().then(function(data){
       var groupNameExists = false;
-      for(x in data){
+      for(x in data){ 
         if(data[x].GroupName == req.body.groupName){
           groupNameExists = true;
         }
@@ -287,7 +287,7 @@ router.post("/unjoin",
         }).end();
       }
       else{
-        messages.newThread(req.session.handle, req.session.img, [[req.session.handle, req.session.img]], new Date(), req.body.groupName + " Group Chat")
+        threads.newThread(req.session.handle, req.session.img, [[req.session.handle, req.session.img]], new Date(), req.body.groupName + " Group Chat")
         .then(function(data){
           
           users.addThread(req.session.handle, req.session.img, data.subject, data._id, req.session.handle);

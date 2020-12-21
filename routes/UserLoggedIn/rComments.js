@@ -45,6 +45,7 @@ router.use(session({
   }));
 //render the checkout page
 router.get('/post/:timelineId', function (req, res) {
+    console.log("RUNNING GET POST")
     if (req.session.userId) {
         timeline.getPostById(req.params.timelineId)
             .then(function (post) {
@@ -71,6 +72,7 @@ router.get('/post/:timelineId', function (req, res) {
                 
             })
             .catch(function (err) {
+                console.log("Errror here")
                 console.log(err)
                 res.redirect("/home")
             })
@@ -90,11 +92,10 @@ function (req, res) {
       console.log(errors)
     }
         //add comment to CommentsDB
+        //if the post is a youtube link
         if(req.body.thumbnail){
             comments.addYTComment(req.body.postId, req.session.handle, req.session.img, req.body.message, req.body.attachments)
             .then(function(data){
-                
-                console.log("Commment added")
                 //add notification
                 timeline.incrementCommentCount(req.body.postId)
                 .then(function(){
@@ -103,7 +104,6 @@ function (req, res) {
                     new Promise((resolve, reject) => {
                         users.incrementNotificationCount(req.body.handle);
                         resolve(true);
-    
                     })
                     .then(function(){
                         //send email
@@ -162,13 +162,15 @@ function (req, res) {
                 })
                 })
                 .catch(function(err){
+                    console.log("ERROR HERE")
                     console.log(err)
                 })
                
             })
             .catch(function(err){
+                CSSConditionRule.log("ERROR")
                 console.log(err);
-                res.redirect("/post/"+req.body.postId);
+                res.redirect("/");
             });
         }
         else{
@@ -247,8 +249,9 @@ function (req, res) {
                
             })
             .catch(function(err){
+                console.log("ERROR HRER")
                 console.log(err);
-                res.redirect("/post/"+req.body.postId);
+                res.redirect("/");
             });
         }
              

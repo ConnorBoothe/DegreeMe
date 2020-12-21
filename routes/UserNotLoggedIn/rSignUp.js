@@ -19,9 +19,10 @@ const {
 } = require('express-validator');
 //Dbs used
 var UserDB = require('../../models/Database/UserDB');
+const StreamDB = require('../../models/Database/StreamDB');
 //instantiate DB
 var users = new UserDB();
-
+var stream = new StreamDB()
 //use session and body parser
 router.use(session({
     secret: 'iloveu',
@@ -101,6 +102,8 @@ router.post('/SignUp', [
                             //capitalize first letter of last name
                             var lNameLetter = req.body.last_name[0].substring(0, 1).toUpperCase();
                             var last_name = lNameLetter + req.body.last_name.substring(1);
+                            //create new stream and assign it to a user
+                            // stream.addStream()
                             users.addUser("@" + req.body.handle, first_name, last_name, req.body.school, req.body.email, hash,
                                 randomImg, "Inactive", activationCode,
                                 "None", req.body.major, req.body.classification).then(function(){

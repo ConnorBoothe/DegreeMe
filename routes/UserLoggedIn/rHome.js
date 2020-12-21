@@ -91,7 +91,9 @@ router.get('/home', function (req, res) {
                 new Promise((resolve, reject) => {
                 for (var x = 0; x < docs1.length; x++) {
                     // .then(function(data){
+                        console.log(docs1[x].likers)
                         var hasLiked = tl.likedBoolean(req.session.handle, docs1[x].likers);
+                        console.log(hasLiked)
                     //potentially removing this
                     if (docs1[x].type == "Tutor Listing") {
                         timeLineArray.push(new TimelinePost(docs1[x]._id, docs1[x].sendToHandle, docs1[x].type, docs1[x].userHandle, docs1[x].userName,
@@ -268,7 +270,7 @@ router.post("/leaveCourse",
             //decrement course studentCount
             // courses.decrementStudents(req.body.course).exec();
             //remove student from course
-            courses.removeStudent(req.body.handle, req.body.course);
+            courses.removeStudent(req.session.handle, req.body.course);
             //need .then() here
             res.status(202).json({
                 status: "left",
@@ -285,8 +287,9 @@ router.post("/addLike",
         if (!errors.isEmpty()) {
             res.redirect('/home');
         }
-        timeline.hasLiked(req.body.postId, req.body.handle)
+        timeline.hasLiked(req.body.postId, req.session.handle)
             .then(function (data1) {
+                console.log(data1)
                 //determine if the user has liked the post
                 var hasLiked = false;
                 for (x in data1.likers) {
@@ -302,17 +305,22 @@ router.post("/addLike",
                     .then(function (data) {
                     //add handle to liker array
                     new Promise((resolve, reject) => {
-                            timeline.addLiker(req.body.postId, req.body.handle);
+                            timeline.addLiker(req.body.postId, req.session.handle);
                             resolve();
                         })
                         .then(function () {
-                            timeline.getTimelineById(req.body.postId)
+                            notifications.addNotification(req.body.postHandle ,req.session.name,"liked your post", req.session.img, "/")
+                            .then(function(){
+                                users.incrementNotificationCount(req.body.postHandle);
+                                timeline.getTimelineById(req.body.postId)
                                 .then(function (data) {
                                     res.status(202).json({
                                         status: "liked",
                                         likeCount: data[0].likes
                                     }).end();
                                 })
+                            })
+                            
                         })
                     });
 
@@ -848,6 +856,7 @@ router.post("/siteWideSearch",
       }
     //   console.log("Group Name", req.body.groupName)
     console.log(req.body.message)
+    console.log("Sending platform inv")
       var splitEmails = req.body.emails.split(",");
       var toEmails = [];
       for(x in splitEmails){
@@ -888,6 +897,7 @@ router.post("/siteWideSearch",
             console.log(res.body);
             // throw new Error(res.error);
         } else if (result.accepted) {
+            console.log("SENT EMAIL")
             res.status(202).json({
             }).end();
             console.log("email has sent for inviting someone to join group");

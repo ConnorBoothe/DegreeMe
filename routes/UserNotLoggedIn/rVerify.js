@@ -55,7 +55,6 @@ router.post("/updateStatus", function(req, res){
             UserDB.updateStatus(req.body.email);
             UserDB.getUserByEmail(req.body.email).exec((err,docs) => {
                 if(docs.length > 0){
-                    console.log("Running")
                     stripe.customers.create({
                         email:docs[0].email,
                         name:docs[0].first_name + " " + docs[0].last_name,
