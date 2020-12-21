@@ -94,7 +94,6 @@ module.exports = class TutorSchedules {
     getAvailableTutorsByCourse(course) {
         var daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         //get tutors By Course
-        console.log("Tutors available running")
         return new Promise((resolve, reject) => {
             var availableTutors = [];
             TutorDB.find({
@@ -108,15 +107,14 @@ module.exports = class TutorSchedules {
                     if(data.length < 1){
                         resolve(availableTutors)
                     }
+                    console.log(data.length)
                     for (var i = 0; i < data.length; i++) {
-                            console.log("Phase 2")
+                           
                             //check availability of user id in query
-                            console.log(data[i].userId)
                             var currTutor = data[i];
-                            console.log("currTutor: " + currTutor)
                             schedule.getUserScheduleByDayAndTime(data[i].userId, daysOfWeek[new Date().getDay()], new Date().getHours())
                                 .then(function (data1) {
-                                    console.log("data1: " + new Date().getDay())
+                                   console.log("DATA: " +data1.length)
                                     if (data1.length > 0) {
                                         console.log("tutors found")
                                         //push if availability found
