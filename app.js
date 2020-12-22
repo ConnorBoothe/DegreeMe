@@ -69,39 +69,45 @@ app.use('/assets', express.static('assets')); //use assets folder for static fil
 //events scheduled to run on the server
 app.use(require('./routes/scheduledEvents/updateListings.js')); 
 app.use(require('./routes/scheduledEvents/chargePayments.js')); 
+//User Account Routes
+app.use([
+  require('./routes/UserAccount/rSignUp'),
+  require('./routes/UserAccount/rVerify.js'),
+  require('./routes/UserAccount/rUpdatePassword.js'),
+  require('./routes/UserAccount/rLogout.js'),
+  require('./routes/UserAccount/rLogin.js'),
+  require('./routes/UserAccount/SendEmailInvite.js'),
+])
+//Message routes
+app.use([
+  require('./routes/UserLoggedIn/Messages/rMessages.js'),
+  require('./routes/UserLoggedIn/Messages/rMessageMembers.js'),
+  require('./routes/UserLoggedIn/Messages/rGetMessageSet.js'),
+  require('./routes/UserLoggedIn/Messages/rGetThreadImages.js'),
+  require('./routes/UserLoggedIn/Messages/rSendDirectMessage.js')
+])
 //User not logged in routes
 app.use([
  require('./routes/UserNotLoggedIn/rIndex'),
  require('./routes/UserNotLoggedIn/rAbout'),
  require('./routes/Websockets/MessageSocket.js'),
  require('./routes/UserNotLoggedIn/rJobs'),
- require('./routes/UserNotLoggedIn/rSignUp'),
  require('./routes/UserNotLoggedIn/rPrivacy'),
  require('./routes/UserNotLoggedIn/rPolicies'),
  require('./routes/UserLoggedIn/rMeeting.js'),
  require('./routes/UserNotLoggedIn/rContact.js'),
  require('./routes/UserNotLoggedIn/rCourseSearch.js'),
  require('./routes/UserNotLoggedIn/rSearchStudents.js'),
- require('./routes/UserNotLoggedIn/rVerify.js'),
- require('./routes/UserNotLoggedIn/rUpdatePassword.js'),
 ]); 
 //UserLoggedIn routes
 app.use([
   require('./routes/UserLoggedIn/rSettings.js'),
   require('./routes/UserLoggedIn/rMyConnections.js'),
   require('./routes/UserLoggedIn/rSetUserStatus.js'),
-  require('./routes/UserLoggedIn/Messages/rMessages.js'),
-  require('./routes/UserLoggedIn/Messages/rMessageMembers.js'),
-  require('./routes/UserLoggedIn/Messages/rGetMessageSet.js'),
-  require('./routes/UserLoggedIn/Messages/rGetThreadImages.js'),
-  require('./routes/UserLoggedIn/Messages/rSendDirectMessage.js'),
-  require('./routes/UserAccount/SendEmailInvite.js'),
   require('./routes/UserLoggedIn/rMyFinances.js'),
   require('./routes/UserLoggedIn/rStudyGroups.js'),
   require('./routes/UserLoggedIn/rCreateTutorListing.js'),
   require('./routes/UserLoggedIn/rMeetups.js'),
-  require('./routes/UserNotLoggedIn/rLogin.js'),
-  require('./routes/UserLoggedIn/rLogout.js'),
   require('./routes/UserLoggedIn/rCheckout.js'),
   require('./routes/UserLoggedIn/rEvents.js'),
   require('./routes/UserLoggedIn/rConnectByMajor.js'),
