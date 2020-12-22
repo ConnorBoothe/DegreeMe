@@ -90,7 +90,7 @@ module.exports = class Email {
             })
         });
     break;
-    case "verifyEmail":
+    case "VerifyAccount":
         return new Promise((resolve, reject) => {
         mail.headers({
             "content-type": "application/json",
@@ -104,13 +104,14 @@ module.exports = class Email {
                     "to": [
                         {
                             "email": email,
+                            name: req[2],
                         }
                 ],
                     "dynamic_template_data": {
                         "subject": "Account Confirmation",
                         "name": req[1].first_name,
                         "code": req[0],
-                        "email": req[1].email,
+                        "email": email,
                 
                 },
             }
@@ -127,9 +128,12 @@ module.exports = class Email {
             });
         
             mail.end(function (res) {
-                // if (res.error) throw new Error(res.error);
-        
-            console.log(res.body);
+                if (res.error) {
+                    reject(res.error)
+                }
+                else {
+                    resolve(res.body)
+                }
             });
         });
             break;
