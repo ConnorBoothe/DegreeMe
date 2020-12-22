@@ -98,8 +98,8 @@ router.post("/sendEmail", function(req, res){
     .then(()=>{
         UserDB.getUserByEmail(req.body.email1).then((user)=>{
             if(user.length > 0) {
-                emailFunction.createEmail(user[0].email, "verifyEmail",
-                 [activationCode, user[0]])
+                emailFunction.createEmail(user[0].email, "VerifyAccount",
+                 [activationCode, user[0].name])
                  .then(()=>{
                     res.redirect("/login?message=New Email Sent");
                  })
@@ -108,11 +108,7 @@ router.post("/sendEmail", function(req, res){
                      console.log(err)
                  })
             }
-        
          })
     })
-   
-
-   
 });
 module.exports = router;
