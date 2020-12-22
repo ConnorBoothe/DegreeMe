@@ -22,7 +22,6 @@ app.use(session({
   }));
 app.set('trust proxy', 1) // trust first proxy
 //classes used
-const MessageDB = require('./models/Database/MessagesDB');
 const StreamDB = require('./models/Database/StreamDB');
 const NotificationsDB = require('./models/Database/NotificationDB');
 const UserDB = require('./models/Database/UserDB');
@@ -96,6 +95,7 @@ app.use([
   require('./routes/UserLoggedIn/Messages/rGetMessageSet.js'),
   require('./routes/UserLoggedIn/Messages/rGetThreadImages.js'),
   require('./routes/UserLoggedIn/Messages/rSendDirectMessage.js'),
+  require('./routes/UserAccount/SendEmailInvite.js'),
   require('./routes/UserLoggedIn/rMyFinances.js'),
   require('./routes/UserLoggedIn/rStudyGroups.js'),
   require('./routes/UserLoggedIn/rCreateTutorListing.js'),
