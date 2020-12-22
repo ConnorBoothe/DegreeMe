@@ -91,6 +91,7 @@ module.exports = class Email {
         });
     break;
     case "verifyEmail":
+        return new Promise((resolve, reject) => {
         mail.headers({
             "content-type": "application/json",
             "authorization": process.env.SENDGRID_API_KEY,
@@ -102,7 +103,7 @@ module.exports = class Email {
                 {
                     "to": [
                         {
-                            "email": user[0].email,
+                            "email": email,
                         }
                 ],
                     "dynamic_template_data": {
@@ -130,6 +131,52 @@ module.exports = class Email {
         
             console.log(res.body);
             });
+        });
+            break;
+            case "invite":
+                return new Promise((resolve, reject) => {
+                    mail.headers({
+                        "content-type": "application/json",
+                        "authorization": process.env.SENDGRID_API_KEY,
+                        });
+                        mail.type("json");
+                        mail.send({
+                        "personalizations": [
+                            {
+                                "to": email,
+                                "dynamic_template_data": {
+                                    "subject": "Group Invitation",
+                                    "name": req.session.name,
+                                    "message": req.body.message,
+                            },
+                                "subject": ""
+                            }
+                        ],
+                            "from": {
+                                "email": "notifications@degreeme.io",
+                                "name": "DegreeMe"
+                        },
+                            "reply_to": {
+                                "email": "noreply@degreeme.io",
+                                "name": "No Reply"
+                        },
+                            "template_id": "d-fd46e3eb5ad84d8e971def6cb357e350"
+                        });
+                        mail.end(function (result) {
+                          if (result.error){
+                              reject(result.error)
+                              // throw new Error(res.error);
+                          } else if (result.accepted) {
+                              resolve(result.accepted)
+                              console.log("email has sent for inviting someone to join group");
+                          }
+                      });
+                    });
+                    
+                      
     }
+
     }
+
+
 }
