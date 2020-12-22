@@ -1,7 +1,5 @@
 require('dotenv').config();
 const mongoose = require("mongoose");
-const unirest = require('unirest');
-var mail = unirest("POST", "https://api.sendgrid.com/v3/mail/send");
 const UserDB = require("./UserDB");
 const Threads = require("./Threads");
 const users = new UserDB();
