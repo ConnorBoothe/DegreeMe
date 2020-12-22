@@ -105,7 +105,7 @@
                 <div class="student-container">
                     <h2 class="result"><span class="badge badge-warning"><%=major%> Students</span></h2>
                     <% if (students.length>0){%>
-                    <% for(var i=0; i<students.length; i++){ %>
+                    <% for(var i=0; i< students.length; i++){ %>
                     <div class="studentResult">
                         <img src="<%=students[i][0].getImg()%>" alt="Profile" class="discoverImage">
                         <p class="name"><%=students[i][0].getName() %></p>
@@ -117,6 +117,8 @@
                             <div class="following-btn-container">
                             <input name="followingHandle" type="hidden" value="<%=students[i][0].getHandle()%>" />
                             <input name="followingImg" type="hidden" value="<%=students[i][0].getImg()%>" />
+                            <input name="email" type="hidden" value="<%=students[i][0].getEmail()%>" />
+
                            <button id="<%=noAtHandle%>"
                                     data-status="unfollow" type="button"
                                     data-onclick="follow(<%=noAtHandle%>, '<%=students[i][0].getHandle()%>','unfollow','no image','#connectModal')"
@@ -129,6 +131,8 @@
                         <form action="follow" method="POST" id="<%"follow-form-"+ i%>">
                             <input name="following" type="hidden" value="<%=students[i][0].getHandle()%>" />
                             <input name="following" type="hidden" value="<%=students[i][0].getImg()%>" />
+                            <input name="email" type="hidden" value="<%=students[i][0].getEmail()%>" />
+
                             <button id="<%=noAtHandle%>" data-status="follow" type="button"
                                 class="btn btn-primary followingButton">Follow</button>
                         </form>
