@@ -109,7 +109,6 @@ module.exports = class TutorSchedules {
                     }
                     console.log(data.length)
                     for (var i = 0; i < data.length; i++) {
-                           
                             //check availability of user id in query
                             var currTutor = data[i];
                             schedule.getUserScheduleByDayAndTime(data[i].userId, daysOfWeek[new Date().getDay()], new Date().getHours())
