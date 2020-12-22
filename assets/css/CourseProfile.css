@@ -571,12 +571,12 @@ input[name="anonymous"]{
     }
     .student-container ul li{
         list-style-type:none;
-          background-color:#242526;
+          background-color:#1f2024;
           padding:5px;
           margin-bottom:15px;
           padding-left:15px;
           padding-right:15px;
-          border-radius:5px;
+          border-radius:10px;
           box-shadow: 1px 2px black;
           cursor:pointer;
       }
