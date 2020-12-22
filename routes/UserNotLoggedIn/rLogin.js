@@ -32,7 +32,7 @@ router.use(
     secret: "toolbox1217!",
     resave: true,
     saveUninitialized: true,
-    cookie: { secure: true, maxAge: 6 * 60 * 60 * 1000 },
+    cookie: { secure: false, maxAge: 6 * 60 * 60 * 1000 },
   })
 );
 router.use(bodyParser.json());

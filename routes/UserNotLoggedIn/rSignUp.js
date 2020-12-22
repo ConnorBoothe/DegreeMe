@@ -226,7 +226,7 @@ router.post(
     //will change to use function getUserByEmail()
     console.log("SIGN UP MOBILE");
     console.log(req.body);
-    users.getStudents().exec((err, docs) => {
+    users.getAllUsers().exec((err, docs) => {
       console.log(req.body.email);
       for (x in docs) {
         if (req.body.email === docs[x].email) {
