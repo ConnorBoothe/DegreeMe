@@ -107,7 +107,7 @@ function (req, res) {
                         //send email
                         users.getEmailByHandle(req.body.handle)
                         .then(function(data1){
-                            emailFunction.createCommentEmail(data1[0].email, "comment", req)
+                            emailFunction.createEmail(data1[0].email, "comment", req)
                             .then(()=>{
                                 res.status(202).json({
                                     post:data,
@@ -143,7 +143,7 @@ function (req, res) {
                         //send email
                         users.getEmailByHandle(req.body.handle)
                         .then(function(data1){
-                            emailFunction.createCommentEmail(data1[0].email, "comment", req)
+                            emailFunction.createEmail(data1[0].email, "comment", req)
                             .then(()=>{
                                 res.status(202).json({
                                     post:data,

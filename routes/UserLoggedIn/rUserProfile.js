@@ -13,15 +13,11 @@ const {
 //DBs used
 const UNCC_CoursesDB = require('../../models/Database/UNCC_CoursesDB');
 const UserDB = require('../../models/Database/UserDB.js');
-const MessagesDB = require('../../models/Database/MessagesDB');
-const ListingsDB = require('../../models/Database/ListingsDB');
 const ReviewsDB = require('../../models/Database/ReviewsDB');
 const TutorDB = require('../../models/Database/TutorDB');
 //instantiate DBs used
 var users = new UserDB();
-var messages = new MessagesDB();
 var courses = new UNCC_CoursesDB();
-var listings = new ListingsDB();
 var reviews = new ReviewsDB();
 var tutors = new TutorDB();
 

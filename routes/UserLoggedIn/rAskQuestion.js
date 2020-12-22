@@ -12,18 +12,11 @@ const {
     check,
     validationResult
 } = require('express-validator');
-const stripe = require('stripe')(process.env.STRIPE_KEY);
 //DBs used
 const TimelineDB = require("../../models/Database/TimeLineDB");
 const UserDB = require("../../models/Database/UserDB");
-const CommentsDB = require("../../models/Database/CommentsDB");
-const NotificationDB = require("../../models/Database/NotificationDB");
 const DiscussionDB = require("../../models/Database/DiscussionBoardDB");
-//classes used
-var DateFunctions = require('../../models/classes/DateFunctions');
-//instantiate classes
-var dateFunctions = new DateFunctions();
-//instantiate DBs for us
+//c//instantiate DBs for us
 var timeline = new TimelineDB();
 var users = new UserDB();
 var discussion = new DiscussionDB();
@@ -53,7 +46,6 @@ function (req, res) {
         fileAttachment.push(req.body.image);
     }
     //post to group discussion board
-    console.log(req.body)
     timeline.addQuestionPost(req.session.handle,req.session.handle, req.session.name, "Question" ,req.session.img,req.body.message,new Date(), fileAttachment, req.body.course )
     .then(function(data){
         console.log("DATA ID : " + data._id)
