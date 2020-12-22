@@ -97,10 +97,6 @@ var UserDB = mongoose.model('UserDB',userDBSchema);
 //Creating an index to retrieve users by id
 UserDB.ensureIndexes({"handle":1});
 module.exports = class User {
-    //return all users
-    getStudents(){
-      return UserDB.find({});    
-    }
      //return all users
      getAllUsers(){
         return UserDB.find({});
@@ -120,7 +116,6 @@ module.exports = class User {
         return UserDB.find({}, "email");
     }
     getUserByEmail(email){
-        console.log(email)
         return UserDB.find({email:email});     
       }
       checkIfEmailExists(email){
@@ -161,10 +156,6 @@ module.exports = class User {
     }
     getUserImg(handle){
         return UserDB.findOne({handle:handle}, "img");
-    }
-    //return all message handles
-    getMessageHandles(userHandle){
-        return UserDB.findOne({handle:userHandle});
     }
     //check if entered code matches code saved in DB. If so, update status of account.
     getActivationCode(email){
@@ -222,6 +213,7 @@ module.exports = class User {
         })
 
     }
+    //unfollow a user
     removeFollow(follower_handle, handle, callback){
         UserDB.findOne({handle:handle}).exec((err,docs)=>{
             if (docs){
@@ -249,6 +241,7 @@ module.exports = class User {
             }
         })
     }
+    //check if a user is following another user
     isFollowing(follower_handle, user, student, callback){
         for (var i=0;i<user.followers.length;i++){
             if(follower_handle==user.followers[i].user_handle){
@@ -258,7 +251,7 @@ module.exports = class User {
         }
         callback(student,false);
     }
-
+    //add message thread to user doc
     addThread(host, hostImg, subject, threadId, handle){
         return new Promise((resolve, reject)=>{
             UserDB.findOne({handle:handle}).then((docs)=>{
@@ -277,6 +270,7 @@ module.exports = class User {
             })
         })
     }
+    //remove message thread from user 
     removeThread(handle, threadId){
         UserDB.findOne({handle:handle}).exec((err,docs)=>{
             for(var x = 0; x < docs.threads.length;x++){
@@ -307,9 +301,8 @@ module.exports = class User {
             }
         });
     }
-      //updates unread count and moves thread to top of list
+      //set unread count to zero and move thread to top of list
       unreadCountToZero(threadId, id, req, res,  messages, formatDate, formatTime, unescapeApostrophe){
-        
             UserDB.findOne({_id:id}).exec((err,docs)=>{
                 var tempThread = "";
                 for(var x = 0; x < docs.threads.length;x++){
@@ -453,6 +446,7 @@ module.exports = class User {
                 }
          }).exec();
     }
+    //clear user's notification count
     clearNotificationCount(handle){
         return UserDB.findOne({
                 handle: handle
@@ -462,7 +456,7 @@ module.exports = class User {
                 }
          });
     }
-
+    //clear notification count for a given thread
     sawMessage(handle, threadId, res){
         UserDB.findOne({
             handle: handle
@@ -502,30 +496,6 @@ module.exports = class User {
             console.log(err)
         })
     }
-
-    unseeMessage(handle, threadId){
-        UserDB.findOne({
-            handle: handle
-        }).exec((err,docs)=>{
-            
-            var threadIndex = -1;
-            for(var x = 0; x< docs.threads.length; x++){
-                if(docs.threads[x].threadId ==  threadId){
-                    threadIndex = x;
-                   
-                }
-            }
-            if(threadIndex > 0){
-                docs.threads[threadIndex].seen = false;
-                return docs.save()
-                
-            }
-            else{
-                console.log("Thread not found")
-            }
-            
-        })
-    }
     setBio(handle, bio){
         return UserDB.findOne({
                 handle: handle
@@ -552,6 +522,8 @@ module.exports = class User {
         })
     }
     //update leftReview boolean
+    //currently this is not being used
+    //consider deleting
     leftReview(handle, id){
         UserDB.find({handle: handle}).exec((err,docs)=>{
             for(var x =0; x< docs[0].TutoringSessions.length; x++){
@@ -570,11 +542,11 @@ module.exports = class User {
     getEmailByHandle(handle){
         return UserDB.find({handle: handle}, "email");
     }
-    //get my courses for mobile
+    //get courses a user belongs to
     getMyCourses(id){
         return UserDB.findOne({_id: id}, "myCourses");
     }
-     //get my courses for mobile
+     //get groups a user belongs to
      getMyGroups(id){
         return UserDB.findOne({_id: id}, "StudyGroups");
     }
@@ -589,6 +561,8 @@ module.exports = class User {
             });
         });
     }
+    //addStreamId to a user's account
+    //should be added once account is verified
     addStreamId(id, streamId){
         var UserDB = mongoose.model('UserDB',userDBSchema);
         return UserDB.findOne({_id: id})
@@ -597,7 +571,7 @@ module.exports = class User {
             user.save();
         })
     }
-     //set active tutor
+     //update a user's major
      updateMajor(id, major){
         return UserDB.findOne({_id: id}).updateOne({$set:{Major: major}})
     }
