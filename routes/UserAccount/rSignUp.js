@@ -6,7 +6,6 @@ const bcrypt = require("bcryptjs");
 const bodyParser = require("body-parser");
 const session = require("express-session");
 const { check, validationResult } = require("express-validator");
-
 //Dbs used
 const UserDB = require("../../models/Database/UserDB");
 const EmailFunction = require("../../models/classes/EmailFunction");
