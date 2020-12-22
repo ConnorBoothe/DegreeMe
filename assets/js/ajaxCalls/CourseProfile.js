@@ -133,6 +133,7 @@ function populateStudents(students){
       +"<p class='bioTxt'>"+students[x][0].Bio+"</p></li>"  
     }else{
       student+= "<li>"
+      +"<input name='email' type='hidden' value ='"+students[x][0].email+"'/>"
       +"<input type='hidden' value ='"+students[x][0].handle+"'/>"
       +"<input type='hidden' value ='"+students[x][0].image+"'/>"
       +"<button id=\""+noAtHandle+"\" data-status=\"follow\" type=\"button\" class=\"btn btn-primary followingButton\">Follow</button>"
