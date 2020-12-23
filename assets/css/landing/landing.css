@@ -3,14 +3,52 @@
 :root {
   --landingButton: #007bff;
 }
+html, body {
+  overscroll-behavior: none;
+}
+.button-1 {
+  padding: .20em .40em .20em .45em;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+}
+a:hover {
+  color: #ffcc00;
+}
+.background--container--emoji {
+  width: 100%;
+    margin-top: var(--insert-section-offset);
+    margin-bottom: calc(2 * var(--insert-section-offset));
+    display: flex;
+    place-content: center;
+    place-items: center;
+    overflow: hidden;
+}
+.background--emoji--picture { 
+  width: 100%;
+  position: absolute;
+  z-index: 0;
+  opacity: 8%;
+}
+
+@font-face { 
+  font-family: GT-Walsheim; 
+  src: url('web/GT-Walsheim-Regular-Trial.woff2') format('woff2'); 
+  } 
+  @font-face { 
+    font-family: GT-Walsheim-Bold; 
+    src: url('web/GT-Walsheim-Bold-Trial.woff2') format('woff2'); 
+    } 
 
 .landing {
   display: flex;
   flex-direction: column;
   padding-top: 150px;
   background-color: #202020;
-  color: #ffffff;
-  font-family: "Poppins", sans-serif;
+  color: white;
+  font-family: 'GT-Walsheim-Bold', Helvetica, Arial, sans-serif;
 }
 .title--landing {
   text-align: center;
@@ -19,13 +57,16 @@
   font-size: clamp(30px, 5vw, 100px);
   line-height: 1.09;
   font-weight: bold;
+  font-family: 'GT-Walsheim-Bold';
+  letter-spacing: -.014em;
 }
 
 .landing--text--small {
   font-size: clamp(25px, 2vw, 18px);
-  line-height: 2.2;
+  line-height: 1.8;
   margin-bottom: 20px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'GT-Walsheim', Helvetica, Arial, sans-serif;
+  letter-spacing: -.014em;
 }
 
 .landing--text--primary {
@@ -199,6 +240,7 @@
 .feature2 {
   display: flex;
   margin: 200px 20px 200px 150px;
+  z-index: 1;
 }
 
 .feature2 img {
@@ -214,6 +256,7 @@
   flex-direction: column;
   align-self: flex-start;
   margin: 200px 10vw 200px 15vw;
+  z-index: 1;
 }
 
 .landing--image--container--true {
@@ -247,9 +290,6 @@
 .landing--image--container--true :nth-child(4) {
   animation: groupAnimation 1s forwards;
   animation-delay: 0.6s;
-}
-
-.landing--image--container--false {
 }
 
 .landing--image--container--false img {
@@ -321,7 +361,27 @@
     transform: translateX(0px) rotate(20deg);
   }
 }
+.feature5{
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  margin: 100px 10vw 10px 15vw;
+}
 
+.text--link {
+  font-size: 30px;
+}
+.feature5Container {
+  display: flex;
+}
+hr {
+  width: 100%;
+  height: 1px;
+  border: 0 none;
+  margin-right: auto;
+  margin-left: auto;
+  background-color:#555;
+}
 .landing--footer {
   display: flex;
   align-items: center;
@@ -439,6 +499,26 @@
 
   .feature4 > .landing--text--big {
     white-space: nowrap;
+  }
+
+  .feature5{
+    display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  margin: 100px 10vw 10px 15vw;
+  }
+
+  .feature5Container {
+    display: flex;
+  }
+
+  hr {
+    width: 100%;
+    height: .5px;
+    border: 0 none;
+    margin-right: auto;
+    margin-left: auto;
+    background-color:#555;
   }
 
   .landing--footer--img {

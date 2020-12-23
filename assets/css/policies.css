@@ -1,3 +1,12 @@
+html {
+    overflow: hidden;
+    height: 100%;
+  }
+  
+  body {
+    overflow: auto;
+    height: 100%;
+  }
 .containerPrivacy {
     margin-top: 60px;
     padding-bottom: 70px;
