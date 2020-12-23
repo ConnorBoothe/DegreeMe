@@ -25,6 +25,7 @@ module.exports = class TutorSchedules {
     }).sort({time:1});
    }
    getUserScheduleByDayAndTime(userId, day, time){
+       console.log("Get user schedule")
        console.log(userId)
        console.log(time)
        console.log(day)
@@ -47,7 +48,9 @@ module.exports = class TutorSchedules {
    }
     //add timeslot
     addTimeslot(id, day, time){
-        var timeslot = new schedule({userId:id, day:day, time: time});
+        var daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+        var timeslot = new schedule({userId:id, day:daysOfWeek[parseInt(day)], time: time});
         return timeslot.save();
     }
     //remove timeslot

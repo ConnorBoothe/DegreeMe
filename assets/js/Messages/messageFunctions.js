@@ -31,7 +31,7 @@ function sendImage(id, sender, senderImg, imageArray, imageNumber) {
         '<div class="spinner-border" role="status">' +
         '<span class="sr-only"></span>' +
         '</div>' +
-        '<span class="loading-span">Loading Image</span>' +
+        '<p class="loading-span">Loading Image</p>' +
         '</div>' +
         '<p class="msg-date msg-date-sent"></p>' +
         '</div></div>');

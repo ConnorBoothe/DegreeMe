@@ -42,6 +42,7 @@
         <% var joined = false%>
 
         <% for(x in course.students){%>
+            <%console.log(course.students[x].Handle)%>
         <%if(course.students[x].Handle === session.handle){%>
         <%joined = true;%>
         <%}%>

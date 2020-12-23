@@ -3,7 +3,8 @@
   "lockfileVersion": 1,
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon app.js"
+    "devStart": "nodemon app.js",
+    "runPeer": "peerjs --port 3001"
   },
   "dependencies": {
     "@firebase/app": "^0.6.11",
@@ -40,6 +41,7 @@
     "nodemon": "^2.0.6",
     "nouislider": "^14.6.2",
     "passport": "^0.4.1",
+    "peer": "^0.5.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
@@ -58,5 +60,7 @@
   "engines": {
     "node": "10.x"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
 }

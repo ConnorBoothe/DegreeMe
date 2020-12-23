@@ -35,34 +35,34 @@ router.use(bodyParser.urlencoded({
   extended: true
 }));
 //render the create connection page
-router.get('/Review/:meetingId', function (req, res) {
+router.get('/review/:handle', function (req, res) {
   if (req.session.userId) {
-    meetups.getMeetupById(req.params.meetingId).exec((err,meeting)=>{
-      var isMember = false;
-      console.log(meeting, "MEETING");
-      if(meeting){
-      for(var x = 0; x< meeting.Members.length;x++){
-        if((meeting.Members[x].handle === req.session.handle) && meeting.Members[x].role != "Host" ){
-            isMember = true;
-        }
-      }
-      if(isMember){
-        res.render('UserLoggedIn/LeaveAReview', {
-          qs: req.query,
-          session: req.session,
-          meeting:meeting
-        });
-      }
-      else{
-        res.redirect("/home");
-      }
-    } else{
-      res.redirect("/home");
-    }
-    })
-  } else {
-    res.redirect('/login?message=Session%20Ended');
-  }
+        users.getUserHandleByHandle(req.params.handle)
+        .then(function(handle){
+          console.log(handle)
+          if(handle.handle){
+            res.render('UserLoggedIn/LeaveAReview', {
+              qs: req.query,
+              session: req.session,
+              params: req.params
+           });
+          }
+          else {
+            res.redirect("/")
+          }
+        })
+        
+      // }
+      // else{
+      //   res.redirect("/home");
+      // }
+    // } else{
+    //   res.redirect("/home");
+    // }
+    // })
+  // } else {
+  //   res.redirect('/login?message=Session%20Ended');
+   }
 
 });
 

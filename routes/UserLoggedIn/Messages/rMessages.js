@@ -53,10 +53,12 @@ router.get('/messages/:threadId', function (req, res) {
     if (req.session.userId) {
         //if a messageId is passed as a query string, proceed
         if (req.params.threadId) {
+            console.log("Thread running")
             //get messages by thread id
             messages.getAllMsg(req.params.threadId).then((messages) => { 
                 //retrieve user handles for the current thread
                 threads.getUserHandles(req.params.threadId).then(function(thread){
+                    console.log(thread)
                     //check if the current user exists in the 2d array
                     if(thread.userHandles.some(row => row.includes(req.session.handle))){
                         res.render('UserLoggedIn/messages', {

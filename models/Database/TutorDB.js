@@ -54,13 +54,17 @@ var scheduleSchema = new Schema({
         type: Boolean,
         required: true
     },
+    streamId: {
+        type: String,
+        required: true
+    }
 }, {
     collection: 'TutorDB'
 });
 var TutorDB = mongoose.model('TutorDB', scheduleSchema);
 module.exports = class TutorSchedules {
 
-    addTutor(userId, userName, handle, userImg, rating, course, courseCode, hourlyRate, transcriptImg) {
+    addTutor(userId, userName, handle, userImg, rating, course, courseCode, hourlyRate, transcriptImg, streamId) {
         var tutor = new TutorDB({
             userId: userId,
             userName: userName,
@@ -71,7 +75,8 @@ module.exports = class TutorSchedules {
             courseCode: courseCode,
             hourlyRate: hourlyRate,
             transcriptImg: transcriptImg,
-            approved: false
+            approved: false,
+            streamId: streamId
         });
         return tutor.save();
     }
@@ -80,9 +85,14 @@ module.exports = class TutorSchedules {
             userId: userId
         })
     }
+    getTutorByHandle(handle) {
+        return TutorDB.find({
+            userHandle: handle
+        })
+    }
     //get tutors available at given day and time
     getAvailableTutorsByCourse(course) {
-        var daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+        var daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         //get tutors By Course
         return new Promise((resolve, reject) => {
             var availableTutors = [];
@@ -94,29 +104,26 @@ module.exports = class TutorSchedules {
                 })
                 .then(function (data) {
                     // loop through query results
-                    console.log("BEFORe")
                     if(data.length < 1){
                         resolve(availableTutors)
                     }
+                    console.log(data.length)
                     for (var i = 0; i < data.length; i++) {
-                        new Promise((res, rej) => {
                             //check availability of user id in query
-                            console.log(data[i].userId)
                             var currTutor = data[i];
-                            schedule.getUserScheduleByDayAndTime(data[i].userId, daysOfWeek[new Date().getDay() - 1], new Date().getHours())
+                            schedule.getUserScheduleByDayAndTime(data[i].userId, daysOfWeek[new Date().getDay()], new Date().getHours())
                                 .then(function (data1) {
-                                    console.log("data1: " + data1)
+                                   console.log("DATA: " +data1.length)
                                     if (data1.length > 0) {
                                         console.log("tutors found")
                                         //push if availability found
                                         availableTutors.push(currTutor);
-                                        console.log(availableTutors)
+                                        console.log("Available tutors: " +availableTutors)
                                         resolve(availableTutors);
                                     } else {
                                         resolve(availableTutors);
                                     }
                                 })
-                        })
                     }
 
                 })

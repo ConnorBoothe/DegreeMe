@@ -16,14 +16,15 @@ function formatCalendarTime(rawTime){
   }
 }
 //control calendar display
-function showDayCalendar(){
-  $("#showNotifications").on("change", ".daySelect-container select", function(){
+function showDayCalendar(selector){
+  selector.on("change", ".daySelect-container select", function(){
     $.session.set("day", dayArray[parseInt($(this).val())])
     $('.calendarContainer').html(generateMobileCalendar(dayArray[parseInt($(this).val())]));
     $(".calendarContainer").hide();
     $(".calendarContainer").fadeIn();
   })
 }
+
 function addTimeslot(day, time, calendarLine){
       payload= {
         day:day,
@@ -69,11 +70,14 @@ function removeTimeslot(day, time, calendarLine){
 });
 }
 function formatCalendarHeader(){
-  var calendar = '<div class="mobileCourses"><h1>'+
-  '<span class="backToMenu"><svg width="1.25em" height="1.25em" viewBox="0 0 16 16" class="bi bi-arrow-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
-  '<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>'+
-  '</svg></span>'+
-  "My Schedule</h1>";
+  var calendar = '<div class="mobileCourses">';
+  if(window.innerWidth < 1000){
+    calendar += '<h1>'+
+    '<span class="backToMenu"><svg width="1.25em" height="1.25em" viewBox="0 0 16 16" class="bi bi-arrow-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
+    '<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>'+
+    '</svg></span>'+
+    "My Schedule</h1>";
+  }
     calendar += "<div class='dateBtn-container'><h1 class='weekOfTxt'>Selecting time slots below will make you an active tutor for that time slot on a weekly recurring basis.</h1></div>"+
             "<div class='daySelect-container'><select class='day-select'>";
             for(x in dayArray){
@@ -99,7 +103,7 @@ function formatMobileCalendar(data){
               }
               calendar +='</div>';
               calendar +='</div>';
-              calendar +='</div>>/div>';
+              
 
 return calendar;
 }
@@ -136,7 +140,9 @@ function generateMobileCalendar(day){
 }
   $(document).ready(function(){
     //control calendar display
-    showDayCalendar();
+    showDayCalendar($("#showNotifications"));
+    showDayCalendar($(".modal"));
+
     $("#showNotifications").on("change", ".calendar-checkbox", function(){
       //add timeslot
       if($(this).prop("checked") == true){
@@ -163,6 +169,17 @@ function generateMobileCalendar(day){
       $("#calendar"+idArr[idArr.length-1]).fadeIn();
       $(this).addClass("bg-primary");
   })
+
+  //desktop Version
+  $(".tutorSchedule").on("click",function(){
+    $.session.set("day", new Date().getDay());
+    $.session.set("calendarCount", 0);
+
+    $('#availability .modal-body').html(formatCalendarHeader() + formatMobileCalendar($.session.get("day")));
+    generateMobileCalendar($.session.get("day"));
+  });
+  
+
 })
 
   

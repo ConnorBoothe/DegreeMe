@@ -161,6 +161,7 @@
 .homeSideBarTitle{
     color:white;
     font-size:18px;
+    padding-left:10px;
 }
 .timeline-title{
     font-size:26px;
@@ -448,14 +449,17 @@
     min-height:100px;
     border-bottom:.5px solid #a9a9a9;
     overflow-y: auto;
-    background-color:#242526;
+    background-color:#1f2024;
     padding:10px;
-    border-radius:10px;
-    text-align:center;
+    border-top-right-radius:10px;
+    border-top-left-radius:10px;
+    text-align:left;
     box-shadow: 2px 4px black;
 }
 .homeSideBar-container:last-of-type{
     border-bottom:none!important;
+    border-bottom-right-radius:10px;
+    border-bottom-left-radius:10px;
 }
 .homeSideBarTitle{
     padding-top:10px;
@@ -504,7 +508,7 @@ padding-right:10px;
 }
 .dots-btn{
     float:right;
-    background-color:#242526!important;
+    background-color:#1f2024!important;
     margin-top:-25px;
 }
 .popoverUl li{
@@ -874,7 +878,8 @@ padding-right:10px;
 .postDetailsList{
     padding-left:20px!important;
     margin-bottom:0!important;
-    width:100px;
+    width:100%;
+    text-align:left;
 }
 .description{
     font-size:16px;
@@ -976,7 +981,7 @@ input[name="searchType"]{
     display:none;
 }
 .spinner-container1{
-    width:800px;
+    width:100%;
     text-align:center;
     display:none;
 }
@@ -987,6 +992,7 @@ input[name="searchType"]{
 .add-tutor-loading .loading-span {
     margin-left:10px;
     font-size:16px;
+    text-align:left;
 }
 .spinner-border{
     color:white!important;
@@ -1143,6 +1149,169 @@ input[name="searchType"]{
 }
   /* desktop only */
   @media only screen and (min-width: 1000px) {
+    .daySelect-container{
+        margin-top:20px;
+        margin-bottom:20px;
+        text-align:center;
+        margin-left:auto;
+        margin-right:auto;
+    }
+    .daySelect-container select{
+        background-color:#3a3b3c;
+        font-family:"Open sans","sans-serif";
+        outline:0;
+        color:white;
+        border-radius:10px;
+        border:none!important;
+        font-size:15px;
+        padding-left:7px;
+        padding-right:7px!important;
+    }
+    .daySelect-container option{
+        padding-left:7px;
+        font-size:15px;
+        border:none!important;
+    }
+    .day-container div{
+        padding-left:0px!important;
+    }
+    .day-container{
+        padding-left:0px!important;
+        padding-bottom:10px;
+    }
+    .weekOfTxt{
+        margin-top:0!important;
+        font-size:16px!important;
+        text-align:left;
+    }
+    .day-container{
+        padding-left:20px;
+        padding-bottom:10px;
+    }
+    .day-wrapper{
+        padding-bottom:10px; 
+        padding-top:10px; 
+    }
+    .calendarLine{
+        width:75%;
+        background-color:#a9a9a9;
+        float:right;
+        height:.5px;
+        margin-top:15px;
+    }
+    .calendarLine-selected{
+        width:75%;
+        background-color:#007bff;
+        float:right;
+        height:.5px;
+        margin-top:15px;
+    }
+    .tutor-add-autocomplete{
+        width:100%;
+        background-color:#2a2f33!important;
+        min-height:40px;
+        border-bottom-right-radius: 10px!important;
+        border-bottom-left-radius: 10px!important;
+        display:none;
+        position:relative;
+        z-index:3;
+
+    }
+    .add-tutoring-btn{
+        font-family: "Open sans", "sans-serif";
+        font-size:14px;
+        margin-top:40px;
+        width:100%;
+    }
+    .add-tutoring-label{
+        text-align:left!important;
+        margin-bottom:10px;
+        font-size:16px;
+        color:white;
+        margin-top:10px;
+        font-family: "Open sans", "sans-serif";
+    }
+    .add-tutoring-wrapper{
+        margin-left:auto;
+        margin-right:auto;
+        width:100%;
+        text-align:left;
+        margin-top:10px;
+    }
+    .input-container-add-tutoring{
+        background-color:#2a2f33;
+        width:100%;
+        border-radius:10px;
+    }
+    .add-tutoring-dollar{
+        width:8px;
+    }
+    .pending-tutor-course{
+        margin-left:10px;
+    }
+    .transcript-upload{
+        margin-top:20px;
+    }
+    .add-tutoring-input, .add-tutoring-input1{
+        background-color:#2a2f33;
+        border:none!important;
+        padding:5px;
+        border-radius:10px;
+        color:white;
+        font-size:16px;
+        width:80%!important;
+        height:40px;
+        margin-bottom:30px;
+        position:relative;
+        z-index:3;
+
+    }
+    .transcript-upload{
+        font-size:15px!important;
+        margin-bottom:20px;
+    }
+    .icon-add-tutoring{
+        float:left;
+        margin-top:5px;
+        margin-right:5px;
+        margin-left:10px;
+    }
+    .add-tutoring-sub-wrapper{
+        margin-left:auto;
+        margin-right:auto;
+        width:100%;
+        text-align:left;
+        display:inline-block;
+    }
+    .add-tutoring-form input{
+        display:block;
+       
+    }
+    .modal-content{
+        background-color:#1f2024!important;
+        color:white!important;
+    }
+    .add-tutoring-form {
+        margin-left:auto;
+        margin-right:auto;
+        text-align:center;
+    }
+    .findTutor-course{
+        cursor:pointer;
+    }
+    .add-tutoring-course{
+        margin-left:20px;
+    }
+    .remove-tutor-course{
+        display:none;
+        font-family: "Open sans", "sans-serif";
+        font-size:12px;
+        position:absolute;
+        padding-top:2px;
+        padding-bottom:2px;
+        padding-left:4px;
+        padding-right:4px;
+    }
     .course-search-sub-container span {
         width: 100%!important;
     }
@@ -1210,10 +1379,10 @@ input[name="searchType"]{
         cursor:pointer;
         position:absolute;
         z-index:3;
-        width:16%!important;
+        width:30%!important;
         background-color:#242526;
         display:none;
-        margin-left:25px;
+        margin-left:50px;
     }
     .mobile-tutor-search{
         background-color:#18191a;
@@ -1315,10 +1484,10 @@ input[name="searchType"]{
         font-family:"Open sans","sans-serif";
     }
     .like-button{
-        width:70px;
+        width:55px;
         border:none!important;
         position:absolute;
-        background-color:#242526!important;  
+        background-color:#1f2024!important;  
         
     }
     .hashtag{
@@ -1443,6 +1612,7 @@ input[name="searchType"]{
         color:white!important;
         margin-left: 20px;
         margin-top:5px;
+        text-align:left;
         font-size:17px;
         font-family: 'Open Sans', sans-serif!important;
     }
@@ -1504,11 +1674,20 @@ input[name="searchType"]{
         margin-top:60px;
     
     }
+    .postDate1{
+        color:#a9a9a9!important;
+        font-size:13px;
+        padding-left:15px;
+        margin-right:7%;
+        margin-top:10px;
+        margin-bottom:5px;
+    }
     .searchLi, .slider-container-header, .mobileUserImg, .userHeader-mobile{
         display:none!important;
     }
     .userImgLi{
         display:inline-block;
+        padding-top:3px;
     }
     .timelinePost-username{
         color:white;
@@ -1542,7 +1721,7 @@ input[name="searchType"]{
         margin-bottom:30px;
         margin-top:30px;
         border-radius:8px;
-        background-color:#242526;
+        background-color:#1f2024;
         text-align:center;
         
     }
@@ -1567,7 +1746,7 @@ input[name="searchType"]{
         cursor:pointer;
     }
     .like-button{
-        width:70px;
+        width:55px;
         border:none!important;
         position:absolute;
         background-color:#18191a!important;  
@@ -1588,9 +1767,10 @@ input[name="searchType"]{
         text-align:center;
 
     }
+   
     .bookTutor{
         font-family: "Open sans", "sans-serif";
-        font-size:13px;
+        font-size:12px!important;
         padding-top:5px;
         padding-bottom:5px;
         padding-left:8px;
@@ -1622,6 +1802,8 @@ input[name="searchType"]{
     .homeWrap{
         width:100%;
         overflow-y:none;
+        background-color:#18191a!important;
+
     }
     .timeline-container-helprequest{
         min-height:100px;
@@ -2017,7 +2199,7 @@ input[name="searchType"]{
         margin-bottom:5px;
     }
     .postDate1{
-        color:#a9a9a9;
+        color:#a9a9a9!important;
         font-size:13px;
         padding-left:15px;
         margin-right:7%;
@@ -2219,7 +2401,7 @@ input[name="searchType"]{
         z-index:2;
     }
     #horizontalHeader{
-        background-color:#18191a!important;
+        background-color:#1f2024!important;
         position:relative!important;
         height:60px!important;
        
@@ -2346,15 +2528,13 @@ input[name="searchType"]{
         font-size:20px;
         padding-top:0px!important;
         margin-top:0!important;
-      
        
     }
     .headerContainer{
         right:0;
         top:0;
-        width:400px!important;
+        width:600px!important;
         margin-right:0px!important;
-        margin-top:5px;
         z-index:2;
         
     }
@@ -2372,6 +2552,8 @@ input[name="searchType"]{
         margin-right:20px!important;
         color:#d4d4d4!important;
         margin-left:20px;
+        margin-top:0;
+        padding-top:0;
         padding-right:0!important;
         
      
@@ -2399,7 +2581,7 @@ input[name="searchType"]{
         margin-right:0;
     }
     .bell{
-        margin-right:10px!important;
+        margin-right:15px!important;
     }
     .input-container-main, .homeSideBar, .img, .bell, .message, .headerLinkTitle, .userProfileName{
         display:none!important;

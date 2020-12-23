@@ -2,7 +2,6 @@ require('dotenv').config();
 const mongoose = require("mongoose");
 const DiscussionBoardDB = require("./DiscussionBoardDB");
 const discussion = new DiscussionBoardDB();
-
 mongoose.Promise = global.Promise;
 mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true,useUnifiedTopology: true },function(err){
     
@@ -214,6 +213,7 @@ module.exports = class Timeline {
         return timeline.save();
     }
     incrementCommentCount(postId){
+        console.log("From timeline: " +postId)
         var timelineDB = mongoose.model('TimelineDB',timelineDBSchema);
             return timelineDB.findOne({
                 _id: postId

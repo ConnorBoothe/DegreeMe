@@ -1,7 +1,7 @@
 <div class="timeline-wrapper">
     <!-- <h1 class="text-light recentActivity-title">Recent Activity</h1> -->
 <% for (x in timeline){%>
-  
+  <input type="hidden" value="<%=timeline[x].userHandle%>" name="postHandle"/>
 <%if(timeline[x].type == "Help Request"){%>
     <%if(x == timeline.length -3){%>
     <input class="postId" name="postId" type="hidden" value="<%=timeline[x].id%>" />
@@ -72,7 +72,7 @@
 
             <%}else{%>
 
-          
+            <%console.log(timeline[x].hasLiked)%>
             <% if (timeline[x].hasLiked == false){%>
             <button class="like-button like-nonhelp">
                 <span class="likeCount"><%=timeline[x].likes%></span>
@@ -140,6 +140,7 @@
             <a class="btn btn-primary view-timeline-btn" href="..<%=timeline[x].url%>">View</a>
             
             <div class="postActions">
+                <%console.log(timeline[x].hasLiked)%>
                 <% if (timeline[x].hasLiked == false){%>
                 <button class="like-button">
                     <span class="likeCount"><%=timeline[x].likes%></span>
@@ -216,8 +217,14 @@
             </svg>
         </button>
         <%}%>
+        <%if(timeline[x].commentCount > 1){%>
+            <a href="/post/<%=timeline[x].id%>" class="addComment"><%=timeline[x].commentCount%> Comments</a>
+        <%}else if(timeline[x].commentCount === 1){%>
+            <a href="/post/<%=timeline[x].id%>" class="addComment"><%=timeline[x].commentCount%> Comment</a>
+        <%}else{%>
+            <a href="/post/<%=timeline[x].id%>" class="addComment">Add Comment</a>
+        <%}%>
         <p class="postDate"><%=timeline[x].date%></p>
-        <br>
     </div>
 </div>
 <%}if(timeline[x].type === "Status Update"){%>

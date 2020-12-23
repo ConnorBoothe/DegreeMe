@@ -21,6 +21,7 @@ const CourseDB = require("../../models/Database/UNCC_CoursesDB");
 const Groups = require("../../models/Database/StudyGroupsDB");
 const AcceptedBids = require("../../models/RecycledClasses/AcceptedBidsDB");
 const MeetupsDB = require("../../models/Database/MeetupsDB");
+const StreamDB = require("../../models/Database/StreamDB");
 //classes used
 var TimeLine = require('../../models/classes/TimeLine');
 var TimelinePost = require('../../models/classes/TimelinePost');
@@ -40,7 +41,6 @@ var notifications = new NotificationDB();
 var groups = new Groups();
 var acceptedBids = new AcceptedBids();
 var meetups = new MeetupsDB();
-var comments = new CommentsDB();
 var mail = unirest("POST", "https://api.sendgrid.com/v3/mail/send");
 //register the session and use bodyParser
 
@@ -80,6 +80,7 @@ function sortTutoringSessions(tutorSeshArray) {
 }
 //render the home page
 router.get('/home', function (req, res) {
+    // stream.clearAllMembers("5fad920a6d292df74fb7493b");
     if (req.session.userId) {
         //get user timeline
        timeline.getUserTimeline(req.session.following, 0, req)
@@ -88,7 +89,9 @@ router.get('/home', function (req, res) {
                 new Promise((resolve, reject) => {
                 for (var x = 0; x < docs1.length; x++) {
                     // .then(function(data){
+                        console.log(docs1[x].likers)
                         var hasLiked = tl.likedBoolean(req.session.handle, docs1[x].likers);
+                        console.log(hasLiked)
                     //potentially removing this
                     if (docs1[x].type == "Tutor Listing") {
                         timeLineArray.push(new TimelinePost(docs1[x]._id, docs1[x].sendToHandle, docs1[x].type, docs1[x].userHandle, docs1[x].userName,
@@ -265,7 +268,7 @@ router.post("/leaveCourse",
             //decrement course studentCount
             // courses.decrementStudents(req.body.course).exec();
             //remove student from course
-            courses.removeStudent(req.body.handle, req.body.course);
+            courses.removeStudent(req.session.handle, req.body.course);
             //need .then() here
             res.status(202).json({
                 status: "left",
@@ -282,8 +285,9 @@ router.post("/addLike",
         if (!errors.isEmpty()) {
             res.redirect('/home');
         }
-        timeline.hasLiked(req.body.postId, req.body.handle)
+        timeline.hasLiked(req.body.postId, req.session.handle)
             .then(function (data1) {
+                console.log(data1)
                 //determine if the user has liked the post
                 var hasLiked = false;
                 for (x in data1.likers) {
@@ -299,17 +303,22 @@ router.post("/addLike",
                     .then(function (data) {
                     //add handle to liker array
                     new Promise((resolve, reject) => {
-                            timeline.addLiker(req.body.postId, req.body.handle);
+                            timeline.addLiker(req.body.postId, req.session.handle);
                             resolve();
                         })
                         .then(function () {
-                            timeline.getTimelineById(req.body.postId)
+                            notifications.addNotification(req.body.postHandle ,req.session.name,"liked your post", req.session.img, "/")
+                            .then(function(){
+                                users.incrementNotificationCount(req.body.postHandle);
+                                timeline.getTimelineById(req.body.postId)
                                 .then(function (data) {
                                     res.status(202).json({
                                         status: "liked",
                                         likeCount: data[0].likes
                                     }).end();
                                 })
+                            })
+                            
                         })
                     });
 
@@ -367,266 +376,7 @@ router.post("User/Settings",
             });
         });
     });
-//Removing bid functionality
-// router.post("/addHelpRequest",
-//     check('userHandle').isString().trim().escape(),
-//     check('sendToHandle').isString().trim().escape(),
-//     check('userName').isString().trim().escape(),
-//     check('type').isString().trim().escape(),
-//     check('userImage').isString().trim(),
-//     check('caption').isString().trim(),
-//     check('date').trim().escape(),
-//     check('name').isString().trim().escape(),
-//     check('price').trim().escape(),
-//     check('course').trim().escape(),
-//     check('anonymous').trim().escape(),
-//     function (req, res) {
-//         const errors = validationResult(req);
-//         if (!errors.isEmpty()) {
-//             res.redirect('/home');
-//         }
-//         var newBidData = {};
-//         if (req.body.userHandle != req.session.handle) {
-//             users.getUserById(req.body.userHandle).exec((err, docs) => {
-//                 timeline.addPost(req.body.sendToHandle, docs.handle, req.body.userName, req.body.type, req.body.userImage, req.body.caption,
-//                     req.body.date, req.body.name, req.body.price, req.body.course, req.body.anonymous)
-//                     .then(function(data){
-//                         newBidData = data;
-//                         var emails = [];
-                        
-//                         new Promise((resolve, reject) => {
-//                         users.getAllEmails().exec((err, docs)=>{
-//                             for(var x = 0; x< docs.length; x++){
-//                                 emails.push({"email": docs[x].email})
-//                             }
-//                             mail.headers({
-//                                 "content-type": "application/json",
-//                                 "authorization": process.env.SENDGRID_API_KEY,
-//                                 });
-//                                 mail.type("json");
-//                                 mail.send({
-//                                 "personalizations": [
-//                                     {
-//                                         "to": emails
-//                                     ,
-//                                         "dynamic_template_data": {
-//                                             "price": req.body.price,
-//                                             "task": req.body.caption,
-//                                     },
-//                                         "subject": "Someone needs help!"
-//                                     }
-//                                 ],
-//                                     "from": {
-//                                         "email": "notifications@degreeme.io",
-//                                         "name": "DegreeMe"
-//                                 },
-//                                     "reply_to": {
-//                                         "email": "noreply@degreeme.io",
-//                                         "name": "No Reply"
-//                                 },
-//                                     "template_id": "d-3211e341f77c42a7a80862aff724e708"
-//                                 });
-//                                 mail.end(function (resp) {
-//                                     resolve(true)
-//                                 if (resp.error){
-//                                     console.log("this is the error for adding help requests", resp.error)
-//                                     // res.redirect("/home")
-//                                     // throw new Error(res.error);
-//                                 } else if (resp.accepted){
-//                                     console.log("email was sent for placing bids")
-//                                 }
-
-//                             console.log(resp.body);
-//                             });
-
-//                             console.log(emails)
-//                         })
-//                     })
-//                     .then(function(){
-//                         res.status(202).json({
-//                             status: "Help request sent",
-//                             bid:newBidData,
-//                             stripeId: req.session.stripeId
-//                         }).end();
-//                     })
-                       
-//                     })
-               
-//             })
-//         } else {
-//             timeline.addPost(req.body.sendToHandle, req.body.userHandle, req.body.userName, req.body.type, req.body.userImage, req.body.caption,
-//                 req.body.date, req.body.name, req.body.price, req.body.course, req.body.anonymous)
-//                 .then(function(data){
-//                     newBidData = data;
-//                     var emails = [];
-//                     new Promise((resolve, reject) => {
-//                         users.getAllEmails().exec((err, docs)=>{
-//                             for(var x = 0; x< docs.length; x++){
-//                                 emails.push({"email": docs[x].email})
-//                             }
-//                             mail.headers({
-//                                 "content-type": "application/json",
-//                                 "authorization": process.env.SENDGRID_API_KEY,
-//                                 });
-//                                 mail.type("json");
-//                                 mail.send({
-//                                 "personalizations": [
-//                                     {
-//                                         "to": emails
-//                                     ,
-//                                         "dynamic_template_data": {
-//                                             "price": req.body.price,
-//                                             "task": req.body.caption,
-//                                     },
-//                                         "subject": "Someone needs help!"
-//                                     }
-//                                 ],
-//                                     "from": {
-//                                         "email": "notifications@degreeme.io",
-//                                         "name": "DegreeMe"
-//                                 },
-//                                     "reply_to": {
-//                                         "email": "noreply@degreeme.io",
-//                                         "name": "No Reply"
-//                                 },
-//                                     "template_id": "d-3211e341f77c42a7a80862aff724e708"
-//                                 });
-//                                 mail.end(function (resp) {
-//                                     resolve(true)
-//                                 if (resp.error){
-//                                     console.log("this is the error for adding help requests", resp.error)
-//                                     // res.redirect("/home")
-//                                     // throw new Error(res.error);
-//                                 } else if (resp.accepted){
-//                                     console.log("email was sent for placing bids")
-//                                 }
-//                             console.log(resp.body);
-//                             });
-//                         })
-//                     })
-//                     .then(function(){
-//                         res.status(202).json({
-//                             status: "Help request sent",
-//                             bid:newBidData,
-//                             stripeId: req.session.stripeId
-//                         }).end();
-//                     })
-                   
-//                 })
-           
-
-//         }
-
-//     });
-// router.post("/addBid",
-//     check('timelineId').isString().trim().escape(),
-//     check('bidder').isString().trim().escape(),
-//     check('price').isString().trim().escape(),
-//     function (req, res) {
-//         const errors = validationResult(req);
-//         if (!errors.isEmpty()) {
-//             res.redirect('/home');
-//         }
-//         var timelineObj = {};
-//          //users.addBid(req.session.handle, req.body.timelineId, req.body.bidder, req.body.price);
-//         timeline.getTimelineById(req.body.timelineId)
-//             .then(function (data) {
-//                 timelineObj = data;
-//                 //users.addBid(data[0].userHandle, req.body.timelineId, req.body.bidder, req.body.price);
-//                 timeline.addBid(data[0].userHandle, req.body.timelineId, req.body.bidder, req.body.price)
-//                 //  addBid(bidder, biddee, price, timelineId){
-//                 bids.addBid(req.session.handle, req.session.img, data[0].userHandle, req.body.price, req.body.description, req.body.timelineId, req.body.stripeId)
-//                     .then(function (bid) {
-//                         // /(userHandle ,name,type, img, url)
-//                         notifications.addNotification(bid.Biddee, bid.Bidder, "bidded <span class='text-success'>$" + req.body.price + "</span>", timelineObj[0].userImage, "/bids/" + bid.TimelineId);
-//                         users.incrementNotificationCount(bid.Biddee);
-//                         var mail = unirest("POST", "https://api.sendgrid.com/v3/mail/send");
-//                         users.getUserByHandle(bid.Biddee)
-//                         .then(function(user){
-//                             mail.headers({
-//                                 "content-type": "application/json",
-//                                 "authorization": process.env.SENDGRID_API_KEY,
-//                                 });
-
-//                                 mail.type("json");
-//                                 mail.send({
-//                                 "personalizations": [
-//                                     {
-//                                         "to": [
-//                                             {
-//                                                 "email": user[0].email,
-//                                                 "name": bid.Biddee
-//                                             }
-//                                     ],
-//                                         "dynamic_template_data": {
-//                                             "subject": req.session.name + " placed a bid on your post.",
-//                                             "name": req.session.name,
-//                                             "price": "$" + req.body.price,
-//                                             "timelineID": bid.TimelineId,
-//                                     },
-//                                         "subject": " "
-//                                     }
-//                                 ],
-//                                     "from": {
-//                                         "email": "notifications@degreeme.io",
-//                                         "name": "DegreeMe"
-//                                 },
-//                                     "reply_to": {
-//                                         "email": "noreply@degreeme.io",
-//                                         "name": "No Reply"
-//                                 },
-//                                     "template_id": "d-d501a18d8e95420fa3d0f35a0a1f3405"
-//                                 });
-//                                 mail.end(function (resp) {
-//                                 if (resp.error){
-//                                     console.log("this is the error for Adding bid", resp.error)
-//                                     // res.redirect("/home")
-//                                     // throw new Error(res.error);
-//                                 } else if (resp.accepted){
-//                                     console.log("email was sent for placing bids")
-//                                 }
-
-//                             console.log(resp.body);
-//                             });
-
-//                         })
-                               
-//                         // var options = {
-//                         //     auth: {
-//                         //         api_key: process.env.SENDGRID_API_KEY
-//                         //     }
-//                         // }
-//                         // var mailer = nodemailer.createTransport(sgTransport(options));
-                      
-//                         //   var email = {
-//                         //     to: "connorboothe@gmail.com",
-//                         //     from: 'degreeMe <notifications@degreeme.io>',
-//                         //     subject: 'Someone bidded on your post!',
-//                         //     attachments: [{
-//                         //         filename: 'cheers.png',
-//                         //         path: 'assets/img/cheers.png',
-//                         //         cid: 'myimagecid'
-//                         //     }],
-//                         //     html: "<div style='width:100%; text-align:center'><div style='margin-left:auto;margin-right:auto;width:100%;padding-bottom:20px; padding-top:20px'><h2 class='text-light'>"+req.session.name+" bidded <span style='font-weight:bold; color:green;'>$"+req.body.price+"</span> on your post. </h2><img src='cid:myimagecid' alt='cheers' /><br><a href='http://127.0.0.1:3000/bids/" + bid.TimelineId+"'><button style='width:200px; font-size:20px; color:white; background-color:#007bff;" +
-//                         //     "border:none; border-radius:10px; font-family:Open Sans, sans-serif;padding:5px; cursor:pointer;margin-top:20px; '>View bids</button></a></div></div>",
-//                         // }
-//                         // mailer.sendMail(email, function(err, result) {
-//                         //     if (err) { 
-//                         //         console.log(err)
-//                         //     }
-                           
-//                         // });
-//                     })
-//                 //Add to bids DB?
-//                 //add to notifications DB
-//                 res.status(202).json({
-//                     status: "Bid Placed"
-//                 }).end();
-//             })
-//             .catch(function (err) {
-//                 console.log(err)
-//             })
-//     });
+//load more timeline items
 router.post("/loadMore",
     check('blockNum').trim().escape(),
     function (req, res) {
@@ -836,63 +586,6 @@ router.post("/siteWideSearch",
             }).end();
        });
     });
-    router.post("/sendPlatformInvite",
-    check('emails').isArray().trim().escape(),
-    function (req, res) {
-      const errors = validationResult(req);
-      if (!errors.isEmpty()) {
-        
-      }
-    //   console.log("Group Name", req.body.groupName)
-    console.log(req.body.message)
-      var splitEmails = req.body.emails.split(",");
-      var toEmails = [];
-      for(x in splitEmails){
-        if(splitEmails[x] != ""){
-          toEmails.push({"email": splitEmails[x]});
-        }
-      }
-      var mail = unirest("POST", "https://api.sendgrid.com/v3/mail/send");
-      mail.headers({
-      "content-type": "application/json",
-      "authorization": process.env.SENDGRID_API_KEY,
-      });
-      mail.type("json");
-      mail.send({
-      "personalizations": [
-          {
-              "to": toEmails,
-              "dynamic_template_data": {
-                  "subject": "Group Invitation",
-                  "name": req.session.name,
-                  "message": req.body.message,
-          },
-              "subject": ""
-          }
-      ],
-          "from": {
-              "email": "notifications@degreeme.io",
-              "name": "DegreeMe"
-      },
-          "reply_to": {
-              "email": "noreply@degreeme.io",
-              "name": "No Reply"
-      },
-          "template_id": "d-fd46e3eb5ad84d8e971def6cb357e350"
-      });
-      mail.end(function (result) {
-        if (result.error){
-            console.log(res.body);
-            // throw new Error(res.error);
-        } else if (result.accepted) {
-            res.status(202).json({
-            }).end();
-            console.log("email has sent for inviting someone to join group");
-        }
-    });
-    
-     console.log("EMAIL INVITE RAN")
-    })
 
     router.post("/mobileCourses", function(req, res){
         users.getMyCourses(req.body.userId)

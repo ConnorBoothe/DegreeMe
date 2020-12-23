@@ -64,13 +64,13 @@ $(document).ready(function(){
         // var base64 = getDataUrl(image);
         storageRef.put(image, metadata)
         .then(function(){
-            alert("TASK COMPLETE")
             storageRef.getDownloadURL().then(function(url) {
                 payload = {
                     course:$(".add-tutoring-input").val(),
                     courseCode:$(".add-tutor-courseCode").val(),
                     hourlyRate:$(".add-tutoring-input1").val(),
-                    transcriptImg:url
+                    transcriptImg:url,
+                    streamId:""
                 }
                 $.ajax({
                     url: "/addTutorCourse",
@@ -103,6 +103,8 @@ $(document).ready(function(){
         // })
       
      });
+
+//mobile view
 $("#showNotifications").on("click", ".dots-tutor-courses",function(){
     if( $(this).next().css("display") != "none"){
         $(this).next().hide();
@@ -133,6 +135,39 @@ $("#showNotifications").on("click", ".remove-tutor-course",function(){
           },
         },
       });
+});
+//desktop view
+$(".homeSideBar").on("click", ".dots-tutor-courses",function(){
+  if( $(this).next().css("display") != "none"){
+      $(this).next().hide();
+  }
+  else{
+      $(this).next().show();
+  }
+});
+
+$(".homeSideBar").on("click", ".remove-tutor-course",function(){
+  var appId = $(this).next().val();
+  var parentElem = $(this).parent().parent();
+  payload = {
+      appId:appId,
+      status:"Reject"
+  }
+  $.ajax({
+      url: "/removeTutorCourse",
+      type: 'POST',
+      data: JSON.stringify(payload),
+      headers: {
+        "Content-Type": "application/json"
+      }, statusCode: {
+        202: function (result) {
+            parentElem.remove();
+        },
+        500: function (result) {
+          alert("500 " + result.responseJSON.err);
+        },
+      },
+    });
 });
 
 

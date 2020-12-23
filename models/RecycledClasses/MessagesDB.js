@@ -28,11 +28,10 @@ var thread = new Schema({
     userHandles:{type:Array, required:true},
     datetime:{type:Date, required:true},
     messages:[messagesSchema],
-    subject:{type:String}
+    subject:{type:String},
     
 }, {collection: 'MessagesDB'});
 var msgDB = mongoose.model('MessagesDB',thread);
-
 module.exports = class Messages {
     getAllThreads(){
       return msgDB.find();

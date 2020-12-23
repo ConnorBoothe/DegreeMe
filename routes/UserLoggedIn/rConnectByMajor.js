@@ -17,9 +17,11 @@ const userDB = require('../../models/Database/UserDB');
 const NotificationDB = require('../../models/Database/NotificationDB');
 //classes used
 var Student = require('../../models/classes/Student');
+var EmailFunction = require('../../models/classes/EmailFunction');
 //instantiate DBs
 var users = new userDB();
 var notifications = new NotificationDB();
+var emailFunction = new EmailFunction();
 //use session and bodyParser
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({
@@ -105,7 +107,7 @@ router.post("/follow",
   check('handle').isString().trim().escape(),
   check('image').isString().trim(),
   function (req, res) {
-    console.log("EMAIL", req.body.email)
+    console.log("EMAIL", req.body)
     //stores validation errors
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -127,56 +129,18 @@ router.post("/follow",
         }).then(function () {
           users.incrementNotificationCount(req.body.handle).then(function (data) {
             // add follow email here
-            mail.headers({
-              "content-type": "application/json",
-              "authorization": process.env.SENDGRID_API_KEY,
+            emailFunction.createEmail(req.body.email, "follow", req)
+            .then(function(){
+              res.status(202).json({
+                action: "followed"
+              }).end();
+              })
+              .catch(function () {
+                res.status(500).json({
+                  err: "something broke in follow"
+                }).end();
               });
-              mail.type("json");
-              mail.send({
-              "personalizations": [
-                  {
-                      "to": [
-                          {
-                              "email": req.body.email,
-                          }
-                  ],
-                      "dynamic_template_data": {
-                          "subject": "You have a new follower!",
-                          "username": req.session.handle
-                  },
-                      "subject": "You have a new follower!"
-                  }
-              ],
-                  "from": {
-                      "email": "notifications@degreeme.io",
-                      "name": "DegreeMe"
-              },
-                  "reply_to": {
-                      "email": "noreply@degreeme.io",
-                      "name": "No Reply"
-              },
-                  "template_id": "d-4d3bb2f9cd0747169169be2492054b3c"
-              });
-              mail.end(function (resp) {
-              if (resp.error){
-                  console.log("follow error: ", resp.error)
-                  // res.redirect("/home")
-                  // throw new Error(res.error);
-              } else if (resp.accepted){
-                  console.log("email was sent for follow")
-              }
-          console.log(resp.body);
-          });
-        });
-        res.status(202).json({
-          action: "followed"
-        }).end();
-        })
-        .catch(function () {
-          console.log("ERROR")
-          res.status(500).json({
-            err: "something broke in follow"
-          }).end();
+            })
         });
     } else {
       res.redirect('/login?message=Session%20Ended');

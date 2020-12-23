@@ -13,15 +13,14 @@ const {
 //DBs used
 const UNCC_CoursesDB = require('../../models/Database/UNCC_CoursesDB');
 const UserDB = require('../../models/Database/UserDB.js');
-const MessagesDB = require('../../models/Database/MessagesDB');
-const ListingsDB = require('../../models/Database/ListingsDB');
 const ReviewsDB = require('../../models/Database/ReviewsDB');
+const TutorDB = require('../../models/Database/TutorDB');
 //instantiate DBs used
 var users = new UserDB();
-var messages = new MessagesDB();
 var courses = new UNCC_CoursesDB();
-var listings = new ListingsDB();
 var reviews = new ReviewsDB();
+var tutors = new TutorDB();
+
 //use session and bodyParser
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({
@@ -83,13 +82,13 @@ router.post("/setBio",
         if (!errors.isEmpty()) {
             res.redirect('/home');
         }
-        users.getUserByHandle(req.body.handle).then(function (docs) {
-            console.log(req.body.handle)
+        users.getUserByHandle(req.session.handle).then(function (docs) {
+            console.log(req.session.handle)
             for (i in docs[0].myCourses) {
-                courses.updateBio(req.body.handle, docs[0].myCourses[i].courseName, req.body.bio);
+                courses.updateBio(req.session.handle, docs[0].myCourses[i].courseName, req.body.bio);
             }
         })
-        users.setBio(req.body.handle, req.body.bio);
+        users.setBio(req.session.handle, req.body.bio);
         res.status(202).json({
             bio: req.body.bio
         }).end();
@@ -115,7 +114,9 @@ router.post("/getTutorListings",
         if (!errors.isEmpty()) {
             res.redirect('/home');
         }
-        listings.getListingsByHandle(req.body.userHandle).exec((err, docs) => {
+        console.log("User handle: " + req.body.userHandle)
+        tutors.getTutorByHandle(req.body.userHandle).exec((err, docs) => {
+            console.log(docs)
             res.status(202).json({
                 tutoringSessions: docs
             })

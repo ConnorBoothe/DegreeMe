@@ -43,9 +43,12 @@ router.post('/course/addCourse',
             res.redirect('/');
         }
         courses.getCourseByName(req.body.courseName).then(function (data) {
-                courses.incrementStudents(data[0].CourseName).exec();
-                users.addCourse(req.session.handle, data[0].CourseName, data[0]._id, data[0].Department + " " + data[0].CourseCode)
-                courses.addStudent(data[0].CourseName, req.session.img, req.session.handle, req.session.name)
+                // courses.incrementStudents(data[0].CourseName).exec();
+                users.addCourse(req.session.handle, data[0].CourseName, 
+                    data[0]._id, data[0].Department + " " + data[0].CourseCode)
+                    .then(()=>{
+                        courses.addStudent(data[0].CourseName, req.session.img, req.session.handle, req.session.name)
+                    })
                 res.redirect("/home");
             })
             .catch(function (error) {

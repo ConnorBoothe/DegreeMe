@@ -1,5 +1,6 @@
 require('dotenv').config();
 const mongoose = require("mongoose");
+const { resolver } = require('stylus');
 mongoose.Promise = global.Promise;
 mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true,useUnifiedTopology: true },function(err){
     
@@ -26,7 +27,9 @@ var courseDBSchema = new Schema({
     Professors: [professorSchema]
     
 }, {collection: 'UNCC_CoursesDB'});
-module.exports = class Reviews {
+var CourseDB = mongoose.model('UNCC_CoursesDB', courseDBSchema);
+
+module.exports = class Course {
  
    addCourse(Dep, Code, Name){
     var CourseDB = mongoose.model('UNCC_CoursesDB', courseDBSchema);
@@ -86,27 +89,38 @@ module.exports = class Reviews {
    }
    //add student to students array
    addStudent(courseName,image, handle, name, bio){
-    var CourseDB = mongoose.model('UNCC_CoursesDB', courseDBSchema);
-    CourseDB.findOne({CourseName:courseName}).exec((err,docs)=>{
-        docs.students.push({Image:image, Handle:handle, Name:name, Bio:bio})
-        docs.save().then(function(){
-            CourseDB.findOne({CourseName:courseName}).updateOne({
-                $inc: {
-                    studentCount: +1
+       new Promise((resolve, reject)=>{
+        CourseDB.findOne({CourseName:courseName}).exec((err,docs)=>{
+            for(var i=0; i < docs.students.length; i++) {
+                if(docs.students[i].Handle == handle){
+                    reject("Handle already exists")
                 }
-              }).exec();
+            }
+            docs.students.push({Image:image, Handle:handle, Name:name, Bio:bio})
+            docs.save().then(function(){
+                CourseDB.findOne({CourseName:courseName}).updateOne({
+                    $inc: {
+                        studentCount: +1
+                    }
+                  }).exec((docs)=>{
+                    resolve(docs)
+                  });
+            })
         })
-    })
+       })
+    
    }
    //remove student from students array
    removeStudent(handle, courseName){
+    console.log(handle)
     var CourseDB = mongoose.model('UNCC_CoursesDB', courseDBSchema);
     CourseDB.findOne({CourseName:courseName}).exec((err,docs)=>{
         var index = -1;
-        console.log("LEAVE", docs)
+    
         for(x in docs.students){
             if(docs.students[x].Handle === handle){
                 index = x;
+                console.log(docs.students[x].Handle)
             }
         }
         if(index != -1){

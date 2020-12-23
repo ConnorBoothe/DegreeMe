@@ -13,7 +13,8 @@ function formatBid(post, stripeId){
     var hasLiked = likedBoolean($(".userProfileName").text(), post.likers);
     if(post.BidOpen == true){
        
-        var bid = '<input class="postId" name="postId" type="hidden" value="'+post._id+'" />'+
+        var bid = '<input class="postId" name="postHandle" type="hidden" value="'+post.userHandle+'" />'+
+        '<input class="postId" name="postId" type="hidden" value="'+post._id+'" />'+
         '<div class="timeline-container-helprequest">'+
         '<div class="postHeader">'+
             '<div class="postRight">'+
@@ -112,6 +113,7 @@ function formatTutorListing(post){
     var hasLiked = likedBoolean($(".userProfileName").text(), post.likers);
     var tutorListing = "";
     tutorListing +=
+    '<input class="postId" name="postHandle" type="hidden" value="'+post.userHandle+'" />'+
     '<input class="postId" name="postId" type="hidden" value="'+post._id+'" />'+
         '<div class="timeline-container-status">'+
             '<div class="postHeader">'+
@@ -167,9 +169,11 @@ function formatTutorListing(post){
 }
 
 function formatStudyGroup(post){
-    var hasLiked = likedBoolean($(".userProfileName").text(), post.likers);
+    var hasLiked = likedBoolean($(".userProfileName").eq(0).text(), post.likers);
+    console.log(hasLiked)
     var studyGroup = "";
     studyGroup += 
+    '<input class="postId" name="postHandle" type="hidden" value="'+post.userHandle+'" />'+
     '<input class="postId" name="postId" type="hidden" value="'+post._id+'" />'+
     '<div class="timeline-container-status">'+
         '<div class="postHeader">'+
@@ -231,6 +235,7 @@ function formatStatusUpdate(post){
     var hasLiked = likedBoolean($(".userProfileName").text(), post.likers);
     var status = "";
     status += 
+    '<input class="postId" name="postHandle" type="hidden" value="'+post.userHandle+'" />'+
     '<input class="postId" name="postId" type="hidden" value="'+post._id+'" />'+
     '<div class="timeline-container-status">'+
         '<div class="postHeader">'+
@@ -265,14 +270,14 @@ function formatStatusUpdate(post){
                     'fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
                     '<path fill-rule="evenodd"'+
                         'd="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />'+
-                '</svg></button><br>';
+                '</svg></button>';
                 if(post.commentCount > 1){
-                    status += '<a href="/post/'+post._id+'" class="addComment">'+post.commentCount+' Comments</a>';
+                    question += '<a href="/post/'+post._id+'" class="addComment">'+post.commentCount+' Comments</a>';
                 }
                 else if(post.commentCount === 1){
-                    status += '<a href="/post/'+post._id+'" class="addComment">'+post.commentCount+' Comment</a>';
+                    question += '<a href="/post/'+post._id+'" class="addComment">'+post.commentCount+' Comment</a>';
                 }else{
-                    status += '<a href="/post/'+post._id+'" class="addComment">Add Comment</a>';
+                    question += '<a href="/post/'+post._id+'" class="addComment">Add Comment</a>';
                 }
             }
             status+=
@@ -284,6 +289,7 @@ function formatQuestion(post){
     var hasLiked = likedBoolean($(".userProfileName").text(), post.likers);
     var question = "";
     question += 
+    '<input class="postId" name="postHandle" type="hidden" value="'+post.userHandle+'" />'+
     '<input class="postId" name="postId" type="hidden" value="'+post._id+'" />'+
     '<div class="timeline-container-status">'+
     '<div class="postHeader">'+
@@ -338,14 +344,14 @@ function formatQuestion(post){
                     'fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
                     '<path fill-rule="evenodd"'+
                         'd="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />'+
-                '</svg></button><br>';
+                '</svg></button>';
                 if(post.commentCount > 1){
-                    status += '<a href="/post/'+post._id+'" class="addComment">'+post.commentCount+' Comments</a>';
+                    question += '<a href="/post/'+post._id+'" class="addComment">'+post.commentCount+' Comments</a>';
                 }
                 else if(post.commentCount === 1){
-                    status += '<a href="/post/'+post._id+'" class="addComment">'+post.commentCount+' Comment</a>';
+                    question += '<a href="/post/'+post._id+'" class="addComment">'+post.commentCount+' Comment</a>';
                 }else{
-                    status += '<a href="/post/'+post._id+'" class="addComment">Add Comment</a>';
+                    question += '<a href="/post/'+post._id+'" class="addComment">Add Comment</a>';
                 }
             }
             question+=

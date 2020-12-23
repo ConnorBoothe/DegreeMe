@@ -27,24 +27,13 @@
             <div class="homeContainer">
                 
                     <div class="contentBlockReview">
-                            <div class="reviewTitle"><h1 class="text-light">Rating <%=meeting.tutorHandle%> in <%=meeting.class%></h1></div>
-                            <input type="hidden" class="tutorHandle" value="<%=meeting.userHandle%>"/>
+                            <div class="reviewTitle"><h1 class="text-light">Rating <%=params.handle%></h1></div>
+                            <input type="hidden" class="tutorHandle" value=""/>
                     <div id="reviewWrapper">
                             
                                 <div class="review-form">
                                     <form method="POST" action="/LeaveAReview">
-                                        <!-- <div class="">
-                                            <label class="text-light" >Name</label>
-                                            <input name="sender" type="text" class="reviewFieldDark form-control input-field1 <%=session.theme%>" id="Name" value="<%=session.handle%>" readonly="true"/>
-                                        </div>
-                                        <div class="">
-                                            <label class="text-light">Tutor Name</label>
-                                            <input name="receiver" type="email" class="form-control reviewFieldDark <%=session.theme%>" id="Email" value="<%=meeting.tutorHandle%>" readonly="true" />
-                                        </div>
-                                        <div class="">
-                                                <label class="text-light">Course</label>
-                                                <input name="course" type="email" class="form-control reviewFieldDark <%=session.theme%>" id="Email" value="<%=meeting.class%>" readonly="true" />
-                                            </div> -->
+                                       
                                         <div class="form-group">
                                             <label class="text-light reviewLabel">Rating</label>
                                             <div id="ratingContainer">
@@ -64,9 +53,9 @@
                                             <small class="reviewMsgErr"></small>
                                         </div>
                                         <br>
-                                        <input name="connectionID" type="hidden" value="<%=meeting._id%>"/>
-                                        <input name="tutor" type="hidden" value="<%=meeting.userHandle%>"/>
-                                        <input name="course" type="hidden" value="<%=meeting.class%>"/>
+                                        <input name="connectionID" type="hidden" value=""/>
+                                        <input name="tutor" type="hidden" value="<%=params.handle%>"/>
+                                        <input name="course" type="hidden" value=""/>
                                         <button type="submit" class="btn btn-primary reviewSubmit">Submit Review</button>
                                         <br>
                                         <br>

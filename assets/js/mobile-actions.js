@@ -177,8 +177,6 @@ $(".timeline-wrapper").on("click", ".findTutor-course", function(){
              '<ul class="mobile-availability">'+
                              '<li class="mobile-available-text">Available</li>'+
                              '<li class="available-selected">Now</li>'+
-                             '<li>Today</li>'+
-                             '<li>This Week</li>'+
              '</ul><div class="tutor-container">';
              for(var x = 0; x < result.tutors.length; x++){
                  var tutor = result.tutors[x];
@@ -196,9 +194,8 @@ $(".timeline-wrapper").on("click", ".findTutor-course", function(){
                   tutorsAvailable += stars;
                   tutorsAvailable +=
                   "</div></div></li>"+
-                  "<li class='tutor-details-li'><div class='rate-container'><p class='text-light'>$"+tutor.hourlyRate+"/hour</p></div><button class='btn btn-primary bookTutor'>Book Tutor</button></li>"+
+                  "<li class='tutor-details-li'><div class='rate-container'><p class='text-light'>$"+tutor.hourlyRate+"/hour</p></div><a href='/room/"+tutor.streamId+"' class='btn btn-primary bookTutor'>Join Room</a></li>"+
                   "<br><br></ul>";
-
              }
              tutorsAvailable += "</div>";
             $(".timeline-wrapper").html(tutorsAvailable);
