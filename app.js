@@ -80,17 +80,16 @@ app.use([
 ])
 //Message routes
 app.use([
-  require('./routes/UserLoggedIn/Messages/rMessages.js'),
-  require('./routes/UserLoggedIn/Messages/rMessageMembers.js'),
-  require('./routes/UserLoggedIn/Messages/rGetMessageSet.js'),
-  require('./routes/UserLoggedIn/Messages/rGetThreadImages.js'),
-  require('./routes/UserLoggedIn/Messages/rSendDirectMessage.js')
+  require('./routes/Messages/rMessages.js'),
+  require('./routes/Messages/rMessageMembers.js'),
+  require('./routes/Messages/rGetMessageSet.js'),
+  require('./routes/Messages/rGetThreadImages.js'),
+  require('./routes/Messages/rSendDirectMessage.js')
 ])
 //User not logged in routes
 app.use([
  require('./routes/UserNotLoggedIn/rIndex'),
  require('./routes/UserNotLoggedIn/rAbout'),
- require('./routes/Websockets/MessageSocket.js'),
  require('./routes/UserNotLoggedIn/rJobs'),
  require('./routes/UserNotLoggedIn/rPrivacy'),
  require('./routes/UserNotLoggedIn/rPolicies'),
@@ -102,11 +101,9 @@ app.use([
 //UserLoggedIn routes
 app.use([
   require('./routes/UserLoggedIn/rSettings.js'),
-  require('./routes/UserLoggedIn/rMyConnections.js'),
   require('./routes/UserLoggedIn/rSetUserStatus.js'),
   require('./routes/UserLoggedIn/rMyFinances.js'),
   require('./routes/UserLoggedIn/rStudyGroups.js'),
-  require('./routes/UserLoggedIn/rCreateTutorListing.js'),
   require('./routes/UserLoggedIn/rMeetups.js'),
   require('./routes/UserLoggedIn/rCheckout.js'),
   require('./routes/UserLoggedIn/rEvents.js'),
@@ -117,7 +114,6 @@ app.use([
   require('./routes/UserLoggedIn/rAddZoomMeeting.js'),
   require('./routes/UserLoggedIn/rHome.js'),
   require('./routes/UserLoggedIn/rTutorSchedule.js'),
-  require('./routes/UserLoggedIn/rEditListing.js'),
   require('./routes/UserLoggedIn/rStudyGroupProfile.js'),
   require('./routes/UserLoggedIn/rMeetupProfile.js'),
   require('./routes/UserLoggedIn/rAddCourse.js'),
@@ -126,10 +122,7 @@ app.use([
   require('./routes/UserLoggedIn/rAskQuestion.js'),
   require('./routes/UserLoggedIn/rVideoChat.js')
 ]); 
- //no longer using
-// app.use(require('./routes/UserLoggedIn/rDisplayAllBids.js')); 
-// app.use(require('./routes/UserLoggedIn/rDisplaySingleAcceptedBid.js')); 
-
+ 
 //API Routes
 app.use([
   require('./routes/API/SendStudyGroupData.js'),
