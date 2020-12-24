@@ -42,7 +42,7 @@ router.post('/course/addCourse',
             //redirect to index if error
             res.redirect('/');
         }
-        courses.getCourseByName(req.body.courseName).then(function (data) {
+        courses.getCourseByName(req.body.courseName).then((data)=> {
                 // courses.incrementStudents(data[0].CourseName).exec();
                 users.addCourse(req.session.handle, data[0].CourseName, 
                     data[0]._id, data[0].Department + " " + data[0].CourseCode)
