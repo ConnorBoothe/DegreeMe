@@ -3,8 +3,8 @@ require('dotenv').config();
 const express = require('express');
 const router = express.Router();
 //DBs used
-const Threads = require('../../../models/Database/Threads');
-const UserDB = require('../../../models/Database/UserDB');
+const Threads = require('../../models/Database/Threads');
+const UserDB = require('../../models/Database/UserDB');
 const users = new UserDB();
 const threads = new Threads();
 router.get("/messageMembers/:threadId", function(req, res) {

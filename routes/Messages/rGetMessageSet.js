@@ -3,7 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const router = express.Router();
 //DBs used
-const Messages = require('../../../models/Database/Messages');
+const Messages = require('../../models/Database/Messages');
 var messages = new Messages();
 router.post("/getMessageSet", function(req, res) {
         messages.getAllMsg(req.body.threadId, req.body.block)

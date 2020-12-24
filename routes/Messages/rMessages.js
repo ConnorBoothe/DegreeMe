@@ -31,12 +31,12 @@ router.use(bodyParser.urlencoded({
         maxAge:  6*60*60*1000 },
 }));
 //DBs used
-const UserDB = require('../../../models/Database/UserDB');
-const Messages = require('../../../models/Database/Messages');
-const Threads = require('../../../models/Database/Threads');
+const UserDB = require('../../models/Database/UserDB');
+const Messages = require('../../models/Database/Messages');
+const Threads = require('../../models/Database/Threads');
 //classes used
-const DateFunctions = require('../../../models/classes/DateFunctions');
-const UnescapeString = require('../../../models/classes/UnescapeString');
+const DateFunctions = require('../../models/classes/DateFunctions');
+const UnescapeString = require('../../models/classes/UnescapeString');
 
 //instantiate DBs
 var users = new UserDB();
