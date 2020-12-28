@@ -1,4 +1,12 @@
-
+html {
+    overflow: hidden;
+    height: 100%;
+  }
+  
+  body {
+    overflow: auto;
+    height: 100%;
+  }
 .page-containerPriv{
     width:100%!important;
     background-image: url('../img/bg-image.svg');

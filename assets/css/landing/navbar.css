@@ -32,7 +32,7 @@
   color: #007bff !important;
 }
 
-.navbar--signup {
+.navbar--login {
   transition: all 0.35s ease-in-out !important;
   background-color: var(--landingButton) !important;
   border: none !important;
