@@ -9,10 +9,9 @@ mongoose.connect(process.env.MONGO_URL, {
 }, function (err) {
 
 });
-// db = mongoose.connection;
-// db.on('error', console.error.bind(console, 'connection error:'));
+
 var Schema = mongoose.Schema;
-//bid schema
+//schedule schema
 var scheduleSchema = new Schema({
     userId: {
         type: String,
@@ -113,7 +112,6 @@ module.exports = class TutorSchedules {
                             var currTutor = data[i];
                             schedule.getUserScheduleByDayAndTime(data[i].userId, daysOfWeek[new Date().getDay()], new Date().getHours())
                                 .then(function (data1) {
-                                   console.log("DATA: " +data1.length)
                                     if (data1.length > 0) {
                                         //push if availability found
                                         availableTutors.push(currTutor);
