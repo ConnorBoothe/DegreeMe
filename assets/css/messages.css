@@ -311,8 +311,8 @@ input:-webkit-autofill:active {
     opacity: 0.7;
 }
 #messageHeader {
-    background-color:#242526;
-    width:85%;	    
+    background-color:#1f2024;
+    width:85%!important;	    
     height:45px;	    
     padding-top:5px;	
     position:fixed;	    
@@ -351,7 +351,7 @@ input:-webkit-autofill:active {
 
 .sendMsgInput {
     font-family: 'Mulish', sans-serif;
-    background-color: #242526!important;
+    background-color: #1f2024!important;
     width:85%!important;
     text-align:left;
     left:0!important;
@@ -460,7 +460,7 @@ input:-webkit-autofill:active {
         border: none;
         min-height: 40px;
         outline: none;
-        background-color: #242526!important;
+        background-color: #1f2024!important;
         box-shadow: 2px 3px #131313;
         margin-bottom:80px;
         text-align:left;
@@ -625,11 +625,37 @@ input:-webkit-autofill:active {
         width: 15%;
         z-index: 1;
         color: #d4d4d4;
-        background-color:#242526;
+        background-color:#1f2024;
         overflow-y: auto;
         padding-bottom: 60px;
         box-shadow: 1px 1px 1px 1px #a9a9a9;
 
+    }
+    .group-images-list{
+        margin-left:10px;
+    }
+    .group-images-list li{
+        list-style-type:none;
+        margin-top:15px;
+        margin-bottom:15px;
+
+    }
+    .group-images {
+        height: 100%;
+        background-color:#23272a;
+        width:70px;
+        position:absolute;
+        z-index:3!important;;
+    }
+    .groupThreads {
+        position: absolute;
+        left: 0;
+        height: 100% !important;
+        width: 250px;
+        z-index: 1;
+        color: #d4d4d4;
+        background-color:#1f2024;
+        overflow-y: auto;
     }
     .msgInput {
         width: 60%;
@@ -641,7 +667,7 @@ input:-webkit-autofill:active {
         border: none;
         min-height: 20px;
         outline: none;
-        background-color: #242526;
+        background-color: #1f2024;
         box-shadow: 2px 3px #131313;
         text-align:left;
         margin-bottom:10px;
