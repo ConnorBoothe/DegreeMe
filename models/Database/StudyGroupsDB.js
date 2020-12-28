@@ -243,6 +243,10 @@ groupsAutocompleteByName(searchValue){
         reject(err)
       })
     })
-    
+  }
+  getGroupMembers(id){
+    return GroupsDB.find({
+      _id: id
+    }, "Members")
   }
 }
