@@ -9,10 +9,8 @@ router.use(session({
     resave: true,
     saveUninitialized: true
 }));
-//render the about page
-router.get('/broadcast', function(req, res){    
-    res.render('UserLoggedIn/Video/Broadcaster',{session:req.session});
-});
+
+
 router.get('/room/:id', function(req, res){
     if(false){
         res.redirect("/home")
