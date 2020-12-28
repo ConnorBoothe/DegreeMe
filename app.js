@@ -112,15 +112,15 @@ app.use([
   require('./routes/UserLoggedIn/rCourseProfile.js'),
   require('./routes/UserLoggedIn/rUserProfile.js'),
   require('./routes/UserLoggedIn/rAddZoomMeeting.js'),
-  require('./routes/UserLoggedIn/rHome.js'),
+  require('./routes/UserAccount/rHome.js'),
   require('./routes/UserLoggedIn/rTutorSchedule.js'),
   require('./routes/UserLoggedIn/rStudyGroupProfile.js'),
   require('./routes/UserLoggedIn/rMeetupProfile.js'),
-  require('./routes/UserLoggedIn/rAddCourse.js'),
+  require('./routes/UserAccount/rAddCourse.js'),
   require('./routes/UserLoggedIn/rComments.js'),
   require('./routes/UserLoggedIn/rAdmin.js'),
   require('./routes/UserLoggedIn/rAskQuestion.js'),
-  require('./routes/UserLoggedIn/rVideoChat.js')
+  require('./routes/Video/rVideoChat.js')
 ]); 
  
 //API Routes

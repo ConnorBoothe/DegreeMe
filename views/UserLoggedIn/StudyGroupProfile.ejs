@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">    <link href="../assets/css/main1.css" rel="stylesheet">
     <link href="../assets/css/StudyGroupProfile.css" rel="stylesheet" />
     <link href="../assets/css/home.css" rel="stylesheet">
+    <link href="../assets/css/messages.css" rel="stylesheet">
 
      <!-- Google Tag Manager -->
 	<script type="text/javascript" src="assets/js/googleTagManager.js"></script>
@@ -29,9 +30,10 @@
     <div class="homeWrap">
     <div class="page-container">
         <%- include ('partials/newMeetupModal.ejs') %>
-        <%- include ('partials/sideBar.ejs') %>
-        <%- include ('partials/horizontalHeader.ejs')%>
+        <%- include ('partials/groupHeader.ejs')%>
         <%- include ('partials/groupMembersSideBar.ejs')%>
+        <%- include ('../Groups/partials/groupThreads.ejs')%>
+
         <div class="profile-wrapper">
             <div class="studyGroupProfileContainer">
                 <!-- Modal -->
@@ -68,21 +70,7 @@
                     <div class="studyGroupHeader-wrapper">
 
                         <div id="courseTitle" class="CourseTitle">
-                            <div class="group-title">
-                                <div class="groupName text-light">
-                                    <img class="groupAvatar" src="<%=studyGroup.HostImage%>" />
-                                    <h1 class="groupName text-light"><%=studyGroup.GroupName%></h1>
-                                    <h1 class="subjectName text-light"><%=studyGroup.Subject%></h1>
-                                    <%if(members.length == 1){%>
-                                        <p class="badge badge-primary memberCount"> <%=members.length%> Member</p>
-                                    <%}else{%>
-                                        <p class="badge badge-primary memberCount"> <%=members.length%> Members</p>
-                                    <%}%>
-                                
-                                </div>
-                            </div>
                            
-                            <p class="text-light groupDescription"><%=studyGroup.GroupDescription%></p>
                             <div class="studyGroupProfileButtons">
                                 <% var isMember = false;%>
                                 <% for (x in studyGroup.Members){%>
@@ -233,13 +221,14 @@
     <script src="../assets/js/popper.min.js"></script>
     <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../assets/js/SiteWideSearch.js"></script>
-    <script type="text/javascript" src="../assets/js/highlightCurrentMenuItem.js"></script>
     <script src="../assets/jquery/jquery.session/jquery.session.js"></script>
     <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../assets/js/getStudyGroups.js"></script>
     <script type="text/javascript" src="../assets/js/follow-client.js"></script>
     <script type="text/javascript" src="../assets/js/createMeetup-client.js"></script>
     <script type="text/javascript" src="../assets/js/Client-DateFunctions.js"></script>
+    <script type="text/javascript" src="../assets/js/tooltip.js"></script>
+    <script type="text/javascript" src="../assets/js/Groups/getGroupsImages.js"></script>
 
 </body>
 
