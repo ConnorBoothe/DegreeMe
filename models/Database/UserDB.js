@@ -590,4 +590,10 @@ module.exports = class User {
             handle: {$in: handleArray}
         }, "active");
     }
+     //get user status to active or inactive
+     getGroupsById(userId){
+        return UserDB.findOne({
+           _id: userId
+        }, "StudyGroups");
+    }
 }
