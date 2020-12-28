@@ -31,7 +31,7 @@ router.use(bodyParser.urlencoded({
         maxAge:  6*60*60*1000 },
 }));
 //DBs used
-const UserDB = require('../../models/Database/UserDB');
+const UserDB = require('../models/Database/UserDB');
 const MessageDB = require('../../models/Database/MessagesDB');
 //classes used
 const DateFunctions = require('../../models/classes/DateFunctions');
