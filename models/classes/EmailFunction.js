@@ -6,7 +6,7 @@ module.exports = class Email {
     //create email
     createEmail(email, type, req) {
         switch (type) {
-            case "comment":
+        case "comment":
         return new Promise((resolve, reject) => {
             mail.headers({
                 "content-type": "application/json",
@@ -179,8 +179,5 @@ module.exports = class Email {
                     
                       
     }
-
     }
-
-
 }
