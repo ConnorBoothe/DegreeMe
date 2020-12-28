@@ -40,7 +40,6 @@ router.use(session({
   cookie: { secure: true,
       maxAge:  6*60*60*1000 },
 }));
-
 //render the tutor page
 router.get('/Group/:GroupId', function (req, res) {
   if (req.session.userId) {
@@ -205,5 +204,14 @@ router.post("/leaveStudyGroup",
     } else {
       res.redirect('/login?message=Session%20Ended');
     }
+  })
+  router.get("/groupImages", (req, res)=>{
+    studyGroups.getGroupImages(req.session.userId)
+    .then((groups)=>{
+      res.json(groups)
+    })
+    .catch((err)=> {
+      res.json("An error occurred")
+    })
   })
 module.exports = router;
