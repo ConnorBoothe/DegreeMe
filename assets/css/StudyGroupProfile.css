@@ -396,11 +396,11 @@ button{
         height:100vh;
     }
     .groupName{
-        font-size:16px!important;
+        font-size:14px!important;
         font-family: 'Open Sans', sans-serif;
         margin-right:5px;
         min-width: 200px;
-        margin-top:10px;
+        margin-top:15px;
     }
     .profile-ul{
         margin-bottom:0!important;
@@ -533,19 +533,40 @@ button{
     }
     .studyGroupHeader-wrapper div{
         display:inline-block;
+    } 
+    .groupTitle {
+    margin-left:20px;
+    margin-top:5px;
+    }
+    .currGroup {
+        border: 2px solid #007bff;
+        border-radius:45px;
     }
     .groupName{
-        font-size:22px!important;
+        font-size:15px!important;
         font-family: 'Open Sans', sans-serif;
         margin-right:5px;
+        margin-left:5px;
         min-width: 200px;
-        margin-top:10px;
+        margin-top:15px!important;
     }
     .course-profile-info{
         text-align:left!important;
         margin-right:200px!important;
     }
     .groupAvatar{
-        width:110px;
+        width:35px;
     }
+    .groupSubject{
+        color: #a9a9a9;
+        font-size:12px;
+        margin-left:10px;
+        margin-top:0!important;
+    }
+}
+#messageHeader{
+    margin-left:70px;
+}
+.go-home-groups {
+    width:45px!important;
 }
