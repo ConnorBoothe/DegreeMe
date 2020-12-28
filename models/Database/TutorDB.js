@@ -115,7 +115,6 @@ module.exports = class TutorSchedules {
                                 .then(function (data1) {
                                    console.log("DATA: " +data1.length)
                                     if (data1.length > 0) {
-                                        console.log("tutors found")
                                         //push if availability found
                                         availableTutors.push(currTutor);
                                         console.log("Available tutors: " +availableTutors)
