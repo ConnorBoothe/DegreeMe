@@ -8,6 +8,11 @@ $(document).ready(()=>{
         selector: '[data-toggle="tooltip"]',
         container: "body"
       })
+      $('.group-images-list').tooltip({
+        selector: '[data-toggle="tooltip"]',
+        container: "body"
+      })
+      
       
 })
 
