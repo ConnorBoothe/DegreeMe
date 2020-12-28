@@ -245,7 +245,7 @@ groupsAutocompleteByName(searchValue){
     })
   }
   getGroupMembers(id){
-    return GroupsDB.find({
+    return GroupsDB.findOne({
       _id: id
     }, "Members")
   }
