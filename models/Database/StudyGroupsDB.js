@@ -1,6 +1,7 @@
 require('dotenv').config();
-const UserDB=require("./UserDB")
-var mongoose = require("mongoose");
+const UserDB = require("./UserDB")
+const users = new UserDB();
+const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
 
 //mongodb url. Move this for security purposes
@@ -37,6 +38,7 @@ var StudyGroupDBSchema = new Schema({
 }, {
   collection: 'StudyGroupsDB'
 });
+var GroupsDB = mongoose.model('StudyGroupDB', StudyGroupDBSchema);
 module.exports = class StudyGroups {
   getAllStudyGroups() {
     var StudyGroupDB = mongoose.model('StudyGroupDB', StudyGroupDBSchema);
@@ -203,7 +205,7 @@ groupsAutocompleteByName(searchValue){
   //get list of students attending the study group
   getStudentsAttending(sessionID) {
     var StudyGroupDB = mongoose.model('StudyGroupDB', StudyGroupDBSchema);
-    return StudyGroupDB.findOne({
+    return GroupsDB.findOne({
       _id: sessionID
     });
   }
@@ -216,5 +218,31 @@ groupsAutocompleteByName(searchValue){
         Active: false
       }
     }).exec();
+  }
+  //get images of a user's study groups
+  getGroupImages(userId){
+    return new Promise((resolve, reject)=> {
+      users.getGroupsById(userId)
+      .then((groups)=> {
+        console.log("Groups: " + groups)
+        var groupIdArray = [];
+        for (var i = 0; i < groups.StudyGroups.length; i++) {
+          groupIdArray.push(groups.StudyGroups[i].studyGroupId)
+        }
+        console.log(groupIdArray)
+        GroupsDB.find({
+          _id: { 
+            $in: groupIdArray
+          }
+        }, "GroupImage GroupName")
+        .then((groups)=>{
+          resolve(groups)
+        })
+      })
+      .catch((err)=>{
+        reject(err)
+      })
+    })
+    
   }
 }
