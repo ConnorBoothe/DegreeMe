@@ -33,14 +33,11 @@ router.get('/VerifyAccount', function(req, res){
                 else{
                     res.redirect("/");
                 }
-               
         })
-       
     }
     else{
         res.redirect('/');
     }
-   
 });
 
 //confirm user account
@@ -78,18 +75,13 @@ router.post("/updateStatus", function(req, res){
                 else{
                     res.redirect("/Login?message=Account Confirmed");
                 }
-               
             })
-
-          
         }
         else{
             res.redirect("/VerifyAccount?email="+req.body.email+"&error=Incorrect Confirmation Code");
         }
     });
-   
 })
-
 //resend account verification code
 router.post("/sendEmail", function(req, res){
     //generate random code and save it to the DB
