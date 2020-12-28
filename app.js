@@ -114,7 +114,9 @@ app.use([
   require('./routes/UserLoggedIn/rAddZoomMeeting.js'),
   require('./routes/UserAccount/rHome.js'),
   require('./routes/UserLoggedIn/rTutorSchedule.js'),
-  require('./routes/UserLoggedIn/rStudyGroupProfile.js'),
+  require('./routes/Groups/rStudyGroupProfile.js'),
+  require('./routes/Groups/getGroupMembers.js'),
+
   require('./routes/UserLoggedIn/rMeetupProfile.js'),
   require('./routes/UserAccount/rAddCourse.js'),
   require('./routes/UserLoggedIn/rComments.js'),
