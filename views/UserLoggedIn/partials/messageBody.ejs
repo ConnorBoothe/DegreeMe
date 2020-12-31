@@ -1,0 +1,127 @@
+<div class="messageBlock" >    
+    <div id="messagesContainer">          
+        
+    <%if(messages.length > 0 ){%>
+    <div class="messageTop0"></div>
+    <% for(var x = messages.length-1; x >= 0; x--){%>
+    <!-- check if session handle === sender -->
+    <%if(session.handle === messages[x].sender){%>
+    <%if(messages[x].type == "file"){%>
+    <div class="sent-wrapper">
+        <div class="containMessageSent">
+            <div class="msg_">
+                <p class="msgSender">
+
+                </p>
+                <p class="messageBody sentMsg bg-primary message-attachment">
+
+                    <%if(messages[x].content.includes(".pdf")){%>
+
+                    <iframe class="pdf-iframe" src="<%=messages[x].content%>"></iframe>
+                    <p class="text-center"><a target="_blank" class="text-light"
+                            href="<%=messages[x].content%>">View Full Screen</a></p>
+                    <%}else{%>
+                    <a target="_blank" href="<%=messages[x].content%>">
+                        <img src="<%=messages[x].content%>" />
+                    </a>
+                    <%}%>
+                
+                </p>
+            </div>
+            <p class="msg-date msg-date-sent"><%=formatTime(new Date(messages[x].dateTime))%>
+                </p>
+            </div>
+        </div>
+<%}else{%>
+    <div class="sent-wrapper">
+        <div class="containMessageSent">
+            <div class="msg_">
+                <%if(messages[x].youtubeData[0] != undefined){%>
+                    <%console.log(messages[x].youtubeData[0])%>
+                    <a target="_blank" href="<%=messages[x].youtubeData[0].link%>">
+                        <div class="messageBody sentMsg bg-primary">
+                            <img class="yt-logo" src= "../assets/img/yt-logo.svg"/>
+                            <div class="thumbnail-container">
+                                <img src="<%=messages[x].youtubeData[0].thumbnail%>" class="yt-thumbnail"/>
+                            </div>
+                            <span class="text-light yt-title"><%=unescapeApostrophe(messages[x].youtubeData[0].title)%></span>
+                        </div>
+                    </a>
+                <%}else{%>
+                    <p class="messageBody sentMsg bg-primary"><%=messages[x].content%></p>
+                <%}%>
+                
+            </div>
+            <p class="msg-date msg-date-sent"><%=formatTime(new Date(messages[x].dateTime))%></p>
+        </div>
+    </div>
+<%}%>
+        <% } else{%>
+        <div class="containMessageReceived">
+            <p class="sender_handle">
+                <img class="messageImg" src="<%=messages[x].senderImg%>" />
+                <%=messages[x].sender%>
+            </p>
+
+            <div class="msg_1" style="left:0px">
+                <p class="messageBody receivedMsg"><%=messages[x].message%></p>
+            </div>
+            <p class="msg-date"><%=formatTime(new Date(messages[x].dateTime))%></p>
+        </div>
+        <%if(messages[x].attachments.length > 0){%>
+        <%for (var i = 0; i < messages[x].attachments.length; i++ ) {%>
+        <div class="containMessageReceived">
+            <div class="msg_">
+                <p class="messageBody receivedMsg bg-primary message-attachment"><img
+                        src="<%=messages[x].attachment[i]%>" /></p>
+            </div>
+            <p class="msg-date msg-date-sent"><%=formatTime(new Date(messages[x].dateTime))%></p>
+        </div>
+        <%}%>
+<%}%>
+        <%}%>
+<%}%>
+        <%}%>
+</div>
+<a name="bottom"></a>
+
+<div id="typeMsg" class="">
+<form id="messageForm" method='POST' action=' '>
+    <div class="msgInput">
+       
+
+        <span class="sendMsg-btn">
+            <span class="memberImage" data-toggle="tooltip" data-placement="left" title="Send Message">
+                <button class="msg-send-btn"> 
+                <svg  fill="#a9a9a9" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-up-circle-fill"
+                    fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-10.646.354a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 6.207V11a.5.5 0 0 1-1 0V6.207L5.354 8.354z" />
+                </svg>
+            </button>
+        </span>
+        
+        </span>
+        
+        <input class="sendMsgInput" name="content" type="text" placeholder="Send a message"
+            autocomplete="off" spellcheck="off"/>
+            
+            <a data-toggle="tooltip" data-placement="top"
+                                title="File Upload">
+            <label id="attach-file-icon" for="attachment" class="">
+              <svg width=".75em" height=".75em" viewBox="0 0 16 16" class="bi bi-file-earmark-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0H4zm5.5 1.5v2a1 1 0 0 0 1 1h2l-3-3z"/>
+              </svg>
+            </label>
+          
+            <input class="message-file" id="attachment" name="attachment" type="file" />
+            </a>
+            <div class="image-attachments text-light"></div>
+    </div>
+    <input name="id" class="threadId" value="<%=threadId%>" type="hidden"/>
+        <input name="userId" class="userId" value="<%=session.handle%>" type="hidden" />
+        </form>
+    </div>
+</div>
+
+</div>
