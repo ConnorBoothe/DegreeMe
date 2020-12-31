@@ -51,6 +51,7 @@ router.get('/Group/:GroupId', function (req, res) {
             console.log(err)
             res.redirect("/Group/" + req.params.GroupId);
           } else {
+            console.log("Group Img: " + docs2[0].HostImage)
             var members = [];
             var memberCount = 0;
             new Promise((resolve, reject) => {
@@ -88,6 +89,7 @@ router.get('/Group/:GroupId', function (req, res) {
                       meetups: docs1,
                       memberCount: memberCount,
                       members: members,
+                      groupImg: docs2[0].HostImage,
                       formatDate: dateFunctions.displayDate,
                       formatTime: dateFunctions.formatTime
                     });
