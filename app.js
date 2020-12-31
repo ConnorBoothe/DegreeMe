@@ -115,8 +115,10 @@ app.use([
   require('./routes/UserAccount/rHome.js'),
   require('./routes/UserLoggedIn/rTutorSchedule.js'),
   require('./routes/Groups/rStudyGroupProfile.js'),
+  require('./routes/Groups/addBannerImage.js'),
   require('./routes/Groups/getGroupMembers.js'),
-
+  require('./routes/Groups/addGroupChat.js'),
+  require('./routes/Groups/getGroupThreads.js'),
   require('./routes/UserLoggedIn/rMeetupProfile.js'),
   require('./routes/UserAccount/rAddCourse.js'),
   require('./routes/UserLoggedIn/rComments.js'),
@@ -188,14 +190,12 @@ io.sockets.on('connection', function (socket) {
         })
       })
     });
-    
   //catch the emitted 'send message' event
   socket.on('send message', function (data) {
-    console.log("Adding message")
       //add message to the db
-      console.log("Adding message")
       messages.addMessage(data.id, data.sender, data.senderImg, data.content, data.date, "text")
       .then(function(message){
+        console.log("Emit new message")
         io.sockets.emit('new message', {
           msg: message
       });
