@@ -89,6 +89,11 @@ input:-webkit-autofill:active {
     width: 50%;
     text-align: right;
 }
+.message-wrapper1 {
+    margin-bottom: 50px;
+    width: 80%;
+    text-align: right;
+}
 .headerContainer{
     right:0;
     top:0;
@@ -312,7 +317,7 @@ input:-webkit-autofill:active {
 }
 #messageHeader {
     background-color:#1f2024;
-    width:85%!important;	    
+    width:85%;	    
     height:45px;	    
     padding-top:5px;	
     position:fixed;	    
@@ -648,7 +653,7 @@ input:-webkit-autofill:active {
         z-index:3!important;;
     }
     .groupThreads {
-        position: absolute;
+        position: fixed;
         left: 0;
         height: 100% !important;
         width: 250px;
@@ -657,6 +662,7 @@ input:-webkit-autofill:active {
         background-color:#1f2024;
         overflow-y: auto;
     }
+    
     .msgInput {
         width: 60%;
         font-family: "Helvetica Neue", Helvetica, sans-serif;

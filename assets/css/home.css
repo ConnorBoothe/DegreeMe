@@ -504,7 +504,7 @@ padding-right:10px;
     margin-right:50px;
 }
 .dots:hover{
-    background-color:black;
+    background-color:#343a40;
 }
 .dots-btn{
     float:right;
@@ -549,15 +549,18 @@ padding-right:10px;
 }
 .popover{
     width:150px!important; 
-    background-color:black!important;
+    background-color:#18191a!important;
+    box-shadow: 2px 2px 2px 2px solid black;
 }
-.arrow::before, .arrow::after {
+.bs-popover-right .arrow::before,  .arrow::after, .bs-popover-right .arrow::after {
     /* border-left-color:black!important; 
     -moz-transform: scaleX(-1);
     -webkit-transform: scaleX(-1);
     -o-transform: scaleX(-1);
     transform: scaleX(-1);
     -ms-filter: fliph; IE */
+    color: #18191a!important;
+    background-color:#18191a!important;
 }
 .placeBid{
     float:right;
@@ -1688,6 +1691,7 @@ input[name="searchType"]{
     .userImgLi{
         display:inline-block;
         padding-top:3px;
+        height:40px;
     }
     .timelinePost-username{
         color:white;
@@ -2411,6 +2415,7 @@ input[name="searchType"]{
     }
     .message{
         background-color:#18191a!important;
+        padding-top:0!important;
     }
 
     .search-container{

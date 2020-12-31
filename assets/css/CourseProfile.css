@@ -456,6 +456,13 @@ input[name="anonymous"]{
     margin-top:-40px;
 }
 @media only screen and (min-width: 1000px) {
+    .profile-wrapper{
+        background-color: #18191a;
+        padding-top:0px;
+        height:100%;
+        position:relative;
+        margin-left:250px!important;
+    }
     .viewTutorMobile{
        display:none;
     }
