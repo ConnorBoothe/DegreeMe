@@ -2,39 +2,35 @@
     //connect to the websocket
     var socket = io.connect({transports: ['websocket']});
     socket.connect();
-    //initialize DOM variables
-    var messageForm = $("#messageForm");
-    var chat = $('#messagesContainer');
-    //youtube url regex
 
-    // var userHandles = new Array;
     $(document).ready(function () {
         //initialize the image attachment array
         var imageArray = [];
         //imageNumber variable used to route the image to the
         //correct message bubble after it is uploaded to firebase
         var imageNumber = 0;
-        //initialize DOM elements used in send message and send image
-        var id = $(".threadId").val();
+        //initialize DOM elements
+        var messageForm = $("#messageForm");
         var sender = $(".userProfileName").eq(0).text();
         var senderImg = $(".userProfileImg").attr("src");
         var messageField = $(".msgInput input");
-        //probably removing this
-        // $(".messageHandle").each(function (x) {
-        //     userHandles.push($(this).text().trim());
-        // })
+        var currPage = window.location.href.split("/")[3];
+        var id = "";
+        chat = $('#messagesContainer');
+       
         messageForm.on("submit", function (e) {
+           id = $(".threadId").val()
+
             e.preventDefault();
             if(imageArray.length > 0){
                 //if text is in the message
                 if (messageField.val().trim() != "") {
-                    
                     sendMessage(id, sender, senderImg);
                 }
                 else {
                     //image is sent without text
                     $('audio#pop')[0].play();
-                    sendImage(id, sender, senderImg, imageArray, imageNumber);
+                    sendImage(id, sender, senderImg, imageArray, imageNumber, chat);
                 }
             }
             else {
@@ -47,26 +43,26 @@
             }
         });
         socket.on("append youtube info", (data, err)=>{
-            console.log(data)
             appendYoutubeDetails(data.video.thumbnail, data.video.link, 
-                data.video.title);
+                data.video.title, chat);
         })
         socket.on('new message', function (data, err) {
-            console.log(data)
             if(err){
                 alert(err)
             }
+            id = $(".threadId").val();
+            
             //play the pop sound
             $('audio#pop')[0].play();
             //append the chat to the DOM
-            appendChat(id, data, data.msg._id);
+            appendChat(id, data, data.msg._id, chat);
             //if images attached, save images to firebase and send the url to the server to be saved to MessagesDB
             if(imageArray.length > 0 ) {
                 sendImage(id, sender, senderImg, imageArray, imageNumber);
             }
         })
         socket.on("append image", function(data){
-
+            id = $(".threadId").val()
             imageArray = data.imageArray;
             $(".new-image"+imageNumber).html("<a target='_blank' href='"+data.image+"'><img src='"+data.image+"'/></a>");
             imageNumber++;
@@ -74,7 +70,7 @@
                 $(".messageBlock").scrollTop($(".messageBlock")[0].scrollHeight);
             },300);            //if there are more images to be saved
             if(data.imageArray.length > 0) {
-                sendImage(id, sender, senderImg, imageArray, imageNumber);
+                sendImage(id, sender, senderImg, imageArray, imageNumber, chat);
             }
             else{
                 
