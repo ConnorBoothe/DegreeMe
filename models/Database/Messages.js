@@ -37,8 +37,10 @@ module.exports = class Messages {
         message.save()
         .then(()=>{
           //get the user handles that belong to the thread
+          console.log(threadId)
           threads.getUserHandles({_id: threadId})
           .then((thread)=>{
+            console.log("THREAD: "+thread)
             for (var i=0; i < thread.userHandles.length; i++) {
               //move the thread to the top spot in the list
               //for each handle in the thread
