@@ -484,9 +484,10 @@ button{
   }
 .cr-boundary {
     width:98%!important;
-    height:200px!important;
+    height:200px;
     text-align:left;
 }
+
 .cr-slider {
     margin-bottom:0;
 }
@@ -539,9 +540,11 @@ button{
     display:inline-block;
     /* border: 2px solid #a9a9a9; */
     position: relative;
-    top: 75px!important;
+    top: 0px!important;
     padding-bottom:20px;
     width:80%!important;
+    z-index:3!important;
+
   }
   .img-upload-container{
     position:relative;
@@ -551,9 +554,14 @@ button{
     text-align:center;
     display:none;
  }
+ 
  .popover{
     width:150px!important; 
     color:#1f2024!important;
+ }
+ .story-img { 
+     width:100%;
+     height:600px;
  }
 @media only screen and (min-width: 1000px) {
     .profile-wrapper{
@@ -696,8 +704,15 @@ button{
     width:200px;
     }
     .currGroup {
-        border: 2px solid #007bff;
-        border-radius:45px;
+        border-radius:140px!important;
+        border: double 2px transparent;
+        border-radius: 80px;
+        background-image: linear-gradient(white, white), radial-gradient(circle at top left, #f00,#3020ff);
+        background-origin: border-box;
+        background-clip: content-box, border-box;   
+        box-shadow: 2px 2px 2px 2px solid black;
+        cursor:pointer;
+        width:48px!important;
     }
     .group-message-heading { 
         font-size:14px;
@@ -773,5 +788,5 @@ button{
     cursor:pointer;
 }
 .go-home-groups {
-    width:45px!important;
+    width:45px;
 }

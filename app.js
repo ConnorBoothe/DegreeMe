@@ -117,6 +117,8 @@ app.use([
   require('./routes/Groups/rStudyGroupProfile.js'),
   require('./routes/Groups/addBannerImage.js'),
   require('./routes/Groups/getGroupMembers.js'),
+  require('./routes/Groups/addStory.js'),
+  require('./routes/Groups/getGroupStories.js'),
   require('./routes/Groups/addGroupChat.js'),
   require('./routes/Groups/getGroupThreads.js'),
   require('./routes/UserLoggedIn/rMeetupProfile.js'),

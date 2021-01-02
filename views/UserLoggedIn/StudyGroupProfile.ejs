@@ -40,10 +40,12 @@
         <%- include ('../Groups/partials/groupThreads.ejs')%>
         <%- include ('../Groups/partials/groupChatModal.ejs')%>
         <%- include ('../Groups/partials/Story.ejs')%>
+        <%- include ('../Groups/partials/addStory.ejs')%>
 
         <div class="profile-wrapper">
+            <input type="hidden" name="upload-type" value="banner"/>
                 <div class="header-image">
-                    <button class="changeBanner-btn btn">Change Banner</button>
+                    <button class="changeBanner-btn btn openImageEditor">Change Banner</button>
                     <p class="bannerSuccess badge badge-success">Banner Successfully Changed</p>
                    <img class="bannerImg" src="<%=studyGroup.BannerImage%>"/>
                 </div>
@@ -107,6 +109,7 @@
     <script src="../assets/js/croppie/croppie.min.js"></script>
     <script type="text/javascript" src="../assets/js/crop.js"></script>
     <script type="text/javascript" src="../assets/js/Groups/story.js"></script>
+    <script type="text/javascript" src="../assets/js/Groups/addStory.js"></script>
 
 
 </body>

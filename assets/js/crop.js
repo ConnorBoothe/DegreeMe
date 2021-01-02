@@ -40,8 +40,10 @@ function base64ImageToBlob(str) {
       });
   }
 $(document).ready(function(){
+  var type= "banner";
   //show image cropper on Groups page for banner image
   $(".changeBanner-btn").on("click", ()=>{
+    $(".overlay").fadeIn();
     $(".img-upload-container").fadeIn();
   })
     $("#imgInp").change(function(){
@@ -62,7 +64,7 @@ $(document).ready(function(){
     }
     var defaultImg = "../assets/img/croppieDefaultImage-100.jpg";
     var location = window.location.href.toString().split("/")[3];
-    if( location === "Group"){
+    if(location == "Group"){
       $uploadCrop = $('.upload-demo').croppie({
         viewport: {
             width: 800,
@@ -73,9 +75,52 @@ $(document).ready(function(){
             width: 320,
             height: 320
         }, 
-        // url: defaultImg,
+        //  url: defaultImg,
     });
+    $(".openImageEditor").on("click", function(){
+      if($(this).text() == "Change Banner"){
+        type = "banner";
+        $uploadCrop = $('.upload-demo').croppie({
+          viewport: {
+              width: 800,
+              height: 150,
+              type: 'rectangle',
+          },
+          boundary: {
+              width: 320,
+              height: 320
+          }, 
+          //  url: defaultImg,
+      });
+      // $('.cr-slider').attr({'min':.5, 'max':2});
+      $uploadCrop.croppie('bind', defaultImg).then(function(){ 
+          $uploadCrop.croppie('setZoom', '.8');
+        });
+      }
+      else if($(this).text() == "Post to Story"){
+        type = "story";
+        $uploadCrop = $('.content-container-add-story').croppie({
+          viewport: {
+              width: 400,
+              height: 500,
+              type: 'rectangle',
+          },
+          boundary: {
+              width: 320,
+              height: 320
+          }, 
+           url: defaultImg,
+      });
+      // $('.cr-slider').attr({'min':.5, 'max':2});
+      $uploadCrop.croppie('bind', defaultImg).then(function(){ 
+          // $uploadCrop.croppie('setZoom', '.8');
+        });
+      }
+      
+     
+  })
     }
+   
     else {
       $uploadCrop = $('.upload-demo').croppie({
         viewport: {
@@ -126,7 +171,12 @@ $(".img-btn").on("click", function(){
 })
 $(".loginBtnSignUp").attr("disabled", true); 
     $('.upload').on('change', function () { 
-        readFile(this); });
+     
+        readFile(this); 
+        if(type == "story") {
+          $(".content-container-add-story").show();
+        }
+      });
     $('.upload-result').on('click', function (ev) {
       $(".profile-uploading-image").show();
         $uploadCrop.croppie('result', {
@@ -184,32 +234,35 @@ $(".loginBtnSignUp").attr("disabled", true);
                   // This can also be downloaded directly
                   // $(".result1 .uploadingImg").text("Uploaded");
                   // $(".imageURL").val(url)
-                  $(".bannerImg").attr("src",resp);
-                  payload = {
-                    url:url,
-                    groupId: $("input[name='groupId']").val()
+                  if(type == "banner"){
+                    $(".bannerImg").attr("src",resp);
+                    payload = {
+                      url:url,
+                      groupId: $("input[name='groupId']").val()
+                    }
+                    $.ajax({
+                      url: "/addBannerImage",
+                      type: 'POST',
+                      data: JSON.stringify(payload),
+                      headers: {
+                        "Content-Type": "application/json"
+                      }, statusCode: {
+                        202: function (result) {
+                          $(function () {
+                              $(".bannerSuccess").fadeIn();
+                              setTimeout(()=>{
+                                $(".bannerSuccess").fadeOut();
+                              }, 1500)
+                            })
+                          
+                        },
+                        500: function (result) {
+                          alert("500 " + result.responseJSON.err);
+                        },
+                      },
+                    });
                   }
-                  $.ajax({
-                    url: "/addBannerImage",
-                    type: 'POST',
-                    data: JSON.stringify(payload),
-                    headers: {
-                      "Content-Type": "application/json"
-                    }, statusCode: {
-                      202: function (result) {
-                        $(function () {
-                            $(".bannerSuccess").fadeIn();
-                            setTimeout(()=>{
-                              $(".bannerSuccess").fadeOut();
-                            }, 1500)
-                          })
-                        
-                      },
-                      500: function (result) {
-                        alert("500 " + result.responseJSON.err);
-                      },
-                    },
-                  });
+                  
                   // $(".imageUploaded").val(url)
                   // $(".loginBtnSignUp").attr("disabled", false); 
                   // $(".imgTryAgain").hide();
@@ -267,6 +320,59 @@ $(".loginBtnSignUp").attr("disabled", true);
     $(".overlay").on("click", function(){
         $(".img-upload-container").hide();
         $(".overlay").hide();
+        $(".img-upload-container").hide();
     })
+    $(".add-story-btn").on("click", function(){
+      $uploadCrop.croppie('result', {
+        type: 'canvas',
+        size: {width:800},
+        format : 'jpg',
+    }).then(function (resp) {
+      var filename = $("#addImage").val().replace(/C:\\fakepath\\/i, '')
+      var storageRef = firebase.storage().ref("/groupImages/"+$(".groupName").text()+"/storyImages/"+filename);
+      var image = base64ImageToBlob(resp);
+      // console.log(image)
+      var metadata = {
+        contentType: 'image/jpeg',
+      };
+      var task = storageRef.put(image, metadata);
+      task.on("state_changed", function(){
+       function error(error){
+        alert(error);
+       }
+      })
+      storageRef.getDownloadURL().then(function(url) {
+      payload = {
+        url:url,
+        groupId: $("input[name='groupId']").val(),
+        text: $(".story-text-span").text(),
+        duration : 10
+      }
+      $.ajax({
+        url: "/addStory",
+        type: 'POST',
+        data: JSON.stringify(payload),
+        headers: {
+          "Content-Type": "application/json"
+        }, statusCode: {
+          202: function (result) {
+            $(function () {
+              $(".modal").modal("hide");
+              $(".bannerSuccess").text("Story successfully posted!")
+                $(".bannerSuccess").fadeIn();
+                setTimeout(()=>{
+                  $(".bannerSuccess").fadeOut();
+                }, 2500)
+              })
+            
+          },
+          500: function (result) {
+            alert("500 " + result.responseJSON.err);
+          },
+        },
+      });
+    });
+    })
+  })
 })
 
