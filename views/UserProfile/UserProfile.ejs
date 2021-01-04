@@ -28,18 +28,18 @@
 <body class="color-dark">
 
 <!-- Google Tag Manager (noscript) -->
-<%- include('partials/googleTagManager1.ejs') -%>
+<%- include('../UserLoggedIn/partials/googleTagManager1.ejs') -%>
 <!-- End Google Tag Manager (noscript) -->
 
     <div class="overlay"></div>
     <div class="homeWrap">
     <div class="page-container">
-        <%- include ('partials/followersModal.ejs') %>
-        <%- include ('partials/followingModal.ejs') %>
-        <%- include ('partials/profileMessageModal.ejs') %>
-        <%- include ('partials/sideBar.ejs') %>
-        <%- include ('partials/horizontalHeader.ejs')%>
-        <%- include ('partials/newMessageModal.ejs')%>
+        <%- include ('../UserLoggedIn/partials/followersModal.ejs') %>
+        <%- include ('../UserLoggedIn/partials/followingModal.ejs') %>
+        <%- include ('../UserLoggedIn/partials/profileMessageModal.ejs') %>
+        <%- include ('../UserLoggedIn/partials/sideBar.ejs') %>
+        <%- include ('../UserLoggedIn/partials/horizontalHeader.ejs')%>
+        <%- include ('../UserLoggedIn/partials/newMessageModal.ejs')%>
         <div class="profileContainer">
             <div class="profile-header">
                 <div class="header-wrapper">
@@ -154,8 +154,6 @@
                         
                     <%}%>
                 </div>
-                   
-               
                         <div class="ProfileButtons">
                             <!-- Modal -->
                             <div class="modal fade" id="profileModal" tabindex="-1" role="dialog"
