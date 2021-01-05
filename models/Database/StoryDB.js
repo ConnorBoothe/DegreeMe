@@ -13,7 +13,7 @@ var storySchema = new Schema({
     date:{type:Date, required:true},
     text: {type:String},
     image: {type:String},
-    duration: {type:Number},
+    duration: {type:Number, required:true},
 }, {collection: 'Stories'});
 
 //instantaiate streamDB model
