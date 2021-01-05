@@ -12,10 +12,11 @@
     <link href="../assets/css/home.css" rel="stylesheet">
     <link href="../assets/css/userProfile.css" rel="stylesheet">
     <link href="../assets/css/profile.css" rel="stylesheet">
+    <link href="../assets/css/settings.css" rel="stylesheet">
     <!-- <link href="../assets/css/settings.css" rel="stylesheet"> -->
     <link href="../assets/css/SignUp.css" rel="stylesheet">
     <link href="../assets/css/tutorGrid.css" rel="stylesheet">
-    <link href="../assets/css/home.css" rel="stylesheet">
+
 
     <!-- Google Tag Manager -->
 	<script type="text/javascript" src="assets/js/googleTagManager.js"></script>
@@ -36,10 +37,11 @@
     <div class="page-container">
         <%- include ('../UserLoggedIn/partials/followersModal.ejs') %>
         <%- include ('../UserLoggedIn/partials/followingModal.ejs') %>
-        <%- include ('../UserLoggedIn/partials/profileMessageModal.ejs') %>
+        <%- include ('partials/profileMessageModal.ejs') %>
         <%- include ('../UserLoggedIn/partials/sideBar.ejs') %>
         <%- include ('../UserLoggedIn/partials/horizontalHeader.ejs')%>
         <%- include ('../UserLoggedIn/partials/newMessageModal.ejs')%>
+        <%- include ('partials/editMajorModal.ejs')%>
         <div class="profileContainer">
             <div class="profile-header">
                 <div class="header-wrapper">
@@ -83,8 +85,8 @@
                                
                                 <% if(user.Tutor === true){%>
                                     <input type="hidden" name="isTutor" value="true"/>
-                                    <a class="memberImage" data-toggle="tooltip" data-placement="top"
-                                        title="degreeMe Tutor">
+                                    <a class="memberImage" data-toggle="tooltip" data-placement="bottom"
+                                        title="Verified Tutor">
                                         <img class="tutorBadge" src="../assets/img/tutorBadge.svg" />
                                     </a>
                                     <%}else{%>
@@ -96,7 +98,11 @@
                                                
                                            </div>
                                            <div class="majorContainer mobileMajorSpan">
+                                           
                                             <p class="profileMajor"><span class="majorSpan"><%=user.Major%></span></p>
+                                            <%if(session.handle === user.handle){%>
+                                                <span>Add Major</span>
+                                            <%}%>
                                         </div>
                                         </div>
                                         
@@ -133,107 +139,28 @@
                     </ul>
                 </div>
                 <div class="majorContainer desktopMajor">
-                    <p class="profileMajor"><span class="majorSpan"><%=user.Major%></span></p>
-                </div>
-                <div class="desktopBio">
+                    <p class="profileMajor"><span class="majorSpan"><%=user.Major%></span>
                     <%if(session.handle === user.handle){%>
-                        <p class="profileBio"><textarea maxlength="150" id="changeBio" class=""
-                            readonly><%=user.bio%> </textarea>
-                            <a class="memberImage" data-toggle="tooltip" data-placement="top" title="Edit Bio">
-                                <span class="btn btn-primary editBio">Edit Bio
-                                </span>
-                            </a>
-                        </p>
-                    <%}else{%>
-                        <%if(user.bio === "Tell the world a bit about yourself"){%>
-                            <p class="profileBio"><%=user.handle%> has not set a bio.
-                        <%}else{%>
-                        <p class="profileBio"><%=user.bio%>
-                        <%}%>
-                        </p>
-                        
+                        <span data-toggle="modal" data-target="#editBioModal" >
+                            <span class="editMajorSpan" data-toggle="tooltip" data-placement="right" title="Edit Major">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                    <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                                  </svg>
+                            </span>
+                            
+                        </span>
                     <%}%>
+                </p>
                 </div>
-                        <div class="ProfileButtons">
-                            <!-- Modal -->
-                            <div class="modal fade" id="profileModal" tabindex="-1" role="dialog"
-                                aria-labelledby="profileModalLabel">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content modal-dark">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal"
-                                                aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                            <h4 class="modal-title" id="profileModalLabel"
-                                                style="color: white; text-align:left">Unfollow</h4>
-                                        </div>
-                                        <div class="modal-body" style="color: white;">
-                                            ...
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button id="profileNo" type="button" class="btn btn-default"
-                                                data-dismiss="modal">No</button>
-                                            <button id="profileYes" type="button" class="btn btn-danger">Yes</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <% var noAtHandle=user.handle.replace('@','')%>
-
-                            <% if(session.handle != user.handle){%>
-                                <input name="email" type="hidden" value="<%=user.email%>" />
-                            <% if(following){%>
-                            <form action="/#" class="followForm" method="post" id="unfollow-form">
-                                
-                                <input name="followingHandle" type="hidden" value="<%=user.handle%>" />
-                                
-                                <input name="followingImg" type="hidden" value="<%=user.img%>" />
-                               
-                                <button id="<%=noAtHandle%>" data-status="unfollow" type="button"
-                                        class="btn btn-sm followingButton following-class"
-                                         data-handle='<%=user.handle%>'>
-                                        Following</button>
-                            </form>
-
-                            <%}else{%>
-                            <form action="/#" class="followForm" method="post" id="follow-form">
-                               
-                                <input name="followingHandle" type="hidden" value="<%=user.handle%>" />
-                                
-                                <input name="followingImg" type="hidden" value="<%=user.img%>" />
-                               
-                                <button id="<%=noAtHandle%>" data-status="follow" type="button"
-                                        class="btn btn-primary btn-sm followingButton follow-class">
-                                        Follow</button>
-                            </form>
-                            <%}%>
-                    <button type="button" class="btn-primary sendMessage" data-toggle="modal" data-target="#profileMessageModal">
-                        Message
-                      </button>
-                    <%}%>
-                        </div>
+                <%- include ('partials/desktopBio.ejs') %>
+                <%- include ('partials/profileButtons.ejs') %>
+                        
 
                     </div>
 
                 </div>
-                <div class="mobileBio">
-                    <%if(session.handle === user.handle){%>
-                        <p class="profileBio"><textarea maxlength="150" id="changeBio" class=""
-                            readonly><%=user.bio%> </textarea>
-                            <a class="memberImage" data-toggle="tooltip" data-placement="top" title="Edit Bio">
-                                <span class="btn btn-primary editBio">Edit Bio
-                                </span>
-                            </a>
-                        </p>
-                    <%}else{%>
-                        <%if(user.bio === "Tell the world a bit about yourself"){%>
-                            <p class="profileBio"><%=user.handle%> has not set a bio.
-                        <%}else{%>
-                        <p class="profileBio"><%=user.bio%>
-                        <%}%>
-                        </p>
-                    <%}%>
-    
-                </div>
+                <%- include ('partials/mobileBio.ejs') %>
+
                 <div class="profileBody">
 
                     <div class="profileNav">
@@ -263,9 +190,9 @@
             <ul class="profile-item-list">
                
                 <% for(x in user.myCourses){%>
-                            <a class="courseLink" href="/course/<%=user.myCourses[x].courseName%>" data-toggle="tooltip"
-                                data-placement="top" title="<%=user.myCourses[x].courseName%>">
-                                <div class="course-container">
+                            <a class="courseLink" href="/course/<%=user.myCourses[x].courseName%>">
+                                <div class="course-container" data-toggle="tooltip"
+                                data-placement="bottom" title="<%=user.myCourses[x].courseName%>">
 
                                     <!-- <h3 class="courseName1"><%=user.myCourses[x].courseName%></h3> -->
                                     <h5 class="courseCode1"><%=user.myCourses[x].courseCode%></h5>
@@ -284,7 +211,10 @@
     <script src="../assets/jquery/jquery.session/jquery.session.js"></script>
     <script type="text/javascript" src="../assets/js/displayMyCourses.js"></script>
     <script src="../assets/js/getNotifications.js"></script>
-    <script src="../assets/js/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="../assets/js/tooltip.js"></script>
+
     <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../assets/js/SiteWideSearch.js"></script>
     <script type="text/javascript" src="../assets/js/highlightCurrentMenuItem.js"></script>
@@ -304,6 +234,8 @@
           <script src="../assets/js/connect.js"></script>
         <script src="../assets/js/follow-client.js"></script>
         <script type="text/javascript" src="../assets/js/Client-DateFunctions.js"></script>
+        <script type="text/javascript" src="../assets/js/ajaxCalls/discoverClassmates_autocomplete.js"></script>
+        <script type="text/javascript" src="../assets/js/UserAccount/updateMajor.js"></script>
 
     </body>
 </html>
