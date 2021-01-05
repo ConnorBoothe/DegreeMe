@@ -8,7 +8,7 @@
 }
 
 .majorContainer{
-max-width:300px;
+max-width:350px;
 }
 .newMajor{
     width:70%;
@@ -29,6 +29,7 @@ max-width:300px;
     min-width:100px;
     font-family:"Open sans", "sans-serif";
     text-align:left;
+    display:inline-block;
    
 }
 .profile-uploading-image{
@@ -42,6 +43,27 @@ max-width:300px;
 }
 .majorSpan{
     background-color:#046A38;
+    padding:3px;
+    border-radius:5px;
+    padding-left:5px;
+    padding-right:5px;
+    box-shadow:1px 1px black;
+}
+.addClassification {
+    cursor: pointer;
+}
+.class-list-item {
+    list-style-type:none;
+    background-color:#18191a;
+    cursor:pointer;
+    margin-bottom:15px;
+    padding-left:15px;
+    padding:3px;
+    border-radius:5px;
+}
+.classSpan{
+    margin-left:10px;
+    background-color:#242526;
     padding:3px;
     border-radius:5px;
     padding-left:5px;
