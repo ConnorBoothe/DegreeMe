@@ -1,3 +1,4 @@
+
 function createProgressTabs() {
     const progressContainer = document.querySelector('.progress-container');
     const progress = Array.from($('.progress-container .progress'));
@@ -39,94 +40,88 @@ function createProgressTabs() {
     playNext();
 }
 
-function getStoryAjaxRequest(groupId, storyNumber){
-    payload = {
-        groupId:groupId,
-        storyNumber:storyNumber
-    }
-        $.ajax({
-            url: "/getStory",
-            type: 'POST',
-            data: JSON.stringify(payload),
-            headers: {
-              "Content-Type": "application/json"
-            }, statusCode: {
-              202: function (result) {
-                $(function () {
-                 $(".story-img-div").html("<img class='story-img' src='"+result.story.image+"'/>");
-                 $(".story-text-div").html("<p>"+result.story.text+"</p>")
-                })
-                setTimeout(function(){
 
-                },parseInt(result.story.duration)*1000)
-              },
-              500: function (result) {
-                alert("500 " + result.responseJSON.err);
-              },
-            },
-          });
-}
-function groupStory(groupId, duration) {
-    var storyNumber = 0;
-        getStoryAjaxRequest(groupId, storyNumber);
-        storyNumber++;
-        setTimeout(function(){
-
-        }, duration)
-    
+//direction == 0 , go back
+//direction ==1, go forward
+function createNewSlide(i, stories){
    
-
+    //  console.log(i)
+    $(".story-img-div").html("<img class='story-img' src='"+stories[i].image+"'/>");
+    $(".story-text-div").html("<p>"+stories[i].text+"</p>")  
 }
-function iterateLoop(i, stories) { 
-
-    if(i == 0) { 
+//format progressBars
+function formatProgressBars(stories, i) { 
+    //if i is 0, set up progress bar
+    
         var progressBarHTML = "";
+        //create story progress bar
         for(x in stories){
             progressBarHTML += '<div style="animation-duration: '+(stories[x].duration-0.5)+'s" class="progress"></div>';
         }
         $(".progress-container").html(progressBarHTML)
+        $(".story-img-div").html("<img class='story-img' src='"+stories[i].image+"'/>");
+        $(".story-text-div").html("<p>"+stories[i].text+"</p>")  //  your code here
         $(".story-container").show();
-        $(".story-img-div").html("<img class='story-img' src='"+stories[i].image+"'/>");
-        $(".story-text-div").html("<p>"+stories[i].text+"</p>")  //  your code here
-        i++;      
-        iterateLoop(i, stories);                   
-    }    
-    setTimeout(function() {   
-        $(".story-img-div").html("<img class='story-img' src='"+stories[i].image+"'/>");
-        $(".story-text-div").html("<p>"+stories[i].text+"</p>")  //  your code here
-      i++;                    
-      if (i < stories.length) {          
-        iterateLoop(i, stories);             
-      }
-      else{
-          setTimeout(function(){
-            $(".story-container").fadeOut();
-            $(".overlay").fadeOut();
-          },parseInt(stories[i-1].duration)*1000);
-          
-      }                       
-    }, parseInt(stories[i].duration)*1000)
+  }
+  function createStory(iterator, result){
+      const storyArray = result.stories;
+    var interval = setTimeout(function() { 
+                     
+        if(iterator < result.stories.length-1) {
+            $(".right-div").on("click", function(){
+                clearTimeout(interval);
+                // iterator++;
+                console.log("I: " +iterator)
+                result.stories.splice(iterator,1)
+                createNewSlide(iterator, result.stories)
+                return createStory(iterator, result)
+            });
+            $(".left-div").on("click", function(){
+                clearTimeout(interval)
+                iterator--;
+                console.log("I: " +iterator)
+
+                createNewSlide(iterator, result.stories)
+                return createStory(iterator, result)
+            });
+            // iterator++;
+            result.stories.splice(iterator,1)
+            console.log("I: " +iterator)
+            createNewSlide(iterator, result.stories)
+            $("input[name='iterator']").val(iterator)
+        }
+    }, 3000);
   }
 $(document).ready(()=>{
     var stories;
+    
     //hide story on overlay click or x button click
     $(".overlay").on("click",()=>{
         $(".overlay").hide();
         $(".story-wrapper").hide();
+        $(".story-img-div").html("");
+        $(".story-text-div").html("");
     })
     $(".picX").on("click",()=>{
         $(".overlay").hide();
         $(".story-wrapper").hide();
+        $(".story-img-div").html("");
+        $(".story-text-div").html("");
     })
     //show story 
     $(".groupImg").on("click", ()=>{
         $(".overlay").show();
         $(".story-wrapper").show();
     })
+    $("#iterator").on("change",function(){
+        alert("CHANGED")
 
+    });
     //ajax GET request to grab group stories
     var groupId = window.location.href.split("/")[4];
     $(".groupImg").on("click", function(){
+        $("input[name='iterator']").val(0)
+        var iterator = 0;
         payload = {
             groupId:groupId
         }
@@ -138,20 +133,68 @@ $(document).ready(()=>{
                   "Content-Type": "application/json"
                 }, statusCode: {
                   202: function (result) {
-                    $(function () {
+                 formatProgressBars(result.stories, iterator);
+                $(".story-img-div").html("<img class='story-img' src='"+result.stories[iterator].image+"'/>");
+                $(".story-text-div").html("<p>"+result.stories[iterator].text+"</p>") 
+                createStory(iterator, result)
                     
-                    })
-                    var iterator = 0;
-                   iterateLoop(iterator, result.stories);
-                   createProgressTabs();
-                    
+                
+                    // $(".right-div").on("click", function(){
+                    //     clearInterval(firstTimeout)
+                    //     // clearInterval(rightTimeout)
+                        
+                    //     if(iterator < result.stories.length-1) {
+                    //         iterator++;
+                    //         console.log(iterator)
+                    //         createNewSlide(iterator, result.stories)
+                    //         $("input[name='iterator']").val(iterator)
+                            
+                    //         // var rightTimeout = setInterval(function() {  
+                    //         //     if(iterator < result.stories.length-1) {
+                    //         //         iterator++;
+                    //         //         createNewSlide(iterator, result.stories)
+                    //         //         $("input[name='iterator']").val(iterator)
+                    //         //         console.log("right interval fired")
+                    //         //     }
+                    //         // }, 3000);
+                    //         //restart interval
+                            
+                    //     }
+                    //     else{
+                    //         $(".story-img-div").html("");
+                    //         $(".story-text-div").html("")  
+                    //          $(".story-container").hide();
+                    //          $(".overlay").hide();
+                    //          iterator = 0;
+                    //     }
+                    // })  
+                    // $(".left-div").on("click", function(){
+                    //     clearInterval(firstTimeout)
+                    //     // clearInterval(leftTimeout)
+                    //     if(iterator > 0) {
+                    //         iterator--;
+                    //         console.log("I: " +iterator)
+                    //         createNewSlide(iterator, result.stories)
+                    //         $("input[name='iterator']").val(iterator)
+                    //         //restart interval
+                    //         // var leftTimeout = setInterval(function() {  
+                    //         //     if(iterator < result.stories.length-1) {
+                    //         //         iterator++;
+                    //         //         createNewSlide(iterator, result.stories)
+                    //         //         $("input[name='iterator']").val(iterator)
+                    //         //         console.log("left interval fired")
+                    //         //     }
+                    //         // }, 3000);
+                           
+                    //     }
+                    // }) 
                   },
                   500: function (result) {
                     alert("500 " + result.responseJSON.err);
                   },
                 },
-              });
-              
+              }); 
     })
+
     
 })

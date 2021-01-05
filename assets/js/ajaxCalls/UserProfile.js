@@ -6,8 +6,8 @@ function formatCourses(res){
     var myCourses = "";
     for(x in res){
         myCourses += 
-        '<a class="courseLink" href="/course/'+res[x].courseName+'" data-toggle="tooltip" data-placement="top" title="'+res[x].courseName+'">'+
-        '<div class="course-container">'+
+        '<a class="courseLink" href="/course/'+res[x].courseName+'>'+
+        '<div class="course-container" " data-toggle="tooltip" data-placement="bottom" title="'+res[x].courseName+'">'+
             '<h5 class="courseCode1">'+res[x].courseCode+'</h5>'+
             '<span class="badge badge-success profile-student-count">#UNCC</span>'+
         '</div>'+
@@ -210,7 +210,7 @@ $(document).ready(function(){
         $(".charCount").remove();
         $("#changeBio").attr("readonly", true);
         $("#changeBio").css({
-            backgroundColor: "#1d1d1d",
+            backgroundColor: "#18191a",
             minHeight:"100px"
         })
         //reset to old bio
@@ -236,7 +236,7 @@ $(document).ready(function(){
                 $(".charCount").remove();
                 $("#changeBio").attr("readonly", true);
                 $("#changeBio").css({
-                    backgroundColor: "#1d1d1d",
+                    backgroundColor: "#18191a",
                     minHeight:"100px"
                 })
                 $("#changeBio").val(result.bio);
