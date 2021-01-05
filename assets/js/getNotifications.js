@@ -346,7 +346,7 @@ $(document).ready(function(){
             $(".blocker").show();
         }
     })
-    $('.userProfileName ').on("click",function(){
+    $('.userAccount').on("click",function(){
         if($('#showNotifications').css("display") == "none"){
            
             $(".blocker").show();
@@ -609,7 +609,7 @@ $("#showNotifications").on("click",".sawMessage", function(e){
 
 });
 //user menu item is clicked
-$(".userHeader").on("click", function(){
+$(".account").on("click", function(){
      //if menu is displaying notifications, or if it is hidden
     if($("#showNotifications").css("display") == "none" || $("#showNotifications").children().eq(0).text() == "Notifications"){
         $("#showNotifications").show();
@@ -799,7 +799,6 @@ payload = {
 $("#showNotifications").on("focus",".add-tutoring-input", function(){
     $(".tutor-add-autocomplete").show();
     $(".mobileBlocker").show();
-    alert("YO")
 });
 
 // $("#showNotifications").on("focusout",".add-tutoring-input", function(){
