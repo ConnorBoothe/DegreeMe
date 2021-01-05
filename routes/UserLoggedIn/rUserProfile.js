@@ -43,6 +43,7 @@ router.get('/user/:Handle', function (req, res) {
         var qs = req.query;
         
         users.getUserByHandle(req.params.Handle).exec((err, docs) => {
+            console.log("User: " + docs[0])
             if(docs.length > 0 ){
             var followerCount = 0;
             var followingCount = 0;

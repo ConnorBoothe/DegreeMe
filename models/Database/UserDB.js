@@ -496,6 +496,7 @@ module.exports = class User {
             console.log(err)
         })
     }
+    //set the user's bio
     setBio(handle, bio){
         return UserDB.findOne({
                 handle: handle
@@ -503,6 +504,22 @@ module.exports = class User {
                 docs.bio = bio;
                 docs.save();
             });
+    }
+    updateClass(id, classification){
+        return new Promise((resolve, reject)=>{
+            UserDB.findOne({
+                _id: id
+            })
+            .then((user)=>{
+                user.classification = classification;
+                user.save();
+                resolve(classification)
+            })
+            .catch((err)=> {
+                reject(err)
+            })
+        })
+        
     }
     //when user creates seller account, make them a 'tutor'
     becomeTutor(handle){
