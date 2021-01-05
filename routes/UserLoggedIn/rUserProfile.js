@@ -55,7 +55,7 @@ router.get('/user/:Handle', function (req, res) {
                 followingCount++;
             }
             users.isFollowing(req.session.handle, docs[0], null, function (temp, folstat) {
-                res.render('UserLoggedIn/UserProfile', {
+                res.render('UserProfile/UserProfile', {
                     qs: req.query,
                     session: req.session,
                     user: docs[0],
