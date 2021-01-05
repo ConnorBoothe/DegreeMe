@@ -1,0 +1,54 @@
+<div class="ProfileButtons">
+    <!-- Modal -->
+    <div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="profileModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content modal-dark">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="profileModalLabel" style="color: white; text-align:left">Unfollow</h4>
+                </div>
+                <div class="modal-body" style="color: white;">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button id="profileNo" type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                    <button id="profileYes" type="button" class="btn btn-danger">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% var noAtHandle=user.handle.replace('@','')%>
+
+        <% if(session.handle !=user.handle){%>
+            <input name="email" type="hidden" value="<%=user.email%>" />
+            <% if(following){%>
+                <form action="/#" class="followForm" method="post" id="unfollow-form">
+
+                    <input name="followingHandle" type="hidden" value="<%=user.handle%>" />
+
+                    <input name="followingImg" type="hidden" value="<%=user.img%>" />
+
+                    <button id="<%=noAtHandle%>" data-status="unfollow" type="button"
+                        class="btn btn-sm followingButton following-class" data-handle='<%=user.handle%>'>
+                        Following</button>
+                </form>
+
+                <%}else{%>
+                    <form action="/#" class="followForm" method="post" id="follow-form">
+
+                        <input name="followingHandle" type="hidden" value="<%=user.handle%>" />
+
+                        <input name="followingImg" type="hidden" value="<%=user.img%>" />
+
+                        <button id="<%=noAtHandle%>" data-status="follow" type="button"
+                            class="btn btn-primary btn-sm followingButton follow-class">
+                            Follow</button>
+                    </form>
+                    <%}%>
+                        <button type="button" class="btn-primary sendMessage" data-toggle="modal"
+                            data-target="#profileMessageModal">
+                            Message
+                        </button>
+                        <%}%>
+</div>

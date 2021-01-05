@@ -1,0 +1,52 @@
+      <!-- Modal -->
+      <div class="modal fade " id="editBioModal" tabindex="-1" role="dialog" aria-labelledby="commentModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered " role="document">
+          <div class="modal-content color-dark">
+            <div class="modal-header">
+              <h5 class="modal-title text-light" id="exampleModalCenterTitle">Change your major</h5>
+              
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                    <div id="searchBarWrapper">
+                      <div id="searchBar" class="active-cyan-3 active-cyan-4 mb-4">
+                         
+                              <div class="input-container1Light-settings">
+                                  <button class="searchBtn"><svg class="text-light" width="1em" height="1em"
+                                          viewBox="0 0 16 16" class="bi bi-search" fill="currentColor"
+                                          xmlns="http://www.w3.org/2000/svg">
+                                          <path fill-rule="evenodd"
+                                              d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
+                                          <path fill-rule="evenodd"
+                                              d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
+                                      </svg></button>
+                                  <input autocomplete="off" id="searchInput" name="major" class=" input-field text-light "
+                                      placeholder="Search Majors at UNC Charlotte" />
+                              </div>
+                              <div class="major-autocomplete-container">
+                                  <div class="major-autocomplete-settings">
+                                      <p class="searchMajors">Search Majors
+                                      </p>
+                                      <div class='major-results'>
+                                         
+                                      </div>
+                                  </div>
+                              </div>
+                             
+                     
+                      </div>
+                  </div>
+                    
+                  
+            </div>
+            
+            <div class="modal-footer">
+                <div class="newMajor"></div>
+                <input value="Update" type="submit" class="btn btn-primary editMajor createThread"/>
+          
+            </div>
+          </div>
+        </div>
+      </div>
