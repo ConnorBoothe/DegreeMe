@@ -341,13 +341,15 @@ $(".loginBtnSignUp").attr("disabled", true);
         alert(error);
        }
       })
+      
       storageRef.getDownloadURL().then(function(url) {
       payload = {
         url:url,
         groupId: $("input[name='groupId']").val(),
         text: $(".story-text-span").text(),
-        duration : 10
+        duration : $(".story-duration").val()
       }
+      alert(payload.duration)
       $.ajax({
         url: "/addStory",
         type: 'POST',
