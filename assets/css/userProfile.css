@@ -6,11 +6,21 @@
   -ms-transform: translateZ(0);
   transform: translateZ(0);
 }
-.cr-image{
-    
-}
+
 .majorContainer{
 max-width:300px;
+}
+.newMajor{
+    width:70%;
+    position:absolute;
+    left:0;
+    margin-left:15px;
+}
+
+.newMajor h3 {
+   
+    text-align:left;
+    font-size:15px!important;
 }
 .profileMajor{
     left:0!important;
@@ -26,6 +36,9 @@ max-width:300px;
     margin-top:10px;
     display:none;
     width:150px;
+}
+.major-results-settings p{
+    cursor: pointer;
 }
 .majorSpan{
     background-color:#046A38;
@@ -378,7 +391,10 @@ max-width:300px;
 .noTutorSesh{
     text-align:center;
 }
-
+.editMajorSpan {
+    margin-left:10px!important;
+    cursor:pointer;
+}
 .similarStudentsImg{
     width:30px;
     margin-right:10px;
@@ -523,7 +539,7 @@ max-width:300px;
     text-align:center;
  }
  .profile-info{
-    color:white!important;
+    color:white;
     font-size:20px;
     font-family: 'Open Sans', sans-serif;
     width:100%!important;
@@ -705,10 +721,11 @@ button.followingButton{
     margin-bottom:0!important;
     height:100%;
     text-align:center;
-    color:#d4d4d4;
+    color:#a9a9a9;
     position:relative;
    
 }
+
 .profile-ul li{
     font-family: 'Open Sans', sans-serif;
     width:84px!important;
@@ -716,6 +733,7 @@ button.followingButton{
     text-align:center;
     padding-left:5px!important;
     padding-right:5px!important;
+    color:#a9a9a9;
 
     
 }
@@ -730,6 +748,7 @@ button.followingButton{
 .followers-text, .following-text{
     font-size:14px!important;
 }
+
 #changeBio{
     outline:none!important;
     padding:5px;
@@ -883,7 +902,7 @@ button.followingButton{
         font-size:16px;
         text-align:left;
         color:white;
-        background-color:#1d1d1d;
+        background-color:#18191a;
         border:none;
         font-family: 'Open Sans', sans-serif;
         width:450px;
@@ -910,7 +929,7 @@ button.followingButton{
     }
     
     .profileBody{
-        margin-top:80px!important;
+        margin-top:40px!important;
 
     }
     .profile-ul{
@@ -920,7 +939,7 @@ button.followingButton{
         color:#d4d4d4;
         position:relative;
         left:0!important;
-        margin-top:50px;
+        margin-top:10px;
        
     }
     .mobileCount{
@@ -951,7 +970,7 @@ button.followingButton{
         font-size:18px!important;
         text-align:left;
         color:white;
-        background-color:#1d1d1d;
+        background-color:#15191a;
         border:none;
         font-family: 'Helvetica';
         width:100%;
@@ -970,7 +989,7 @@ button.followingButton{
         width:100%;
      }
      .profile-header{
-         background-color:#1d1d1d!important;
+         background-color:#18191a!important;
          padding-left:10%;
          padding-top:80px;
      }
@@ -995,7 +1014,7 @@ button.followingButton{
         text-align:center;
         width:100%!important;
         margin-bottom:0px!important;
-        margin-top:20px!important;
+        margin-top:5px!important;
         
     }
     .join-room-btn {

@@ -468,9 +468,10 @@ header{
     position:absolute;
     right:0;
     top:0;
-    width:300px;
+    width:500px;
+    height:20px;
+    margin-top:10px;
     margin-right:25px;
-    margin-top:5px;
     z-index:2;
 }
 .sideBarSchool{
@@ -495,9 +496,8 @@ header{
 }
 .headerContainer li{
    display:inline-block;
-   padding-right:60px;
+   padding-right:40px;
    color:#d4d4d4!important;
-
 }
 
 .search-all{
@@ -513,9 +513,20 @@ header{
     cursor:pointer;
     height:30px;
     width:20px;
-    position: absolute;
+}
+.search {
+    /* top:0;
+    height:0px;
+    width:120px;
     padding-top:12px;
-    margin-right:30px;
+    margin-right:150px;
+    margin:0; */
+
+}
+.desktop-li {
+}
+.searchImg{
+    width:10px!important;
 }
 .mainSearch{
     top:0;
@@ -523,18 +534,16 @@ header{
     height:90%;
     width:17px;
     position: absolute;
-    margin-top:10px;
-    margin-right:30px;
+    margin-top:5px;
+    margin-right:10px;
     margin-left:15px!important;
 }
 .message{
     font-size:18px!important;
-    position:absolute!important;
     top:0!important;
     color:#d4d4d4;
     padding-top:10px!important;
     cursor:pointer!important;
-    margin-right:30px!important;
     border:none!important;
     
 }
@@ -769,7 +778,7 @@ header{
     position:absolute;
     right:0;
     top:0;
-    margin-top:43px;
+    margin-top:55px;
     margin-right:1%;
     /* margin-top:41px; */
     margin-bottom:0;
@@ -952,9 +961,7 @@ header{
     margin-top:20px!important;
 }
 .userProfileImg{
-    width:25px;
-    padding-top:2px;
-    float:left;
+    width:30px;
     cursor:pointer;
 }
 .userProfileName{
@@ -966,7 +973,6 @@ header{
     padding-left:2px;
     margin-left:30px;
     margin-top:0!important;
-    position:absolute;
     
 }
 .userHeaderWrapper{
@@ -975,11 +981,9 @@ header{
 }
 .userHeader{
     top:0;
-    position:absolute;
     padding-top:12px;
     display:inline-block;
     cursor:pointer;
-    height:50px!important;
 }
 /* Message sent animation */
 @media only screen and (max-width: 1000px) {

@@ -1661,10 +1661,10 @@ input[name="searchType"]{
     }
     .searchTab{
         display:inline-block;
-        font-size:15px;
+        font-size:13px;
         padding-bottom:5px;
-        margin-left:10px;
-        margin-right:10px;
+        margin-left:5px;
+        margin-right:5px;
         cursor:pointer;
         font-family: 'Open Sans', sans-serif!important;
         color:white!important;
@@ -1674,7 +1674,7 @@ input[name="searchType"]{
         margin-left:auto;
         margin-right:auto;
         text-align:center;
-        margin-top:60px;
+        margin-top:40px;
     
     }
     .postDate1{
@@ -2554,9 +2554,9 @@ input[name="searchType"]{
 
     .headerContainer li{
         display:inline-block;
-        margin-right:20px!important;
+        margin-right:10px!important;
         color:#d4d4d4!important;
-        margin-left:20px;
+        margin-left:10px;
         margin-top:0;
         padding-top:0;
         padding-right:0!important;
@@ -2572,7 +2572,7 @@ input[name="searchType"]{
          top:0;
          margin-top:0!important;
          margin-left:5px!important;
-         margin-right:5px!important;
+         margin-right:50px!important;
          border-top-right-radius:20px!important;
          border-top-left-radius:20px!important;
          padding-bottom:120px!important;
