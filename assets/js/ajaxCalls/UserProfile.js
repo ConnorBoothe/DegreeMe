@@ -241,6 +241,7 @@ $(document).ready(function(){
                 })
                 $("#changeBio").val(result.bio);
                 $(".editBio").show();
+                updateProgressBar('#addBio');
               },
               500: function (result) {
                 alert("500 " + result.responseJSON.err);

@@ -116,6 +116,20 @@
                                   
                     <div class="connectionBody-container">   
             <div class="tutorMiddle">
+                <div id="progressInfo">
+                <%if(percentComplete<100){%>
+                    <span class="text-light">How Complete is your Account?</span>
+                    <div class="progress">
+                        <div id="profileProgressBar" class="progress-bar" role="progressbar" style="width:<%=percentComplete%>%;" aria-valuenow="<%=percentComplete%>" aria-valuemin="0" aria-valuemax="100"><%=percentComplete%>%</div>
+                    </div>
+                    <span class="text-light">Things to Complete Your Account:</span>
+                    <ui class="text-light">
+                        <%for(var i = 0; i < toComplete.length; i++){%>
+                            <li id=<%=toComplete[i][1] %>><%=toComplete[i][0]%></li>
+                        <%}%>
+                    </ui>
+                <%}%>
+                </div>
                 <div class="followers-container">
                     <ul class="followers-list">
                         <li class="followers-item"> 
@@ -256,6 +270,7 @@
         <script src="../assets/js/follow-client.js"></script>
         <script type="text/javascript" src="../assets/js/Client-DateFunctions.js"></script>
         <script type="text/javascript" src="../assets/js/ajaxCalls/discoverClassmates_autocomplete.js"></script>
+        <script type="text/javascript" src="../assets/js/UserAccount/updateProgressBar.js"></script>
         <script type="text/javascript" src="../assets/js/UserAccount/updateMajor.js"></script>
         <script type="text/javascript" src="../assets/js/UserAccount/updateClass.js"></script>
 
