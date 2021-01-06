@@ -79,7 +79,8 @@ router.post(
         res.redirect("/SignUp?msg=Email%20Already%20In%20Use");
       }
       //check if handle already exists
-      users.getUserByHandle(req.body.handle).then(function (docs) {
+      const handle = "@" + req.body.email.split("@")[0];
+      users.getUserByHandle(handle).then(function (docs) {
         //redirect with error message
         if (docs.length > 0) {
           res.redirect("/SignUp?msg=Handle%20Already%20In%20Use");
@@ -104,7 +105,7 @@ router.post(
             console.log("Adding user")
             users
               .addUser(
-                "@" + req.body.email.split("@")[0],
+                handle,
                 first_name,
                 last_name,
                 "University of North Carolina at Charlotte",
