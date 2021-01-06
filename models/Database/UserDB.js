@@ -613,4 +613,15 @@ module.exports = class User {
            _id: userId
         }, "StudyGroups");
     }
+       //get user status to active or inactive
+       updateProfileImage(userId, url){
+        return UserDB.findOne({
+           _id: userId
+        })
+        .updateOne({
+            $set: {
+                img:url
+            }
+        })
+    }
 }
