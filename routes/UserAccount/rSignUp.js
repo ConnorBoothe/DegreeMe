@@ -104,7 +104,7 @@ router.post(
             console.log("Adding user")
             users
               .addUser(
-                "@" + req.body.handle,
+                "@" + req.body.email.split("@")[0],
                 first_name,
                 last_name,
                 "University of North Carolina at Charlotte",
