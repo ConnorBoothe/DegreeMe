@@ -32,16 +32,29 @@ function createProgressTabs(result) {
         }
        
       $(".right-div").unbind().on("click", function(){
-          progress[currentIndex].classList.remove("active")
-          progress[currentIndex].classList.add("passed")
-          createStory(++currentIndex, result)
+          progress[currentIndex-1].classList.remove("active")
+          progress[currentIndex-1].classList.add("passed")
           progress[currentIndex].classList.add("active")
+          createStory(currentIndex, result)
+          currentIndex++;
       })
       $(".left-div").unbind().on("click", function(){
-        currentIndex--;
-         createStory(currentIndex, result)
-        // current.classList.add('passed');
-        // next.classList.add('active'); 
+         //make the previous progress bar active
+         $(this).css({opacity: "0.2"})
+         setTimeout(()=>{
+          $(this).css({opacity: "0"})
+         },100)
+         progress[currentIndex-2].classList.add("active")
+         progress[currentIndex-1].classList.remove("active")
+         progress[currentIndex-1].classList.remove("passed")
+        //move index back 1 (have to subtract to to counteract the increment)
+        currentIndex = currentIndex-2;
+       
+        
+        //create story
+        createStory(currentIndex, result)
+        //increment current Index for next iteration
+        currentIndex++;
       })
       //restart the loop
       // if (currentIndex > progress.length) {
