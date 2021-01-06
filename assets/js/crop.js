@@ -211,6 +211,7 @@ $(".loginBtnSignUp").attr("disabled", true);
                   setTimeout(function(){
                     $(".profile-uploading-image").fadeOut();
                   },1000)
+                  updateProgressBar('#addImg');
                 }).catch(function(error) {
                   // Handle any errors
                 });

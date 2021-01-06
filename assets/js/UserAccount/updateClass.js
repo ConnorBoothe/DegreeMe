@@ -13,7 +13,7 @@ $(document).ready(()=>{
                   202: function (result) {
                     $(".classSpan").text(result.class);
                     $(".modal").modal("hide");
-                    
+                    updateProgressBar('#addStanding');
                   },
                   500: function (result) {
                     alert("500 " + result.responseJSON.err);

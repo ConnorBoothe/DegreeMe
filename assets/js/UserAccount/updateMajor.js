@@ -23,8 +23,8 @@ $(document).ready(()=> {
                   202: function (result) {
                     $(".majorSpan").text(result.major);
                     $(".modal").modal("hide");
-                    $(".newMajor").html("")
-                    
+                    $(".newMajor").html("");
+                    updateProgressBar('#addMajor');
                   },
                   500: function (result) {
                     alert("500 " + result.responseJSON.err);
