@@ -3068,26 +3068,7 @@ display:inline-block!important      }
   .input-container-main::placeholder{
       color:white;
   }
-  .input-container-main{
-    display: -ms-flexbox; /* IE10 */
-    display: flex;
-    width: 200px;
-    background-color:#242526!important;
-    border-collapse: separate; 
-    border-radius:10px;
-    font-size:16px!important;
-    padding-bottom:none!important;
-    height:30px;
-    margin-top:0!important;
-    background-color:none;
-    color:white!important;
-    margin-bottom:10px;
-    margin-top:8px;
-    position:relative;
-    z-index:3;
-    top:0;
-    
-  }
+
   .input-container2 {
        
     display:block;

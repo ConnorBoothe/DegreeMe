@@ -61,9 +61,7 @@ input:-webkit-autofill:active {
     display:none;
 
 }
-.input-container-main {
-    margin-left: 500px;
-}
+
 .msgSender {
     font-size: 16px !important;
     text-align: left;
@@ -95,13 +93,14 @@ input:-webkit-autofill:active {
     text-align: right;
 }
 .headerContainer{
+    position:absolute;
     right:0;
     top:0;
-    width:215px!important;
-    margin-right:0px!important;
-    margin-top:5px;
+    width:500px!important;
+    height:20px;
+    margin-top:5px!important;
+    margin-right:5px;
     z-index:2;
-    
 }
 #pageTitle {
     padding-top:2px!important;
@@ -619,9 +618,6 @@ input:-webkit-autofill:active {
     }
 .yt-thumbnail {
     width:200px;
-}
-.headerContainer{
-    margin-top:0!important;
 }
     .membersRightSideBar {
         position: fixed;
