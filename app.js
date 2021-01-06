@@ -124,6 +124,7 @@ app.use([
   require('./routes/UserLoggedIn/rMeetupProfile.js'),
   require('./routes/UserAccount/rAddCourse.js'),
   require('./routes/UserAccount/updateClass.js'),
+  require('./routes/UserAccount/updateImg'),
   require('./routes/UserLoggedIn/rComments.js'),
   require('./routes/UserLoggedIn/rAdmin.js'),
   require('./routes/UserLoggedIn/rAskQuestion.js'),
