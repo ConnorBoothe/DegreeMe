@@ -1,5 +1,5 @@
 var timeoutID;
-var tenMinutes = 5000;
+var timeInterval = 5000;
 var active = true;
 function setup() {
     this.addEventListener("mousemove", resetTimer, false);
@@ -14,11 +14,13 @@ function setup() {
 setup();
  
 function startTimer() {
-    // wait 10 min before calling goInactive
-    timeoutID = window.setTimeout(goInactive, tenMinutes);
+    //set timeout for 5 minutes. After 5 minutes of inactivity, call 
+    //goInactive function
+    timeoutID = window.setTimeout(goInactive, timeInterval);
 }
  
 function resetTimer(e) {
+    //clear the timeout and set user status to active
     window.clearTimeout(timeoutID);
     // if inactive, set to active
     if(!active){
@@ -27,7 +29,6 @@ function resetTimer(e) {
 }
  
 function goInactive() {
-     active = false;
       payload = {
         status: false
     }
@@ -50,7 +51,6 @@ function goInactive() {
  
 function goActive() {
     // do something
-    active = true;
     payload = {
         status: true
     }
