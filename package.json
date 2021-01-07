@@ -4,7 +4,7 @@
   "scripts": {
     "start": "node app.js",
     "devStart": "nodemon app.js",
-    "runPeer": "peerjs --port 3001"
+    "runPeer": "peerjs --port 443"
   },
   "dependencies": {
     "@firebase/app": "^0.6.11",
@@ -29,6 +29,7 @@
     "firebase": "^8.2.1",
     "helmet": "^4.2.0",
     "helmet-csp": "^3.2.0",
+    "https": "^1.0.0",
     "imagemin": "^7.0.1",
     "imagemin-jpegtran": "^7.0.0",
     "imagemin-pngquant": "^9.0.1",

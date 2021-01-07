@@ -19,16 +19,21 @@
 	</script>
 	<script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
 	<script src="../socket.io/socket.io.js" defer></script>
+	<script src="../assets/js/lifeCycle/lifeCycle.es5.js" defer></script>
 	<script src="../assets/js/Video/zoomClone.js" defer></script>
         <body class="color-dark">
             <div class="homeWrap">
                 <div class="page-container">
 			<%- include ('../partials/horizontalHeader.ejs')%>
 			<%- include ('../partials/VideoChatBox.ejs')%>
-			<input type="hidden" id="userHandle" name="handle" value="<%=session.handle%>"/>
-			<input type="hidden" id="userId" name="userId" value="<%=session.userId%>"/>
-			<input type="hidden" id="host"name="host" value="<%=stream.host%>"/>
-			<input type="hidden" name="stream" value="<%=stream._id%>"/>
+			<input type="hidden" id="userHandle" name="handle" value="<%= session.handle %>"/>
+			<input type="hidden" id="userId" name="userId" value="<%= session.userId %>"/>
+			<input type="hidden" id="inStream" name="inStream" value="<%= inStream %>"/>
+			<input type="hidden" id="host"name="host" value="<%= stream.host %>"/>
+			<input type="hidden" id="hostId"name="hostId" value="<%= stream.hostId %>"/>
+			<input type="hidden" name="stream" value="<%= stream._id %>"/>
+			<button class="btn-secondary" id="shareScreen">Share Screen</button>
+			<button class="btn-secondary" id="stopSharing">Stop Sharing</button>
 			<div class="video-container">
 				<div class="video-sub-container">
 					<div class="live-container">
@@ -72,10 +77,21 @@
 				
 				</div>
 		</div>
+		<div class="videoContainerWrap">
 		<div class="below-video-frame" id="videoDiv">
 			
 			
 		</div>
+		<div class="below-video-frame"id="videoDivMember">
+			
+			<table id="memberGrid">
+				<tr id="row1"></tr>
+				<tr id="row2"></tr>
+			</table>
+			
+			
+		</div>
+	</div>
 		</div>
 				
 		</div>
@@ -83,9 +99,9 @@
 	</div>
 	
     
+	
 	<!-- <video playsinline autoplay muted></video> -->
     <script src="../assets/jquery/jquery.session/jquery.session.js"></script>
-    <script type="text/javascript" src="../assets/js/displayMyCourses.js"></script>
     <!-- <script src="../assets/js/getNotifications.js"></script> -->
     <script src="../assets/js/popper.min.js"></script>
     <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
@@ -94,9 +110,7 @@
     <script src="../assets/jquery/jquery.session/jquery.session.js"></script>
     <script type="text/javascript" src="../assets/js/Client-DateFunctions.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
-	<!-- <script src="../assets/js/Video/watch.js"></script>
-	<script src="../assets/js/Video/broadcast.js"></script>-->
-	<script src="../assets/js/Video/chat.js"></script> 
+
 
     </body>
 </html>

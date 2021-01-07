@@ -2,6 +2,8 @@ require('dotenv').config();
 const express = require('express');
 const helmet = require("helmet");
 const csp = require("helmet-csp");
+const https = require('https');
+const fs = require('fs');
 const mongoose = require("mongoose");
 mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true,useUnifiedTopology: true },function(err){
 
@@ -9,6 +11,11 @@ mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true,useUnifiedTopolo
 const session = require('express-session'); //used to manipulate the session
 var MongoStore = require('connect-mongo')(session);
 var app = module.exports = express(); 
+const options = {
+  key: fs.readFileSync('key.pem'),
+  cert: fs.readFileSync('cert.pem')
+};
+
 //set cookie to secure to true for production
 app.use(session({
   store: new MongoStore({
@@ -20,6 +27,14 @@ app.use(session({
     cookie: { secure: false,
         maxAge:  6*60*60*1000 },
   }));
+//middleware to make userId available in all templates
+/*
+app.use(function(req, res, next) {
+  res.locals.userId = req.session.userId;
+  res.locals.handle = req.session.handle;
+  next();
+});
+*/
 app.set('trust proxy', 1) // trust first proxy
 //classes used
 const StreamDB = require('./models/Database/StreamDB');
@@ -151,7 +166,8 @@ app.get('*', function(req, res) {
         res.redirect('/');
     }
 });
-let server = app.listen(3000);
+
+let server = https.createServer(options, app).listen(3000);
 const io = require('socket.io')(server);
 var members = [];
 let broadcaster;
@@ -160,10 +176,13 @@ io.sockets.on('connection', function (socket) {
   console.log("Server socket connected")
   // //join video chat room
   socket.on('join-room', function (roomId, peerId, userHandle, userId) {
+
+    socket.to(roomId).emit('user-joined',peerId);
     //join the room
     socket.join(roomId);
     //send message to everyone in room, but don't send back to me
-    socket.to(roomId).broadcast.emit("user-connected", peerId, userHandle);
+    socket.to(roomId).broadcast.emit("user-connected", peerId);
+  
       stream.addMember(roomId, userId)
       .then(function(userId){
         // console.log("added userId: " + userId._id);

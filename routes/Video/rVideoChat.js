@@ -9,46 +9,76 @@ router.use(session({
     resave: true,
     saveUninitialized: true
 }));
-
-
+let caller = [];
+let isHostIn=false;
 router.get('/room/:id', function(req, res){
-    if(false){
-        res.redirect("/home")
-        console.log(req.session.inStream)
-        
-    }
-    else {
-        req.session.inStream = req.params.id;
-        console.log(req.session.inStream)
-        
-  
+let isInStream=false;  
     stream.getStreamById(req.params.id)
     .then(function(stream){
+        
         //check if user is already in room
-        // var inStream = false;
-        // var count = 0;
-        // for(var i = 0; i < stream.members.length; i++){
-        //     if(stream.members[i].userId == req.session.userId){
-        //         inStream = true;
-        //         count++;
-        //     }
-        // }
-        // if(inStream){
-        //         //render 'already joined'
-        //         res.redirect("/home");
-           
-        // }
-        // else{
+        stream.members.forEach(member => {
+            if(member.userId===stream.hostId){
+                isHostIn=true;
+            }
+        });
+        let count = stream.members.length;
             //render chat room
-            res.render('UserLoggedIn/Video/Viewer',{session:req.session, params: req.params, stream: stream});
-
+           
+            if(isHostIn||req.session.userId===stream.hostId){
+                console.log("this is the instream "+req.session.isInStream);
+                if(req.session.isInStream){
+                    isInStream=true;
+                }
+                else{
+                    req.session.isInStream = true;
+                }
+                if(count<5){
+            res.render('UserLoggedIn/Video/Viewer',{session:req.session, params: req.params, stream: stream, inStream:isInStream});
+        }
+        else{
+            res.redirect("/home");
+        }
+        }
+        else{
+            res.render('UserLoggedIn/Video/StandBy',{session:req.session, params: req.params, stream: stream, inStream:isInStream});
+        }
         // }
     })
     .catch(function(err){
-        // console.log(err)
+         console.log(err)
     })
-}
+
 });
+router.post("/videochat/updatehoststatus/", function(req, res){
+    isHostIn=true;
+    res.status(202).json({
+        messages: "host is in"
+    }).end();
+})
+router.get("/videochat/gethoststatus/", function(req, res){
+    
+    res.status(202).json({
+        isHostIn: isHostIn
+    }).end();
+})
+router.post("/videochat/postCallerHandle/:handle", function(req, res){
+caller.push(req.params.handle);
+res.status(202).json({
+    message: "handle received"+caller
+}).end();
+})
+
+router.get("/videochat/getCallerHandle/", function(req, res){
+    let response;
+    if(caller!=[]){
+        response = caller[caller.length - 1];
+    }
+    caller.pop();
+    res.status(202).json({
+        caller: response
+    }).end();
+})
 
 router.post("/videoChat", function(req, res){
     stream.getChatByStream(req.body.streamId)
@@ -59,9 +89,34 @@ router.post("/videoChat", function(req, res){
         }).end();
     })
 })
-router.post("/leaveStream", function(req, res){
-   console.log("leave stream")
+router.get("/videoChatMembers", function(req, res){
+    
+        res.status(202).json({
+            messages: stream.members
+        }).end();
+  
 })
+router.post("/videochat/leaveStream/:roomID/:userId", function(req, res){
+   req.session.isInStream = false;
+   console.log("formdata : "+req.params.roomID+"  "+req.params.userId);
+   stream.leaveStream(req.params.roomID,req.params.userId).then((result)=>{
+    res.send({message: "user left room"});
+    console.log("user left the stream")
+   }).catch((err)=>{
+    console.log(err)
+})
+
+})
+router.post("/leaveStream/:id", function(req, res){
+    stream.clearAllMembers(req.params.id).then((result)=>{
+        res.status(202).json({
+            message: "cleared all members"
+        }).end();
+    }).catch((err)=>{
+        console.log(err)
+    })
+ })
+
 router.post("/toggleChat", function(req, res){
         req.session.showChat = req.body.showChat;
         res.status(202).json({

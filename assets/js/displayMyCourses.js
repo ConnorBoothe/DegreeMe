@@ -95,13 +95,8 @@ $(document).ready(function(){
     $(".terms").on("click", function(){
         $(".termsMsg").css("color","white");
     })
-     $.ajax({
-            url: '/API/MyCourses' ,
-            method: 'GET',
-            error:function(err,str){
-               
-            }
-            }).done(function(res) {
+     $.getJSON("/API/MyCourses",function(res) {
+                console.log(res);
                 var courses = "";
         if(res.length == 0){    
             $(".course-wrapper").show();

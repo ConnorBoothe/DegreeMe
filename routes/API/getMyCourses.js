@@ -8,12 +8,13 @@ var UserDB = require('../../models/Database/UserDB');
 var users = new UserDB();
 //send list of my courses
 router.get('/API/MyCourses', function(req, res){
-    if(req.session.email){
-        users.getUserByEmail(req.session.email).exec((err,docs)=>{
+    if(req.session.userId){
+        console.log(req.session.userId)
+        users.getUserById(req.session.userId).exec((err,user)=>{
             if(err){
-                res.json("An error occurred.")
+                console.log(err);
             }
-            res.json(docs[0].myCourses);
+            res.json(user.myCourses);
         });
     }
     else{

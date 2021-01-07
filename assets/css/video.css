@@ -283,8 +283,15 @@ text-align:center;
     outline:none;
 }
 .hostVid {
-    width:400px;
-    margin-right:10px;
+    width:350px;
+    margin-top: 23px;
+    margin-left:3px;
+    outline:none;
+}
+.hostVidSpec {
+    width:250px;
+    margin-top: 23px;
+    margin-left:3px;
     outline:none;
 }
 .chat-members-container {
@@ -316,9 +323,7 @@ text-align:center;
     padding-top:7px;
     padding-bottom:7px;
 }
-.member-div {
-    
-}
+
 .member-div p {
    
     display:none;
@@ -344,4 +349,34 @@ text-align:center;
     margin-left:auto;
     margin-right:auto;
     margin-top:10px;
+}
+.videoContainerWrap{
+    position: relative;
+    padding-bottom: 30%;
+    margin-left: 10px;
+}
+#videoDivMember{
+    position: absolute;
+    left: 25%;
+    float: left;
+}
+#videoDiv{
+    position: absolute;
+    background-image: linear-gradient(to bottom right, #2196f3, #6C63FF);
+    width: 270px;
+    height: 300px;
+    margin-left: 10px;
+
+}
+#shareScreen{
+    z-index: 1000000000;
+    margin-left: 20%;
+    margin-top: 5%;
+    border-radius: 10px 10px;
+}
+#stopSharing{
+    z-index: 1000000000;
+    margin-left: 20%;
+    margin-top: 5%;
+    border-radius: 10px 10px;
 }

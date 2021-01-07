@@ -76,12 +76,12 @@ module.exports = class Stream {
     })
     }
     //remove member from the stream
-    removeMember(id, handle){
+    removeMember(id, userId){
         return new Promise(function(req, res){
             streamDB.findOne({_id: id})
             .then(function(data){
                 for(var i = 0; i < data.members.length; i++) {
-                    if(data.members[i] == handle) {
+                    if(data.members[i] == userId) {
                         data.members.pull(members[i]);
                         data.save();
                     }

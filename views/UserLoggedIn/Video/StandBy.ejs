@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+    <head>
+        <title> Room | degreeMe </title>
+        <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="../assets/img/favicon.png" type="image/png" />
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="../assets/css/bootstrap.min.css">       
+         <link href="../assets/css/main1.css" rel="stylesheet">
+        <link href="../assets/css/home.css" rel="stylesheet">
+        <link href="../assets/css/CourseProfile.css" rel="stylesheet">
+        <link href="../assets/css/video.css" rel="stylesheet">
+		<script src="../assets/jquery/dist/jquery.js"></script>
+		
+
+	</head>
+	<script>
+		const roomID = "<%=params.id%>";
+	</script>
+	<script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
+	<script src="../socket.io/socket.io.js" defer></script>
+	<script src="../assets/js/Video/zoomStandBy.js" defer></script>
+        <body class="color-dark">
+            <div class="homeWrap">
+                <div class="page-container">
+			<%- include ('../partials/horizontalHeader.ejs')%>
+			<%- include ('../partials/VideoChatBox.ejs')%>
+			<input type="hidden" id="userHandle" name="handle" value="<%= session.handle %>"/>
+			<input type="hidden" id="userId" name="userId" value="<%= session.userId %>"/>
+			<input type="hidden" id="host"name="host" value="<%= stream.host %>"/>
+			<input type="hidden" id="hostId"name="hostId" value="<%= stream.hostId %>"/>
+			<input type="hidden" name="stream" value="<%= stream._id %>"/>
+			<div class="video-container">
+				
+		</div>
+		<h3>waiting for host to join the Stream</h3>
+		</div>
+        </div>   
+	
+	
+    
+	
+	<!-- <video playsinline autoplay muted></video> -->
+    <script src="../assets/jquery/jquery.session/jquery.session.js"></script>
+    <script type="text/javascript" src="../assets/js/displayMyCourses.js"></script>
+    <!-- <script src="../assets/js/getNotifications.js"></script> -->
+    <script src="../assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../assets/js/SiteWideSearch.js"></script>
+    <script type="text/javascript" src="../assets/js/highlightCurrentMenuItem.js"></script>
+    <script src="../assets/jquery/jquery.session/jquery.session.js"></script>
+    <script type="text/javascript" src="../assets/js/Client-DateFunctions.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+	<!-- <script src="../assets/js/Video/watch.js"></script>
+	<script src="../assets/js/Video/broadcast.js"></script>-->
+	<script src="../assets/js/Video/chat.js"></script> 
+
+    </body>
+</html>
