@@ -70,7 +70,7 @@ var userDBSchema = new Schema({
     //account status
     status:{type:String, required:true},  
     //user status
-    active: {type:String, required:true},
+    active: {type:Date, required:true},
     activationCode:{type:String, required:true},  
     // subscription:{type:String, required:true},
     Major: {type:String},
@@ -590,7 +590,8 @@ module.exports = class User {
     }
      //update a user's major
      updateMajor(id, major){
-        return UserDB.findOne({_id: id}).updateOne({$set:{Major: major}})
+        return UserDB.findOne({_id: id})
+        .updateOne({$set:{Major: major}})
     }
     //set user status to active or inactive
     setUserStatus(id, status){
