@@ -1,5 +1,5 @@
 var timeoutID;
-var timeInterval = 5000;
+var timeInterval = 5000 *60;
 var active = true;
 function setup() {
     this.addEventListener("mousemove", resetTimer, false);
