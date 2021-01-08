@@ -16,9 +16,7 @@ function resetTimer(e) {
 }
  
 function pingServer() {
-      payload = {
-        ActiveTimestamp: Date.now()
-    }
+      payload = {    }
     $.ajax({
         url: "/setActiveTimestamp",
         type: 'POST',
