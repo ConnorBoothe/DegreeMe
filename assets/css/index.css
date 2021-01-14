@@ -134,7 +134,7 @@
 .page-container {
   width: 100% !important;
 
-  min-height: 130vh;
+
   background-size: 1980px;
   margin-bottom: 0;
 }
@@ -202,7 +202,7 @@
   } */
 
 .signup-container {
-  height: 100vh;
+  min-height:100%;
 }
 
 /** For mobile view **/
@@ -350,6 +350,9 @@
   }
   .signup-container {
     padding: 0 !important;
+    padding-top: 120px !important;
+    margin-bottom: 0!important;
+    padding-bottom: 30vh !important;
   }
   .input-field2 {
     width: 100% !important;

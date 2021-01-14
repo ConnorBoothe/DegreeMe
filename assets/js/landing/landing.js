@@ -88,29 +88,7 @@ sectionObserver.observe(document.getElementById("landing--section2"));
 sectionObserver.observe(document.getElementById("landing--section3"));
 sectionObserver.observe(document.getElementById("landing--section4"));
 
-let menuOpen = false;
-let navbarElement = document.getElementById("navbar--hamburger");
-let navbarMobile = document.getElementById("navbar--mobile");
 
-navbarElement.onclick = () => {
-  if (menuOpen) {
-    navbarMobile.classList.remove("navbar--mobile--open");
-    navbarMobile.classList.add("navbar--mobile--close");
-    menuOpen = false;
-  } else {
-    navbarMobile.classList.remove("navbar--mobile--close");
-    navbarMobile.classList.add("navbar--mobile--open");
-    menuOpen = true;
-  }
-
-  console.log(menuOpen);
-};
-
-navbarMobile.onclick = () => {
-  navbarMobile.classList.remove("navbar--mobile--open");
-  navbarMobile.classList.add("navbar--mobile--close");
-  menuOpen = false;
-};
 
 // function openMenu(open) {
 //   if (open) {
