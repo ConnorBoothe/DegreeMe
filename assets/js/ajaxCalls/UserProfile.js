@@ -105,7 +105,7 @@ function populateTutors(data){
           "</div>"+
              "</div>"+
          "<div class='infoItem text-light'>"+  
-         "<a type='submit' class='btn btn-primary text-light join-room-btn'"+
+         "<a class='btn btn-primary text-light join-room-btn'"+
          "name=''"+
          "href='/room/"+data[x].streamId+"'>Join Room"+
          "</a></div>"+
@@ -356,5 +356,11 @@ $(document).ready(function(){
             },
           });
     });
+    $(document).on("click",".join-room-btn", function(e){
+      e.preventDefault();
+      var url = $(this).attr('href');
+      window.open(url, "stream", "location=no,toolbar=no,scrollbars=no,menubar=no,status=no,directories=no,resizable=yes,width=800,height=600,top=4,left=6").focus();
+      return false;
+    })
 })
 

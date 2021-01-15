@@ -10,9 +10,15 @@ router.use(session({
     saveUninitialized: true
 }));
 let caller = [];
-let isHostIn=false;
+let isHostIn;
 router.get('/room/:id', function(req, res){
+let referer = req.headers.referrer || req.headers.referer;
+if(referer===undefined){
+    res.redirect("/home");
+    return;
+}
 let isInStream=false;  
+console.log("this is the req.params.id "+req.params.id);
     stream.getStreamById(req.params.id)
     .then(function(stream){
         
@@ -22,6 +28,10 @@ let isInStream=false;
                 isHostIn=true;
             }
         });
+        if(req.session.userId===stream.hostId){
+            isHostIn=true;
+        }
+
         let count = stream.members.length;
             //render chat room
            
@@ -32,6 +42,7 @@ let isInStream=false;
                 }
                 else{
                     req.session.isInStream = true;
+                    req.session.previousStream = stream.id;
                 }
                 if(count<5){
             res.render('UserLoggedIn/Video/Viewer',{session:req.session, params: req.params, stream: stream, inStream:isInStream});
@@ -64,6 +75,7 @@ router.get("/videochat/gethoststatus/", function(req, res){
 })
 router.post("/videochat/postCallerHandle/:handle", function(req, res){
 caller.push(req.params.handle);
+console.log("this is the caller on post: "+caller)
 res.status(202).json({
     message: "handle received"+caller
 }).end();
@@ -75,6 +87,7 @@ router.get("/videochat/getCallerHandle/", function(req, res){
         response = caller[caller.length - 1];
     }
     caller.pop();
+    console.log("this is the caller on get: "+caller)
     res.status(202).json({
         caller: response
     }).end();
@@ -98,7 +111,21 @@ router.get("/videoChatMembers", function(req, res){
 })
 router.post("/videochat/leaveStream/:roomID/:userId", function(req, res){
    req.session.isInStream = false;
+   var streamHostId;
+   
    console.log("formdata : "+req.params.roomID+"  "+req.params.userId);
+   stream.getStreamById(req.params.roomID)
+   .then(function(stream){
+    streamHostId = stream.hostId;
+    if(req.params.userId=== streamHostId){
+        isHostIn = false;
+        console.log("host is out")
+    }
+
+   }).catch((err)=>{
+       console.log(err)
+   })
+
    stream.leaveStream(req.params.roomID,req.params.userId).then((result)=>{
     res.send({message: "user left room"});
     console.log("user left the stream")

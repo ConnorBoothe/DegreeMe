@@ -1,3 +1,5 @@
+
+$(document).ready(function(){
 function getChat(){
   payload = {
     streamId: $("input[name='streamId']").val()
@@ -41,7 +43,7 @@ function toggleChat(chatStatus){
     
     
 }
-$(document).ready(function(){
+
   $("#videoDiv").on("mouseover","video", function(){
     
     $(this).prev().fadeIn();

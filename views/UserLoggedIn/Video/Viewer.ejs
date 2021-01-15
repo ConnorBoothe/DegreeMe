@@ -9,7 +9,7 @@
          <link href="../assets/css/main1.css" rel="stylesheet">
         <link href="../assets/css/home.css" rel="stylesheet">
         <link href="../assets/css/CourseProfile.css" rel="stylesheet">
-        <link href="../assets/css/video.css" rel="stylesheet">
+		<link href="../assets/css/video.css" rel="stylesheet">
 		<script src="../assets/jquery/dist/jquery.js"></script>
 		
 
@@ -21,81 +21,66 @@
 	<script src="../socket.io/socket.io.js" defer></script>
 	<script src="../assets/js/lifeCycle/lifeCycle.es5.js" defer></script>
 	<script src="../assets/js/Video/zoomClone.js" defer></script>
+	<script src="../assets/js/Video/chat.js" defer></script> 
         <body class="color-dark">
+			<style>
+				#video-grid{
+				   display: flex;
+				   justify-content: center;
+				   flex-wrap: wrap;
+				}
+				video{
+				   height: 300px;
+				   width: 400px;
+				   object-fit: cover;
+				   padding: 8px;
+				}
+			 </style>
             <div class="homeWrap">
                 <div class="page-container">
-			<%- include ('../partials/horizontalHeader.ejs')%>
-			<%- include ('../partials/VideoChatBox.ejs')%>
+			<%- include ('../partials/VideoChatBox.ejs')%> 
 			<input type="hidden" id="userHandle" name="handle" value="<%= session.handle %>"/>
 			<input type="hidden" id="userId" name="userId" value="<%= session.userId %>"/>
+			<input type="hidden" id="previousStream" name="previousStream" value="<%= session.previousStream %>"/>
 			<input type="hidden" id="inStream" name="inStream" value="<%= inStream %>"/>
 			<input type="hidden" id="host"name="host" value="<%= stream.host %>"/>
 			<input type="hidden" id="hostId"name="hostId" value="<%= stream.hostId %>"/>
 			<input type="hidden" name="stream" value="<%= stream._id %>"/>
-			<button class="btn-secondary" id="shareScreen">Share Screen</button>
-			<button class="btn-secondary" id="stopSharing">Stop Sharing</button>
-			<div class="video-container">
-				<div class="video-sub-container">
-					<div class="live-container">
-						<div class="badge badge-danger live-badge ">LIVE</div>
-					</div>
-					<!-- <video controls width="" playsinline autoplay muted class="video-frame"></video> -->
-			
-			
-			<div class="video-actions-list">
-		
-			
-			<div id="full-screen">
-				<ul>
-					<li>
-						<p class="text-light showControls">
-							
-						<svg width="1.25em" height="1.25em" viewBox="0 0 16 16" class="bi bi-gear-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-							<path fill-rule="evenodd" d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 0 0-5.86 2.929 2.929 0 0 0 0 5.858z"/>
-						  </svg>
+			<div class="main">
+				<div class="main__left">
+				   <div class="main__videos">
+					  <div id="video-grid">
+				
+					  </div>
+				   </div>
+				   <div class="main__controls">
+					  <div class="main__controls__block">
+						 <div class="main__controls__button main__mute_button">
+							<i class="fas fa-microphone"></i>
+							<span>Mute</span>
+						 </div>
+						 <div class="main__controls__button main__video_button" >
+							<i class="fas fa-video"></i>
+							<span>Stop Video</span>
+						 </div>
+					  </div>
+					  
+					  <div class="main__controls__block">
+						 <div class="main__controls__button">
+							<span id="leaveStream" class="leave_meeting">Leave Stream</span>
+						 </div>
+						 <div class="main__controls__button">
+							<span id="shareScreen" class="shareScreen">Share Screen</span>
+							<span style="display: none;" id="stopSharing" class="stopSharing">Stop Sharing</span>
+						 </div>
 					
-						</p>
-						<div class="controls">
-							<p class="text-light controls-text">Audio Source</p>
-							<section class="select">
-								<select id="audioSource"></select>
-							  </section>
-							  <p class="text-light controls-text">Video Source</p>
-							  <section class="select">
-								<select id="videoSource"></select>
-							  </section>
-						</div>
-					</li>
-					<li>
-						<p class="text-light fullScreen">
-							<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-fullscreen" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-								<path fill-rule="evenodd" d="M1.5 1a.5.5 0 0 0-.5.5v4a.5.5 0 0 1-1 0v-4A1.5 1.5 0 0 1 1.5 0h4a.5.5 0 0 1 0 1h-4zM10 .5a.5.5 0 0 1 .5-.5h4A1.5 1.5 0 0 1 16 1.5v4a.5.5 0 0 1-1 0v-4a.5.5 0 0 0-.5-.5h-4a.5.5 0 0 1-.5-.5zM.5 10a.5.5 0 0 1 .5.5v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 1 0 1h-4A1.5 1.5 0 0 1 0 14.5v-4a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v4a1.5 1.5 0 0 1-1.5 1.5h-4a.5.5 0 0 1 0-1h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 1 .5-.5z"/>
-							  </svg>
-						</p>
-					</li>
-				</ul>
-				
+							
+					  </div>
+				   </div>
 				</div>
-		</div>
-		<div class="videoContainerWrap">
-		<div class="below-video-frame" id="videoDiv">
-			
-			
-		</div>
-		<div class="below-video-frame"id="videoDivMember">
-			
-			<table id="memberGrid">
-				<tr id="row1"></tr>
-				<tr id="row2"></tr>
-			</table>
-			
-			
-		</div>
-	</div>
-		</div>
 				
-		</div>
-        </div>   
+			 </div>
+		</div>   
 	</div>
 	
     

@@ -11,7 +11,6 @@ const myPeer = new Peer(undefined,{
     host: "0.peerjs.com"
 })
 let isHostIn = false;
-
 //Our custom function.
 function send(){
     $.ajax({

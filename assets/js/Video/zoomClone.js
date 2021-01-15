@@ -1,20 +1,77 @@
+$(document).ready(function(){
+
 const socket = io('/');
 const videoDiv = document.getElementById('videoDiv');
 const videoDivMember = document.getElementById('videoDivMember');
+const videoGrid = document.getElementById('video-grid')
+const gallery = document.getElementById('gallery');
 var userHandle = document.getElementById("userHandle").value;
 var host = document.getElementById("host").value;
 var hostId = document.getElementById("hostId").value;
 var userId = document.getElementById("userId").value;
 var inStream = document.getElementById("inStream").value;
+var previousStream = document.getElementById("previousStream").value;
+window.onbeforeunload = function() {
+  return "message"; // Probably won't be shown because custom messages have been dropped in all major browsers
+};
+function keepAlive(){
+    $.ajax({
+        type: "get",
+        url: "/videochat/gethoststatus/",
+        success:function(data)
+        {
+            var isHostIn = data.isHostIn;
+            //console.log the response
+            console.log(data);
+            if(!isHostIn){
+              $.ajax({
+                url:"/videochat/leaveStream/"+roomID+"/"+userId,
+                type:"POST",
+                async: false,
+                success:function(data){
+                  window.onbeforeunload = null;
+                    location.reload();
+                    $(window).off('beforeunload');
+                },
+                error: function(error){
+                    console.log(error)
+                }
+            })
+                
+            }
+            //Send another request in 10 seconds.
+            setTimeout(function(){
+                keepAlive();
+            }, 10000);
+        }
+    });
+    
+}
 
 //checking if the user is in a stream
 if(inStream==="true"){
     console.log(inStream);
-    alert("you are already in a stream you have to exit that stream before you can get into this one");
+   if(confirm("you are already in a stream do you want to enter this one anyway?")){
+    $.ajax({
+        url:"/videochat/leaveStream/"+previousStream+"/"+userId,
+        type:"POST",
+        async: false,
+        success:function(data){
+            if(data.message==="user left room")
+            location.reload();
+        },
+        error: function(error){
+            console.log(error)
+        }
+    })
+
+   }else{
     window.location.replace("/home");
-    
+}
   
 }
+else{
+
 
 //connect to the peerjs server
 const myPeer = new Peer(undefined,{
@@ -23,19 +80,23 @@ const myPeer = new Peer(undefined,{
 })
 console.log(" ::"+hostId)
 let myStream;
+let myScreenShareStream;
 const myVideo = document.createElement('video');
-//myVideo.muted = true;
+myVideo.muted = true;
 //myVideo.audio = false;
-//myVideo.controls = true;
+myVideo.controls = false;
+myVideo.autoplay = true;
 //this isnt
  //myVideo.play();
 const peers = {};
 let users = [];
 let peerList = [];
 //get user video/audio
-var getUserMedia = navigator.mediaDevices.getUserMedia({video:true,audio:true});
+var getUserMedia = navigator.mediaDevices.getUserMedia({video:true,audio:{echoCancellation:true,
+    noiseSuppression:true}});
 
     if(userHandle===host){
+        
     getUserMedia.then(function(stream){
         addVideoStreamHost(myVideo, stream);
         myStream = stream;
@@ -55,7 +116,7 @@ var getUserMedia = navigator.mediaDevices.getUserMedia({video:true,audio:true});
     getUserMedia.then
     (function(stream){
         myStream = stream;
-        addVideoStreamMember(myVideo, stream);
+        addVideoStreamMember(myVideo, stream, userHandle);
     })
 }
  
@@ -63,9 +124,9 @@ var getUserMedia = navigator.mediaDevices.getUserMedia({video:true,audio:true});
         $.getJSON("/videochat/getCallerHandle/" ,  function(data){
             let caller = data.caller;
             console.log(caller)
-            alert("here is a call");
+            
             getUserMedia.then(function(stream){
-                alert("here is a stream");
+                
                 call.answer(stream);
                 const video = document.createElement('video');
                 
@@ -73,11 +134,11 @@ var getUserMedia = navigator.mediaDevices.getUserMedia({video:true,audio:true});
                     console.log("Added stream 1")
                     if(caller===host){
                         console.log("adding host")
-                        addVideoStreamHost(video, userVideoStream, caller);
+                        addVideoStreamHost(video, userVideoStream);
                     }
                     else{
                         console.log("adding member")
-                        addVideoStreamMember(video, userVideoStream, caller);
+                        addVideoStreamMember(video, userVideoStream);
                     }
                             
                         
@@ -98,10 +159,10 @@ var getUserMedia = navigator.mediaDevices.getUserMedia({video:true,audio:true});
     })
     socket.on("user-connected", userId =>{
         
-        alert("here is a user-connected");
+        
         console.log("user connected: "+ userId)
         getUserMedia.then(function(stream){
-            alert("here is a user stream");
+            
             console.log(stream);
             connectToNewUser(userId, stream);
         })
@@ -146,7 +207,21 @@ myPeer.on("open",  id => {
     console.log(id + " joined")
 });
 
+$("#leaveStream").on("click",function(e){
+  $.ajax({
+    url:"/videochat/leaveStream/"+roomID+"/"+userId,
+    type:"POST",
+    async: false,
+    success:function(data){
+        if(data.message==="user left room")
+        window.close();
+    },
+    error: function(error){
+        console.log(error)
+    }
+})
 
+})
 
 $("#stopSharing").hide();
 $("#shareScreen").on("click",function(e){
@@ -183,17 +258,16 @@ $("#stopSharing").on("click", function(e){
 })
 
 function addVideoStreamHost(video, stream, caller){
+    keepAlive();
     console.log("here we are adding the host to the stream")
     stream.image = $(".userProfileImg").attr("src");
     stream.username = $(".userProfileName").eq(0).text();
     video.srcObject = stream;
-    video.controls = true;
-    console.log("Welcome "+userHandle+"!! isn't that"+host+" ")   
-    
+    console.log("Welcome "+userHandle+"!! isn't that"+host+" ")  
     $(video).addClass('hostVid');
     $(video).addClass('hostVidSpec');
     $(video).addClass(' '+caller);
-    $(videoDiv).append(video)
+    videoGrid.append(video)
     
     var isPlaying = video.currentTime > 0 && !video.paused && !video.ended 
     && video.readyState > 2;
@@ -223,7 +297,6 @@ function addVideoStreamMember(video, stream, caller){
     stream.image = $(".userProfileImg").attr("src");
     stream.username = $(".userProfileName").eq(0).text();
     video.srcObject = stream;
-    video.controls = true;
     console.log("trying to get in as a member") 
     video===myVideo?console.log("the same"):console.log("not the same");
     var isPlaying = myVideo.currentTime > 0 && !myVideo.paused && !myVideo.ended 
@@ -240,14 +313,10 @@ function addVideoStreamMember(video, stream, caller){
     console.log("trying to play")
     $(video).addClass('hostVid');
     $(video).addClass(' '+caller);
-    var row1 = $("#row1").children().length;
-    var row2 = $("#row2").children().length;
-    if(row1<=2){
-        $("#row1").append(video)
-    }
-    else{
-        $("#row2").append(video)
-    }
+    videoGrid.append(video);
+  
+    
+ 
     
     var playPromise = video.play();
     
@@ -272,7 +341,6 @@ function connectToNewUser(userId, stream){
     const video = document.createElement('video');
     
     
-    
     $.ajax({
         url:"/videochat/postCallerHandle/"+userHandle,
         type:"POST",
@@ -283,17 +351,16 @@ function connectToNewUser(userId, stream){
             console.log(error)
         }
     })
+
     call.on("stream", userVideoStream => {
         console.log("added stream 2")
-        
     
-            addVideoStreamMember(video, userVideoStream)
+            addVideoStreamMember(video, userVideoStream);
         
     });
 
  
     call.on("close", () => {
-        alert("close")
         video.remove();
     })
     users.push(userId);
@@ -314,6 +381,21 @@ const screenshare = () =>{
         }
    
     }).then(stream =>{
+        myScreenShareStream = stream;
+        myVideo.srcObject = stream;
+        var playPromise = myVideo.play();
+    
+        if (playPromise !== undefined) {
+          playPromise.then(_ => {
+            // Automatic playback started!
+            // Show playing UI.
+          })
+          .catch(error => {
+            // Auto-play was prevented
+            // Show paused UI.
+            console.log(error)
+          });
+        }
         let videoTrack = stream.getVideoTracks()[0];
             videoTrack.onended = function(){
               stopScreenShare();
@@ -332,14 +414,91 @@ const screenshare = () =>{
     }
    
    function stopScreenShare(){
+
+    myScreenShareStream.getTracks().forEach(track => track.stop())
+    myVideo.srcObject = myStream;
+    var playPromise = myVideo.play();
+
+    if (playPromise !== undefined) {
+      playPromise.then(_ => {
+        // Automatic playback started!
+        // Show playing UI.
+      })
+      .catch(error => {
+        // Auto-play was prevented
+        // Show paused UI.
+        console.log(error)
+      });
+    }
      let videoTrack = myStream.getVideoTracks()[0];
      for (let x=0;x<peerList.length;x++){
              let sender = peerList[x].getSenders().find(function(s){
                  return s.track.kind == videoTrack.kind;
                }) 
+               
              sender.replaceTrack(videoTrack);
      }       
    }
+
+   
+
+const muteUnmute = () => {
+  const enabled = myStream.getAudioTracks()[0].enabled;
+  if (enabled) {
+    myStream.getAudioTracks()[0].enabled = false;
+    setUnmuteButton();
+  } else {
+    setMuteButton();
+    myStream.getAudioTracks()[0].enabled = true;
+  }
+}
+
+const playStop = () => {
+  console.log('object')
+  let enabled = myStream.getVideoTracks()[0].enabled;
+  if (enabled) {
+    myStream.getVideoTracks()[0].enabled = false;
+    setPlayVideo()
+  } else {
+    setStopVideo()
+    myStream.getVideoTracks()[0].enabled = true;
+  }
+}
+$(document).on('click','.main__mute_button',muteUnmute);
+$(document).on('click','.main__video_button',playStop);
+
+
+const setMuteButton = () => {
+  const html = `
+    <i class="fas fa-microphone"></i>
+    <span>Mute</span>
+  `
+  document.querySelector('.main__mute_button').innerHTML = html;
+}
+
+const setUnmuteButton = () => {
+  const html = `
+    <i class="unmute fas fa-microphone-slash"></i>
+    <span>Unmute</span>
+  `
+  document.querySelector('.main__mute_button').innerHTML = html;
+}
+
+const setStopVideo = () => {
+  const html = `
+    <i class="fas fa-video"></i>
+    <span>Stop Video</span>
+  `
+  document.querySelector('.main__video_button').innerHTML = html;
+}
+
+const setPlayVideo = () => {
+  const html = `
+  <i class="stop fas fa-video-slash"></i>
+    <span>Play Video</span>
+  `
+  document.querySelector('.main__video_button').innerHTML = html;
+}
 
 /*
 lifecycle.addEventListener('statechange', function(event) {
@@ -354,7 +513,26 @@ lifecycle.addEventListener('statechange', function(event) {
       alert("queuing beacon")
     }
   });*/
-  $(document).ready(function(){
+
+
+    var timerVar = setInterval(countTimer, 1000);
+    var totalSeconds = 0;
+    function countTimer() {
+           ++totalSeconds;
+           var hour = Math.floor(totalSeconds /3600);
+           var minute = Math.floor((totalSeconds - hour*3600)/60);
+           var seconds = totalSeconds - (hour*3600 + minute*60);
+           if(hour < 10)
+             hour = "0"+hour;
+           if(minute < 10)
+             minute = "0"+minute;
+           if(seconds < 10)
+             seconds = "0"+seconds;
+           var time = hour + ":" + minute + ":" + seconds;
+           return time;
+        }
+
+
     var browserPrefixes = ['moz', 'ms', 'o', 'webkit'];
 
     // get the correct attribute name
@@ -391,7 +569,12 @@ lifecycle.addEventListener('statechange', function(event) {
     function handleVisibilityChange() {
       if(document[getHiddenPropertyName(browserPrefix )]&&unloading) {
         // the page is hidden
-        alert("queuing beacon")
+        /*
+        if(userHandle===host){
+            navigator.sendBeacon("endPointToSaveDuration");
+        }*/
+
+
         var URL = "/videochat/leaveStream/"+roomID+"/"+userId;
         var fd = new FormData();
         fd.append('roomID', roomID);
@@ -402,5 +585,5 @@ lifecycle.addEventListener('statechange', function(event) {
     }
 
     document.addEventListener(getVisibilityEvent(browserPrefix), handleVisibilityChange, false);
-    
+}
   })
