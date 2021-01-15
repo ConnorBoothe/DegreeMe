@@ -72,7 +72,7 @@ var userDBSchema = new Schema({
     //user status
     active: {type:Boolean, required:true},
     activationCode:{type:String, required:true},  
-    activeRoom: {type:Boolean, required:true},
+    activeRoom: {type:Boolean},
     // subscription:{type:String, required:true},
     Major: {type:String},
     Tutor:{type:Boolean, required:true},
