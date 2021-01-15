@@ -21,7 +21,6 @@
        
         messageForm.on("submit", function (e) {
             sendCount = 0;
-
            id = $(".threadId").val()
             
             e.preventDefault();
@@ -46,8 +45,16 @@
             }
         });
         socket.on("append youtube info", (data, err)=>{
+            
+            if(data.sender == $("input[name='userId']").val()) {
+
             appendYoutubeDetails(data.video.thumbnail, data.video.link, 
                 data.video.title, chat);
+            }
+            else{
+                appendSentYoutubeDetails(data.video.thumbnail, data.video.link, 
+                    data.video.title, chat, data.sender, data.senderImg); 
+            }
         })
         socket.on('new message', function (data, err) {
             if(err){

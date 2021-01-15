@@ -352,7 +352,6 @@ $(".timeline-wrapper").on("click", ".postQuestionBtn", function(){
     }
     //post question without image
     else {
-        alert("No image")
         payload = {
             message:message.val(),
             course:course.val(),
@@ -367,7 +366,6 @@ $(".timeline-wrapper").on("click", ".postQuestionBtn", function(){
             "Content-Type": "application/json"
             }, statusCode: {
             202: function (result) {
-                alert("YO")
                  location.href = "/";
             },
             500: function (result) {
