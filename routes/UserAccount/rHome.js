@@ -218,8 +218,10 @@ router.post("/SeenMsg",
     function (req, res) {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            res.redirect('/home');
+            console.log(errors)
+            // res.redirect('/home');
         }
+        console.log(req.session.handle, req.body.threadId)
         users.sawMessage(req.session.handle, req.body.threadId, res);
     })
 router.post("/addCourse",
@@ -287,12 +289,10 @@ router.post("/addLike",
         }
         timeline.hasLiked(req.body.postId, req.session.handle)
             .then(function (data1) {
-                console.log(data1)
                 //determine if the user has liked the post
                 var hasLiked = false;
                 for (x in data1.likers) {
                     if (data1.likers.likerHandle === req.session.handle) {
-                        console.log("Found liker")
                         hasLiked = true;
                     }
                 }
@@ -440,7 +440,6 @@ router.post("/siteWideSearch",
             users.usersByNameAutocomplete(req.body.searchValue).exec((err, docs1) => {
                 if(docs1){
                     if(docs1.length < 1){
-                        console.log("Search by handle")
                         users.usersByHandleAutocomplete(req.body.searchValue).exec((err, docs) => {
                             res.status(202).json({
                                 Users: docs,
@@ -548,12 +547,9 @@ router.post("/siteWideSearch",
                         // res.redirect("/home")
                         // throw new Error(res.error);
                     } else if (resp.accepted){
-                        console.log("email SENT")
                         res.status(202).json({
                         }).end();
                     }
-        
-                console.log(resp.body);
                 });
             })
             })
