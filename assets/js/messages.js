@@ -16,11 +16,14 @@
         var messageField = $(".msgInput input");
         var currPage = window.location.href.split("/")[3];
         var id = "";
+        var sendCount = 0;
         chat = $('#messagesContainer');
        
         messageForm.on("submit", function (e) {
-           id = $(".threadId").val()
+            sendCount = 0;
 
+           id = $(".threadId").val()
+            
             e.preventDefault();
             if(imageArray.length > 0){
                 //if text is in the message
@@ -64,16 +67,33 @@
         socket.on("append image", function(data){
             id = $(".threadId").val()
             imageArray = data.imageArray;
-            $(".new-image"+imageNumber).html("<a target='_blank' href='"+data.image+"'><img src='"+data.image+"'/></a>");
+            var actualSender = "";
+            if(sendCount == 0) {
+                actualSender = sender;
+            }
+            sendCount++;
+            if(data.sender == $("input[name='userId']").val()) {
+             
+                $(".new-image"+imageNumber).html("<a target='_blank' href='"+data.image+"'><img src='"+data.image+"'/></a>");
+            }
+            else if(data.sender != $("input[name='userId']").val()) {
+                chat.append('<div class="containMessageReceived">' +
+                '<div class="msg_">' +
+                '<div class="messageBody receivedMsg message-image">' +
+                "<a target='_blank' href='"+data.image+"'><img src='"+data.image+"'/></a>"+
+                '</div>' +
+                '<a class="messageImg" href="/user/'+data.sender+'"><img data-toggle="tooltip" data-placement="right" title="'+data.sender+'" class="messageImg"  src='+data.senderImg+'/></a>'+
+                '</div>');
+             }
             imageNumber++;
             setTimeout(()=>{
                 $(".messageBlock").scrollTop($(".messageBlock")[0].scrollHeight);
             },300);            //if there are more images to be saved
             if(data.imageArray.length > 0) {
-                sendImage(id, sender, senderImg, imageArray, imageNumber, chat);
+                sendImage(id, actualSender, senderImg, imageArray, imageNumber, chat);
             }
             else{
-                
+            
             }
             
             //clear attachments
