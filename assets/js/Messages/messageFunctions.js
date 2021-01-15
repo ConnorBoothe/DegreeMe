@@ -25,7 +25,9 @@ function readURL(input, imageArray, inputVal) {
 //save image to firebase and save to DB using websocket
 function sendImage(id, sender, senderImg, imageArray, imageNumber, chat) {
     $(".image-attachments").html("");
-    chat.append('<div class="sent-wrapper"><div class="containMessageSent">' +
+    console.log(sender)
+    if(sender == $("input[name='userId']").val()){
+        chat.append('<div class="sent-wrapper"><div class="containMessageSent">' +
         '<div class="msg_">' +
         '<div class="messageBody sentMsg bg-primary message-image new-image'+imageNumber+'">' +
         '<div class="spinner-border" role="status">' +
@@ -35,6 +37,8 @@ function sendImage(id, sender, senderImg, imageArray, imageNumber, chat) {
         '</div>' +
         '<p class="msg-date msg-date-sent"></p>' +
         '</div></div>');
+    }
+    
         $(".messageBlock").scrollTop($(".messageBlock")[0].scrollHeight);
 
     var storageRef = firebase.storage().ref("attachments/" + imageArray[0].name);
@@ -42,7 +46,7 @@ function sendImage(id, sender, senderImg, imageArray, imageNumber, chat) {
         .then(function () {
             storageRef.getDownloadURL().then(function (url) {
                 imageArray.splice(0,1)
-                
+                console.log(sender)
                 socket.emit("send image", 
                     {
                         id: id,
@@ -133,18 +137,28 @@ function appendChat(threadId, data, messageId, chatContainer) {
             
         } else {
             if(youtubeRegEx.test(data.msg.content)){
-                alert("YOUTUBE!!!")
+                chatContainer.append('<div class="containMessageReceived">' +
+                '<div class="msg_ ">' +
+                '<a target="_blank" href="'+link+'">'+
+                '<div class="messageBody receivedMsg">'+
+                '<img class="yt-logo" src= "../assets/img/yt-logo.svg"/>'+
+                '<div class="thumbnail-container"><img src="'+thumbnail+'" class="yt-thumbnail"/></div>'+
+                '<span class="text-light yt-title">'+ title +'</span></div></div>' +
+                '</a>'+
+                '<p class="msg-date msg-date-sent"></p>' +
+                '</div>')
             }
-            chatContainer.append('<div class="containMessageReceived">' +
-                '<img class="messageImg" src="' + data.msg.senderImg +
-                '" /><p class="sender_handle"' +
-                data.msg.sender +
-                '</p><div class="msg_1" style="left:0px">' +
+            else {
+                chatContainer.append('<div class="containMessageReceived">' +
+                '<div class="msg_1"">' +
                 '<p class="messageBody receivedMsg">' + data.msg.content +
                 '</p>' +
                 '</div>' +
-                '<p class="msg-date msg-date-sent">' + displayTimeSince(data.msg.date) + '</p>' +
+                '<a class="messageImg" href="/user/'+data.msg.sender+'"><img data-toggle="tooltip" data-placement="right" title="'+data.msg.sender+'" class="messageImg"  src='+data.msg.senderImg+'/></a>'+
+
                 '</div>');
+            }
+           
             window.scrollTo(0, $(document).height() + 100);
         }
     }
@@ -166,25 +180,25 @@ function formatTime(date) {
     var hourDifference = parseInt(minDifference / 60);
     var dayDifference = parseInt(hourDifference / 24);
     if(secDifference < 60){
-        return secDifference + " seconds ago";
+        return secDifference + " sec";
     }
     else if(secDifference < 120){
-        return minDifference + " minute ago";
+        return minDifference + " min";
     }
     else if(secDifference > 60 && minDifference < 60){
-        return minDifference + " minutes ago";
+        return minDifference + " min";
     }
     else if(minDifference < 120){
-        return hourDifference + " hour ago";
+        return hourDifference + " hour";
     }
     else if(minDifference > 120 && hourDifference < 24){
-        return hourDifference + " hours ago";
+        return hourDifference + " hours";
     }
     else if(hourDifference < 48){
-        return dayDifference + " day ago";
+        return dayDifference + " day";
     }
     else{
-        return dayDifference + " days ago";
+        return dayDifference + " days";
     }
   }
   function formatDate(date) {
@@ -235,13 +249,15 @@ function prependNext50(messages, handle, block) {
     var messageHTML = '<div class="messageTop'+block+'"></div>';
     for (var x = messages.length - 1; x >= 0; x--) {
         // check if session handle === sender
+        console.log(messages[x].sender)
+        console.log(handle)
         if (handle === messages[x].sender) {
             if (messages[x].type == "file") {
                 messageHTML += '<div class="sent-wrapper">' +
                     '<div class="containMessageSent">' +
                     '<div class="msg_">' +
                     '<p class="msgSender"></p>' +
-                    '<p class="messageBody sentMsg bg-primary message-attachment">';
+                    '<p class="messageBody sentMsg message-attachment bg-primary">';
                 if (messages[x].content.includes(".pdf")) {
                     messageHTML += '<iframe class="pdf-iframe" src="' + messages[x].content + '"></iframe>' +
                         '<p class="text-center"><a target="_blank" class="text-light"' +
@@ -253,6 +269,7 @@ function prependNext50(messages, handle, block) {
                 }
                 messageHTML += '</p>' +
                     '</div>' +
+
                     '<p class="msg-date msg-date-sent">' + formatTime(new Date(messages[x].dateTime)) +
                     '</p>' +
                     '</div>' +
@@ -281,11 +298,12 @@ function prependNext50(messages, handle, block) {
             }
         } else {
             if (messages[x].type == "file") {
-                messageHTML += '<div class="sent-wrapper">' +
-                    '<div class="containMessageSent">' +
-                    '<div class="msg_">' +
-                    '<p class="msgSender"></p>' +
-                    '<p class="messageBody sentMsg bg-primary message-attachment">';
+                messageHTML += 
+                    '<div class="containMessageReceived">' +
+
+                    '<div class="msg_1">' +
+                    '<p class="msgReceiver"></p>' +
+                    '<p class="messageBody receivedMsg message-attachment">';
                 if (messages[x].content.includes(".pdf")) {
                     messageHTML += '<iframe class="pdf-iframe" src="' + messages[x].content + '"></iframe>' +
                         '<p class="text-center"><a target="_blank" class="text-light"' +
@@ -297,18 +315,25 @@ function prependNext50(messages, handle, block) {
                 }
                 messageHTML += '</p>' +
                     '</div>' +
+
                     '<p class="msg-date msg-date-sent">' + formatTime(new Date(messages[x].dateTime)) +
                     '</p>' +
+                    '<a href="/user/'+messages[x].sender+'"><img data-toggle="tooltip" data-placement="right" title="'+messages[x].sender+'" class="messageImg"  src='+messages[x].senderImg+'/></a>' +
+
                     '</div>' +
+
                     '</div>';
 
             } else {
-                messageHTML += '<div class="sent-wrapper">' +
-                    '<div class="containMessageSent">' +
-                    '<div class="msg_">';
+                messageHTML += 
+                    '<div class="containMessageReceived">' +
+
+
+                    '<div class="msg_1">';
+                    
                 if (messages[x].youtubeData[0] != undefined) {
                     messageHTML += '<a target="_blank" href="' + messages[x].youtubeData[0].link + '">' +
-                        '<div class="messageBody sentMsg bg-primary">' +
+                        '<div class="messageBody receivedMsg ">' +
                         '<img class="yt-logo" src= "../assets/img/yt-logo.svg"/>' +
                         '<div class="thumbnail-container">' +
                         '<img src="' + messages[x].youtubeData[0].thumbnail + '" class="yt-thumbnail"/>' +
@@ -317,12 +342,20 @@ function prependNext50(messages, handle, block) {
                         '</div>' +
                         '</a>';
                 } else {
-                    messageHTML += '<p class="messageBody sentMsg bg-primary">' + messages[x].content + '</p>';
+                    messageHTML += '<p class="messageBody receivedMsg">' + messages[x].content + '</p>';
                 }
-                messageHTML += '</div>' +
+                messageHTML += 
+
+                '</div>' +
+
                     '<p class="msg-date msg-date-sent">' + formatTime(new Date(messages[x].dateTime)) + '</p>' +
+                    '<a class="messageImg" href="/user/'+messages[x].sender+'"><img data-toggle="tooltip" data-placement="right" title="'+messages[x].sender+'" class="messageImg"  src='+messages[x].senderImg+'/></a>'+
+
                     '</div>' +
+
                     '</div>';
+
+                    ;
             }
         }
     }

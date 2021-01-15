@@ -1,6 +1,7 @@
 function appendMembers(res){
-    var members = "";
+    var members = '<p class="messageHeader">MEMBERS</p>';
     for(x in res.members){
+        f
         if(res.statusArray[x].active == "true"){
             members += 
             '<div class="messageHandle">'+
@@ -37,7 +38,8 @@ $(document).ready(function(){
         error:function(err,str){
             alert(err)
         }
-        }).done(function(res) {             
+        }).done(function(res) {   
+            alert("GOt user handle")          
             $(".messageHandle-container").append(appendMembers(res));
         });
 })
