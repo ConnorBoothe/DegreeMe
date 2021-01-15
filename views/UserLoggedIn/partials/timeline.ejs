@@ -1,5 +1,8 @@
 <div class="timeline-wrapper">
     <!-- <h1 class="text-light recentActivity-title">Recent Activity</h1> -->
+    <% if(timeline.length < 1){%>
+        <h3 class="text-light text-center noFollowing">Follow users to see their activity here</h3>
+    <%}%>
 <% for (x in timeline){%>
   <input type="hidden" value="<%=timeline[x].userHandle%>" name="postHandle"/>
 <%if(timeline[x].type == "Help Request"){%>
