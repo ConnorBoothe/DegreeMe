@@ -10,6 +10,9 @@
 .majorContainer{
 max-width:350px;
 }
+.progress {
+    margin-bottom: 10px;
+}
 .newMajor{
     width:70%;
     position:absolute;

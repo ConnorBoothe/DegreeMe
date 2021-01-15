@@ -6,8 +6,12 @@
     background-color: #18191a;
 
 }
-
-
+.noFollowing {
+    padding-top:30px;
+}
+.tutoring-container { 
+    display:none;
+}
 .home-wrapper{
     padding-top:50px;
     width:100%;
@@ -1380,12 +1384,14 @@ input[name="searchType"]{
         font-family: "Open sans", "sans-serif";
         font-size:15px;
         padding-top:5px;
+        margin-top:10px;
         padding-bottom:5px;
         padding-left:8px;
         padding-right:8px;
+        
     }
     .tutorList {
-        width:100%;
+        width:70%;
         text-align:center;
     }
     .tutorList li {
@@ -1465,6 +1471,7 @@ input[name="searchType"]{
         text-align:center;
         font-family: "Open sans", "sans-serif";
         text-align:center;
+        margin-bottom: 40px;
     }
     .tagACourse, .tagAGroup{
         background-color:#242526;
@@ -1814,6 +1821,7 @@ input[name="searchType"]{
         padding-bottom:5px;
         padding-left:8px;
         padding-right:8px;
+        margin-top:10px;
     }
     .tutor-details-li{
         top:0;
@@ -1826,7 +1834,7 @@ input[name="searchType"]{
     }
     .tutorList li {
         display:inline-block;
-        width:40%;
+        width:20%;
         margin-left:20px;
     }
     .tutor-name{
