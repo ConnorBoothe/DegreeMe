@@ -1,12 +1,12 @@
 function appendMembers(res){
-    var members = '<p class="messageHeader">MEMBERS</p>';
+    var members = '';
     for(x in res.members){
-        f
+        
         if(res.statusArray[x].active == "true"){
             members += 
             '<div class="messageHandle">'+
             '<span class="online"></span></a>'+
-            '<a class="member-tooltip" href="/user/'+res.members[x][0]+'" data-toggle="tooltip" data-placement="bottom"'+
+            '<a class="member-tooltip" href="/user/'+res.members[x][0]+'" data-toggle="tooltip" data-placement="left"'+
            'title="Online">'+
             '<img class="messageSideBarImg" src="'+res.members[x][1]+'" />'+
             '</a>'+
@@ -39,7 +39,6 @@ $(document).ready(function(){
             alert(err)
         }
         }).done(function(res) {   
-            alert("GOt user handle")          
             $(".messageHandle-container").append(appendMembers(res));
         });
 })
