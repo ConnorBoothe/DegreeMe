@@ -72,7 +72,9 @@ app.use(require('./routes/scheduledEvents/chargePayments.js'));
 //User Account Routes
 app.use([
   require('./routes/UserAccount/rSignUp'),
-  require('./routes/UserAccount/rVerify.js'),
+  require('./routes/UserAccount/rSignUp'),
+
+  require('./routes/UserAccount/updateAvatarURL.js'),
   require('./routes/UserAccount/rUpdatePassword.js'),
   require('./routes/UserAccount/rLogout.js'),
   require('./routes/UserAccount/rLogin.js'),
