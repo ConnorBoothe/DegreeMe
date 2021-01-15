@@ -42,8 +42,7 @@ var scheduleSchema = new Schema({
         required: true
     },
     hourlyRate: {
-        type: Number,
-        required: true
+        type: Number
     },
     transcriptImg: {
         type: String,
@@ -63,7 +62,7 @@ var scheduleSchema = new Schema({
 var TutorDB = mongoose.model('TutorDB', scheduleSchema);
 module.exports = class TutorSchedules {
 
-    addTutor(userId, userName, handle, userImg, rating, course, courseCode, hourlyRate, transcriptImg, streamId) {
+    addTutor(userId, userName, handle, userImg, rating, course, courseCode, transcriptImg, streamId) {
         var tutor = new TutorDB({
             userId: userId,
             userName: userName,
@@ -72,7 +71,6 @@ module.exports = class TutorSchedules {
             userHandle: handle,
             course: course,
             courseCode: courseCode,
-            hourlyRate: hourlyRate,
             transcriptImg: transcriptImg,
             approved: false,
             streamId: streamId
