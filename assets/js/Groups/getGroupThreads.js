@@ -55,9 +55,11 @@ function appendGroupThreads(res){
                         console.log("Messages: " + result)
                         //prepend
                             $("#messagesContainer").html(prependNext50(result.messages,
-                                $(".userHandle").text(),block));
-                        //    $(".messageBlock").scrollTop(oldMessageTop.offset().top)
-                    },
+                                result.currHandle,block));
+                                    $('.messageBlock').scrollTop($('#messagesContainer')[0].scrollHeight);
+
+                               
+                            },
                     500: function (result) {
                         alert("500 " + result.responseJSON.err);
                     },

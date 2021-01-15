@@ -56,22 +56,9 @@ function createProgressTabs(result) {
         //increment current Index for next iteration
         currentIndex++;
       })
-      //restart the loop
-      // if (currentIndex > progress.length) {
-      //   $(".story-container").hide();
-      //   $(".overlay").hide();
-      //   // progress.map((el) => {
-      //   //   el.classList.remove('active');
-      //   //   el.classList.remove('passed');
-      //   //   currentIndex = 0;
-      //   // })
-      //   // next = progress[0];
-      // } 
       
     }
     
-    
-  
     progress.map(el => el.addEventListener("animationend", playNext, false));
     createStory(0, result)
     playNext();
@@ -81,10 +68,135 @@ function createProgressTabs(result) {
 //direction == 0 , go back
 //direction ==1, go forward
 function createNewSlide(i, stories){
-   
-    //  console.log(i)
+  $("input[name='storyId']").val(stories[i]._id)
+   if(stories[i].image) {
+    $(".group-story-image").attr("src",stories[i].userImg);
+    $(".group-story-title-text").text(stories[i].userHandle)
     $(".story-img-div").html("<img class='story-img' src='"+stories[i].image+"'/>");
-    $(".story-text-div").html("<p>"+stories[i].text+"</p>")  
+    $(".story-text-div").html("<p>"+stories[i].text+"</p>") 
+   
+  } 
+  else if(stories[i].poll[0]){
+    $("input[name='storyType']").val("poll")
+    payload= {
+      storyId: stories[i]._id
+    }
+    $.ajax({
+      url: "/hasResponded",
+      type: 'POST',
+      data: JSON.stringify(payload),
+      headers: {
+        "Content-Type": "application/json"
+      }, statusCode: {
+        202: function (result) {
+    if(result.hasResponded == true){
+      $(".story-img-div").html("<div class='poll-story'><h3 class='text-light multiple-question'>"+stories[i].poll[0].question+"</h3>"+
+    "<ul class='poll-options-list'>"+
+      "<li><button disabled='true' class='story-option-item poll-answer poll-option1 lowerOpacity' id=''>"+stories[i].poll[0].options[0]+"</button><p class='percentage poll-text1'></p></li>"+
+      "<li><button disabled='true' class='story-option-item poll-answer poll-option2 lowerOpacity' id=''>"+stories[i].poll[0].options[1]+"</button><p class='percentage poll-text2'></p></li>"+
+    "</ul>"+
+    "</div>")
+  
+    payload1= {
+      storyId: result.storyId,
+      answer: result.answer
+    }
+    $.ajax({
+      url: "/getPercentage",
+      type: 'POST',
+      data: JSON.stringify(payload1),
+      headers: {
+        "Content-Type": "application/json"
+      }, statusCode: {
+        202: function (result) {
+          console.log(result)
+          $(".story-option-item").each((x)=>{
+            if($(".story-option-item").eq(x).text() == result.answer) {
+              if(x == 0) {
+                $(".story-option-item").eq(x).css({color:"white", backgroundColor: "#6c62f0"});
+              }
+              else{
+                $(".story-option-item").eq(x).css({color:"white", backgroundColor: "#28c10d"});
+              }
+                $(".percentage").eq(x).text(result.matchingPercentage+"%");
+                $(".percentage").eq(1-x).text(result.otherPercentage+"%");
+                
+            }
+        })
+        $(".percentage").show();
+        $(".percentage").animate({
+           fontSize: "32px"
+       }, 100);
+        }
+      }
+
+    })
+  }
+    else{
+      $(".story-img-div").html("<div class='poll-story'><h3 class='text-light multiple-question'>"+stories[i].poll[0].question+"</h3>"+
+    "<ul class='poll-options-list'>"+
+      "<li><button class='story-option-item poll-answer poll-option1' id=''>"+stories[i].poll[0].options[0]+"</button><p class='percentage poll-text1'></p></li>"+
+      "<li><button class='story-option-item poll-answer poll-option2' id=''>"+stories[i].poll[0].options[1]+"</button><p class='percentage poll-text2'></p></li>"+
+    "</ul>"+
+    "</div>")
+    }
+      }
+    }
+  })
+}
+  else if(stories[i].multipleChoice[0]){
+    $("input[name='storyType']").val("multiple")
+
+    payload= {
+      storyId: stories[i]._id
+    }
+    $.ajax({
+      url: "/hasResponded",
+      type: 'POST',
+      data: JSON.stringify(payload),
+      headers: {
+        "Content-Type": "application/json"
+      }, statusCode: {
+        202: function (result) {
+          console.log(result)
+    if(result.hasResponded == true){
+        var multipleChoiceHTML = 
+        "<div class='poll-story'><h3 class='text-light multiple-question'>"+stories[i].multipleChoice[0].question+"</h3>"+
+      "<ul class='multiple-options-list'>";
+      for(var x = 0; x < 4; x++){
+        if(stories[i].multipleChoice[0].options[x] == result.correct && result.correct == result.answer){
+          multipleChoiceHTML += "<li><button disabled='true' class='answer-container correct-answer-option-final'>"+stories[i].multipleChoice[0].options[x]+"</button></li>";
+        }
+        else if(stories[i].multipleChoice[0].options[x] ==result.answer) {
+          multipleChoiceHTML += "<li><button disabled='true' class='answer-container incorrect-answer-option-final'>"+stories[i].multipleChoice[0].options[x]+"</button></li>";
+
+        }
+        else if(stories[i].multipleChoice[0].options[x] == result.correct && (result.correct != result.answer)){
+          multipleChoiceHTML += "<li><button disabled='true' class='answer-container correct-answer-option'>"+stories[i].multipleChoice[0].options[x]+"</button></li>";
+        }
+        else {
+          multipleChoiceHTML += "<li><button disabled='true' class='answer-container'>"+stories[i].multipleChoice[0].options[x]+"</button></li>";
+
+        }
+      }
+      multipleChoiceHTML += "</ul></div>";
+      $(".story-img-div").html(multipleChoiceHTML);
+    }
+    else{
+      $(".story-img-div").html("<div class='poll-story'><h3 class='text-light multiple-question'>"+stories[i].multipleChoice[0].question+"</h3>"+
+      "<ul class='multiple-options-list'>"+
+        "<li><button class='answer-container'>"+stories[i].multipleChoice[0].options[0]+"</button></li>"+
+        "<li><button class='answer-container'>"+stories[i].multipleChoice[0].options[1]+"</button></li>"+
+        "<li><button class='answer-container'>"+stories[i].multipleChoice[0].options[2]+"</button></li>"+
+        "<li><button class='answer-container'>"+stories[i].multipleChoice[0].options[3]+"</button></li>"+
+  
+        "</ul>"+
+      "</div>")
+    }
+  }
+}
+})
+  }
 }
 //format progressBars
 function formatProgressBars(result, i) { 
@@ -95,46 +207,19 @@ function formatProgressBars(result, i) {
         for(x in result.stories){
             progressBarHTML += '<div style="animation-duration: '+(result.stories[x].duration-0.5)+'s" class="progress"></div>';
         }
+        
         $(".progress-container").html(progressBarHTML)
         $(".story-img-div").html("<img class='story-img' src='"+result.stories[i].image+"'/>");
         $(".story-text-div").html("<p>"+result.stories[i].text+"</p>")  //  your code here
-        $(".story-container").show();
         createProgressTabs(result, i)
   }
   function createStory(iterator, result){
-      const storyArray = result.stories;
       if(iterator < result.stories.length) {
         createNewSlide(iterator, result.stories)
         $("input[name='iterator']").val(iterator)
-    }
-    else {
-      // clearTimeout(interval)
-    }
-      // $(".right-div").unbind().on("click", function(){
-      //     // clearTimeout(interval);
-      //     if(iterator < result.stories.length-1) {
-      //       iterator++;
-      //       $("input[name='iterator']").val(iterator)
-      //       console.log("I: " +iterator)
-      //       createNewSlide(iterator, result.stories)
-      //       $("input[name='iterator']").trigger('change');
-      //     }
-         
-      // });
-      // $(".left-div").unbind().on("click", function(){
-      //   // clearTimeout(interval)
-      //   if(iterator > 0) {
-      //     iterator--;
-      //     $("input[name='iterator']").val(iterator)
-      //     createNewSlide(iterator, result.stories)
-      //   }
-      //   $("input[name='iterator']").trigger('change');
-      // });
-      
-  
+    } 
   }
 $(document).ready(()=>{
-    var stories;
     
     //hide story on overlay click or x button click
     $(".overlay").on("click",()=>{
@@ -152,6 +237,9 @@ $(document).ready(()=>{
     //show story 
     $(".groupImg").on("click", ()=>{
         $(".overlay").show();
+        $(".story-img-div").html('<div class="spinner-border" role="status">'+
+            '<span class="sr-only"></span>'+
+        '</div>')
         $(".story-wrapper").show();
     })
     var groupId = window.location.href.split("/")[4];
@@ -169,16 +257,8 @@ $(document).ready(()=>{
                   "Content-Type": "application/json"
                 }, statusCode: {
                   202: function (result) {
-                    console.log(result.stories)
+                   
                  formatProgressBars(result, iterator);
-                // $(".story-img-div").html("<img class='story-img' src='"+result.stories[iterator].image+"'/>");
-                // $(".story-text-div").html("<p>"+result.stories[iterator].text+"</p>") 
-                // if(iterator == 0 ) {
-                //   createStory(iterator, result)
-                // }
-                // $("input[name='iterator']").on("change", function(){
-                //   createStory($(this).val(), result)
-                // })
                   },
                   500: function (result) {
                     alert("500 " + result.responseJSON.err);
