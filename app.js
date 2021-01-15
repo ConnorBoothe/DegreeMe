@@ -11,11 +11,6 @@ mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true,useUnifiedTopolo
 const session = require('express-session'); //used to manipulate the session
 var MongoStore = require('connect-mongo')(session);
 var app = module.exports = express(); 
-const options = {
-  key: fs.readFileSync('key.pem'),
-  cert: fs.readFileSync('cert.pem')
-};
-
 //set cookie to secure to true for production
 app.use(session({
   store: new MongoStore({
@@ -27,14 +22,6 @@ app.use(session({
     cookie: { secure: false,
         maxAge:  6*60*60*1000 },
   }));
-//middleware to make userId available in all templates
-/*
-app.use(function(req, res, next) {
-  res.locals.userId = req.session.userId;
-  res.locals.handle = req.session.handle;
-  next();
-});
-*/
 app.set('trust proxy', 1) // trust first proxy
 //classes used
 const StreamDB = require('./models/Database/StreamDB');
@@ -54,7 +41,6 @@ var messages = new Messages();
 var threads = new Threads();
 //set limit size of file upload
 app.use(express.json({limit: '50mb'}));
-app.use(express.text())
 app.use(express.urlencoded({
     limit: '50mb',
     extended:true
@@ -88,7 +74,9 @@ app.use(require('./routes/scheduledEvents/chargePayments.js'));
 //User Account Routes
 app.use([
   require('./routes/UserAccount/rSignUp'),
-  require('./routes/UserAccount/rVerify.js'),
+  require('./routes/UserAccount/rSignUp'),
+
+  require('./routes/UserAccount/updateAvatarURL.js'),
   require('./routes/UserAccount/rUpdatePassword.js'),
   require('./routes/UserAccount/rLogout.js'),
   require('./routes/UserAccount/rLogin.js'),
@@ -130,9 +118,18 @@ app.use([
   require('./routes/UserLoggedIn/rAddZoomMeeting.js'),
   require('./routes/UserAccount/rHome.js'),
   require('./routes/UserLoggedIn/rTutorSchedule.js'),
-  require('./routes/UserLoggedIn/rStudyGroupProfile.js'),
+  require('./routes/Groups/rStudyGroupProfile.js'),
+  require('./routes/Groups/addBannerImage.js'),
+  require('./routes/Groups/getGroupMembers.js'),
+  require('./routes/Groups/addStory.js'),
+  require('./routes/Groups/getGroupStories.js'),
+  require('./routes/Groups/addGroupChat.js'),
+  require('./routes/Groups/getGroupThreads.js'),
+  require('./routes/Groups/addStoryResponse.js'),
   require('./routes/UserLoggedIn/rMeetupProfile.js'),
   require('./routes/UserAccount/rAddCourse.js'),
+  require('./routes/UserAccount/updateClass.js'),
+  require('./routes/UserAccount/updateImg'),
   require('./routes/UserLoggedIn/rComments.js'),
   require('./routes/UserLoggedIn/rAdmin.js'),
   require('./routes/UserLoggedIn/rAskQuestion.js'),
@@ -154,7 +151,10 @@ app.use([
   require('./routes/API/sendSortedStudyGroups.js'),
   require('./routes/API/sendUsersAndImages.js')
 ]); 
-
+const options = {
+  key: fs.readFileSync('key.pem'),
+  cert: fs.readFileSync('cert.pem')
+};
 
 //Wildcard route
 app.get('*', function(req, res) {
@@ -167,8 +167,7 @@ app.get('*', function(req, res) {
         res.redirect('/');
     }
 });
-
-let server = https.createServer(options, app).listen(3000);
+let server = https.createServer(options, app).listen(8080);
 const io = require('socket.io')(server);
 var members = [];
 let broadcaster;
@@ -177,13 +176,10 @@ io.sockets.on('connection', function (socket) {
   console.log("Server socket connected")
   // //join video chat room
   socket.on('join-room', function (roomId, peerId, userHandle, userId) {
-
-    socket.to(roomId).emit('user-joined',peerId);
     //join the room
     socket.join(roomId);
     //send message to everyone in room, but don't send back to me
-    socket.to(roomId).broadcast.emit("user-connected", peerId);
-  
+    socket.to(roomId).broadcast.emit("user-connected", peerId, userHandle);
       stream.addMember(roomId, userId)
       .then(function(userId){
         // console.log("added userId: " + userId._id);
@@ -206,14 +202,12 @@ io.sockets.on('connection', function (socket) {
         })
       })
     });
-    
   //catch the emitted 'send message' event
   socket.on('send message', function (data) {
-    console.log("Adding message")
       //add message to the db
-      console.log("Adding message")
       messages.addMessage(data.id, data.sender, data.senderImg, data.content, data.date, "text")
       .then(function(message){
+        console.log("Emit new message")
         io.sockets.emit('new message', {
           msg: message
       });
@@ -233,12 +227,16 @@ io.sockets.on('connection', function (socket) {
     })
   })
   socket.on('send image', function (data) {
+    console.log("EMIT SEND IMAGE")
+    console.log("Sender: " +data.sender)
   //   add message to the db
   //  add image to me   console.log("sending image")
+  console.log("ADD msg")
   messages.addMessage(data.id, data.sender, data.senderImg, data.content, data.date, "file")
    .then(function(success){
      if(success){
-      socket.emit("append image", {image:data.content, imageArray: data.imageArray });
+      io.sockets.emit("append image", {image:data.content, imageArray: data.imageArray, 
+        sender: data.sender, senderImg: data.senderImg });
      }
    })
    .catch(function(error){
@@ -247,14 +245,18 @@ io.sockets.on('connection', function (socket) {
   
 });
 socket.on('send youtube link', function (data) {
+  console.log("send yt link")
   messages.addYoutubeData(data)
-  .then(()=>{
-    socket.emit("append youtube info", {
-      video: data
+  .then((message)=>{
+    console.log(message)
+    io.sockets.emit("append youtube info", {
+      video: data,
+      sender: message.sender,
+      senderImg: message.senderImg
     })
-    .catch((err)=>{
-      console.log(err)
-    })
+  })
+  .catch((err)=>{
+    console.log(err)
   })
   
   
