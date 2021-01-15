@@ -12,12 +12,12 @@ var UserDB = require("../../models/Database/UserDB.js");
 //instantiate DBs
 var users = new UserDB();
 //render the create connection page
-router.post('/toggleActive', function (req, res) {
+router.post('/setActiveTimestamp', function (req, res) {
     console.log(req.body)
-    users.setUserStatus(req.session.userId, req.body.status)
+    users.setUserStatus(req.session.userId, Date.now())
     .then((result)=>{
         console.log(result)
-        console.log("Set user status")
+        console.log("Set user active timestamp")
         res.status(202).json({
             status: "Complete",
         }).end();

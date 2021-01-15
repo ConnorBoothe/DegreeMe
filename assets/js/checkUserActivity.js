@@ -1,39 +1,24 @@
 var timeoutID;
-var timeInterval = 5000 *60;
+var timeInterval = 1000 * 60 * 2.5;//1000miliSec in a sec * 60 sec in a min * 2.5 min
 var active = true;
-function setup() {
-    this.addEventListener("mousemove", resetTimer, false);
-    this.addEventListener("mousedown", resetTimer, false);
-    this.addEventListener("keypress", resetTimer, false);
-    this.addEventListener("DOMMouseScroll", resetTimer, false);
-    this.addEventListener("mousewheel", resetTimer, false);
-    this.addEventListener("touchmove", resetTimer, false);
-    this.addEventListener("MSPointerMove", resetTimer, false);
-    startTimer();
-}
-setup();
+startTimer();
  
 function startTimer() {
-    //set timeout for 5 minutes. After 5 minutes of inactivity, call 
-    //goInactive function
-    timeoutID = window.setTimeout(goInactive, timeInterval);
+    //set timeout for 2.5 minutes; after 2.5 minutes of inactivity, call 
+    //resetTimer function to keep cycle going
+    timeoutID = window.setTimeout(resetTimer, timeInterval);
 }
  
 function resetTimer(e) {
-    //clear the timeout and set user status to active
-    window.clearTimeout(timeoutID);
-    // if inactive, set to active
-    if(!active){
-        goActive();
-    }
+  pingServer();//ping server to current time
+  window.clearTimeout(timeoutID);//clear the timeout
+  timeoutID = window.setTimeout(resetTimer, timeInterval);
 }
  
-function goInactive() {
-      payload = {
-        status: false
-    }
+function pingServer() {
+      payload = {    }
     $.ajax({
-        url: "/toggleActive",
+        url: "/setActiveTimestamp",
         type: 'POST',
         data: JSON.stringify(payload),
         headers: {
@@ -47,26 +32,4 @@ function goInactive() {
           },
         },
       });
-}
- 
-function goActive() {
-    // do something
-    payload = {
-        status: true
-    }
-    $.ajax({
-        url: "/toggleActive",
-        type: 'POST',
-        data: JSON.stringify(payload),
-        headers: {
-          "Content-Type": "application/json"
-        }, statusCode: {
-          202: function (result) {
-          },
-          500: function (result) {
-            alert("500 " + result.responseJSON.err);
-          },
-        },
-      });
-    startTimer();
 }
