@@ -56,9 +56,11 @@ router.get('/messages/:threadId', function (req, res) {
             console.log("Thread running")
             //get messages by thread id
             messages.getAllMsg(req.params.threadId).then((messages) => { 
+                console.log("PHASE 1")
                 //retrieve user handles for the current thread
                 threads.getUserHandles(req.params.threadId).then(function(thread){
-                    console.log(thread)
+                    console.log("Thread: " +thread.userHandles[1])
+                    console.log(thread.userHandles.some(row => row.includes(req.session.handle)))
                     //check if the current user exists in the 2d array
                     if(thread.userHandles.some(row => row.includes(req.session.handle))){
                         res.render('UserLoggedIn/messages', {
@@ -74,12 +76,14 @@ router.get('/messages/:threadId', function (req, res) {
                         //     dateFunctions.formatMessageCreatedDate, dateFunctions.displayTimeSince);
                     }
                     else {
+                        console.log("NOT INCLUDED")
                         res.redirect('/home');
                     }
                 })
             })
         } else {
             //redirect if no parameter exists
+            console.log("NO param")
             res.redirect('/home'); 
         }
     } else {
