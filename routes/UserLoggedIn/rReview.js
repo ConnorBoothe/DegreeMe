@@ -39,20 +39,27 @@ router.get('/review/:handle', function (req, res) {
   if (req.session.userId) {
         users.getUserHandleByHandle(req.params.handle)
         .then(function(handle){
-          meetups.getMeetupById(req.query.id)
-          .then((meetup)=>{
-            console.log(meetup)
-              if(!meetup.LeftReview && handle.handle){
-                res.render('UserLoggedIn/LeaveAReview', {
-                  qs: req.query,
-                  session: req.session,
-                  params: req.params
-               });
-              }
-              else {
-                res.redirect("/")
-              }
-          })
+          if(req.query.id){
+            meetups.getMeetupById(req.query.id)
+            .then((meetup)=>{
+              console.log(meetup)
+                if(!meetup.LeftReview && handle.handle){
+                  res.render('UserLoggedIn/LeaveAReview', {
+                    qs: req.query,
+                    session: req.session,
+                    params: req.params
+                 });
+                }
+                else {
+                  res.redirect("/")
+                }
+            })
+          }
+          else{
+            res.redirect("/")
+
+          }
+          
         })
         .catch((err)=>{
           console.log(err)
