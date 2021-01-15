@@ -240,14 +240,18 @@ io.sockets.on('connection', function (socket) {
   
 });
 socket.on('send youtube link', function (data) {
+  console.log("send yt link")
   messages.addYoutubeData(data)
-  .then(()=>{
-    socket.emit("append youtube info", {
-      video: data
+  .then((message)=>{
+    console.log(message)
+    io.sockets.emit("append youtube info", {
+      video: data,
+      sender: message.sender,
+      senderImg: message.senderImg
     })
-    .catch((err)=>{
-      console.log(err)
-    })
+  })
+  .catch((err)=>{
+    console.log(err)
   })
   
   
