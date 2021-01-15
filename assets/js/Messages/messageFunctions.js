@@ -85,9 +85,26 @@ function appendYoutubeDetails(thumbnail, link, title, chat) {
                 
                 setTimeout(()=>{
                     $(".messageBlock").scrollTop($(".messageBlock")[0].scrollHeight);
-                },100);
+                },100);        
 
+}
+function appendSentYoutubeDetails(thumbnail, link, title, chat, sender, senderImg) {
+    chat.append('<div class="received-wrapper"><div class="containMessageReceived">' +
+                '<div class="msg_1 ">' +
+                '<a target="_blank" href="'+link+'">'+
+                '<div class="messageBody receivedMsg">'+
+                '<img class="yt-logo" src= "../assets/img/yt-logo.svg"/>'+
+                '<div class="thumbnail-container"><img src="'+thumbnail+'" class="yt-thumbnail"/></div>'+
+                '<span class="text-light yt-title">'+ title +'</span></div></div>' +
+                '<a class="messageImg" href="/user/'+sender+'"><img data-toggle="tooltip" data-placement="right" title="'+sender+'" class="messageImg"  src='+senderImg+'/></a>'+
+                '</a>'+
+                '<p class="msg-date msg-date-sent"></p>' +
+                '</div></div>'
+                );
                 
+                setTimeout(()=>{
+                    $(".messageBlock").scrollTop($(".messageBlock")[0].scrollHeight);
+                },100);        
 
 }
 //append chat to the DOM on new message
@@ -108,7 +125,6 @@ function appendChat(threadId, data, messageId, chatContainer) {
                         videoEmbeddable: true,
                     },
                     success: function(data){
-                        
                             var thumbnail = data.items[0].snippet.thumbnails.default.url;
                             var link ='https://www.youtube.com/watch?v=' + data.items[0].id.videoId;
                             var title = data.items[0].snippet.title; 
@@ -119,7 +135,6 @@ function appendChat(threadId, data, messageId, chatContainer) {
                                 link: link,
                                 title: title
                             })
-
                     },
                     error: function(response){
                         console.log("Request Failed");
