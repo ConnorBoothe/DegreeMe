@@ -9,7 +9,7 @@
 
   <div id="messageHeader" class="horizontalDark">
       <div class="groupTitle">
-        <span class="groupName text-light"><%=studyGroup.GroupName%></span>
+        <span class="groupName text-light"><a class="group-name-link" href="/Group/<%=studyGroup._id%>"><%=studyGroup.GroupName%></a></span>
         <% if(isMember){%>
         <img class="dots dots-tutor-courses" data-container="body" data-toggle="popover" data-placement="right" data-content="<ul class=popoverUl><li><a class=askQuestionBtn href=/course/'+removeSpace(res[x].courseName)+'>Ask a Question</a></li><li><form method=POST class=leaveCourseForm ><input class=courseName type=hidden name=course value='+removeSpace(res[x].courseName)+' /><button class=leaveCourse>Leave</button></form></li></ul>" src="../assets/img/3dots.svg"/>
         <%}else{%>
@@ -93,7 +93,7 @@
                         </li>
                         <li class="desktop-li">
                             <span class="message" name = "New Message" data-toggle="tooltip" data-placement="bottom" title="Messages">  
-                                <svg class="bi bi-chat-fill" width="1.25em" height="1.25em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <svg class="bi bi-chat-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6-.097 1.016-.417 2.13-.771 2.966-.079.186.074.394.273.362 2.256-.37 3.597-.938 4.18-1.234A9.06 9.06 0 0 0 8 15z"/>
                                 </svg>
                                 <span class="badge badge-danger bdge1"></span>
