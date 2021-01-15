@@ -10,7 +10,8 @@ router.post("/getMessageSet", function(req, res) {
         .then(function(messages){
             console.log(messages.length)
             res.status(202).json({
-                messages: messages
+                messages: messages,
+                currHandle: req.session.handle
             }).end();
         })
         .catch(function(error) {
