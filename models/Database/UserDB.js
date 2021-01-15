@@ -70,8 +70,9 @@ var userDBSchema = new Schema({
     //account status
     status:{type:String, required:true},  
     //user status
-    active: {type:Date, required:true},
+    active: {type:Boolean, required:true},
     activationCode:{type:String, required:true},  
+    activeRoom: {type:Boolean, required:true},
     // subscription:{type:String, required:true},
     Major: {type:String},
     Tutor:{type:Boolean, required:true},
@@ -458,13 +459,16 @@ module.exports = class User {
     }
     //clear notification count for a given thread
     sawMessage(handle, threadId, res){
+        console.log("data exists")
+
+        console.log(handle)
+        console.log(threadId)
         UserDB.findOne({
             handle: handle
         }).then(function(data){
             var threadIndex = -1;
             console.log(data)
             if(data){
-                console.log("data exists")
                 new Promise((resolve, reject) => {
                     for(var x = 0; x< data.threads.length; x++){
                         if(data.threads[x].threadId ===  threadId){
@@ -480,11 +484,13 @@ module.exports = class User {
                     }
             })
             .then(function(){
+                console.log("RUNNING THEN")
                 res.status(202).json({
-                    threadURL: "/messages?messageId="+ data.threads[threadIndex].threadId
+                    threadURL: "/messages/"+ data.threads[threadIndex].threadId
                 }).end();
             })
-            .catch(function(){
+            .catch(function(err){
+                console.log("ERR: "+ err)
                 res.redirect("/home")
             })
             }
@@ -624,5 +630,39 @@ module.exports = class User {
                 img:url
             }
         })
+    }
+    //make the room active
+    setRoomActive(handle){
+        return new Promise(()=>{
+            UserDB.findOne({
+                handle: handle
+             })
+             .then((user)=>{
+                user.activeTutor = true;
+                user.save();
+                resolve(user)
+             })
+             .catch((err)=>{
+                 console.log(err)
+                 reject(err)
+             })
+        })  
+    }
+    //de-activate the room
+    deactivateRoom(handle){
+        return new Promise(()=>{
+            UserDB.findOne({
+                handle: handle
+             })
+             .then((user)=>{
+                user.activeTutor = false;
+                user.save();
+                resolve(user)
+             })
+             .catch((err)=>{
+                 console.log(err)
+                 reject(err)
+             })
+        })  
     }
 }
