@@ -31,7 +31,7 @@
     <!-- Google Tag Manager (noscript) -->
     <%- include('partials/googleTagManager1.ejs') -%>
     <!-- End Google Tag Manager (noscript) -->
-
+        <div class="blocker"></div>
     <div class="homeWrap">
     <div class="page-container">
         <%- include ('partials/newMeetupModal.ejs') %>
@@ -44,6 +44,7 @@
 
         <div class="profile-wrapper">
             <input type="hidden" name="upload-type" value="banner"/>
+            
                 <div class="header-image">
                     <button class="changeBanner-btn btn openImageEditor">Change Banner</button>
                     <p class="bannerSuccess badge badge-success">Banner Successfully Changed</p>
@@ -74,11 +75,14 @@
                     </div>
                  </div>
                 <%- include ('../Messages/partials/MessageInput.ejs')%>
+                
         </div>
         <audio id="pop">
             <source src="../assets/sounds/Blop-Mark_DiAngelo-79054334.mp3" type="audio/mpeg">
         </audio>
     <script src="../assets/jquery/jquery.session/jquery.session.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
     <script type="text/javascript" src="../assets/js/displayMyCourses.js"></script>
     <script type="text/javascript" src="../assets/js/group-mobile.js"></script>
     <script src="../assets/js/getNotifications.js"></script>
@@ -110,6 +114,9 @@
     <script type="text/javascript" src="../assets/js/crop.js"></script>
     <script type="text/javascript" src="../assets/js/Groups/story.js"></script>
     <script type="text/javascript" src="../assets/js/Groups/addStory.js"></script>
+    <script type="text/javascript" src="../assets/js/SiteWideSearch.js"></script>
+    <script type="text/javascript" src="../assets/js/Groups/addStoryResponse.js"></script>
+
 
 
 </body>
