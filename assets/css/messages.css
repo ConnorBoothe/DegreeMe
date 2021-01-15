@@ -61,9 +61,7 @@ input:-webkit-autofill:active {
     display:none;
 
 }
-.input-container-main {
-    margin-left: 500px;
-}
+
 .msgSender {
     font-size: 16px !important;
     text-align: left;
@@ -89,15 +87,46 @@ input:-webkit-autofill:active {
     width: 50%;
     text-align: right;
 }
+.message-wrapper1 {
+    margin-bottom: 50px;
+    width: 80%;
+    text-align: right;
+}
+.mainSearch{
+    margin-top:2px!important;
+}
+
 .headerContainer{
+    position:absolute;
     right:0;
     top:0;
-    width:215px!important;
-    margin-right:0px!important;
-    margin-top:5px;
+    width:450px;
+    height:20px;
+    margin-top:5px!important;
+    margin-right:5px;
     z-index:2;
-    
 }
+.messageHeaderContainer{
+    position:absolute;
+    right:0;
+    top:0;
+    width:220px;
+    height:20px;
+    margin-top:5px!important;
+    margin-right:5px;
+    z-index:2;
+}
+.messageHeaderContainer li{
+    display:inline-block;
+    margin-right:10px!important;
+    color:#d4d4d4!important;
+    margin-left:30px;
+    margin-top:-10px;
+    padding-top:0;
+    padding-right:0!important;
+    
+ 
+ }
 #pageTitle {
     padding-top:2px!important;
 }
@@ -143,6 +172,8 @@ input:-webkit-autofill:active {
 
 .msg_1 {
     left: 0 !important;
+    padding-top:10px;
+    min-width:100px;
 }
 
 .msg_ h1 {
@@ -158,7 +189,22 @@ input:-webkit-autofill:active {
     border-radius: 15px;
     left: 0;
 }
-
+  
+/* .receivedMsg:after {
+	content: '';
+	position: absolute;
+	right: 0;
+	/* top: 50%; */
+    /* width: 0;
+    bottom:2;
+	height: 0;
+	border: 20px solid transparent;
+	border-left-color: #2C2F33;
+	border-right: 0;
+	border-bottom: 0; */
+    /* margin-top: 40px; */
+    /* margin-right: -12px; */
+/* } */ 
 .sentMsg {
     padding-top: 5px;
     padding-bottom: 5px;
@@ -170,7 +216,7 @@ input:-webkit-autofill:active {
 }
 
 .sent-wrapper {
-    margin-left: 42%;
+    margin-left: 55%;
 
 }
 
@@ -203,13 +249,15 @@ input:-webkit-autofill:active {
     color: #d4d4d4;
     padding-left: 5px;
     padding-top: 5px;
+    text-align: left;
 }
 
 .msg-date-sent {
-    text-align: right;
+    text-align: left;
     padding-left: 0px !important;
     padding-right: 5px;
     font-size: 12px;
+    margin-left:15px;
     color: #d4d4d4;
     font-family: 'Open Sans', sans-serif;
 
@@ -312,7 +360,7 @@ input:-webkit-autofill:active {
 }
 #messageHeader {
     background-color:#1f2024;
-    width:85%!important;	    
+    width:85%;	    
     height:45px;	    
     padding-top:5px;	
     position:fixed;	    
@@ -339,6 +387,10 @@ input:-webkit-autofill:active {
 .messageImg {
     width: 25px;
     position:absolute;
+    text-align:left;
+    top:27px;
+    bottom:0;
+    right:-20px;
 
 }
 
@@ -368,9 +420,9 @@ input:-webkit-autofill:active {
     position:absolute;
 }
 .spinner-border{
-    width:20px!important;
-    height:20px!important;
-    margin-right:5px!important;
+    width:20px;
+    height:20px;
+    margin-right:5px;
 }
 .message-image img, .message-attachment img{
     width:220px!important;
@@ -574,9 +626,9 @@ input:-webkit-autofill:active {
         text-align: center;
         position: relative;
         margin-top: 30px !important;
-        padding-bottom: 0px;
+        padding-bottom: 20px;
         background-color: #18191a;
-        max-height:86vh!important;
+        max-height:80vh!important;
         overflow-y: auto;
         padding-right:20px;
     }
@@ -615,9 +667,6 @@ input:-webkit-autofill:active {
 .yt-thumbnail {
     width:200px;
 }
-.headerContainer{
-    margin-top:0!important;
-}
     .membersRightSideBar {
         position: fixed;
         right: 0;
@@ -648,7 +697,7 @@ input:-webkit-autofill:active {
         z-index:3!important;;
     }
     .groupThreads {
-        position: absolute;
+        position: fixed;
         left: 0;
         height: 100% !important;
         width: 250px;
@@ -657,6 +706,7 @@ input:-webkit-autofill:active {
         background-color:#1f2024;
         overflow-y: auto;
     }
+    
     .msgInput {
         width: 60%;
         font-family: "Helvetica Neue", Helvetica, sans-serif;
@@ -696,13 +746,16 @@ input:-webkit-autofill:active {
         background-color: #18191a;
     
     }
+    .containMessageReceived .messageImg {
+        position:absolute;
+    }
     .containMessageReceived {
-        min-height: 40px;
+        height: 40px;
         border-radius: 40px;
         text-align: left;
         color: white;
         padding-left: 20px;
-        padding-top: 10px;
+        padding-top:40px;
         text-align: left;
         text-justify: inter-word;
         font-family: 'Open Sans', sans-serif;
@@ -736,3 +789,4 @@ input:-webkit-autofill:active {
     
     }
 }
+/* chat bubble tail */

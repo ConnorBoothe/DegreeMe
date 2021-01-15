@@ -16,6 +16,8 @@ $(document).ready(function(){
     })
     var users = "";
     $(".main-search-input").on("focus",function(){
+        $(".input-container-main").css({width: "250px"})
+        $(".headerContainer").css({width: "500px"})
         $(".siteWideSearchContainer").show();
         $(".blocker").show();
     })
@@ -24,6 +26,8 @@ $(document).ready(function(){
         $("#showNotifications").hide();
         $(".blocker").hide();
         $(".main-search-input").attr("placeholder", "Search");
+        $(".input-container-main").css({width: "200px"})
+        $(".headerContainer").css({width: "450px"})
     })
     if(window.innerWidth > 1000){
         $("input[name='searchType']").on("click", function(){

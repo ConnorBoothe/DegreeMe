@@ -68,7 +68,6 @@ $(document).ready(function(){
                 payload = {
                     course:$(".add-tutoring-input").val(),
                     courseCode:$(".add-tutor-courseCode").val(),
-                    hourlyRate:$(".add-tutoring-input1").val(),
                     transcriptImg:url,
                     streamId:""
                 }

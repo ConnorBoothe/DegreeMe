@@ -251,8 +251,13 @@ router.post('/MakeStripeAccount',
 
     router.post("/updateMajor",function(req, res){
         users.updateMajor(req.session.userId, req.body.major)
-        .then(function(){
-            res.redirect("/user/"+req.session.handle);
+        .then(function(user){
+            console.log("MAJor updated")
+            console.log(user)
+            res.status(202).json({
+                major: req.body.major
+            }).end();
+            // res.redirect("/user/"+req.session.handle);
         })
        
     });

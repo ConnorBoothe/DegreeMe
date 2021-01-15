@@ -247,6 +247,7 @@ router.post("/unjoin",
         }).then(function () {
           studyGroups.getStudyGroupById(req.body.id)
           .then(function(data){
+            //must leave all threads
             threads.leaveThread(data[0].MessageId, req.session.handle);
             users.removeThread(req.session.handle, data[0].MessageId);
           })

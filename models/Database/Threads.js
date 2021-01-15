@@ -10,6 +10,7 @@ var Schema = mongoose.Schema;
 var thread = new Schema({
     host:{type:String, required:true},
     hostImg:{type:String, required:true},
+    //nested array with format [[handle, img]]
     userHandles:{type:Array, required:true},
     datetime:{type:Date, required:true},
     subject:{type:String}

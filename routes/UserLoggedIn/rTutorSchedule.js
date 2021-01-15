@@ -14,6 +14,7 @@ var mail = unirest("POST", "https://api.sendgrid.com/v3/mail/send");
 
 router.post("/addTimeslot", function(req, res){
     console.log("adding time slot")
+    console.log(req.body)
     schedule.addTimeslot(req.session.userId, req.body.day, req.body.time)
     .then(function(){
         res.status(202).json({
@@ -76,7 +77,7 @@ router.post("/getTutoringCourses", function(req, res){
 router.post("/addTutorCourse", function(req, res){
     // userId, course, courseCode, hourlyRate, transcriptImg
     // addTutor(userId, userName, handle, userImg, rating, course, courseCode, hourlyRate, transcriptImg, streamId)
-    tutorDB.addTutor(req.session.userId, req.session.name, req.session.handle, req.session.img, 5, req.body.course, req.body.courseCode, parseFloat(req.body.hourlyRate), req.body.transcriptImg, req.session.streamId)
+    tutorDB.addTutor(req.session.userId, req.session.name, req.session.handle, req.session.img, 5, req.body.course, req.body.courseCode, req.body.transcriptImg, req.session.streamId)
     .then(function(data){
         mail.headers({
             "content-type": "application/json",

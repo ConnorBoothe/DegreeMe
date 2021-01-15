@@ -57,9 +57,7 @@
 #userImage{
   width:140px!important;
 }
-.editImg{
-        margin-bottom:10px;
-}
+
 
 .slidecontainer {
     width: 10%; /* Width of the outside container */
@@ -250,7 +248,7 @@ input[type=range]::-webkit-slider-thumb {
 }
 .input-container1Light-settings {
   position:relative!important;
-  width:50%!important;
+  width:100%!important;
 display: -ms-flexbox; /* IE10 */
 display: flex;
 font-size:14px!important;
@@ -279,7 +277,7 @@ color:white!important;
   background-color:#2c2f33;
   min-height:50px;
   display:none;
-  width:50%;
+  width:100%;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
   margin-left:auto;

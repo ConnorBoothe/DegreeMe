@@ -51,8 +51,8 @@ function filterMajorSettings(res, searchValue){
     else{
         for (x in majorList){
             if((majorList[x]).toLowerCase().includes(searchValue.toLowerCase())){
-          
                 if(count < 10){
+                    console.log(majorList[x])
                     majors+= "<div class='major-results major-results-settings'><p>"+majorList[x]+ " "+
                     "</p></div>";
                     count++;
@@ -111,7 +111,7 @@ $(document).ready(function(){
         }).done(function(res) {
             
             $("#searchInput").on("keyup", function(){
-               if(window.location.href.toString().split("/")[3].includes("Settings")){
+               if(window.location.href.toString().split("/")[3].includes("Settings") || window.location.href.toString().split("/")[3].includes("user")){
                 $(".major-autocomplete-settings").html(filterMajorSettings(res, $(this).val()));
                }
                else{
@@ -125,7 +125,8 @@ $(document).ready(function(){
 
     //select major on settings page
     $(".major-autocomplete-settings").on("click", ".major-results-settings", function(){
-        $("#searchInput").val($(this).text())
+        $("#searchInput").val("")
+        $(".newMajor").html("<h3 class='newMajorText'>New Major: <span class='majorSpan' id='major'>"+$(this).text()+"</span></h3>");
         $(".blocker").hide();
         $(".major-autocomplete-settings").hide();
         $(".input-container1Light-settings").css({

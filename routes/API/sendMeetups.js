@@ -9,7 +9,7 @@ var meetups = new MeetupsDB();
 //send users meetups
 router.get('/API/Meetups', function(req, res){
     if(req.session.userId){
-        meetups.getConnectionsByHandle(req.session.handle).exec((err,docs)=>{
+        meetups.getMeetupsByHandle(req.session.handle).exec((err,docs)=>{
             if(err){
                 res.json("An error occurred.")
             }

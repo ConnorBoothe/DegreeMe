@@ -2,7 +2,6 @@
   <input type="hidden" name="userId" value="<%=session.userId%>"/>
         <script type="text/javascript" src="/assets/js/MyCourses.js"></script>
         <ul class="menuIcons">
-
                 <input id="theme" type="hidden" value="<%=session.theme%>"/>
                 <%if(session.email == "cboothe1@uncc.edu" || session.email == "chithe@uncc.edu"){%>
                   <a href="/admin" class="menu-link"><li class="headerLinks "><span class="img"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-shield-fill-check" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -18,7 +17,7 @@
                         <path fill-rule="evenodd" d="M11.293 1.293a1 1 0 0 1 1.414 0l2 2a1 1 0 0 1 0 1.414l-9 9a1 1 0 0 1-.39.242l-3 1a1 1 0 0 1-1.266-1.265l1-3a1 1 0 0 1 .242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z"/>
                         <path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 0 0 .5.5H4v.5a.5.5 0 0 0 .5.5H5v.5a.5.5 0 0 0 .5.5H6v-1.5a.5.5 0 0 0-.5-.5H5v-.5a.5.5 0 0 0-.5-.5H3z"/>
                       </svg></span><span class="headerLinkTitle" name="Connect">Find a Tutor</span></li></a> -->
-                      <a href="/groups" class="menu-link" name="Host a Session"><li class="headerLinks "><span class="img"><svg class="bi bi-people-fill" width="1.25em" height="1.25em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <a href="/Group/" class="group-link" class="menu-link" name="Host a Session"><li class="headerLinks "><span class="img"><svg class="bi bi-people-fill" width="1.25em" height="1.25em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
                       </svg></span><span class="headerLinkTitle" >Groups</span></li></a>
                       <a href="/discover" class="menu-link" name="Host a Session"><li class="headerLinks "><span class="img"><svg class="bi bi-compass" width="1.25em" height="1.25em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

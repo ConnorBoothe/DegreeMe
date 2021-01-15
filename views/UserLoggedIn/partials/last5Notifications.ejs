@@ -1,6 +1,6 @@
 <%- include ('mobileMenu.ejs') %>
 <link href="../assets/css/userHeader.css" rel="stylesheet">
-<script type="text/javascript" src="../assets/js/checkUserInactivity.js"></script>
+<script type="text/javascript" src="../assets/js/checkUserActivity.js"></script>
 
     <!-- <p class="betaVersion">BETA</p> -->
     <!-- <button class="navbar-toggler third-button" type="button" data-toggle="collapse" data-target="#navbarSupportedContent22"
@@ -17,7 +17,7 @@
     <h1 id="pageTitle" class="pageTitleDark"> 
         <div class="userHeader-mobile">
             <div class="mobileUserImg">
-            <img class="userProfileImg" src="<%=session.img%>" alt="Profile Picture" />
+            <img class="userProfileImg userAccount" src="<%=session.img%>" alt="Profile Picture" />
                <h1 class="userProfileName "><span><%=session.handle%></span></h1>
                <%- include ('userProfileDropdown.ejs') %>
               </div>
@@ -37,69 +37,22 @@
        
                  <div>
                     <ul class="headerContainer">
-                        
-                                <li class="desktop-li">
-                                    <span class="bell" name = "Notifications" data-toggle="tooltip" data-placement="bottom" title="Notifications">
-                                        <svg class="bi bi-bell-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
-                                          </svg>
-                                    
-                                        <span class="badge badge-danger bdge"></span>
-                                  
-                                    <span class='hint' style='position:absolute'></span>
-                                    
-                                     </span>
-                                </li>
-                                <li class="desktop-li">
-                                    <span class="message" name = "New Message">  
-                                        <svg class="bi bi-chat-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6-.097 1.016-.417 2.13-.771 2.966-.079.186.074.394.273.362 2.256-.37 3.597-.938 4.18-1.234A9.06 9.06 0 0 0 8 15z"/>
+                            <li class="desktop-li">
+                                <div class="input-container-main">
+                                        <span class="mainSearch" name = "Notifications">
+                                            <svg class="text-light" width=".95em" height=".95em"
+                                            viewBox="0 0 16 16" class="bi bi-search" fill="currentColor"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd"
+                                                d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
+                                            <path fill-rule="evenodd"
+                                                d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
                                         </svg>
-                                        <span class="badge badge-danger bdge1"></span>
-                                        <span class='hint' style='position:absolute'></span>
-                                    </span>
-                                </li>
-                                <li class="searchLi">
-                                    
-                                 
-                                     
-                             </li>
-                                <li class="userImgLi">
-                                <div class="userHeader">
-                                 <img class="userProfileImg" src="<%=session.img%>" alt="Profile Picture" />
-                                   
-                                    <h1 class="userProfileName "><span><%=session.handle%></span></h1>
-                                    <%- include ('userProfileDropdown.ejs') %>
-                                   
+                                        </span>
+                                        <input name="course" id="" class=" main-search-input"
+                                            placeholder="Search" autocomplete="off" />
                                 </div>
-                                </li>
-                               
-                            </ul>
-                        </div>
-                    <div id="showNotifications" class="">
-                        <!-- <span>X</span> -->
-                    <h1 id="recentNotifications">Notifications</h1>
-                    <ul>
-                        <% for(x in session.notifications){%>
-                                <li class=" notificationsDark">
-                                    <img class="notifImg" src="<%=session.img%>"/>
-                                    <p class="notif"><%=session.notifications[x] %></p>
-                                </li>
-                        <% }%>
-                    </ul>
-                </div>
-
-               
-                    <span class="headerLinkPageTitle"></span>
-                    <div class="input-container-main">
-                        <form method="POST" action="/SearchMain" class="searchForm">
-                            <span class="mainSearch" name = "Notifications">
-                                <img id="bellImg" alt='bell' src='../assets/img/search.svg.svg'/>
-                            </span>
-                            <input name="course" id="" class=" main-search-input"
-                                placeholder="Search" autocomplete="off" />
-                        </form>
-                    </div>
+                                    
                     
                     <div class="siteWideSearchContainer">
                         <div class="tab-container">
@@ -116,4 +69,56 @@
                         
                         
                     </div>  
+                            </li>
+                                <li class="desktop-li">
+                                    <span class="bell" name = "Notifications" data-toggle="tooltip" data-placement="bottom" title="Notifications">
+                                        <svg class="bi bi-bell-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+                                          </svg>
+                                    
+                                        <span class="badge badge-danger bdge"></span>
+                                  
+                                    <span class='hint' style='position:absolute'></span>
+                                    
+                                     </span>
+                                </li>
+                                <li class="desktop-li">
+                                    <span class="message" name = "New Message" data-toggle="tooltip" data-placement="bottom" title="Messages">  
+                                        <svg class="bi bi-chat-fill" width="1.25em" height="1.25em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6-.097 1.016-.417 2.13-.771 2.966-.079.186.074.394.273.362 2.256-.37 3.597-.938 4.18-1.234A9.06 9.06 0 0 0 8 15z"/>
+                                        </svg>
+                                        <span class="badge badge-danger bdge1"></span>
+                                        <span class='hint' style='position:absolute'></span>
+                                    </span>
+                                </li>
+                                <li class="userImgLi">
+                               
+                                    <span class="account" name = "New Message" >  
+
+                                 <img class="userProfileImg userAccount" src="<%=session.img%>" alt="Profile Picture" data-toggle="tooltip" data-placement="bottom" title="Account" />
+                                   </span>
+                                    <input type="hidden" class="userProfileName " value="<%=session.handle%>">
+                                    <%- include ('userProfileDropdown.ejs') %>
+        
+                                </li>
+                               
+                            </ul>
+                        </div>
+                    <div id="showNotifications" class="">
+                        <!-- <span>X</span> -->
+                    <h1 id="recentNotifications">Notifications</h1>
+                    <ul>
+                        <% for(x in session.notifications){%>
+                                <li class=" notificationsDark">
+                                    <img class="notifImg" src="<%=session.img%>"/>
+                                    <p class="notif"><%=session.notifications[x] %></p>
+                                </li>
+                        <% }%>
+                    </ul>
+                </div>
+                <div class="page-title-container">
+                    <span class="headerLinkPageTitle"></span>
+
+                </div>
+                
  </h1>

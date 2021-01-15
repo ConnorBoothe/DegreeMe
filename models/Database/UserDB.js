@@ -70,8 +70,9 @@ var userDBSchema = new Schema({
     //account status
     status:{type:String, required:true},  
     //user status
-    active: {type:String, required:true},
+    active: {type:Boolean, required:true},
     activationCode:{type:String, required:true},  
+    activeRoom: {type:Boolean},
     // subscription:{type:String, required:true},
     Major: {type:String},
     Tutor:{type:Boolean, required:true},
@@ -458,19 +459,21 @@ module.exports = class User {
     }
     //clear notification count for a given thread
     sawMessage(handle, threadId, res){
+        console.log("data exists")
+
+        console.log(handle)
+        console.log(threadId)
         UserDB.findOne({
             handle: handle
         }).then(function(data){
             var threadIndex = -1;
-            console.log(data)
             if(data){
-                console.log("data exists")
                 new Promise((resolve, reject) => {
                     for(var x = 0; x< data.threads.length; x++){
                         if(data.threads[x].threadId ===  threadId){
                             console.log("set to true")
                             threadIndex = x;
-                            data.threads[x].seen = true;
+                            data.threads[x].unreadCount = 0;
                             data.save();
                             resolve(true);
                         }
@@ -481,10 +484,11 @@ module.exports = class User {
             })
             .then(function(){
                 res.status(202).json({
-                    threadURL: "/messages?messageId="+ data.threads[threadIndex].threadId
+                    threadURL: "/messages/"+ data.threads[threadIndex].threadId
                 }).end();
             })
-            .catch(function(){
+            .catch(function(err){
+                console.log("ERR: "+ err)
                 res.redirect("/home")
             })
             }
@@ -496,6 +500,7 @@ module.exports = class User {
             console.log(err)
         })
     }
+    //set the user's bio
     setBio(handle, bio){
         return UserDB.findOne({
                 handle: handle
@@ -503,6 +508,22 @@ module.exports = class User {
                 docs.bio = bio;
                 docs.save();
             });
+    }
+    updateClass(id, classification){
+        return new Promise((resolve, reject)=>{
+            UserDB.findOne({
+                _id: id
+            })
+            .then((user)=>{
+                user.classification = classification;
+                user.save();
+                resolve(classification)
+            })
+            .catch((err)=> {
+                reject(err)
+            })
+        })
+        
     }
     //when user creates seller account, make them a 'tutor'
     becomeTutor(handle){
@@ -573,7 +594,8 @@ module.exports = class User {
     }
      //update a user's major
      updateMajor(id, major){
-        return UserDB.findOne({_id: id}).updateOne({$set:{Major: major}})
+        return UserDB.findOne({_id: id})
+        .updateOne({$set:{Major: major}})
     }
     //set user status to active or inactive
     setUserStatus(id, status){
@@ -595,5 +617,58 @@ module.exports = class User {
         return UserDB.findOne({
            _id: userId
         }, "StudyGroups");
+    }
+       //get user status to active or inactive
+       updateProfileImage(userId, url){
+        return UserDB.findOne({
+           _id: userId
+        })
+        .updateOne({
+            $set: {
+                img:url
+            }
+        })
+    }
+    //make the room active
+    setRoomActive(handle){
+        return new Promise(()=>{
+            UserDB.findOne({
+                handle: handle
+             })
+             .then((user)=>{
+                user.activeTutor = true;
+                user.save();
+                resolve(user)
+             })
+             .catch((err)=>{
+                 console.log(err)
+                 reject(err)
+             })
+        })  
+    }
+    //de-activate the room
+    deactivateRoom(handle){
+        return new Promise(()=>{
+            UserDB.findOne({
+                handle: handle
+             })
+             .then((user)=>{
+                user.activeTutor = false;
+                user.save();
+                resolve(user)
+             })
+             .catch((err)=>{
+                 console.log(err)
+                 reject(err)
+             })
+        })  
+    }
+    updateImageUrl(id,url){
+        return UserDB.findOne({_id: id})
+        .updateOne({
+            $set: {
+               img: url 
+            }
+        })
     }
 }

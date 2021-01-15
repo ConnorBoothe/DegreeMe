@@ -38,12 +38,13 @@ router.use(bodyParser.urlencoded({
   resave: true,
   saveUninitialized: true
 }));
-router.get('/TutoringSessions',
+router.get('/meetups',
   function (req, res) {
     //require login for page access
     if (req.session.userId) {
-      meetups.getConnectionsByHandle(req.session.handle).exec((err, docs1) => {
+      meetups.getMeetupsByHandle(req.session.handle).exec((err, docs1) => {
         var pastMeetups = [];
+        console.log("Meetups: " + docs1)
         for (x in docs1) {
           if (new Date(docs1[x].date) < new Date()) {
             pastMeetups.push(docs1[x]);
@@ -63,7 +64,7 @@ router.get('/TutoringSessions',
 
 router.get('/changeMeetupsViewing', function (req, res) {
   if (req.session.userId) {
-    meetups.getConnectionsByHandle(req.session.handle).exec((err, docs) => {
+    meetups.getMeetupsByHandle(req.session.handle).exec((err, docs) => {
       var returnArr = [];
       if (req.query.kind.valueOf() == "undefined".valueOf()) {
         returnArr = docs;

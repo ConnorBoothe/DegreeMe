@@ -48,9 +48,10 @@ module.exports = class TutorSchedules {
    }
     //add timeslot
     addTimeslot(id, day, time){
+        console.log("DAY: "+ day)
         var daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
-        var timeslot = new schedule({userId:id, day:daysOfWeek[parseInt(day)], time: time});
+        var timeslot = new schedule({userId:id, day:day, time: time});
         return timeslot.save();
     }
     //remove timeslot

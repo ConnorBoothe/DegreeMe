@@ -1,15 +1,5 @@
 <div class="homeSideBar">
-    <div class="homeSideBar-container">
-        <h2 class="homeSideBarTitle">Your Groups</h2>
-      
-        <ul class="sideBarItemMenu">
-            <%for (var x = myStudyGroups.length-1; x>=0;x--){%>
-                <li class="sideBarItemMenu-item"><a href="/Group/<%=myStudyGroups[x].studyGroupId%>"><%= myStudyGroups[x].studyGroupName%></a></li>
-            <%}%>
-            <li class="sideBarItemMenu-item"><a href="/startAGroup" class="btn btn-primary startGroup">Start a Group</a></li>
-        </ul>
-    </div>
-    <div class="homeSideBar-container">
+    <div class="homeSideBar-container tutoring-container">
         <h2 class="homeSideBarTitle">Courses You're Tutoring In</h2>
       
         <ul class="sideBarItemMenu tutoringCourses">

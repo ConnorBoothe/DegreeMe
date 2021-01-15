@@ -1,0 +1,19 @@
+<div class="mobileBio">
+    <%if(session.handle === user.handle){%>
+        <p class="profileBio"><textarea maxlength="150" id="changeBio" class=""
+            readonly><%=user.bio%>YOYOYOY </textarea>
+            <a class="memberImage" data-toggle="tooltip" data-placement="top" title="Edit Bio">
+                <span class="btn btn-primary editBio">Edit Bio
+                </span>
+            </a>
+        </p>
+    <%}else{%>
+        <%if(user.bio === "Tell the world a bit about yourself"){%>
+            <p class="profileBio"><%=user.handle%> has not set a bio.
+        <%}else{%>
+        <p class="profileBio"><%=user.bio%>
+        <%}%>
+        </p>
+    <%}%>
+
+</div>

@@ -8,16 +8,19 @@ mongoose.Promise = global.Promise;
 mongoose.connect(process.env.MONGO_URL, {useNewUrlParser: true, useUnifiedTopology: true }, function (err) {
 
 });
-var db = mongoose.connection;
-// db.on('error', console.error.bind(console, 'connection error:'));
-// db.on('connected', function(){
-//   //console.log("Connected!")
-// });
+
 var Schema = mongoose.Schema;
 var membersSchema = new Schema({
   MemberHandle: {type:String, required: true},
   MemberImage:{type:String, required: true},
   MemberRole:{type:String, required: true}
+});
+
+//group chat schema
+var groupChat = new Schema({
+  threadId: {type:String, required: true},
+  name: {type:String, required: true},
+  category: {type:String, required: true}
 });
 
 //add course name to study groups db
@@ -34,7 +37,9 @@ var StudyGroupDBSchema = new Schema({
   GroupDescription:{type: String,required: true},
   MessageId:{type: String,required: true},
   GroupImage: {type: String},
-  Members: [membersSchema]
+  BannerImage: {type: String},
+  Members: [membersSchema],
+  groupChat: [groupChat]
 }, {
   collection: 'StudyGroupsDB'
 });
@@ -112,7 +117,7 @@ groupsAutocompleteByName(searchValue){
       GroupName:GroupName,
       GroupDescription: GroupDescription,
       GroupImage:GroupImage,
-      Members: [{MemberHandle:HostHandle, MemberImage: HostImage, MemberRole: "Host"}],
+      Members: [{MemberHandle:HostHandle, MemberImage: HostImage, MemberRole: "Admin"}],
       MessageId: MessageID
     });
     return studyGroup.save();
@@ -224,7 +229,6 @@ groupsAutocompleteByName(searchValue){
     return new Promise((resolve, reject)=> {
       users.getGroupsById(userId)
       .then((groups)=> {
-        console.log("Groups: " + groups)
         var groupIdArray = [];
         for (var i = 0; i < groups.StudyGroups.length; i++) {
           groupIdArray.push(groups.StudyGroups[i].studyGroupId)
@@ -243,6 +247,42 @@ groupsAutocompleteByName(searchValue){
         reject(err)
       })
     })
-    
+  }
+  getGroupMembers(id){
+    return GroupsDB.findOne({
+      _id: id
+    }, "Members")
+  }
+  getGroupThreads(id){
+    return GroupsDB.findOne({
+      _id: id
+    }, "groupChat")
+  }
+  addGroupChat(id, threadId, name, category){
+    return new Promise((resolve, reject)=>{
+      GroupsDB.findOne({
+        _id: id
+      })
+      .then((group)=>{
+        var newChat = {threadId: threadId, name: name, category: category}
+        group.groupChat.push(newChat);
+        group.save();
+        resolve(newChat);
+      })
+      .catch((err)=>{
+        console.log(err)
+        reject(err)
+      })
+    })
+  }
+  addBannerImage(id, url){
+    return new Promise ((resolve, reject)=>{
+      GroupsDB.findOne({_id: id}).then((group)=>{
+        group.BannerImage = url;
+        group.save();
+        resolve(group)
+      })
+    })
+   
   }
 }

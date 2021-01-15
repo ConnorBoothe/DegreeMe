@@ -43,47 +43,16 @@
                         <table id="meetupsTable" class="table_">
                             <thead class="">
                                 <tr>
-                                    <th class="text-light">Tutor</th>
-                                    <th class="text-light">Student</th>
-                                    <th class="text-light">Class</th>
+                                    <th class="text-light">Role</th>
+                                    <th class="text-light">Host</th>
                                     <th class="text-light">Date</th>
-                                    <th class="text-light">Time</th>
-                                    <th class="text-light">Location</th>
-                                    <th class="text-light">Members</th>
+                                    <th class="text-light">Duration</th>
                                     <th class="text-light"></th>
-                                  
-                                
                                 </tr>
                             </thead>
                             <tbody>
                                 <div class="myConnectionsWrapper">
-                                    <% for(x in meetups){%>
-                                    <tr class="myConnectionContainer">
-                                        <td class="text-light"><%=meetups[x].tutorHandle%></td>
-                                        <td class="text-light"><%=meetups[x].userHandle%></td>
-                                        <td class="text-light"><%=meetups[x].class%></td>
-                                        <td class="text-light"><%= formatDate(meetups[x].date)%></td>
-                                        <td class="text-light"><%= formatTime(meetups[x].date)%></td>
-                                        <%if(meetups[x].Location.Building){%>
-                                            <td class="text-light">Building: <%=meetups[x].Location.Building%> Room: <%=meetups[x].Location.Building%> </td>
-
-                                        <%}else if(meetups[x].ZoomLink){%>
-                                            <td class="text-light">Zoom Meeting</td>
-                                            <%}else{%>
-                                                <td class="text-light"><a class="btn btn-primary setLocation" href="meeting/<%=meetups[x]._id%>">Set Location</a></td>
-                                            <%}%>
-                                        <td>
-                                            <%for(i in meetups[x].Members){%>
-                                            <a href="/user/<%= meetups[x].Members[i].handle%>" class="memberImage"
-                                                data-toggle="tooltip" title="<%= meetups[x].Members[i].handle%>">
-                                                <img class="meetupsImg" src="<%=meetups[x].Members[i].image%>" />
-                                            </a>
-                                            <%}%>
-                                        </td>
-            
-                                        <td></td>           
-                                    </tr>
-                                    <%}%>
+                                   
                                 </div>
                             </tbody>
                         </table>

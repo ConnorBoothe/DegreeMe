@@ -39,30 +39,33 @@ router.get('/review/:handle', function (req, res) {
   if (req.session.userId) {
         users.getUserHandleByHandle(req.params.handle)
         .then(function(handle){
-          console.log(handle)
-          if(handle.handle){
-            res.render('UserLoggedIn/LeaveAReview', {
-              qs: req.query,
-              session: req.session,
-              params: req.params
-           });
+          if(req.query.id){
+            meetups.getMeetupById(req.query.id)
+            .then((meetup)=>{
+              console.log(meetup)
+                if(!meetup.LeftReview && handle.handle){
+                  res.render('UserLoggedIn/LeaveAReview', {
+                    qs: req.query,
+                    session: req.session,
+                    params: req.params
+                 });
+                }
+                else {
+                  res.redirect("/")
+                }
+            })
           }
-          else {
+          else{
             res.redirect("/")
+
           }
         })
-        
-      // }
-      // else{
-      //   res.redirect("/home");
-      // }
-    // } else{
-    //   res.redirect("/home");
-    // }
-    // })
-  // } else {
-  //   res.redirect('/login?message=Session%20Ended');
-   }
+        .catch((err)=>{
+          console.log(err)
+          res.redirect("/")
+
+        })
+       }
 
 });
 
@@ -80,9 +83,11 @@ router.get('/FeedbackLeft', function (req, res) {
 router.post('/LeaveAReview', function (req, res) {
   reviews.addReview(req.session.handle, req.session.img, req.body.tutor, req.body.course, req.body.star, req.body.message)
   .then(function(){
-    users.leftReview(req.session.handle, req.body.connectionID);
-    meetups.updateLeftReview(req.body.connectionID);
+    meetups.updateLeftReview(req.body.meetupId);
     res.redirect("/FeedbackLeft");
+  })
+  .catch((err)=>{
+    console.log(err)
   })
 });
 

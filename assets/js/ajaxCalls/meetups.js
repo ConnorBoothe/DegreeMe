@@ -51,93 +51,53 @@ function filterMeetupResults(res, type){
     var meetups = "";
     if(type === "Current"){
         for(var x = res.length-1; x>=0; x--){
+          console.log(res[x]._id)
             if(new Date(res[x].date) > new Date()){
-                meetups +=   '<tr class="myConnectionContainer">'+
-                '<td class="text-light">'+res[x].tutorHandle+'</td>'+
-                '<td class="text-light">'+res[x].userHandle+'</td>'+
-                '<td class="text-light">'+res[x].class+'</td>'+
-                '<td class="text-light">'+formatMeetupDate(res[x].date)+'</td>'+
-                '<td class="text-light">'+ formatMeetupTime(res[x].date)+'</td>';
-                if(res[x].Location.Building){
-                  meetups += '<td class="text-light">Building: '+res[x].Location.Building+' Room: '+ meetups[x].Location.Building +'</td><td>';
+              meetups +=   '<tr class="myConnectionContainer">'+
+              '<td class="text-light">'+res[x].role+'</td>'+
+              '<td class="text-light">'+res[x].host+'</td>'+
+              '<td class="text-light">'+formatMeetupDate(res[x].date)+'</td>'+
+              '<td class="text-light">'+ res[x].duration+' hrs</td> </td>';
+                meetups+='<td></td>';        
 
-              }else if(res[x].ZoomLink){
-                meetups +='<td class="text-light">Zoom Meeting</td><td>';
-              }else{
-                meetups += '<td class="text-light"><a class="btn btn-primary setLocation" href="meeting/'+res[x]._id+'">Set Location</a></td><td>';
-              }
-                for(i in res[x].Members){
-                    meetups+= '<a href="/user/'+res[x].Members[i].handle+'" class="memberImage" data-toggle="tooltip" data-placement="top" title="'+res[x].Members[i].handle+'">'+
-                        '<img class="meetupsImg" src="'+res[x].Members[i].image+'"/>'+
-                    '</a>';
-                }
-            
-            meetups+= '</td>'+
-             
-                '<td></td>'+
-               
-            '</tr>';
+              meetups+=  '</tr>';          '</tr>';
             }
           }
     }
     else if (type === "Past"){
         for(var x = res.length-1; x>=0; x--){
             if(new Date(res[x].date) < new Date()){
-                meetups +=   '<tr class="myConnectionContainer">'+
-                '<td class="text-light">'+res[x].tutorHandle+'</td>'+
-                '<td class="text-light">'+res[x].userHandle+'</td>'+
-                '<td class="text-light">'+res[x].class+'</td>'+
+              meetups +=   '<tr class="myConnectionContainer">'+
+                '<td class="text-light">'+res[x].role+'</td>'+
+                '<td class="text-light">'+res[x].host+'</td>'+
                 '<td class="text-light">'+formatMeetupDate(res[x].date)+'</td>'+
-                '<td class="text-light">'+ formatMeetupTime(res[x].date)+'</td>';
-              if(res[x].Location.Building){
-                  meetups += '<td class="text-light">Building: '+res[x].Location.Building+' Room: '+ meetups[x].Location.Building +'</td><td>';
-
-              }else if(res[x].ZoomLink){
-                meetups +='<td class="text-light">Zoom Meeting</td><td>';
-              }else{
-                meetups += '<td class="text-light"><a class="btn btn-primary setLocation" href="meeting/'+res[x]._id+'">Set Location</a></td><td>';
-              }
-                for(i in res[x].Members){
-                    meetups+= '<a href="/user/'+res[x].Members[i].handle+'" class="memberImage" data-toggle="tooltip" data-placement="top" title="'+res[x].Members[i].handle+'">'+
-                        '<img class="meetupsImg" src="'+res[x].Members[i].image+'"/>'+
-                    '</a>';
+                '<td class="text-light">'+ res[x].duration+' hrs</td> </td>';
+                if(!res[x].LeftReview && res[x].role != "Host" ){
+                  meetups+='<td><a href="/review/'+res[x].host+'?id='+res[x]._id+'" class="btn-primary">Leave a Review</button></td>';        
                 }
-            
-            meetups+= '</td>'+
-         
-               
-            '</tr>';
-            }
+                else{
+                  meetups+='<td></td>';        
+
+                }
+                meetups+=  '</tr>';            }
+
         }
     }
     else{
         for(var x = res.length-1; x>=0; x--){
-            
             meetups +=   '<tr class="myConnectionContainer">'+
-                '<td class="text-light">'+res[x].tutorHandle+'</td>'+
-                '<td class="text-light">'+res[x].userHandle+'</td>'+
-                '<td class="text-light">'+res[x].class+'</td>'+
+                '<td class="text-light">'+res[x].role+'</td>'+
+                '<td class="text-light">'+res[x].host+'</td>'+
                 '<td class="text-light">'+formatMeetupDate(res[x].date)+'</td>'+
-                '<td class="text-light">'+ formatMeetupTime(res[x].date)+'</td>';
-                if(res[x].Location.Building){
-                  meetups += '<td class="text-light">Building: '+res[x].Location.Building+' Room: '+ meetups[x].Location.Building +'</td><td>';
-
-              }else if(res[x].ZoomLink){
-                meetups +='<td class="text-light">Zoom Meeting</td><td>';
-              }else{
-                meetups += '<td class="text-light"><a class="btn btn-primary setLocation" href="meeting/'+res[x]._id+'">Set Location</a></td><td>';
-              }
-                for(i in res[x].Members){
-                    meetups+= '<a href="/user/'+res[x].Members[i].handle+'" class="memberImage" data-toggle="tooltip" data-placement="top" title="'+res[x].Members[i].handle+'">'+
-                        '<img class="meetupsImg" src="'+res[x].Members[i].image+'"/>'+
-                    '</a>';
+                '<td class="text-light">'+ res[x].duration+' hrs</td> </td>';
+                if(!res[x].LeftReview && res[x].role != "Host" ){
+                  meetups+='<td><a href="/review/'+res[x].host+'?id='+res[x]._id+'" class="btn-primary">Leave a Review</button></td>';        
                 }
-            
-            meetups+= '</td>'+
-            
-                '<td></td>'+
-               
-            '</tr>';
+                else{
+                  meetups+='<td></td>';        
+
+                }
+                meetups+=  '</tr>';
             }
         }
         if(meetups != ""){
@@ -151,6 +111,25 @@ function filterMeetupResults(res, type){
 
 
 $(document).ready(function(){
+  $.ajax({
+    url: '/API/Meetups' ,
+    method: 'GET',
+    error:function(err,str){
+    }
+    }).done(function(res) { 
+      console.log(res)
+      var results = filterMeetupResults(res, "Past");
+      if(results.split(" ")[0] != "<h3"){
+        $(".noMeetups").hide();
+        $("#meetupsTable").show();
+        $("tbody").html(filterMeetupResults(res, "Past"))
+      }
+      else{
+        $("#meetupsTable").hide();
+        $(".noMeetups").html(filterMeetupResults(res, type));
+        $(".noMeetups").show();
+      }
+});
     $(".myConnectionOptions").on("click", function(){
         var type = $(this).text();
         $.ajax({
@@ -159,6 +138,7 @@ $(document).ready(function(){
             error:function(err,str){
             }
             }).done(function(res) { 
+              console.log(res)
               var results = filterMeetupResults(res, type);
               if(results.split(" ")[0] != "<h3"){
                 $(".noMeetups").hide();

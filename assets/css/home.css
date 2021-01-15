@@ -6,8 +6,12 @@
     background-color: #18191a;
 
 }
-
-
+.noFollowing {
+    padding-top:30px;
+}
+.tutoring-container { 
+    display:none;
+}
 .home-wrapper{
     padding-top:50px;
     width:100%;
@@ -482,6 +486,7 @@
     font-family: 'Open Sans', sans-serif!important;
     padding-left:20px;
     color:#d4d4d4;
+    width:120px;
     margin-bottom:3px!important;
 }
 .myCoursesWrapper{
@@ -504,7 +509,7 @@ padding-right:10px;
     margin-right:50px;
 }
 .dots:hover{
-    background-color:black;
+    background-color:#343a40;
 }
 .dots-btn{
     float:right;
@@ -549,15 +554,18 @@ padding-right:10px;
 }
 .popover{
     width:150px!important; 
-    background-color:black!important;
+    background-color:#18191a!important;
+    box-shadow: 2px 2px 2px 2px solid black;
 }
-.arrow::before, .arrow::after {
+.bs-popover-right .arrow::before,  .arrow::after, .bs-popover-right .arrow::after {
     /* border-left-color:black!important; 
     -moz-transform: scaleX(-1);
     -webkit-transform: scaleX(-1);
     -o-transform: scaleX(-1);
     transform: scaleX(-1);
     -ms-filter: fliph; IE */
+    color: #18191a!important;
+    background-color:#18191a!important;
 }
 .placeBid{
     float:right;
@@ -580,6 +588,26 @@ padding-right:10px;
     margin-right:20px;
     border-radius:5px;
 }
+.input-container-main{
+    display: -ms-flexbox; /* IE10 */
+    display: flex;
+    width: 200px;
+    background-color:#242526!important;
+    border-collapse: separate; 
+    border-radius:10px;
+    font-size:16px!important;
+    padding-bottom:none!important;
+    height:30px;
+    margin-top:0!important;
+    background-color:none;
+    color:white!important;
+    margin-bottom:10px;
+    margin-top:8px;
+    position:relative;
+    z-index:3;
+    top:0;
+    
+  }
 .help-dollar-text{
     padding-left:10px!important;
 }
@@ -631,6 +659,10 @@ padding-right:10px;
     padding-left:20px;
     padding-right:20px;
     font-family: 'Open Sans', sans-serif!important;
+}
+.page-title-container {
+    width:60%;
+    
 }
 .addCourseCode{
     font-size:12px;
@@ -1223,6 +1255,18 @@ input[name="searchType"]{
         margin-top:40px;
         width:100%;
     }
+    .add-story-btn{
+        font-family: "Open sans", "sans-serif";
+        font-size:14px;
+        width:20%;
+        margin-right:3%;
+        right:0;
+        position:relative;
+        float:right;
+        margin-left:48%;
+        margin-top:0!important;
+        border-radius:15px;
+    }
     .add-tutoring-label{
         text-align:left!important;
         margin-bottom:10px;
@@ -1342,12 +1386,14 @@ input[name="searchType"]{
         font-family: "Open sans", "sans-serif";
         font-size:15px;
         padding-top:5px;
+        margin-top:10px;
         padding-bottom:5px;
         padding-left:8px;
         padding-right:8px;
+        
     }
     .tutorList {
-        width:100%;
+        width:70%;
         text-align:center;
     }
     .tutorList li {
@@ -1427,6 +1473,7 @@ input[name="searchType"]{
         text-align:center;
         font-family: "Open sans", "sans-serif";
         text-align:center;
+        margin-bottom: 40px;
     }
     .tagACourse, .tagAGroup{
         background-color:#242526;
@@ -1658,10 +1705,10 @@ input[name="searchType"]{
     }
     .searchTab{
         display:inline-block;
-        font-size:15px;
+        font-size:13px;
         padding-bottom:5px;
-        margin-left:10px;
-        margin-right:10px;
+        margin-left:5px;
+        margin-right:5px;
         cursor:pointer;
         font-family: 'Open Sans', sans-serif!important;
         color:white!important;
@@ -1671,7 +1718,7 @@ input[name="searchType"]{
         margin-left:auto;
         margin-right:auto;
         text-align:center;
-        margin-top:60px;
+        margin-top:40px;
     
     }
     .postDate1{
@@ -1688,6 +1735,7 @@ input[name="searchType"]{
     .userImgLi{
         display:inline-block;
         padding-top:3px;
+        height:40px;
     }
     .timelinePost-username{
         color:white;
@@ -1775,6 +1823,7 @@ input[name="searchType"]{
         padding-bottom:5px;
         padding-left:8px;
         padding-right:8px;
+        margin-top:10px;
     }
     .tutor-details-li{
         top:0;
@@ -1787,7 +1836,7 @@ input[name="searchType"]{
     }
     .tutorList li {
         display:inline-block;
-        width:40%;
+        width:20%;
         margin-left:20px;
     }
     .tutor-name{
@@ -2411,6 +2460,7 @@ input[name="searchType"]{
     }
     .message{
         background-color:#18191a!important;
+        padding-top:0!important;
     }
 
     .search-container{
@@ -2533,7 +2583,7 @@ input[name="searchType"]{
     .headerContainer{
         right:0;
         top:0;
-        width:600px!important;
+        width:300px!important;
         margin-right:0px!important;
         z-index:2;
         
@@ -2549,9 +2599,9 @@ input[name="searchType"]{
 
     .headerContainer li{
         display:inline-block;
-        margin-right:20px!important;
+        margin-right:10px!important;
         color:#d4d4d4!important;
-        margin-left:20px;
+        margin-left:10px;
         margin-top:0;
         padding-top:0;
         padding-right:0!important;
@@ -2567,7 +2617,7 @@ input[name="searchType"]{
          top:0;
          margin-top:0!important;
          margin-left:5px!important;
-         margin-right:5px!important;
+         margin-right:50px!important;
          border-top-right-radius:20px!important;
          border-top-left-radius:20px!important;
          padding-bottom:120px!important;
