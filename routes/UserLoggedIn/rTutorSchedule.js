@@ -14,6 +14,7 @@ var mail = unirest("POST", "https://api.sendgrid.com/v3/mail/send");
 
 router.post("/addTimeslot", function(req, res){
     console.log("adding time slot")
+    console.log(req.body)
     schedule.addTimeslot(req.session.userId, req.body.day, req.body.time)
     .then(function(){
         res.status(202).json({

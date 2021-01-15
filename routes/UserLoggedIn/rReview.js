@@ -59,7 +59,6 @@ router.get('/review/:handle', function (req, res) {
             res.redirect("/")
 
           }
-          
         })
         .catch((err)=>{
           console.log(err)
