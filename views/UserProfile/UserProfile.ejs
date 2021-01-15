@@ -117,10 +117,10 @@
                     <div class="connectionBody-container">   
             <div class="tutorMiddle">
                 <div id="progressInfo">
+             <%if(session.handle == user.handle ){%>
                 <%if(percentComplete<100){%>
-                    <span class="text-light">How Complete is your Account?</span>
                     <div class="progress">
-                        <div id="profileProgressBar" class="progress-bar" role="progressbar" style="width:<%=percentComplete%>%;" aria-valuenow="<%=percentComplete%>" aria-valuemin="0" aria-valuemax="100"><%=percentComplete%>%</div>
+                        <div id="profileProgressBar" class="progress-bar" role="progressbar" style="width:<%=percentComplete%>%;" aria-valuenow="<%=percentComplete%>" aria-valuemin="0" aria-valuemax="100"><%=percentComplete%>% Complete</div>
                     </div>
                     <span class="text-light">Things to Complete Your Account:</span>
                     <ui class="text-light">
@@ -128,6 +128,7 @@
                             <li id=<%=toComplete[i][1] %>><%=toComplete[i][0]%></li>
                         <%}%>
                     </ui>
+                <%}%>
                 <%}%>
                 </div>
                 <div class="followers-container">
