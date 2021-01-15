@@ -3,45 +3,109 @@
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+            
             <div class="modal-body">
-                <div class='mobileBlocker'></div>
-                <div class='mobileCourses'>
-    
-                    <div class='add-tutoring-wrapper'>
-                        <div class='add-tutoring-sub-wrapper'>
-                                <div class="content-container-add-story"></div>
-                                    <label for="addImage">Add Image</label>
-                                    <input type="file" placeholder="Add Image" class="upload" id="addImage"/>
-                                    <div class="story-input-container">
-                                        <span class="story-text-span" contenteditable="true">Write your message here</span>
-                                    </div>
-                                    <select name="duration" class="story-duration">
-                                        <option value="5">5 seconds</option>
-                                        <option value="6">6 seconds</option>
-                                        <option value="7">7 seconds</option>
-                                        <option value="8">8 seconds</option>
-                                        <option value="9">9 seconds</option>
-                                        <option value="10">10 seconds</option>
-                                        <option value="100">infinity</option>
-
-
-
-                                    </select>
-                            <button class='btn btn-primary add-tutoring-btn add-story-btn' >Add Story</button>
-                            <div class="spinner-container1 add-tutor-loading">
-                                <div class="spinner-border" role="status">
-                                    <span class="sr-only"></span>
-                                </div>
-                                <span class="loading-span">Loading</span>
-                            </div>
-                        </div>
-                    </div>
+                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button> -->
+                <div class="story-tools-wrapper">
+                    <input name="story-type" type="hidden" value="image"/>
+                    <ul class="story-tools">
+                        <li>
+                            <input type="hidden" name="image" value="image" />
+                            <label  class="add-img-label" for="addImage">
+                                <defs>
+                                    <filter id="f2" x="0" y="0" width="200%" height="200%">
+                                      <feOffset result="offOut" in="SourceGraphic" dx="20" dy="20" />
+                                      <feGaussianBlur result="blurOut" in="offOut" stdDeviation="10" />
+                                      <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+                                    </filter>
+                                  </defs>
+                                <svg data-toggle="tooltip" data-title="Image" data-placement="left" xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-file-earmark-image" viewBox="0 0 16 16">
+                                    <path d="M6.502 7a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+                                    <path d="M14 14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5V14zM4 1a1 1 0 0 0-1 1v10l2.224-2.224a.5.5 0 0 1 .61-.075L8 11l2.157-3.02a.5.5 0 0 1 .76-.063L13 10V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4z"/>
+                                  </svg>
+                            </label>
+                            <input type="file" placeholder="Add Image" class="upload" id="addImage"/>
+                           
+                        </li>
+                        
+                        <li>
+                            <input type="hidden" name="multiple-choice" value="multiple" />
+                            <svg data-toggle="tooltip" data-title="Multiple Choice Question" data-placement="left" xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-chat-left-text" viewBox="0 0 16 16">
+                                <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                <path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6zm0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
+                              </svg>
+                        </li>
+                        <li>
+                            <input type="hidden" name="poll" value="poll" />
+                            <svg data-toggle="tooltip" data-title="Poll" data-placement="left" xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-megaphone-fill" viewBox="0 0 16 16">
+                                <path d="M13 2.5a1.5 1.5 0 0 1 3 0v11a1.5 1.5 0 0 1-3 0v-11zm-1 .724c-2.067.95-4.539 1.481-7 1.656v6.237a25.222 25.222 0 0 1 1.088.085c2.053.204 4.038.668 5.912 1.56V3.224zm-8 7.841V4.934c-.68.027-1.399.043-2.008.053A2.02 2.02 0 0 0 0 7v2c0 1.106.896 1.996 1.994 2.009a68.14 68.14 0 0 1 .496.008 64 64 0 0 1 1.51.048zm1.39 1.081c.285.021.569.047.85.078l.253 1.69a1 1 0 0 1-.983 1.187h-.548a1 1 0 0 1-.916-.599l-1.314-2.48a65.81 65.81 0 0 1 1.692.064c.327.017.65.037.966.06z"/>
+                              </svg>
+                        </li>
+                    </ul>
+                    
                 </div>
+                    <div class='add-story-wrapper'>
+                         <div class="poll-container">
+                            <div contenteditable="true" class='poll-question' 
+                            id="poll-question">Ask Something..</div>
+                            <ul class='poll-list'>
+                            <li>
+                                <p class='poll-answer text-dark'  contenteditable='true'>Option 1</p>
+                            </li>
+                            <li>
+                            <p class='poll-answer text-dark' contenteditable='true'>Option 2</p>
+                            </li>
+                            </ul>
+                        </div>
+                        <div class="multiple-choice-container">
+                            <div contenteditable="true" class='poll-question' id="multiple-question">
+                                Ask Something..</div>
+
+                            <ul class="multiple-choice-list">
+                                <p class="text-light correct-label">Correct?</p>
+
+                                <li>
+                                    <div  class="answer-container"><div contenteditable="true" class="answer-text">Answer 1</div><span class="correct-answer"><input name="correct" type="radio"/></span></div>
+                                </li>
+                                <li>
+                                    <div class="answer-container"><div contenteditable="true" class="answer-text">Answer 2</div><span class="correct-answer"><input name="correct" type="radio"/></span></div>
+                                </li>
+                                <li>
+                                    <div class="answer-container"><div contenteditable="true" class="answer-text">Answer 3</div><span class="correct-answer"><input name="correct" type="radio"/></span></div>
+                                </li>
+                                <li>
+                                    <div class="answer-container"><div contenteditable="true" class="answer-text">Answer 4</div><span class="correct-answer"><input name="correct" type="radio"/></span></div>
+                                </li>
+                            </ul>
+                        </div>
+                            <div class="content-container-add-story">
+                                
+                            </div>  
+                    </div>
+                    <!-- <p class="story-label">Duration</p> -->
+                    <div class="story-input-container">
+                        <span class="story-text-span"  contenteditable="true">Write your message here</span>
+                    </div>
+                <select name="duration" class="story-duration">
+                    <option value="5">5 seconds</option>
+                    <option value="6">6 seconds</option>
+                    <option value="7">7 seconds</option>
+                    <option value="8">8 seconds</option>
+                    <option value="9">9 seconds</option>
+                    <option value="10">10 seconds</option>
+                    <option value="100">infinity</option>
+                </select>
+        <button class='btn btn-primary add-story-btn' >
+            Send
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
+              </svg>
+        </button>
+            </div>
+            <div class="modal-footer">
+                
             </div>
         </div>
     </div>
