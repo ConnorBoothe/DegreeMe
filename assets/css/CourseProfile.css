@@ -32,7 +32,7 @@
     padding-top:20px;
     padding-left:15%;
     padding-right:500px;
-    background-color:#1d1d1d;
+    background-color:#18191a;
     height:150px;
  }
 .tab-selected{
@@ -509,13 +509,17 @@ input[name="anonymous"]{
         margin-top:50px;
         text-align:center;
     }
+    .page-title-container {
+        width:60%;
+        padding-top:10px;
+    }
     .course-profile-info{
         color:white!important;
         font-size:20px;
         font-family: 'Open Sans', sans-serif;
         width:80%;
+        margin-left:140px;
         text-align:center;
-        margin-left:250px;
         padding-left:15%;
         padding-right:15%;
         padding-top:50px;

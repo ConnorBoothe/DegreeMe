@@ -155,6 +155,7 @@ td{
 .student-container{
     flex-wrap: wrap;
     width:700px!important;
+    margin-top:30px;
 }
 .studentResult{
     display:flex;
