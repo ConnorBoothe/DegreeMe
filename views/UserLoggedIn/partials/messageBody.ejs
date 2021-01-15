@@ -57,28 +57,59 @@
     </div>
 <%}%>
         <% } else{%>
-        <div class="containMessageReceived">
-            <p class="sender_handle">
-                <img class="messageImg" src="<%=messages[x].senderImg%>" />
-                <%=messages[x].sender%>
-            </p>
+            <%if(messages[x].type == "file"){%>
+                <div class="received-wrapper">
+                    <div class="containMessageReceived">
+                        <div class="msg_1">
+                            
+                            <div class="messageBody receivedMsg message-attachment">
+            
+                                <%if(messages[x].content.includes(".pdf")){%>
+            
+                                <iframe class="pdf-iframe" src="<%=messages[x].content%>"></iframe>
+                                <p class="text-center"><a target="_blank" class="text-light"
+                                        href="<%=messages[x].content%>">View Full Screen</a></p>
+                                <%}else{%>
+                                <a target="_blank" href="<%=messages[x].content%>">
+                                    <img src="<%=messages[x].content%>" />
+                                </a>
+                                <%}%>
+                            
+                            </div>
+                            <a class="messageImg" href="/user/<%=messages[x].sender%>"><img data-toggle="tooltip" data-placement="right" title="<%=messages[x].sender%>" class="messageImg"  src="<%=messages[x].senderImg%>"/></a>
+                        </div>
+                        <p class="msg-date msg-date-sent"><%=formatTime(new Date(messages[x].dateTime))%>
+                            </p>
+                        </div>
+                    </div>
+            <%}else{%>
+                <div class="received-wrapper">
+                    <div class="containMessageReceived">
+                        <div class="msg_1">
+                            <%if(messages[x].youtubeData[0] != undefined){%>
+                                <%console.log(messages[x].youtubeData[0])%>
+                                <a target="_blank" href="<%=messages[x].youtubeData[0].link%>">
+                                    <div class="messageBody receivedMsg">
+                                        <img class="yt-logo" src= "../assets/img/yt-logo.svg"/>
+                                        <div class="thumbnail-container">
+                                            <img src="<%=messages[x].youtubeData[0].thumbnail%>" class="yt-thumbnail"/>
+                                        </div>
+                                        <span class="text-light yt-title"><%=unescapeApostrophe(messages[x].youtubeData[0].title)%></span>
+                                    </div>
+                                    <a class="messageImg" href="/user/<%=messages[x].sender%>"><img data-toggle="tooltip" data-placement="right" title="<%=messages[x].sender%>" class="messageImg"  src="<%=messages[x].senderImg%>"/></a>
 
-            <div class="msg_1" style="left:0px">
-                <p class="messageBody receivedMsg"><%=messages[x].content%></p>
-            </div>
-            <p class="msg-date"><%=formatTime(new Date(messages[x].dateTime))%></p>
-        </div>
-        <%if(messages[x].attachments){%>
-        <%for (var i = 0; i < messages[x].attachments.length; i++ ) {%>
-        <div class="containMessageReceived">
-            <div class="msg_">
-                <p class="messageBody receivedMsg message-attachment"><img
-                        src="<%=messages[x].attachment[i]%>" /></p>
-            </div>
-            <p class="msg-date msg-date-sent"><%=formatTime(new Date(messages[x].dateTime))%></p>
-        </div>
-        <%}%>
-<%}%>
+                                </a>
+                            <%}else{%>
+                                <div class="messageBody receivedMsg"><%=messages[x].content%></div>
+                                <a class="messageImg" href="/user/<%=messages[x].sender%>"><img data-toggle="tooltip" data-placement="right" title="<%=messages[x].sender%>" class="messageImg"  src="<%=messages[x].senderImg%>"/></a>
+
+                            <%}%>
+                            
+                        </div>
+                        <p class="msg-date msg-date-sent"><%=formatTime(new Date(messages[x].dateTime))%></p>
+                    </div>
+                </div>
+            <%}%>
         <%}%>
 <%}%>
         <%}%>

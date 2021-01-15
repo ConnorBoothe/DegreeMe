@@ -88,7 +88,7 @@
                                                 d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
                                         </svg></button>
                                     <input id="searchInput" name="searchInput" class=" input-field "
-                                        placeholder="Search Majors at UNC Charlotte" />
+                                        value="<%=major%> Students" />
                                 </div>
                                 <div class="major-autocomplete-container">
                                     <div class="major-autocomplete">
@@ -104,7 +104,6 @@
                     </div>
                 </div>
                 <div class="student-container">
-                    <h2 class="result"><span class="badge badge-warning"><%=major%> Students</span></h2>
                     <% if (students.length>0){%>
                     <% for(var i=0; i< students.length; i++){ %>
                     <div class="studentResult">
