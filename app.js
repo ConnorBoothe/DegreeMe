@@ -121,6 +121,7 @@ app.use([
   require('./routes/Groups/getGroupStories.js'),
   require('./routes/Groups/addGroupChat.js'),
   require('./routes/Groups/getGroupThreads.js'),
+  require('./routes/Groups/addStoryResponse.js'),
   require('./routes/UserLoggedIn/rMeetupProfile.js'),
   require('./routes/UserAccount/rAddCourse.js'),
   require('./routes/UserAccount/updateClass.js'),
@@ -159,7 +160,7 @@ app.get('*', function(req, res) {
         res.redirect('/');
     }
 });
-let server = app.listen(3000);
+let server = app.listen(8080);
 const io = require('socket.io')(server);
 var members = [];
 let broadcaster;
@@ -219,12 +220,16 @@ io.sockets.on('connection', function (socket) {
     })
   })
   socket.on('send image', function (data) {
+    console.log("EMIT SEND IMAGE")
+    console.log("Sender: " +data.sender)
   //   add message to the db
   //  add image to me   console.log("sending image")
+  console.log("ADD msg")
   messages.addMessage(data.id, data.sender, data.senderImg, data.content, data.date, "file")
    .then(function(success){
      if(success){
-      socket.emit("append image", {image:data.content, imageArray: data.imageArray });
+      io.sockets.emit("append image", {image:data.content, imageArray: data.imageArray, 
+        sender: data.sender, senderImg: data.senderImg });
      }
    })
    .catch(function(error){
