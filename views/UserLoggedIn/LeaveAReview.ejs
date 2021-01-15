@@ -33,7 +33,7 @@
                             
                                 <div class="review-form">
                                     <form method="POST" action="/LeaveAReview">
-                                       
+                                       <input type="hidden" name="meetupId" value="<%=qs.id%>"/>
                                         <div class="form-group">
                                             <label class="text-light reviewLabel">Rating</label>
                                             <div id="ratingContainer">
