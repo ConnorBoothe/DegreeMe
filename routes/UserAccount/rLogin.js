@@ -136,7 +136,7 @@ router.post(
                   });
                 //get the users connections
                 meetups
-                  .getConnectionsByHandle(req.session.handle)
+                  .getMeetupsByHandle(req.session.handle)
                   .exec((err, docs) => {
                     for (x in docs) {
                       req.session.allConnections.push(
