@@ -64,15 +64,15 @@
             </p>
 
             <div class="msg_1" style="left:0px">
-                <p class="messageBody receivedMsg"><%=messages[x].message%></p>
+                <p class="messageBody receivedMsg"><%=messages[x].content%></p>
             </div>
             <p class="msg-date"><%=formatTime(new Date(messages[x].dateTime))%></p>
         </div>
-        <%if(messages[x].attachments.length > 0){%>
+        <%if(messages[x].attachments){%>
         <%for (var i = 0; i < messages[x].attachments.length; i++ ) {%>
         <div class="containMessageReceived">
             <div class="msg_">
-                <p class="messageBody receivedMsg bg-primary message-attachment"><img
+                <p class="messageBody receivedMsg message-attachment"><img
                         src="<%=messages[x].attachment[i]%>" /></p>
             </div>
             <p class="msg-date msg-date-sent"><%=formatTime(new Date(messages[x].dateTime))%></p>
