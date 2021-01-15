@@ -26,24 +26,24 @@ function displayDate(date){
     var hourDifference = parseInt(minDifference / 60);
     var dayDifference = parseInt(hourDifference / 24);
     if(secDifference < 60){
-        return secDifference + " seconds ago";
+        return secDifference + " sec";
     }
     else if(secDifference < 120){
-        return minDifference + " minute ago";
+        return minDifference + " min";
     }
     else if(secDifference > 60 && minDifference < 60){
-        return minDifference + " minutes ago";
+        return minDifference + " min";
     }
     else if(minDifference < 120){
-        return hourDifference + " hour ago";
+        return hourDifference + " hour";
     }
     else if(minDifference > 120 && hourDifference < 24){
-        return hourDifference + " hours ago";
+        return hourDifference + " hours";
     }
     else if(hourDifference < 48){
-        return dayDifference + " day ago";
+        return dayDifference + " day";
     }
     else{
-        return dayDifference + " days ago";
+        return dayDifference + " days";
     }
   }
