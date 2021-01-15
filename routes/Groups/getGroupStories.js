@@ -8,6 +8,7 @@ router.post("/getStory", (req, res)=>{
 
         stories.getGroupStory(req.body.groupId)
         .then((stories)=>{
+          
             res.status(202).json({
                 stories: stories
             }).end();
