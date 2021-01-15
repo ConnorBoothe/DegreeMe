@@ -117,7 +117,7 @@ groupsAutocompleteByName(searchValue){
       GroupName:GroupName,
       GroupDescription: GroupDescription,
       GroupImage:GroupImage,
-      Members: [{MemberHandle:HostHandle, MemberImage: HostImage, MemberRole: "Host"}],
+      Members: [{MemberHandle:HostHandle, MemberImage: HostImage, MemberRole: "Admin"}],
       MessageId: MessageID
     });
     return studyGroup.save();
