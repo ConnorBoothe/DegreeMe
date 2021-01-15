@@ -1,4 +1,24 @@
-
+function createCroppie(viewportWidth, viewportHeight, boundaryWidth,
+   boundaryHeight, shape) {
+  $uploadCrop = $('.upload-demo').croppie({
+          viewport: {
+            width: viewportWidth,
+            height: viewportHeight,
+            type: shape,
+          },
+          boundary: {
+            width: boundaryWidth,
+            height: boundaryHeight
+          },
+          //  url: defaultImg,
+        });
+  }
+  function resizeCroppie(viewportWidth, viewportHeight, boundaryWidth,
+    boundaryHeight, shape) {
+    $('.upload-demo').croppie('destroy');
+    createCroppie(viewportWidth, viewportHeight, boundaryWidth,
+    boundaryHeight, shape);
+    }
 function base64ImageToBlob(str) {
   // extract content type and base64 payload from original string
   var pos = str.indexOf(';base64,');
@@ -65,6 +85,7 @@ $(document).ready(function () {
   var defaultImg = "../assets/img/croppieDefaultImage-100.jpg";
   var location = window.location.href.toString().split("/")[3];
   if (location == "Group") {
+// resizeCroppie(800, 150, 'rectangle', 320   )
     $uploadCrop = $('.upload-demo').croppie({
       viewport: {
         width: 800,
@@ -80,7 +101,7 @@ $(document).ready(function () {
     $(".openImageEditor").on("click", function () {
       if ($(this).text() == "Change Banner") {
         type = "banner";
-        $uploadCrop = $('.upload-demo').croppie({
+       $uploadCrop = $('.upload-demo').croppie({
           viewport: {
             width: 800,
             height: 150,
@@ -92,13 +113,13 @@ $(document).ready(function () {
           },
           //  url: defaultImg,
         });
-        // $('.cr-slider').attr({'min':.5, 'max':2});
+        $('.cr-slider').attr({'min':.5, 'max':2});
         $uploadCrop.croppie('bind', defaultImg).then(function () {
           $uploadCrop.croppie('setZoom', '.8');
         });
       }
       else if ($(this).text() == "Post to Story") {
-        type = "story";
+        type = "story";  
         $uploadCrop = $('.content-container-add-story').croppie({
           viewport: {
             width: 500,
@@ -122,6 +143,7 @@ $(document).ready(function () {
   }
 
   else {
+
     $uploadCrop = $('.upload-demo').croppie({
       viewport: {
         width: 300,
@@ -208,7 +230,7 @@ $(document).ready(function () {
             imgLink: url,
           }
           $.ajax({
-            url: "/updateClass",
+            url: "/updateImageURL ",
             type: 'POST',
             data: JSON.stringify(payload),
             headers: {
@@ -267,6 +289,7 @@ $(document).ready(function () {
                 }, statusCode: {
                   202: function (result) {
                     $(function () {
+
                       $(".bannerSuccess").fadeIn();
                       setTimeout(() => {
                         $(".bannerSuccess").fadeOut();
@@ -362,7 +385,6 @@ $(document).ready(function () {
             alert(error);
           }
         })
-  
         storageRef.getDownloadURL().then(function (url) {
           payload = {
             type:"image",

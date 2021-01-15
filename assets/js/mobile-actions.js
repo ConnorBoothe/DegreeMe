@@ -174,10 +174,7 @@ $(".timeline-wrapper").on("click", ".findTutor-course", function(){
              '<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>'+
              '</svg></span>'+
              '<span class="text-light find-tutor-course-title">'+courseCode+'</span></div><div class="findTutorMobile-results"></div>'+
-             '<ul class="mobile-availability">'+
-                             '<li class="mobile-available-text">Available</li>'+
-                             '<li class="available-selected">Now</li>'+
-             '</ul><div class="tutor-container">';
+            '<div class="tutor-container">';
              for(var x = 0; x < result.tutors.length; x++){
                  var tutor = result.tutors[x];
                  tutorsAvailable +=
@@ -193,8 +190,8 @@ $(".timeline-wrapper").on("click", ".findTutor-course", function(){
                   }
                   tutorsAvailable += stars;
                   tutorsAvailable +=
-                  "</div></div></li>"+
-                  "<li class='tutor-details-li'><div class='rate-container'><p class='text-light'>$"+tutor.hourlyRate+"/hour</p></div><a href='/room/"+tutor.streamId+"' class='btn btn-primary bookTutor'>Join Room</a></li>"+
+                  "<a href='/room/"+tutor.streamId+"' class='btn btn-primary bookTutor'>Join Room</a></div></div></li>"+
+                  "<li class='tutor-details-li'></li>"+
                   "<br><br></ul>";
              }
              tutorsAvailable += "</div>";

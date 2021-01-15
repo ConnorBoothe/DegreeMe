@@ -467,14 +467,13 @@ module.exports = class User {
             handle: handle
         }).then(function(data){
             var threadIndex = -1;
-            console.log(data)
             if(data){
                 new Promise((resolve, reject) => {
                     for(var x = 0; x< data.threads.length; x++){
                         if(data.threads[x].threadId ===  threadId){
                             console.log("set to true")
                             threadIndex = x;
-                            data.threads[x].seen = true;
+                            data.threads[x].unreadCount = 0;
                             data.save();
                             resolve(true);
                         }
@@ -484,7 +483,6 @@ module.exports = class User {
                     }
             })
             .then(function(){
-                console.log("RUNNING THEN")
                 res.status(202).json({
                     threadURL: "/messages/"+ data.threads[threadIndex].threadId
                 }).end();
@@ -664,5 +662,13 @@ module.exports = class User {
                  reject(err)
              })
         })  
+    }
+    updateImageUrl(id,url){
+        return UserDB.findOne({_id: id})
+        .updateOne({
+            $set: {
+               img: url 
+            }
+        })
     }
 }

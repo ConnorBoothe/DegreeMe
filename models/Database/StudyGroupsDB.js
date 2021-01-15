@@ -229,7 +229,6 @@ groupsAutocompleteByName(searchValue){
     return new Promise((resolve, reject)=> {
       users.getGroupsById(userId)
       .then((groups)=> {
-        console.log("Groups: " + groups)
         var groupIdArray = [];
         for (var i = 0; i < groups.StudyGroups.length; i++) {
           groupIdArray.push(groups.StudyGroups[i].studyGroupId)
