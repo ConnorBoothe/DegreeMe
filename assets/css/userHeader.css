@@ -49,7 +49,7 @@ header{
 }
 #userHeaderContainer{
     margin-top:55px;
-    width:250px;
+    width:220px;
     height:93.5%;
     position:fixed;
     z-index:1;
@@ -468,7 +468,7 @@ header{
     position:absolute;
     right:0;
     top:0;
-    width:500px;
+    width:450px;
     height:20px;
     margin-top:10px;
     margin-right:25px;
@@ -482,7 +482,7 @@ header{
     font-size:16px!important;
     font-family: 'Open Sans', sans-serif;
     background-color:#046A38!important;
-    width:250px;
+    width:220px;
     margin-bottom:0!important;
 }
 .sideBarBranding{
@@ -531,7 +531,7 @@ header{
 .mainSearch{
     top:0;
     cursor:pointer;
-    height:90%;
+    height:100%;
     width:17px;
     position: absolute;
     margin-top:5px;
@@ -843,7 +843,7 @@ header{
     margin-left:15px;
     color:#a9a9a9;
     font-size:20px;
-    padding-top:10px;
+    padding-top:0px;
     margin-top:0!important;
   
    
@@ -1031,9 +1031,10 @@ header{
     .bdge, .bdge1{
         position:absolute;
         top:0;
-        margin-left:11px;
+        margin-left:0px;
         margin-top:2px;
-        width:18px;
+        width:20px;
+        text-align:center!important;
         padding-left:2px!important;
         font-size:11px!important;
         border-radius:18px!important;

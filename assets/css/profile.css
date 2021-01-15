@@ -15,7 +15,7 @@
     position: absolute;
     right: 0;
     top: 0;
-    transition: opacity 0.25s;
+    transition: opacity 0.1 0.25s;
     font-family: 'Open Sans', sans-serif;
     z-index: 1;
     font-weight:400;

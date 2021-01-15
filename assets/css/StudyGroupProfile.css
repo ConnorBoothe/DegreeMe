@@ -252,8 +252,12 @@ button{
     color:black;
 }
 .modal-body{
-    padding-top: 0;
+    padding: 0;
+    text-align:center;
 } 
+button[type="close"]{
+    position:absolute;
+}
 .modal-secondText {
     text-align: center;
     position: absolute;
@@ -263,7 +267,7 @@ button{
 .modal-footer{
     border-top:0 none!important;
    
-    padding-top: 50px!important;
+    padding-top: 5px!important;
 }    
 .studyGroupAttending{
     position: relative;
@@ -561,7 +565,7 @@ button{
  }
  .story-img { 
      width:100%;
-     height:600px;
+     height:100%;
  }
 @media only screen and (min-width: 1000px) {
     .profile-wrapper{
@@ -579,6 +583,9 @@ button{
         width:80%;
         text-align:center;
         margin-top:-140px;
+    }
+    .group-name-link, .group-name-link:hover{
+        color:white;
     }
     .groupImg {
         width:140px;
@@ -703,16 +710,12 @@ button{
     margin-top:5px;
     width:200px;
     }
-    .currGroup {
-        border-radius:140px!important;
-        border: double 2px transparent;
-        border-radius: 80px;
-        background-image: linear-gradient(white, white), radial-gradient(circle at top left, #f00,#3020ff);
-        background-origin: border-box;
-        background-clip: content-box, border-box;   
-        box-shadow: 2px 2px 2px 2px solid black;
-        cursor:pointer;
-        width:48px!important;
+    .story-tools-wrapper {
+        position:absolute;
+        right:0;
+        top:0;
+        margin-top:400px;
+        z-index:2;
     }
     .group-message-heading { 
         font-size:14px;

@@ -655,6 +655,9 @@ padding-right:10px;
     padding-right:20px;
     font-family: 'Open Sans', sans-serif!important;
 }
+.page-title-container {
+    width:60%;
+}
 .addCourseCode{
     font-size:12px;
     color:#a9a9a9;
@@ -1245,6 +1248,18 @@ input[name="searchType"]{
         font-size:14px;
         margin-top:40px;
         width:100%;
+    }
+    .add-story-btn{
+        font-family: "Open sans", "sans-serif";
+        font-size:14px;
+        width:20%;
+        margin-right:3%;
+        right:0;
+        position:relative;
+        float:right;
+        margin-left:48%;
+        margin-top:0!important;
+        border-radius:15px;
     }
     .add-tutoring-label{
         text-align:left!important;
@@ -2558,7 +2573,7 @@ input[name="searchType"]{
     .headerContainer{
         right:0;
         top:0;
-        width:600px!important;
+        width:300px!important;
         margin-right:0px!important;
         z-index:2;
         

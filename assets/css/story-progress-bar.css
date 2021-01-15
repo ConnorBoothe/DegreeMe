@@ -1,7 +1,7 @@
 .progress-container {
     display: flex;
     flex-direction: row;
-    width: 100%;
+    width: 500px;
     padding: 10px 0;
     cursor: pointer;
   }
