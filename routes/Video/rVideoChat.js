@@ -8,6 +8,7 @@ const UserDB = require("../../models/Database/UserDB");
 var stream = new StreamDB();
 var meetup = new MeetupDB();
 var user = new UserDB();
+var queue = [];
 router.use(session({
     secret:'iloveu',
     resave: true,
@@ -42,7 +43,13 @@ console.log("this is the req.params.id "+req.params.id);
                    console.log(err);
                });
            }
+
+           if((req.session.userId!==stream.hostId)&&!isHostIn){
+            queue.push(req.session.userId);
+           }
+
             if(isHostIn||req.session.userId===stream.hostId){
+                queue=[];
                 console.log("this is the instream "+req.session.isInStream);
                 if(req.session.isInStream){
                     isInStream=true;
@@ -59,7 +66,12 @@ console.log("this is the req.params.id "+req.params.id);
         }
         }
         else{
+            if(queue.length<=4){
             res.render('UserLoggedIn/Video/StandBy',{session:req.session, params: req.params, stream: stream, inStream:isInStream});
+        }
+        else{
+            res.redirect("/home");
+        }
         }
         // }
     })
