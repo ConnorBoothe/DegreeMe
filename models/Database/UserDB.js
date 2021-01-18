@@ -631,7 +631,7 @@ module.exports = class User {
     }
     //make the room active
     setRoomActive(handle){
-        return new Promise(()=>{
+        return new Promise((resolve, reject)=>{
             UserDB.findOne({
                 handle: handle
              })
@@ -648,7 +648,7 @@ module.exports = class User {
     }
     //de-activate the room
     deactivateRoom(handle){
-        return new Promise(()=>{
+        return new Promise((resolve, reject)=>{
             UserDB.findOne({
                 handle: handle
              })

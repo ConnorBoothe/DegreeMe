@@ -11,6 +11,7 @@ var hostId = document.getElementById("hostId").value;
 var userId = document.getElementById("userId").value;
 var inStream = document.getElementById("inStream").value;
 var previousStream = document.getElementById("previousStream").value;
+var timerVar = 0;
 window.onbeforeunload = function() {
   return "message"; // Probably won't be shown because custom messages have been dropped in all major browsers
 };
@@ -24,10 +25,26 @@ function keepAlive(){
             //console.log the response
             console.log(data);
             if(!isHostIn){
+               var role;
+               if(userHandle===host){
+               role="host"
+               }else{
+               role="member"
+               }
+               var data = {
+               role : role,
+               userHandle : userHandle,
+               host : host,
+               date : new Date(Date.now()),
+               duration : timerVar,
+               LeftReview : false
+             }
               $.ajax({
                 url:"/videochat/leaveStream/"+roomID+"/"+userId,
                 type:"POST",
                 async: false,
+                contentType:"application/json",
+                data:JSON.stringify(data),
                 success:function(data){
                   window.onbeforeunload = null;
                     location.reload();
@@ -41,6 +58,7 @@ function keepAlive(){
             }
             //Send another request in 10 seconds.
             setTimeout(function(){
+                console.log(timerVar);
                 keepAlive();
             }, 10000);
         }
@@ -94,7 +112,8 @@ let peerList = [];
 //get user video/audio
 var getUserMedia = navigator.mediaDevices.getUserMedia({video:true,audio:{echoCancellation:true,
     noiseSuppression:true}});
-
+    setInterval(function () {
+      timerVar++;}, 1000);
     if(userHandle===host){
         
     getUserMedia.then(function(stream){
@@ -208,10 +227,26 @@ myPeer.on("open",  id => {
 });
 
 $("#leaveStream").on("click",function(e){
+  var role;
+  if(userHandle===host){
+    role="host"
+  }else{
+    role="member"
+  }
+  var data = {
+    role : role,
+    userHandle : userHandle,
+    host : host,
+    date : new Date(Date.now()),
+    duration : timerVar,
+    LeftReview : false
+  }
   $.ajax({
     url:"/videochat/leaveStream/"+roomID+"/"+userId,
     type:"POST",
     async: false,
+    contentType:"application/json",
+    data:JSON.stringify(data),
     success:function(data){
         if(data.message==="user left room")
         window.close();
@@ -515,22 +550,7 @@ lifecycle.addEventListener('statechange', function(event) {
   });*/
 
 
-    var timerVar = setInterval(countTimer, 1000);
-    var totalSeconds = 0;
-    function countTimer() {
-           ++totalSeconds;
-           var hour = Math.floor(totalSeconds /3600);
-           var minute = Math.floor((totalSeconds - hour*3600)/60);
-           var seconds = totalSeconds - (hour*3600 + minute*60);
-           if(hour < 10)
-             hour = "0"+hour;
-           if(minute < 10)
-             minute = "0"+minute;
-           if(seconds < 10)
-             seconds = "0"+seconds;
-           var time = hour + ":" + minute + ":" + seconds;
-           return time;
-        }
+  
 
 
     var browserPrefixes = ['moz', 'ms', 'o', 'webkit'];

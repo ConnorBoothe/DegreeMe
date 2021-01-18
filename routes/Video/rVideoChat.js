@@ -3,7 +3,11 @@ const express = require('express');
 const router = express.Router();
 const session = require('express-session');
 const StreamDB = require("../../models/Database/StreamDB");
+const MeetupDB = require("../../models/Database/MeetupsDB");
+const UserDB = require("../../models/Database/UserDB");
 var stream = new StreamDB();
+var meetup = new MeetupDB();
+var user = new UserDB();
 router.use(session({
     secret:'iloveu',
     resave: true,
@@ -23,18 +27,21 @@ console.log("this is the req.params.id "+req.params.id);
     .then(function(stream){
         
         //check if user is already in room
-        stream.members.forEach(member => {
-            if(member.userId===stream.hostId){
-                isHostIn=true;
-            }
-        });
+        stream.members.push(req.session.userId);
+        console.log(stream.members);
         if(req.session.userId===stream.hostId){
             isHostIn=true;
         }
 
         let count = stream.members.length;
             //render chat room
-           
+           if(req.session.userId===stream.hostId){
+               user.setRoomActive(stream.host).then(function(active){
+                   console.log("room is active!")
+               }).catch((err)=>{
+                   console.log(err);
+               });
+           }
             if(isHostIn||req.session.userId===stream.hostId){
                 console.log("this is the instream "+req.session.isInStream);
                 if(req.session.isInStream){
@@ -102,24 +109,32 @@ router.post("/videoChat", function(req, res){
         }).end();
     })
 })
-router.get("/videoChatMembers", function(req, res){
-    
-        res.status(202).json({
-            messages: stream.members
-        }).end();
-  
-})
+
 router.post("/videochat/leaveStream/:roomID/:userId", function(req, res){
+    if(req.body.duration!==undefined){
+    meetup.addMeetup(req.body.role, req.body.userHandle, req.body.host, req.body.date, req.body.duration, req.body.LeftReview).
+    then(function(meetup){
+        console.log("meetup added to DB with id: "+meetup.id);
+    }).catch((err)=>{
+        console.log(err);
+    })}
    req.session.isInStream = false;
    var streamHostId;
    
    console.log("formdata : "+req.params.roomID+"  "+req.params.userId);
    stream.getStreamById(req.params.roomID)
    .then(function(stream){
+       stream.members.pop(req.params.userId);
+       console.log(stream.members);
     streamHostId = stream.hostId;
     if(req.params.userId=== streamHostId){
         isHostIn = false;
         console.log("host is out")
+        user.deactivateRoom(stream.host).then(function(active){
+            console.log("room is inactive!")
+        }).catch((err)=>{
+            console.log(err);
+        });
     }
 
    }).catch((err)=>{

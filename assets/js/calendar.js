@@ -118,7 +118,7 @@ $(function() {
                 <button id="enableEditEvent" class="btn btn-secondary" >Edit</button>
                 </div>
                 </div>
-                </div><a href="/stream/`+event.url+`" class="btn btn-secondary" id="eventUrl" target="_blank" >Go to stream</a><button type="button" class="btn btn-light" data-dismiss="modal">Close</button>`)
+                </div><a href="/room/`+event.url+`" class="btn btn-secondary join-room-btn" id="eventUrl" target="_blank" >Go to stream</a><button type="button" class="btn btn-light" data-dismiss="modal">Close</button>`)
             
             }
             else if(event.location){
@@ -147,7 +147,12 @@ $(function() {
             return false;
                 
 }
-
+$(document).on("click",".join-room-btn", function(e){
+    e.preventDefault();
+    var url = $(this).attr('href');
+    window.open(url, "stream", "location=no,toolbar=no,scrollbars=no,menubar=no,status=no,directories=no,resizable=yes,width=800,height=600,top=4,left=6").focus();
+    return false;
+  })
 //this is for enabling edit
     $(document).on("click","#enableEditEvent", function(e){
 
