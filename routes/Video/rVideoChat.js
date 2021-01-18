@@ -124,7 +124,9 @@ router.post("/videochat/leaveStream/:roomID/:userId", function(req, res){
    console.log("formdata : "+req.params.roomID+"  "+req.params.userId);
    stream.getStreamById(req.params.roomID)
    .then(function(stream){
-       stream.members.pop(req.params.userId);
+       stream.members=stream.members.filter(function(value, index, arr){ 
+        return value !== req.params.userId;
+    });
        console.log("stream members: "+stream.members);
     streamHostId = stream.hostId;
     if(req.params.userId=== streamHostId){
