@@ -131,6 +131,7 @@ router.post("/follow",
             // add follow email here
             emailFunction.createEmail(req.body.email, "follow", req)
             .then(function(){
+              req.session.following.push({user_handle:req.body.handle, user_image: req.body.image})
               res.status(202).json({
                 action: "followed"
               }).end();
@@ -151,7 +152,7 @@ router.post("/unfollow", function (req, res) {
   console.log("unfollow ran")
   if (req.session.userId) {
     new Promise((resolve, reject) => {
-        users.removeFollow(req.session.handle, req.body.handle, function (suc) {
+        users.removeFollow(req.session.handle, req.body.handle, req, function (suc) {
           if (suc) {
             resolve();
           } else {

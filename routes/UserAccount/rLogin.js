@@ -111,6 +111,7 @@ router.post(
                 req.session.bio = docs1[0].bio;
                 req.session.stripeId = docs1[0].StripeId;
                 req.session.following = docs1[0].following;
+                console.log(docs1[0].following);
                 req.session.notificationCount = 0;
                 req.session.currentConnections = [];
                 req.session.pastConnections = [];

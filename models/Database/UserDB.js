@@ -215,7 +215,7 @@ module.exports = class User {
 
     }
     //unfollow a user
-    removeFollow(follower_handle, handle, callback){
+    removeFollow(follower_handle, handle, req, callback){
         UserDB.findOne({handle:handle}).exec((err,docs)=>{
             if (docs){
                 for (var i=0;i<docs.followers.length;i++){
@@ -229,6 +229,8 @@ module.exports = class User {
                         for (var j=0;j<docs1.following.length;j++){
                             if (docs1.following[j].user_handle.valueOf()==handle.valueOf()){
                                 docs1.following.splice(j,1);
+                                req.session.following.splice(j,1);
+
                             }
                         }
                         docs1.save();

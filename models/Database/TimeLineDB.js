@@ -72,8 +72,7 @@ module.exports = class Timeline {
         var timelineDB = mongoose.model('TimelineDB',timelineDBSchema);
         return timelineDB.find({
         'sendToHandle': { $in: [
-            handle,
-            "All"
+            handle
         ]}
     })
     }
@@ -97,7 +96,6 @@ module.exports = class Timeline {
         for(var x = 0; x < followingList.length; x++){
             followingHandles.push(followingList[x].user_handle.trim().toString());
         }
-        followingHandles.push("All");
         followingHandles.push(req.session.handle);
         var length = "";
         timelineDB.find({
