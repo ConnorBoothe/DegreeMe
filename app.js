@@ -167,7 +167,7 @@ app.get('*', function(req, res) {
         res.redirect('/');
     }
 });
-let server = https.createServer(options, app).listen(8088);
+let server = https.createServer(options, app).listen(8080);
 const io = require('socket.io')(server);
 var members = [];
 let broadcaster;
