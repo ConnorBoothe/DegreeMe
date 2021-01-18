@@ -125,7 +125,9 @@ router.post("/videochat/leaveStream/:roomID/:userId", function(req, res){
    stream.getStreamById(req.params.roomID)
    .then(function(stream){
        stream.members=stream.members.filter(function(value, index, arr){ 
-        return value !== req.params.userId;
+           var removed = value =!req.params.userId;
+        console.log("is the user going to be removed "+removed)
+        return value =! req.params.userId;
     });
        console.log("stream members: "+stream.members);
     streamHostId = stream.hostId;
