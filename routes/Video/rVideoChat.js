@@ -28,11 +28,10 @@ console.log("this is the req.params.id "+req.params.id);
         
         //check if user is already in room
         stream.members.push(req.session.userId);
-        console.log(stream.members);
+        console.log("Members: " +stream.members);
         if(req.session.userId===stream.hostId){
             isHostIn=true;
         }
-
         let count = stream.members.length;
             //render chat room
            if(req.session.userId===stream.hostId){
