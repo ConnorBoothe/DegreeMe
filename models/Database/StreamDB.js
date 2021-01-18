@@ -14,16 +14,13 @@ var chatSchema = new Schema({
     message: {type:String, required:true},
     time: {type:Number, required:true},
 });
-//members schema
-var memberSchema = new Schema({
-    userId:{type:String, required:true}
-});
+
 //stream schema
 var streamSchema = new Schema({
     host:{type:String, required:true},
     hostId: {type:String, required:true},
     chat: [chatSchema],
-    members: [memberSchema]
+    members: [{type:String, required:true}]
 }, {collection: 'StreamDB'});
 
 //instantaiate streamDB model
@@ -69,7 +66,7 @@ module.exports = class Stream {
         return new Promise(function(resolve, reject){
             streamDB.findOne({_id: id})
             .then(function(data){
-                data.members.push({userId: userId});
+                data.members.push(userId);
                 data.save();
                 resolve(data);
             })
