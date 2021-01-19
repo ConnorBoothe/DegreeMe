@@ -664,6 +664,26 @@ padding-right:10px;
     width:60%;
     
 }
+.roomImg {
+    width:100px;
+}
+.rooms-container {
+}
+.active-rooms-title {
+    margin-bottom:20px;
+    font-size:22px;
+    margin-top:40px;
+}
+.roomsList {
+    width:100%;
+}
+.roomsList li {
+    width:100px;
+    margin-left:10px;
+    margin-right:10px;
+    display:inline-block;
+    list-style-type:none;
+}
 .addCourseCode{
     font-size:12px;
     color:#a9a9a9;

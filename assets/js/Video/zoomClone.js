@@ -1,10 +1,7 @@
 $(document).ready(function(){
 
 const socket = io('/');
-const videoDiv = document.getElementById('videoDiv');
-const videoDivMember = document.getElementById('videoDivMember');
 const videoGrid = document.getElementById('video-grid')
-const gallery = document.getElementById('gallery');
 var userHandle = document.getElementById("userHandle").value;
 var host = document.getElementById("host").value;
 var hostId = document.getElementById("hostId").value;

@@ -26,16 +26,32 @@ $(document).ready(function(){
         $(".mobile-actions ul li").removeClass("mobile-actions-bottom-border")
         $(this).addClass("mobile-actions-bottom-border")
         if($(this).attr("class").split(" ")[0] == "findATutor") {
-            $(".timeline-wrapper").html('<div class="recentActivity-title"><div class="course-search-container"><div class="course-search-sub-container"><span class="text-light"><svg class="" width="1em" height="1em"'+
-            'viewBox="0 0 16 16" class="bi bi-search" fill="white"'+
-            'xmlns="http://www.w3.org/2000/svg">'+
-                        '<path fill-rule="evenodd"'+
-                'd="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />'+
-            '<path fill-rule="evenodd"'+
-                'd="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />'+
-        '</svg>'+
+            $(".timeline-wrapper").html('<div class="recentActivity-title">'+
+        //     '<div class="course-search-container"><div class="course-search-sub-container"><span class="text-light"><svg class="" width="1em" height="1em"'+
+        //     'viewBox="0 0 16 16" class="bi bi-search" fill="white"'+
+        //     'xmlns="http://www.w3.org/2000/svg">'+
+        //                 '<path fill-rule="evenodd"'+
+        //         'd="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />'+
+        //     '<path fill-rule="evenodd"'+
+        //         'd="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />'+
+        // '</svg>'+
 
-            '<input type="text" name="courseSearch" class="mobile-tutor-search" placeholder="Enter a course" /></span></div></div></div><div class="findTutorMobile-results"></div>'
+        //     '<input type="text" name="courseSearch" class="mobile-tutor-search" placeholder="Enter a course" /></span></div></div>'+
+            '<div class="rooms-container">'+
+            '<h3 class="text-light active-rooms-title">Network-Based Application Development</h3>'+
+            
+                '<ul class="roomsList">'+
+                    '<li><img class="roomImg" src='+$(".userProfileImg").attr("src")+'/></li>'+
+                    '<li><img class="roomImg" src='+$(".userProfileImg").attr("src")+'/></li>'+
+                '</ul>'+
+                '<h3 class="text-light active-rooms-title">College Algebra</h3>'+
+            
+                '<ul class="roomsList">'+
+                    '<li><img class="roomImg" src='+$(".userProfileImg").attr("src")+'/></li>'+
+                    '<li><img class="roomImg" src='+$(".userProfileImg").attr("src")+'/></li>'+
+                '</ul>'+
+            '</div>'+
+            '</div><div class="findTutorMobile-results"></div>'
             );
             $(".mobile-tutor-search").focus();
         }

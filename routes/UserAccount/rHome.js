@@ -82,6 +82,7 @@ function sortTutoringSessions(tutorSeshArray) {
 router.get('/home', function (req, res) {
     // stream.clearAllMembers("5fad920a6d292df74fb7493b");
     if (req.session.userId) {
+        console.log("ID: " + req.session.userId)
         //get user timeline
        timeline.getUserTimeline(req.session.following, 0, req)
        .then(function(docs1){

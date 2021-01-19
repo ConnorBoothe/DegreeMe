@@ -27,12 +27,13 @@ console.log("this is the req.params.id "+req.params.id);
     .then(function(stream){
         
         //check if user is already in room
-        stream.members.push(req.session.userId);
-        console.log("Members: " +stream.members);
+        stream.members.push("stream members: "+req.session.userId);
+        console.log(stream.members);
         if(req.session.userId===stream.hostId){
             isHostIn=true;
         }
-        let count = stream.members.length;
+
+        var count = stream.members.length;
             //render chat room
            if(req.session.userId===stream.hostId){
                user.setRoomActive(stream.host).then(function(active){
@@ -50,7 +51,7 @@ console.log("this is the req.params.id "+req.params.id);
                     req.session.isInStream = true;
                     req.session.previousStream = stream.id;
                 }
-                if(count<5){
+                if(count<=5){
             res.render('UserLoggedIn/Video/Viewer',{session:req.session, params: req.params, stream: stream, inStream:isInStream});
         }
         else{
@@ -123,8 +124,11 @@ router.post("/videochat/leaveStream/:roomID/:userId", function(req, res){
    console.log("formdata : "+req.params.roomID+"  "+req.params.userId);
    stream.getStreamById(req.params.roomID)
    .then(function(stream){
-       stream.members.pop(req.params.userId);
-       console.log(stream.members);
+       stream.members=stream.members.filter(function(value, index, arr){ 
+        return value !== req.params.userId;
+    });
+    stream.save();
+       console.log("stream members: "+stream.members);
     streamHostId = stream.hostId;
     if(req.params.userId=== streamHostId){
         isHostIn = false;
