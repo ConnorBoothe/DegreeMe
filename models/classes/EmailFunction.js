@@ -5,6 +5,7 @@ require('dotenv').config();
 module.exports = class Email {
     //create email
     createEmail(email, type, req) {
+        console.log(req)
         switch (type) {
         case "comment":
         return new Promise((resolve, reject) => {
