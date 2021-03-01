@@ -30,23 +30,29 @@ body {
 .homeContainer1--Login {
   width: 100% !important;
   text-align: center;
-  background-color: #202020;
-  height: 100vh;
+  background-color: #1f2024;
+  height:100%!important;
 }
+.contentBlock {
+  background-color: #1f2024;
 
+}
 .Login--Submit {
   border: none;
+  outline:none!important;
   background-color: var(--primary);
   color: white;
   border-radius: 10px;
   width: 100%;
   box-shadow: 0px 2px 10px -3px black;
-  font-size: 22px;
+  font-size: 18px;
   font-weight: bold;
   margin-top: 10px;
   margin-bottom: 10px;
 }
-
+.Login--Submit:hover {
+  opacity: 0.8!important;
+}
 .Login--Switch {
   color: white;
 
@@ -86,6 +92,7 @@ body {
   font-size: 1em;
   border: 0;
   border-bottom: 1px solid #ccc;
+  background-color: #343a40!important;
   font-family: inherit;
   -webkit-appearance: none;
   border-radius: 0;

@@ -5,9 +5,170 @@
 
 }
 
+.profile-ul li{
+    font-family: 'Open Sans', sans-serif;
+    font-size:14px!important;
+    text-align:center;
+    padding-left:5px!important;
+    padding-right:5px!important;
+    display:inline-block;
+    width:20px!important;
+    /* background-color:#1f2024!important; */
+
+
+    
+}
+.bdge, .bdge1{
+    
+    margin-left:17px!important;
+}
+.profileBody {
+    width:550px!important;
+    margin-top:0!important;
+    background-color: #1f2024;
+}
+.messageHandle {
+    color: white;
+    padding-top: 12px;
+    padding-bottom: 3px;
+    padding-left: 15px;
+    border-radius: 5px;
+    font-size: 18px;
+    margin-right: 15px;
+    text-align: left;
+    display: block;
+    font-family: 'Open Sans', sans-serif;
+
+}
+.messageHeader {
+    text-align: left;
+    padding-left: 10px;
+    padding-top: 10px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    margin-bottom: 0;
+}
+.postQuestion-container{
+    width:100%;
+    position:relative;
+    height:30px;
+}
+.img-container {
+    display:inline-block;
+     max-height:25px!important;
+     margin-left:5px;
+     margin-right:5px;
+ }
+.postQuestion {
+    border-radius:10px!important;
+    position:absolute;
+    right:0;
+    font-size:13px!important;
+    margin-right:10px;
+    top:0;
+}
+.messageSideBarImg {
+    width: 35px !important;
+    margin-left: 5px;
+    cursor:pointer;
+}
+.member-menu{
+    position:absolute;
+    width:180px;
+    min-height:60px;
+    background-color:#18191a;
+    z-index:2;
+    border-radius:15px;
+    box-shadow: 2px 2px solid black;
+    padding-top:20px;
+    padding-left:20px;
+    display:none;
+}
+.find-room-container {
+    width:550px!important;
+}
+.offline, .online {
+    height: 20px;
+    /* float: left; */
+    position:absolute;
+    width: 20px;
+    border: 5px solid #1f2024;
+    margin-left:30px;
+    border-radius: 20px;
+    margin-top: 19px;
+    
+}
+.online {
+    background-color: #28a745;
+
+}
+.offline {
+    background-color: #dc3545;
+}
+.member-menu ul li {
+    font-size:14px;
+    list-style-type: none;
+    padding-bottom:10px;
+}
+.member-menu ul li a {
+    color:#d9d9d9;
+}
+.userHandleTxt {
+    font-size: 14px;
+    color: #d4d4d4;
+    margin-left: 15px;
+    opacity: 0.7;
+}
+.membersRightSideBar {
+    position: fixed;
+    right: 0;
+    height: 100vh !important;
+    width: 18%;
+    min-width:200px!important;
+    z-index: 3;
+    color: #d4d4d4;
+    background-color:#1f2024;
+    overflow-y: auto;
+    padding-bottom: 60px;
+    box-shadow: 1px 1px 1px 1px #a9a9a9;
+
+}
+.headerLinkTitle{
+    margin-right:25px;
+    margin-left:5px!important;
+    margin-top:-7px!important;
+    font-size:13px!important;
+}
+
+.joinCourse{
+    font-size:13px!important;
+    margin-right:20px;
+    padding-bottom:2px!important;
+    padding-top:2px!important;
+    margin-top:-4px!important;
+
+}
+.courseName {
+    margin-bottom:10px;
+    font-size:15px!important;
+}
+.courseCodeTxt{
+    display:none;
+}
 
 .student-container a{
     color:white;
+}
+.askAQuestion {
+    width:100%;
+    background-color:#1f2024!important;
+    text-align:left;
+    min-height:50px;
+    padding:10px;
+    border-bottom-right-radius:10px!important;
+    border-bottom-left-radius:10px!important;
+
+    position:relative;
 }
 .student-container a:hover{
     color:white;
@@ -28,15 +189,21 @@
 
 
 .courseProfileContainer1{
-    margin-left:250px;
+    /* margin-left:250px; */
     padding-top:20px;
     padding-left:15%;
-    padding-right:500px;
+    /* padding-right:500px; */
     background-color:#18191a;
     height:150px;
  }
-.tab-selected{
-    border-bottom: 2px solid #007bff;
+ .profile-details{
+    background-color:#18191a!important;
+    padding-top:90px;
+    width:100%!important;
+    border-bottom:1px solid rgb(85, 85, 85);
+    padding-bottom:50px;
+    padding-top:0!important; 
+
 }
 .img-container img {
     width:50px;
@@ -44,30 +211,45 @@
 .courseButtons{
     position:relative;
     top:0;
-    margin-top:-30px;
+    margin-top:0px;
+    margin-left:10px;
+    float:right;
  }
  .comments-actions-list { 
-    position:relative!important;
-    margin-top:20px;
-    width:80%;
-    margin-right:20px;
-    margin-bottom:50px;
+    position:absolute!important;
+    width:100px!important;
+    right:0;
+    top:0;
+    /* margin-right:20px;*/
+    height:20px; 
+    margin-top:-4px;
+}
+.questionTxt-container{
+    min-width:400px!important;
+    background-color:#242526;
+    border-radius:12px;
+    min-height:40px!important;
+    padding-top:0;
+    padding-left:10px;
 }
 .questionTxt{
+    padding-top:10px;
     overflow-wrap: break-word;
-    width:100%;
-    background-color:#343a40;
     color:white;
-    padding:10px;
-    font-size:15px;
-    min-height:150px;
+    font-size:14px;
+    min-height:20px!important;
+    margin-left:0!important;
+    border-radius:10px;
+    max-width:400px!important;
     font-family: 'Open Sans', sans-serif;
     outline:none;
+    background-color:#242526;
 }
 .deleteDiscussion{
-    border-radius:15px!important;
-    font-size:13px!important;
+    border-radius:18px!important;
+    font-size:12px!important;
     margin-left:20px;
+    padding:3px!important;
 }
 
 
@@ -85,11 +267,31 @@
     background-color:#1f2024!important;
     margin-bottom:30px;
     padding:10px;
+    padding-top:15px;
     padding-left:20px;
+    border-radius:10px;
+    min-width:400px!important;
+}
+
+#messageHeader {
+    background-color:#1f2024;
+    width:85%;	    
+    height:45px;	    
+    padding-top:5px;	
+    position:fixed;	    
+    z-index:3;	
 }
 .modal-content{
     background-color:#1f2024!important;
     color:white!important;
+}
+.message-logo {
+    width:23px;
+    margin-top:8px!important;
+}
+.course-profile-wrapper {
+    padding-top:60px;
+    width:85%;
 }
 input[name="anonymous"]{
     margin-right:10px;
@@ -113,18 +315,22 @@ input[name="anonymous"]{
     margin-top:50px!important;
     text-align: left; 
 }
+.tab-selected{
+    border-top: 2px solid #a9a9a9;
+}
+
 .commentMsg{
     width:100%;
     min-height:100px;
-    background-color: #343a40;
+    background-color: #1f2024;
     color: white;
     margin-top:40px;
     padding: 10px;
     border:none;
+    outline:none;
 } 
 .sg-img{
-    width:40px;
-    float:left;
+    width:100px;
     margin-right:10px;
 }
 .course-autocomplete, #courseName{
@@ -141,6 +347,7 @@ input[name="anonymous"]{
     color:#a9a9a9;
     font-family: 'Open Sans', sans-serif;
     padding-left:15px;
+    display:none;
     
 }
 
@@ -194,10 +401,13 @@ input[name="anonymous"]{
     width: 300px;
     float: left;
 }
+.group-mem-count {
+    font-size:13px!important;
+}
 .group-name {
-    margin-top: 10px;
-    font-size:17px;
-    margin-left:15px!important;
+    margin-top: 4px;
+    font-size:14px;
+    margin-bottom:0!important;
 }
 
 /* delete if dont work */
@@ -250,11 +460,81 @@ input[name="anonymous"]{
 }
 #imageUploadLabel{
     border-radius:50px;
+    width:35px!important;
+    height:35px!important;
+    font-size:13px;
+    cursor:pointer;
+}
+#imageUploadLabel{
+    border-radius:50px;
     /* width:50px!important;
     height:50px!important;
     font-size:20px; */
 }
+.course-dropdown ul a {
+    color:white;
+}
+.course-dropdown ul a:hover {
+    text-decoration:none;
+}
+.course-dropdown ul li:hover{
+    opacity:0.8;
+}
+.course-select { 
+    background-color: #242526;
+    border-radius:15px;
+    width:150px;
+    position:absolute;
+    margin-left:100px;
+    height:30px;
+    top:0;
+    margin-top:13px;
+    padding-top:0px;
+    padding-bottom:3px;
 
+    padding-left:20px;
+    padding-right:10px;
+    cursor: pointer;
+}
+.course-dropdown {
+    background-color: #242526;
+    min-height:100px;
+    display:none;
+    width:150px;
+    margin-right:10px;
+    position:absolute;
+    left:0;
+    margin-left:100px;
+
+}
+.course-dropdown ul {
+    margin-top:10px;
+}
+.course-dropdown ul li {
+    list-style-type: none;
+    font-size:14px;
+    padding-left:0px!important;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    /* border-bottom: 0.5px solid white; */
+    padding-bottom:3px;
+    background-color: #242526;
+    padding:5px;
+    border-radius:10px;
+    padding-left:15px;
+}
+.profileNav li, .profileNav li a{
+    width:160px!important;
+    color:#d4d4d4!important;
+}
+.profileNav{
+    width:550px;
+    height:40px;
+    padding:0px!important;
+    margin-right:auto;
+    margin-left:0;
+    background-color:#1f2024;
+    }
 @media only screen and (max-width: 1000px) {
     .profile-pic{
         width:80px!important;
@@ -323,7 +603,7 @@ input[name="anonymous"]{
     }
    
     .CourseTitle .courseName{
-        font-size:18px!important;
+        font-size:16px!important;
         width:50%;
         min-width:250px;
     }
@@ -331,32 +611,25 @@ input[name="anonymous"]{
         color:white!important;
         font-size:20px;
         font-family: 'Open Sans', sans-serif;
-        width:100%;
         text-align:center;
         margin-left:0px;
-        padding-top:50px;
+        padding-top:0px;
         text-align:center;
         
     }
     .profile-ul{
         margin-bottom:0!important;
         height:100%;
-        text-align:center;
+        width:100%!important;
+        text-align:left;
         color:#d4d4d4;
         position:relative;
+        background-color:white!important;
        
     }
-    .profile-ul li{
-        font-family: 'Open Sans', sans-serif;
-        font-size:13px!important;
-        text-align:center;
-        padding-left:5px!important;
-        padding-right:5px!important;
-        display:inline-block;
-        width:85px;
-    
-        
-    }
+   
+   
+  
     .numStudents{
         margin-left:5px;
         font-size:12px!important;
@@ -441,7 +714,7 @@ input[name="anonymous"]{
         margin-top:15px!important;
     }
     .responseLink{
-        font-size:14px!important;
+        font-size:12px!important;
     }
     .hostName{
         font-size:14px!important;
@@ -453,7 +726,7 @@ input[name="anonymous"]{
 #postQuestion { 
     font-size:14px;
     font-family: "Open sans", "sans-serif";
-    margin-top:-40px;
+    
 }
 @media only screen and (min-width: 1000px) {
     .profile-wrapper{
@@ -470,7 +743,7 @@ input[name="anonymous"]{
         font-size:16px!important;
     }
     .responseLink{
-        font-size:16px!important;
+        font-size:13px!important;
     }
     .dateText{
         font-size:14px;
@@ -480,7 +753,7 @@ input[name="anonymous"]{
         font-weight:100!important;
     }
     .questionText{
-        font-size:16px;
+        font-size:14px;
         margin-top:20px;
         margin-right:20px;
     
@@ -517,21 +790,17 @@ input[name="anonymous"]{
         color:white!important;
         font-size:20px;
         font-family: 'Open Sans', sans-serif;
-        width:80%;
-        margin-left:140px;
         text-align:center;
-        padding-left:15%;
-        padding-right:15%;
-        padding-top:50px;
+        padding-top:0px;
         padding-bottom:75px!important;
         text-align:center;
         
     }
     .question-container{
-        margin-right:10%!important;
+        margin-right:50px!important;
     }
     .CourseTitle{
-        margin-top:30px;
+        margin-top:40px;
         max-width:900px!important;
     }
     .profile-wrapper{
@@ -540,8 +809,13 @@ input[name="anonymous"]{
         height:200px;
         position:relative;
     }
+    .course-group-container {
+        width:200px;
+        text-align:center;
+        margin-top:20px
+    }
     .CourseTitle .courseName{
-        font-size:24px!important;
+        font-size:20px!important;
     }
     .mobileCount{
         display:none;
@@ -559,7 +833,7 @@ input[name="anonymous"]{
     }
     .course-profile-header{
         padding-left:0;
-        width:800px;
+        width:1000px;
     }
     .followButton{
         float:right;

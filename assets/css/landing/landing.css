@@ -46,7 +46,7 @@ a:hover {
   display: flex;
   flex-direction: column;
   padding-top: 150px;
-  background-color: #202020;
+  background-color: #1f2024;
   color: white;
   font-family: 'GT-Walsheim-Bold', Helvetica, Arial, sans-serif;
 }
@@ -99,7 +99,7 @@ a:hover {
 }
 
 .landing--signup {
-  margin-top: 100px;
+  margin-top: 30px;
   transition: all 0.35s ease-in-out;
   background-color: #007bff;
   border: none;
@@ -107,7 +107,7 @@ a:hover {
   padding: 5px 10px 5px 10px;
   border-radius: 100px;
   font-weight: bold;
-  font-size: xx-large;
+  font-size: x-large;
   cursor: pointer;
   outline: none !important;
   box-shadow: 0px 5px 10px 0px #0f0f0f;
@@ -194,18 +194,22 @@ a:hover {
 .landing--wave {
   margin-top: -150px;
   z-index: 10;
-  height: 300px;
+  height: 250px;
 }
 
 .landing--wave--footer {
   margin-top: -250px;
   z-index: 10;
   height: 300px;
+  
 }
 
 .feature1 {
   display: flex;
-  margin: 200px 10vw 200px 15vw;
+  margin: 20px 10vw 100px 15vw;
+  background-color:#1f2024;
+  padding:20px;
+  border-radius: 20px;
 }
 
 .feature1 img {
@@ -241,6 +245,9 @@ a:hover {
   display: flex;
   margin: 200px 20px 200px 150px;
   z-index: 1;
+  background-color:#1f2024;
+  padding:20px;
+  border-radius:20px;
 }
 
 .feature2 img {
@@ -255,8 +262,11 @@ a:hover {
   display: flex;
   flex-direction: column;
   align-self: flex-start;
-  margin: 200px 10vw 200px 15vw;
+  margin: 100px 10vw 100px 15vw;
   z-index: 1;
+  background-color:#1f2024;
+  padding:20px;
+  border-radius:20px;
 }
 
 .landing--image--container--true {
@@ -346,7 +356,11 @@ a:hover {
   display: flex;
   flex-direction: column;
   align-self: flex-start;
-  margin: 200px 10vw 200px 15vw;
+  margin: 100px 10vw 100px 15vw;
+  background-color: #1f2024;
+  border-radius:20px; 
+  padding:20px;
+
 }
 
 .feature4Container {
@@ -362,10 +376,12 @@ a:hover {
   }
 }
 .feature5{
+  position:relative;
+  z-index:10!important;
   display: flex;
   flex-direction: column;
   align-self: flex-start;
-  margin: 100px 10vw 10px 15vw;
+  margin: 0px 10vw 10px 15vw;
 }
 
 .text--link {
@@ -386,7 +402,7 @@ hr {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #202020;
+  background-color: #1f2024;
   flex-direction: column;
 }
 
@@ -432,7 +448,7 @@ hr {
 }
 
 .landing--footer--text {
-  margin: 50px 0px;
+  padding: 50px 0px;
   text-align: center;
   color: white;
   font-weight: bold;

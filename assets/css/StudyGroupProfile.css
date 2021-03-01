@@ -3,9 +3,125 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover, 
 input:-webkit-autofill:focus, 
 input:-webkit-autofill:active  {
-    -webkit-box-shadow: 0 0 0 30px #202020 inset !important;
+    -webkit-box-shadow: 0 0 0 30px #18191a inset !important;
 }
+.add-meetup {
+    cursor: pointer;
+    margin-left:20px;
+}
+.reserveSeat {
+    font-size:13px!important;
+    border-radius:20px;
+}
+.upcoming-meetup-container {
+    text-align: center;
+    width:80%;
+    margin-top:20px;
+}
+.private-group-img {
+    width:140px;
+}
+.meetup-host-image {
+    width:40px;
+    margin-right:5px;
+}
+.meetup-host{
+    text-align:left;
+    margin-left:10px;
+    font-size:14px;
+    font-family:"Open sans", "sans-serif";
+    margin-top:40px!important;
+    padding-top:10px;
+    margin-bottom:0;
+}
+.meetup-title {
+    font-size:20px;
+}
+.meetup-date {
+    color:#a9a9a9!important;
+}
+.date-picker {
+    margin-left:auto!important;
+    margin-right:auto!important;
+    margin-bottom:20px;
+    width:250px;
 
+}
+.date-picker-container {
+    width:100%;
+    text-align:center;
+    display:inline-block;
+
+}
+.date-picker .ui-datepicker-inline {
+    background-color :#18191a;
+    border:none!important;
+}
+.ui-state-default {
+    background-color:#343a40!important;
+    color:white!important;
+    border:none!important;
+    border-radius: 5px!important;
+}
+.ui-datepicker-title, .ui-datepicker-header{
+    background-color:#18191a!important;
+    border:none!important;
+    color:white!important;
+
+
+}
+.ui-state-active {
+    background-color:#007bff!important;
+}
+.ui-datepicker-calendar th {
+    color:white!important;
+}
+.meetup-host a {
+    color:white;
+}
+.meetup-container{
+    text-align:center;
+    background-color:#1f2024;
+    width:60%;
+    min-height:75px;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:30px;
+    border-radius:10px;
+    padding-bottom:20px;
+}
+.private-group-name {
+    margin-top:10px;
+}
+.groupRequestBtn{
+    font-size:15px!important;
+    margin-top:10px;
+    border-radius:20px;
+    font-family: "Open sans", "sans-serif";
+}
+.requestSent {
+    width:100%;
+    margin-top:20px;
+    display:none;
+
+}
+.requestSent span{
+    border-radius:10px;
+    font-size:16px;
+    text-align:center;
+    font-family: "Open sans", "sans-serif";
+    padding:5px;
+
+}
+.private-group-div {
+    width:90%;
+    text-align:center;
+    margin-right:80px;
+    padding-top:100px;
+}
+.hiddenEditor {
+    display: none;
+}
 .courseCode{
     font-size:16px!important;
     font-family: 'Open Sans', sans-serif;
@@ -49,21 +165,54 @@ input:-webkit-autofill:active  {
     background-color:#1d1d1d;
     
  }
+ 
+ .group-settings ul li {
+     list-style-type:none;
+     color: white;
+ }
  .profileNav li, .profileNav li a{
-     width:170px!important;
+     width:170px;
      color:#d4d4d4!important;
  }
-
-
+.time-select-container {
+    width:100%;
+    text-align:left;
+    margin-left:20px;
+    margin-right:20px;
+    margin-bottom:20px;
+}
+.timeLabel{
+    margin-bottom:10px!important ;
+}
+.time-select{
+    background-color: #1f2024;
+    padding:5px!important;
+    border-radius: 10px;
+    /* border: 1px solid #a9a9a9; */
+    color:white;
+    outline:none;
+}
+.time-list li {
+    list-style-type:none;
+    display:inline-block;
+    width:230px;
+}
+.input-field-duration{
+    background-color: #18191a;
+}
+.hours-span{
+    margin-left:10px;
+}
 .meetup-item-container{
-    background-color:#121212;
+    background-color:#18191a;
     margin-bottom:20px;
     margin-left:20px;
     margin-right:20px;
     border-bottom:2px solid #121212;
+    border-radius:10px;
 }
 .input-field{
-    background-color:#121212;
+    background-color:#18191a;
     border:none!important;
     color:white;
 }
@@ -79,6 +228,7 @@ input:-webkit-autofill:active  {
     margin-bottom:0!important;
     padding-left:7px;
     padding-top:3px;
+    text-align:left;
 }
 
  .studyGroupMeetupsHeader{
@@ -123,6 +273,63 @@ input:-webkit-autofill:active  {
     list-style-type:none;
     display:inline-block!important;
     width:40px;
+}
+#showNotifications{
+    margin-top:45px!important;
+}
+.searchUser{
+    width:40px!important;
+}
+.searchName, .userHandle {
+    text-align:left;
+}
+.courseCountainer {
+    height:60px!important;
+}
+.handle-container {
+    width:95%;
+    position:absolute;
+    background-color:#343a40;
+    min-height:100px;
+    margin-top:5px;
+    border-radius:10px;
+    display:none;
+}
+.invite-type-select {
+    margin-left:10px;
+}
+.invite-type-select {
+    cursor:pointer;
+}
+.sendInviteEmail{
+    width:100%;
+}
+.down-arrow{
+    margin-left:5px;
+    font-size:12px!important;
+}
+.input-container-message {
+    border-radius:20px!important;
+}
+.emails {
+    border-radius:20px!important;
+}
+.invite-button {
+    font-size:20px;
+    margin-left:5px;
+    color:white!important;
+    padding-top:5px;
+    cursor:pointer;
+}
+.messageHeaderContainer{
+    position:absolute;
+    right:0;
+    top:0;
+    width:220px;
+    height:20px;
+    margin-top:5px!important;
+    margin-right:5px!important;
+    z-index:2;
 }
 .plusStudents{
     font-size:16px;
@@ -252,7 +459,7 @@ button{
     color:black;
 }
 .modal-body{
-    padding: 0;
+    padding: 10px;
     text-align:center;
 } 
 button[type="close"]{
@@ -278,8 +485,9 @@ button[type="close"]{
     bottom:0!important;
     
 }
+
 .joinButton{
-    font-family: 'Open Sans', sans-serif!important;
+    /* font-family: 'Open Sans', sans-serif!important; */
 }
 #makeSession {
 
@@ -355,11 +563,8 @@ button[type="close"]{
         margin-top:0px;
      }
     .joinButton{
-        font-family: 'Open Sans', sans-serif!important;
-        font-size:13px!important;
-        border-radius:20px!important;
-        padding-top:0px!important;
-        padding-bottom:0px!important;
+        /* font-family: 'Open Sans', sans-serif!important; */
+       
     }
     .memberCount{
         font-size:12px!important;
@@ -411,6 +616,7 @@ button[type="close"]{
         left:0!important;
        
     }
+  
     .profile-ul li{
         font-family: 'Open Sans', sans-serif;
         font-size:13px!important;
@@ -563,9 +769,28 @@ button[type="close"]{
     width:150px!important; 
     color:#1f2024!important;
  }
- .story-img { 
-     width:100%;
-     height:100%;
+ .removeMember {
+     cursor: pointer;
+ }
+ .member-menu{
+     position:absolute;
+     width:180px;
+     min-height:60px;
+     background-color:#18191a;
+     z-index:2;
+     border-radius:15px;
+     box-shadow: 2px 2px solid black;
+     padding-top:20px;
+     padding-left:20px;
+     display:none;
+ }
+ .member-menu ul li {
+     font-size:14px;
+     list-style-type: none;
+     padding-bottom:10px;
+ }
+ .member-menu ul li a {
+     color:#d9d9d9;
  }
 @media only screen and (min-width: 1000px) {
     .profile-wrapper{
@@ -573,7 +798,7 @@ button[type="close"]{
         padding-top:40px!important;
         height:100%;
         min-height:100vh;
-        margin-left:250px!important;
+        margin-left:245px!important;
         width:80%!important;
     }
     .header-image{
@@ -616,7 +841,7 @@ button[type="close"]{
         opacity:1;
     }
     .bannerImg{
-     width:100%!important;
+     width:82%!important;
      background-repeat: none;
      object-fit: cover;
      height:100%;
@@ -697,7 +922,6 @@ button[type="close"]{
         border-bottom: 1px solid #007bff;
     }
     .group-options ul li {
-        display:inline-block;
         list-style-type:none;
         padding-bottom:3px;
         color:white;
@@ -749,13 +973,12 @@ button[type="close"]{
     } */
     .thread-container {
         margin-left:80px;
-        margin-top:80px;
+        margin-top:70px;
     }
     .groupName{
         font-size:15px!important;
         font-family: 'Open Sans', sans-serif;
-        margin-right:5px;
-        margin-left:5px;
+        margin-right:7px;
         min-width: 200px;
         margin-top:15px!important;
     }
@@ -771,17 +994,21 @@ button[type="close"]{
         margin-top:-5px!important;
         height:100%;
     }
+    .meetupsTitle {
+        font-size:22px;
+    }
     .groupSubject{
         color: #a9a9a9;
         font-size:12px;
-        margin-top:0!important;
-        text-align:center;
+        margin-top:2px!important;
+        text-align:left;
         width:120px;
     }
 }
 #messageHeader{
     margin-left:70px;
-    width:80%!important;	    
+    width:80%!important;
+    	    
 }
 .groupChat-text {
     margin-right:10px;
@@ -792,4 +1019,18 @@ button[type="close"]{
 }
 .go-home-groups {
     width:45px;
+}
+.createMeetup { 
+    font-size: 14px;
+    border-radius:10px;
+}
+.create-group-container{
+    width:45px;
+    height:45px;
+    text-align:center;
+    border-radius:30px;
+    cursor:pointer;
+}
+.create-group-container svg {
+    margin-top:10px;
 }

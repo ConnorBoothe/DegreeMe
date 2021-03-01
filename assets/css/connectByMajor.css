@@ -138,7 +138,7 @@ td{
     margin-right:5px;
 }
 .tutorResultsContent{
-    margin-left:250px;
+    margin-left:50px;
     margin-right: 0!important;
     position: relative;
     right: 50px;
@@ -247,5 +247,5 @@ button.sendMessage{
     text-align: left;
 }
 .modal-content{
-    background-color:#2c2f33!important;
+    background-color:#1f2024!important;
 }

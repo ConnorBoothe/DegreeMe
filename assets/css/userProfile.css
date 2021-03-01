@@ -10,6 +10,26 @@
     width:60%;
     padding-top:10px;
 }
+.online {
+    background-color: #28a745;
+
+}
+.offline {
+    background-color: #dc3545;
+}
+.offline, .online {
+    height: 30px;
+    /* float: left; */
+    position:relative;
+    width: 30px;
+    border: 5px solid #18191a;
+    border-radius: 30px;
+    /* margin-top:100px; */
+    margin-left:125px;
+    margin-top:100px;
+    z-index:2;
+    
+}
 .majorContainer{
 max-width:350px;
 }
@@ -53,6 +73,7 @@ max-width:350px;
     border-radius:5px;
     padding-left:5px;
     padding-right:5px;
+    margin-left:20px;
     box-shadow:1px 1px black;
 }
 .addClassification {
@@ -116,7 +137,7 @@ max-width:350px;
     padding-top:10px;
     font-family: 'Open Sans', sans-serif;
     color:white;
-    text-align:center;
+    text-align:left;
 
     margin-bottom:0!important;
     margin-top:0!important;
@@ -262,7 +283,7 @@ max-width:350px;
 .tableContainer tr td span{
     padding:5px;
     border-radius:15px;
-    width:150px;
+    width:100px;
 }
 .tableContainer table thead {
     width:100%;
@@ -332,10 +353,24 @@ max-width:350px;
     text-decoration:none!important;
     
 }
-
+.followForm{
+    text-align:center;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:10px;
+}
 .following-class{
     border: 2px solid #007bff!important;
     background-color:#1d1d1d;
+}
+.headerLinkPageTitle{
+    text-align:left;
+    font-size:15px;
+    color:white!important;
+}
+.profile-logo {
+    width:23px;
+    margin-top:8px!important;
 }
 .unfollow-class{
     border: 2px solid #dc3545!important;
@@ -355,11 +390,12 @@ max-width:350px;
 
 .messageText{
     width:100%;
-    background-color:#1d1d1d;
+    background-color:#18191a;
     color:white;
     outline:none;
     padding:5px;
     height:100px;
+    border:none;
 }
 .userImage{
     width:40px;
@@ -381,7 +417,7 @@ max-width:350px;
 
 
 .course-container2{
-    background-color:#242526;
+    background-color:#1f2024;
     border-radius:10px;
     width:170px;
     height:170px;
@@ -396,6 +432,7 @@ max-width:350px;
     margin-left:10px;
     color:#d4d4d4;
     overflow: auto;
+    position:relative;
 }
 .course-container:hover{
     background-color:#323335;
@@ -436,7 +473,7 @@ max-width:350px;
    margin-top:20px;
 }
 .tab-selected{
-    border-bottom: 2px solid #007bff;
+    border-top: 2px solid #a9a9a9;
 }
 .followersContainer {
     width: 100%;
@@ -446,7 +483,7 @@ max-width:350px;
     padding-bottom:0;
 }
 .followHandle:hover {
-    color: #007bff;
+    opacity: 0.8;
 }
 .followersContainer a:link {
     text-decoration: none;
@@ -485,7 +522,7 @@ max-width:350px;
         text-align:center;
     }
     .course-container{
-        background-color:#242526;
+        background-color:#1f2024;
         border-radius:10px;
         width:120px;
         height:120px;
@@ -517,7 +554,7 @@ max-width:350px;
         color:#d4d4d4;
     }
     .courseCode1{
-        font-size:16px;
+        font-size:14px;
         text-align:center;
     }
     .following-modal{
@@ -530,6 +567,7 @@ max-width:350px;
     }
      .mobile-courses-container{
          margin-top:25px;
+         text-align:left!important;
      }
      .mobileGroupsList{
          margin-left:20px!important;
@@ -668,20 +706,21 @@ max-width:350px;
     background-color:#18191a!important;
     border:none!important;
     color:white!important;
+    font-size:12px!important;
 }
 .following-modal{
     padding-left:15px;
 }
+
 .modal-content-follow{
     background-color:#18191a!important;
     color:white!important;
-    width:300px!important;
-    margin-left:50px!important;
     margin-top:100px!important;
+    width:350px!important;
 }
 .sendMessage{
     font-family: 'Open Sans', sans-serif;
-    border-radius:20px;
+    border-radius:40px!important;
     border-style: none;
     padding-right: 15px;
     padding-left: 15px;
@@ -710,7 +749,7 @@ button.followingButton{
     padding-right: 10px;
     padding-left: 10px;
     float:none;
-    font-size:12px;
+    font-size:10px;
     margin-left:30px;
     
 }
@@ -756,8 +795,8 @@ button.followingButton{
 
 .profile-ul li{
     font-family: 'Open Sans', sans-serif;
-    width:84px!important;
-    font-size:14px!important;
+    width:54px!important;
+    font-size:12px!important;
     text-align:center;
     padding-left:5px!important;
     padding-right:5px!important;
@@ -774,7 +813,7 @@ button.followingButton{
     /* display:none; */
 }
 .followers-text, .following-text{
-    font-size:14px!important;
+    font-size:12px!important;
 }
 
 #changeBio{
@@ -890,12 +929,33 @@ button.followingButton{
 }
 }
 @media only screen and (min-width: 1000px) {
+    .modal-title {
+        font-size:16px;
+    }
+    .sendDM {
+        font-size:14px;
+        border-radius:20px;
+    }
+    .message-modal-img {
+        width:20px;
+        margin-left:10px;
+        margin-right:5px;
+    }
+    .desktopFollow {
+        font-size:18px!important;
+    }
+    .followers-text, .following-text{
+        font-size:15px!important;
+    }
     .courseCode2{
-        font-size:20px;
-        text-align:center;
+        font-size:15px;
+        text-align:center!important;
+        position:absolute;
+        width:80%;
     }
     .course-container{
-        background-color:#242526;
+    
+        background-color:#1f2024;
         border-radius:10px;
         width:170px;
         height:170px;
@@ -910,9 +970,13 @@ button.followingButton{
         margin-left:10px;
         color:#d4d4d4;
     }
+    .find-room-container {
+        background-color:#18191a!important;
+        border-top:0!important;
+    }
     .courseCode1{
 
-        font-size:20px;
+        font-size:17px;
         text-align:center;
     }
     .following-modal{
@@ -920,8 +984,9 @@ button.followingButton{
     }
     .profileHeader{
         width:200px!important;
-        text-align:left;
+        text-align:center;
         float:left;
+        margin-right:5%;
     
     }
     #changeBio{
@@ -943,7 +1008,7 @@ button.followingButton{
 .tutorMiddle
 {
    width:500px!important;
-   padding-top:20px!important;
+   padding-top:0px!important;
    text-align:left;
 }
     .editBio{
@@ -957,7 +1022,47 @@ button.followingButton{
     }
     
     .profileBody{
-        margin-top:40px!important;
+        margin-top:0px!important;
+        text-align:center;
+
+    }
+    .profile-student-count {
+        font-size:14px!important;
+        margin-top:50px;
+    }
+    .roomsList {
+        text-align:center;
+        width:400px!important;
+
+    }
+    .room-username {
+        float:left;
+    }
+    .rooms-container{
+        text-align:center;
+        margin-left:auto;
+        margin-right:auto;
+        display:inline-block;
+        width:300px;
+    }
+    .rooms-btn {
+        width:100px!important;
+        font-size:14px!important;
+        margin-left:30px!important;
+
+    }
+    .roomsList li p {
+        font-size:18px!important;
+        font-family: "Poppins", sans-serif;
+
+    }
+    .roomsList li {
+        display:block!important;
+        text-align:center!important;
+        width:250px!important;
+        /* border-bottom: 1px solid #a9a9a9; */
+        margin-bottom:15px;
+        padding-bottom:10px;
 
     }
     .profile-ul{
@@ -967,7 +1072,13 @@ button.followingButton{
         color:#d4d4d4;
         position:relative;
         left:0!important;
-        margin-top:10px;
+       
+    }
+    .profile-ul li{
+        font-size:15px;
+        width:120px!important;
+        color:#a9a9a9!important;
+
        
     }
     .mobileCount{
@@ -978,24 +1089,30 @@ button.followingButton{
     }
     .profile-item-list{
         width:700px;
+        margin-left:auto;
+        margin-right:auto
+    }
+    .time-text {
+        width:120px!important;
     }
     .sendMessage{
         font-family: 'Open Sans', sans-serif;
-        border-radius:20px;
+        border-radius:40px!important;
+        width:28px!important;
+        height:28px!important;
         border-style: none;
-        padding-right: 15px;
-        padding-left: 15px;
+        padding-right: 7px;
+        padding-left: 7px;
         padding-top:3px;
         padding-bottom:3px;
         margin-left:10px;
-        border: 2px solid #007bff!important;
-    
+        font-size:12px;
     }
     .mobileMajorSpan{
         display:none;
     }
     .profileBio{
-        font-size:18px!important;
+        font-size:17px!important;
         text-align:left;
         color:white;
         background-color:#15191a;
@@ -1010,23 +1127,25 @@ button.followingButton{
         display:none;
     }
     .profileContainer{
-        margin-left:250px!important;
-        
-       
+        margin-left:auto;
+        margin-right:auto;
         background-color:#18191a;
-        width:100%;
+        width:60%;
      }
-     .profile-header{
+     .profile-details{
          background-color:#18191a!important;
-         padding-left:10%;
-         padding-top:80px;
+         padding-top:90px;
+         width:100%!important;
+         border-bottom:1px solid rgb(85, 85, 85);
+         padding-bottom:80px;
+
      }
     .tutorName{
-        font-size:18px;
+        font-size:22px;
         padding-top:10px;
         font-family: 'Open Sans', sans-serif;
         color:white;
-        text-align:center;
+        text-align:left;
         width:100%!important;
     }
     .profile-name{
@@ -1043,6 +1162,7 @@ button.followingButton{
         width:100%!important;
         margin-bottom:0px!important;
         margin-top:5px!important;
+        display:none;
         
     }
     .join-room-btn {
@@ -1055,12 +1175,13 @@ button.followingButton{
         color:white!important;
         font-size:20px;
         font-family: 'Open Sans', sans-serif;
-        width:70%;
-        padding-top:50px;
+        width:100%;
+        padding-top:20px;
         background-color:#18191a;
-        min-height:100vh;
-        padding-left:10%;
-        text-align:left;
+        min-height:50vh;
+        margin-left:auto;
+        margin-right:auto;
+        text-align:center;
     }
     .profile-img{
         width:150px!important;
@@ -1095,7 +1216,8 @@ button.followingButton{
         font-family: open sans, sans-serif;
         padding-right: 25px;
         padding-left: 25px;
-        float:left;
+        font-size:12px;
+        text-align:center;
         
     }
 

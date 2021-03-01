@@ -30,9 +30,10 @@
     font-size:18px;
 }
 .attachment-li{
-    max-width:800px;
-    width:50%!important;
+    width:30%!important;
+    margin-top:-20px;
 }
+
 .yt-logo {
     width:20px!important;
     float:left!important;
@@ -53,20 +54,36 @@
     word-wrap: break-word;
     padding-right: 10px;
   }
+  .underline-header{
+      margin-left:0!important;
+  }
 .comment-img{
-    width:200px;
+    width:100px;
+    margin-left:40px;
 }
    /* button */
    #comments-button {
     border-radius:20px;
     font-family:"Open sans", "sans-serif";
-    font-size:16px!important;
+    font-size:13px!important;
     margin-top:-50px;
 }
 .purple-file-upload{
-    background-color: #8a84ff;
+    background-color: #3a3b3c;
     color:white;
-    margin-top:30px;
+    /* margin-top:30px; */
+}
+.comments-page-actions-list {
+    width:300px;
+    position:absolute;
+    right:0;
+    margin-top:10px;
+}
+.comments-page-actions-list li {
+    list-style-type: none;
+    display:inline-block;
+    width:50px;
+    margin-right:20px;
 }
 .comments-actions-list li{
     list-style-type: none;
@@ -76,9 +93,17 @@
   
 }
 .comments-actions-list { 
-    position:absolute;
+    position:relative;
     right:0;
-    margin-top:20px;
+    margin-top:14px;
+    width:100%;
+    text-align:right;
+    margin-bottom:50px;
+}
+.comments-actions-page-list { 
+    position:relative;
+    right:0;
+    margin-top:14px;
     width:100%;
     text-align:right;
     margin-bottom:50px;
@@ -106,8 +131,11 @@
     .comment-sub-container{
         position: relative;
         display:inline-block;
+        text-align:center;
         margin-top:0px!important;
-        width: 100%!important;
+        width: 80%!important;
+        margin-left:auto;
+        margin-right:auto;
     }
     .question-Header{
         font-size:18px;
@@ -137,17 +165,18 @@
     }
     .comment-sub-container{
         position: relative;
-        right: 130px;
         display:inline-block;
         margin-top:50px;
         width: 800px;
     }
     .comments-container{
-        margin-left:250px;
+        margin-left:auto;
+        margin-right:auto;
         width:100%;
         min-height:100vh;
         text-align:center;
         background-color:#18191a;
+        padding-bottom:40px;
     }
     
     .comment-container{

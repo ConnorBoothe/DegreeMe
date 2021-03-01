@@ -16,8 +16,8 @@
 }
 .reviewBlock{  
         min-height:120px;
-        margin-bottom:20px;
-        display: -webkit-inline-box;
+        margin-bottom:0px!important;
+        /* display: -webkit-inline-box; */
         margin-bottom:50px;
         border-radius:10px;
         

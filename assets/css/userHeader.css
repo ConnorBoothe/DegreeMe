@@ -49,12 +49,13 @@ header{
 }
 #userHeaderContainer{
     margin-top:55px;
-    width:220px;
+    width:70px;
     height:93.5%;
     position:fixed;
     z-index:1;
     background-color:#1f2024;
     overflow-y: auto;
+    border-right:1px solid #343a40;
 }
 #userHeaderContainer1{
     height:45px;
@@ -90,11 +91,12 @@ header{
   .headerLinks { 
     display: table-cell; 
     position: relative;
-    padding-top:7px;
+    padding-top:3px;
     padding-bottom:5px;
     margin-bottom:5px;
-    padding-left:35px;
+    padding-left:20px;
     color:#d4d4d4;
+    cursor:pointer;
 
 
   }
@@ -278,8 +280,8 @@ header{
     margin-left:5px;
 }
   .headerLinkTitle{
-    font-family: 'Open Sans', sans-serif;
-      margin-left:10px;
+    font-family: "Poppins", sans-serif;
+    margin-left:10px;
       opacity:1;
       font-weight:500;
       font-size:15px;
@@ -302,7 +304,7 @@ header{
     left: 0; 
   }
   .dateTxt, .dateTxt1{
-      font-size:14px;
+      font-size:13px;
       padding-left:50px;
       margin-bottom:0!important;
       font-family: 'Open Sans', sans-serif;
@@ -468,7 +470,7 @@ header{
     position:absolute;
     right:0;
     top:0;
-    width:450px;
+    width:470px;
     height:20px;
     margin-top:10px;
     margin-right:25px;
@@ -482,7 +484,8 @@ header{
     font-size:16px!important;
     font-family: 'Open Sans', sans-serif;
     background-color:#046A38!important;
-    width:220px;
+    width:70px;
+    border-radius:0!important;
     margin-bottom:0!important;
 }
 .sideBarBranding{
@@ -496,7 +499,7 @@ header{
 }
 .headerContainer li{
    display:inline-block;
-   padding-right:40px;
+   padding-right:30px;
    color:#d4d4d4!important;
 }
 
@@ -754,10 +757,11 @@ header{
 
 .notif{
     position:relative;
-    padding-top:0px!important;
-    margin-bottom:5px;
+    padding-top:2px!important;
+    margin-bottom:2px;
     color:white;
     font-family: 'Open Sans', sans-serif;
+    font-size:13px!important;
 
 
 }
@@ -772,8 +776,8 @@ header{
     position:relative;
 }
 #showNotifications{
-    max-height:900px!important;
-    overflow-y:auto;
+    max-height:550px!important;
+    overflow-y:auto!important;
     width:350px;
     position:absolute;
     right:0;
@@ -782,22 +786,22 @@ header{
     margin-right:1%;
     /* margin-top:41px; */
     margin-bottom:0;
-    padding-bottom:20px;
     display:none;
     background-color:#1f2024;
     font-size:19px;
     border-radius: 0px 0px 10px 10px;
     box-shadow:1px 2px #131313;
     z-index:2;
+    padding-bottom:20px!important;
    
 }
 #recentNotifications{
     color:white;
-    font-size:20px;
+    font-size:17px;
     padding-top:10px;
     padding-left:20px;
     text-align:left;
-   padding-bottom:7px;
+   padding-bottom:2px;
    background-color:#1f2024;
 }
 #showNotifications ul li{
@@ -829,13 +833,21 @@ header{
     border-bottom:2px solid rgb(216, 215, 215);
     color:black;
 }
-
+.underline-header {
+    position:absolute;
+    border-bottom:1px solid #343a40!important;
+    height:51px;
+    width:100%;
+    margin-left:70px;
+    z-index:0;
+}
 #horizontalHeader{
     width:100%;	    
     height:55px;	    
-    padding-top:5px;	
+    padding-top:3px;	
     position:fixed;	    
-    z-index:3;	   
+    z-index:3;	
+   
 
     
 }
@@ -992,7 +1004,7 @@ header{
         top:0;
         margin-left:15px;
         margin-top:2px;
-        width:12px!important;
+        /* width:12px!important; */
         font-size:11px!important;
         border-radius:10px!important;
     }
@@ -1033,10 +1045,13 @@ header{
         top:0;
         margin-left:0px;
         margin-top:2px;
-        width:20px;
-        text-align:center!important;
-        padding-left:2px!important;
-        font-size:11px!important;
-        border-radius:18px!important;
+        /* width:20px; */
+        text-align:center;
+        padding-left:6px;
+        padding-right:6px
+        ;
+        padding-top:4px!important;
+        font-size:11px;
+        border-radius:18px;
     }
 }

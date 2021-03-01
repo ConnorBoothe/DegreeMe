@@ -4,7 +4,7 @@ body{
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: aliceblue;
-    background-color:	#242526;
+    background-color:	#1f2024;
     font-weight: 100;
     overflow: hidden; /* don't do scrollbars */
 }
@@ -49,15 +49,53 @@ body{
 .fc table, td{
     border-collapse: separate !important;
 }
+.fc-next-button, .fc-prev-button {
+    background-color:#1f2024!important;
+    border: 0!important;
+    border-radius:0!important;
+    padding-top:5px;
+}
 .fc-bg table,.fc-bg table td {
 
-    border: #464646 1px solid !important;
+    border: #242526 .5px solid !important;
+    cursor:pointer;
+}
+.go-home {
+    text-decoration:none!important;
+}
+.dm-logo {
+    width:25px;
+    margin-left:20px;
+    margin-right:30px;
+    margin-top:-10px;
+}
+.fc-button-group {
+    padding-top:0px;
+}
+.fc-center 
+{
+    padding-top:2px!important;
+}
+.fc-right select {
+    background-color: #3c3d3f!important;
+    border:none!important;
+
+}
+.fc-right {
+    margin-right:20px;
+
+
 }
 
+.fc-slats tr { 
+    background-color: #1f2024!important;
+}
 .fc-right .fc-button, .fc-left .fc-button{
-    background-color: #242526;
+    background-color: #3c3d3f;
     background-image: none;
     color: aliceblue;
+    outline:none!important;
+    border:none!important;
 }
 .fc-button.fc-state-active {
     background-color: #3c3d3f;
@@ -96,10 +134,21 @@ body{
     margin-right: 20px;
 }
 .fc-left{
-    margin-top: 10px;
+    margin-top: 15px;
+}
+.date-title {
+    padding-top:10px;
+    font-size:24px!important;
+}
+.fc-today-button {
+    margin-left:20px;
+    font-size:15px!important;
+    color:white!important;
 }
 .fc-day.fc-today {
-         background: rgb(97, 97, 97,0.3) !important; 
+         background: #242526 !important; 
+         color:white!important;
+         margin-left:20px;
         } 
         .close{
             position: absolute;
@@ -109,20 +158,34 @@ body{
             color: aliceblue;
         }
         #modalBody,#addEventBody,#addEvent, .modal-footer,#editEvent{
-            background: #3c3d3f;
+            background: #1f2024;
             color: aliceblue;
         }
-       
+        .modal-footer {
+            border-top:0!important;
+        }
+        .modal-content {
+            border-right:0!important;
+           
+        }
+       .close {
+           color:#a9a9a9!important;
+           outline:0!important;
+       }
         .modal .modal-body { /* Vertical scrollbar if necessary */
-            min-height: 580px;
+            min-height: 400px;
         }
         form.form-control{
             border: none !important;
+            background-color:#1f2024!important;
         }
         
 
           .modal-open .modal {
              z-index: 1050;
+          }
+          .fc-time {
+              font-weight:bold!important;
           }
         #editEvent input[type=text],#editEvent input[type=textarea],#editEvent input[type=number],#editEvent input[type=datetime-local],#editEvent select{
             background: #3c3d3f;
@@ -135,11 +198,22 @@ body{
         #addEvent label{
             font-weight: 500;
         }
+        .calendar-duration {
+            color:#a9a9a9;
+        }
+        label {
+            padding-top:5px!important;
+        }
+        #fieldset input {
+            background-color:#1f2024!important;
+            padding-left:0!important;
+        }
         .modal-header{
-            background: #242526;
+            background: #1f2024;
             text-align: center;
             display: inline-block;
             position: relative;
+            border-bottom:0!important;
         }
         #update-button, #addEventSubmit{
             margin-top: 10px;

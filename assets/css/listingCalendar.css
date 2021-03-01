@@ -72,6 +72,7 @@
 }
 .timeLabel{
     color:white;
+    margin-left:5px;
 }
 .calendarDay{
     display:none;

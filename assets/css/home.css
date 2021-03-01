@@ -6,6 +6,43 @@
     background-color: #18191a;
 
 }
+/* my courses color classes */
+.redCourse{
+    background-color: #f35e54!important;
+}
+.blueCourse {
+    background-color: #007bff!important;
+
+}
+
+.purpleCourse {
+    background-color: #36008d!important;
+
+}
+html {
+    /* overflow: hidden; */
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    /* overflow: auto; */
+}
+.add-course-container {
+    
+}
+.mobile-actions-text{
+    font-size:14px;
+    text-align:center;
+    margin-top:5px;
+    margin-bottom:0;
+    color:white!important;
+    padding-left:5px;
+    padding-right:5px;
+    padding-top:3px;
+    border-radius:20px;
+    
+}
 .noFollowing {
     padding-top:30px;
 }
@@ -15,29 +52,37 @@
 .home-wrapper{
     padding-top:50px;
     width:100%;
-    margin-left:250px;
+    margin-left:10%!important;
 }
 
 #attachment{
     display:none;
 }
 .purple-file-upload{
-    background-color: #8a84ff;
+    background-color: #3a3b3c;
     color:white;
-    margin-top:30px;
+    margin-top:0px!important;
+    padding-top:5px!important;
+    margin-top:-5px!important;
+    padding-left:12px!important;
 }
 #comments-button {
     border-radius:20px;
+    padding-left:10px;
+    padding-right:10px;
+    padding-top:3px;
+    padding-bottom:3px;
     font-family:"Open sans", "sans-serif";
-    font-size:16px!important;
-    margin-top:-50px;
+    font-size:13px!important;
+    margin-top:-45px;
 }
 #imageUploadLabel{
     border-radius:50px;
-    width:45px!important;
-    height:45px!important;
-    font-size:17px;
+    width:35px!important;
+    height:35px!important;
+    font-size:15px;
     cursor:pointer;
+    margin-top:-5px;
 }
 .comments-actions-list li{
     list-style-type: none;
@@ -46,9 +91,12 @@
     margin-right:20px;
   
 }
+.postQuestionBtn{
+    font-size: 13px;
+}
 .comments-actions-list{
-    margin-bottom:50px;
-    margin-top:20px;
+    margin-bottom:30px;
+    /* margin-top:20px; */
     text-align:right;
     margin-right:30px;
 }
@@ -67,6 +115,7 @@
     color:#a9a9a9!important;
     margin-bottom:0!important;
     text-align:left;
+    font-size:14px;
 }
 
 .timelinePost-Image{
@@ -134,6 +183,7 @@
 .addCourses, .hideCourseInput{
     margin-left:4px;
     cursor:pointer;
+    z-index:5!important;
 }
 .hostImg{
     width:40px;
@@ -164,7 +214,7 @@
 }
 .homeSideBarTitle{
     color:white;
-    font-size:18px;
+    font-size:15px;
     padding-left:10px;
 }
 .timeline-title{
@@ -446,8 +496,9 @@
 }
 .likeCount{
     color:#a9a9a9;
-    font-size:14px;
+    font-size:13px;
     float:right;
+    padding-top:3px;
 }
 .homeSideBar-container{
     min-height:100px;
@@ -459,6 +510,21 @@
     border-top-left-radius:10px;
     text-align:left;
     box-shadow: 2px 4px black;
+}
+.room-username {
+    font-size:13px;
+    margin-bottom:2px!important;
+    margin-top:2px!important
+}
+.rooms-btn {
+    font-size:12px!important;
+    border-radius:20px;
+
+}
+.courseName-text, .day-text, .time-text, .am-text{
+    font-size:13px;
+    padding-left:10px;
+    padding-right:20px;
 }
 .homeSideBar-container:last-of-type{
     border-bottom:none!important;
@@ -474,31 +540,60 @@
     font-size:16px;
     font-family: 'Open Sans', sans-serif!important;
 }
+.dots-tutor-courses {
+    
+}
+.myCoursesText a {
+    color:#d4d4d4;
+}
 .myCoursesText{
     font-size:14px;
+    width:90px;
     font-family: 'Open Sans', sans-serif!important;
-    padding-left:20px;
+    padding-left:10px;
+    text-align:left!important;
     color:white;
-    margin-bottom:3px!important;
+    margin-bottom:0px!important;
+}
+.myCoursesWrapper a {
+    text-decoration:none!important;
 }
 .myCoursesSubText{
-    font-size:14px;
+    text-align:center;
+    text-decoration:none!important;
+    font-size:15px;
     font-family: 'Open Sans', sans-serif!important;
-    padding-left:20px;
     color:#d4d4d4;
-    width:120px;
-    margin-bottom:3px!important;
+    width:50px;
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom:0!important;
+}
+.code {
+    margin-top:-5px;
+    font-size:15px!important;
+}
+.myCoursesWrapper:hover {
+    opacity: 0.8;
 }
 .myCoursesWrapper{
-margin-bottom:20px;
-padding-right:10px;
+margin-bottom:10px;
+height:55px;
+width:55px;
+margin-left:auto;
+margin-right:auto;
+text-align:center;
+background-color:#242526;
+border-radius:50px;
+border: 2px solid #343a40;
+text-align:center;
 }
 .addMyCoursesWrapper{
     margin-left:20px;
     margin-bottom:20px;
 }
 .myCourse-container{
-     margin-left:20px;
+     margin-left:0px;
 }
 .dots{
     right:0;
@@ -506,15 +601,19 @@ padding-right:10px;
     border-radius:20px;
     padding:5px;
     width:30px!important;
-    margin-right:50px;
+    /* margin-right:50px; */
 }
 .dots:hover{
     background-color:#343a40;
 }
+.dept {
+    padding-top:7px;
+    font-size:11px!important;
+}
 .dots-btn{
-    float:right;
-    background-color:#1f2024!important;
-    margin-top:-25px;
+    /* float:right; */
+    /* background-color:#1f2024!important; */
+    margin-top:-10px;
 }
 .popoverUl li{
     color:white;
@@ -551,6 +650,127 @@ padding-right:10px;
 .joinButton{
     font-family: 'Open Sans', sans-serif!important;
     font-size:14px;
+}
+.course-dropdown ul a {
+    color:white;
+}
+.course-dropdown ul a:hover {
+    text-decoration:none;
+}
+.course-dropdown ul li:hover{
+    opacity:0.8;
+}
+.find-room-container ul {
+    margin-bottom:5px!important;
+}
+.find-room-container {
+    background-color:#1f2024;
+    border-top: 1px solid #343a40;
+    padding-top:5px;
+    padding-bottom: 5px;
+    text-align:center;
+    padding-top:10px;
+}
+.find-room-container ul li {
+    display:inline-block;
+}
+.course-select { 
+    background-color: #343a40;
+    border-radius:20px;
+    min-width:120px;
+    margin-top:0px;
+    padding-top:3px;
+    padding-bottom:3px;
+    border: 1px solid #343a40;
+    /* padding-left:20px; */
+    padding-right:10px;
+    cursor: pointer;
+    position:relative;
+    margin-right:20px;
+}
+.course-select-day{
+    background-color: #343a40;
+    border-radius:20px;
+    margin-top:0px;
+    padding-top:3px;
+    padding-bottom:3px;
+    border: 1px solid #343a40;
+    /* padding-left:20px; */
+    padding-right:10px;
+    cursor: pointer;
+    position:relative;
+    margin-right:20px;
+}
+.course-dropdown {
+    background-color: #343a40;
+    min-height:100px;
+    position:absolute;
+    display:none;
+    width:120px;
+    margin-left:0!important;
+    border-bottom-left-radius:20px;
+    border-bottom-right-radius:20px;
+    padding:3px;
+    margin-top:10px;
+    border-radius:10px;
+    text-align:center;
+   
+}
+.course-dropdown-day {
+    background-color: #343a40;
+    min-height:60px;
+    position:absolute;
+    z-index:3;
+    display:none;
+    margin-right:20px;
+    border-radius:10px;
+    margin-top:10px;
+    border-bottom-left-radius:20px;
+    border-bottom-right-radius:20px;
+    padding:3px;
+    min-width:70px;
+    text-align:center;
+    border-left: 1px solid #343a40;
+    border-right: 1px solid #343a40;
+    border-bottom: 1px solid #343a40;
+}
+.dropdown-svg{
+    position:absolute;
+    right:0;
+    margin-right:10px;
+    margin-top:5px;
+}
+.course-dropdown ul {
+    margin-top:10px;
+}
+.course-dropdown ul li {
+    list-style-type: none;
+    font-size:14px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    /* border-bottom: 0.5px solid white; */
+    padding-bottom:3px;
+    background-color: #343a40;
+    padding:5px;
+    border-radius:10px;
+    padding-left:0px;
+    display:block;
+}
+.course-dropdown-day ul li:hover {
+    opacity: 0.8;
+}
+.course-dropdown-day ul li {
+    list-style-type: none;
+    font-size:14px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    /* border-bottom: 0.5px solid white; */
+    padding-bottom:3px;
+    background-color: #343a40;
+    padding:5px;
+    border-radius:10px;
+    padding-left:0px;
+    display:block;
 }
 .popover{
     width:150px!important; 
@@ -668,6 +888,7 @@ padding-right:10px;
     width:100px;
 }
 .rooms-container {
+    padding-top:0px;
 }
 .active-rooms-title {
     margin-bottom:20px;
@@ -676,11 +897,15 @@ padding-right:10px;
 }
 .roomsList {
     width:100%;
+    margin-top:40px;
+}
+.bell a, .bell1 a {
+    color:#d4d4d4;
 }
 .roomsList li {
     width:100px;
-    margin-left:10px;
-    margin-right:10px;
+    margin-left:15px;
+    margin-right:15px;
     display:inline-block;
     list-style-type:none;
 }
@@ -706,11 +931,12 @@ padding-right:10px;
 }
 
 .course-wrapper{
+    
     background-color:#2a2f33;
-    width:80%;
+    width:400px;
     margin-left:30px;
-    display:none;
-    margin-top:15px;
+    /* display:none; */
+    z-index:5;
 }
 .scheduleHeader{
     font-size:25px;
@@ -766,7 +992,7 @@ padding-right:10px;
 }
 
 .heartIcon{
-    font-size:22px;
+    font-size:15px;
     font-weight:50!important;
     color:#a9a9a9;
     
@@ -885,7 +1111,7 @@ padding-right:10px;
     color:white!important;
     padding-left: 30px;
     margin-top:10px;
-    font-size:17px;
+    font-size:14px;
     text-align:left;
 }
 .captionAnon{
@@ -1203,7 +1429,7 @@ input[name="searchType"]{
   @media only screen and (min-width: 1000px) {
     .daySelect-container{
         margin-top:20px;
-        margin-bottom:20px;
+        margin-bottom:10px;
         text-align:center;
         margin-left:auto;
         margin-right:auto;
@@ -1233,7 +1459,7 @@ input[name="searchType"]{
     }
     .weekOfTxt{
         margin-top:0!important;
-        font-size:16px!important;
+        font-size:14px!important;
         text-align:left;
     }
     .day-container{
@@ -1364,7 +1590,8 @@ input[name="searchType"]{
         cursor:pointer;
     }
     .add-tutoring-course{
-        margin-left:20px;
+        margin-left:10px;
+        font-size:12px!important;
     }
     .remove-tutor-course{
         display:none;
@@ -1387,11 +1614,15 @@ input[name="searchType"]{
         margin-bottom:0!important;
     }
     .timeline{
-        width:40%;
-        max-width:600px;
+        width:50%;
+        min-height:600px;
+        max-width:620px;
+        min-width:550px;
         height:100%;
-        margin-left:15%;
+        margin-left:10%;
+        margin-right:5%;
         overflow-y:auto;
+        overscroll-behavior: none!important;
     }
     .rate-container p{
         font-family: "Open sans", "sans-serif";
@@ -1489,11 +1720,11 @@ input[name="searchType"]{
     }
     .recentActivity-title{
         font-size:16px;
-        padding-left:20px;
+        padding-left:0px;
         text-align:center;
         font-family: "Open sans", "sans-serif";
         text-align:center;
-        margin-bottom: 40px;
+        margin-bottom: 0px;
     }
     .tagACourse, .tagAGroup{
         background-color:#242526;
@@ -1519,10 +1750,13 @@ input[name="searchType"]{
         padding-left:0px;
     }
     .askQuestion-container{
+        padding-top:20px;
         text-align:center;
         left:0!important;
-        margin-top:40px;
+        margin-top:0px;
         overflow-x: hidden;
+        background-color:#1f2024;
+        border-top:1px solid #343a40;
     }
     
       .mobileMenu{
@@ -1532,12 +1766,23 @@ input[name="searchType"]{
         width:100%;
         margin-left:auto;
         margin-right:auto;
-        text-align:center;
+        text-align: left;
+        padding:5px;
+        padding-left:10px;
         margin-top:45px;
         margin-bottom:0px;
+        border-radius:10px;
+        background-color: #1f2024;
+        /* border: 1px solid #343a40; */
     }
     .mobile-actions-bottom-border{
-        border-bottom: 2px solid #007bff;
+        background-color:#343a40;
+        
+    }
+    .mobile-actions-span {
+        margin-left:5px;
+        padding-top:20px;
+        font-size:14px!important;
     }
     .mobile-actions ul {
         margin-bottom:0;
@@ -1549,11 +1794,17 @@ input[name="searchType"]{
         cursor:pointer;
         height:32px;
         font-family:"Open sans","sans-serif";
+        border-radius:20px;
+        padding-left:10px;
+        padding-right:10px;
+    }
+    .mobile-actions li:hover {
+        background-color:#343a40;
     }
     .like-button{
         width:55px;
         border:none!important;
-        position:absolute;
+        /* position:absolute; */
         background-color:#1f2024!important;  
         
     }
@@ -1561,6 +1812,9 @@ input[name="searchType"]{
         color:white;
         text-align:left;
         margin-left:30px;
+        font-size:14px;
+        padding-top:4px;
+        margin-bottom:9px!important;
     }
     .pdf-link, .pdf-link:hover{
         text-align:center;
@@ -1594,7 +1848,7 @@ input[name="searchType"]{
         margin-top:20px;
     }
     .question-img1{
-        width:200px!important;
+        width:100px!important;
         margin-top:20px;
         padding-bottom:5px;
     }
@@ -1617,7 +1871,7 @@ input[name="searchType"]{
         
     }
     .recentActivity-title{
-        margin-top:30px;
+        margin-top:0px;
         text-align: center;
     }
     .backToMenu{
@@ -1649,26 +1903,29 @@ input[name="searchType"]{
     }
     .view-timeline-btn{
         padding-top:2px;
+        border-radius:20px;
+        box-shadow:1px 1px black;
         padding-bottom:2px;
-        font-size:14px!important;
+        font-size:13px!important;
         margin-left:20px;
         font-family: 'Open Sans', sans-serif!important;
     }
     .postDate{
         color:#a9a9a9;
         font-size:14px;
-        padding-left:20px;
+        padding-left:5px;
     
         margin-right:10%;
-        margin-top:10px;
-        margin-bottom:5px;
+        margin-top:20px;
+        margin-bottom:0px;
     }
     .caption-status{
-        color:white!important;
+        color:#d4d4d4!important;
         margin-left: 30px;
+        margin-right: 30px;
         margin-top:0px;
         margin-bottom:5px;
-        font-size:17px;
+        font-size:14px;
         text-align:left;
         font-weight:450;
         font-family: 'Open Sans', sans-serif!important;
@@ -1677,10 +1934,10 @@ input[name="searchType"]{
     }
     .caption{
         color:white!important;
-        margin-left: 20px;
+        margin-left: 25px;
         margin-top:5px;
         text-align:left;
-        font-size:17px;
+        font-size:14px;
         font-family: 'Open Sans', sans-serif!important;
     }
     .studyGroupSubject{
@@ -1689,7 +1946,7 @@ input[name="searchType"]{
         padding-left:8px;
     }
     .courseName{
-        font-size:15px;
+        font-size:13px;
         color:white;
         padding-left:10px;
         padding-right:10px;
@@ -1744,10 +2001,10 @@ input[name="searchType"]{
     .postDate1{
         color:#a9a9a9!important;
         font-size:13px;
-        padding-left:15px;
+        padding-left:5px;
         margin-right:7%;
-        margin-top:10px;
-        margin-bottom:5px;
+        margin-top:20px;
+        margin-bottom:0px;
     }
     .searchLi, .slider-container-header, .mobileUserImg, .userHeader-mobile{
         display:none!important;
@@ -1762,7 +2019,8 @@ input[name="searchType"]{
         font-family: 'Open Sans', sans-serif!important;
         margin-bottom:0!important;
         margin-left:55px;
-        font-size:16px;
+        margin-top:4px;
+        font-size:14px;
         text-align:left;
     }
     .postHandle a{
@@ -1775,22 +2033,22 @@ input[name="searchType"]{
         font-family: 'Open Sans', sans-serif!important;
     }
     .addComment{
-        margin-left:70px;
+        margin-left:20px;
         color:#d4d4d4;
+        font-size:13px;
     }
     #findATutorMobile-wrapper{
         display:none;
     }
     .timeline-container-status{
         min-height:100px;
-        /* border-bottom: 2px solid #007bff; */
-        /* box-shadow:1px 2px #131313; */
-        margin-right:5%;
         margin-bottom:30px;
         margin-top:30px;
         border-radius:8px;
         background-color:#1f2024;
         text-align:center;
+        /* border: 1px solid #343a40!important; */
+
         
     }
     .available-selected{
@@ -1868,10 +2126,13 @@ input[name="searchType"]{
     .right-container {
         width:30%;        
     }
+
     .homeWrap{
         width:100%;
         overflow-y:none;
         background-color:#18191a!important;
+        overscroll-behavior: none!important;
+        position:fixed!important;
 
     }
     .timeline-container-helprequest{
@@ -2004,7 +2265,7 @@ input[name="searchType"]{
         margin-left:auto;
         margin-right:auto;
         text-align:center;
-        margin-top:15px;
+        margin-top:10px;
         margin-bottom:0px;
     }
     .mobile-actions-bottom-border{
@@ -2024,10 +2285,9 @@ input[name="searchType"]{
         text-align:left;
     }
     .mobile-actions-text{
-        font-size:13px;
+        font-size:14px!important;
         text-align:center;
         margin-top:5px;
-        font-family:"Open sans", "sans-serif";
         margin-bottom:0;
     }
     .mobile-actions-item{
@@ -2232,7 +2492,7 @@ input[name="searchType"]{
     .addComment{
         margin-left:90px;
         color:#d4d4d4;
-        font-size:13px!important;
+        font-size:12px!important;
     }
     .view-timeline-btn{
         padding-top:2px;
@@ -2261,7 +2521,7 @@ input[name="searchType"]{
     .postDate{
         color:#a9a9a9;
         font-size:14px;
-        padding-left:20px;
+        padding-left:0px;
         float:right;
         margin-right:7%;
         margin-top:10px;
@@ -2276,12 +2536,12 @@ input[name="searchType"]{
         margin-bottom:5px;
     }
     .caption-status{
-        color:white!important;
+        color:#d4d4d4!important;
         margin-left: 30px;
-        margin-right: 30px;
+        margin-right: 50px;
         margin-top:0px;
         margin-bottom:5px;
-        font-size:15px;
+        font-size:14px;
         font-weight:450;
         text-align:left;
         font-family: 'Open Sans', sans-serif!important;
@@ -2473,7 +2733,8 @@ input[name="searchType"]{
         background-color:#1f2024!important;
         position:relative!important;
         height:60px!important;
-       
+       overscroll-behavior: none!important;
+       border-bottom:1px solid #343a40!important;
     }
     .timeline-title{
         display:none;
@@ -2603,7 +2864,7 @@ input[name="searchType"]{
     .headerContainer{
         right:0;
         top:0;
-        width:300px!important;
+        width:400px!important;
         margin-right:0px!important;
         z-index:2;
         
@@ -2631,21 +2892,23 @@ input[name="searchType"]{
 
      #showNotifications{
          width:100%!important;
-         height:100vh;
          /* padding-left:10%; */
          position:fixed!important;
          top:0;
+         overflow-y:auto;
          margin-top:0!important;
          margin-left:5px!important;
          margin-right:50px!important;
          border-top-right-radius:20px!important;
          border-top-left-radius:20px!important;
-         padding-bottom:120px!important;
 
          
      }
      .startConversation-button{
          padding-left:0!important;
+         position:absolute;
+         right:0;
+         float:right;
      }
     .logo{
         margin-right:0;

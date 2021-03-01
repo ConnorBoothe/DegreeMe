@@ -255,19 +255,38 @@ body {
 .upload-spinner {
   display: none;
 }
-
-.Signup--Background {
-  background-color: #202020 !important;
+.signup-body {
+  background-color: #1f2024 !important;
 }
+.landing--footer--social a {
+  margin-left:8px;
+  margin-right:8px;
+}
+.Signup--Background {
+  background-color: #1f2024 !important;
+  height:100%;
+}
+.landing--footer--text {
+  padding-top:5px;
+  padding-bottom: 5px;
+  font-family: 'GT-Walsheim', Helvetica, Arial, sans-serif;
 
+}
+.landing--footer {
+  text-align:center;
+}
+.Login--Submit:hover {
+  opacity: 0.8!important;
+}
 .Login--Submit {
   border: none;
+  outline: none!important;
   background-color: var(--primary);
   color: white;
   border-radius: 10px;
   width: 100%;
   box-shadow: 0px 2px 10px -3px black;
-  font-size: 22px;
+  font-size: 18px;
   font-weight: bold;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -339,7 +358,7 @@ body {
   border-radius: 10px;
   border: none !important;
   box-shadow: 0px 2px 10px -3px black;
-  background-color: #1a1a1a;
+  background-color: #343a40;
   width: 100%;
   color: white;
   line-height: normal !important;
@@ -464,7 +483,7 @@ body {
 
   .signup-container {
     padding-bottom: 0 !important;
-    background-color: #202020 !important;
+    background-color: #1f2024 !important;
   }
 }
 .disclaimerText h3 {

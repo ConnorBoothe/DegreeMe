@@ -12,12 +12,12 @@
 }
 .contentBlock {
   height: 100% !important;
+  background-color:#1f2024;
 }
 .aboutContainer2 {
   padding-top: 200px;
   min-height: 100vh;
   background-size: 100% 95%;
-  background-repeat: no-repeat;
 }
 /* text on aboutContainer2 */
 .aboutContainer2 h2 {
@@ -49,12 +49,9 @@
 }
 .page-container1 {
   width: 100% !important;
-  background-image: url("../img/bg-image.svg");
-  background-repeat: no-repeat;
-  background-position: fixed;
-  background-color: #2196f3;
+  background-color: #1f2024;
   min-height: 130vh;
-  background-size: 1980px;
+
 }
 
 /* change the size of the entire block content filled with the images */
@@ -69,17 +66,16 @@
 }
 
 .page-container1 {
-  background-color: black;
+  background-color: #1f2024;
+}
+.rocketMan {
+  width:300px!important;
 }
 /* ****** MAY DELETE ***** */
 .wholeScreen {
   width: 100% !important;
-  background-image: url("../img/bg-image.svg");
-  background-repeat: no-repeat;
   background-position: fixed;
-  background-color: #2196f3;
-  min-height: 130vh;
-  background-size: 1980px;
+  background-color: #1f2024;
 }
 /* styling the parent div for children aboutChild */
 /* .aboutParent {
@@ -168,6 +164,12 @@
 .iconAbout3 {
   text-align: center !important;
   padding-top: 15px !important;
+  font-family: "Poppins", sans-serif;
+
+}
+.about-sub {
+  font-family: "Poppins", sans-serif;
+  font-size: 24px;
 }
 .aboutUsTitle img {
   width: 500px;
@@ -206,6 +208,7 @@
     text-align: center !important;
     padding-top: 15px !important;
   }
+  
   .iconAbout2 {
     margin-top: 100px;
   }

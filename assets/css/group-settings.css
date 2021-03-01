@@ -1,0 +1,85 @@
+.profile-wrapper {
+    margin-left:60px!important;
+    width:95%!important;
+}
+.joinButton {
+    display: none!important;
+}
+.group-settings-container {
+    position:relative;
+    margin-right:auto;
+    text-align:center;
+    width:80%;
+    margin-top: 30px;
+}
+.group-settings-container h3 {
+    color: white;
+    margin-bottom:20px;
+}
+.group-settings-container p {
+    margin-bottom:4px;
+}
+.group-settings-input-container {
+    margin-bottom:20px;
+    
+}
+.group-settings-input{
+    background-color: #1f2024;
+    color:white;
+    border:none;
+    border-radius:10px;
+    font-size:16px;
+    padding:5px;
+    padding-left:15px;
+    padding-right: 15px;
+    width:100%;
+    position:relative;
+    z-index:2;
+}
+.save-changes-btn{
+    position: absolute;
+    right:0;
+    font-size:14px;
+    border-radius:20px;
+}
+.group-settings-wrapper {
+    position:relative;
+    width:30%;
+    text-align:left;
+    margin-left:auto;
+    margin-right:auto;
+}
+.courseCountainer {
+    cursor:pointer;
+}
+.groups-course-autocomplete {
+    background-color:#1f2024;
+    width:100%;
+    min-height:50px;
+    display:none;
+    position:absolute;
+    z-index:3;
+}
+.groupSubject {
+    display: none;
+}
+.update-success {
+    width:100%;
+    border-radius:10px;
+    margin-top:75px;
+    text-align:center;
+    display: none;
+}
+.img-upload-container{
+    position:absolute;
+    top:0;
+    width:400px!important;
+    z-index:3;
+    margin-top:100px;
+    right:40%;
+    height:500px;
+    text-align:center;
+    display:none;
+    margin-left:auto;
+    margin-right:auto;
+ }

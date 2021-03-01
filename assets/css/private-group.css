@@ -1,0 +1,30 @@
+.joinButton {
+    display:none!important;
+}
+.private-text {
+    color: #d9d9d9;
+    font-size:17px!important;
+}
+.openImageEditor, .groupTitle svg {
+    display:none;
+}
+.approve-member-image{
+    width:60px;
+    margin-right:10px;
+}
+.title-pending-members{
+    font-size:24px;
+    margin-bottom:25px;
+}
+.private-group-div ul li {
+    margin-bottom:20px;
+}
+.private-member-handle {
+    font-size:18px;
+    margin-right:30px;
+    width:60px!important;
+}
+.Accept, .Reject {
+    margin-right:10px;
+    border-radius:15px;
+}

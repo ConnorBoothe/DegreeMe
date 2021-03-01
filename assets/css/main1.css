@@ -1,3 +1,7 @@
+#loginBtn, #loginBtn1 {
+    margin-top:10px;
+    outline:none!important;
+}
 @media only screen and (max-width: 1000px) {
     .profileNav{
         width:100%;
@@ -43,7 +47,10 @@
       font-family: "Open sans", "sans-serif";
       
     }
-    
+    #searchInput {
+        position:relative;
+        z-index:3!important;
+    }
     #searchInput, .input-field{
         font-family: "Open sans", "sans-serif"!important;
         font-size:14px!important;
@@ -90,9 +97,6 @@
     }
     #userHeaderContainer{
         display:none;
-    }
-    .home-wrapper{
-        margin-left:0!important;
     }
     .mobileComingSoon{
         display:block!important;
@@ -152,12 +156,12 @@
 }
 @media only screen and (min-width: 1000px) {
     .profileNav{
-        width:1000px;
-        
+        width:500px!important;
         height:40px;
         padding:0px!important;
-        margin:0!important;
-    }
+        margin-right:auto;
+        margin-left:auto;
+        }
     .profile-wrapper{
         background-color: #18191a;
         padding-top:55px;
@@ -209,6 +213,7 @@
     .followers-container{
         width:80%;
         text-align:left;
+        margin-top:10px;
     }
     .tutorMiddle{
         width:100%;
@@ -442,10 +447,10 @@ header{
 }
 .logo{
     float:left;
-    width:125px;
-    margin-right:80px;
-    margin-left:30px;
-    margin-top:17px;
+    width:23px;
+    margin-right:40px;
+    margin-left:10px;
+    margin-top:10px;
 
 }
 .table_ tr thead th{
@@ -547,10 +552,14 @@ Menu css
         margin-top:20px;
     }
     .myCourseTitle{
-        padding-left:40px;
-        margin-top:40px;
+        text-align:center;
+       margin-right:auto;
+       margin-left:auto;
+        margin-top:10px;
         margin-bottom:0;
-        font-size:22px;
+        font-size:25px;
+        position:relative;
+        z-index:5!important;
     }
     .input-field-addCourse{
         background-color:#2a2f33;
@@ -558,7 +567,7 @@ Menu css
         margin-left:5px;
         height:30px;
         border:none;
-        font-size:15px;
+        font-size:14px;
         color:white;
         font-family: 'Open Sans', sans-serif;
     }
@@ -975,7 +984,7 @@ Menu css
    .findTutorSubTitle{
     text-align:center;
     padding-top:10px;
-    font-size:35px;
+    font-size:25px;
     width:700px;
 }
    
@@ -1368,7 +1377,7 @@ Menu css
         text-align:center;
     }
     .starImg{
-        width:17px;
+        width:15px;
         display:inline-block!important;
     }
     .starLi{
@@ -1430,13 +1439,14 @@ Menu css
         color:#d4d4d4;
         position:relative;
         left:0!important;
+        
        
     }
-    .profile-ul li{
+     /* .profile-ul li{
         font-family: 'Open Sans', sans-serif;
         width:100px;
         
-    }
+    } */
     .questionHeader{
         width:100%;
        
@@ -1504,8 +1514,8 @@ Menu css
     }
     .questionTxt{
         text-align:left;
-        width:60%;
-        
+        /* width:60%; */
+        width:600px;
         padding-bottom:10px;
         margin-left:auto;
         margin-right:auto;
@@ -1685,7 +1695,7 @@ Menu css
         padding-left:27px;
         padding-top:10px;
         height:100%;
-        width:200px;
+        width:100px!important;
         cursor:pointer;
         color:white;
     }
@@ -1941,10 +1951,14 @@ Menu css
 
     .courseProfileContainer{
         /* margin-left:250px; */
-        padding-top:20px;
+        /* padding-top:20px;
         padding-left:15%;
         padding-right:500px;
-        background-color:#18191a;
+        background-color:#18191a; */
+        margin-left:auto;
+        margin-right:auto;
+        text-align:center;
+        width:600px;
        
      }
     
@@ -1986,9 +2000,10 @@ Menu css
     }
     .reviewSubmit{
         font-family: 'Open Sans', sans-serif;
+        width:100%;
     }
     .contentBlockReview{
-        margin-left:250px;
+        margin-left:50px;
         padding-left:20%;
         margin-right:25%;
     }
@@ -2161,7 +2176,8 @@ Menu css
     }
 
     .reviewTitle h1{
-        font-size:26px;
+        font-size:22px;
+        color:#d4d4d4!important;
         font-family: 'Open Sans', sans-serif;;
     }
     .reviewLabel{
@@ -2356,8 +2372,9 @@ Menu css
     
 }
 .feedbackLeftContainer{
-    margin-left:250px;
+    margin-left:50px;
     text-align:center;
+    width:80%;
 }
 .tutorButtons{
     width:30%;
@@ -2482,14 +2499,15 @@ Menu css
 }
     
     .reviewBlock{
-        width:650px;
-         margin-bottom:20px;
+        width:500px;
+         margin-bottom:10px;
          margin-top:10px;
-         margin-left:30px;
-         margin-right:30px;
+         margin-left:100px;
+         margin-right:0px;
          display:block!important;
          border-radius:10px;
          padding-top:10px;
+         text-align:left!important;
      }
 
     .dateImg{
@@ -2786,11 +2804,18 @@ display:inline-block!important      }
         background-color:#eeeeec;
         
     }
+    .review-btn{
+        padding:5px;
+        border-radius:10px;
+        font-size:12px!important;
+        text-decoration:none!important;
+    }
+
     .myConnectionOptionList{
         width: 150px;
         list-style-type:none!important;
         position: relative;
-        left: 335px;
+        margin-left:210px;
     }
     .myConnectionOptions{
         font-size:14px!important;
@@ -2835,8 +2860,9 @@ display:inline-block!important      }
         border-radius:5px;
         padding:5px;
     }
-    #loginBtn{
+    #loginBtn, #loginBtn1 {
         margin-top:10px;
+        outline:none!important;
     }
     .overlay{
         width:100%;
@@ -2844,7 +2870,7 @@ display:inline-block!important      }
       position:absolute;
       background-color:black;
       opacity:.3;
-      z-index:3;
+      z-index:2;
       top:0;
       display:none;
     }
@@ -2957,24 +2983,27 @@ display:inline-block!important      }
           text-align:center;
       }
       .reviewMsg{
-          font-size:17px;
-          color:white;
+          font-size:16px;
+          color:#d4d4d4;
           font-family: 'Open Sans', sans-serif;
           font-weight:300;
+          width:100%;
       }
       .review-handle{
-          font-size:17px!important;
+          font-size:16px!important;
       }
       .reviewCourse{
           color:#d4d4d4;
           font-size:16px;
       }
       .reviewBody{
-          padding-right:20px;
-          padding-left:80px;
+          padding-right:10px;
+          padding-left:25px;
+          padding-top:10px;
+          width:450px!important;
       }
       .review-pic{
-          width:40px!important;
+          width:35px!important;
           margin-right:10px;
       }
       .review-header li{
@@ -3120,6 +3149,7 @@ display:inline-block!important      }
     margin-bottom:0;
     height:40px;
     background-color:none;
+    border-radius:20px!important;
     
   }
   .input-container-addCourse{
@@ -3129,7 +3159,7 @@ display:inline-block!important      }
     background-color:#343a40;
     font-family:"Helvetica Neue", Helvetica, sans-serif;   
     border-collapse: separate; 
-    border-radius:20px;
+    border-radius:20px!important;
    
     padding-bottom:none!important;
     margin-bottom:20px;
@@ -3378,9 +3408,11 @@ background-color:#2c2f33 ;
     margin-top:65px!important;
     margin-bottom:30px;
 }
-
+#meetupsTable {
+    margin-left:100px!important;
+}
 .listContainer{
-    width:100%;
+
     margin-top:20px;
     margin-left:auto;
     margin-right:auto;
@@ -3650,14 +3682,14 @@ background-color:#2c2f33 ;
         
     }
     .startConversation{
-        font-size:20px;
+        font-size:22px;
         background-color:none!important;
         color:#d4d4d4;
         padding-left:10px;
     }
     .startConversation-button{
         background-color:#1f2024!important;
-        padding-left:15px;
+        padding-left:5px;
     }
     .text-bold {
         color: white;
