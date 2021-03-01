@@ -21,11 +21,14 @@
 	<script src="../socket.io/socket.io.js" defer></script>
 	<script src="../assets/js/Video/zoomStandBy.js" defer></script>
         <body class="color-dark">
-            <h3 id="waiting">waiting for host to join the Stream</h3>
+            <div class="waiting-container">
+                <h3 id="waiting">Waiting for the host to join...</h3>
+                <img class="waiting-img" src="../assets/img/superhero.svg"/>
+            </div>
+          
             <div class="homeWrap">
                 <div class="page-container">
-			<%- include ('../partials/horizontalHeader.ejs')%>
-			<%- include ('../partials/VideoChatBox.ejs')%>
+			
 			<input type="hidden" id="userHandle" name="handle" value="<%= session.handle %>"/>
 			<input type="hidden" id="userId" name="userId" value="<%= session.userId %>"/>
 			<input type="hidden" id="host"name="host" value="<%= stream.host %>"/>

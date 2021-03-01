@@ -1,73 +1,74 @@
  <!-- Modal -->
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css"></link>
+ <script src="../assets/js/Groups/createMeetup.js"></script>
  <div class="modal fade" id="newMeetup" tabindex="-1" role="dialog" aria-labelledby="meetupModal" aria-hidden="true">
    <div class="modal-dialog " role="document">
      <div class="modal-content color-dark">
        <div class="modal-header">
-         <h5 class="modal-title text-light" id="exampleModalCenterTitle"><span class="groupModalTitle"><%=studyGroup.GroupName%> Study Session</span></h5>
+         <h5 class="modal-title text-light" id="exampleModalCenterTitle"><span class="groupModalTitle">New <%=studyGroup.GroupName%> Meetup </span></h5>
          
          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
            <span aria-hidden="true">&times;</span>
          </button>
        </div>
        <div class="modal-body">
-            <form class="meetupForm" method="POST" action="createMeetup">
               <div class="">
-                <p class="text-light meetupLabel typeLabel">Type</p>
-                <label for="virtual" class="text-light studySeshLabel">Virtual</label>
-                <input id="virtual" name="type" type="radio" class="input-field" value="Virtual" checked/>
-                <label for="inPerson" class="text-light studySeshLabel">In-Person</label>
-                <input id="inPerson" name="type" type="radio" class="input-field" value="In-person"/>
+                
             </div>
               <input name="groupId" value="<%=params.GroupId%>" type="hidden" class="input-field" />
               <input name="groupName" value="<%=studyGroup.GroupName%>" type="hidden" class="input-field" />
                 <div class="meetup-item-container">
-                <p class="text-light meetupLabel">Description</p>
-                <input name="description" type="text" class="input-field" placeholder="ie Midterm Review"/>
-            </div>
-           
-                <div class="meetup-item-container building-container">
-                    <p class="text-light meetupLabel">Building</p>
-                <input name="building" type="text" class="input-field" placeholder="ie Atkins"/>
-            </div>
-            <div class="meetup-item-container building-container">
-              <p class="text-light meetupLabel">Room</p>
-          <input name="room" type="text" class="input-field" placeholder="ie 225b"/>
-      </div>
-      <div class="meetup-item-container">
-        <p class="text-light meetupLabel">Date</p>
-        <input name="date" type="date" class="input-field" placeholder="--/--/----"/>
+                <p class="text-light meetupLabel">Title</p>
+                <input autocomplete="off" name="description" type="text" class=" input-field" placeholder="ie Midterm Review"/>
+                </div>
+                <div class="date-picker-container">
+                  <div class="date-picker"></div>
+                </div>
+        
        
-        </div>
-      <div class="meetup-item-container">
-        <p class="text-light meetupLabel">Time</p>
-    <input name="time" type="time" class="input-field" placeholder="ie 6:00pm"/>
-</div>
-            <div class="meetup-item-container">
-                <p class="text-light meetupLabel">Duration</p>
-                
-                <input name="duration" type="number" class="input-field" placeholder="ie 2 hours"/>
-                </div>
+      
+      <div class="time-select-container">
+        <ul class="time-list">
 
-                <div class="zoom-container">
-                  <div class="study-session-link">
-                    <p>Create the zoom meeting, then enter the zoom invite link below.</p>
-                    <a target="_blank" href="https://zoom.us/meeting"><h3>Click Here to Create Zoom Meeting</h3></a>
-                  </div>
-                  <div class="meetup-item-container">
-                    <p class="text-light meetupLabel">Zoom Link</p>
-            
-                    <input name="zoomLink" type="text" class="input-field" placeholder="Insert Zoom Invite Link"/>
-                    </div>
-                    <p class="text-danger zoomErrTxt"></p>
-                </div>
+      <li>
+        <p class="text-light timeLabel">Time</p>
+        <select name="hour" class="time-select">
+          <%for(var x = 1; x < 13; x++) {%>
+              <option value="<%=x%>"><%=x%> </option>
+        
+           
+          <%}%>
+          
+        </select> :
+          <select name="min" class="time-select">
+                <option>00 </option>
+                <option>30 </option>
+          </select>
+          <select name="AMorPM" class="time-select">
+            <option>AM </option>
+            <option>PM </option>
+      </select>
+    </li>
+    <li>
+      <p class="text-light timeLabel">Duration</p>
+      <select name="duration" class="time-select">
+        <option value="1">1</option>
+        <option value="2">2 </option>
+        <option value="3">3 </option>
+  </select>     
+  <span class="hours-span">hours</span>
+    </li>
+  </ul>
+</div>
+               </div>
+
                 <div class="modal-footer">
-                  <input placeholder="Subject" value="Create Meetup" type="submit" class="btn btn-primary createMeetup"/>
+                  <input  placeholder="Subject" value="Create Meetup" type="submit" class="btn btn-primary createMeetup"/>
             
               </div>
               <input type="hidden" name="courseName" value="<%=studyGroup.Subject%>"/>
-            </form>
+           
             
-       </div>
        
        
      </div>

@@ -4,22 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css"  />
-    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
     <link rel="stylesheet" href="../assets/css/all.css" >
     <link rel="stylesheet" href="../assets/css/calendar.css">
-    
- 
     <title>Calendar | Degreeme</title>
 
     <!-- Google Tag Manager -->
     <script type="text/javascript" src="assets/js/googleTagManager.js"></script>
     <!-- End Google Tag Manager -->
     
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" ></script>
-    <script src="../assets/js/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
+    <script src="../assets/js/tooltip.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+
     <script src='https://cdn.jsdelivr.net/npm/moment@2.27.0/min/moment.min.js'></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js" ></script>
+    
+
 
 </head>
 <body>
@@ -29,20 +36,27 @@
     <script src="../assets/js/calendar.js"></script>
 
     <div id='calendar-container'>
+     
         <div class="fc-toolbar">
             <div class="fc-left">
+              <a data-toggle="tooltip" data-placement="" title="" 
+              class="go-home" href="/home">
+                <img 
+                 class="dm-logo" src="../assets/img/degreeMeHashTag.svg"/>
+              </a>
+
               <div class="fc-button-group">
-                <button class="fc-prev-button fc-button fc-state-default fc-corner-left" 
+                <button class="fc-prev-button fc-button fc-corner-left" 
                  type="button">
                   <span class="fc-icon fc-icon-left-single-arrow"></span>
                 </button>
-                <button class="fc-next-button fc-button fc-state-default fc-corner- 
+                <button class="fc-next-button fc-button fc-corner- 
                 right" type="button">
                    <span class="fc-icon fc-icon-right-single-arrow"></span>
                 </button>
               </div>
               <button class="fc-today-button fc-button fc-state-default fc-corner-left 
-                 fc-corner-right fc-state-disabled">Today</button>
+                 fc-corner-right ">Today</button>
            </div>
            <div class="fc-right">
               <div class="fc-button-group">
@@ -58,7 +72,7 @@
               </div>
             </div>
            <div class="fc-center">
-             <h2></h2>
+             <h2 class="date-title"></h2>
            </div>
            <div class="fc-clear"></div>
           </div>
@@ -66,9 +80,9 @@
     
         </div>
 
-        <a href="javascript:void(0)" id="addEventButton" class="float">
+        <!-- <a href="javascript:void(0)" id="addEventButton" class="float">
             <i class="fa fa-plus my-float"></i>
-            </a>
+            </a> -->
       </div>
       <div id="fullCalModal" class="modal fade">
         <div class="modal-dialog">

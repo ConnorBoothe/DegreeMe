@@ -18,37 +18,10 @@
             </div>
         </div>
     </div>
-    <% var noAtHandle=user.handle.replace('@','')%>
-
+   
         <% if(session.handle !=user.handle){%>
             <input name="email" type="hidden" value="<%=user.email%>" />
-            <% if(following){%>
-                <form action="/#" class="followForm" method="post" id="unfollow-form">
-
-                    <input name="followingHandle" type="hidden" value="<%=user.handle%>" />
-
-                    <input name="followingImg" type="hidden" value="<%=user.img%>" />
-
-                    <button id="<%=noAtHandle%>" data-status="unfollow" type="button"
-                        class="btn btn-sm followingButton following-class" data-handle='<%=user.handle%>'>
-                        Following</button>
-                </form>
-
-                <%}else{%>
-                    <form action="/#" class="followForm" method="post" id="follow-form">
-
-                        <input name="followingHandle" type="hidden" value="<%=user.handle%>" />
-
-                        <input name="followingImg" type="hidden" value="<%=user.img%>" />
-
-                        <button id="<%=noAtHandle%>" data-status="follow" type="button"
-                            class="btn btn-primary btn-sm followingButton follow-class">
-                            Follow</button>
-                    </form>
-                    <%}%>
-                        <button type="button" class="btn-primary sendMessage" data-toggle="modal"
-                            data-target="#profileMessageModal">
-                            Message
-                        </button>
+            
+                        
                         <%}%>
 </div>

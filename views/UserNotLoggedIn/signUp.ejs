@@ -13,6 +13,10 @@
   <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
   <link href="assets/css/header.css" rel="stylesheet">
   <link href="assets/css/schoolSuggestions.css" rel="stylesheet">
+  <link href="assets/css/landing.css" rel="stylesheet">
+  <link href="assets/css/index.css" rel="stylesheet">
+  <link href="assets/css/landing/landing.css" rel="stylesheet">
+
   <link href="assets/css/SignUp.css" rel="stylesheet">
   <link href="../assets/css/index.css" rel="stylesheet">
   <link href="../assets/css/footer.css" rel="stylesheet">
@@ -27,7 +31,7 @@
 
 </head>
 
-<body class="bg-light">
+<body class="signup-body">
     <!-- Google Tag Manager (noscript) -->
     <%- include('partials/googleTagManager.ejs') -%>
     <!-- End Google Tag Manager (noscript) -->
@@ -49,22 +53,20 @@
           <form method="POST" action="/SignUp" class="form">
             <input name="imageURL" type="hidden" class="imageURL"/>
 
-            <div class="login-logo-link">
-              <a href="/" ><img src="/assets/img/hash.svg" class="loginLogo"/></a>
-          </div>
+            
             <div class="signInTitleContainer"><h1 class='signIn'>Register to degreeMe</h1></div>
                     <div class="Login--Switch">Already have an account? <a href="/login">Sign in here</a></div>
             <div class="SignUp--Field--Flex">
               <div class="field--Small--Left">
                 <p class="firstTxt"></p>
-                <input class="Login--Input" name="first_name" type="text" id="first_name"
+                <input autocomplete= "off" class="Login--Input" name="first_name" type="text" id="first_name"
                   spellcheck="false" placeholder=" " autocomplete="autocomplete_off_hack_xfr4!k" style="text-transform: capitalize;"  />
                 <label class="Login--Label" for="first_name">First Name</label>
               </div>
 
               <div class="field--Small--Right">
                 <p class="lastTxt"></p>
-                <input name="last_name" id="last_name" type="text" class="Login--Input" spellcheck="false"
+                <input autocomplete= "off" name="last_name" id="last_name" type="text" class="Login--Input" spellcheck="false"
                   autocomplete="autocomplete_off_hack_xfr4!k" placeholder=" " style="text-transform: capitalize;" />
                 <label for="last_name" class="Login--Label">Last Name</label>
               </div>
@@ -72,7 +74,7 @@
 
             <div class="field">
               <p class="emailTxt"></p>
-              <input name="email" type="email" class="Login--Input"
+              <input autocomplete= "off" name="email" type="email" class="Login--Input"
                 autocomplete="autocomplete_off_hack_xfr4!k" placeholder=" " />
               <label for="email" class="Login--Label">University Email</label>
             </div>
@@ -96,8 +98,8 @@
     </div>
 </div>
   </div>
-  <%- include ('partials/footer.ejs') %>
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <div class="landing--footer--text text-light">Copyright © DegreeMe 2021<br/> <a href="/Privacy">Privacy</a> · <a href="/Policies">Policies</a></div>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
 <!-- <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-app.js"></script> -->
 <!-- <script src="https://www.gstatic.com/firebasejs/6.2.3/firebase-storage.js"></script> -->
 <!-- TODO: Add SDKs for Firebase products that you want to use

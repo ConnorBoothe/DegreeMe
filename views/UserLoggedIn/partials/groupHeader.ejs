@@ -1,24 +1,18 @@
 <%- include ('mobileMenu.ejs') %>
-<% var isMember = false;%>
-<% for (x in studyGroup.Members){%>
-    <%if(studyGroup.Members[x].MemberHandle == session.handle){%>
-        <%isMember = true%>
-    <%}%>
-<%}%>
+
 <link href="../assets/css/userHeader.css" rel="stylesheet">
 
   <div id="messageHeader" class="horizontalDark">
       <div class="groupTitle">
         <span class="groupName text-light"><a class="group-name-link" href="/Group/<%=studyGroup._id%>"><%=studyGroup.GroupName%></a></span>
-        <% if(isMember){%>
-        <img class="dots dots-tutor-courses" data-container="body" data-toggle="popover" data-placement="right" data-content="<ul class=popoverUl><li><a class=askQuestionBtn href=/course/'+removeSpace(res[x].courseName)+'>Ask a Question</a></li><li><form method=POST class=leaveCourseForm ><input class=courseName type=hidden name=course value='+removeSpace(res[x].courseName)+' /><button class=leaveCourse>Leave</button></form></li></ul>" src="../assets/img/3dots.svg"/>
+        <% if(isHost){%>
+            <a href="/group-settings/<%=studyGroup._id%>">
+            <svg class="gear-icon" data-toggle="tooltip" data-placement="bottom" title="Group Settings" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-gear-fill" viewBox="0 0 16 16">
+                <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
+              </svg>     
+            </a>
         <%}else{%>
-            <form action="/#" method="post" id="joinGroup">
-                <input name="joinGroup" type="hidden" value="<%=studyGroup._id%>" />
-                <input name="joinGroup" type="hidden" value="<%=studyGroup.GroupName%>" />
-                <button id="groupBtn" data-status="join" type="button"
-                     class="btn btn-primary joinButton"> Join Group </button>
-            </form>
+            
         <%}%>
         <p class="groupSubject"><%=studyGroup.Subject%></p>
       </div>
@@ -39,7 +33,20 @@
                  <div>
                     <div class="group-options">
                         <ul>
+                            <%if(isMember){%>
                             <li class="btn btn-primary openImageEditor" data-toggle="modal" data-target="#addStory" >Post to Story</li>
+                            <li class="btn btn-primary openImageEditor hiddenEditor" data-toggle="modal" data-target="#addStory" >Post to Story</li>
+
+                            <%}else{%>
+                                <form action="/#" method="post" id="joinGroup">
+                                    <input name="joinGroup" type="hidden" value="<%=studyGroup._id%>" />
+                                    <input name="joinGroup" type="hidden" value="<%=studyGroup.GroupName%>" />
+                                    <li id="" data-status="join" type="button"
+                                         class="btn btn-primary joinButton openImageEditor"> Join Group </li>
+                                </form>
+                                <li class="btn btn-primary openImageEditor hiddenEditor" data-toggle="modal" data-target="#addStory" >Post to Story</li>
+
+                            <%}%>
                             <!-- <li>Quizzes</li>
                             <li>Files</li>
                             <li>Invite</li> -->
@@ -99,6 +106,14 @@
                                 <span class="badge badge-danger bdge1"></span>
                                 <span class='hint' style='position:absolute'></span>
                             </span>
+                        </li>
+                        <li class="desktop-li">
+                            <span class="bell1" name = "Notifications" data-toggle="tooltip" data-placement="bottom" title="Calendar">
+                                <a href="/calendar" class=""><span class="img"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-calendar-fill" viewBox="0 0 16 16">
+                                    <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V5h16V4H0V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5z"/>
+                                  </svg></span></a>
+                            
+                             </span>
                         </li>
                         <li class="userImgLi">
                        

@@ -1,0 +1,44 @@
+
+
+ <!-- Modal -->
+<div class="modal fade " id="addGroupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered " role="document">
+      <div class="modal-content color-dark">
+        <div class="modal-header">
+          <h5 class="modal-title text-light" id="exampleModalCenterTitle">Create a Group</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form method="POST" action="StudyGroup">
+                <div class="createStudyGroupDiv">
+                   
+                 <div class="study-item-container">
+                     <p class="text-light loginLabel1">Group Name</p>
+                     <input name="createGroupName" id="group_name" type="text" class="input-field-createStudyGroup" autocomplete="off" />
+                     <p id="groupNameTxt"></p>
+                 </div>
+                 <div class="study-item-container">
+                     <p class="text-light loginLabel1">Privacy</p>
+                     <div class="privacy-slider">
+                         <input id="priceSlider" class="priceSlider" name="theme" type="range" min="1" max="2" value="1" class="" id="">
+                     <p class="private ">Private</p>
+                     </div>
+                                                                  <p id="groupNameTxt"></p>
+                 </div>
+                 
+                 <button id="createStudyGroup" type="submit" class="btn btn-primary loginLink">Create</button>
+                </div>
+                 
+               
+                </div>
+               
+             </form>
+        </div>
+        
+         
+      </div>
+    </div>
+  </div>
+

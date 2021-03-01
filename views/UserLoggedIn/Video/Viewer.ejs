@@ -24,35 +24,68 @@
 	<script src="../assets/js/Video/chat.js" defer></script> 
         <body class="color-dark">
 			<style>
-				#video-grid{
-				   display: flex;
-				   justify-content: center;
-				   flex-wrap: wrap;
-				}
+				
 				video{
-				   height: 300px;
-				   width: 400px;
+				   height: 200px;
+				   width: 40%;
 				   object-fit: cover;
 				   padding: 8px;
 				}
 			 </style>
             <div class="homeWrap">
                 <div class="page-container">
-			<%- include ('../partials/VideoChatBox.ejs')%> 
-			<input type="hidden" id="userHandle" name="handle" value="<%= session.handle %>"/>
+			<input type="hidden" id="userImg" name="image" value="<%= session.img%>"/>
+
+			<input type="hidden" id="userHandle" name="handle" value="<%= session.handle%>"/>
 			<input type="hidden" id="userId" name="userId" value="<%= session.userId %>"/>
 			<input type="hidden" id="previousStream" name="previousStream" value="<%= session.previousStream %>"/>
 			<input type="hidden" id="inStream" name="inStream" value="<%= inStream %>"/>
 			<input type="hidden" id="host"name="host" value="<%= stream.host %>"/>
 			<input type="hidden" id="hostId"name="hostId" value="<%= stream.hostId %>"/>
 			<input type="hidden" name="stream" value="<%= stream._id %>"/>
+			<div class="chat-container">
+				<div class="chat-wrapper">
+				</div>
+				<div class="write-message">
+					<div class="send-chat-container">
+						<p contenteditable="true" placeholder="Write message here" class="chatbox">Write your message here</p>
+						<span class="btn btn-primary chat-btn">Chat</span>
+
+					</div>
+			
+				</div>
+			   </div>
+			<div class="member-video-container">
+				<div class="container">
+					<%var classes = ["video-purple", "video-red", 
+					"video-blue", "video-yellow"]%>
+					<%for(var i = 0; i < 3; i++){%>
+					<div class="row">
+					  <div class="col <%=classes[Math.floor(Math.random() * 4)]%>">
+						<img class="video-image isTalking" src="<%=session.img%>">
+						<p class="text-light speakingText">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-broadcast" viewBox="0 0 16 16">
+                                <path d="M3.05 3.05a7 7 0 0 0 0 9.9.5.5 0 0 1-.707.707 8 8 0 0 1 0-11.314.5.5 0 0 1 .707.707zm2.122 2.122a4 4 0 0 0 0 5.656.5.5 0 0 1-.708.708 5 5 0 0 1 0-7.072.5.5 0 0 1 .708.708zm5.656-.708a.5.5 0 0 1 .708 0 5 5 0 0 1 0 7.072.5.5 0 1 1-.708-.708 4 4 0 0 0 0-5.656.5.5 0 0 1 0-.708zm2.122-2.12a.5.5 0 0 1 .707 0 8 8 0 0 1 0 11.313.5.5 0 0 1-.707-.707 7 7 0 0 0 0-9.9.5.5 0 0 1 0-.707zM10 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/>
+                              </svg>
+							Speaking</p>
+					</div>
+					  <div class="col <%=classes[Math.floor(Math.random() * 4)]%>">
+						<img class="video-image" src="<%=session.img%>">
+					  </div>
+					</div>
+					<%}%>
+					
+				  </div>
+			</div>
 			<div class="main">
+				
 				<div class="main__left">
 				   <div class="main__videos">
 					  <div id="video-grid">
 				
 					  </div>
 				   </div>
+				   
 				   <div class="main__controls">
 					  <div class="main__controls__block">
 						 <div class="main__controls__button main__mute_button">
@@ -90,11 +123,14 @@
     <!-- <script src="../assets/js/getNotifications.js"></script> -->
     <script src="../assets/js/popper.min.js"></script>
     <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../assets/js/SiteWideSearch.js"></script>
+	
+	<script type="text/javascript" src="../assets/js/SiteWideSearch.js"></script>
+
     <script type="text/javascript" src="../assets/js/highlightCurrentMenuItem.js"></script>
     <script src="../assets/jquery/jquery.session/jquery.session.js"></script>
     <script type="text/javascript" src="../assets/js/Client-DateFunctions.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+	<!-- <script type="text/javascript" src="../assets/js/Video/chat.js"></script> -->
 
 
     </body>

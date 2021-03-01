@@ -11,6 +11,9 @@
     <link rel="icon" href="assets/img/favicon.png" type="image/png" />
     <link rel="stylesheet" href="assets/css/login.css">
     <link href="assets/css/main.css" rel="stylesheet">
+    <link href="../assets/css/index.css" rel="stylesheet">
+    <link href="../assets/css/navbar.css" rel="stylesheet">
+    <link href="assets/css/landing/landing.css" rel="stylesheet">
 
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
@@ -19,11 +22,14 @@
 
     <!-- Google Tag Manager -->
     <script type="text/javascript" src="assets/js/googleTagManager.js"></script>
+
     <!-- End Google Tag Manager -->
 
     <!-- Scripts -->
     <script src="assets/jquery/dist/jquery.js"></script>
     <script type="text/javascript" src="assets/js/formValidation_1.js"></script>
+
+    <!-- <script type="text/javascript" src="assets/js/formValidation_1.js"></script> -->
 </head>
 <body class="">
     <!-- Google Tag Manager (noscript) -->
@@ -34,26 +40,25 @@
       </div>
         <div class="homeContainer1--Login">
             <div class="contentBlock">
-                
-                <% if(qs.email){%>
-                <h4 class='badge badge-warning loginErr'><%=qs.message%></h4>
-                <form method="POST" action="/sendEmail">
-                    <input name="email1" type="hidden" value="<%=qs.email%>" />
-                    <input class="btn btn-danger newEmailBtn" type="submit" value="Send another email" />
-                </form>
-                <%}else{%>
-                <%if(qs.message === "Account Successfully Created" ){%>
-                    <h4 class='badge badge-success loginErr'><%=qs.message%></h4>
-                    <p class="text-light">Check your email to confirm your account.</p>
-                <%}else if (qs.message == "Account Confirmed") {%>
-                    <h4 class='badge badge-success loginErr'><%=qs.message%></h4>
-                <%}else if (qs.message == "Session Ended") {%>
-                    <h4 class='badge badge-danger loginErr'><%=qs.message%></h4>
-                <%}else{%>
-                    <h4 class='badge badge-warning loginErr'><%=qs.message%></h4>
-                <%}%>
-                <%}%>
                 <div id="loginPage">
+                <% if(qs.email){%>
+                    <h4 class='badge badge-warning loginErr'><%=qs.message%></h4>
+                    <form method="POST" action="sendEmail">
+                        <input name="email1" type="hidden" value="<%=qs.email%>" />
+                        <input class="btn btn-danger newEmailBtn" type="submit" value="Send another email" />
+                    </form>
+                    <%}else{%>
+                    <%if(qs.message === "Account Successfully Created" ){%>
+                        <h4 class='badge badge-success loginErr'><%=qs.message%></h4>
+                        <p class="text-light">Check your email to confirm your account.</p>
+                    <%}else if (qs.message == "Account Confirmed") {%>
+                        <h4 class='badge badge-success loginErr'><%=qs.message%></h4>
+                    <%}else if (qs.message == "Session Ended") {%>
+                        <h4 class='badge badge-danger loginErr'><%=qs.message%></h4>
+                    <%}else{%>
+                        <h4 class='badge badge-warning loginErr'><%=qs.message%></h4>
+                    <%}%>
+                    <%}%>
                     <div class="login-logo-link">
                         <a href="/" ><img src="/assets/img/hash.svg" class="loginLogo"/></a>
                     </div>
@@ -62,7 +67,10 @@
                     <div class="Login--Switch">Don't have an account? <a href="/SignUp">Sign up here</a></div>
                     <%- include ('partials/login.ejs')%>
             </div>
+            <div class="landing--footer--text text-light">Copyright © DegreeMe 2021 <br/> <a href="/Privacy">Privacy</a> · <a href="/Policies">Policies</a></div>
+
         </div>
+ 
     </div>
 </body>
 </html>

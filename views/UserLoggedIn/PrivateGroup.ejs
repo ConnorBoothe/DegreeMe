@@ -12,8 +12,9 @@
     <link href="../assets/css/home.css" rel="stylesheet">
     <link href="../assets/css/messages.css" rel="stylesheet">
     <link href="../assets/css/story.css" rel="stylesheet">
+    <link href="../assets/css/private-group.css" rel="stylesheet">
+
     <link href="../assets/css/story-progress-bar.css" rel="stylesheet">
-    <link href="../assets/css/createStudyGroup.css" rel="stylesheet">
 
     <link rel="stylesheet" href="../assets/js/croppie/croppie.css" />
 
@@ -34,72 +35,41 @@
     <!-- End Google Tag Manager (noscript) -->
         <div class="blocker"></div>
     <div class="homeWrap">
-    <input type="hidden" name="handle" value="<%=session.handle%>"/>
     <div class="page-container">
         <input type="hidden" class="member_id" value="<%=session.handle%>" />
-        <%- include ('partials/newMeetupModal.ejs') %>
         <%- include ('partials/groupHeader.ejs')%>
         <%- include ('partials/groupMembersSideBar.ejs')%>
-        <%- include ('partials/newMeetupModal.ejs')%>
-        <%- include ('../Groups/partials/groupThreads.ejs')%>
-        <%- include ('../Groups/partials/groupChatModal.ejs')%>
-        <%- include ('../Groups/partials/Story.ejs')%>
-        <%- include ('../Groups/partials/addStory.ejs')%>
-        <%- include ('partials/addGroup.ejs')%>
-        <%- include ('partials/inviteModal.ejs')%>
+        <%- include ('../Groups/partials/UserGroups.ejs')%>
 
 
-        <div class="profile-wrapper">
-            <input type="hidden" name="upload-type" value="banner"/>
-            <input type="hidden" class="hiddenGroupId" />
-                <div class="header-image">
-                    <%if(isHost){%>
-                    <button class="changeBanner-btn btn openImageEditor">Change Banner</button>
-                    <p class="bannerSuccess badge badge-success">Banner Successfully Changed</p>
-                   <%}%>
-                    <img class="bannerImg" src="<%=studyGroup.BannerImage%>"/>
-                </div>
-                <div class="groupImg-container">
-                        <img data-toggle="tooltip" data-placement="bottom" title="View Story" 
-                        class="groupImg" src="<%=groupImg%>"/>
-                </div>
-                <div class="img-upload-container">
-                    <div class="img-secondary-wrapper">
-                        <input type='hidden' name='img1' class='croppedImg' value="" required />
-                        <input type="file" class="upload-file upload" value="Upload an Image"
-                            accept="image/gif, image/jpeg, image/png">
-                        <span class="text-dark picX"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
-                            <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
-                          </svg></span>
-                        <div class="upload-demo"></div>
-                        <input name="img1 imagebase64" type="hidden" />
-                        <div class="upload-result btn-primary">Use</div>
-                    </div>
-                </div>
-                <div class="upcoming-meetup-container">
-                    <h3 class="text-light meetupsTitle">Upcoming meetups
-                        <span class="add-meetup" data-toggle="modal" data-target="#newMeetup">
-                            <svg data-toggle="tooltip" data-placement="bottom" title="Add group meetup" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
-                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
-                              </svg>
-                        </span>
-                        
-                    </h3>
-                    <div class="meetup-list">
-                        
-                    </div>
-                    
-                </div>
-                <input type="hidden" class="handle" value="<%=session.handle%>"/>
-                <div class="messageBlock" >    
+        <div class="">
+            <input type="hidden" name="groupId" value="<%=studyGroup._id%>"/>
+            <div class="private-group-div">
+            <img class="private-group-img" src="<%=studyGroup.HostImage%>"/>
+            <h3 class="text-light private-group-name"><%=studyGroup.GroupName%></h3>
+            <p class="text-bold private-text">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1.25em" height="1.25em" fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 16 16">
+                    <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+                  </svg>
+                Private</p>
+            <form action="/#" method="post" id="joinGroup">
+                <input name="joinGroup" type="hidden" value="<%=studyGroup._id%>" />
+                <input name="joinGroup" type="hidden" value="<%=studyGroup.GroupName%>" />
+               <%if(pending){%>
+                <button id="" data-status="join" type="button" disabled
+                     class="btn btn-primary groupRequestBtn"> Request to Join Group </button>
+            
+                <%}else{%>
+                    <button id="" data-status="join" type="button"
+                     class="btn btn-primary groupRequestBtn"> Request to Join Group </button>
+                <%}%>
+                <p class="requestSent">
+                    <span class="text-light bg-success">Request Successfully Sent</span>
 
-                    <div id="messagesContainer">  
-                       
-                    </div>
-                 </div>
-                <%- include ('../Messages/partials/MessageInput.ejs')%>
-                
+                </p>
+
+                </form>
+        </div>
         </div>
         <audio id="pop">
             <source src="../assets/sounds/Blop-Mark_DiAngelo-79054334.mp3" type="audio/mpeg">
@@ -124,10 +94,8 @@
     <script type="text/javascript" src="../assets/js/Groups/getGroupMembers.js"></script>
     <script type="text/javascript" src="../assets/js/Groups/addGroupChat.js"></script>
     <script type="text/javascript" src="../assets/js/Messages/messageFunctions.js"></script>
-    <script type="text/javascript" src="../assets/js/Messages/messageScroll.js"></script>
     <script type="text/javascript" src="../assets/js/Groups/getGroupThreads.js"></script>
     <script type="text/javascript" src="../assets/js/Groups/story-progress-bar.js"></script>
-    <script type="text/javascript" src="../assets/js/Groups/getGroupMeetups.js"></script>
 
     <script src="../assets/js/socket.io.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-app.js"></script>
@@ -143,11 +111,7 @@
     <script type="text/javascript" src="../assets/js/SiteWideSearch.js"></script>
     <script type="text/javascript" src="../assets/js/Groups/addStoryResponse.js"></script>
     <script type="text/javascript" src="../assets/js/Groups/showGroupUserMenu.js"></script>
-    <script type="text/javascript" src="../assets/js/Groups/removeMember.js"></script>
-    <script type="text/javascript" src="../assets/js/ajaxCalls/CreateStudyGroups.js"></script>
-    <script type="text/javascript" src="../assets/js/emailInvite.js"></script>
-
-
+    <script type="text/javascript" src="../assets/js/Groups/privateGroupRequest.js"></script>
 
 
 

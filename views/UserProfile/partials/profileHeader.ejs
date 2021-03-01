@@ -1,0 +1,153 @@
+<div class="blocker"></div>
+<div class="blocker1"></div>
+    <div id="horizontalHeader" class="horizontalDark">
+
+
+        <%- include ('../../UserLoggedIn/partials/mobileMenu.ejs') %>
+        <link href="../assets/css/userHeader.css" rel="stylesheet">
+        <script type="text/javascript" src="../assets/js/checkUserActivity.js"></script>
+        
+          
+          <div class="mobile-logo-container">
+            <div class="mobile-logo-wrapper">
+            <img src="../assets/img/degreeMeHashTag.svg" alt="logo" class="logo mobileLogo" width="20"/>
+            </div>
+          </div>
+            <h1 id="pageTitle" class="pageTitleDark"> 
+                <div class="userHeader-mobile">
+                    <div class="mobileUserImg">
+                    <img class="userProfileImg userAccount" src="<%=session.img%>" alt="Profile Picture" />
+                       <h1 class="userProfileName "><span><%=session.handle%></span></h1>
+                       <%- include ('../../UserLoggedIn/partials/userProfileDropdown.ejs') %>
+                      </div>
+                     
+                      <div class="slider-container-header">
+                          <% if(session.activeTutor === true){%>
+                            <input id="priceSlider" class="priceSlider" name="theme" type="range" min="1" max="2" value="2" class="" id="">
+                            <p class="active text-success">Active</p> 
+                          <%}else{%>
+                            <input id="priceSlider" class="priceSlider" name="theme" type="range" min="1" max="2" value="1" class="" id="">
+                            <p class="active text-danger">Inactive</p> 
+                        <%}%>
+                       
+                  </div> 
+                   </div>
+                   <a  href="/home" class="text-dark"><img data-toggle="tooltip" data-placement="bottom" title="Go home" src="../assets/img/degreeMeHashTag.svg" alt="logo" class="logo profile-logo" width="20"/></a>
+               
+                         <div>
+                            <ul class="headerContainer">
+                                    <li class="desktop-li">
+                                        <div class="input-container-main">
+                                                <span class="mainSearch" name = "Notifications">
+                                                    <svg class="text-light" width=".95em" height=".95em"
+                                                    viewBox="0 0 16 16" class="bi bi-search" fill="currentColor"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd"
+                                                        d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
+                                                    <path fill-rule="evenodd"
+                                                        d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
+                                                </svg>
+                                                </span>
+                                                <input name="course" id="" class=" main-search-input"
+                                                    placeholder="Search" autocomplete="off" />
+                                        </div>
+                                            
+                            
+                            <div class="siteWideSearchContainer">
+                                <div class="tab-container">
+                                    <label for="users1" class="searchTab searchMenuUnderLine">Users</label>
+                                    <input type="radio" name="searchType" id="users1" value="Users"/>
+                                    <label for="courses" class="searchTab">Courses</label>
+                                    <input type="radio" name="searchType" id="courses" value="Courses" />
+                                    <label for="tutors" class="searchTab ">Tutors</label>
+                                    <input type="radio" name="searchType" id="tutors" value="Tutors"/>
+                                    <label for="studyGroups" class="searchTab ">Groups</label>
+                                    <input type="radio" name="searchType" id="studyGroups" value="Groups"/>
+                                </div>
+                                <div class="resultsContainer"><p class='emptySearch'>Search Users</p></div>
+                                
+                                
+                            </div>  
+                                    </li>
+                                        <li class="desktop-li">
+                                            <span class="bell" name = "Notifications" data-toggle="tooltip" data-placement="bottom" title="Notifications">
+                                                <svg class="bi bi-bell-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+                                                  </svg>
+                                            
+                                                <span class="badge badge-danger bdge"></span>
+                                          
+                                            <span class='hint' style='position:absolute'></span>
+                                            
+                                             </span>
+                                        </li>
+                                        <li class="desktop-li">
+                                            <span class="message" name = "New Message" data-toggle="tooltip" data-placement="bottom" title="Messages">  
+                                                <svg class="bi bi-chat-fill" width="1.25em" height="1.25em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6-.097 1.016-.417 2.13-.771 2.966-.079.186.074.394.273.362 2.256-.37 3.597-.938 4.18-1.234A9.06 9.06 0 0 0 8 15z"/>
+                                                </svg>
+                                                <span class="badge badge-danger bdge1"></span>
+                                                <span class='hint' style='position:absolute'></span>
+                                            </span>
+                                        </li>
+                                        <li class="desktop-li">
+                                            <span class="bell1" name = "Notifications" data-toggle="tooltip" data-placement="bottom" title="Calendar">
+                                                <a href="/calendar" class=""><span class="img"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-calendar-fill" viewBox="0 0 16 16">
+                                                    <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V5h16V4H0V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5z"/>
+                                                  </svg></span></a>
+                                            
+                                             </span>
+                                        </li>
+                                        <li class="userImgLi">
+                                       
+                                            <span class="account" name = "New Message" >  
+        
+                                         <img class="userProfileImg userAccount" src="<%=session.img%>" alt="Profile Picture" data-toggle="tooltip" data-placement="bottom" title="Account" />
+                                           </span>
+                                            <input type="hidden" class="userProfileName " value="<%=session.handle%>">
+                                            <%- include ('../../UserLoggedIn/partials/userProfileDropdown.ejs') %>
+                
+                                        </li>
+                                       
+                                    </ul>
+                                </div>
+                            <div id="showNotifications" class="">
+                                <!-- <span>X</span> -->
+                            <h1 id="recentNotifications">Notifications</h1>
+                            <ul>
+                                <% for(x in session.notifications){%>
+                                        <li class=" notificationsDark">
+                                            <img class="notifImg" src="<%=session.img%>"/>
+                                            <p class="notif"><%=session.notifications[x] %></p>
+                                        </li>
+                                <% }%>
+                            </ul>
+                        </div>
+                        <div class="page-title-container">
+                            <span class="headerLinkPageTitle"><%=user.handle%></span>
+                            <span class="message-tooltip" data-toggle="tooltip" data-placement="bottom" title="Message">
+                            <button type="button" class=" sendMessage" data-toggle="modal"
+                            data-target="#profileMessageModal">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="#1f2024" class="bi bi-envelope-fill" viewBox="0 0 16 16">
+                                <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z"/>
+                              </svg>
+                        </button>
+                    </span>
+                        <!-- <button type="button" class="btn-secondary sendMessage">
+                            Schedule Appointment
+                        </button> -->
+                        </div>
+                        
+         </h1>
+            <ul id="horizontalMenu">
+        
+    </ul>
+        <div class="userHeaderWrapper">
+            <div class="userHeader">
+                <%- include ('../../UserLoggedIn/partials/userProfileDropdown.ejs') %>
+            </div>
+            <div id="versionTxt">
+                  
+                </div>
+        </div>
+</div>

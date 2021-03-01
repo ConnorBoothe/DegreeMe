@@ -12,8 +12,9 @@
     <link href="../assets/css/home.css" rel="stylesheet">
     <link href="../assets/css/messages.css" rel="stylesheet">
     <link href="../assets/css/story.css" rel="stylesheet">
+    <link href="../assets/css/group-settings.css" rel="stylesheet">
+
     <link href="../assets/css/story-progress-bar.css" rel="stylesheet">
-    <link href="../assets/css/createStudyGroup.css" rel="stylesheet">
 
     <link rel="stylesheet" href="../assets/js/croppie/croppie.css" />
 
@@ -34,34 +35,28 @@
     <!-- End Google Tag Manager (noscript) -->
         <div class="blocker"></div>
     <div class="homeWrap">
-    <input type="hidden" name="handle" value="<%=session.handle%>"/>
     <div class="page-container">
         <input type="hidden" class="member_id" value="<%=session.handle%>" />
+        <input type="hidden" class="groupId" value="<%=params.GroupId%>" />
+
         <%- include ('partials/newMeetupModal.ejs') %>
         <%- include ('partials/groupHeader.ejs')%>
         <%- include ('partials/groupMembersSideBar.ejs')%>
-        <%- include ('partials/newMeetupModal.ejs')%>
-        <%- include ('../Groups/partials/groupThreads.ejs')%>
+        <%- include ('../Groups/partials/UserGroups.ejs')%>
         <%- include ('../Groups/partials/groupChatModal.ejs')%>
         <%- include ('../Groups/partials/Story.ejs')%>
         <%- include ('../Groups/partials/addStory.ejs')%>
-        <%- include ('partials/addGroup.ejs')%>
-        <%- include ('partials/inviteModal.ejs')%>
-
 
         <div class="profile-wrapper">
             <input type="hidden" name="upload-type" value="banner"/>
-            <input type="hidden" class="hiddenGroupId" />
+            
                 <div class="header-image">
-                    <%if(isHost){%>
-                    <button class="changeBanner-btn btn openImageEditor">Change Banner</button>
-                    <p class="bannerSuccess badge badge-success">Banner Successfully Changed</p>
-                   <%}%>
+                    
                     <img class="bannerImg" src="<%=studyGroup.BannerImage%>"/>
                 </div>
                 <div class="groupImg-container">
-                        <img data-toggle="tooltip" data-placement="bottom" title="View Story" 
-                        class="groupImg" src="<%=groupImg%>"/>
+                        <img data-toggle="tooltip" data-placement="bottom" title="Update Group Image" 
+                        class="groupImg img-btn" src="<%=groupImg%>"/>
                 </div>
                 <div class="img-upload-container">
                     <div class="img-secondary-wrapper">
@@ -77,28 +72,36 @@
                         <div class="upload-result btn-primary">Use</div>
                     </div>
                 </div>
-                <div class="upcoming-meetup-container">
-                    <h3 class="text-light meetupsTitle">Upcoming meetups
-                        <span class="add-meetup" data-toggle="modal" data-target="#newMeetup">
-                            <svg data-toggle="tooltip" data-placement="bottom" title="Add group meetup" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
-                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
-                              </svg>
-                        </span>
-                        
-                    </h3>
-                    <div class="meetup-list">
-                        
-                    </div>
-                    
-                </div>
-                <input type="hidden" class="handle" value="<%=session.handle%>"/>
-                <div class="messageBlock" >    
+                <div class="group-settings-container" > 
+                    <h3>Group Settings</h3>
+                    <div class="group-settings-wrapper">
+                        <p class="text-light">Add Course</p>
+                        <div class="group-settings-input-container">
+                            <%if(studyGroup.Subject){%>
+                            <input class="group-settings-input" type="text" value="<%=studyGroup.Subject%>" placeholder="ie College Algebra"/>
+                            <%}else{%>
+                                <input class="group-settings-input" type="text" placeholder="ie College Algebra"/>
 
-                    <div id="messagesContainer">  
-                       
-                    </div>
+                            <%}%>
+                            <div class="groups-course-autocomplete"></div>
+                        </div>
+                        
+                        <p class="text-light">Add Professor</p>
+                        <div class="group-settings-input-container">
+                            <%if(studyGroup.Professor){%>
+                                <input class="group-settings-input" type="text" placeholder="Professor Name" value="<%=studyGroup.Professor%>"/>
+                            <%}else{%>
+                                <input class="group-settings-input" type="text" placeholder="Professor Name"/>
+                            <%}%>
+                        </div>
+                        <button class="save-changes-btn btn btn-primary align-right">Save Changes</button>
+                        <div class="update-success bg-success">
+                            <p class="text-light">Group settings successfully updated</p>
+                        </div>
+                    </div>   
+                    
+                    
                  </div>
-                <%- include ('../Messages/partials/MessageInput.ejs')%>
                 
         </div>
         <audio id="pop">
@@ -124,10 +127,8 @@
     <script type="text/javascript" src="../assets/js/Groups/getGroupMembers.js"></script>
     <script type="text/javascript" src="../assets/js/Groups/addGroupChat.js"></script>
     <script type="text/javascript" src="../assets/js/Messages/messageFunctions.js"></script>
-    <script type="text/javascript" src="../assets/js/Messages/messageScroll.js"></script>
     <script type="text/javascript" src="../assets/js/Groups/getGroupThreads.js"></script>
     <script type="text/javascript" src="../assets/js/Groups/story-progress-bar.js"></script>
-    <script type="text/javascript" src="../assets/js/Groups/getGroupMeetups.js"></script>
 
     <script src="../assets/js/socket.io.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-app.js"></script>
@@ -138,15 +139,11 @@
     <script type="text/javascript" src="../assets/js/messages.js"></script>
     <script src="../assets/js/croppie/croppie.min.js"></script>
     <script type="text/javascript" src="../assets/js/crop.js"></script>
-    <script type="text/javascript" src="../assets/js/Groups/story.js"></script>
-    <script type="text/javascript" src="../assets/js/Groups/addStory.js"></script>
     <script type="text/javascript" src="../assets/js/SiteWideSearch.js"></script>
     <script type="text/javascript" src="../assets/js/Groups/addStoryResponse.js"></script>
     <script type="text/javascript" src="../assets/js/Groups/showGroupUserMenu.js"></script>
     <script type="text/javascript" src="../assets/js/Groups/removeMember.js"></script>
-    <script type="text/javascript" src="../assets/js/ajaxCalls/CreateStudyGroups.js"></script>
-    <script type="text/javascript" src="../assets/js/emailInvite.js"></script>
-
+    <script type="text/javascript" src="../assets/js/Groups/group-settings.js"></script>
 
 
 

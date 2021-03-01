@@ -17,11 +17,14 @@
     <link href="assets/css/header.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/about.css">
     <link href="assets/css/index.css" rel="stylesheet">
+    <link href="assets/css/landing/landing.css" rel="stylesheet">
+
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
     <!-- Scripts -->
     <script src="assets/jquery/dist/jquery.js"></script>
     <script type="text/javascript" src="assets/js/about.js"></script>
     <script type="text/javascript" src="assets/js/showPopOutMenu.js"></script>
+    <script type="text/javascript" src="assets/js/landing/landing.js"></script>
 
 </head>
 
@@ -38,7 +41,7 @@
                 <div id="aboutContainer">
                     <div class="aboutUsTitle">
                         <div class="aboutChild">
-                            <img src="assets/img/undraw_to_the_moon_v1mv.svg" alt="caps" />
+                            <img class="rocketMan" src="assets/img/undraw_to_the_moon_v1mv.svg" alt="caps" />
                         </div>
                         <div class="aboutChild">
                             <p class="aboutUs-title">About Us</p>
@@ -64,7 +67,7 @@
                             <div class="iconAbout1">
                                 <img src="assets/img/undraw_online_learning_ao11.svg" alt="caps" />
                             </div>
-                            <h1>Earn</h1>
+                            <h1 class="about-sub">Earn</h1>
                             <p class="about-item-info">We are creating the next profitable side hustle for college students. By utilizing the knowledge acquired over your 
                                 academic career, you can earn more with DegreeMe than you can with taxi hailing services and food delivery services. Set your schedule, set
                                 your hourly rate and become your own boss.
@@ -78,7 +81,7 @@
                             <div class="iconAbout">
                                 <img src="assets/img/undraw_around_the_world_v9nu.svg" alt="caps" />
                             </div>
-                            <h1>Connect</h1>
+                            <h1 class="about-sub">Connect</h1>
                             <p class="about-item-info">DegreeMe keeps you connected on campus by allowing you to find students in your courses and in your major,
                                 follow them, create direct messages and group messages, post to course discussion boards, and more.
                             </p>
@@ -91,7 +94,7 @@
                             <div class="iconAbout">
                                 <img src="assets/img/undraw_scrum_board_cesn.svg" alt="caps" />
                             </div>
-                            <h1>Study</h1>
+                            <h1 class="about-sub">Study</h1>
                             <p class="about-item-info">
                                 Our platform enables you to organize groups around your courses so you can collaborate on assignments
                                 online. Create study sessions within the group and chat with group members.
@@ -100,10 +103,12 @@
                     </div>
                 </div>
             </div>
-            <br>
+            <div class="landing--footer--text text-light">Copyright © DegreeMe 2021 <br/> <a href="/Privacy">Privacy</a> · <a href="/Policies">Policies</a></div>
         </div>
+
     </div>
+
 </body>
-<%- include ('partials/footer.ejs') %>
+
 
 </html>

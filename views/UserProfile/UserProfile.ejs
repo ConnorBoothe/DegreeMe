@@ -19,7 +19,7 @@
 
 
     <!-- Google Tag Manager -->
-	<script type="text/javascript" src="assets/js/googleTagManager.js"></script>
+	<script type="text/javascript" src="../assets/js/googleTagManager.js"></script>
     <!-- End Google Tag Manager -->
     
     <!-- Scripts -->
@@ -31,23 +31,49 @@
 <!-- Google Tag Manager (noscript) -->
 <%- include('../UserLoggedIn/partials/googleTagManager1.ejs') -%>
 <!-- End Google Tag Manager (noscript) -->
-
     <div class="overlay"></div>
     <div class="homeWrap">
     <div class="page-container">
         <%- include ('../UserLoggedIn/partials/followersModal.ejs') %>
         <%- include ('../UserLoggedIn/partials/followingModal.ejs') %>
         <%- include ('partials/profileMessageModal.ejs') %>
-        <%- include ('../UserLoggedIn/partials/sideBar.ejs') %>
-        <%- include ('../UserLoggedIn/partials/horizontalHeader.ejs')%>
+        <%- include ('./partials/profileHeader.ejs')%>
         <%- include ('../UserLoggedIn/partials/newMessageModal.ejs')%>
         <%- include ('partials/editMajorModal.ejs')%>
         <%- include ('partials/updateClassificationModal.ejs')%>
         <div class="profileContainer">
             <div class="profile-header">
+                <div class="profile-details">
                 <div class="header-wrapper">
                 <div class="profileHeader">
+                  
                     <div class="profile-img-container">
+                        <input name="handle" type="hidden" value="<%=user.handle%>"/>
+                        <input name="userId" type="hidden" value="<%=user._id%>"/>
+                        <input name="streamId" type="hidden" value="<%=user.streamId%>"/>
+                        <input class="date-select" type="hidden" value="<%=new Date().getDay()%>"/>
+                        <%if(user.myCourses.length > 0){%>
+                            <input class="first-course" type="hidden" value="<%=user.myCourses[0].courseCode%>"/>
+                        <%}%>
+                        <%if(new Date().getHours() <= 12){%>
+                            <input class="am-text" type="hidden" value="AM"/>
+                            <%if(new Date().getHours() == 12 ){%>
+                                <input class="time-text" type="hidden" value="12"/>
+                            <%}else{%>
+                                <input class="time-text" type="hidden" value="<%=new Date().getHours()%12%>"/>
+
+                            <%}%>
+                        <%}else{%>
+                            <input class=".am-text" type="hidden" value="PM"/>
+
+                            <%if(new Date().getHours() == 24 ){%>
+                                <input class=".time-text" type="hidden" value="12"/>
+                            <%}else{%>
+                                <input class=".time-text" type="hidden" value="<%=new Date().getHours()%12%>"/>
+
+                            <%}%>
+                        <%}%>
+
                         <%if(session.handle === user.handle){%>
                         <div class="img">
                             <a class="img" href="#">
@@ -78,21 +104,44 @@
                                 <div class="profile-img-container">
                                     <img src="<%=user.img%>" width="120" alt="Profile Picture" class="profile-img userImage editImg"
                                          />
+                                         <%if(user.active){%>
+                                            <p data-toggle="tooltip" data-placement="right" title="Online" class="online"></p>
+                                        <%}else{%>
+                                            <p data-toggle="tooltip" data-placement="right" title="Offline" class="offline"></p>
+
+                                        <%}%>
+                                        
                                 </div>
-                                <div class="profile-name">
-                                    <h1 class="tutorName text-light"><%=user.first_name + ' '+ user.last_name%></h1>
-                                    <h1 class="userProfileHandle"><%=user.handle%>
+                                <% var noAtHandle=user.handle.replace('@','')%>
+
+                                <% if(following){%>
+                                    <form action="/#" class="followForm" method="post" id="unfollow-form">
+                    
+                                        <input name="followingHandle" type="hidden" value="<%=user.handle%>" />
+                    
+                                        <input name="followingImg" type="hidden" value="<%=user.img%>" />
+                    
+                                        <button id="<%=noAtHandle%>" data-status="unfollow" type="button"
+                                            class="btn btn-sm followingButton following-class" data-handle='<%=user.handle%>'>
+                                            Following</button>
+                                    </form>
+                    
+                                    <%}else{%>
+                                        <form action="/#" class="followForm" method="post" id="follow-form">
+                    
+                                            <input name="followingHandle" type="hidden" value="<%=user.handle%>" />
+                    
+                                            <input name="followingImg" type="hidden" value="<%=user.img%>" />
+                    
+                                            <button id="<%=noAtHandle%>" data-status="follow" type="button"
+                                                class="btn btn-primary btn-sm followingButton follow-class">
+                                                Follow</button>
+                                        </form>
+                                        <%}%>
+                                
                                 <%}%>
                                
-                                <% if(user.Tutor === true){%>
-                                    <input type="hidden" name="isTutor" value="true"/>
-                                    <a class="memberImage" data-toggle="tooltip" data-placement="bottom"
-                                        title="Verified Tutor">
-                                        <img class="tutorBadge" src="../assets/img/tutorBadge.svg" />
-                                    </a>
-                                    <%}else{%>
-                                        <input type="hidden" name="isTutor" value="false"/>
-                                    <%}%>
+
                                                 
                                             </h1>
                                            
@@ -117,48 +166,27 @@
                     <div class="connectionBody-container">   
             <div class="tutorMiddle">
                 <div id="progressInfo">
+                    
              <%if(session.handle == user.handle ){%>
                 <%if(percentComplete<100){%>
                     <div class="progress">
                         <div id="profileProgressBar" class="progress-bar" role="progressbar" style="width:<%=percentComplete%>%;" aria-valuenow="<%=percentComplete%>" aria-valuemin="0" aria-valuemax="100"><%=percentComplete%>% Complete</div>
                     </div>
                     <span class="text-light">Things to Complete Your Account:</span>
-                    <ui class="text-light">
+                    <ul class="text-light">
                         <%for(var i = 0; i < toComplete.length; i++){%>
                             <li id=<%=toComplete[i][1] %>><%=toComplete[i][0]%></li>
                         <%}%>
-                    </ui>
-                <%}%>
-                <%}%>
-                </div>
-                <div class="followers-container">
-                    <ul class="followers-list">
-                        <li class="followers-item"> 
-                            <button type="button" class="followModal" data-toggle="modal" data-target="#followerModal" name = "New Message">  
-                            <h1 class="mobileCount"><%=followerCount%></h1>
-                            <h1><span class="desktopFollow"><%=followerCount%></span> <span>
-                                    <% if(followerCount === 1){%>
-                                    <span class="followers-text">Follower</span>
-                                    <%}else{%>
-                                        <span class="followers-text">Followers</span>
-                                    <%}%>
-                               </span></h1>
-                            </button>
-                        </li>
-                        <li class="followers-item"> 
-                            <button type="button" class="followModal following-modal" data-toggle="modal" data-target="#followingModal">
-                                <h1 class="mobileCount"><%=followingCount%></h1>
-                                <h1><span class="desktopFollow"><%=followingCount%></span> <span class="following-text">Following</span>
-                                </h1>
-                            </button>
-                        </li>
                     </ul>
+                <%}%>
+                <%}%>
                 </div>
-                <div class="majorContainer desktopMajor">
-                    <p class="profileMajor"><span class="majorSpan"><%=user.Major%></span>
-                   
+                <h1 class="tutorName text-light"><%=user.first_name + ' '+ user.last_name%>
+                    <input class="userProfileHandle" value="<%=user._id%>">
 
-                    <%if(session.handle === user.handle){%>
+                    <p class="profileMajor"><span class="majorSpan"><%=user.Major%></span>
+                        <%if(session.handle === user.handle){%>
+
                         <span data-toggle="modal" data-target="#editBioModal" >
                             <span class="editMajorSpan" data-toggle="tooltip" data-placement="right" title="Edit Major">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
@@ -167,26 +195,54 @@
                             </span>
                             
                         </span>
-                    <%}%>
+                        <%}%>
+                        <%if(user.classification){%>
+                            <span class="classSpan"><%=user.classification%></span>
+                            <%if(session.handle === user.handle){%>
+                                <span data-toggle="modal" data-target="#updateClassModal" >
+                                    <span class="editMajorSpan" data-toggle="tooltip" data-placement="right" title="Edit Classification">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                            <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                                          </svg>
+                                    </span>
+                                    
+                                </span>
+
+                            <%}%>
+                        
+                        <%}else if(user.classification == undefined && 
+                        session.handle === user.handle){%>
+                            <span data-toggle="modal" data-target="#updateClassModal" class="classSpan addClassification">Add Classification</span>
+
+                        <%}%>
+                </h1>
+                                    <h1 class="userProfileHandle"><%=user.handle%></h1>
+                <div class="followers-container">
+                    <ul class="followers-list">
+                        <li class="followers-item"> 
+                            <button type="button" class="followModal" data-toggle="modal" data-target="#followerModal" name = "New Message">  
+                            <h1 class="mobileCount"><%=followerCount%></h1>
+                            <h1><span class="desktopFollow"><%=followerCount%></span> <span>
+                                    <% if(followerCount === 1){%>
+                                    <span class="followers-text">follower</span>
+                                    <%}else{%>
+                                        <span class="followers-text">followers</span>
+                                    <%}%>
+                               </span></h1>
+                            </button>
+                        </li>
+                        <li class="followers-item"> 
+                            <button type="button" class="followModal following-modal" data-toggle="modal" data-target="#followingModal">
+                                <h1 class="mobileCount"><%=followingCount%></h1>
+                                <h1><span class="desktopFollow"><%=followingCount%></span> <span class="following-text">following</span>
+                                </h1>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="majorContainer desktopMajor">
                 </p>
-                <p class="profileMajor">
-                <%if(user.classification){%>
-                    <span class="classSpan"><%=user.classification%></span>
-                    <%if(session.handle === user.handle){%>
-                        <span data-toggle="modal" data-target="#updateClassModal" >
-                            <span class="editMajorSpan" data-toggle="tooltip" data-placement="right" title="Edit Classification">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
-                                    <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
-                                  </svg>
-                            </span>
-                            
-                        </span>
-                    <%}%>
-                <%}else{%>
-                    <span data-toggle="modal" data-target="#updateClassModal" class="classSpan addClassification">Add Classification</span>
-                <%}%>
-                    
-                </p>
+                
                 </div>
                 <%- include ('partials/desktopBio.ejs') %>
                 <%- include ('partials/profileButtons.ejs') %>
@@ -196,24 +252,21 @@
 
                 </div>
                 <%- include ('partials/mobileBio.ejs') %>
-
+                </div>
                 <div class="profileBody">
 
                     <div class="profileNav">
                         <ul class="profile-ul">
                             <li class="courseTab tab-selected">COURSES</li>
                             <%if(user.Tutor){%>
-                            <li class="tutorTab">TUTORING</li>
+                            <li class="tutorTab1">TUTORING</li>
                             <li class="reviewsTab">REVIEWS</li>
                             <%}%>
                     <li class="groupsTab">GROUPS</li>
                 </ul>
             </div>
                     
-            </div>
-            </div>
             
-        </div>
        
         <div class="profile-info">
             <div class="spinner-container1">
@@ -233,13 +286,16 @@
                                     <!-- <h3 class="courseName1"><%=user.myCourses[x].courseName%></h3> -->
                                     <h5 class="courseCode1"><%=user.myCourses[x].courseCode%></h5>
                                     <span class="badge badge-success profile-student-count">#UNCC</span>
-
                                 </div>
                             </a>
 
                             <%}%>
             </ul>
         </div>
+    </div>
+</div>
+
+</div>
     </div>
     </div>
 </div>
@@ -250,6 +306,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="../assets/js/tooltip.js"></script>
+    <script type="text/javascript" src="../assets/js/tutorRoomsFunctions.js"></script>
 
     <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../assets/js/SiteWideSearch.js"></script>
@@ -274,6 +331,7 @@
         <script type="text/javascript" src="../assets/js/UserAccount/updateProgressBar.js"></script>
         <script type="text/javascript" src="../assets/js/UserAccount/updateMajor.js"></script>
         <script type="text/javascript" src="../assets/js/UserAccount/updateClass.js"></script>
+
 
     </body>
 </html>

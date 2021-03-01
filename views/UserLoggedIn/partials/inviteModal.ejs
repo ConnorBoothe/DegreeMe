@@ -3,7 +3,10 @@
             <div class="modal-dialog modal-dialog-centered " role="document">
               <div class="modal-content color-dark">
                 <div class="modal-header">
-                  <h5 class="modal-title text-light" id="exampleModalCenterTitle">Invite friends</h5>
+                  <h5 class="modal-title text-light" id="exampleModalCenterTitle">Invite people by 
+                    <span class="text text-primary invite-type-select"><span class="invite-text">Email</span> <svg class="bi bi-caret-down-fill down-arrow" width="1em" height="1em" viewBox="0 0 16 16" fill="#007bff" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>'
+                  </svg></span></h5>
                   
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -12,10 +15,12 @@
                 <div class="modal-body">
                             <div class="searchPeople-container">
                                      <div class="input-container-message">
-                                        <input type="text" name="email" class="emails" placeholder="Enter an email address here"/>
-                                        <button class="addEmailBtn"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <input autocomplete="off" type="text" name="email" class="emails" placeholder="Enter email address"/>
+                                        <button class="addEmailBtn" data-toggle="tooltip" data-placement="bottom" title="Add"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                             <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4a.5.5 0 0 0-1 0v3.5H4a.5.5 0 0 0 0 1h3.5V12a.5.5 0 0 0 1 0V8.5H12a.5.5 0 0 0 0-1H8.5V4z"/>
                                           </svg></button>
+                                </div>
+                                <div class="handle-container">
                                 </div>
                             </div>      
                 <br>
@@ -23,12 +28,12 @@
                 <div class="addedEmails">
 
                 </div>
-                <label class="text-light">Enter a custom message (optional)</label>
-                <textarea name ="post" class="inviteMsg"></textarea>   
+                <!-- <label class="text-light">Enter a custom message (optional)</label>
+                <textarea name ="post" class="inviteMsg"></textarea>    -->
                 </div>
                 
                 <div class="modal-footer">
-                    <input placeholder="Subject" value="Send Email" type="submit" class="btn btn-primary createThread sendInviteEmail" data-dismiss="modal"/>
+                    <input placeholder="Subject" value="Invite" type="submit" class="btn btn-primary right-align sendInviteEmail" data-dismiss="modal"/>
               
                 </div>
               </div>
