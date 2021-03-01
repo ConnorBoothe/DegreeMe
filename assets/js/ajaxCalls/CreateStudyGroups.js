@@ -20,6 +20,14 @@ function validateGroup(){
     
 }
 $(document).ready(function(){
+    $(".priceSlider").on("change", function(){
+        if($(this).val() == 1) {
+            $(".private").text("Private")
+        }
+        else {
+            $(".private").text("Public")
+        }
+    })
     $(".course-autocomplete").hide();
     $("#courseName").on("focus", function(){
         $(".course-autocomplete").show();
@@ -85,15 +93,17 @@ $(document).ready(function(){
     });
     //AJAX post call to create Group
     $("#createStudyGroup").on("click", function(e){
+        alert("Y")
         var submit = validateGroup();
         e.preventDefault();
         if(submit){
             payload = {
                 course:$("#courseName").val(),
                 professor:$("input[name='professor']").val(),
-                groupName:$("input[name='groupName']").val(),
+                createGroupName:$("input[name='createGroupName']").val(),
                 groupDescription:$("#group_description").val(),
-                groupImage:$(".userProfileImg").attr("src")
+                groupImage:$(".userProfileImg").attr("src"),
+                private:$(".priceSlider").val()
              }
              $.ajax({
                  url: "/createGroup",
@@ -103,19 +113,16 @@ $(document).ready(function(){
                  "Content-Type": "application/json"
                  }, statusCode: {
                  202: function (result) {
-                    
+                    console.log(result.action)
                     if(result.action == "Group Name Exists"){
                         $("#groupNameTxt").text("Group name already exists.")
                         $("#group_name").css("border-bottom", "2px solid #dc3545");
                     }
                     else{
-                        $(".hiddenGroup").val($("input[name='groupName']").val())
-                        $(".hiddenGroupId").val(result.groupId)
-                        $("#hostSession-form").hide();
-                        $("#hostSession-form").html("<h1>Group Successfully Created</h1><img class='group-success-img' src='../assets/img/undraw_launch_day_4e04.svg'/>"
-                        +'<input type="hidden" class="emailAction" value="Invite Group"/>'+
-                        "<h2 class='inviteFriends'>Invite Your Friends</h2><button data-toggle='modal' data-target='#inviteModal' class='btn btn-primary'>Via email</button>");
-                        $("#hostSession-form").fadeIn();
+                        $(".hiddenGroupId").val(result.groupId);
+                        $(".modal").modal("hide");
+                        window.location.href = "/Group/"+ result.groupId;
+                    
                     }
                  },
                  500: function (result) {
