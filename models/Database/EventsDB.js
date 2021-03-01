@@ -11,7 +11,6 @@ var memberSchema = new Schema({
     image: {type:String, required:true},
     role:{type:String, required:true}
 });
-//PS: changed DataCue to Date ask connor 
 var eventsSchema = new Schema({
     userId:{type:String, required:true},
     date: {type:Date, required:true},
@@ -42,7 +41,7 @@ module.exports = class Events {
       
 
        var tempDuration = hours+"."+minutes;
-
+      
        var durationInNumbers = parseFloat(tempDuration);
 
        var event = new events({
@@ -56,7 +55,7 @@ module.exports = class Events {
            location: location,
            members: members
         });
-        return event;
+        return event.save();
    }
    deleteEvent(id){
        return events.deleteOne({_id:id});

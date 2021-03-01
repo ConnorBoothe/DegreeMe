@@ -64,7 +64,8 @@ var timelineDBSchema = new Schema({
     url: {type:String},
     courseCode:{type: String},
     discussionId:{type: String},
-    files: [attachments]
+    files: [attachments],
+    eventDate: {type: Date}
 }, {collection: 'TimelineDB'});
 module.exports = class Timeline {
     //get timeline by handle, and get timeline with sendtoHandle 'All'
@@ -96,6 +97,7 @@ module.exports = class Timeline {
         for(var x = 0; x < followingList.length; x++){
             followingHandles.push(followingList[x].user_handle.trim().toString());
         }
+        followingHandles.push("All");
         followingHandles.push(req.session.handle);
         var length = "";
         timelineDB.find({
@@ -182,6 +184,14 @@ module.exports = class Timeline {
                 userImage:userImage, caption:caption, likes:0, date:date, name:name, price:price, course: taggedCourse, url:url, commentCount:0
             });
         }
+        return timeline.save();
+    }
+    addGroupMeetupTimelinePost(sendToHandle,userHandle, userName, type ,userImage,caption,date, name,url, eventDate){
+        var timelineDB = mongoose.model('TimelineDB',timelineDBSchema);
+      
+            var timeline = new timelineDB({sendToHandle:sendToHandle, userHandle:userHandle, userName:userName, type:type,
+                userImage:userImage, caption:caption, likes:0, date:date, name:name, url:url, eventDate: eventDate, commentCount:0
+            });
         return timeline.save();
     }
     addGroupTimelinePost(sendToHandle,userHandle, userName, type ,userImage,caption,date, name, professor, taggedCourse,url){

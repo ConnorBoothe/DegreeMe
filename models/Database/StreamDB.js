@@ -19,6 +19,9 @@ var chatSchema = new Schema({
 var streamSchema = new Schema({
     host:{type:String, required:true},
     hostId: {type:String, required:true},
+    hostImage: {type:String, required:true},
+    title: {type:String},
+    groupId: {type:String},
     chat: [chatSchema],
     members: [{type:String, required:true}]
 }, {collection: 'StreamDB'});
@@ -28,18 +31,25 @@ var streamDB = mongoose.model('StreamDB',streamSchema);
 
 module.exports = class Stream {
     //get user schedule
-    addStream(host, hostId, hostImg){
-        var stream = new streamDB({host: host, hostId: hostId, members: [{handle: host, role: "host", img: hostImg}]});
+    addStream(host, hostId, hostImg, title, groupId){
+        var stream = new streamDB({host: host, hostId: hostId,
+            hostImage:hostImg, title:title, groupId: groupId, members: [host]});
         return stream.save();
     }
     addChat(id, sender, msg, img){
+        console.log("ID: "+ id)
         return new Promise((resolve, reject) => {
             streamDB.findOne({_id: id})
             .then(function(stream){
+                console.log("APPENDG CHAT: ", sender, msg, img)
                 var chat = {sender:sender, message: msg, senderImg: img, time: new Date()};
                 stream.chat.push(chat);
                 stream.save();
                 resolve(chat)
+            })
+            .catch((err)=>{
+                reject(err)
+                console.log(err)
             })
         })
     }
@@ -71,7 +81,7 @@ module.exports = class Stream {
                 resolve(data);
             })
     })
-    }
+    }z
     //remove member from the stream
     removeMember(id, userId){
         return new Promise(function(req, res){
@@ -79,6 +89,7 @@ module.exports = class Stream {
             .then(function(data){
                 for(var i = 0; i < data.members.length; i++) {
                     if(data.members[i] == userId) {
+                        console.log("REMOVE THIS MEMBER")
                         data.members.pull(members[i]);
                         data.save();
                     }

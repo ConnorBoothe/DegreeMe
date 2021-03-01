@@ -25,6 +25,7 @@ module.exports = class Reviews {
     }
     //return connections
     getReviewsByHandle(handle){
+        console.log("handle: " +handle)
         var reviewsDB = mongoose.model('ReviewsDB',reviewsDBSchema);
         return reviewsDB.find({ReceiverHandle:handle});
      

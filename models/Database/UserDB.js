@@ -169,9 +169,7 @@ module.exports = class User {
     }
     //update activation code
     updateActivationCode(email, code){
-        return UserDB.findOne({email:email}).updateOne({$set:{activationCode: code}}).exec((err,docs)=>{
-           
-        });
+        return UserDB.findOne({email:email}).updateOne({$set:{activationCode: code}});
     }
     updatePassword(email, pw){
         return UserDB.findOne({email:email}).updateOne({$set:{password: pw}}).exec((err,docs)=>{
@@ -414,24 +412,54 @@ module.exports = class User {
     }
     //remove course from myCourses list
     removeCourse(handle, courseName){
-        UserDB.find({handle: handle}).exec((err,docs)=>{
-            var index = "";
-            for(var x = 0; x < docs[0].myCourses.length;x++){
-                if(docs[0].myCourses[x].courseName === courseName){
-                    index = x;
-                    docs[0].myCourses.splice(x,1);
-                    return docs[0].save();
-                    break;
+        return new Promise((resolve, reject)=>{
+            UserDB.find({handle: handle}).exec((err,docs)=>{
+                var index = "";
+                for(var x = 0; x < docs[0].myCourses.length;x++){
+                    if(docs[0].myCourses[x].courseName === courseName){
+                        index = x;
+                        docs[0].myCourses.splice(x,1);
+                        resolve(docs[0].save());
+                        break;
+                    }
                 }
-            }
-           
-        });
+               
+            });
+        })
+        
+    }
+     //remove course from myCourses list
+     removeGroup(handle, groupId){
+        return new Promise((resolve, reject)=>{
+            UserDB.findOne({handle: handle}).then((user)=>{
+                for(var x = 0; x < user.StudyGroups.length;x++){
+                    if(user.StudyGroups[x].studyGroupId === groupId){
+                        user.StudyGroups.splice(x,1);
+                        user.save();
+                        resolve(user);
+                    }
+                }
+            })
+            .catch((err)=>{
+                console.log(err)
+                reject(err)
+            })
+        })
     }
     addStudyGroup(handle, groupId, groupName, course){
-        UserDB.find({handle: handle}).exec((err,docs)=>{
-            docs[0].StudyGroups.push({studyGroupId:groupId, studyGroupName:groupName, course:course});
-            docs[0].save();
+        return new Promise((resolve, reject)=>{
+            UserDB.findOne({handle: handle})
+            .then((user)=>{
+                user.StudyGroups.push({studyGroupId:groupId, studyGroupName:groupName, course:course});
+                user.save();
+                resolve(user);
+            })
+            .catch((err)=>{
+                console.log(err)
+                reject(err);
+            })
         })
+        
     }
     addMeetup(handle, meetupId, meetupName, date, meetupType){
         UserDB.find({handle: handle}).exec((err,docs)=>{

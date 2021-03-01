@@ -87,40 +87,52 @@ module.exports = class TutorSchedules {
             userHandle: handle
         })
     }
-    //get tutors available at given day and time
-    getAvailableTutorsByCourse(course) {
-        var daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-        //get tutors By Course
+      //get tutors available at given day and time
+      getAvailableTutorsByCourse(userHandle, course, day, time) {
         return new Promise((resolve, reject) => {
-            var availableTutors = [];
+            //get approved tutor by course
             TutorDB.find({
                     $and: [{
-                        course: course,
+                        courseCode:course,
                         approved: true
                     }]
-                })
+                }).sort({course:1})
                 .then(function (data) {
-                    // loop through query results
-                    if(data.length < 1){
-                        resolve(availableTutors)
-                    }
-                    console.log(data.length)
+                    var userIdArray = [];
+                    var userArray = [];
+                     // loop through query results
                     for (var i = 0; i < data.length; i++) {
-                            //check availability of user id in query
-                            var currTutor = data[i];
-                            schedule.getUserScheduleByDayAndTime(data[i].userId, daysOfWeek[new Date().getDay()], new Date().getHours())
-                                .then(function (data1) {
-                                    if (data1.length > 0) {
-                                        //push if availability found
-                                        availableTutors.push(currTutor);
-                                        console.log("Available tutors: " +availableTutors)
-                                        resolve(availableTutors);
-                                    } else {
-                                        resolve(availableTutors);
-                                    }
-                                })
+                        //save userIds in array to make db call to
+                        userIdArray.push(data[i].userId)
+                        //used to format final tutor results
+                        userArray.push([data[i].userId, data[i].userHandle, 
+                            data[i].userImg, data[i].streamId, data[i].userName])
                     }
-
+                            //get the schedule of the tutors in the course
+                            schedule.getUserScheduleByDayAndTime(userHandle, userIdArray, day, time, course)
+                                .then(function (scheduleSlots) {
+                                    //save final tutors that are currently available
+                                    var finalTutors = [];
+                                    //match user array id to id of schedule doc
+                                    for(var x = 0; x < userArray.length; x++){
+                                        for(var i = 0; i < scheduleSlots.schedule.length; i++) {
+                                            //if ids match, save the array in finalTutors
+                                            if(userArray[x][0]== scheduleSlots.schedule[i].userId) {
+                                                userArray[x].push(scheduleSlots.schedule[i].reservedStatus);
+                                                finalTutors.push(userArray[x])
+                                            }
+                                        }
+                                    }
+                                    resolve({
+                                        userHandle: userHandle, 
+                                        finalTutors:finalTutors
+                                    });
+                                   
+                                })
+                })
+                .catch((err)=>{
+                    console.log(err);
+                    reject(err);
                 })
         })
     }

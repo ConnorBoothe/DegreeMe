@@ -77,6 +77,29 @@ module.exports = class Stories {
     getCorrectAnswerById(id){
         return StoryDB.findOne({_id: id}, "multipleChoice")
     }
+    getNonZeroStories(groupIdList){
+        var yesterday = new Date();
+        yesterday.setDate(yesterday.getDate()-1);
+        return new Promise((resolve, reject)=>{
+            StoryDB.find({
+                $and: [{ 
+                    groupId: { 
+                        $in: groupIdList
+                    },
+                    date: {
+                        $gte: yesterday
+                      }
+                    }]
+               
+                }, "groupImg")
+                    .distinct("groupId")
+                .then((groupImgs)=>{
+                    resolve(groupImgs)
+                })
+        })
+        
+
+    }
     
 
 }

@@ -80,7 +80,6 @@ module.exports = class Course {
    }
    //decrease studentCount when student leaves
    decrementStudents(courseName){
-    var CourseDB = mongoose.model('UNCC_CoursesDB', courseDBSchema);
     return CourseDB.findOne({CourseName:courseName}).updateOne({
         $inc: {
             studentCount: -1
@@ -112,29 +111,31 @@ module.exports = class Course {
    }
    //remove student from students array
    removeStudent(handle, courseName){
-    console.log(handle)
-    var CourseDB = mongoose.model('UNCC_CoursesDB', courseDBSchema);
-    CourseDB.findOne({CourseName:courseName}).exec((err,docs)=>{
-        var index = -1;
-    
-        for(x in docs.students){
-            if(docs.students[x].Handle === handle){
-                index = x;
-                console.log(docs.students[x].Handle)
+       return new Promise((resolve, reject)=>{
+        CourseDB.findOne({CourseName:courseName}).then((docs)=>{
+            var index = -1;
+            for(x in docs.students){
+                if(docs.students[x].Handle === handle){
+                    index = x;
+                    console.log(docs.students[x].Handle)
+                }
             }
-        }
-        if(index != -1){
-            docs.students.splice(index,1);
-            docs.save().then(function(){
-                //decrement student count
-                CourseDB.findOne({CourseName:courseName}).updateOne({
-                    $inc: {
-                        studentCount: -1
-                    }
-                  }).exec();
-            })
-        }
-    });
+            if(index != -1){
+                docs.students.splice(index,1);
+                docs.save().then(function(){
+                    //decrement student count
+                    CourseDB.findOne({CourseName:courseName}).updateOne({
+                        $inc: {
+                            studentCount: -1
+                        }
+                      }).exec();
+                      resolve({courseCode: docs.CourseCode,
+                        courseDept: docs.Department})
+                })
+            }
+        });
+       });
+    
    }
    //update bio in students array
    updateBio(handle, courseName, bio){

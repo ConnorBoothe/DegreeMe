@@ -1,5 +1,7 @@
 require('dotenv').config();
 const UserDB = require("./UserDB")
+const StoryDB = require("./StoryDB")
+const stories = new StoryDB();
 const users = new UserDB();
 const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
@@ -13,7 +15,8 @@ var Schema = mongoose.Schema;
 var membersSchema = new Schema({
   MemberHandle: {type:String, required: true},
   MemberImage:{type:String, required: true},
-  MemberRole:{type:String, required: true}
+  MemberRole:{type:String, required: true},
+  Status: {type:String},
 });
 
 //group chat schema
@@ -34,12 +37,12 @@ var StudyGroupDBSchema = new Schema({
   Professor: {type: String},
   School: {type: String,required: true},
   GroupName:{type: String,required: true},
-  GroupDescription:{type: String,required: true},
-  MessageId:{type: String,required: true},
+  GroupDescription:{type: String},
   GroupImage: {type: String},
   BannerImage: {type: String},
   Members: [membersSchema],
-  groupChat: [groupChat]
+  groupChat: [groupChat],
+  private:{type:Boolean},
 }, {
   collection: 'StudyGroupsDB'
 });
@@ -48,6 +51,21 @@ module.exports = class StudyGroups {
   getAllStudyGroups() {
     var StudyGroupDB = mongoose.model('StudyGroupDB', StudyGroupDBSchema);
     return StudyGroupDB.find({})
+  }
+  allMembersAccepted() {
+  
+     GroupsDB.find({}).then((groups)=>{
+       console.log("Groups: " +groups)
+       for(var x = 0; x < groups.length; x++){
+         for(var i = 0; i < groups[x].Members.length; i++){
+           groups[x].Members[i].Status = "Accepted";
+           console.log(groups[x].Members[i])
+
+         }
+                    groups[x].save();
+
+       }
+     })
   }
   //return sutdy group list by UserID
   getStudyGroupsByUserId(id) {
@@ -103,22 +121,36 @@ groupsAutocompleteByName(searchValue){
     return StudyGroupDB.find({},'GroupName')
 
   }
-  addStudyGroup(HostId, HostHandle, HostName, HostImage, Subject, CourseId, Professor, School, GroupName, GroupDescription,GroupImage, MessageID) {
-    var StudyGroupDB = mongoose.model('StudyGroupDB', StudyGroupDBSchema);
-    var studyGroup = new StudyGroupDB({
+  isGroupNameTaken(groupName){
+    console.log("name: "+ groupName)
+    return new Promise((resolve, reject)=>{
+      GroupsDB.find({GroupName: groupName},'GroupName')
+      .then((groupNames)=>{
+        console.log(groupNames)
+        if(groupNames.length > 0){
+          resolve(true)
+        }
+        else {
+          resolve(false)
+        }
+      })
+    })
+    
+
+  }
+  addStudyGroup(HostId, HostHandle, HostName, HostImage,School, GroupName,GroupImage,bannerImg, privacy ) {
+    var studyGroup = new GroupsDB({
       HostId: HostId,
       HostHandle: HostHandle,
       HostName: HostName,
       HostImage: HostImage,
-      Subject: Subject,
-      CourseId: CourseId,
-      Professor:Professor,
       School: School,
       GroupName:GroupName,
-      GroupDescription: GroupDescription,
       GroupImage:GroupImage,
-      Members: [{MemberHandle:HostHandle, MemberImage: HostImage, MemberRole: "Admin"}],
-      MessageId: MessageID
+      BannerImage: bannerImg,
+      Members: [{MemberHandle:HostHandle, MemberImage: HostImage, 
+        MemberRole: "Admin", Status: "Accepted"}],
+      private: privacy,
     });
     return studyGroup.save();
   }
@@ -130,29 +162,31 @@ groupsAutocompleteByName(searchValue){
     }).exec();
   }
   //add students attending the study group
-  addStudentAttending(sessionID, handle,img, callback) {
-    var StudyGroupDB = mongoose.model('StudyGroupDB', StudyGroupDBSchema);
-    StudyGroupDB.findOne({_id: sessionID}).exec((err,docs)=>{
-      if(docs){
-        docs.Members.push({MemberHandle: handle, MemberImage: img, MemberRole: "Member"});
-        docs.save();
-        var users = mongoose.model('UserDB',UserDB.UserDBSchema);
-        users.findOne({handle:handle}).exec((err,docs1)=>{
-          if(docs1){
-            docs1.StudyGroups.push({studyGroupId:sessionID,studyGroupName:docs.GroupName, course:docs.Subject})
-            docs1.save();
-          }else{
-            console.log("could not find handle");
-            callback(false);
-          }
-        })
-        callback(true);
-      }else{
-        console.log("could not find study session ID");
-        console.log(sessionID);
-        callback(false);
-      }
-    });
+  addMember(id, handle,img, status) {
+    console.log(id,handle,img, status)
+    return new Promise((resolve, reject)=>{
+      GroupsDB.findOne({_id: id}).then((docs)=>{
+        if(docs){
+          docs.Members.push({MemberHandle: handle, MemberImage: img, MemberRole: "Student", Status: status});
+          docs.save();
+          var users = mongoose.model('UserDB',UserDB.UserDBSchema);
+          users.findOne({handle:handle}).then((user)=>{
+            if(user){
+              user.StudyGroups.push({studyGroupId:id,studyGroupName:docs.GroupName, course:docs.Subject})
+              user.save();
+              resolve(user)
+            }else{
+              console.log("could not find handle");
+              reject("could not find handle");
+            }
+          })
+        }else{
+          console.log("could not find study session ID");
+          console.log(id);
+          callback(false);
+        }
+      });
+  })
   }
   removeStudentAttending(sessionID, handle, callback){
     var StudyGroupDB = mongoose.model('StudyGroupDB', StudyGroupDBSchema);
@@ -225,7 +259,7 @@ groupsAutocompleteByName(searchValue){
     }).exec();
   }
   //get images of a user's study groups
-  getGroupImages(userId){
+  getStoryImages(userId){
     return new Promise((resolve, reject)=> {
       users.getGroupsById(userId)
       .then((groups)=> {
@@ -233,16 +267,42 @@ groupsAutocompleteByName(searchValue){
         for (var i = 0; i < groups.StudyGroups.length; i++) {
           groupIdArray.push(groups.StudyGroups[i].studyGroupId)
         }
-        console.log(groupIdArray)
-        GroupsDB.find({
-          _id: { 
-            $in: groupIdArray
-          }
-        }, "GroupImage GroupName")
-        .then((groups)=>{
-          resolve(groups)
+        stories.getNonZeroStories(groupIdArray)
+        .then((groupIds)=>{
+          GroupsDB.find({
+            _id: { 
+              $in: groupIds
+            }
+          }, "GroupImage GroupName")
+          .then((groups)=>{
+            resolve(groups)
+          })
         })
+        })
+      .catch((err)=>{
+        reject(err)
       })
+    })
+  }
+  //get images of a user's study groups
+  getGroupImages(userId){
+    console.log("calling group iamges")
+    return new Promise((resolve, reject)=> {
+      users.getGroupsById(userId)
+      .then((groups)=> {
+        var groupIdArray = [];
+        for (var i = 0; i < groups.StudyGroups.length; i++) {
+          groupIdArray.push(groups.StudyGroups[i].studyGroupId)
+        }
+          GroupsDB.find({
+            _id: { 
+              $in: groupIdArray
+            }
+          }, "GroupImage GroupName")
+          .then((groups)=>{
+            resolve(groups)
+          })
+        })
       .catch((err)=>{
         reject(err)
       })
@@ -251,7 +311,7 @@ groupsAutocompleteByName(searchValue){
   getGroupMembers(id){
     return GroupsDB.findOne({
       _id: id
-    }, "Members")
+    }, "HostHandle Members")
   }
   getGroupThreads(id){
     return GroupsDB.findOne({
@@ -284,5 +344,74 @@ groupsAutocompleteByName(searchValue){
       })
     })
    
+  }
+  updateGroupImage(id, url){
+    return new Promise ((resolve, reject)=>{
+      GroupsDB.findOne({_id: id}).then((group)=>{
+        group.GroupImage = url;
+        group.save();
+        resolve(group)
+      })
+    })
+   
+  }
+  updateCourseSettings(id, course, professor){
+    return new Promise ((resolve, reject)=>{
+      GroupsDB.findOne({_id: id}).then((group)=>{
+        if(professor.trim() != ""){
+          group.Professor = professor;
+        }
+        if(course.trim() != course){
+          group.Subject = course;
+        }
+        group.save();
+        resolve(group)
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+    })
+   
+  }
+  removeMember(groupId, handle){
+    return new Promise((resolve, reject)=>{
+        GroupsDB.findOne({_id: groupId})
+        .then((group)=>{
+          for(var i = 0; i < group.Members.length; i++) {
+            if(group.Members[i].MemberHandle == handle){
+              console.log("handle match")
+              var removedHandle = group.Members[i].MemberHandle;
+              group.Members.splice(i,1);
+              group.save();
+              resolve(removedHandle);
+            }
+          }
+        })
+        .catch((err)=>{
+          console.log(err)
+          reject(err)
+        })
+    })
+  }
+  approveMember(groupId, handle){
+    return new Promise((resolve, reject)=>{
+        GroupsDB.findOne({_id: groupId})
+        .then((group)=>{
+          for(var i = 0; i < group.Members.length; i++) {
+            if(group.Members[i].MemberHandle == handle){
+              var removedHandle = group.Members[i].MemberHandle;
+              console.log("ACCEPT THE MEM")
+              group.Members[i].Status = "Accepted";
+              console.log(group.Members[i])
+              group.save();
+              resolve(removedHandle);
+            }
+          }
+        })
+        .catch((err)=>{
+          console.log(err)
+          reject(err)
+        })
+    })
   }
 }
