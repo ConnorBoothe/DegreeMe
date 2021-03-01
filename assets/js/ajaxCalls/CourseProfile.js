@@ -113,7 +113,7 @@ function populateDiscussion(res, subject){
       '<form action="removeDiscussion" method="POST">'+
       '<input type="hidden" name="discId" value="'+res[x]._id+'"/ >'+
       '<input type="hidden" name="course" value="'+res[x].courseName+'"/ >'+
-      '<input type="submit" value="delete" class="btn btn-danger"/ >'+
+      '<input type="submit" value="Delete" class="btn btn-danger"/ >'+
       '</form>'
   '</div>';
     }
@@ -152,36 +152,47 @@ function populateStudents(students){
   }
 }
 $(document).ready(function(){
+  $(".courseProfileContainer").on("click", ".course-select-day", function () {
+    showDropdown($(this))
+})
+  $(".course-select").on("click", function(){
+    if($(".course-dropdown").css("display") == "none") {
+      $(".course-dropdown").show()
+     
+    }
+    else {
+      $(".course-dropdown").hide()
+
+    }
+  })
+  //filter time
+  $(".courseProfileContainer").on("click", ".time-dropdown ul li", function () {
+    filterTime($(this), $(".headerLinkTitle").text());
+})
+//filter day
+$(".courseProfileContainer").on("click", ".day-dropdown ul li", function () {
+    filterDay($(this), $(".headerLinkTitle").text());
+})
+//filter am/pm
+$(".courseProfileContainer").on("click", ".amPm-dropdown ul li", function () {
+    filterAmPm($(this), $(".headerLinkTitle").text());
+})
+//reserve seat
+//reserve seat
+$(".courseProfileContainer").on("click", ".reserveSeat", function(){
+  reserveSeat($(this))
+})
   //if mobile, make page title the course code
   var course = $(".courseName").text();
+  var courseCode = $("input[name='courseCode']").val();
   if(window.innerWidth < 1000){
     $("input[name='screenSize'").val("mobile")
-    var courseCode = $("input[name='courseCode']").val();
+  
         $(".mobile-logo-wrapper").html("<h1 class='userProfileHandle1'>"+courseCode+"</h1>"); 
 }
     $(".tutorTab").on("click", function(){
-      payload = {
-        course:course,
-     }
-        $.ajax({
-            url: '/getAvailableTutors' ,
-            method: 'POST',
-            data: JSON.stringify(payload),
-            headers: {
-              "Content-Type": "application/json"
-              }, statusCode: {
-              202: function (result) {
-                console.log(result)
-                $(".course-profile-info").html(populateTutors(result.tutors, course)) 
-              },
-              500: function (result) {
-                  alert("500 ");
-                  console.log(result)
-              },
-              },
-          });
-       
-              })
+      getFirstTutorRooms(courseCode);
+    })
               $(document).on("click",".join-room-btn", function(e){
                 e.preventDefault();
                 var url = $(this).attr('href');
@@ -197,10 +208,34 @@ $(document).ready(function(){
         error:function(err,str){
         }
         }).done(function(res) { 
-          console.log(res.discussion)
-          var discussion = "<div class='question-container'><button type='button' class='btn btn-primary askQuestion' data-toggle='modal' data-target='#exampleModalCenter'>"+
-                      "Ask a Question</button><h1 class='DiscussionTitle'>"+"Questions asked in "+ $(".courseCodeTxt").text()+
-                      "</h1><div class='discussion-container'>";
+          var discussion = "<div class='question-container'>"+
+          '<div class="askAQuestion">'+
+                    
+                    '<div class="comments-actions-list">'+
+                      
+                            '<label id="imageUploadLabel"  for="attachment" class=" ">'+
+                              '<svg data-toggle="tooltip" data-placement="top"'+
+                              'title="File Upload" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-earmark-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
+                                '<path fill-rule="evenodd" d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0H4zm5.5 1.5v2a1 1 0 0 0 1 1h2l-3-3z"/>'+
+                              '</svg>'+
+                            '</label>'+
+                            '<input class="askQuestion-file" id="attachment" name="attachment" type="file">'+
+                            
+                        '</div>'+
+                    '<div class="questionTxt-container">'+
+                        '<p contenteditable="true" id="message" class="questionTxt">Ask a question</p>'+
+
+                    '</div>'+
+                    '<div class="postQuestion-container">'+
+                        '<div class="image-attachments">'+
+                                
+                    '</div>'+
+
+                        '<button id="postQuestion" class="btn btn-primary postQuestion">Post</button>'+
+
+                    '</div>'+
+                '</div>'+
+          '<div class="discussion-container">';
           var handle = res.currHandle;
           for(var x = res.discussion.length-1; x>=0; x--){
            
@@ -226,7 +261,7 @@ $(document).ready(function(){
               if(handle === res.discussion[x].userHandle){
                 discussion+=
                 '<form action="removeDiscussion" method="POST"  class="removeDiscussion">'+
-                '<input type="submit" value="delete" class="btn btn-danger deleteDiscussion"/ >'+
+                '<input type="submit" value="Delete" class="btn btn-danger deleteDiscussion"/ >'+
                 '<input type="hidden" name="discId" value="'+res.discussion[x]._id+'"/ >'+
                 '<input type="hidden" name="course" value="'+res.discussion[x].courseName+'"/ >'+
                 '</form>'+
@@ -263,7 +298,7 @@ $(document).ready(function(){
               if(handle === res.discussion[x].userHandle){
                 discussion+=
                 '<form action="removeDiscussion" method="POST" class="removeDiscussion">'+
-                '<input type="submit" value="delete" class="btn btn-danger deleteDiscussion"/ >'+
+                '<input type="submit" value="Delete" class="btn btn-danger deleteDiscussion"/ >'+
                 '<input type="hidden" name="discId" value="'+res.discussion[x]._id+'"/ >'+
                 '<input type="hidden" name="course" value="'+res.discussion[x].courseName+'"/ >'+
                
@@ -290,8 +325,7 @@ $(document).ready(function(){
                error:function(err,str){
                }
                }).done(function(res) { 
-                 var studyGroups = "<div class='question-container'><a href='/startAGroup' class='btn btn-primary' >"+
-                             "Create a Group</a><div class='discussion-container'>";
+                 var studyGroups = "<div class='question-container'><div class='discussion-container'>";
                  var noGroups = true;
                   for(var x = res.length-1; x>=0; x--){
                    if(res[x].Subject === $(".courseCodeTxt").text()){
@@ -300,17 +334,16 @@ $(document).ready(function(){
                         memberCount++;
                     }
                     noGroups = false;
-                     studyGroups +=  '<div class="checkout-container"><a href="/user/'+res[x].HostHandle+'" class="memberImage"'+
-                     'data-toggle="tooltip" data-placement="top"'+
-                     'title="Created By '+res[x].HostHandle+'"><div class="checkout-header"><img class="sg-img" src="'+res[x].HostImage+ '"/></a>' +
-                     '<p class="group-name"><a href="../Group/'+res[x]._id+'">'+res[x].GroupName+'</a></p></div>'+
-                     '<div class="p-container"><p class="descriptionLabel">Description</p><p class="group-description">'+res[x].GroupDescription+'</p>'+
-                     '<p class="badge badge-warning prof-badge">Prof. '+res[x].Professor+'</p>';
-                     if(memberCount === 1){
-                      studyGroups += '<p class="badge badge-primary">'+memberCount+ ' member</p></div></div>';
+                     studyGroups +=  '<div class="course-group-container">'+
+                     '<a href="../Group/'+res[x]._id+'">'+
+                     '<img class="sg-img" src="'+res[x].HostImage+ '"/>'+
+                     '</a>' +
+                     '<p class="group-name">'+res[x].GroupName+'</p>';
+                     if(res[x].Members.length === 1){
+                      studyGroups += '<p class="badge badge-secondary group-mem-count">'+res[x].Members.length+ ' member</p></div></div>';
                      }
                      else{
-                      studyGroups += '<p class="badge badge-primary">'+memberCount+ ' members</p></div></div>';
+                      studyGroups += '<p class="badge badge-secondary group-mem-count">'+res[x].Members.length+ ' members</p></div></div>';
                      }
                     
                     
@@ -320,7 +353,10 @@ $(document).ready(function(){
                if(noGroups){
                 studyGroups += '<p class="noGroups">No groups exist</p>';
                }
-                 $(".course-profile-info").html(studyGroups+"</div></div>");
+               else {
+                $(".course-profile-info").html(studyGroups+"</div>");
+
+               }
            });
     });
 
@@ -335,33 +371,6 @@ $(document).ready(function(){
             $(".questionTxt").css("border","1px solid red");
             e.preventDefault();
         }
-    })
-    $(".studentsTab").on("click", function(){
-    payload = {
-      course:$(".courseName").text()
-  }
-    $.ajax({
-      url: "/getStudentsByCourse",
-      type: 'POST',
-      data: JSON.stringify(payload),
-      headers: {
-        "Content-Type": "application/json"
-      }, statusCode: {
-        202: function (result) {
-         $(".question-container").remove();
-          if(result.students != ""){
-            $(".course-profile-info").html(populateStudents(result.students));
-          }
-          else{
-            $(".course-profile-info").html("<h3 class='course-noStudents'>No students have added this course</h3>");
-          }
-        
-        },
-        500: function (result) {
-          alert("500 ");
-        },
-      },
-  })
     })
 
   
