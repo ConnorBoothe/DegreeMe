@@ -135,16 +135,16 @@ router.post("/setBio",
     })
 
 router.post("/getCourses",
-    check('userHandle').isString().trim().escape(),
     function (req, res) {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            res.redirect('/home');
-        }
-        users.getUserByHandle(req.body.userHandle).exec((err, docs) => {
+        console.log(req.body.handle)
+        users.getUserByHandle(req.body.handle)
+        .then((docs) => {
             res.status(202).json({
                 courses: docs[0].myCourses
             })
+        })
+        .catch((err)=>{
+            console.log(err)
         })
     });
 router.post("/getTutorListings",
@@ -162,27 +162,23 @@ router.post("/getTutorListings",
             })
         })
     });
+//get user reviews
 router.post("/getReviews",
-    check('userHandle').isString().trim().escape(),
     function (req, res) {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            res.redirect('/home');
-        }
-        reviews.getReviewsByHandle(req.body.userHandle).exec((err, docs) => {
+        reviews.getReviewsByHandle(req.body.handle)
+        .then((docs) => {
+            console.log("Reviews: " +docs)
             res.status(202).json({
                 reviews: docs
             })
         })
+        .catch((err)=>{
+            console.log(err)
+        })
     });
 router.post("/getGroups",
-    check('userHandle').isString().trim().escape(),
     function (req, res) {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            res.redirect('/home');
-        }
-        users.getUserByHandle(req.body.userHandle).exec((err, docs) => {
+        users.getUserByHandle(req.body.handle).exec((err, docs) => {
             res.status(202).json({
                 groups: docs[0].StudyGroups
             })

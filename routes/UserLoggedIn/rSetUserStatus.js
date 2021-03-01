@@ -14,7 +14,7 @@ var users = new UserDB();
 //render the create connection page
 router.post('/setActiveTimestamp', function (req, res) {
     console.log(req.body)
-    users.setUserStatus(req.session.userId, Date.now())
+    users.setUserStatus(req.session.userId, req.body.active)
     .then((result)=>{
         console.log(result)
         console.log("Set user active timestamp")
@@ -24,7 +24,7 @@ router.post('/setActiveTimestamp', function (req, res) {
 
     })
     .catch((err)=>{
-        console.log(err)
+        console.log("User Active err: " +err)
     })
 });
 

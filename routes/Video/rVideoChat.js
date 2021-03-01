@@ -16,12 +16,14 @@ router.use(session({
 }));
 let caller = [];
 let isHostIn;
+console.log("ROOM")
 router.get('/room/:id', function(req, res){
 let referer = req.headers.referrer || req.headers.referer;
-if(referer===undefined){
-    res.redirect("/home");
-    return;
-}
+// if(referer===undefined){
+//     console.log("No referer")
+//     res.redirect("/home");
+//     return;
+// }
 let isInStream=false;  
 console.log("this is the req.params.id "+req.params.id);
     stream.getStreamById(req.params.id)
@@ -62,6 +64,7 @@ console.log("this is the req.params.id "+req.params.id);
             res.render('UserLoggedIn/Video/Viewer',{session:req.session, params: req.params, stream: stream, inStream:isInStream});
         }
         else{
+            console.log("RAN count greate than 5")
             res.redirect("/home");
         }
         }
@@ -70,6 +73,7 @@ console.log("this is the req.params.id "+req.params.id);
             res.render('UserLoggedIn/Video/StandBy',{session:req.session, params: req.params, stream: stream, inStream:isInStream});
         }
         else{
+            console.log("Queue greater than 5")
             res.redirect("/home");
         }
         }

@@ -8,7 +8,7 @@ router.use(session({
     saveUninitialized: true
 }));
 //render the about page
-router.get('/aboutUs', function(req, res){
+router.get('/about', function(req, res){
     res.render('UserNotLoggedIn/aboutUs',{session:req.session});
 });
 module.exports = router;

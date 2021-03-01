@@ -154,55 +154,15 @@ router.post('/course/removeDiscussion',
         })
     });
 //get students that have joined a given course. Displayed on Course Profile page
-router.post('/getStudentsByCourse',
-    check('course').isString().trim().escape(),
+router.get('/getStudentsByCourse/:Course',
     function (req, res) {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            //redirect to index if error
-            res.redirect('/home');
-        }
-        coursesDB.getCourseByName(req.body.course).then(function (data) {
+        coursesDB.getCourseByName(req.params.Course).then(function (data) {
             console.log(data)
-            var numInMajor = 0;
-            var students = [];
-            console.log(data)
-            new Promise((resolve, reject) => {
-                if(data[0].students.length === 0){
-                    res.status(202).json({
-                        students: ""
-                    })
-                }
-                for (var i in data[0].students) {
-                    if (data[0].students[i].id != req.session.userId) {
-                        numInMajor++;
-                        users.getUserByHandle(data[0].students[i].Handle).then(function (docs) {
-                            //create tutor objects from DB results
-                            //constructor(userId,first_name,last_name,school,email,password,img,theme,handle, mySchedule, status, subscription, creditHours, threads, major) {
-                            var temp = new Student(docs[0]._id, docs[0].first_name, docs[0].last_name, docs[0].school,
-                                docs[0].email, docs[0].password, docs[0].img, docs[0].theme, docs[0].handle, docs[0].myCourses,
-                                docs[0].status, docs[0].subscription, null, docs[0].threads, docs[0].Major, docs[0].bio);
-                            //console.log("calling isFollowing:"+docs[x].handle);
-                            users.isFollowing(req.session.handle, docs[0], temp, function (student, folstat) {
-                                students.push([student, folstat]);
-                                if (students.length == numInMajor) {
-                                    resolve(students);
-                                }
-                            });
-                        })
-                    }
-                }
-            }).then(function (students) {
-                console.log(students);
-                res.status(202).json({
-                    students: students
-                })
-            })
-            .catch(function(err){
-                console.log(err)
-            })
+            res.json(data[0].students)
         })
-
+        .catch(function(err){
+            console.log(err)
+        })
 
     });
 module.exports = router;

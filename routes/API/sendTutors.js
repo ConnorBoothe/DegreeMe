@@ -10,7 +10,7 @@ var tutors = new TutorDB();
 router.get('/API/Tutors/:Course', function(req, res){
     if(req.params.Course) {
         tutors.getAvailableTutorsByCourse(req.params.course).then((docs)=>{
-            console.log(docs)
+            console.log("DOCS: " +docs)
             res.json(docs);
         })
         .catch(()=>{

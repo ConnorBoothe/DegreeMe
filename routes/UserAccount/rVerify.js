@@ -7,10 +7,12 @@ const bodyParser = require("body-parser");
 var stripe = require('stripe')(process.env.STRIPE_KEY);
 //DBs used
 const userDB = require('../../models/Database/UserDB');
+const StreamDB = require('../../models/Database/StreamDB');
 const EmailFunction = require('../../models/classes/EmailFunction');
 //instantiate DBs
 const UserDB = new userDB();
 const emailFunction = new EmailFunction();
+const stream = new StreamDB();
 //use session and body parser
 router.use(session({
     secret: 'iloveu',
@@ -25,14 +27,19 @@ router.use(bodyParser.urlencoded({
 //render the verify account page
 router.get('/VerifyAccount', function(req, res){
     if(req.query.email){
-        UserDB.getUserByEmail(req.query.email).exec((err,docs)=>{
+        UserDB.getUserByEmail(req.query.email).then((docs)=>{
             //if the email exists render the page and the account is inactive
                 if(docs.length > 0){
-                    res.render('UserNotLoggedIn/verifyAccount',{session:req.session, qs:req.query});
+                    
+                        res.render('UserNotLoggedIn/verifyAccount',{session:req.session, qs:req.query});
+                    
                 }
                 else{
                     res.redirect("/");
                 }
+        })
+        .catch((err)=>{
+            console.log(err)
         })
     }
     else{
@@ -65,7 +72,11 @@ router.post("/updateStatus", function(req, res){
                             //console.log(customer);
                             //console.log(docs[0].id);
                             UserDB.setCustomerId(docs[0].id,customer.id).then(function(data){
+                                stream.addStream(docs[0].handle, docs[0]._id,docs[0].img)
+                                    .then((stream)=>{
+                                     UserDB.addStreamId(docs[0]._id, stream._id)
                                 res.redirect("/Login?message=Account Confirmed");
+                             })
                             }).catch(function(err){
                                 console.log(err);
                             });    
@@ -84,14 +95,16 @@ router.post("/updateStatus", function(req, res){
 })
 //resend account verification code
 router.post("/sendEmail", function(req, res){
+    console.log("Send email")
     //generate random code and save it to the DB
     var activationCode = Math.floor(Math.random() * 10000);
     UserDB.updateActivationCode(req.body.email1,  activationCode)
     .then(()=>{
         UserDB.getUserByEmail(req.body.email1).then((user)=>{
             if(user.length > 0) {
+                console.log("User: " +user[0])
                 emailFunction.createEmail(user[0].email, "VerifyAccount",
-                 [activationCode, user[0].name])
+                 [activationCode, user[0].first_name ])
                  .then(()=>{
                     res.redirect("/login?message=New Email Sent");
                  })

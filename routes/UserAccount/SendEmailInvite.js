@@ -14,7 +14,12 @@ const {
     validationResult
 } = require('express-validator');
 const EmailFunction = require('../../models/classes/EmailFunction');
+const NotificationsDB = require('../../models/Database/NotificationDB');
+const GroupsDB = require('../../models/Database/StudyGroupsDB');
+
 const emailFunction = new EmailFunction();
+const notifications = new NotificationsDB();
+const groups = new GroupsDB();
 router.post("/sendPlatformInvite",
     check('emails').isArray().trim().escape(),
     function (req, res) {
@@ -37,5 +42,25 @@ router.post("/sendPlatformInvite",
         }).end();
       })
       
+    })
+    router.post("/sendHandleInvite",
+    function (req, res) {
+    
+      console.log("req handle invite: "+ req.body.handles)
+      new Promise((resolve, reject)=>{
+        for(var i = 0; i < req.body.handles.length; i++) {
+          notifications.addNotification(req.body.handles[i],
+          req.session.name, " invited you to join "+ req.body.group,
+          req.session.img, "/Group/"+ req.body.groupId);
+      }
+      resolve();
+      })
+      .then(()=>{
+        res.status(202).json({
+        }).end();
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
     })
     module.exports = router;

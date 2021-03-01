@@ -46,6 +46,7 @@ function (req, res) {
         fileAttachment.push(req.body.image);
     }
     //post to group discussion board
+    console.log(req.body.message)
     timeline.addQuestionPost(req.session.handle,req.session.handle, req.session.name, "Question" ,req.session.img,req.body.message,new Date(), fileAttachment, req.body.course )
     .then(function(data){
         console.log("DATA ID : " + data._id)

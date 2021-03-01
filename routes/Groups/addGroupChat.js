@@ -26,6 +26,7 @@ router.post("/addGroupChat", (req, res)=>{
                 req.body.name, "General")
             .then((group)=>{
                 res.status(202).json({
+                    threadId: thread._id,
                     group: group
                 }).end();
             })

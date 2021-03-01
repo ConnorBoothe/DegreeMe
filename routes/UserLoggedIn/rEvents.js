@@ -66,25 +66,23 @@ router.get('/calendar/getEvents', function(req, res){
      calendarEvents.map((e)=>{
 
         var formattedDate = moment(e.date).format("yyyy-MM-DDTHH:mm:ss");
-        console.log(formattedDate);
         var newEvent = {...e, ...{date:formattedDate}}
         formattedEvents.push(newEvent);
     })
-    console.log(formattedEvents);
     res.send(formattedEvents);
  });
  
 })
 //add a new event to the calendar
 router.post('/calendar/addEvent', function (req, res) {
-    var eventDoc = events.addEvent(req.session.userId,req.body.start,req.body.hours,req.body.minutes,req.body.title,req.body.description,req.body.type,req.session.streamId,req.body.location);
-
-    eventDoc.save(function(err,event){
-        if(err){
-            console.log(err);
-        }
+    events.addEvent(req.session.userId,req.body.start,req.body.hours,req.body.minutes,req.body.title,req.body.description,req.body.type,req.session.streamId,req.body.location)
+    .then((event)=>{
         res.send(event);
     })
+    .catch((err)=>{
+        console.log(err)
+    })
+    
 });
 //remove event from calendar
 router.delete('/calendar/removeEvent', function (req, res) {

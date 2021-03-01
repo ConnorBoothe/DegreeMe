@@ -94,23 +94,18 @@ router.get('/home', function (req, res) {
                         var hasLiked = tl.likedBoolean(req.session.handle, docs1[x].likers);
                         console.log(hasLiked)
                     //potentially removing this
-                    if (docs1[x].type == "Tutor Listing") {
-                        timeLineArray.push(new TimelinePost(docs1[x]._id, docs1[x].sendToHandle, docs1[x].type, docs1[x].userHandle, docs1[x].userName,
-                            docs1[x].userImage, docs1[x].caption, docs1[x].likes, docs1[x].comments, dateFunctions.displayDate(new Date(docs1[x].date)),
-                            docs1[x].name, docs1[x].course, docs1[x].price, docs1[x].url, hasLiked, docs1[x].commentCount));
-                    }
+                    
                     if (docs1[x].type == "Study Group") {
                         timeLineArray.push(new TimelinePost(docs1[x]._id, docs1[x].sendToHandle, "Study Group", docs1[x].userHandle, docs1[x].userName,
                             docs1[x].userImage, docs1[x].caption, docs1[x].likes, docs1[x].comments, dateFunctions.displayDate(new Date(docs1[x].date)),
                             docs1[x].name, docs1[x].course, docs1[x].professor, docs1[x].url, hasLiked,  docs1[x].commentCount));
                     }
-                    //removing this
-                    if (docs1[x].type == "Status Update") {
-
-                        timeLineArray.push(new TimelinePost(docs1[x]._id, docs1[x].sendToHandle, "Status Update", docs1[x].userHandle, docs1[x].userName,
-                            docs1[x].userImage, docs1[x].caption, docs1[x].likes, "", dateFunctions.displayDate(new Date(docs1[x].date)),
-                            "", "", "", "",  hasLiked, docs1[x].commentCount));
+                    if (docs1[x].type == "Group Meetup") {
+                        timeLineArray.push(new TimelinePost(docs1[x]._id, docs1[x].sendToHandle, "Study Group", docs1[x].userHandle, docs1[x].userName,
+                            docs1[x].userImage, docs1[x].caption, docs1[x].likes, docs1[x].comments, dateFunctions.displayDate(new Date(docs1[x].date)),
+                            docs1[x].name, docs1[x].course, docs1[x].professor, docs1[x].url, hasLiked,  docs1[x].commentCount));
                     }
+                  
                     if (docs1[x].type == "Question") {
 
                         timeLineArray.push(new TimelinePost(docs1[x]._id, docs1[x].sendToHandle, "Question", docs1[x].userHandle, docs1[x].userName,
@@ -155,7 +150,7 @@ router.get('/home', function (req, res) {
                     //new view goes here
                     else {
                         acceptedBids.getUserBids(req.session.handle).exec((err, bids)=>{
-                        res.render('UserLoggedIn/emptyHome', {
+                        res.render('UserLoggedIn/Home', {
                             session: req.session,
                             qs: req.query,
                             timeline: timeLineArray,
@@ -238,6 +233,8 @@ router.post("/addCourse",
         if (!req.body.exist) {
             users.addCourse(req.session.handle, req.body.course, req.body.courseId, req.body.courseCode);
             // courses.incrementStudents(req.body.course).exec();
+            req.session.myCourses.push({courseName: req.body.course, 
+                courseId:req.body.courseId, courseCode: req.body.courseCode})
             courses.addStudent(req.body.course, req.session.img, req.session.handle, req.session.name, req.session.bio)
             res.status(202).json({
                 course: req.body.course,
@@ -255,30 +252,38 @@ router.post("/leaveCourse",
             res.redirect('/home');
         }
         //remove course from UserDB
+        var course = "";
         if (req.body.course.includes("+")) {
-            var course = req.body.course.replace(/\+/g, " ");
-            users.removeCourse(req.session.handle, course);
-            courses.decrementStudents(course).exec();
-            //remove student from course
-            courses.removeStudent(req.session.handle, course);
-            //need .then() here
-            res.status(202).json({
-                status: "left",
-                course: course
-            }).end();
-        } else {
-            users.removeCourse(req.session.handle, req.body.course);
-            //decrement course studentCount
-            // courses.decrementStudents(req.body.course).exec();
-            //remove student from course
-            courses.removeStudent(req.session.handle, req.body.course);
-            //need .then() here
-            res.status(202).json({
-                status: "left",
-                course: req.body.course
-            }).end();
+            course = req.body.course.replace(/\+/g, " ");
         }
-
+        else {
+            course = req.body.course;
+        }
+            users.removeCourse(req.session.handle, course)
+            .then(()=>{
+                courses.removeStudent(req.session.handle, course)
+                .then((course)=>{
+                    console.log("LEAVe couree")
+                    for(x in req.session.myCourses){
+                        console.log(req.session.myCourses[x].courseCode)
+                        console.log(course.courseDept + 
+                            " " + course.courseCode)
+                        if(req.session.myCourses[x].courseCode == (course.courseDept + 
+                            " " + course.courseCode) ) {
+                                console.log("FOUND")
+                            req.session.myCourses.splice(x,1);
+                        }
+                    }
+                    res.status(202).json({
+                        status: "left",
+                        courseDept: course.courseDept,
+                        courseCode: course.courseCode
+                    }).end();
+                })
+            })
+            .catch((err)=>{
+                console.log(err)
+            })
     })
 router.post("/addLike",
     check('handle').isString().trim().escape(),

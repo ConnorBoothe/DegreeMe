@@ -11,10 +11,10 @@ const {
     validationResult
   } = require('express-validator');
 //DBs used
-const StudyGroupMeetupDB = require('../../models/Database/StudyGroupMeetupsDB.js');
+const StudyGroupMeetupDB = require('../../models/Database/GroupMeetups.js');
 const DateFunctions = require('../../models/classes/DateFunctions.js');
 //instantiate DBs used
-var studyGroupMeetups = new StudyGroupMeetupDB();
+var meetups = new StudyGroupMeetupDB();
 var dateFunctions = new DateFunctions();
 //use session and bodyParser
 router.use(bodyParser.json());
@@ -35,7 +35,7 @@ router.use(session({
 //render the meetup profile page
 router.get('/meetup/:MeetupId', function (req, res) {
     if (req.session.userId) {
-        studyGroupMeetups.getMeetupById(req.params.MeetupId).exec((err, docs) => {
+        meetups.getMeetupById(req.params.MeetupId).exec((err, docs) => {
             var memberCount = 0;
             if(docs.length > 0 ){
             for (x in docs[0].Attendees) {

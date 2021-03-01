@@ -14,7 +14,7 @@ var mail = unirest("POST", "https://api.sendgrid.com/v3/mail/send");
 
 router.post("/addTimeslot", function(req, res){
     console.log("adding time slot")
-    console.log(req.body)
+    console.log(req.body.day)
     schedule.addTimeslot(req.session.userId, req.body.day, req.body.time)
     .then(function(){
         res.status(202).json({
@@ -39,7 +39,7 @@ router.post("/removeTimeslot", function(req, res){
 })
 router.post("/getScheduleByDay", function(req, res){
     console.log("Day: " ,req.body.day)
-    schedule.getUserScheduleByDay(req.session.userId, req.body.day)
+    schedule.getPersonalSchedule(req.session.userId, req.body.day)
     .then(function(data){
         var times = [];
         for(var i = 0; i < data.length; i++){

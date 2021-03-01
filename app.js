@@ -74,7 +74,8 @@ app.use(require('./routes/scheduledEvents/chargePayments.js'));
 //User Account Routes
 app.use([
   require('./routes/UserAccount/rSignUp'),
-  require('./routes/UserAccount/rSignUp'),
+  require('./routes/UserAccount/getTutorRooms'),
+  require('./routes/UserAccount/rVerify'),
 
   require('./routes/UserAccount/updateAvatarURL.js'),
   require('./routes/UserAccount/rUpdatePassword.js'),
@@ -107,7 +108,7 @@ app.use([
   require('./routes/UserLoggedIn/rSettings.js'),
   require('./routes/UserLoggedIn/rSetUserStatus.js'),
   require('./routes/UserLoggedIn/rMyFinances.js'),
-  require('./routes/UserLoggedIn/rStudyGroups.js'),
+  require('./routes/Groups/Groups.js'),
   require('./routes/UserLoggedIn/rMeetups.js'),
   require('./routes/UserLoggedIn/rCheckout.js'),
   require('./routes/UserLoggedIn/rEvents.js'),
@@ -119,10 +120,17 @@ app.use([
   require('./routes/UserAccount/rHome.js'),
   require('./routes/UserLoggedIn/rTutorSchedule.js'),
   require('./routes/Groups/rStudyGroupProfile.js'),
+  require('./routes/Groups/update-group-settings.js'),
   require('./routes/Groups/addBannerImage.js'),
+  require('./routes/Groups/updateGroupImage.js'),
+
   require('./routes/Groups/getGroupMembers.js'),
   require('./routes/Groups/addStory.js'),
   require('./routes/Groups/getGroupStories.js'),
+  require('./routes/Groups/removeGroupMember.js'),
+  require('./routes/Groups/privateGroupRequest.js'),
+
+
   require('./routes/Groups/addGroupChat.js'),
   require('./routes/Groups/getGroupThreads.js'),
   require('./routes/Groups/addStoryResponse.js'),
@@ -225,6 +233,9 @@ io.sockets.on('connection', function (socket) {
         img: data.senderImg
     });
     })
+    .catch((err)=>{
+      console.log(err)
+    })
   })
   socket.on('send image', function (data) {
     console.log("EMIT SEND IMAGE")
@@ -232,6 +243,7 @@ io.sockets.on('connection', function (socket) {
   //   add message to the db
   //  add image to me   console.log("sending image")
   console.log("ADD msg")
+  console.log(data.sender)
   messages.addMessage(data.id, data.sender, data.senderImg, data.content, data.date, "file")
    .then(function(success){
      if(success){
@@ -240,6 +252,7 @@ io.sockets.on('connection', function (socket) {
      }
    })
    .catch(function(error){
+     console.log("ERROR in chat")
      console.log(error)
    })
   
