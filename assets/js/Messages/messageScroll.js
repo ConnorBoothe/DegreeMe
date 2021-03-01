@@ -37,7 +37,7 @@ $(document).ready(function () {
                         //prepend
                         if(result.messages.length > 0) {
                             $("#messagesContainer").prepend(prependNext50(result.messages,
-                                $(".userHandle").text(),block));
+                                $("input[name='handle']").val(),block));
                            
                            $(".messageBlock").scrollTop(oldMessageTop.offset().top)
                         }

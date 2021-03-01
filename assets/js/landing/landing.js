@@ -11,7 +11,7 @@ $("#wave2").wavify({
   height: 60,
   bones: 3,
   amplitude: 40,
-  color: "#202020",
+  color: "#1f2024",
   speed: 0.25,
 });
 

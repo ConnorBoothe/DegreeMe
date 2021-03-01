@@ -2,7 +2,7 @@ function appendMembers(res){
     var members = '';
     for(x in res.members){
         
-        if(res.statusArray[x].active == "true"){
+        if(res.statusArray[x].active){
             members += 
             '<div class="messageHandle">'+
             '<span class="online"></span></a>'+

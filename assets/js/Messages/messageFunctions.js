@@ -10,13 +10,25 @@ function readURL(input, imageArray, inputVal) {
         var reader = new FileReader();
         var image = "";
         reader.onload = function (e) {
-            image = "<div class='img-container'>" +
+            if(filename.toString().toUpperCase().includes("PDF")) {
+                image = "<div class='img-container'>" +
+                "<span class='delete-badge badge badge-secondary'>" +
+                '<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x" fill="white" xmlns="http://www.w3.org/2000/svg">' +
+                '<path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>' +
+                '</svg>' +
+                '</span>' +
+                "<p class='pdf-filename'>"+ filename + "</p></div>";
+            }
+            else {
+                image = "<div class='img-container'>" +
                 "<span class='delete-badge badge badge-secondary'>" +
                 '<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x" fill="white" xmlns="http://www.w3.org/2000/svg">' +
                 '<path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>' +
                 '</svg>' +
                 '</span>' +
                 "<img name='" + filename + "' src='" + e.target.result + "'/></div>";
+            }
+            
             $(".image-attachments").append(image);
         }
         reader.readAsDataURL(input.files[0]);
@@ -38,15 +50,14 @@ function sendImage(id, sender, senderImg, imageArray, imageNumber, chat) {
         '<p class="msg-date msg-date-sent"></p>' +
         '</div></div>');
     }
-    
-        $(".messageBlock").scrollTop($(".messageBlock")[0].scrollHeight);
+    $(".messageBlock").scrollTop($(".messageBlock")[0].scrollHeight);
 
-    var storageRef = firebase.storage().ref("attachments/" + imageArray[0].name);
+    var storageRef = firebase.storage().ref("attachments/"+$("input[name='handle']").val() +"/"+ imageArray[0].name);
     storageRef.put(imageArray[0].image)
         .then(function () {
             storageRef.getDownloadURL().then(function (url) {
                 imageArray.splice(0,1)
-                console.log(sender)
+                console.log("Sender: " +sender)
                 socket.emit("send image", 
                     {
                         id: id,
@@ -99,7 +110,7 @@ function appendSentYoutubeDetails(thumbnail, link, title, chat, sender, senderIm
                 '<a class="messageImg" href="/user/'+sender+'"><img data-toggle="tooltip" data-placement="right" title="'+sender+'" class="messageImg"  src='+senderImg+'/></a>'+
                 '</a>'+
                 '<p class="msg-date msg-date-sent"></p>' +
-                '</div></div>'
+                '</div></div></div>'
                 );
                 
                 setTimeout(()=>{
@@ -152,8 +163,8 @@ function appendChat(threadId, data, messageId, chatContainer) {
             
         } else {
             if(youtubeRegEx.test(data.msg.content)){
-                chatContainer.append('<div class="containMessageReceived">' +
-                '<div class="msg_ ">' +
+                chatContainer.append('<div class="received-wrapper"><div class="containMessageReceived">' +
+                '<div class="msg_1">' +
                 '<a target="_blank" href="'+link+'">'+
                 '<div class="messageBody receivedMsg">'+
                 '<img class="yt-logo" src= "../assets/img/yt-logo.svg"/>'+
@@ -164,7 +175,7 @@ function appendChat(threadId, data, messageId, chatContainer) {
                 '</div>')
             }
             else {
-                chatContainer.append('<div class="containMessageReceived">' +
+                chatContainer.append('<div class="received-wrapper"><div class="containMessageReceived">' +
                 '<div class="msg_1"">' +
                 '<p class="messageBody receivedMsg">' + data.msg.content +
                 '</p>' +
@@ -314,8 +325,7 @@ function prependNext50(messages, handle, block) {
         } else {
             if (messages[x].type == "file") {
                 messageHTML += 
-                    '<div class="containMessageReceived">' +
-
+                    '<div class="received-wrapper"><div class="containMessageReceived">' +
                     '<div class="msg_1">' +
                     '<p class="msgReceiver"></p>' +
                     '<p class="messageBody receivedMsg message-attachment">';
@@ -333,15 +343,15 @@ function prependNext50(messages, handle, block) {
 
                     '<p class="msg-date msg-date-sent">' + formatTime(new Date(messages[x].dateTime)) +
                     '</p>' +
-                    '<a href="/user/'+messages[x].sender+'"><img data-toggle="tooltip" data-placement="right" title="'+messages[x].sender+'" class="messageImg"  src='+messages[x].senderImg+'/></a>' +
+                    '<a class="messageImg" href="/user/'+messages[x].sender+'"><img data-toggle="tooltip" data-placement="right" title="'+messages[x].sender+'" class="messageImg"  src='+messages[x].senderImg+'/></a>' +
 
                     '</div>' +
 
-                    '</div>';
+                    '</div></div></div></div>';
 
             } else {
                 messageHTML += 
-                    '<div class="containMessageReceived">' +
+                    '<div class="received-wrapper"><div class="containMessageReceived">' +
 
 
                     '<div class="msg_1">';
@@ -368,7 +378,7 @@ function prependNext50(messages, handle, block) {
 
                     '</div>' +
 
-                    '</div>';
+                    '</div></div>';
 
                     ;
             }
