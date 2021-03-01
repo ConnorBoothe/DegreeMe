@@ -1,7 +1,31 @@
 $('[data-toggle="tooltip"]').tooltip();   
 $(document).ready(()=>{
+  $('.go-home').tooltip();   
+  
+  $('.page-title-container').tooltip({
+    selector: ".group-story-image1",
+    container: "body"
+  })
+  
+  $('#recentNotifications').tooltip({
+    selector: ".startConversation",
+    container: "body"
+  })
+  $('.timeline').tooltip({
+    selector: ".room-item",
+    container: "body"
+  })
+ 
+  $('.myCourse-container').tooltip({
+    selector: ".myCoursesWrapper",
+    container: "body"
+  })
     $('.membersRightSideBar ').tooltip({
         selector: ".member-tooltip",
+        container: "body"
+      })
+      $('.membersRightSideBar').tooltip({
+        selector: ".inv-tooltip",
         container: "body"
       })
       $('.messageBlock').tooltip({

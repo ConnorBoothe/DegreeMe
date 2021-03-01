@@ -9,7 +9,6 @@ function matchUrlToLi(url, li){
     }
     //if query string, perform another split to get page name w/o query
     if(location.includes("?")){
-      
       var temp1 = location.split("?");
       location = temp1[0];
     }
@@ -22,15 +21,6 @@ function matchUrlToLi(url, li){
           li.eq(x).children().eq(0).css({ color:"white"});
         }
     })
-  
-    //Below code adds page titles to page based upon location
-    if(location === "course"){
-      
-      $('.headerLinkPageTitle').html('<span class="img"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bookmarks-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
-      '<path fill-rule="evenodd" d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v12l-5-3-5 3V4z"/>'+
-      '<path d="M14 14l-1-.6V2a1 1 0 0 0-1-1H4.268A2 2 0 0 1 6 0h6a2 2 0 0 1 2 2v12z"/>'+
-    '</svg></span><span class="headerLinkTitle">'+$(".courseCodeTxt").text()+'</span>');
-    }
     if(location === "MyFinances"){
       $('.headerLinkPageTitle').html('<span class="img"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cash-stack" fill="currentColor" xmlns="http://www.w3.org/2000/svg">'
         +'<path d="M14 3H1a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1h-1z"/>'
@@ -85,11 +75,7 @@ function matchUrlToLi(url, li){
     +'<path fill-rule="evenodd" d="M4 3.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>'
   +'</svg></span><span class="headerLinkTitle" name="My Sessions">My Tutor Listings</span>');
   }
-  if(location === "user"){
-    $('.headerLinkPageTitle').html('<span class="img"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-person-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">'
-    +'<path fill-rule="evenodd" d="M2 3a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3zm6 7a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm5 2.755C12.146 11.825 10.623 11 8 11s-4.146.826-5 1.755V13a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-.245z"/>'
- +'</svg></span><span class="headerLinkTitle">'+title+'</span>');
-  }
+ 
   if(location === "Group"){
     $('.headerLinkPageTitle').html('<span class="img"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-geo" fill="currentColor" xmlns="http://www.w3.org/2000/svg">'
     +'<path d="M11 4a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>'
@@ -144,9 +130,9 @@ function matchUrlToLi(url, li){
   '</svg></span><span class="headerLinkTitle">Bid Details</span>');
   }
   if(location === "post"){
-    $('.headerLinkPageTitle').html('<span class="img"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chat-left-quote-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
-    '<path fill-rule="evenodd" d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4.414a1 1 0 0 0-.707.293L.854 15.146A.5.5 0 0 1 0 14.793V2zm7.194 2.766c.087.124.163.26.227.401.428.948.393 2.377-.942 3.706a.446.446 0 0 1-.612.01.405.405 0 0 1-.011-.59c.419-.416.672-.831.809-1.22-.269.165-.588.26-.93.26C4.775 7.333 4 6.587 4 5.667 4 4.747 4.776 4 5.734 4c.271 0 .528.06.756.166l.008.004c.169.07.327.182.469.324.085.083.161.174.227.272zM11 7.073c-.269.165-.588.26-.93.26-.958 0-1.735-.746-1.735-1.666 0-.92.777-1.667 1.734-1.667.271 0 .528.06.756.166l.008.004c.17.07.327.182.469.324.085.083.161.174.227.272.087.124.164.26.228.401.428.948.392 2.377-.942 3.706a.446.446 0 0 1-.613.01.405.405 0 0 1-.011-.59c.42-.416.672-.831.81-1.22z"/>'+
-  '</svg></span><span class="headerLinkTitle">Comments</span>');
+    $(".logo").attr("src","/assets/img/degreeMeHashTag.svg")
+    $(".logo").css({width:"28px", marginTop: "5px"})
+    $('.headerLinkPageTitle').html('<span class="img"></span><span class="headerLinkTitle">Comments</span>');
   }
   if(location === "room"){
     $('.headerLinkPageTitle').html('<span class="img"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-camera-video-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+

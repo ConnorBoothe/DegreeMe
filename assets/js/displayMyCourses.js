@@ -95,6 +95,7 @@ $(document).ready(function(){
     $(".terms").on("click", function(){
         $(".termsMsg").css("color","white");
     })
+    var courseColorArr = ["redCourse", "purpleCourse", "blueCourse"]
      $.getJSON("/API/MyCourses",function(res) {
                 console.log(res);
                 var courses = "";
@@ -102,10 +103,12 @@ $(document).ready(function(){
             $(".course-wrapper").show();
         }
         for(var x = res.length-1; x >=0; x--){
-            courses+='<div class="myCoursesWrapper">'+
-            '<a href="/course/'+res[x].courseName+'"><p class="myCoursesText">'+res[x].courseName+'</p>'+
-            '<p class="myCoursesSubText">'+res[x].courseCode+'</p></a>'+
-            '  <span class="dots-btn" data-container="body" data-toggle="popover" data-placement="right" data-content="<ul class=popoverUl><li><a class=askQuestionBtn href=/course/'+removeSpace(res[x].courseName)+'>Ask a Question</a></li><li><form method=POST class=leaveCourseForm ><input class=courseName type=hidden name=course value='+removeSpace(res[x].courseName)+' /><button class=leaveCourse>Leave</button></form></li></ul>"><img class="dots" src="../assets/img/3dots.svg"/></span>'+
+            var courseCodeArr = res[x].courseCode.split(" ");
+            courses+='<div class="myCoursesWrapper '+courseColorArr[x]+'" data-toggle="tooltip" data-placement="right" title="'+res[x].courseName+'">'+
+            '<a href="/course/'+res[x].courseName+'">'+
+            '<p class="myCoursesSubText dept">'+courseCodeArr[0]+'</p>'+
+            '<p class="myCoursesSubText code">'+courseCodeArr[1]+'</p></a>'+
+            '  <p class="dots-btn" data-container="body" data-toggle="popover" data-placement="right" data-content="<ul class=popoverUl><li><a class=askQuestionBtn href=/course/'+removeSpace(res[x].courseName)+'>Ask a Question</a></li><li><form method=POST class=leaveCourseForm ><input class=courseName type=hidden name=course value='+removeSpace(res[x].courseName)+' /><button class=leaveCourse>Leave</button></form></li></ul>"><img class="dots" src="../assets/img/3dots.svg"/></p>'+
             '</div>';
         }
         $(".myCourse-container").html(courses);
@@ -143,17 +146,20 @@ $(document).ready(function(){
                     }, statusCode: {
                       202: function (result) {
                         $(function () {
+                            $(".input-field-addCourse").val("");
                             $('[data-toggle="popover"]').popover({
                                 html : true,
                                 sanitize  : false
                             })
                           })
-                        $("#myCourses").prepend('<div class="addMyCoursesWrapper">'+
-                        '<a href="/course/'+result.course+'"><p class="myCoursesText">'+result.course+'</p>'+
-                        '<p class="myCoursesText">'+result.code+'</p></a>'+
-                        '<div class="courseActions">'+
-                        '  <span class="dots-btn" data-container="body" data-toggle="popover" data-placement="right" data-content="<ul class=popoverUl><li><a class=askQuestionBtn href=/course/'+removeSpace(result.course)+'>Ask a Question</a></li><li><form method=POST class=leaveCourseForm ><input class=courseName type=hidden name=course value='+removeSpace(result.course)+' /><button class=leaveCourse>Leave</button></form></li></ul>"><img class="dots" src="../assets/img/3dots.svg"/></span>'+
-                        '</div></div>');
+                          var splitCourse = result.code.split(" ");
+                        $("#myCourses").prepend('<div class="myCoursesWrapper" data-toggle="tooltip" data-placement="right" title="'+result.course+'">'+
+                        '<a href="/course/'+result.course+'">'+
+                        '<p class="myCoursesSubText dept">'+splitCourse[0]+'</p>'+
+                        '<p class="myCoursesSubText code">'+splitCourse[1]+'</p>'+
+                        '</a>'+
+                        '  <p class="dots-btn" data-container="body" data-toggle="popover" data-placement="right" data-content="<ul class=popoverUl><li><a class=askQuestionBtn href=/course/'+removeSpace(result.course)+'>Ask a Question</a></li><li><form method=POST class=leaveCourseForm ><input class=courseName type=hidden name=course value='+removeSpace(result.course)+' /><button class=leaveCourse>Leave</button></form></li></ul>"><img class="dots" src="../assets/img/3dots.svg"/></p>'+
+                        '</div>');
                         
                       },
                       500: function (result) {
@@ -179,9 +185,10 @@ $(document).ready(function(){
              202: function (result) {
                  var courses = "";
                      if(($(".input-field-addCourse").val() === "")){
-                         $(".autocomplete-addCourse").html("<p class='emptySearch'>Search Courses</p>");
+                         $(".autocomplete-addCourse").hide();
                      }
                      else if(result.Courses.length > 0){
+                        $(".autocomplete-addCourse").show();
                          if(result.Courses.length >=5){
                             for(var x = 0; x< 5; x++){
                                 courses+= "<div class='addCourseCountainer'><input type='hidden' name='courseId' value='"+result.Courses[x]._id+"'/><p class='addCourseName'>"+result.Courses[x].CourseName+"</p><p class='addCourseCode'><span>"+result.Courses[x].Department + " " +
@@ -298,9 +305,11 @@ $(document).ready(function(){
               "Content-Type": "application/json"
             }, statusCode: {
               202: function (res) {
-                $(".myCoursesText").each(function(x){
-                    if($(".myCoursesText").eq(x).text() == res.course){
-                        $(".myCoursesText").eq(x).parent().parent().remove();
+                $(".myCoursesWrapper").each(function(x){
+                    if($(".myCoursesWrapper").eq(x).children().eq(0).children().eq(1).text() == res.courseCode
+                    && $(".myCoursesWrapper").eq(x).children().eq(0).children().eq(0).text() == res.courseDept
+                    ){
+                        $(".myCoursesWrapper").eq(x).remove();
                         $(".popover").hide();
                     }
                 })
@@ -430,26 +439,28 @@ $(".tagCourse").on("focus", function(){
     $(".tagCourse-wrapper").show();
     $(".blocker").show();
 })
-$(".addCourses").on("click", function(){
-    if($(this).children().eq(0).hasClass("bi-plus")){
-        $(this).parent().attr("title", "Hide add course input");
-        $(this).html('<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
-        '<path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>'+
-        '<path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>'+
-      '</svg>');
-        $(".course-wrapper").show();
-    }
-    else{
-        $(this).parent().attr("title", "Add Courses");
-        $(this).html('<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
-    '<path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"/>'+
-    '<path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"/>'+
-  '</svg>');
+// $(".addCourses").on("click", function(){
+//     if($(this).children().eq(0).hasClass("bi-plus")){
+//         $(".overlay").show()
+//         $(this).parent().attr("title", "Hide add course input");
+//         $(this).html('<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
+//         '<path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>'+
+//         '<path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>'+
+//       '</svg>');
+//         $(".course-wrapper").show();
+//     }
+//     else{
+//         $(".overlay").hide()
+//         $(this).parent().attr("title", "Add Courses");
+//         $(this).html('<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
+//     '<path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"/>'+
+//     '<path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"/>'+
+//   '</svg>');
 
-    $(".course-wrapper").hide();
-    }
+//     $(".course-wrapper").hide();
+//     }
    
-})
+// })
 $(".myCourseTitle").on("click", ".hideCourseInput", function(){
     
 })

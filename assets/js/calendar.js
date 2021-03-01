@@ -75,34 +75,14 @@ $(function() {
             <input class="form-control" name="title" type="text" value="`+event.title+`" required/>
             <label for="description">Description</label>
             <input class="form-control" name="description" type="textarea" value="`+event.description+`" />
-            <label for="stream">Stream link</label>
-            <input class="form-control" name="stream" type="text" value="`+event.url+`"/>
-            <label for="location">Location</label>
-            <input class="form-control" name="location" type="text" value="`+event.location+`"/>
-            <label for="start">Start</label>
+            <label for="start">Date</label>
             <input class="form-control" name="start" type="datetime-local" value="`+moment.utc(event.start, "yyyy-MM-ddTHH:mm:ss")._i+`" required/> 
             <label for="duration">Duration</label>
             <div class="input-group">
-        
-            <select id="hours" class="form-control" name="hours" id="hours" required>
-            <option id="selectedHours" class="selectedOptions" value="`+hours+`" disabled selected>`+hours+`</option>
-            `+hourOptions+`
-            </select>
-            <select id="minutes" class="form-control" name="minutes" required>
-            <option id="selectedMinutes" class="selectedOptions" value="`+tempMinutes+`" disabled selected>`+minutes+`</option>
-            <option value="0">00</option>
-            <option value="25">15</option>
-            <option value="50">30</option>
-            <option value="75">45</option>
-            </select>
+            <p class="calendar-duration">`+hours+`:`+tempMinutes+`</p>
+            
+            
                 </div>
-            <label for="type">Type</label>
-            <select id="select-type" class="form-control" name="type" required>
-                <option value="tutoring">tutoring</option>
-                <option value="group session">group session</option>
-                <option value="meetup">meetup</option>
-                <option value="appointment">appointment</option>
-            </select>
             <input type="hidden" name="id" value="`+event.id+`" />
             <input id="update-button" class="form-control btn-success" type="hidden" value="Update" />
             </fieldset>
@@ -114,9 +94,9 @@ $(function() {
                 $('#modal-footer').html(`  <div class="row">
                 <div class="col-md-12 text-center">
                 <div class="btn-group btn-group-md" role="group">
-                <button id="deleteEvent" class="btn btn-danger ">Delete</button>
-                <button id="enableEditEvent" class="btn btn-secondary" >Edit</button>
-                </div>
+                <button id="deleteEvent" class="btn btn-danger ">Delete</button>`+
+                // <button id="enableEditEvent" class="btn btn-secondary" >Edit</button>
+                `</div>
                 </div>
                 </div><a href="/room/`+event.url+`" class="btn btn-secondary join-room-btn" id="eventUrl" target="_blank" >Go to stream</a><button type="button" class="btn btn-light" data-dismiss="modal">Close</button>`)
             
@@ -125,11 +105,11 @@ $(function() {
                 $('#modal-footer').html(`  <div class="row">
                 <div class="col-md-12 text-center">
                 <div class="btn-group btn-group-md" role="group">
-                <button id="deleteEvent" class="btn btn-danger ">Delete</button>
-                <button id="enableEditEvent" class="btn btn-secondary" >Edit</button>
+                <button id="deleteEvent" class="btn btn-danger ">Delete</button>`+
+                // <button id="enableEditEvent" class="btn btn-secondary" >Edit</button>
+                `</div>
                 </div>
-                </div>
-                </div><a href="`+event.location+`" class="btn btn-secondary" id="eventUrl" target="_blank" >Go to location</a><button type="button" class="btn btn-light" data-dismiss="modal">Close</button>`)
+                </div><a href="/meetups" class="btn btn-primary" id="eventUrl" target="_blank" >View</a>`)
             
             }else{
                 $('#modal-footer').html(`  <div class="row">
@@ -409,7 +389,7 @@ $(document).on("click",".join-room-btn", function(e){
              }
         
                                     }))
-           //commented below is the method we're going to call the server with to supply us with the events
+    //commented below is the method we're going to call the server with to supply us with the events
 $.getJSON("/calendar/getEvents", function(data){
     data.map(function(e){
         var endtemp = new Date(e.date);
@@ -429,7 +409,7 @@ $.getJSON("/calendar/getEvents", function(data){
             url: e._doc.streamId,
             location: e._doc.location
         }
-
+        console.log(EventObj)
         calendarEvents.push(EventObj);
     })
     
@@ -447,7 +427,7 @@ $('#calendar').fullCalendar({
               viewRender:renderTitle ,
               eventRender:eventColorCode ,
               eventClick: showEditForm,
-              select : showAddEventModal,
+            //   select : showAddEventModal,
               events: calendarEvents
   })
 })

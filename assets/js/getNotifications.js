@@ -144,15 +144,14 @@ function formatCoursesTutoring(courses){
     if(courseData.length > 0 ){
         for(x in courseData){
             courses += "<li>"+
-            '<a href="/course/'+courseData[x].course+'"><p class="myCoursesText">'+courseData[x].course+'</p></a>'+
-                '<p class="myCoursesSubText">'+courseData[x].courseCode;
+            '<p class="myCoursesText"><a href="/course/'+courseData[x].course+'">'+courseData[x].courseCode+'</a>';
                 if(!courseData[x].approved){
-                    courses +='<span class="badge badge-warning pending-tutor-course"> Pending</span></p>';
+                    courses +='<span class="badge badge-warning pending-tutor-course"> Pending</span>';
                 }
                 else{
                     courses +='<img class="dots dots-tutor-courses" src="../assets/img/3dots.svg"/><button class="btn btn-danger remove-tutor-course">Remove</button>';
                 }
-            courses += "<input type='hidden' class='appId' value='"+courseData[x]._id+"'</li>";
+            courses += "<input type='hidden' class='appId' value='"+courseData[x]._id+"'</p></li>";
         }
     }
     else{
@@ -471,13 +470,25 @@ $(".mobile-message").on("click", function(){
                         threads +=  '<a href=../messages'+res[x].threadId+'><li class=" notifications"><div><div class="blue-dot"></div> <img class="notifImg" src="'+res[x].hostImg+'"/><p class="notif">'+res[x].subject+'</p><p class="text-secondary">'+displayTimeSince(res[x].timestamp)+'</p></div></a></li>';
                     }
                     else{
-                        threads +=  
-                        '<li class=" notifications"><div>'+
-                        "<input type= 'hidden' name='handle' value='"+$(".userProfileName").text()+"'/>"+
-                        "<input type= 'hidden' name='threadId' value='"+res[x].threadId+"'/>"+
-                       
-                         '<button class="sawMessage"><div class="blue-dot bg-primary"></div> <img class="notifImg" src="'+res[x].hostImg+'"/><p class="notif">'+res[x].subject+'</p>'+ "<p class='text-primary'>"+res[x].unreadCount+" unread messages</p>"+'</div></button></li>';
-                    }
+                        if(res[x].unreadCount === 1){
+                            threads +=  
+                            '<li class=" notifications"><div>'+
+                            "<input type= 'hidden' name='handle' value='"+$(".userProfileName").text()+"'/>"+
+                            "<input type= 'hidden' name='threadId' value='"+res[x].threadId+"'/>"+
+                           
+                             '<button class="sawMessage"><div class="blue-dot bg-primary"></div> <img class="notifImg" src="'+res[x].hostImg+'"/><p class="notif">'+res[x].subject+'</p>'+ "<p class='text-primary'>"+res[x].unreadCount+" unread message</p>"+'</div></button></li>';
+                        
+                        }
+                        else{
+                            threads +=  
+                            '<li class=" notifications"><div>'+
+                            "<input type= 'hidden' name='handle' value='"+$(".userProfileName").text()+"'/>"+
+                            "<input type= 'hidden' name='threadId' value='"+res[x].threadId+"'/>"+
+                           
+                             '<button class="sawMessage"><div class="blue-dot bg-primary"></div> <img class="notifImg" src="'+res[x].hostImg+'"/><p class="notif">'+res[x].subject+'</p>'+ "<p class='text-primary'>"+res[x].unreadCount+" unread messages</p>"+'</div></button></li>';
+                        
+                        }
+                        }
                 }
                 threads+= "</form>";
                 $("#showNotifications ul").html(threads)
@@ -614,8 +625,6 @@ $("#showNotifications").on("click",".sawMessage", function(e){
         },
       });
     e.preventDefault();
-
-
 });
 //user menu item is clicked
 $(".account").on("click", function(){
@@ -640,7 +649,7 @@ $(".account").on("click", function(){
     +'<a id="" href="/meetups"><li><span class="accountIcon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">'
     +'<path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>'
   +'</svg>'
-  +'</span><span class="text-light profileMenuTitle">History</span></li></a>'+
+  +'</span><span class="text-light profileMenuTitle">Meetups</span></li></a>'+
   '<a id="inviteFriends" data-toggle="modal" data-target="#platformInviteModal"><li><span class="accountIcon"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cursor-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
   '<path fill-rule="evenodd" d="M14.082 2.182a.5.5 0 0 1 .103.557L8.528 15.467a.5.5 0 0 1-.917-.007L5.57 10.694.803 8.652a.5.5 0 0 1-.006-.916l12.728-5.657a.5.5 0 0 1 .556.103z"/>'+
     '</svg></span><span class="text-light profileMenuTitle">Invite Friends</span></li></a>'+
@@ -655,9 +664,10 @@ $(".account").on("click", function(){
     '</ul>');
 });
 $(".message").on("click", function(){
-    if($("#recentNotifications").text() !== "Messages" || $("#showNotifications").css("display") == "none"){
+    if($("#recentNotifications .message-label").text() !== "Messages" || $("#showNotifications").css("display") == "none"){
         $("#showNotifications").show();
-        $("#recentNotifications").text("Messages");
+        $("#recentNotifications").html('<span class="message-label">Messages</span><button type="button" class="startConversation-button" data-toggle="modal" data-target="#exampleModal1"><h4 class="startConversation"'+
+        'data-toggle="tooltip" data-placement="right" title="New Conversation">+</h4></button>');
         $.ajax({
             url: '/API/Threads' ,
             method: 'GET',
@@ -665,20 +675,32 @@ $(".message").on("click", function(){
                 alert(err)
             }
             }).done(function(res) {  
-                var threads =  "<form method='POST' action='/seenMsg' class='seenMsg'>" +
-                '<div class=" "><button  type="button" class="startConversation-button" data-toggle="modal" data-target="#exampleModal1"><h4 class="startConversation" >Start a Conversation</h4></button></div>';
+                var threads =  '<form method="POST" action="/seenMsg" class="seenMsg">' +
+                '<div class=" "></div>';
                 for(var x=res.length-1; x>=0; x--){
                     if(res[x].unreadCount === 0){
                         threads +=  '<a href=../messages/'+res[x].threadId+'><li class=" notifications"><div><div class="blue-dot"></div> <img class="notifImg" src="'+res[x].hostImg+'"/><p class="notif">'+res[x].subject+'</p><p class="text-secondary">'+displayTimeSince(res[x].timestamp)+'</p></div></a></li>';
                     }
                     else{
-                        threads +=  
-                        '<li class=" notifications"><div>'+
-                        "<input type= 'hidden' name='handle' value='"+$(".userProfileName").text()+"'/>"+
-                        "<input type= 'hidden' name='threadId' value='"+res[x].threadId+"'/>"+
-                       
-                         '<button class="sawMessage"><div class="blue-dot bg-primary"></div> <img class="notifImg" src="'+res[x].hostImg+'"/><p class="notif">'+res[x].subject+'</p>'+ "<p class='text-primary'>"+res[x].unreadCount+" unread messages</p>"+'</div></button></li>';
-                    }
+                        if(res[x].unreadCount === 1){
+                            threads +=  
+                            '<li class=" notifications"><div>'+
+                            "<input type= 'hidden' name='handle' value='"+$(".userProfileName").text()+"'/>"+
+                            "<input type= 'hidden' name='threadId' value='"+res[x].threadId+"'/>"+
+                           
+                             '<button class="sawMessage"><div class="blue-dot bg-primary"></div> <img class="notifImg" src="'+res[x].hostImg+'"/><p class="notif">'+res[x].subject+'</p>'+ "<p class='text-primary'>"+res[x].unreadCount+" unread message</p>"+'</div></button></li>';
+                        
+                        }
+                        else{
+                            threads +=  
+                            '<li class=" notifications"><div>'+
+                            "<input type= 'hidden' name='handle' value='"+$(".userProfileName").text()+"'/>"+
+                            "<input type= 'hidden' name='threadId' value='"+res[x].threadId+"'/>"+
+                           
+                             '<button class="sawMessage"><div class="blue-dot bg-primary"></div> <img class="notifImg" src="'+res[x].hostImg+'"/><p class="notif">'+res[x].subject+'</p>'+ "<p class='text-primary'>"+res[x].unreadCount+" unread messages</p>"+'</div></button></li>';
+                        
+                        }
+                        }
                 }
                 threads+= "</form>";
                 $("#showNotifications ul").html(threads)

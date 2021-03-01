@@ -49,12 +49,14 @@ $(".course-profile-info").on("click", ".followingButton", function(){
         follow($(this), $(this).prev().prev().val(),'unfollow',$(this).prev().val(),'#connectModal')
     }
 })
-$(".joinButton").on("click", function(){
+$(".group-options").on("click",".joinButton", function(){
     if($(this).attr("data-status") === "unjoin"){
+        
         join($(this), $(this).prev().prev().val(),$(this).prev().val(),'#groupProfileModal','unjoin');
-        // toggleMakeSession('makeSession');
+        
     }
     else if($(this).attr("data-status") === "join"){
+        
         join($(this), $(this).prev().prev().val(),$(this).prev().val(),'#groupProfileModal','join');
         // toggleMakeSession('makeSession');
     }

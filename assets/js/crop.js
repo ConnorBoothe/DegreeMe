@@ -98,6 +98,7 @@ $(document).ready(function () {
       },
       //  url: defaultImg,
     });
+    
     $(".openImageEditor").on("click", function () {
       if ($(this).text() == "Change Banner") {
         type = "banner";
@@ -141,7 +142,22 @@ $(document).ready(function () {
 
     })
   }
+  else if (location == "group-settings") {
 
+    // resizeCroppie(800, 150, 'rectangle', 320   )
+        $uploadCrop = $('.upload-demo').croppie({
+          viewport: {
+            width: 300,
+            height: 300,
+            type: 'circle',
+          },
+          boundary: {
+            width: 320,
+            height: 320
+          },
+          //  url: defaultImg,
+        });
+      }
   else {
 
     $uploadCrop = $('.upload-demo').croppie({
@@ -166,6 +182,10 @@ $(document).ready(function () {
   // $(".cr-image").attr("src", $(".profile-img").attr("src"));
   $(".img-btn").on("click", function () {
     if (location === "user") {
+      $(".overlay").show();
+      $(".img-upload-container").show();
+    }
+    else if(location === "group-settings") {
       $(".overlay").show();
       $(".img-upload-container").show();
     }
@@ -207,7 +227,6 @@ $(document).ready(function () {
       format: 'jpg',
     }).then(function (resp) {
       $(".croppedImg").val(("src", resp));
-
       if (location === "user") {
 
         var storageRef = firebase.storage().ref("userImages/" + $(".userProfileHandle").text().trim().substring(1));
@@ -245,6 +264,53 @@ $(document).ready(function () {
                   $(".profile-uploading-image").fadeOut();
                 }, 1000)
                 updateProgressBar('#addImg');
+              },
+              500: function (result) {
+                alert("500 " + result.responseJSON.err);
+              },
+            },
+          });
+        }).catch(function (error) {
+          // Handle any errors
+        });
+      }
+      else if (location === "group-settings") {
+
+        var storageRef = firebase.storage().ref("groupImages/"+$(".groupId").val()+".jpg");
+        var image = base64ImageToBlob(resp);
+        // console.log(image)
+        var metadata = {
+          contentType: 'image/jpeg',
+        };
+        var task = storageRef.put(image, metadata);
+        task.on("state_changed", function () {
+          function error(error) {
+            alert(error);
+          }
+        })
+        storageRef.getDownloadURL().then(function (url) {
+          // Get the download URL for 'images/stars.jpg'
+          // This can be inserted into an <img> tag
+          // This can also be downloaded directly
+          payload = {
+            imgLink: url,
+            groupId: $(".groupId").val()
+          }
+          $.ajax({
+            url: "/updateGroupImage",
+            type: 'POST',
+            data: JSON.stringify(payload),
+            headers: {
+              "Content-Type": "application/json"
+            }, statusCode: {
+              202: function (result) {
+                $(".groupImg").attr("src", resp);
+                $(".profile-uploading-image").text("Image Uploaded");
+                $(".profile-uploading-image").removeClass("badge-warning");
+                $(".profile-uploading-image").addClass("badge-success");
+                setTimeout(function () {
+                  $(".profile-uploading-image").fadeOut();
+                }, 1000)
               },
               500: function (result) {
                 alert("500 " + result.responseJSON.err);
@@ -312,6 +378,10 @@ $(document).ready(function () {
           });
         })
 
+      }
+      else if(location == "group-settings") {
+      
+        
       }
       else {
         var storageRef = firebase.storage().ref("userImages/" + $("input[name='handle']").val());

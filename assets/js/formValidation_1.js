@@ -46,13 +46,13 @@ $(document).ready(function(){
             $("#email1").css("border","1px solid red");
             e.preventDefault();
         }
-        else if(!email.includes("uncc.edu")){
-            $("#password1").css("border","none");
-            $("#pwMsg1").text("");
-            $("#emailMsg1").html("<span>Enter a UNCC Email</span>");
-            $("#email1").css("border-bottom","2px solid #dc3545");
-            e.preventDefault();
-        }
+        // else if(!email.includes("uncc.edu")){
+        //     $("#password1").css("border","none");
+        //     $("#pwMsg1").text("");
+        //     $("#emailMsg1").html("<span>Enter a UNCC Email</span>");
+        //     $("#email1").css("border-bottom","2px solid #dc3545");
+        //     e.preventDefault();
+        // }
         else if (!match){
             $("#emailMsg1").html("<span>Email Not Valid</span>");
             $("#email1").css("border","1px solid red");

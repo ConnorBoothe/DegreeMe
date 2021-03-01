@@ -52,13 +52,7 @@ function populateTutors(data){
              "<p class='timeText'>"+data.sessions[x].Type+"</p>"+
          "</div>"+
      "</div>"+
-             "<div class='infoItem text-light'>"+
-                 "<div><img src='assets/img/MyFinancesDark.svg' class='iconImg dollarImg' />"+
-                 "</div>"+
-                 "<div>"+
-                     "<p class='timeText'>"+data.sessions[x].HourlyRate+"/hour</p>"+
-                 "</div>"+
-             "</div>"+
+             
          "<div class='infoItem text-light'><div><img src='assets/img/hourGlass.svg' class='iconImg dateImg'/></div><div><p class='timeText'>"+
          data.sessions[x].NumHours + " hour(s) duration</p>"+
         " </div>"+
@@ -121,7 +115,7 @@ $(document).ready(function(){
        $(this).css("border-bottom", "2px solid #007bff");
        if($(this).text() === "Courses"){
         payload = {
-            userHandle:"",
+            handle:$("input[name='handle']").val(),
         }
         $.ajax({
             url: "/getCourses",

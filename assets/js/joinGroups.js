@@ -5,21 +5,21 @@ $(document).ready(function(){
     console.log(scrolled);
     })
 
-    $("button").hover(function(){
-            action = $(this).attr("data-status");
-            if (action == "unjoin"){
-                $(this).html("Leave");
-                //$(this).removeClass('btn-success');
-                $(this).addClass('btn-danger');
-            }
-        },function(){
-            action = $(this).attr("data-status");
-            if (action == "unjoin"){
-                $(this).html("Joined");
-                $(this).removeClass('btn-danger');
-                $(this).addClass('btn-success');
-            }
-        })
+    // $("button").hover(function(){
+    //         action = $(this).attr("data-status");
+    //         // if (action == "unjoin"){
+    //         //     $(this).html("Leave");
+    //         //     //$(this).removeClass('btn-success');
+    //         //     $(this).addClass('btn-danger');
+    //         // }
+    //     },function(){
+    //         action = $(this).attr("data-status");
+    //         if (action == "unjoin"){
+    //             $(this).html("Joined");
+    //             $(this).removeClass('btn-danger');
+    //             $(this).addClass('btn-success');
+    //         }
+    //     })
 
         // $('#studyGroupModal').on('show.bs.modal', function (event) {
         //         var button = $(event.relatedTarget) // Button that triggered the modal
@@ -32,21 +32,14 @@ $(document).ready(function(){
         //         // $('#studyGroupYes').attr("onclick",button.data("onclick"));
         // })
 
-        $(".joinButton").on("click", function(){
+        $(".group-options").on("click", ".joinButton", function(){
                 if($(this).attr("data-status") == "join"){
                     join($(this), $(this).prev().prev().val(),$(this).prev().val(),'#studyGroupModal','join')
                 }
                 else if ($(this).attr("data-status") == "unjoin"){
                     join($(this), $(this).prev().prev().val(),$(this).prev().val(),'#studyGroupModal','unjoin')
                 }
-               
-                //   onclick="join(this, '<%=StudyGroups[x][1][i][0]._id%>','<%=StudyGroups[x][1][i][0].GroupName%>',
-                // '#studyGroupModal','join')"
-                // alert( $(this).prev().prev().val())
-                // console.log($(this), $(this).prev().prev().val(),$(this).prev().val(),'#studyGroupModal','join')   
-                // join($(this), $(this).prev().prev().val(),$(this).prev().val(),'#studyGroupModal','join')            
-               // $('#studyGroupYes').attr("onclick",join($(this),$(this).prev().prev().val(),$(this).prev().val(),'#studyGroupModal','join') );
-   
+                  
         })
         //not usinng anymore
         // $(".joinedButton").on("click", function(){
