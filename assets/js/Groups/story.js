@@ -2,41 +2,48 @@
 function createProgressTabs(result) {
     const progress = Array.from($('.progress-container .progress'));
     var currentIndex = 0;
-    var nextIndex = 0;
+    $(".story-container").show();
+    $(".overlay").show();
     const playNext = (e) => {
      
-      const current = e && e.target;
-      let next;
       if(currentIndex == 0){
         progress[currentIndex].classList.add("active")
         currentIndex++;
       }
       else{
-
-        console.log("Else running")
-        progress[currentIndex-1].classList.remove("active")
-        progress[currentIndex-1].classList.add("passed")
-         progress[currentIndex].classList.add("active")
-        // progress[currentIndex+1].classList.add("active")
-        createStory(currentIndex, result)
-        currentIndex++;
-        if (currentIndex > progress.length) {
+        if (currentIndex+1 > progress.length) {
+           
+          currentIndex = 0;
           $(".story-container").hide();
           $(".overlay").hide();
 
         }
-      }
-        // currentIndex++;
-        if (currentIndex < progress.length) {
-          next = progress[currentIndex+1];
+        else{
+          progress[currentIndex-1].classList.remove("active")
+          progress[currentIndex-1].classList.add("passed")
+           progress[currentIndex].classList.add("active")
+          // progress[currentIndex+1].classList.add("active")
+          createStory(currentIndex, result)
+          currentIndex++;
         }
+      }
        
       $(".right-div").unbind().on("click", function(){
+        if (currentIndex+1 > progress.length) {
+          currentIndex = 0;
+          $(".story-container").hide();
+          $(".overlay").hide();
+
+        }
+        else {
+          
           progress[currentIndex-1].classList.remove("active")
           progress[currentIndex-1].classList.add("passed")
           progress[currentIndex].classList.add("active")
           createStory(currentIndex, result)
           currentIndex++;
+        }
+          
       })
       $(".left-div").unbind().on("click", function(){
          //make the previous progress bar active
@@ -44,11 +51,23 @@ function createProgressTabs(result) {
          setTimeout(()=>{
           $(this).css({opacity: "0"})
          },100)
-         progress[currentIndex-2].classList.add("active")
-         progress[currentIndex-1].classList.remove("active")
-         progress[currentIndex-1].classList.remove("passed")
-        //move index back 1 (have to subtract to to counteract the increment)
-        currentIndex = currentIndex-2;
+         if (currentIndex-2 < 0) {
+          currentIndex = 0;
+          progress[currentIndex].classList.remove("active")
+
+          setTimeout(function(){
+            progress[currentIndex-1].classList.add("active")
+
+          },10)
+          }
+        else{
+          progress[currentIndex-2].classList.add("active")
+          progress[currentIndex-1].classList.remove("active")
+          progress[currentIndex-1].classList.remove("passed")
+         //move index back 1 (have to subtract to to counteract the increment)
+         currentIndex = currentIndex-2;
+        }
+        
        
         
         //create story
@@ -69,14 +88,17 @@ function createProgressTabs(result) {
 //direction ==1, go forward
 function createNewSlide(i, stories){
   $("input[name='storyId']").val(stories[i]._id)
+  $(".group-story-image").attr("src",stories[i].userImg);
+  $(".group-story-title-text").text(stories[i].userHandle)
    if(stories[i].image) {
-    $(".group-story-image").attr("src",stories[i].userImg);
-    $(".group-story-title-text").text(stories[i].userHandle)
+   
     $(".story-img-div").html("<img class='story-img' src='"+stories[i].image+"'/>");
     $(".story-text-div").html("<p>"+stories[i].text+"</p>") 
    
   } 
   else if(stories[i].poll[0]){
+    $(".story-text-div").html("") 
+
     $("input[name='storyType']").val("poll")
     payload= {
       storyId: stories[i]._id
@@ -109,7 +131,6 @@ function createNewSlide(i, stories){
         "Content-Type": "application/json"
       }, statusCode: {
         202: function (result) {
-          console.log(result)
           $(".story-option-item").each((x)=>{
             if($(".story-option-item").eq(x).text() == result.answer) {
               if(x == 0) {
@@ -133,6 +154,8 @@ function createNewSlide(i, stories){
     })
   }
     else{
+      $(".story-text-div").html("<p><a class='btn btn-primary'>Go to group"+"</a></p>") 
+
       $(".story-img-div").html("<div class='poll-story'><h3 class='text-light multiple-question'>"+stories[i].poll[0].question+"</h3>"+
     "<ul class='poll-options-list'>"+
       "<li><button class='story-option-item poll-answer poll-option1' id=''>"+stories[i].poll[0].options[0]+"</button><p class='percentage poll-text1'></p></li>"+
@@ -158,8 +181,9 @@ function createNewSlide(i, stories){
         "Content-Type": "application/json"
       }, statusCode: {
         202: function (result) {
-          console.log(result)
     if(result.hasResponded == true){
+          $(".story-text-div").html("") 
+
         var multipleChoiceHTML = 
         "<div class='poll-story'><h3 class='text-light multiple-question'>"+stories[i].multipleChoice[0].question+"</h3>"+
       "<ul class='multiple-options-list'>";
@@ -235,15 +259,14 @@ $(document).ready(()=>{
         $(".story-text-div").html("");
     })
     //show story 
-    $(".groupImg").on("click", ()=>{
-        $(".overlay").show();
-        $(".story-img-div").html('<div class="spinner-border" role="status">'+
-            '<span class="sr-only"></span>'+
-        '</div>')
-        $(".story-wrapper").show();
-    })
+   
     var groupId = window.location.href.split("/")[4];
     $(".groupImg").on("click", function(){
+      $(".overlay").show();
+      $(".story-img-div").html('<div class="spinner-border" role="status">'+
+          '<span class="sr-only"></span>'+
+      '</div>')
+      $(".story-wrapper").show();
         $("input[name='iterator']").val(0)
         var iterator = 0;
         payload = {
@@ -266,6 +289,32 @@ $(document).ready(()=>{
                 },
               }); 
     })
-
+    $(".page-title-container").on("click", ".group-story-image1", function(){
+      $(".overlay").show();
+      $(".story-img-div").html('<div class="spinner-border" role="status">'+
+          '<span class="sr-only"></span>'+
+      '</div>')
+      $(".story-wrapper").show();
+        $("input[name='iterator']").val(0)
+        var iterator = 0;
+        payload = {
+            groupId:$(this).prev().val()
+        }
+            $.ajax({
+                url: "/getStory",
+                type: 'POST',
+                data: JSON.stringify(payload),
+                headers: {
+                  "Content-Type": "application/json"
+                }, statusCode: {
+                  202: function (result) {
+                 formatProgressBars(result, iterator);
+                  },
+                  500: function (result) {
+                    alert("500 " + result.responseJSON.err);
+                  },
+                },
+              }); 
+    })
     
 })

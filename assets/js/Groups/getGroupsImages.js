@@ -6,9 +6,8 @@ function formatStoryList(groups){
      
             groupsHTML += 
             '<li>'+
-                '<a href="/Group/'+groups[i]._id+'" data-toggle="tooltip" data-placement="right" title="'+groups[i].GroupName+'">'+
-                    '<img class="group-story-image currGroup" src="'+groups[i].GroupImage+'"/>'+
-                '</a>'+
+                '<input type="hidden" name="groupId" value="'+groups[i]._id+'" />'+
+                '<img class="group-story-image1 currGroup" src="'+groups[i].GroupImage+'" data-toggle="tooltip" data-placement="bottom" title="'+groups[i].GroupName+' Story"/>'+
             '</li>';
         
     }
@@ -36,25 +35,35 @@ function formatGroupImageList(groups){
                 '</a>'+
             '</li>';
         }
+        
        
     }
+    groupsHTML += 
+            '<li>'+
+                
+                    
+            '<div data-toggle="tooltip" class="create-group-container" data-placement="right" title="New Group">'+
+            '<svg data-toggle="modal" data-target="#addGroupModal"  xmlns="http://www.w3.org/2000/svg" width="2.3em" height="2.3em" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">'+
+                '<path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>'+
+            '</svg>'+
+            '</div>'+
+                
+            '</li>';
     return groupsHTML;
 }
 
 $(document).ready(()=>{
 var page = window.location.href.split("/")[3];
     $.ajax({
-        url: '/GroupImages' ,
+        url: '/getStoryImages' ,
         method: 'GET',
         error:function(err,str){
            
         }
         }).done(function(res) {
            $(".group-link").attr("href","/Group/"+ res[0]._id)
-            if(page == "Group") {
-                $(".go-home-item").append(formatGroupImageList(res));
-            }
-            else if(page == "home") {
+            
+            if(page == "home") {
                 $(".page-title-container").html(formatStoryList(res));
             }
             else if(page == "discover") {
@@ -62,4 +71,18 @@ var page = window.location.href.split("/")[3];
             }
            
         });
+        $.ajax({
+            url: '/getGroupImages' ,
+            method: 'GET',
+            error:function(err,str){
+               
+            }
+            }).done(function(res) {
+               $(".group-link").attr("href","/Group/"+ res[0]._id)
+                if(page == "Group") {
+                    $(".group-images-list").append(formatGroupImageList(res));
+                }
+               
+               
+            });
 })

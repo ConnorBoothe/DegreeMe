@@ -1,6 +1,6 @@
 function appendNewGroupThread(res){
     var threads = 
-            '<div class="group-thread">'+
+            '<input type="hidden" name="threadId" value="'+res.threadId+'"/> <div class="group-thread">'+
                 '<p>'+
                     '<span class="chat-bubble">'+
                         '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat" viewBox="0 0 16 16">'+

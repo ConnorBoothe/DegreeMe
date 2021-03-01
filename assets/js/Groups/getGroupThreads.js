@@ -33,6 +33,8 @@ function appendGroupThreads(res){
        
         //get messages by thread and append to the DOM
         $(".message-thread-container").on("click", ".group-thread", function(){
+            $(".upcoming-meetup-container").hide();
+
            $(".message-thread-container .group-thread").css({backgroundColor: "#1f2024"});
             $(this).css({backgroundColor: "#23272a"});
             $("#typeMsg").show();
