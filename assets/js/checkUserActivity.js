@@ -1,5 +1,5 @@
 var timeoutID;
-var timeInterval = 1000 * 60;//1000miliSec in a sec * 60 sec in a min * 2.5 min
+var timeInterval = 1000 * 60*2.5;//1000miliSec in a sec * 60 sec in a min * 2.5 min
 var active = true;
 pingServer(active)
 startTimer();
