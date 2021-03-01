@@ -51,15 +51,26 @@ function filterMeetupResults(res, type){
     var meetups = "";
     if(type === "Current"){
         for(var x = res.length-1; x>=0; x--){
-          console.log(res[x]._id)
             if(new Date(res[x].date) > new Date()){
               meetups +=   '<tr class="myConnectionContainer">'+
-              '<td class="text-light">'+res[x].role+'</td>'+
               '<td class="text-light">'+res[x].host+'</td>'+
-              '<td class="text-light">'+formatMeetupDate(res[x].date)+'</td>'+
-              '<td class="text-light">'+ res[x].duration+' hrs</td> </td>';
-                meetups+='<td></td>';        
+              '<td class="text-light">'+res[x].courseCode+'</td>'+
+              '<td class="text-light">'+formatMeetupDate(res[x].date)+' '+formatMeetupTime(res[x].date)+'</td>';
+              if(res[x].duration == 0) {
+                meetups += '<td class="text-light">N/A</td>';
+              }
+              else {
+                meetups += '<td class="text-light">'+res[x].duration+'</td>';
 
+              }
+                
+              if((new Date(res[x].date) - (new Date()))/(1000*60*60) <=1) {
+                  meetups+='<td>Join</td>';
+                }
+                else {
+                  meetups+='<td>Join here 1 hr before start time</td>';
+                }
+              
               meetups+=  '</tr>';          '</tr>';
             }
           }
@@ -68,12 +79,18 @@ function filterMeetupResults(res, type){
         for(var x = res.length-1; x>=0; x--){
             if(new Date(res[x].date) < new Date()){
               meetups +=   '<tr class="myConnectionContainer">'+
-                '<td class="text-light">'+res[x].role+'</td>'+
                 '<td class="text-light">'+res[x].host+'</td>'+
-                '<td class="text-light">'+formatMeetupDate(res[x].date)+'</td>'+
-                '<td class="text-light">'+ res[x].duration+' hrs</td> </td>';
+                '<td class="text-light">'+res[x].courseCode+'</td>'+
+                '<td class="text-light">'+formatMeetupDate(res[x].date)+'</td>';
+                if(res[x].duration == 0) {
+                  meetups += '<td class="text-light">N/A</td>';
+                }
+                else {
+                  meetups += '<td class="text-light">'+res[x].duration+'</td>';
+  
+                }
                 if(!res[x].LeftReview && res[x].role != "Host" ){
-                  meetups+='<td><a href="/review/'+res[x].host+'?id='+res[x]._id+'" class="btn-primary">Leave a Review</button></td>';        
+                  meetups+='<td><a href="/review/'+res[x].host+'?id='+res[x]._id+'" class="btn-primary review-btn">Leave a Review</button></td>';        
                 }
                 else{
                   meetups+='<td></td>';        
@@ -83,28 +100,11 @@ function filterMeetupResults(res, type){
 
         }
     }
-    else{
-        for(var x = res.length-1; x>=0; x--){
-            meetups +=   '<tr class="myConnectionContainer">'+
-                '<td class="text-light">'+res[x].role+'</td>'+
-                '<td class="text-light">'+res[x].host+'</td>'+
-                '<td class="text-light">'+formatMeetupDate(res[x].date)+'</td>'+
-                '<td class="text-light">'+ res[x].duration+' hrs</td> </td>';
-                if(!res[x].LeftReview && res[x].role != "Host" ){
-                  meetups+='<td><a href="/review/'+res[x].host+'?id='+res[x]._id+'" class="btn-primary">Leave a Review</button></td>';        
-                }
-                else{
-                  meetups+='<td></td>';        
-
-                }
-                meetups+=  '</tr>';
-            }
-        }
         if(meetups != ""){
           return meetups;
         }
         else{
-          return "<h3 class='noMeetups'>No "+type+" meetups</h3>"
+          return "<h3 class='noMeetups'>No "+type+" Meetups</h3>"
         }
                       
     }
@@ -117,12 +117,11 @@ $(document).ready(function(){
     error:function(err,str){
     }
     }).done(function(res) { 
-      console.log(res)
-      var results = filterMeetupResults(res, "Past");
+      var results = filterMeetupResults(res, "Current");
       if(results.split(" ")[0] != "<h3"){
         $(".noMeetups").hide();
         $("#meetupsTable").show();
-        $("tbody").html(filterMeetupResults(res, "Past"))
+        $("tbody").html(filterMeetupResults(res, "Current"))
       }
       else{
         $("#meetupsTable").hide();

@@ -6,7 +6,7 @@ function formatCourses(res){
     var myCourses = "";
     for(x in res){
         myCourses += 
-        '<a class="courseLink" href="/course/'+res[x].courseName+'>'+
+        '<a class="courseLink" href="/course/'+res[x].courseName+'">'+
         '<div class="course-container" " data-toggle="tooltip" data-placement="bottom" title="'+res[x].courseName+'">'+
             '<h5 class="courseCode1">'+res[x].courseCode+'</h5>'+
             '<span class="badge badge-success profile-student-count">#UNCC</span>'+
@@ -89,20 +89,8 @@ function populateTutors(data){
           "</div>"+
           "<div>"+
           "<p class='timeText courseText'>"+data[x].courseCode+"</p>"+
-
           "</div>"+
              "</div>"+
-             "<div class='infoItem text-light'>"+
-                 '<div class="iconImg">'+
-                 '<svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-cash-stack" fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
-                          '<path d="M14 3H1a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1h-1z" />'+
-                          '<path fill-rule="evenodd" d="M15 5H1v8h14V5zM1 4a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1H1z" />'+
-                          '<path d="M13 5a2 2 0 0 0 2 2V5h-2zM3 5a2 2 0 0 1-2 2V5h2zm10 8a2 2 0 0 1 2-2v2h-2zM3 13a2 2 0 0 0-2-2v2h2zm7-4a2 2 0 1 1-4 0 2 2 0 0 1 4 0z" />'+
-                '</svg>'+
-          "</div>"+
-          "<div>"+
-          "<p class='timeText courseText'>$"+data[x].hourlyRate+"/hour</p>"+
-          "</div>"+
              "</div>"+
          "<div class='infoItem text-light'>"+  
          "<a class='btn btn-primary text-light join-room-btn'"+
@@ -112,13 +100,10 @@ function populateTutors(data){
       " </div>"+
   "</div>"+
   "</div>";
-  }
-      
+    }
       }
       return sessions;
-      
   }
-
 function formatReviews(res){
     if(res.length > 0){
 
@@ -137,10 +122,9 @@ function formatReviews(res){
         '</svg></span>';
     }
     stars += "</div>";
-    var reviews = "<div class='avgRating'><p class'ratingTxt'>Average Rating</p>"+stars+"<p class='rating-subTxt'>"+averageRating.toFixed(2)+"/5 stars</p></div>";
+    var reviews = "<div class='avgRating'><p class'ratingTxt'>"+res.length+ " Reviews</p>"+stars+"<p class='rating-subTxt'>"+averageRating.toFixed(2)+"/5 stars</p></div>";
     for(var x = res.length-1; x >= 0; x--){
         var stars = "<div class='starRating'>";
-        
         for(var i = 0; i< parseInt(res[x].Rating);i++){
             stars +=  '<span><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
             '<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>'+
@@ -265,7 +249,7 @@ $(document).ready(function(){
         $(".loading-span").text("Loading Courses");
         $(".spinner-container1").show();
         payload = {
-            userHandle: $(".userProfileHandle").text().trim()
+            handle: $("input[name='handle']").val()
         }
         $.ajax({
             url: "/getCourses",
@@ -284,36 +268,19 @@ $(document).ready(function(){
             },
           });
     })
-    $(".tutorTab").on("click", function(){
+    $(".tutorTab1").on("click", function(){
         $(".profile-item-list").html("");
-        $(".loading-span").text("Loading Tutoring Sessions");
+        $(".loading-span").text("Loading Availability");
         $(".spinner-container1").show();
-        payload = {
-            userHandle: $(".userProfileHandle").text().trim()
-        }
-        $.ajax({
-            url: "/getTutorListings",
-            type: 'POST',
-            data: JSON.stringify(payload),
-            headers: {
-              "Content-Type": "application/json"
-            }, statusCode: {
-              202: function (result) {
-                $(".spinner-container1").hide();
-                $(".profile-item-list").html(populateTutors(result.tutoringSessions));
-              },
-              500: function (result) {
-                alert("500 ");
-              },
-            },
-          });
+        getFirstTutorRoomsUserProfile($("input[name='userId']").val());
     });
     $(".reviewsTab").on("click", function(){
         $(".profile-item-list").html("");
         $(".loading-span").text("Loading Reviews");
         $(".spinner-container1").show();
+
         payload = {
-            userHandle: $(".userProfileHandle").text().trim()
+            handle: $("input[name='handle']").val()
         }
         $.ajax({
             url: "/getReviews",
@@ -332,12 +299,47 @@ $(document).ready(function(){
             },
           });
     });
+    $(".profileBody").on("click", function () {
+
+    //   getTutorRooms($(this).text(), $("input[name='day-value']").val(), $(".time-text").text(),
+    //       $(".am-text").text())
+
+  })
+  //show filter dropdowns
+  $(".profileBody").on("click", ".course-select", function () {
+      $(".course-dropdown-day").hide();
+      if ($(".course-dropdown").css("display") == "none") {
+          $(".course-dropdown").show()
+      }
+      else {
+          $(".course-dropdown").hide()
+      }
+  })
+  $(".profileBody").on("click", ".course-select-day", function () {
+      showDropdown($(this))
+  })
+   //filter day
+   $(".profileBody").on("click", ".day-dropdown ul li", function () {
+    $(".day-text").text($(this).text());
+       $(".date-select").val($(this).children().eq(0).val());
+       $("input[name='day-value']").val($(this).children().eq(0).val())
+       getTutorRoomsUserProfile($("input[name='userId']").val(), parseInt($(this).children().eq(0).val()))
+    
+})
+$(".profileBody").on("click", ".course-dropdown ul li", function () {
+ //filter course
+ console.log("course: " +$(".courseName-text").text())
+ $(".courseName-text").text($(this).text())
+ alert($(".courseName-text").text());
+ alert($("input[name='day-value']").val())
+getTutorRoomsUserProfile($("input[name='userId']").val(), $("input[name='day-value']").val())
+})
     $(".groupsTab").on("click", function(){
         $(".profile-item-list").html("");
         $(".loading-span").text("Loading Groups");
         $(".spinner-container1").show();
         payload = {
-            userHandle: $(".userProfileHandle").text().trim()
+            handle: $("input[name='handle']").val()
         }
         $.ajax({
             url: "/getGroups",
@@ -362,5 +364,13 @@ $(document).ready(function(){
       window.open(url, "stream", "location=no,toolbar=no,scrollbars=no,menubar=no,status=no,directories=no,resizable=yes,width=800,height=600,top=4,left=6").focus();
       return false;
     })
+    $(document).on("click",".rooms-btn", function(e){
+        alert($(this).prev().prev().text())
+        var time = $(this).prev().prev().text();
+        reserveSeat($(this), time)
+      })
+   
+
+   
 })
 

@@ -73,7 +73,6 @@ else{
   '</div>';
   }
 }
-console.log("YO")
 console.log(discussionHTML)
 return discussionHTML;
 
@@ -100,25 +99,35 @@ $(document).ready(function(){
         //remove attachment from the DOM
         $(this).parent().remove();
     })
-    $("#postQuestion").on("click", function(e){
+    $(".course-profile-info").on("focus", "#message", function(){
+      $(this).parent().css("border","none")
+      if($(this).text() == "Ask a question"){
+        $(this).text("")
+      }
+    })
+    $(".course-profile-info").on("click", "#postQuestion", function(e){
         e.preventDefault();
+        
         var course = $(".courseName");
         var message = $("#message");
         var filename = $(".askQuestion-file").val().replace(/C:\\fakepath\\/i, '')
         var storageRef = firebase.storage().ref("attachments/"+filename);
         var image = $(".askQuestion-file")[0].files[0];
-        // alert( message.val());
         //input validation
-            if(message.val() == ""){
-                message.css("border", "1px solid #dc3545")
+            if(message.text() == ""){
+                message.parent().css("border", "1px solid #dc3545")
 
             }
+            else if(message.text() == "Ask a question"){
+              message.parent().css("border", "1px solid #dc3545")
+
+          }
         else if(image != undefined) {
         storageRef.put(image)
         .then(function(){
             storageRef.getDownloadURL().then(function(url) {
                 payload = {
-                    message:message.val(),
+                    message:message.text(),
                     course:course.text(),
                     image:url
                  }
@@ -130,6 +139,8 @@ $(document).ready(function(){
                      "Content-Type": "application/json"
                      }, statusCode: {
                      202: function (result) {
+                      $("#message").text("Ask a Question")
+
                         $(".modal").modal("hide");
                         $(".questionTxt").val("");
                         $(".modal").modal("hide");
@@ -151,7 +162,7 @@ $(document).ready(function(){
         //post question without image
         else {
             payload = {
-                message:message.val(),
+                message:message.text(),
                 course:course.text(),
                 image:"none"
              }
@@ -163,6 +174,7 @@ $(document).ready(function(){
                 "Content-Type": "application/json"
                 }, statusCode: {
                 202: function (result) {
+                  $("#message").text("Ask a Question")
                     $(".questionTxt").val("");
                     $(".modal").modal("hide");
 

@@ -27,7 +27,7 @@ function formatAllDiscussion(res){
       if(handle === res.discussion[x].userHandle){
       discussion+=
       '<form action="removeDiscussion" method="POST"  class="removeDiscussion">'+
-      '<input type="submit" value="delete" class="btn btn-danger deleteDiscussion"/ >'+
+      '<input type="submit" value="Delete" class="btn btn-danger deleteDiscussion"/ >'+
       '<input type="hidden" name="discId" value="'+res.discussion[x]._id+'"/ >'+
       '<input type="hidden" name="course" value="'+res.discussion[x].courseName+'"/ >'+
       '</form>'+
@@ -67,7 +67,7 @@ else{
       if(handle === res.discussion[x].userHandle){
         discussion+=
         '<form action="removeDiscussion" method="POST" class="removeDiscussion">'+
-        '<input type="submit" value="delete" class="btn btn-danger deleteDiscussion"/ >'+
+        '<input type="submit" value="Delete" class="btn btn-danger deleteDiscussion"/ >'+
         '<input type="hidden" name="discId" value="'+res.discussion[x]._id+'"/ >'+
         '<input type="hidden" name="course" value="'+res.discussion[x].courseName+'"/ >'+
         '</form>'+

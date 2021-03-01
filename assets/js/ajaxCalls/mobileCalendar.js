@@ -18,8 +18,8 @@ function formatCalendarTime(rawTime){
 //control calendar display
 function showDayCalendar(selector){
   selector.on("change", ".daySelect-container select", function(){
-    $.session.set("day", dayArray[parseInt($(this).val())])
-    $('.calendarContainer').html(generateMobileCalendar(dayArray[parseInt($(this).val())]));
+    $.session.set("day", parseInt($(this).val()))
+    $('.calendarContainer').html(generateMobileCalendar(parseInt($(this).val())));
     $(".calendarContainer").hide();
     $(".calendarContainer").fadeIn();
   })
@@ -92,11 +92,13 @@ function formatMobileCalendar(data){
               calendar+= '<div class="calendarContainer" id="calendar">'
               calendar += '<div class="day-container">';
               calendar += '<div class="">';
+              console.log("Data: " +data)
                  for(var y = 0; y <24; y++){
                     if(data.includes(y)){
                         calendar += '<div class="day-wrapper"><input class="calendar-checkbox" type="checkbox" value="'+y+'" checked/><label><p class="timeLabel">'+formatCalendarTime(y)+'</p><p class="newTime"></p></label><div class="calendarLine-selected"></div></div>';
                     }
                     else{
+                      console.log("No include")
                       calendar += '<div class="day-wrapper"><input class="calendar-checkbox" type="checkbox" value="'+y+'"/><label><p class="timeLabel">'+formatCalendarTime(y)+'</p><p class="newTime"></p></label><div class="calendarLine"></div></div>';
 
                     } 
@@ -123,7 +125,7 @@ function generateMobileCalendar(day){
     }, statusCode: {
     202: function (result) {
       data = result.data;
-     
+      console.log("DATA: " +data)
         if(calendarCount > 0){
           $(".calendarContainer").html(formatMobileCalendar(data));
         }
@@ -155,7 +157,7 @@ function generateMobileCalendar(day){
     });
     // show calendar
     $("#showNotifications").on("click",".mySchedule",function(){
-      $.session.set("day", "Sunday");
+      $.session.set("day", 0);
       $.session.set("calendarCount", 0);
 
       $('#showNotifications').html(formatCalendarHeader() + formatMobileCalendar($.session.get("day")));

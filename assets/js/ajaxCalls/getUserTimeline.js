@@ -49,7 +49,7 @@ function formatBid(post, stripeId){
                  if (hasLiked == false){
                     bid+= '<button class="like-button like-help">'+
                         '<span class="likeCount">'+post.likes+'</span>'+
-                        '<svg class="bi bi-heart heartIcon" width="1em" height="1em" viewBox="0 0 16 16"'+
+                        '<svg class="bi bi-heart heartIcon" width="0.8em" height="0.8em" viewBox="0 0 16 16"'+
                             'fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
                             '<path fill-rule="evenodd"'+
                                 'd="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />'+
@@ -66,7 +66,7 @@ function formatBid(post, stripeId){
                     }else{
                     bid+= '<button class="like-button like-help hasLiked">'+
                         '<span class="likeCount">'+post.likes+'</span>'+
-                        '<svg class="bi bi-heart heartIcon" width="1em" height="1em" viewBox="0 0 16 16"'+
+                        '<svg class="bi bi-heart " width="0.8em" height="0.8em" viewBox="0 0 16 16"'+
                             'fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
                             '<path fill-rule="evenodd"'+
                                 'd="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />'+
@@ -129,7 +129,7 @@ function formatTutorListing(post){
                 tutorListing +=
                 '<button class="like-button">'+
                 '<span class="likeCount">'+post.likes+'</span>'+
-                '<svg class="bi bi-heart heartIcon" width="1em" height="1em" viewBox="0 0 16 16"'+
+                '<svg class="bi bi-heart heartIcon" width="0.8em" height="0.8em" viewBox="0 0 16 16"'+
                                         'fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
                                         '<path fill-rule="evenodd"'+
                                             'd="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />'+
@@ -147,7 +147,7 @@ function formatTutorListing(post){
                 tutorListing +=
                 '<button class="like-button hasLiked">'+
                 '<span class="likeCount">'+post.likes+'</span>'+
-                '<svg class="bi bi-heart heartIcon" width="1em" height="1em" viewBox="0 0 16 16"'+
+                '<svg class="bi bi-heart heartIcon" width="0.8em" height="0.8em" viewBox="0 0 16 16"'+
                                         'fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
                 '<path fill-rule="evenodd"'+
                     'd="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />'+
@@ -170,7 +170,6 @@ function formatTutorListing(post){
 
 function formatStudyGroup(post){
     var hasLiked = likedBoolean($(".userProfileName").eq(0).text(), post.likers);
-    console.log(hasLiked)
     var studyGroup = "";
     studyGroup += 
     '<input class="postId" name="postHandle" type="hidden" value="'+post.userHandle+'" />'+
@@ -181,21 +180,23 @@ function formatStudyGroup(post){
             '<p class="timelinePost-username">'+post.userName+'<span class="postHandle">'+
             '<p class="postHandle"><a href="/user/'+post.userHandle+'">'+post.userHandle+'</a></span></p></p>'+
         '</div>'+
-        '<p class="caption1">'+post.caption+'<a href="/Group/'+post.url+'" class="btn btn-primary view-timeline-btn">View</a></p>'+
-        '<ul class="postDetailsList">'+
+        '<p class="caption1">'+post.caption+'<a href="/Group/'+post.url+'" class="btn btn-primary view-timeline-btn">View</a></p>';
+        if(post.course){
+            studyGroup +='<ul class="postDetailsList">'+
             '<li class="postDetailsItem">'+
                 '<p class="badge badge-primary info-badge help-course">'+post.course+'</p>'+
             '</li>'+
             '<li class="postDetailsItem">'+
-                '<p class="badge badge-warning info-badge help-course">Prof. '+post.professor+'</p>'+
             '</li>'+
-        '</ul>'+
-        '<div class="postActions">';
+        '</ul>';
+        }
+        
+        studyGroup += '<div class="postActions">';
         if (hasLiked == false){
             studyGroup +=
             '<button class="like-button">'+
                 '<span class="likeCount">'+post.likes+'</span>'+
-                '<svg class="bi bi-heart heartIcon" width="1em" height="1em" viewBox="0 0 16 16"'+
+                '<svg class="bi bi-heart heartIcon" width="0.8em" height="0.8em" viewBox="0 0 16 16"'+
                     'fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
                     '<path fill-rule="evenodd"'+
                         'd="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />'+
@@ -212,7 +213,7 @@ function formatStudyGroup(post){
             studyGroup +=
             '<button class="like-button hasLiked">'+
                 '<span class="likeCount">'+post.likes+'</span>'+
-                '<svg class="bi bi-heart heartIcon" width="1em" height="1em" viewBox="0 0 16 16"'+
+                '<svg class="bi bi-heart heartIcon" width="0.8em" height="0.8em" viewBox="0 0 16 16"'+
                     'fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
                     '<path fill-rule="evenodd"'+
                         'd="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />'+
@@ -228,7 +229,7 @@ function formatStudyGroup(post){
             }
             studyGroup+=
             '<p class="postDate">'+displayDate(new Date(post.date))+'</p>'+
-        '<br></div></div>';
+        '</div></div>';
         return studyGroup;
 }
 function formatStatusUpdate(post){
@@ -249,7 +250,7 @@ function formatStatusUpdate(post){
             status +=
             '<button class="like-button">'+
                 '<span class="likeCount">'+post.likes+'</span>'+
-                '<svg class="bi bi-heart heartIcon" width="1em" height="1em" viewBox="0 0 16 16"'+
+                '<svg class="bi bi-heart heartIcon" width="0.8em" height="0.8em" viewBox="0 0 16 16"'+
                     'fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
                     '<path fill-rule="evenodd"'+
                         'd="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />'+
@@ -266,7 +267,7 @@ function formatStatusUpdate(post){
             status +=
             '<button class="like-button hasLiked">'+
                 '<span class="likeCount">'+post.likes+'</span>'+
-                '<svg class="bi bi-heart heartIcon" width="1em" height="1em" viewBox="0 0 16 16"'+
+                '<svg class="bi bi-heart heartIcon" width="0.8em" height="0.8em" viewBox="0 0 16 16"'+
                     'fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
                     '<path fill-rule="evenodd"'+
                         'd="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />'+
@@ -323,7 +324,7 @@ function formatQuestion(post){
             question +=
             '<button class="like-button">'+
                 '<span class="likeCount">'+post.likes+'</span>'+
-                '<svg class="bi bi-heart heartIcon" width="1em" height="1em" viewBox="0 0 16 16"'+
+                '<svg class="bi bi-heart heartIcon" width="0.8em" height="0.8em" viewBox="0 0 16 16"'+
                     'fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
                     '<path fill-rule="evenodd"'+
                         'd="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />'+
@@ -340,7 +341,7 @@ function formatQuestion(post){
             question +=
             '<button class="like-button hasLiked">'+
                 '<span class="likeCount">'+post.likes+'</span>'+
-                '<svg class="bi bi-heart heartIcon" width="1em" height="1em" viewBox="0 0 16 16"'+
+                '<svg class="bi bi-heart heartIcon" width="0.8em" height="0.8em" viewBox="0 0 16 16"'+
                     'fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
                     '<path fill-rule="evenodd"'+
                         'd="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />'+
@@ -356,15 +357,12 @@ function formatQuestion(post){
             }
             question+=
 
-        '<p class="postDate1">'+displayDate(new Date(post.date))+'</p><br></div></div>';
+        '<p class="postDate1">'+displayDate(new Date(post.date))+'</p></div></div>';
         return question;
 }
 function createTimeline(nextTen, stripeId){
     var timeline = "";
     for(x in nextTen){
-        if(nextTen[x].type === "Help Request"){
-            timeline += formatBid(nextTen[x], stripeId);
-        }
         if(nextTen[x].type === "Tutor Listing"){
             timeline += formatTutorListing(nextTen[x]);
         }
@@ -372,8 +370,8 @@ function createTimeline(nextTen, stripeId){
             timeline += formatStudyGroup(nextTen[x]);
         }
         //add status update
-        else if(nextTen[x].type === "Status Update"){
-            timeline += formatStatusUpdate(nextTen[x]);
+        else if(nextTen[x].type === "Group Meetup"){
+            timeline += formatStudyGroup(nextTen[x]);
         }
         else if(nextTen[x].type === "Question"){
             timeline += formatQuestion(nextTen[x]);
@@ -393,7 +391,9 @@ $(document).ready(function(){
        //give the last elem in the ajax request a unique ID
        //once scrolled past, make another ajax call
        var docHeight = "";
-        if ($(window).scrollTop() + $(window).height() == $(document).height() && ($(document).height()+400) - docHeight > 0 ) {
+       console.log($(document).height())
+       console.log($(window).scrollTop() + $(window).height()+20)
+        if (($(window).scrollTop() + $(window).height())+50 >= $(document).height()) {
             var blockNum = parseInt($.session.get("blockNumber"));
             blockNum++;
             $.session.set("blockNumber",blockNum);
