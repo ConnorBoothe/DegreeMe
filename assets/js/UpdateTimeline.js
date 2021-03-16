@@ -28,9 +28,9 @@ $(document).ready(function(){
                 likeButton.addClass("hasLiked")
                 var currCount = parseInt(likeButton.children().eq(0).text())+1;
                 likeButton.children().eq(0).text(currCount)
-                likeButton.children().eq(1).animate({fontSize:"18px"},100)
+                likeButton.children().eq(1).animate({fontSize:"16px"},100)
                 likeButton.children().animate({color:"#dc3545"},100)
-                likeButton.children().eq(1).animate({fontSize:"22px"},100)
+                likeButton.children().eq(1).animate({fontSize:"18px"},100)
                 likeButton.prop('disabled', false)
               },
               500: function (result) {
@@ -56,9 +56,9 @@ $(document).ready(function(){
                 likeButton.removeClass("hasLiked")
                 var currCount = parseInt(likeButton.children().eq(0).text())-1;
                 likeButton.children().eq(0).text(currCount)
-                likeButton.children().eq(1).animate({fontSize:"18px"},100)
+                likeButton.children().eq(1).animate({fontSize:"16px"},100)
                 likeButton.children().animate({color:"#a9a9a9"},100)
-                likeButton.children().eq(1).animate({fontSize:"22px"},100)
+                likeButton.children().eq(1).animate({fontSize:"18px"},100)
                 likeButton.prop('disabled', false)
            
               },
