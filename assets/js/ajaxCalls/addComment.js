@@ -7,6 +7,14 @@ $(document).ready(function () {
         var filename = $(".comment-file").val().replace(/C:\\fakepath\\/i, '')
         var storageRef = firebase.storage().ref("attachments/" + filename);
         var image = $(".comment-file")[0].files[0];
+       //if no comment entered
+        if($(".commentMsg").val() === ""){
+            alert("TO")
+            $(".commentMsg").css("border", "1px solid #dc3545");
+        }
+        else{
+
+       
         //if file attached
         if (image != undefined) {
             storageRef.put(image)
@@ -66,5 +74,6 @@ $(document).ready(function () {
                 },
             });
         }
+    }
     })
 });
