@@ -193,17 +193,19 @@ router.post(
                 console.log("Account Not Verified");
                 res.redirect(
                   "/login?message=Account%20Not%20Verified&email=" +
-                    req.body.email
+                    req.body.email+"&verified=false"
                 );
               }
             } else {
               console.log("PW Incorrect");
-              res.redirect("/login?message=Email%20or%20Password%20Incorrect");
+              res.redirect("/login?message=Email%20or%20Password%20Incorrect&email=" +
+              req.body.email);
             }
           }
         );
       } else {
-        res.redirect("/login?message=Email%20or%20Password%20Incorrect");
+        res.redirect("/login?message=Email%20or%20Password%20Incorrect&email=" +
+        req.body.email);
       }
     });
   }
