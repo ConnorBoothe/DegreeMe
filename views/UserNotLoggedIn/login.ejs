@@ -41,7 +41,7 @@
         <div class="homeContainer1--Login">
             <div class="contentBlock">
                 <div id="loginPage">
-                <% if(qs.email){%>
+                <% if(qs.verified == "false"){%>
                     <h4 class='badge badge-warning loginErr'><%=qs.message%></h4>
                     <form method="POST" action="sendEmail">
                         <input name="email1" type="hidden" value="<%=qs.email%>" />

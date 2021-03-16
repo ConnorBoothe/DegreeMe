@@ -3,7 +3,11 @@
     <form method="POST" action ="/login">
     <div class="field">
         <p id="emailMsg1"></p>
-        <input class="Login--Input" name="email" id="email1" type="text" placeholder=" " spellcheck="false" autocomplete="off" />
+        <%if(qs.email != undefined){%>
+            <input class="Login--Input" value="<%=qs.email%>" name="email" id="email1" type="text" placeholder=" " spellcheck="false" autocomplete="off" />
+        <%}else{%>
+            <input class="Login--Input" value="<%=qs.email%>" name="email" id="email1" type="text" placeholder=" " spellcheck="false" autocomplete="off" />
+        <%}%>
         <label class="Login--Label" for="email1">Email</label>
     </div>
 
