@@ -87,18 +87,29 @@ function createProgressTabs(result) {
 //direction == 0 , go back
 //direction ==1, go forward
 function createNewSlide(i, stories){
+  console.log(stories)
   $("input[name='storyId']").val(stories[i]._id)
   $(".group-story-image").attr("src",stories[i].userImg);
-  $(".group-story-title-text").text(stories[i].userHandle)
+  $(".group-story-title-text").text(stories[i].userHandle);
+  
+
+ 
+  if(stories[i].backgroundColor != undefined) {
+    $(".story-img-div").css("background-color",stories[i].backgroundColor)
+  }
+  else {
+    $(".story-img-div").css("background-color","#1f2024");
+
+  }
    if(stories[i].image) {
-   
     $(".story-img-div").html("<img class='story-img' src='"+stories[i].image+"'/>");
     $(".story-text-div").html("<p>"+stories[i].text+"</p>") 
    
   } 
   else if(stories[i].poll[0]){
-    $(".story-text-div").html("") 
-
+    
+    $(".story-text-div").html("");
+    
     $("input[name='storyType']").val("poll")
     payload= {
       storyId: stories[i]._id
@@ -111,13 +122,44 @@ function createNewSlide(i, stories){
         "Content-Type": "application/json"
       }, statusCode: {
         202: function (result) {
+          var poll_story = "";
+          var textElem = "<p class='text-elem' style='";
+          for(x in stories[i].text_styles){
+            textElem += " " +stories[i].text_styles[x];
+          }
+          textElem+="'>"+stories[i].text+"</p>";
+          if(stories[i].link != undefined) {
+            var linkElem = "<p class='link-elem' style='";
+            for(x in stories[i].link_styles){
+              linkElem += " " +stories[i].link_styles[x];
+            }
+            //if link contains http
+            if(stories[i].link.includes("http")){
+              linkElem+="'><a target='_blank' href='"+stories[i].link+"'>"+stories[i].link+"</a></p>";
+            }
+            else {
+              linkElem+="'><a target='_blank' href='http://"+stories[i].link+"'>"+stories[i].link+"</a></p>";
+        
+            }
+            poll_story+= linkElem+" " +textElem;
+          }
+          else {
+            poll_story += textElem;
+        
+          }
     if(result.hasResponded == true){
-      $(".story-img-div").html("<div class='poll-story'><h3 class='text-light multiple-question'>"+stories[i].poll[0].question+"</h3>"+
-    "<ul class='poll-options-list'>"+
-      "<li><button disabled='true' class='story-option-item poll-answer poll-option1 lowerOpacity' id=''>"+stories[i].poll[0].options[0]+"</button><p class='percentage poll-text1'></p></li>"+
-      "<li><button disabled='true' class='story-option-item poll-answer poll-option2 lowerOpacity' id=''>"+stories[i].poll[0].options[1]+"</button><p class='percentage poll-text2'></p></li>"+
-    "</ul>"+
-    "</div>")
+      poll_story += "<div class='poll-story' style='";
+        for(var j in stories[i].poll_styles){
+          poll_story += stories[i].poll_styles[j];
+        }
+      poll_story += "'><h3 class='text-light multiple-question'>"+stories[i].poll[0].question+"</h3>"+
+      "<ul class='poll-options-list'>"+
+        "<li><button disabled='true' class='story-option-item poll-answer poll-option1 lowerOpacity' id=''>"+stories[i].poll[0].options[0]+"</button><p class='percentage poll-text1'></p></li>"+
+        "<li><button disabled='true' class='story-option-item poll-answer poll-option2 lowerOpacity' id=''>"+stories[i].poll[0].options[1]+"</button><p class='percentage poll-text2'></p></li>"+
+      "</ul>"+
+      "</div>";
+    
+      $(".story-img-div").html(poll_story);
   
     payload1= {
       storyId: result.storyId,
@@ -154,14 +196,17 @@ function createNewSlide(i, stories){
     })
   }
     else{
-      $(".story-text-div").html("<p><a class='btn btn-primary'>Go to group"+"</a></p>") 
-
-      $(".story-img-div").html("<div class='poll-story'><h3 class='text-light multiple-question'>"+stories[i].poll[0].question+"</h3>"+
-    "<ul class='poll-options-list'>"+
-      "<li><button class='story-option-item poll-answer poll-option1' id=''>"+stories[i].poll[0].options[0]+"</button><p class='percentage poll-text1'></p></li>"+
-      "<li><button class='story-option-item poll-answer poll-option2' id=''>"+stories[i].poll[0].options[1]+"</button><p class='percentage poll-text2'></p></li>"+
-    "</ul>"+
-    "</div>")
+      poll_story += "<div class='poll-story' style='";
+      for(var j in stories[i].poll_styles){
+        poll_story += stories[i].poll_styles[j];
+      }
+      poll_story +="'><h3 class='text-light multiple-question'>"+stories[i].poll[0].question+"</h3>"+
+      "<ul class='poll-options-list'>"+
+        "<li><button class='story-option-item poll-answer poll-option1' id=''>"+stories[i].poll[0].options[0]+"</button><p class='percentage poll-text1'></p></li>"+
+        "<li><button class='story-option-item poll-answer poll-option2' id=''>"+stories[i].poll[0].options[1]+"</button><p class='percentage poll-text2'></p></li>"+
+      "</ul>"+
+      "</div>";
+      $(".story-img-div").html(poll_story)
     }
       }
     }
@@ -206,6 +251,7 @@ function createNewSlide(i, stories){
       multipleChoiceHTML += "</ul></div>";
       $(".story-img-div").html(multipleChoiceHTML);
     }
+    //just text
     else{
       $(".story-img-div").html("<div class='poll-story'><h3 class='text-light multiple-question'>"+stories[i].multipleChoice[0].question+"</h3>"+
       "<ul class='multiple-options-list'>"+
@@ -231,10 +277,9 @@ function formatProgressBars(result, i) {
         for(x in result.stories){
             progressBarHTML += '<div style="animation-duration: '+(result.stories[x].duration-0.5)+'s" class="progress"></div>';
         }
-        
         $(".progress-container").html(progressBarHTML)
-        $(".story-img-div").html("<img class='story-img' src='"+result.stories[i].image+"'/>");
-        $(".story-text-div").html("<p>"+result.stories[i].text+"</p>")  //  your code here
+        // $(".story-img-div").html("<img class='story-img' src='"+result.stories[i].image+"'/>");
+        // $(".story-text-div").html("<p>"+result.stories[i].text+"</p>")  //  your code here
         createProgressTabs(result, i)
   }
   function createStory(iterator, result){
@@ -244,7 +289,10 @@ function formatProgressBars(result, i) {
     } 
   }
 $(document).ready(()=>{
-    
+  
+
+      
+ 
     //hide story on overlay click or x button click
     $(".overlay").on("click",()=>{
         $(".overlay").hide();
@@ -289,7 +337,7 @@ $(document).ready(()=>{
                 },
               }); 
     })
-    $(".page-title-container").on("click", ".group-story-image1", function(){
+    $(".mobile-actions1").on("click", ".group-story-image1", function(){
       $(".overlay").show();
       $(".story-img-div").html('<div class="spinner-border" role="status">'+
           '<span class="sr-only"></span>'+
@@ -298,7 +346,7 @@ $(document).ready(()=>{
         $("input[name='iterator']").val(0)
         var iterator = 0;
         payload = {
-            groupId:$(this).prev().val()
+            groupId:$(this).parent().prev().val()
         }
             $.ajax({
                 url: "/getStory",
@@ -308,7 +356,8 @@ $(document).ready(()=>{
                   "Content-Type": "application/json"
                 }, statusCode: {
                   202: function (result) {
-                 formatProgressBars(result, iterator);
+                    console.log(result)
+                    formatProgressBars(result, iterator);
                   },
                   500: function (result) {
                     alert("500 " + result.responseJSON.err);

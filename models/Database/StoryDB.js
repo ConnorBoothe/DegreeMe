@@ -20,12 +20,18 @@ var multipleChoice = new Schema({
 })
 //story schema
 var storySchema = new Schema({
-    
     groupId:{type:String, required:true},
     userHandle: {type:String, required:true},
     userImg: {type:String, required:true},
     date:{type:Date, required:true},
+    backgroundColor: {type:String, required:true},
     text: {type:String},
+    link: {type:String},
+    pollText: {type:String},
+    text_styles: {type:Array},
+    link_styles: {type:Array},
+    poll_styles: {type: Array},
+    backgroundColor: {type: String},
     image: {type:String},
     poll:[poll],
     multipleChoice:[multipleChoice],
@@ -45,17 +51,45 @@ module.exports = class Stories {
         return story.save();
     }
     //add poll story
-    addPollStory(groupId, userHandle, userImg, date, duration, text, question, options){
+    addPollStory(groupId, userHandle, userImg, date, duration, 
+        pollText, question, options, backgroundColor, textColor, 
+        textObject, linkObject, poll_styles){
+            console.log("Poll Styles", poll_styles)
         var story = new StoryDB({groupId: groupId, userHandle: userHandle, userImg: userImg,
-            date:date,  duration: duration,  text: text,
-             poll:{question: question, options: options}});
+            date:date,  duration: duration,  pollText: pollText,
+             poll:{question: question, options: options,
+            }, backgroundColor: backgroundColor, textColor: textColor,
+            text: textObject.text, text_styles: textObject.text_styles,
+            link:linkObject.link, link_styles: linkObject.link_styles,
+            poll_styles: poll_styles
+        });
         return story.save();
     }
     //add multiple choice
-    addMultipleChoiceStory(groupId, userHandle, userImg, date, duration, text, question, options, correct){
+    addMultipleChoiceStory(groupId, userHandle, userImg, date, duration, question, options, correct,
+        textColor, textObject, linkObject){
+            console.log("duration: ", duration)
+            console.log("question: ", question)
+            console.log("options: ", options)
         var story = new StoryDB({groupId: groupId, userHandle: userHandle, userImg: userImg,
-            date:date,  duration: duration,  text: text,
-             multipleChoice:{question: question, options: options, correct:correct}});
+            date:date, duration: duration, multipleChoice:{question: question, options: options, correct:correct},
+             textColor: textColor,
+             text: textObject.text, text_styles: textObject.text_styles,
+             link:linkObject.link, link_styles: linkObject.link_styles});
+        return story.save();
+    }
+     //add text story
+     addTextStory(groupId, userHandle, userImg, date, duration, text, textOffsetTop,
+        textOffsetLeft, linkOffsetTop, linkOffsetLeft, linkFontSize,
+        textColor, fontSize, backgroundColor, link){
+            var textStylesArray = ["margin-top:"+textOffsetTop+"px;", 
+            "margin-left:"+textOffsetLeft+"px;", "color:"+textColor+";", "font-size:"+fontSize+ ";"];
+            var linkStylesArray = ["margin-top:"+linkOffsetTop+"px;", 
+            "margin-left:"+linkOffsetLeft+"px;", "color:"+textColor+";", "font-size:"+linkFontSize+ ";"];
+        var story = new StoryDB({groupId: groupId, userHandle: userHandle, userImg: userImg,
+            date:date,  duration: duration,  text: text, text_styles: textStylesArray,
+            link_styles: linkStylesArray, backgroundColor: backgroundColor, link: link
+             });
         return story.save();
     }
     //get group stories posted in past 24 hrs

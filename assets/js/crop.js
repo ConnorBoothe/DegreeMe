@@ -19,6 +19,14 @@ function createCroppie(viewportWidth, viewportHeight, boundaryWidth,
     createCroppie(viewportWidth, viewportHeight, boundaryWidth,
     boundaryHeight, shape);
     }
+    function componentToHex(c) {
+      var hex = c.toString(16);
+      return hex.length == 1 ? "0" + hex : hex;
+    }
+    function rgbToHex(r, g, b) {
+
+      return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+    }
 function base64ImageToBlob(str) {
   // extract content type and base64 payload from original string
   var pos = str.indexOf(';base64,');
@@ -228,8 +236,8 @@ $(document).ready(function () {
     }).then(function (resp) {
       $(".croppedImg").val(("src", resp));
       if (location === "user") {
-
-        var storageRef = firebase.storage().ref("userImages/" + $(".userProfileHandle").text().trim().substring(1));
+        var storageRef = firebase.storage().ref("userImages/" + $(".userProfileHandle").eq(0).text().trim().substring(1));
+        console.log("Storageref: " + storageRef)
         var image = base64ImageToBlob(resp);
         // console.log(image)
         var metadata = {
@@ -249,7 +257,7 @@ $(document).ready(function () {
             imgLink: url,
           }
           $.ajax({
-            url: "/updateImageURL ",
+            url: "/updateImageURL",
             type: 'POST',
             data: JSON.stringify(payload),
             headers: {
@@ -435,7 +443,9 @@ $(document).ready(function () {
   })
 
   $(".add-story-btn").on("click", function () {
+
     var type = $("input[name='story-type']").val()
+    
     if(type == "image"){
       $uploadCrop.croppie('result', {
         type: 'canvas',
@@ -461,7 +471,7 @@ $(document).ready(function () {
             url: url,
             groupId: $("input[name='groupId']").val(),
             text: $(".story-text-span").text(),
-            duration: $(".story-duration").val()
+            duration: $(".duration-text").text()
           }
           $.ajax({
             url: "/addStory",
@@ -490,13 +500,42 @@ $(document).ready(function () {
       })
     }
     else if(type == "poll") {
-      payload = {
+      var containerOffsetTop = $(".story-modal").offset().top;
+      var containerOffsetLeft = $(".story-modal").offset().left;
+      var textOffsetTop = $(".textBox-wrapper").offset().top;
+      var textOffsetLeft = $(".textBox-wrapper").offset().left;
+      var textPositionTop = textOffsetTop - containerOffsetTop;
+      var textPositionLeft = textOffsetLeft - containerOffsetLeft;
+      var linkOffsetTop = $(".link-wrapper").offset().top;
+      var linkOffsetLeft = $(".link-wrapper").offset().left;
+      var linkPositionTop = linkOffsetTop - containerOffsetTop;
+      var linkPositionLeft = (linkOffsetLeft - containerOffsetLeft)
+      linkPositionLeft += $(".http").width();
+      var pollOffsetTop = $(".poll-container").offset().top - containerOffsetTop;
+      var pollOffsetLeft = $(".poll-container").offset().left - containerOffsetLeft;
+      payload = {  
         type:"poll",
         question: $("#poll-question").text(),
         option1: $(".poll-answer").eq(0).text(),
         option2:$(".poll-answer").eq(1).text(),
         groupId: $("input[name='groupId']").val(),
-        duration: $(".story-duration").val()
+        pollPositionTop: pollOffsetTop,
+        pollPositionLeft: pollOffsetLeft,
+        duration: $(".duration-text").text(),
+        backgroundColor: $(".add-story-btn").parent().css("background-color")
+      }
+      if($("input[name='hasLink']").val() == "true") {
+        payload.linkOffsetTop = linkPositionTop;
+        payload.linkOffsetLeft = linkPositionLeft;
+        payload.linkFontSize = $(".link").css("font-size");
+        payload.link = $(".link").text();
+      }
+      if($("input[name='hasText']").val() == "true") {
+        payload.textPositionTop = textPositionTop;
+        payload.textPositionLeft = textPositionLeft;
+        payload.text = $(".textBox").text();
+        payload.textColor =  $(".textBox").css("color");
+        payload.fontSize = $(".textBox").css("font-size");
       }
       $.ajax({
         url: "/addStory",
@@ -524,6 +563,20 @@ $(document).ready(function () {
       console.log(payload)
     }
     else if(type == "multiple") {
+      var containerOffsetTop = $(".story-modal").offset().top;
+      var containerOffsetLeft = $(".story-modal").offset().left;
+      var textOffsetTop = $(".textBox-wrapper").offset().top;
+      var textOffsetLeft = $(".textBox-wrapper").offset().left;
+      var textPositionTop = textOffsetTop - containerOffsetTop;
+      var textPositionLeft = textOffsetLeft - containerOffsetLeft;
+      var linkContainerOffsetTop = $(".story-modal").offset().top;
+      var linkContainerOffsetLeft = $(".story-modal").offset().left;
+      var linkOffsetTop = $(".link-wrapper").offset().top;
+      var linkOffsetLeft = $(".link-wrapper").offset().left;
+      var linkPositionTop = linkOffsetTop - linkContainerOffsetTop;
+      var linkPositionLeft = (linkOffsetLeft - linkContainerOffsetLeft)
+      linkPositionLeft += $(".http").width();
+      
       payload = {
         type:"multiple",
         question: $("#multiple-question").text(),
@@ -532,8 +585,21 @@ $(document).ready(function () {
         option3: $(".answer-text").eq(2).text(),
         option4:$(".answer-text").eq(3).text(),
         groupId: $("input[name='groupId']").val(),
-        duration: $(".story-duration").val(),
+        duration: $(".duration-text").text(),
         correct: $("input[name='correct']:checked").parent().prev().text()
+      }
+      if($("input[name='hasLink']").val() == "true") {
+        payload.linkOffsetTop = linkPositionTop;
+        payload.linkOffsetLeft = linkPositionLeft;
+        payload.linkFontSize = $(".link").css("font-size");
+        payload.link = $(".link").text();
+      }
+      if($("input[name='hasText']").val() == "true") {
+        payload.textPositionTop = textPositionTop;
+        payload.textPositionLeft = textPositionLeft;
+        payload.text = $(".textBox").text();
+        payload.textColor =  $(".textBox").css("color");
+        payload.fontSize = $(".textBox").css("font-size");
       }
       $.ajax({
         url: "/addStory",
@@ -543,6 +609,65 @@ $(document).ready(function () {
           "Content-Type": "application/json"
         }, statusCode: {
           202: function (result) {
+            $(function () {
+              $(".modal").modal("hide");
+              $(".bannerSuccess").text("Story successfully posted!")
+              $(".bannerSuccess").fadeIn();
+              setTimeout(() => {
+                $(".bannerSuccess").fadeOut();
+              }, 2500)
+            })
+
+          },
+          500: function (result) {
+            alert("500 " + result.responseJSON.err);
+          },
+        },
+      });
+    }
+    else if(type == "text") {
+      if($("input[name='hasLink']").val() == "true") {
+       //get position of link element
+       var linkContainerOffsetTop = $(".story-modal").offset().top;
+       var linkContainerOffsetLeft = $(".story-modal").offset().left;
+       var linkOffsetTop = $(".link-wrapper").offset().top;
+       var linkOffsetLeft = $(".link-wrapper").offset().left;
+       var linkPositionTop = linkOffsetTop - linkContainerOffsetTop;
+       var linkPositionLeft = (linkOffsetLeft - linkContainerOffsetLeft)
+        
+        linkPositionLeft += $(".http").width();
+      }
+      //get position of the text element
+      var containerOffsetTop = $(".story-modal").offset().top;
+      var containerOffsetLeft = $(".story-modal").offset().left;
+      var textOffsetTop = $(".textBox-wrapper").offset().top;
+      var textOffsetLeft = $(".textBox-wrapper").offset().left;
+      var textPositionTop = textOffsetTop - containerOffsetTop;
+      var textPositionLeft = textOffsetLeft - containerOffsetLeft;
+      payload = {
+        type:"text",
+        text:$(".textBox").text(),
+        link:$(".link").text(),
+        textPositionTop: textPositionTop,
+        textPositionLeft: textPositionLeft,
+        linkOffsetTop: linkPositionTop,
+        linkOffsetLeft: linkPositionLeft,
+        linkFontSize:$(".link").css("font-size"),
+        textColor: $(".textBox").css("color"),
+        fontSize:$(".textBox").css("font-size"),
+        backgroundColor: $(".add-story-body").css("background-color"),
+        groupId: $("input[name='groupId']").val(),
+        duration: $(".duration-text").text(),
+      }
+      $.ajax({
+        url: "/addStory",
+        type: 'POST',
+        data: JSON.stringify(payload),
+        headers: {
+          "Content-Type": "application/json"
+        }, statusCode: {
+          202: function (result) {
+            console.log(result)
             $(function () {
               $(".modal").modal("hide");
               $(".bannerSuccess").text("Story successfully posted!")

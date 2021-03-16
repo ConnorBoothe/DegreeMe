@@ -1,16 +1,31 @@
 <!-- Modal -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.1/spectrum.min.js" integrity="sha512-1aNp9qKP+hKU/VJwCtYqJP9tdZWbMDN5pEEXXoXT0pTAxZq1HHZhNBR/dtTNSrHO4U1FsFGGILbqG1O9nl8Mdg==" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.1/spectrum.min.css" integrity="sha512-KuSX+43gVS5MEIJD2ewtrFPOHqC1PJnL8o2f5ciggPC0JUZ8XV0QXlfArO1mSzKkVFdRjsBDfrTU96C5SuRfqQ==" crossorigin="anonymous" />
 <div class="modal fade" id="addStory" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-    aria-hidden="true">
+    aria-hidden="true"></script>
     <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            
-            <div class="modal-body">
+        
+        <div class="modal-content story-modal">
+            <input name="hasLink" value="false" type="hidden"/>
+            <input name="hasText" value="false" type="hidden"/>
+            <div class="text-options-fadeout">
+
+            </div>
+            <div class="modal-body add-story-body">
+               
                 <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button> -->
                 <div class="story-tools-wrapper">
                     <input name="story-type" type="hidden" value="image"/>
                     <ul class="story-tools">
+                        <li>
+                            
+                            
+                        </li>
+                        <!-- <li>
+                            <input type='text' id="flat1" />
+                        </li> -->
                         <li>
                             <input type="hidden" name="image" value="image" />
                             <label  class="add-img-label" for="addImage">
@@ -32,21 +47,43 @@
                         
                         <li>
                             <input type="hidden" name="multiple-choice" value="multiple" />
-                            <svg data-toggle="tooltip" data-title="Multiple Choice Question" data-placement="left" xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-chat-left-text" viewBox="0 0 16 16">
+                            <svg data-toggle="tooltip" data-title="Multiple Choice Question" data-placement="left" xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="white" class="bi bi-chat-left-text" viewBox="0 0 16 16">
                                 <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
                                 <path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6zm0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
                               </svg>
                         </li>
                         <li>
                             <input type="hidden" name="poll" value="poll" />
-                            <svg data-toggle="tooltip" data-title="Poll" data-placement="left" xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-megaphone-fill" viewBox="0 0 16 16">
+                            <svg data-toggle="tooltip" data-title="Poll" data-placement="left" xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="white" class="bi bi-megaphone-fill" viewBox="0 0 16 16">
                                 <path d="M13 2.5a1.5 1.5 0 0 1 3 0v11a1.5 1.5 0 0 1-3 0v-11zm-1 .724c-2.067.95-4.539 1.481-7 1.656v6.237a25.222 25.222 0 0 1 1.088.085c2.053.204 4.038.668 5.912 1.56V3.224zm-8 7.841V4.934c-.68.027-1.399.043-2.008.053A2.02 2.02 0 0 0 0 7v2c0 1.106.896 1.996 1.994 2.009a68.14 68.14 0 0 1 .496.008 64 64 0 0 1 1.51.048zm1.39 1.081c.285.021.569.047.85.078l.253 1.69a1 1 0 0 1-.983 1.187h-.548a1 1 0 0 1-.916-.599l-1.314-2.48a65.81 65.81 0 0 1 1.692.064c.327.017.65.037.966.06z"/>
                               </svg>
                         </li>
+                        <li class="link-li">
+                            <svg data-toggle="tooltip" data-title="Link" data-placement="left" xmlns="http://www.w3.org/2000/svg" width="1.75em" height="1.75em" fill="white" class="bi bi-link-45deg" viewBox="0 0 16 16">
+                                <path d="M4.715 6.542L3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.001 1.001 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 0 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 0 0-4.243-4.243L6.586 4.672z"/>
+                              </svg>
+                        </li>
+                        <li class="textBox-li">
+                            <input type="hidden" name="text" value="text" />
+
+                            <svg class="add-text" data-toggle="tooltip" data-title="Text Box" data-placement="left" xmlns="http://www.w3.org/2000/svg" width="1.75em" height="1.75em" fill="white" class="bi bi-textarea-t" viewBox="0 0 16 16">
+                                <path d="M1.5 2.5A1.5 1.5 0 0 1 3 1h10a1.5 1.5 0 0 1 1.5 1.5v3.563a2 2 0 0 1 0 3.874V13.5A1.5 1.5 0 0 1 13 15H3a1.5 1.5 0 0 1-1.5-1.5V9.937a2 2 0 0 1 0-3.874V2.5zm1 3.563a2 2 0 0 1 0 3.874V13.5a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V9.937a2 2 0 0 1 0-3.874V2.5A.5.5 0 0 0 13 2H3a.5.5 0 0 0-.5.5v3.563zM2 7a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm12 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                                <path d="M11.434 4H4.566L4.5 5.994h.386c.21-1.252.612-1.446 2.173-1.495l.343-.011v6.343c0 .537-.116.665-1.049.748V12h3.294v-.421c-.938-.083-1.054-.21-1.054-.748V4.488l.348.01c1.56.05 1.963.244 2.173 1.496h.386L11.434 4z"/>
+                              </svg>
+                             
+                        </li>
+                        <li class="text-color">
+                            <input type='text' id="flat1" />
+                        </li>
+
+                        
                     </ul>
                     
                 </div>
                     <div class='add-story-wrapper'>
+                        <div id="hsvflat"></div>
+
                          <div class="poll-container">
                             <div contenteditable="true" class='poll-question' 
                             id="poll-question">Ask Something..</div>
@@ -88,7 +125,18 @@
                     <div class="story-input-container">
                         <span class="story-text-span"  contenteditable="true">Write your message here</span>
                     </div>
-                <select name="duration" class="story-duration">
+                    
+                    <div class="background-color-change">
+                        <svg data-toggle="tooltip" data-placement="right" title="Background Color" xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" fill="white" class="bi bi-palette-fill" viewBox="0 0 16 16">
+                            <path d="M12.433 10.07C14.133 10.585 16 11.15 16 8a8 8 0 1 0-8 8c1.996 0 1.826-1.504 1.649-3.08-.124-1.101-.252-2.237.351-2.92.465-.527 1.42-.237 2.433.07zM8 5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm4.5 3a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM5 6.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm.5 6.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
+                        </svg>
+                        <p class="flat-p">
+                            <input type='text' id="flat" />
+                        </p>
+                        
+                    </div>
+                   
+                <!-- <select name="duration" class="story-duration">
                     <option value="5">5 seconds</option>
                     <option value="6">6 seconds</option>
                     <option value="7">7 seconds</option>
@@ -96,17 +144,47 @@
                     <option value="9">9 seconds</option>
                     <option value="10">10 seconds</option>
                     <option value="100">infinity</option>
-                </select>
+                </select> -->
+                <div class="duration-container">
+                    <div class="duration-options">
+                        <ul>
+                            <li>
+                                5
+                            </li>
+                            <li>
+                                6
+                            </li>
+                            <li>
+                                7
+                            </li>
+                            <li>
+                                8
+                            </li>
+                            <li>
+                                9
+                            </li>
+                            <li>
+                                10
+                            </li>
+                            <li>
+                                &infin;
+                            </li>
+                        </ul>
+
+                    </div>
+                    <p class="duration-text">10</p>
+                    <img data-toggle="tooltip"  data-placement="right" title="Duration"
+                    class="duration-img" src="../assets/img/stopwatch.svg"/>
+                    <span class="duration-seconds">seconds</span>
+                </div>
         <button class='btn btn-primary add-story-btn' >
             Send
-            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="white" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
               </svg>
         </button>
             </div>
-            <div class="modal-footer">
-                
-            </div>
+            
         </div>
     </div>
 </div>
