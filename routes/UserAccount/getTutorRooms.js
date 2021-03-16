@@ -57,11 +57,14 @@ router.post('/getTutorRooms',
             day = new Date().getDay();
             time = new Date().getHours();           
         }
-        tutor.getAvailableTutorsByCourse(req.session.handle, courseName, day, time).then((result)=> {
+        tutor.getAvailableTutorsByCourse(req.session.handle, courseName, day, time)
+        .then((result)=> {
+            console.log(result)
                 res.status(202).json({
                     tutors:result.finalTutors,
                     reservedStatus: result.reservedStatus,
-                    courses: req.session.myCourses
+                    courses: req.session.myCourses,
+                    times: result.times
                })
             })
             .catch(function (error) {
