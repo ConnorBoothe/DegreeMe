@@ -123,8 +123,8 @@ function formatCourses(courses){
                     "<ul>";
     for(x in courseData){
         courses += "<li>"+
-        '<a href="/course/'+courseData[x].courseName+'"><p class="myCoursesText">'+courseData[x].courseName+'</p>'+
-            '<p class="myCoursesSubText">'+courseData[x].courseCode+'</p><span>'+courseData[x].courseCode+'</span></a>'+
+        '<p><a href="/course/'+courseData[x].courseName+'"><p class="myCoursesText">'+courseData[x].courseName+'</p>'+
+            '<p class="myCoursesSubText">'+courseData[x].courseCode+'</p><span>'+courseData[x].courseCode+'</span></a></p>'+
         "</li>";
     }
     courses+="</ul></div></div>";
@@ -144,7 +144,7 @@ function formatCoursesTutoring(courses){
     if(courseData.length > 0 ){
         for(x in courseData){
             courses += "<li>"+
-            '<p class="myCoursesText"><a href="/course/'+courseData[x].course+'">'+courseData[x].courseCode+'</a>';
+            '<p class="myCoursesText"><p class="course-code-link"><a href="/course/'+courseData[x].course+'">'+courseData[x].courseCode+'</a></p>';
                 if(!courseData[x].approved){
                     courses +='<span class="badge badge-warning pending-tutor-course"> Pending</span>';
                 }
