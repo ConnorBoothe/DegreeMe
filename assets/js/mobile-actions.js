@@ -37,79 +37,7 @@ $(document).ready(function () {
         //remove attachment from the DOM
         $(this).parent().remove();
     })
-    $(".mobile-actions ul li").unbind().on("click", function () {
-        $(".mobile-actions ul li").removeClass("mobile-actions-bottom-border")
-        $(this).addClass("mobile-actions-bottom-border")
-        if ($(this).attr("class").split(" ")[0] == "findATutor") {
-             getFirstTutorRooms()
     
-        }
-        else if ($(this).attr("class").split(" ")[0] == "recentActivity") {
-            $(".timelineItemsLoaded").text("");
-            $.session.set("blockNumber", 0);
-
-            payload = {
-                block: parseInt($.session.get("loadMore")),
-                blockNum: parseInt($.session.get("blockNumber"))
-            }
-
-            $.ajax({
-                async: true,
-                url: "/loadMore",
-                type: 'POST',
-                data: JSON.stringify(payload),
-                headers: {
-                    "Content-Type": "application/json"
-                }, statusCode: {
-                    202: function (result) {
-                        $(".spinner-container").fadeOut();
-                        $(".timeline-wrapper").html(createTimeline(result.newItems, result.stripeId));
-                        if (result.newItems.length < 5 && $.session.get("end") == "false") {
-                            $.session.set("end", true);
-                            $(".timeline").append('<p class="timelineItemsLoaded">All items loaded</p>');
-                        }
-                    },
-                    500: function (result) {
-                        alert("500");
-                    },
-                },
-            });
-        }
-        else if ($(this).attr("class").split(" ")[0] == "askQuestion") {
-            $(".timeline-wrapper").html('<div class="recentActivity-title">' +
-                '</div>' +
-                '<div class="askQuestion-container"><span class="text-light"><textarea class="askQuestion-textarea" placeholder="Ask the DegreeMe community.."/></textarea></span>' +
-                '<ul class="question-tag-list" >' +
-                '<li><p class="text-light optional">Required</p><input type="text" class="tagACourse" placeholder="Tag a course"/><div class="findTutorMobile-results"></div></li>' +
-                '<li><p class="text-light optional">Optional</p><input type="text" class="tagAGroup" placeholder="Tag a group"/><div class="findTutorMobile-results-group"></div></li>' +
-                '</ul>' +
-                '<ul class="comments-actions-list">' +
-                '<li class="attachment-li">' +
-                '<div class="image-attachments">' +
-
-                '</div>' +
-                '</li>' +
-                '<li>' +
-                '<a data-toggle="tooltip" data-placement="top"' +
-                'title="File Upload">' +
-                '<label id="imageUploadLabel" for="attachment" class=" btn-lg purple-file-upload darken-2 mt-0 float-left">' +
-                '<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-earmark-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">' +
-                '<path fill-rule="evenodd" d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0H4zm5.5 1.5v2a1 1 0 0 0 1 1h2l-3-3z"/>' +
-                '</svg>' +
-                '</label>' +
-                '</a>' +
-                '<input class="comment-file" id="attachment" name="attachment" type="file" />' +
-
-                '</li>' +
-                '<li>' +
-                '<input class="btn btn-primary postQuestionBtn" id="comments-button" type="submit" name="" value="Post" />' +
-                '</li>' +
-
-                '</ul>');
-            $(".askQuestion-textarea").focus();
-        }
-
-    })
 
     //filter course
     $(".timeline").on("click", ".course-dropdown ul li", function () {
