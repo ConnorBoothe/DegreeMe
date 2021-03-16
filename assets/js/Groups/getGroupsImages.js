@@ -7,7 +7,7 @@ function formatStoryList(groups){
             groupsHTML += 
             '<li>'+
                 '<input type="hidden" name="groupId" value="'+groups[i]._id+'" />'+
-                '<img class="group-story-image1 currGroup" src="'+groups[i].GroupImage+'" data-toggle="tooltip" data-placement="bottom" title="'+groups[i].GroupName+' Story"/>'+
+                '<div class="currGroup"><img class="group-story-image1 " src="'+groups[i].GroupImage+'" data-toggle="tooltip" data-placement="bottom" title="'+groups[i].GroupName+' Story"/></div>'+
             '</li>';
         
     }
@@ -23,7 +23,7 @@ function formatGroupImageList(groups){
             groupsHTML += 
             '<li>'+
                 '<a href="/Group/'+groups[i]._id+'" data-toggle="tooltip" data-placement="right" title="'+groups[i].GroupName+'">'+
-                    '<img class="go-home-groups currGroup" src="'+groups[i].GroupImage+'"/>'+
+                    '<div class="currGroup1"><img class="go-home-groups " src="'+groups[i].GroupImage+'"/></div>'+
                 '</a>'+
             '</li>';
         }
@@ -64,7 +64,10 @@ var page = window.location.href.split("/")[3];
            $(".group-link").attr("href","/Group/"+ res[0]._id)
             
             if(page == "home") {
-                $(".page-title-container").html(formatStoryList(res));
+               
+                    $(".mobile-actions1").show();
+                    $(".story-list-container").html(formatStoryList(res));
+                
             }
             else if(page == "discover") {
                 $(".page-title-container").html(formatStoryList(res));
