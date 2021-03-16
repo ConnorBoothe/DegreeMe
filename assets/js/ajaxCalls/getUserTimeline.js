@@ -49,7 +49,7 @@ function formatBid(post, stripeId){
                  if (hasLiked == false){
                     bid+= '<button class="like-button like-help">'+
                         '<span class="likeCount">'+post.likes+'</span>'+
-                        '<svg class="bi bi-heart heartIcon" width="0.8em" height="0.8em" viewBox="0 0 16 16"'+
+                        '<svg class="bi bi-heart heartIcon" width="1em" height="1em" viewBox="0 0 16 16"'+
                             'fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
                             '<path fill-rule="evenodd"'+
                                 'd="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />'+
@@ -129,7 +129,7 @@ function formatTutorListing(post){
                 tutorListing +=
                 '<button class="like-button">'+
                 '<span class="likeCount">'+post.likes+'</span>'+
-                '<svg class="bi bi-heart heartIcon" width="0.8em" height="0.8em" viewBox="0 0 16 16"'+
+                '<svg class="bi bi-heart heartIcon" width="1em" height="1em" viewBox="0 0 16 16"'+
                                         'fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
                                         '<path fill-rule="evenodd"'+
                                             'd="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />'+
@@ -147,7 +147,7 @@ function formatTutorListing(post){
                 tutorListing +=
                 '<button class="like-button hasLiked">'+
                 '<span class="likeCount">'+post.likes+'</span>'+
-                '<svg class="bi bi-heart heartIcon" width="0.8em" height="0.8em" viewBox="0 0 16 16"'+
+                '<svg class="bi bi-heart heartIcon" width="1em" height="1em" viewBox="0 0 16 16"'+
                                         'fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
                 '<path fill-rule="evenodd"'+
                     'd="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />'+
@@ -196,7 +196,7 @@ function formatStudyGroup(post){
             studyGroup +=
             '<button class="like-button">'+
                 '<span class="likeCount">'+post.likes+'</span>'+
-                '<svg class="bi bi-heart heartIcon" width="0.8em" height="0.8em" viewBox="0 0 16 16"'+
+                '<svg class="bi bi-heart heartIcon" width="1em" height="1em" viewBox="0 0 16 16"'+
                     'fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
                     '<path fill-rule="evenodd"'+
                         'd="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />'+
@@ -213,7 +213,7 @@ function formatStudyGroup(post){
             studyGroup +=
             '<button class="like-button hasLiked">'+
                 '<span class="likeCount">'+post.likes+'</span>'+
-                '<svg class="bi bi-heart heartIcon" width="0.8em" height="0.8em" viewBox="0 0 16 16"'+
+                '<svg class="bi bi-heart heartIcon" width="1em" height="1em" viewBox="0 0 16 16"'+
                     'fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
                     '<path fill-rule="evenodd"'+
                         'd="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />'+
@@ -250,7 +250,7 @@ function formatStatusUpdate(post){
             status +=
             '<button class="like-button">'+
                 '<span class="likeCount">'+post.likes+'</span>'+
-                '<svg class="bi bi-heart heartIcon" width="0.8em" height="0.8em" viewBox="0 0 16 16"'+
+                '<svg class="bi bi-heart heartIcon" width="1em" height="1em" viewBox="0 0 16 16"'+
                     'fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
                     '<path fill-rule="evenodd"'+
                         'd="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />'+
@@ -267,7 +267,7 @@ function formatStatusUpdate(post){
             status +=
             '<button class="like-button hasLiked">'+
                 '<span class="likeCount">'+post.likes+'</span>'+
-                '<svg class="bi bi-heart heartIcon" width="0.8em" height="0.8em" viewBox="0 0 16 16"'+
+                '<svg class="bi bi-heart heartIcon" width="1em" height="1em" viewBox="0 0 16 16"'+
                     'fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
                     '<path fill-rule="evenodd"'+
                         'd="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />'+
@@ -308,7 +308,7 @@ function formatQuestion(post){
             
         } 
         else{
-            question += '<div>'+
+            question += '<div class="question-img-container">'+
                 '<img class="question-img" src="'+post.files[0].file+'"/>'+
             '</div>';
        }
@@ -324,7 +324,7 @@ function formatQuestion(post){
             question +=
             '<button class="like-button">'+
                 '<span class="likeCount">'+post.likes+'</span>'+
-                '<svg class="bi bi-heart heartIcon" width="0.8em" height="0.8em" viewBox="0 0 16 16"'+
+                '<svg class="bi bi-heart heartIcon" width="1em" height="1em" viewBox="0 0 16 16"'+
                     'fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
                     '<path fill-rule="evenodd"'+
                         'd="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />'+
@@ -341,7 +341,7 @@ function formatQuestion(post){
             question +=
             '<button class="like-button hasLiked">'+
                 '<span class="likeCount">'+post.likes+'</span>'+
-                '<svg class="bi bi-heart heartIcon" width="0.8em" height="0.8em" viewBox="0 0 16 16"'+
+                '<svg class="bi bi-heart heartIcon" width="1em" height="1em" viewBox="0 0 16 16"'+
                     'fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
                     '<path fill-rule="evenodd"'+
                         'd="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />'+
@@ -387,13 +387,91 @@ $(document).ready(function(){
     $.session.set("stripeId",  $("input[name='stripeId']").val())
     $.session.set("userId",  $("input[name='userId']").val())
     $.session.set("tutor",  $("input[name='tutor']").val())
+    //control menu on home page
+    var type = "timeline";
+    $(".mobile-actions ul li").unbind().on("click", function () {
+        $(".mobile-actions ul li").removeClass("mobile-actions-bottom-border")
+        $(this).addClass("mobile-actions-bottom-border")
+        if ($(this).attr("class").split(" ")[0] == "findATutor") {
+            type = "tutor";
+            getFirstTutorRooms()
+    
+        }
+        else if ($(this).attr("class").split(" ")[0] == "recentActivity") {
+            $(".timelineItemsLoaded").text("");
+            $.session.set("blockNumber", 0);
+            type = "timeline";
+            payload = {
+                block: parseInt($.session.get("loadMore")),
+                blockNum: parseInt($.session.get("blockNumber"))
+            }
+
+            $.ajax({
+                async: true,
+                url: "/loadMore",
+                type: 'POST',
+                data: JSON.stringify(payload),
+                headers: {
+                    "Content-Type": "application/json"
+                }, statusCode: {
+                    202: function (result) {
+                        $(".spinner-container").fadeOut();
+                        $(".timeline-wrapper").html(createTimeline(result.newItems, result.stripeId));
+                        if (result.newItems.length < 5 && $.session.get("end") == "false") {
+                            $.session.set("end", true);
+                            $(".timeline").append('<p class="timelineItemsLoaded">All items loaded</p>');
+                        }
+                    },
+                    500: function (result) {
+                        alert("500");
+                    },
+                },
+            });
+        }
+        else if ($(this).attr("class").split(" ")[0] == "askQuestion") {
+           type = "question";
+            $(".timeline-wrapper").html('<div class="recentActivity-title">' +
+                '</div>' +
+                '<div class="askQuestion-container"><span class="text-light"><textarea class="askQuestion-textarea" placeholder="Ask the DegreeMe community.."/></textarea></span>' +
+                '<ul class="question-tag-list" >' +
+                '<li><p class="text-light optional">Required</p><input type="text" class="tagACourse" placeholder="Tag a course"/><div class="findTutorMobile-results"></div></li>' +
+                '<li><p class="text-light optional">Optional</p><input type="text" class="tagAGroup" placeholder="Tag a group"/><div class="findTutorMobile-results-group"></div></li>' +
+                '</ul>' +
+                '<ul class="comments-actions-list">' +
+                '<li class="attachment-li">' +
+                '<div class="image-attachments">' +
+
+                '</div>' +
+                '</li>' +
+                '<li>' +
+                '<a data-toggle="tooltip" data-placement="top"' +
+                'title="File Upload">' +
+                '<label id="imageUploadLabel" for="attachment" class=" btn-lg purple-file-upload darken-2 mt-0 float-left">' +
+                '<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-earmark-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">' +
+                '<path fill-rule="evenodd" d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0H4zm5.5 1.5v2a1 1 0 0 0 1 1h2l-3-3z"/>' +
+                '</svg>' +
+                '</label>' +
+                '</a>' +
+                '<input class="comment-file" id="attachment" name="attachment" type="file" />' +
+
+                '</li>' +
+                '<li>' +
+                '<input class="btn btn-primary postQuestionBtn" id="comments-button" type="submit" name="" value="Post" />' +
+                '</li>' +
+
+                '</ul>');
+            $(".askQuestion-textarea").focus();
+        }
+
+    })
     $(document).on("scroll", function() {
        //give the last elem in the ajax request a unique ID
        //once scrolled past, make another ajax call
        var docHeight = "";
        console.log($(document).height())
        console.log($(window).scrollTop() + $(window).height()+20)
-        if (($(window).scrollTop() + $(window).height())+50 >= $(document).height()) {
+        if (($(window).scrollTop() + $(window).height())+50 >= $(document).height()
+        && type == "timeline") {
             var blockNum = parseInt($.session.get("blockNumber"));
             blockNum++;
             $.session.set("blockNumber",blockNum);
