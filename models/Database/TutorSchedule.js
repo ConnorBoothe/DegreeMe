@@ -17,13 +17,13 @@ var scheduleSchema = new Schema({
     reservedStatus: {type:String},
 
 }, {collection: 'TutorSchedules'});
-var schedule = mongoose.model('TutorSchedules',scheduleSchema);
+var ScheduleDB = mongoose.model('TutorSchedules',scheduleSchema);
 module.exports = class TutorSchedules {
     //get user schedule to display
     //on user dashboard. Doesn't check if 
     //slots are reserved
     getPersonalSchedule(userId, day){
-            return schedule.find({
+            return ScheduleDB.find({
                 $and : [{
                     userId:userId,
                     day:day
@@ -34,7 +34,7 @@ module.exports = class TutorSchedules {
     //on user profile. Checks if slots are reserved
    getUserScheduleByDay(userId, day, userHandle, courseCode){
        return new Promise((resolve, reject)=>{
-        schedule.find({
+        ScheduleDB.find({
             $and : [{
                 userId:userId,
                 day:day
@@ -103,7 +103,7 @@ module.exports = class TutorSchedules {
       console.log("Day: "+ day)
       console.log("userHandle: "+ userHandle)
     return new Promise((resolve, reject)=>{
-        schedule.find({
+        ScheduleDB.find({
             $and : [{
                 userId:{
                     $in:userIdArray
@@ -122,30 +122,22 @@ module.exports = class TutorSchedules {
                     date.setDate(date.getDate()+ Math.abs(day - date.getDay()))
                 }
                 else{
-                    console.log((day))
-                    console.log(date.getDay())
-                    console.log("Else date: "+(parseInt(day)-(date.getDay())) )
                     date.setDate(date.getDate()+ (7-Math.abs(day - date.getDay())))
                 }
             }
-            console.log("prev date: "+ date)
 
             date.setHours(time);
             date.setMinutes(0);
             date.setSeconds(0);
-            console.log("Schedule date: "+ date)
             //get meetups by date, handle, course code to check
             //if the schedule slot has a corresponding meetup
             //for the current user
-            console.log("checking reserve status")
             meetups.checkReservedStatus(date)
             .then((meetupData)=>{
-                console.log("Meetuip data: " + meetupData);
                 var meetupsHostIds = [];
                 for(var i = 0; i < meetupData.length; i++){
                     meetupsHostIds.push(meetupData[i].hostId);
                 }
-                console.log("Host Ids: " + meetupsHostIds)
                 for(var i = 0; i < schedule.length; i++ ){
                     if(meetupsHostIds.includes(schedule[i].userId)){
                         schedule[i].reservedStatus = true;
@@ -154,7 +146,22 @@ module.exports = class TutorSchedules {
                         schedule[i].reservedStatus = false;
                     }
                 }
-                resolve({schedule: schedule})
+                ScheduleDB.find({
+                    $and : [{
+                        userId:{
+                            $in:userIdArray
+                        },
+                        day:day
+                    }]
+                },"time").sort({time:1})
+                .then((times)=>{
+                    console.log("Times: "+ times)
+                    resolve({
+                        schedule: schedule,
+                        timeSlots: times
+                    })
+                })
+               
             })
         })
         .catch((err)=>{

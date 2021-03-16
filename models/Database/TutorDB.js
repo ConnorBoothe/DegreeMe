@@ -111,6 +111,8 @@ module.exports = class TutorSchedules {
                             //get the schedule of the tutors in the course
                             schedule.getUserScheduleByDayAndTime(userHandle, userIdArray, day, time, course)
                                 .then(function (scheduleSlots) {
+                                    console.log("sched slots")
+                                    console.log(scheduleSlots)
                                     //save final tutors that are currently available
                                     var finalTutors = [];
                                     //match user array id to id of schedule doc
@@ -123,9 +125,23 @@ module.exports = class TutorSchedules {
                                             }
                                         }
                                     }
+                                    //Create readable times (%12) and remove duplicates
+                                    var times = [];
+                                    for(var x = 0 ; x < scheduleSlots.timeSlots.length; x++) {
+                                        if(scheduleSlots.timeSlots[x].time == 12
+                                            || scheduleSlots.timeSlots[x].time == 0) {
+                                                times.push(12)
+                                        }
+                                        else {
+                                            times.push(scheduleSlots.timeSlots[x].time%12)
+                                        }
+                                    }
+                                    var timeSet = new Set(times);
+                                    var timesNoDuplicates = Array.from(timeSet)
                                     resolve({
                                         userHandle: userHandle, 
-                                        finalTutors:finalTutors
+                                        finalTutors:finalTutors,
+                                        times: timesNoDuplicates
                                     });
                                    
                                 })
