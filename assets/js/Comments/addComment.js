@@ -50,6 +50,10 @@ $(document).ready(function () {
         readURL($("#attachment")[0], imageArray, $("#attachment"));
         console.log(imageArray)
     })
+    $(".commentMsg").on("focus", ()=>{
+        $(".commentMsg").css("border", "none");
+
+    })
     $(".image-attachments").on("click", ".delete-badge", function(){
         var name = $(this).next().attr("name");
         //remove attachment from array
@@ -61,6 +65,13 @@ $(document).ready(function () {
     $("#comments-button").on("click", function (e) {
         //prevent form submission
         e.preventDefault();
+        if($(".commentMsg").val() === ""){
+           
+            $(".commentMsg").css("border", "1px solid #dc3545");
+        }
+        else {
+
+        
         $(".commentTabs").append(
         '<div class="loading-post">'+
             '<div class="spinner-border" role="status">'+
@@ -216,6 +227,7 @@ $(document).ready(function () {
             });
            
         }
+    }
     })
 
 });
