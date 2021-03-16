@@ -31,7 +31,7 @@
     
     <div class="homeWrap">
         <%- include ('partials/sideBar.ejs')%>
-        <%- include ('partials/homeSideBar.ejs')%>
+       
         <%- include ('partials/horizontalHeader.ejs')%>
         <%- include ('partials/newMessageButton.ejs')%>
         <%- include ('partials/newMessageModal.ejs')%>
@@ -42,6 +42,7 @@
         <%- include ('../Groups/partials/Story.ejs')%>
         <%- include ('./partials/addCourseModal.ejs')%>
 
+        <input type="hidden" class="first-course" value="<%=session.myCourses[0].courseCode%>"/>
 
         <input type="hidden" name="handle" value="<%=session.handle%>"/>
         <input type="hidden" name="stripeId" value="<%=session.stripeId%>"/>
@@ -49,8 +50,15 @@
         <input type="hidden" name="tutor" value="<%=session.tutor%>"/>
         <div class="home-wrapper">
             <%-include ('partials/myCoursesSideBar.ejs')%>
+           
+
             <div class="timeline">
+                <%- include ('partials/homeSideBar.ejs')%>
+
                 <!-- <p class="badge badge-danger">Mobile version of DegreeMe is under construction</p> -->
+                <div class="mobile-actions1">
+                    <div class="story-list-container"></div>
+                </div>
                 <div class="mobile-actions">
                     <ul>
                         <li class="recentActivity mobile-actions-bottom-border"><div class="mobile-actions-item bg-primary">
@@ -83,7 +91,9 @@
                     </ul>
                 </div>
                 <!-- Include the timeline partial -->
+               
                 <%- include ('partials/timeline.ejs')%> 
+              
                 <div class="toast-body bg-danger text-light">
                     Error: File type not allowed
                   </div>
