@@ -51,7 +51,7 @@ function getFirstTutorRooms(course) {
                     '<div class="course-dropdown-day day-dropdown">' +
                     '<input type="hidden" name="day-value" value="' + new Date().getDay() + '"/>' +
                     '<ul>';
-                var daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+                var daysOfWeek = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
                 var today = new Date().getDay();
                 var endIteration = today + 7;
                 var iterator = 1
@@ -76,52 +76,38 @@ function getFirstTutorRooms(course) {
 
 
                 }
-                tutorRooms += '</ul>' +
-                    '</div></div>' +
-                    '</li>' +
-                    '<li>' +
-                    '<div class="course-select-day">' +
-                    '<span class="text-light time-text">' + new Date().getHours() % 12 + '</span>' +
-                    '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#d4d4d4" class="bi bi-caret-down-fill" viewBox="0 0 16 16">' +
-                    '<path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>' +
-                    '</svg>' +
-                    '<div class="course-dropdown-day time-dropdown">' +
-                    '<ul>';
-                var currHour = new Date().getHours();
-                var endIteration = currHour + +12;
-                for (var i = currHour; i < endIteration; i++) {
-                    if (i == 12) {
-                        tutorRooms +=
-                            '<li class="text-light">' +
-                            '<input type="hidden" value="' + i + '"/>' +
-                            '<span>' + i + '</span>' +
-                            '</li>';
-                    }
-                    else if (i == 24) {
-                        tutorRooms +=
-                            '<li class="text-light">' +
-                            '<input type="hidden" value="' + i + '"/>' +
-                            '<span>' + i / 2 + '</span>' +
-                            '</li>';
-                    }
-                    else {
-                        tutorRooms +=
-                            '<li class="text-light">' +
-                            '<input type="hidden" value="' + i + '"/>' +
-                            '<span>' + i % 12 + '</span>' +
-                            '</li>';
-                    }
-
-
-
-
+                var currTime = new Date().getHours();
+                var amText = "PM";
+                if(currTime == 12 || currTime == 0) { 
+                    currTime = 12;
+                }
+                else {
+                    currTime = currTime%12;
+                }
+                if(currTime < 12){
+                    amText = "AM";
                 }
                 tutorRooms += '</ul>' +
                     '</div></div>' +
                     '</li>' +
                     '<li>' +
+                    '<div class="course-select-day time-select">' +
+                    '<span class="text-light time-text">' + currTime + '</span>' +
+                    '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#d4d4d4" class="bi bi-caret-down-fill" viewBox="0 0 16 16">' +
+                    '<path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>' +
+                    '</svg>' +
+                    '<div class="course-dropdown-day time-dropdown">' +
+                    '<ul>';
+                // var currHour = new Date().getHours();
+                // var endIteration = currHour + +12;
+                
+           
+                tutorRooms += '</ul>' +
+                    '</div></div>' +
+                    '</li>' +
+                    '<li>' +
                     '<div class="course-select-day amPm-select">' +
-                    '<span class="text-light am-text">PM</span>' +
+                    '<span class="text-light am-text">'+amText+'</span>' +
                     '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#d4d4d4" class="bi bi-caret-down-fill" viewBox="0 0 16 16">' +
                     '<path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>' +
                     '</svg>' +
@@ -149,6 +135,7 @@ function getFirstTutorRooms(course) {
                         "<a href='/room/" + result.tutors[i][3] + "'class='btn btn-primary rooms-btn'>Join Room</a></li>";
 
                 }
+            
                 
                 tutorRooms += '</ul>' +
                     '</div>' +
@@ -161,6 +148,26 @@ function getFirstTutorRooms(course) {
                     }
                     else if(window.location.href.split("/")[3] == "course"){
                         $(".question-container").html(tutorRooms);
+                    }
+                    var noRooms = "";
+                    if(result.times.length == 0) {
+                        $(".time-select").hide();
+                        $(".amPm-select").hide();
+                        noRooms += "<p class='text-light'>No " 
+                        +$(".first-course").val()+ " tutors available today"
+                        +"</p><img class='no-tutors-img'"
+                        +"src='../assets/img/undraw_camping.svg'/>"
+                        $(".roomsList").html(noRooms)
+                    }
+                    //if there are no available tutors for time slot
+                    else if(result.tutors.length == 0) {
+                        $(".time-select").hide();
+                        $(".amPm-select").hide();
+                        noRooms += "<p class='text-light'>No " 
+                        +$(".first-course").val()+ " tutors available at "
+                        +new Date().getHours()+"</p><img class='no-tutors-img'"
+                        +"src='../assets/img/undraw_camping.svg'/>"
+                        $(".roomsList").html(noRooms)
                     }
             },
             500: function (result) {
@@ -225,7 +232,7 @@ function getFirstTutorRoomsUserProfile(userId) {
                     '<div class="course-dropdown-day day-dropdown">' +
                     '<input type="hidden" name="day-value" value="' + new Date().getDay() + '"/>' +
                     '<ul>';
-                var daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+                var daysOfWeek = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
                 var today = new Date().getDay();
                 var endIteration = today + 7;
                 var iterator = 1
@@ -332,8 +339,65 @@ function getTutorRooms(course, day, time, amPm) {
         }, statusCode: {
             202: function (result) {
                 var tutorRooms = "";
+                // var currHour = new Date().getHours();
+                // var endIteration = currHour + +12;
 
+                if(result.times.length > 0) { 
+                    var times = "<ul>";
+                    for (var i = 0; i < result.times.length; i++) {
+                            times +=
+                                '<li class="text-light">' +
+                                '<input type="hidden" value="' + result.times[i] + '"/>' +
+                                '<span>' + result.times[i] + '</span>' +
+                                '</li>';
+                        
+                    }
+                    times += '</ul>';
+                }
+                else{
+                    if($(".day-text").text() == "Today") {
+                        var times = "<p class='no-tutors text-light'>No " +$(".courseName-text").text()+ " tutors available " +$(".day-text").text();
+                    }
+                    else { 
+                        var times = "<p class='no-tutors text-light'>No " +$(".courseName-text").text()+ " tutors available this " +$(".day-text").text();
+
+                    }
+                }
+                
+                $(".time-dropdown").html(times);
+                console.log(result.times)
+                //if there are no available times on this day
+                if(result.times.length == 0) {
+                    
+                    $(".time-select").hide();
+                    $(".amPm-select").hide();
+                    if($(".day-text").text() == "Today"){
+                        $(".roomsList").html("<p class='text-light'>No " 
+                    +$(".courseName-text").text()+ " tutors available today "
+                   +"</p><img class='no-tutors-img' src='../assets/img/undraw_camping.svg'/>")
+               
+                    }
+                    else {
+                        $(".roomsList").html("<p class='text-light'>No " 
+                        +$(".courseName-text").text()+ " tutors available on "
+                        +$(".day-text").text()+"</p><img class='no-tutors-img' src='../assets/img/undraw_camping.svg'/>")
+                   
+                    }
+                    }
+                //if there are no available tutors for time slot
+                else if(result.tutors.length == 0) {
+                    $(".time-select").show();
+                    $(".amPm-select").show();
+                    $(".roomsList").html("<p class='text-light'>No " +$(".courseName-text").text()+ " tutors"+
+                    " available at "+$(".time-text").text()+" "+$(".am-text").text()+"</p><img class='no-tutors-img' src='../assets/img/undraw_camping.svg'/>");
+                }
+                //if tutors are available now
+                else {
+                    $(".time-select").show();
+                    $(".amPm-select").show();
                 for (var i = 0; i < result.tutors.length; i++) {
+                    console.log(result.tutors[i])
+
                     tutorRooms += '<li> ' +
                         '<img class="room-item roomImg "' +
                         'src=' + result.tutors[i][2] + '/>' +
@@ -355,6 +419,7 @@ function getTutorRooms(course, day, time, amPm) {
                         "<input type='hidden' value='" + result.tutors[i][0] + "'/></li>";
                 }
                     $(".roomsList").html(tutorRooms);
+                }
             },
             500: function (result) {
                 alert("500");
