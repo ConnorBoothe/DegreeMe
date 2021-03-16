@@ -330,8 +330,6 @@ $(".profileBody").on("click", ".course-dropdown ul li", function () {
  //filter course
  console.log("course: " +$(".courseName-text").text())
  $(".courseName-text").text($(this).text())
- alert($(".courseName-text").text());
- alert($("input[name='day-value']").val())
 getTutorRoomsUserProfile($("input[name='userId']").val(), $("input[name='day-value']").val())
 })
     $(".groupsTab").on("click", function(){
@@ -365,7 +363,6 @@ getTutorRoomsUserProfile($("input[name='userId']").val(), $("input[name='day-val
       return false;
     })
     $(document).on("click",".rooms-btn", function(e){
-        alert($(this).prev().prev().text())
         var time = $(this).prev().prev().text();
         reserveSeat($(this), time)
       })
