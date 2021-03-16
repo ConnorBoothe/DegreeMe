@@ -4,18 +4,13 @@ function validateGroup(){
         $("#group_name").css("border-bottom", "2px solid #dc3545");
         submit = false;
     }
-    if($("#group_description").val() == ""){
-        $("#group_description").css("border-bottom", "2px solid #dc3545");
+    else if ($("#group_name").val().length > 16) {
+        $("#group_name").css("border-bottom", "2px solid #dc3545");
+        $("#groupNameTxt").text("Name must be 16 characters or less")
         submit = false;
     }
-    // if($("#courseName").val() == ""){
-    //     $("#courseName").css("border-bottom", "2px solid #dc3545");
-    //     submit = false;
-    // }
-    // if($("#professor").val() == ""){
-    //     $("#professor").css("border-bottom", "2px solid #dc3545");
-    //     submit = false;
-    // }
+    
+ 
     return submit;
     
 }
