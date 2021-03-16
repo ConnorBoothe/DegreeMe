@@ -604,7 +604,7 @@ button[type="close"]{
         font-size:14px!important;
         font-family: 'Open Sans', sans-serif;
         margin-right:5px;
-        min-width: 200px;
+        min-width: 80px;
         margin-top:15px;
     }
     .profile-ul{
@@ -811,6 +811,10 @@ button[type="close"]{
     }
     .group-name-link, .group-name-link:hover{
         color:white;
+       
+    }
+    .group-name-link {
+        max-width:80px!important;
     }
     .groupImg {
         width:140px;
@@ -932,14 +936,15 @@ button[type="close"]{
     .groupTitle {
     margin-left:20px;
     margin-top:5px;
-    width:200px;
+    width:170px;
+    margin-bottom:10px;
     }
     .story-tools-wrapper {
         position:absolute;
         right:0;
         top:0;
-        margin-top:400px;
-        z-index:2;
+        margin-top:20px;
+        z-index:4;
     }
     .group-message-heading { 
         font-size:14px;

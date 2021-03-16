@@ -405,6 +405,7 @@ input:-webkit-autofill:active {
     margin-bottom: 0 !important;
     font-family: "Helvetica";
     font-weight:540;
+    font-size:13px!important;
 }
 
 .sendMsgInput {

@@ -6,6 +6,11 @@
     background-color: #18191a;
 
 }
+.addCourses{
+    color:#d9d9d9!important;
+    text-decoration:none!important;
+    font-size:30px;
+}
 /* my courses color classes */
 .redCourse{
     background-color: #f35e54!important;
@@ -59,12 +64,15 @@ body {
     display:none;
 }
 .purple-file-upload{
-    background-color: #3a3b3c;
-    color:white;
+    /* background-color: #3a3b3c; */
+    color:#d9d9d9;
     margin-top:0px!important;
     padding-top:5px!important;
     margin-top:-5px!important;
     padding-left:12px!important;
+}
+.story-list-container {
+    width:100%;
 }
 #comments-button {
     border-radius:20px;
@@ -78,11 +86,11 @@ body {
 }
 #imageUploadLabel{
     border-radius:50px;
-    width:35px!important;
-    height:35px!important;
+    /* width:35px!important;
+    height:35px!important; */
     font-size:15px;
     cursor:pointer;
-    margin-top:-5px;
+    /* margin-top:-5px; */
 }
 .comments-actions-list li{
     list-style-type: none;
@@ -157,14 +165,11 @@ body {
     width:200px;
 }
 .homeSideBar{
-    width:180px;
-    position:fixed;
-    right:0;
-    top:0;
-    margin-top:60px;
-    padding-top:20px;
+    width:250px;
+    padding-top:14px;
     max-height:90%;
     overflow-y:auto;
+    float:right;
     margin-right:20px;
 }
 .toast-body {
@@ -543,17 +548,26 @@ body {
 .dots-tutor-courses {
     
 }
-.myCoursesText a {
+.course-code-link {
+    width:90px!important;
+    font-size:14px;
+    margin-bottom:0!important;
+    float:left;
+    margin-left:12px;
+}
+.course-code-link a {
     color:#d4d4d4;
+    margin-right:2px;
 }
 .myCoursesText{
     font-size:14px;
-    width:90px;
+    width:140px;
     font-family: 'Open Sans', sans-serif!important;
     padding-left:10px;
     text-align:left!important;
     color:white;
     margin-bottom:0px!important;
+    padding-bottom:5px;
 }
 .myCoursesWrapper a {
     text-decoration:none!important;
@@ -909,6 +923,10 @@ text-align:center;
     display:inline-block;
     list-style-type:none;
 }
+.no-tutors-img {
+    width:150px;
+}
+
 .addCourseCode{
     font-size:12px;
     color:#a9a9a9;
@@ -1023,8 +1041,15 @@ text-align:center;
 .like-nonhelp{
     background-color: #242526;
 }
+.message-handle {
+    font-size:13px!important;
+}
 .hasLiked .likeCount, .hasLiked path{
     color:#dc3545!important;
+
+}
+.hasLiked {
+    font-size:18px!important;
 }
 .sideBarItemMenu-listing{
     color:white;
@@ -1131,7 +1156,7 @@ text-align:center;
     margin-left:20px;
 }
 .postActions{
-    padding-bottom:20px;
+    padding-bottom: 18px;
     padding-top:0px;
     padding-left:20px;
     text-align:left;
@@ -1426,7 +1451,7 @@ input[name="searchType"]{
     cursor:pointer;
 }
   /* desktop only */
-  @media only screen and (min-width: 1000px) {
+  /* @media only screen and (min-width: 1000px) { */
     .daySelect-container{
         margin-top:20px;
         margin-bottom:10px;
@@ -1501,17 +1526,23 @@ input[name="searchType"]{
         margin-top:40px;
         width:100%;
     }
+    .add-story-body {
+        background-color: #1f2024;
+    }
     .add-story-btn{
         font-family: "Open sans", "sans-serif";
         font-size:14px;
         width:20%;
         margin-right:3%;
         right:0;
+        bottom:0;
         position:relative;
-        float:right;
-        margin-left:48%;
+        margin-left:75%;
         margin-top:0!important;
         border-radius:15px;
+        padding-bottom:25px!important;
+        z-index:3;
+
     }
     .add-tutoring-label{
         text-align:left!important;
@@ -1613,16 +1644,25 @@ input[name="searchType"]{
         font-size:14px;
         margin-bottom:0!important;
     }
-    .timeline{
-        width:50%;
-        min-height:600px;
+    .timeline-wrapper {
         max-width:620px;
-        min-width:550px;
+        min-width:520px;
+        margin-left:0%;
+        margin-right:auto;
+    }
+    .timeline{
+        width:910px;
+       
+        min-width:520px;
         height:100%;
-        margin-left:10%;
-        margin-right:5%;
         overflow-y:auto;
+        margin-top:15px;
+        margin-left:10%!important;
+        margin-right:auto!important;
         overscroll-behavior: none!important;
+        float:left!important;
+        position:relative!important;
+        text-align:left;
     }
     .rate-container p{
         font-family: "Open sans", "sans-serif";
@@ -1763,16 +1803,32 @@ input[name="searchType"]{
     display:none!important;
 }
     .mobile-actions{
-        width:100%;
-        margin-left:auto;
+       
+        max-width:620px;
+        min-width:520px;
+        margin-left:0%;
         margin-right:auto;
         text-align: left;
         padding:5px;
         padding-left:10px;
-        margin-top:45px;
+        margin-top:15px;
         margin-bottom:0px;
         border-radius:10px;
         background-color: #1f2024;
+        /* border: 1px solid #343a40; */
+    }
+    
+    .mobile-actions1{
+        max-width:620px;
+        min-width:520px;
+        text-align: left;
+        padding:5px;
+        padding-left:10px;
+        margin-top:18px;
+        margin-bottom:0px;
+        border-radius:10px;
+        background-color: #1f2024;
+        display:none;
         /* border: 1px solid #343a40; */
     }
     .mobile-actions-bottom-border{
@@ -1805,6 +1861,7 @@ input[name="searchType"]{
         width:55px;
         border:none!important;
         /* position:absolute; */
+        font-size:18px!important;
         background-color:#1f2024!important;  
         
     }
@@ -1844,8 +1901,10 @@ input[name="searchType"]{
         text-align:left!important;
     }
     .question-img{
-        width:300px!important;
-        margin-top:20px;
+        /* max-height:300px!important; */
+        margin-top:10px;
+        width:400px!important;
+        max-width:500px!important;
     }
     .question-img1{
         width:100px!important;
@@ -1857,6 +1916,7 @@ input[name="searchType"]{
         margin-right:auto;
         display:inline-block;
         text-align:center;
+        width:100%;
     }
     .timeline-container-helprequest{
         min-height:100px;
@@ -1912,11 +1972,11 @@ input[name="searchType"]{
     }
     .postDate{
         color:#a9a9a9;
-        font-size:14px;
+        font-size:13px;
         padding-left:5px;
-    
+        text-align:right;
         margin-right:10%;
-        margin-top:20px;
+        margin-top:-20px;
         margin-bottom:0px;
     }
     .caption-status{
@@ -2003,8 +2063,9 @@ input[name="searchType"]{
         font-size:13px;
         padding-left:5px;
         margin-right:7%;
-        margin-top:20px;
+        margin-top:-20px;
         margin-bottom:0px;
+        text-align:right;
     }
     .searchLi, .slider-container-header, .mobileUserImg, .userHeader-mobile{
         display:none!important;
@@ -2043,7 +2104,7 @@ input[name="searchType"]{
     .timeline-container-status{
         min-height:100px;
         margin-bottom:30px;
-        margin-top:30px;
+        margin-top:15px;
         border-radius:8px;
         background-color:#1f2024;
         text-align:center;
@@ -2063,901 +2124,6 @@ input[name="searchType"]{
     .stars-container span{
         font-size:24px;
     }
-  }
+  /* } */
   /* mobile */
 
-@media only screen and (max-width: 1000px) {
- 
-    .findTutor-course{
-        cursor:pointer;
-    }
-    .like-button{
-        width:55px;
-        border:none!important;
-        position:absolute;
-        background-color:#18191a!important;  
-        
-    }
-    .stars-container span{
-        font-size:20px;
-    }
-    .tutor-results-img{
-        width:50px;
-    }
-    .rate-container p{
-        font-family: "Open sans", "sans-serif";
-        font-size:20px;
-        color:#a9a9a9;
-    }
-    .left-container{
-        text-align:center;
-
-    }
-   
-    .bookTutor{
-        font-family: "Open sans", "sans-serif";
-        font-size:12px!important;
-        padding-top:5px;
-        padding-bottom:5px;
-        padding-left:8px;
-        padding-right:8px;
-        margin-top:10px;
-    }
-    .tutor-details-li{
-        top:0;
-        margin-left:20%;
-        margin-top:-60px!important;
-        position:relative;
-    }
-    .tutorList {
-        width:100%;
-    }
-    .tutorList li {
-        display:inline-block;
-        width:20%;
-        margin-left:20px;
-    }
-    .tutor-name{
-        font-family: "Open sans", "sans-serif";
-        margin-bottom:5px;
-        margin-top:5px;
-        font-size: 14px;
-    }
-    .right-container {
-        width:30%;        
-    }
-
-    .homeWrap{
-        width:100%;
-        overflow-y:none;
-        background-color:#18191a!important;
-        overscroll-behavior: none!important;
-        position:fixed!important;
-
-    }
-    .timeline-container-helprequest{
-        min-height:100px;
-        box-shadow:1px 2px #131313;
-        border-bottom: 2px solid #28a745;
-        margin-right:5%;
-        margin-bottom:30px;
-        margin-top:30px;
-        border-radius:8px;
-        padding-bottom:20px;
-        
-    }
-    .timeline-container-status{
-        min-height:100px;
-        /* border-bottom: 2px solid #007bff;
-        box-shadow:1px 2px #131313; */
-        margin-right:auto;
-        margin-right:auto;
-        margin-bottom:30px;
-        margin-top:30px;
-        border-radius:8px;
-        width:85%;
-        min-width:350px;
-        display:inline-block;
-
-        
-    }
-    #calendar1, #calendar2,#calendar3,#calendar4,#calendar5, #calendar6{
-        display:none;
-    }
-    .askQuestion-textarea{
-        width:90%;
-        height:80px;
-        outline:none;
-        margin-left:auto;
-        margin-right:auto;
-        text-align:left;
-        padding-left:10px;
-        padding-top:5px;
-        background-color:#343a40;
-        color:white;
-        border:none;
-
-    }
-    .timeline-wrapper{
-        /* background-color:#242526!important; */
-        padding-top:20px;
-        border-radius:20px;
-        padding-bottom:20px;
-        text-align:center;
-    }
-    #findATutorMobile-wrapper{
-        width:100%;
-        display:none;
-    }
-    .available-selected{
-        background-color:#007bff;
-        padding-left:6px;
-        padding-right:6px;
-        border-radius:10px;
-    }
-    .recentActivity-title{
-        font-size:16px;
-        padding-left:20px;
-        text-align:left;
-        font-family: "Open sans", "sans-serif";
-        text-align:center;
-    }
-    .tagACourse, .tagAGroup{
-        background-color:#242526;
-        border:none;
-        color:white;
-        margin-top:10px;
-        width:90%;
-        height:35px!important;
-    }
-.attachFile{
-    margin-top:25px;
-    text-align:left;
-    margin-left:30px;
-}
-    .askQuestion-file{
-        margin-top:5px;
-        margin-right:20px;
-        margin-left:30px;
-        color:white!important;
-        padding-left:0px;
-    }
-    .askQuestion-container{
-        text-align:center;
-        left:0!important;
-        margin-top:40px;
-        overflow-x: hidden;
-    }
-    
-    .recentActivity-title svg{
-        margin-right:10px;
-    }
-    .mobile-availability{
-        margin-left:10px;
-        margin-right:auto;
-        padding-left:20px;
-        padding-bottom:20px;
-        text-align:left;
-    }
-    .mobile-availability li {
-        display:inline-block;
-        margin-left:5px;
-        margin-right:5px;
-        color:white;
-    }
-    .mobile-available-text{
-        color:#a9a9a9!important;
-    }
-    .success-sub-text{
-        font-size:15px;
-        color:white;
-        text-align:left!important;
-        margin-left:20px;
-        margin-right:20px;
-    }
-    .success-msg{
-        font-size:16px!important;
-        margin-top:30px;
-        font-family:"Open sans", "sans-serif";
-    }
-    .mobile-actions{
-        width:100%;
-        margin-left:auto;
-        margin-right:auto;
-        text-align:center;
-        margin-top:10px;
-        margin-bottom:0px;
-    }
-    .mobile-actions-bottom-border{
-        border-bottom: 2px solid #007bff;
-    }
-    .mobile-actions ul {
-        margin-bottom:0;
-    }
-    .mobile-actions li {
-        display:inline-block;
-        margin-left:3.5%;
-        margin-right:3.5%;
-    }
-    .hashtag{
-        color:white;
-        margin-left:30px;
-        text-align:left;
-    }
-    .mobile-actions-text{
-        font-size:14px!important;
-        text-align:center;
-        margin-top:5px;
-        margin-bottom:0;
-    }
-    .mobile-actions-item{
-        width:40px;
-        height:40px;
-        border-radius:60px;
-        background-color:#2a2f33;
-        margin-left:auto;
-        margin-right:auto;
-        display:none;
-    }
-    .mobile-actions-item svg{
-      margin-top:15px;
-    }
-    .day-container{
-        padding-left:20px;
-        padding-bottom:10px;
-    }
-    .day-wrapper{
-        padding-bottom:10px; 
-        padding-top:10px; 
-    }
-    .calendarLine{
-        width:75%;
-        background-color:#a9a9a9;
-        float:right;
-        height:.5px;
-        margin-top:15px;
-    }
-    .calendarLine-selected{
-        width:75%;
-        background-color:#007bff;
-        float:right;
-        height:.5px;
-        margin-top:15px;
-    }
-    .mobile-tutor-search{
-        background-color:#18191a;
-        color:white;
-        border-right:none!important;
-        border-top:none!important;
-        border-bottom:none;
-        border-left:none!important;
-    }
-    .course-search-container{
-        text-align:center!important;
-        width:100%;
-        margin-top:20px;
-    }
-    .course-search-sub-container{
-        border-bottom:2px solid #a9a9a9;
-        width:250px;
-        display:inline-block;
-        margin-left:auto;
-        margin-right:auto;
-    }
-    .tutor-add-autocomplete{
-        width:100%;
-        background-color:#2a2f33!important;
-        min-height:40px;
-        border-bottom-right-radius: 10px!important;
-        border-bottom-left-radius: 10px!important;
-        display:none;
-        position:relative;
-        z-index:3;
-
-    }
-
-    .add-tutoring-course{
-        font-family: "Open sans", "sans-serif";
-        font-size:14px;
-        margin-left:20px;
-        margin-top:10px;
-    }
-    .add-tutoring-form label{
-        text-align:left!important;
-     
-    }
-    .add-tutoring-label{
-        text-align:left!important;
-        margin-bottom:10px;
-        font-size:16px;
-        color:white;
-        margin-top:10px;
-    }
-    .add-tutoring-wrapper{
-        margin-left:auto;
-        margin-right:auto;
-        width:100%;
-        text-align:center;
-        margin-top:40px;
-    }
-    .input-container-add-tutoring{
-        background-color:#2a2f33;
-        width:100%;
-        border-radius:10px;
-    }
-    .add-tutoring-dollar{
-        width:8px;
-    }
-    .remove-tutor-course{
-        display:none;
-        font-family: "Open sans", "sans-serif";
-        font-size:12px;
-        position:absolute;
-        padding-top:2px;
-        padding-bottom:2px;
-        padding-left:4px;
-        padding-right:4px;
-    }
-    .add-tutoring-btn{
-        font-family: "Open sans", "sans-serif";
-        font-size:14px;
-        margin-top:40px;
-        width:100%;
-    }
-    .dots-tutor-courses{
-        margin-left:10px;
-    }
-    .pending-tutor-course{
-        margin-left:10px;
-    }
-    .transcript-upload{
-        margin-top:20px;
-    }
-    .add-tutoring-input, .add-tutoring-input1{
-        background-color:#2a2f33;
-        border:none!important;
-        padding:5px;
-        border-radius:10px;
-        color:white;
-        font-size:16px;
-        width:80%!important;
-        height:40px;
-        margin-bottom:30px;
-        position:relative;
-        z-index:3;
-
-    }
-    .transcript-upload{
-        font-size:15px!important;
-        margin-bottom:20px;
-    }
-    .icon-add-tutoring{
-        float:left;
-        margin-top:5px;
-        margin-right:5px;
-        margin-left:10px;
-    }
-    .add-tutoring-sub-wrapper{
-        margin-left:auto;
-        margin-right:auto;
-        width:250px;
-        text-align:center;
-        display:inline-block;
-    }
-    .add-tutoring-form input{
-        display:block;
-       
-    }
-    .add-tutoring-form {
-        margin-left:auto;
-        margin-right:auto;
-        text-align:center;
-    }
-    .findTutor-course{
-        cursor:pointer;
-    }
-.questionLabel{
-    margin-left:20px;
-    margin-bottom:0;
-    text-align:left!important;
-}
-
-    .findTutorMobile-results, .findTutorMobile-results{
-        padding-top:20px;
-    }
-    .optional{
-        margin-top:20px!important;
-        text-align:left;
-        margin-left:30px;
-    }
-    .pdf-iframe{
-        width:100%;
-        height:400px;
-        margin-top:0!important;
-    }
-    .day-container label{
-
-        padding-left:10px;
-    }
-    .connectionBody-container{
-        text-align:left;
-        padding-top:20px!important;
-        width:100%;
-        top:0!important;
-        right:0;
-        margin-top:-200px!important;
-        margin-bottom:200px;
-        margin-right:20px;
-    }
-    .addComment{
-        margin-left:90px;
-        color:#d4d4d4;
-        font-size:12px!important;
-    }
-    .view-timeline-btn{
-        padding-top:2px;
-        padding-bottom:2px;
-        padding-left:4px;
-        padding-right:4px;
-        font-size:12px!important;
-        margin-left:20px;
-        font-family: 'Open Sans', sans-serif!important;
-    }
-    .name-link, .name-link:hover{
-        color:white;
-    }
-    .pdf-link, .pdf-link:hover{
-        text-align:center;
-        width:100%!important;
-        color:#d4d4d4;
-        padding-top:10px;
-    }
-    .question-img1{
-        width:100%!important;
-    }
-    .question-img1{
-        width:50%!important;
-    }
-    .postDate{
-        color:#a9a9a9;
-        font-size:14px;
-        padding-left:0px;
-        float:right;
-        margin-right:7%;
-        margin-top:10px;
-        margin-bottom:5px;
-    }
-    .postDate1{
-        color:#a9a9a9!important;
-        font-size:13px;
-        padding-left:15px;
-        margin-right:7%;
-        margin-top:10px;
-        margin-bottom:5px;
-    }
-    .caption-status{
-        color:#d4d4d4!important;
-        margin-left: 30px;
-        margin-right: 50px;
-        margin-top:0px;
-        margin-bottom:5px;
-        font-size:14px;
-        font-weight:450;
-        text-align:left;
-        font-family: 'Open Sans', sans-serif!important;
-        white-space: pre-wrap;
-    
-    }
-    .info-badge{
-        font-family: 'Open Sans', sans-serif!important;
-        font-size:13px!important;
-    }
-    .caption{
-        color:white!important;
-        margin-left: 20px;
-        margin-top:5px;
-        font-size:14px;
-        font-family: 'Open Sans', sans-serif!important;
-    }
-    .studyGroupSubject{
-        color:#a9a9a9;
-        font-size:13px;
-        padding-left:8px;
-        text-align:left;
-    }
-    .courseName{
-        font-size:13px;
-        color:white;
-        padding-left:10px;
-        padding-right:10px;
-        margin-bottom:3px;
-        font-family: 'Open Sans', sans-serif!important;
-        text-align:left!important;
-    }
-    .searchUser{
-        width:33px;
-        margin-right:10px;
-        float:left;
-        margin-bottom:0!important;
-        margin-top:5px;
-    
-    }
-    .courseCountainer{
-        padding-left:20px;
-        padding-top:5px;
-        padding-bottom:3px;
-       
-    }
-    .userHandle{
-        font-size:13px!important;
-        padding-left:40px;
-        color:#a9a9a9;
-        margin-bottom:0!important;
-        text-align:left;
-    }
-    
-    .searchName{
-        font-size:14px;
-        color:white;
-        margin-bottom:2px;
-        text-align:left;
-    }
-    .searchTab{
-        display:inline-block;
-        font-size:13px;
-        padding-bottom:5px;
-        margin-left:5px;
-        margin-right:5px;
-        cursor:pointer;
-        font-family: 'Open Sans', sans-serif!important;
-        color:white!important;
-    
-    }
-    .tab-container{
-        margin-left:auto;
-        margin-right:auto;
-        text-align:center;
-        margin-top:30px;
-    
-    }
-    .mobile-search-container{
-        background-color:#242526;
-        width:100%;
-        height:100%;
-        position:fixed;
-        top:0;
-        z-index:3;
-        display:none;
-        text-align:center;
-    }
-    .mobile-home-link{
-        color:#a9a9a9;
-    }
-    .close-mobile-menu, .close-search{
-        position:absolute;
-        right:0;
-        top:0;
-        margin-top:10px;
-        margin-right:10px;
-        cursor:pointer;
-    }    
-    .postHandle a{
-        color:#d4d4d4;
-        font-size:14px;
-    }
-    .timelinePost-username{
-        color:white;
-        font-family: 'Open Sans', sans-serif!important;
-        margin-bottom:0!important;
-        margin-left:55px;
-        text-align:left;
-        font-size:14px;
-    }
-    .daySelect-container{
-        margin-top:20px;
-        margin-bottom:20px;
-        text-align:center;
-        margin-left:auto;
-        margin-right:auto;
-    }
-    .daySelect-container select{
-        background-color:#3a3b3c;
-        font-family:"Open sans","sans-serif";
-        outline:0;
-        color:white;
-        border-radius:10px;
-        border:none!important;
-        font-size:15px;
-        padding-left:7px;
-        padding-right:7px!important;
-    }
-    .daySelect-container option{
-        padding-left:7px;
-        font-size:15px;
-        border:none!important;
-    }
-    .dateButtons{
-        font-size:15px;
-        margin-left:5px!important;
-        margin-right:5px!important;
-        margin-bottom:0px!important;
-        padding:5px!important;
-        cursor:pointer;
-        border-radius:10px;
-        font-family: 'Open Sans', sans-serif;
-    }
-    .dateButtons p{
-        margin-bottom:0!important;
-    }
-    
-    .dateBtn-container{
-        margin-left:auto;
-        margin-right:auto;
-        text-align:center;
-    }
-    .weekOfTxt{
-        font-size:14px!important;
-        text-align:left;
-    }
-    #calendarContainer td{
-        display:block!important;
-    }
-    .post-selection-menu li{
-        padding-bottom:0px!important;
-        cursor:pointer;
-        margin-bottom:0px!important;
-    }
-    .post-selection-menu{
-        margin-left:50px;
-        padding-top:10px;
-    }
-    .requestHelp{
-        width:100%;
-        background-color:#242526;
-        border-bottom:2px solid #3a3b3c;
-        color:#d4d4d4;
-        border-radius:10px;
-        margin-top:10px;
-        margin-left:10px;
-        margin-right:10px;
-        padding:5px;
-        cursor:text!important;
-        font-weight:480;
-    }
-    .mobileUserImg{
-        padding-top:10px;
-        position:relative;
-        z-index:2;
-    }
-    #horizontalHeader{
-        background-color:#1f2024!important;
-        position:relative!important;
-        height:60px!important;
-       overscroll-behavior: none!important;
-       border-bottom:1px solid #343a40!important;
-    }
-    .timeline-title{
-        display:none;
-    }
-    .message{
-        background-color:#18191a!important;
-        padding-top:0!important;
-    }
-
-    .search-container{
-        position:absolute;
-        margin-right:30px;
-        margin-top:3px;
-
-    }
-    .searchLi{
-        margin-top:-30px!important;
-        height:1.5em;
-        margin-right:30px!important;
-    }
-    .mobileMenu{
-        display:block;
-        width:100%;
-        background-color:#18191a;
-        color:#d4d4d4;
-        position:fixed;
-        z-index:3;
-        bottom:0;
-        text-align:center;
-        padding-top:10px;
-        padding-bottom:10px;
-        border-top: 1px solid #202020;
-
-        -webkit-box-shadow: 0px 1px 1px rgba(50, 50, 50, 0.75);
-        -moz-box-shadow:    0px 1px 1px rgba(50, 50, 50, 0.75);
-        box-shadow:         0px 1px 1px rgba(50, 50, 50, 0.75);
-
-        
-    }
-    .home-wrapper{
-        padding-top:10px!important;
-    }
-    .requestHelp{
-        margin-left:50px;
-    }
-    .mobileMenu ul li{
-        display:inline-block;
-        font-size:12px;
-        font-family: "Open sans","sans-serif";
-        cursor:pointer;
-        width:23%;
-    }
-    .mobileMenu ul{
-        width:100%;
-        margin-bottom:0!important;
-        padding-bottom:10px;
-    }
-    .timeline-container-status, .timeline-container-helprequest{
-        margin-left:0px;
-        margin-right:0px;
-        margin-top:0;
-        margin-bottom:0;
-        border-radius:0!important;
-        /* border-bottom:1px solid #a9a9a9!important; */
-    }
-    .request-help-container{
-        background-color:#18191a!important;
-        margin-left:8px;
-        margin-right:8px;
-        border-radius:20px!important;
-        border-bottom:none!important;
-        margin-top:10px;
-        margin-bottom:10px;
-        box-shadow:none!important;
-        display:none;
-    }
-    .helpRequest-body .timelinePost-Image{
-        display:none;
-    }
-    .requestHelp, .post-selection-menu{
-        margin-left:0!important;
-    }
-    .like-button{
-        background-color:#18191a;
-    }
-    .userNameLink{
-        font-size:14px!important;
-    }
-    /* .tl-main-img{
-        display:none;
-    } */
-    .timeline{
-        width:100%;
-        height:100%;
-        margin-left:0px;
-        overflow-y:auto;
-    }
-    .desktopLogo{
-        display:none!important;
-    }
-    .mobile-logo-container{
-        position:absolute;
-        width:100%!important;
-        text-align:center!important;
-    }
-    .mobile-logo-wrapper{
-        margin-left:auto;
-        margin-right:auto;
-        display:inline-block;
-    }
-    .mobileLogo{
-        margin-left:auto;
-        margin-right:auto;
-        display:inline-block;
-        width:28px;
-        margin-top:15px;
-    }
-    
-    #pageTitle{
-        margin-left:15px;
-        color:#a9a9a9;
-        font-size:20px;
-        padding-top:0px!important;
-        margin-top:0!important;
-       
-    }
-    .headerContainer{
-        right:0;
-        top:0;
-        width:400px!important;
-        margin-right:0px!important;
-        z-index:2;
-        
-    }
-    .active{
-        position:absolute;
-        font-size:13px;
-        text-align:center;
-        width:69px;
-        margin-top:-5px;
-        
-    }
-
-    .headerContainer li{
-        display:inline-block;
-        margin-right:10px!important;
-        color:#d4d4d4!important;
-        margin-left:10px;
-        margin-top:0;
-        padding-top:0;
-        padding-right:0!important;
-        
-     
-     }
-
-     #showNotifications{
-         width:100%!important;
-         /* padding-left:10%; */
-         position:fixed!important;
-         top:0;
-         overflow-y:auto;
-         margin-top:0!important;
-         margin-left:5px!important;
-         margin-right:50px!important;
-         border-top-right-radius:20px!important;
-         border-top-left-radius:20px!important;
-
-         
-     }
-     .startConversation-button{
-         padding-left:0!important;
-         position:absolute;
-         right:0;
-         float:right;
-     }
-    .logo{
-        margin-right:0;
-    }
-    .bell{
-        margin-right:15px!important;
-    }
-    .input-container-main, .homeSideBar, .img, .bell, .message, .headerLinkTitle, .userProfileName{
-        display:none!important;
-    }
-    .mobile-input-container-main{
-        display: -ms-flexbox; /* IE10 */
-    display: inline-block;
-    width: 270px;
-    background-color:#3a3b3c!important;
-    margin-left:auto;;
-    margin-right:auto;
-    border-radius:20px;
-    font-size:16px!important;
-    padding-bottom:none!important;
-    height:40px;
-    background-color:none;
-    color:white!important;
-    margin-top:15px!important;
-    position:relative;
-    top:0;
-    
-    }
-    .searchForm{
-        height:40px!important;
-    }
-    .userProfileImg{
-        width:40px!important;
-        padding-top:10px;
-    }
-   .userImgLi{
-       display:none!important;
-   }
-    .slider-container-header{
-        width:60px;
-        position:absolute;
-        right:0;
-        top:0;
-        margin-top:20px;
-        margin-right:15px;
-        padding:0!important;
-        z-index:2;
-      }
-.desktop-li{
-    display:none;
-}
-}
