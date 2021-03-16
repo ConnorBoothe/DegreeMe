@@ -61,8 +61,10 @@ max-width:350px;
 .profile-uploading-image{
     font-size:15px;
     margin-top:10px;
+    position:absolute;
     display:none;
     width:150px;
+    text-align:center;
 }
 .major-results-settings p{
     cursor: pointer;
@@ -365,7 +367,7 @@ max-width:350px;
 }
 .headerLinkPageTitle{
     text-align:left;
-    font-size:15px;
+    font-size:14px;
     color:white!important;
 }
 .profile-logo {
@@ -935,11 +937,12 @@ button.followingButton{
     .sendDM {
         font-size:14px;
         border-radius:20px;
+        font-family: "Poppins", sans-serif;
     }
     .message-modal-img {
         width:20px;
-        margin-left:10px;
-        margin-right:5px;
+        margin-left:5px;
+        margin-right:0px;
     }
     .desktopFollow {
         font-size:18px!important;

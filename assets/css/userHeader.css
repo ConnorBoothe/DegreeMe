@@ -1002,7 +1002,7 @@ header{
     .bdge, .bdge1{
         position:absolute;
         top:0;
-        margin-left:15px;
+        margin-left:5px;
         margin-top:2px;
         /* width:12px!important; */
         font-size:11px!important;
