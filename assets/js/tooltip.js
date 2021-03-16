@@ -2,13 +2,17 @@ $('[data-toggle="tooltip"]').tooltip();
 $(document).ready(()=>{
   $('.go-home').tooltip();   
   
-  $('.page-title-container').tooltip({
+  $('.mobile-actions1').tooltip({
     selector: ".group-story-image1",
     container: "body"
   })
   
   $('#recentNotifications').tooltip({
     selector: ".startConversation",
+    container: "body"
+  })
+  $('.add-story-wrapper').tooltip({
+    selector: ".link",
     container: "body"
   })
   $('.timeline').tooltip({
