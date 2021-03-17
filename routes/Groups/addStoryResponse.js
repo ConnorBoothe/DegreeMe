@@ -25,11 +25,9 @@ router.post("/addStoryResponse", (req, res)=>{
             })
     }
     else if(req.body.type == "multiple") {
-        console.log("Multiple")
         storyResponses.addMultipleChoiceResponse(req.body.storyId, req.session.handle,
             req.body.answer)
             .then((response)=>{
-                console.log("RESPONSE: " +response)
                     res.status(202).json({
                         correct: response.correct,
                         answer: response.answer,
@@ -44,7 +42,6 @@ router.post("/addStoryResponse", (req, res)=>{
     
   })
   router.post("/hasResponded", (req, res)=>{
-    console.log(req.body)
     storyResponses.hasResponded(req.body.storyId, req.session.handle)
         .then((response)=>{
             if(response){
@@ -70,10 +67,8 @@ router.post("/addStoryResponse", (req, res)=>{
     
   })
   router.post("/getPercentage", (req, res)=>{
-      console.log("REQ: " +req.body.storyId, req.body.answer)
     storyResponses.getPollPercentage(req.body.storyId, req.body.answer)
     .then((percentage)=>{
-        console.log(percentage)
         res.status(202).json({
             matchingPercentage: percentage.matchingAnswer,
             otherPercentage: percentage.other,

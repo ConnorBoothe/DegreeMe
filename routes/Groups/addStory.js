@@ -2,12 +2,10 @@
 require('dotenv').config();
 const express = require('express');
 const router = express.Router();
-
 const StoryDB = require('../../models/Database/StoryDB.js');
 const stories = new StoryDB();
 
 router.post("/addStory", (req, res)=>{
-    console.log(req.body)
     //add image to story
     if(req.body.type == "image") {
         stories.addImageStory(req.body.groupId, req.session.handle, req.session.img,
@@ -51,10 +49,9 @@ router.post("/addStory", (req, res)=>{
         stories.addPollStory(req.body.groupId, req.session.handle, req.session.img,
             new Date(),  req.body.duration, req.body.text, req.body.question, 
             [req.body.option1, req.body.option2], req.body.backgroundColor, req.body.textColor,
-            textObject, linkObject, poll_styles)
+            textObject, linkObject, poll_styles, req.body.image)
         .then((story)=>{
-            console.log(story)
-            console.log("Success")
+         
             res.status(202).json({
                 story: story
             }).end();
@@ -65,7 +62,8 @@ router.post("/addStory", (req, res)=>{
         })
     }
     else if (req.body.type == "multiple") {
-        console.log("ADDING multiple")
+        console.log("Multiple")
+        console.log(req.body)
         textObject = {}
         linkObject = {}
         //add poll story with no text and no link
@@ -85,32 +83,29 @@ router.post("/addStory", (req, res)=>{
                  "font-size:"+req.body.linkFontSize+ ";"]
             }
         }
-        console.log("linkObje:", linkObject)
+        var multiple_styles = ["margin-top:"+req.body.multiplePositionTop+"px;", 
+        "margin-left:"+req.body.multiplePositionLeft+"px;"]
         stories.addMultipleChoiceStory(req.body.groupId, req.session.handle, req.session.img,
             new Date(),  req.body.duration, req.body.question, 
             [req.body.option1, req.body.option2,req.body.option3, req.body.option4 ], 
-            req.body.correct, req.body.textColor, textObject, linkObject)
+            req.body.correct, req.body.backgroundColor, req.body.textColor, textObject, 
+            linkObject, multiple_styles, req.body.image)
         .then((story)=>{
-            console.log(story)
-            console.log("Success")
             res.status(202).json({
                 story: story
             }).end();
-    
         })
         .catch((err)=> {
             console.log(err)
         })
     }
     else if (req.body.type == "text") {
-        console.log("Body", req.body)
         stories.addTextStory(req.body.groupId, req.session.handle, req.session.img,
             new Date(), req.body.duration, req.body.text, req.body.textPositionTop,
              req.body.textPositionLeft, req.body.linkOffsetTop, req.body.linkOffsetLeft,
              req.body.linkFontSize, req.body.textColor, req.body.fontSize,
-            req.body.backgroundColor, req.body.link)
+            req.body.backgroundColor, req.body.link, req.body.image)
         .then((story)=>{
-            console.log(story)
             console.log("Success")
             res.status(202).json({
                 story: story

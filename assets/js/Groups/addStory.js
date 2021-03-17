@@ -60,7 +60,7 @@ $(document).ready(function(){
         $(".poll-container").draggable( 'disable' )
     })
     $(".add-text").on("click", ()=>{
-        $("input[name='story-type']").val();
+   
         if(!textAdded) {
             $("input[name='hasText']").val(true);
             var textBox = "<div class='textBox-wrapper'><p class='textBox' contenteditable='true'>Write text</p>"+
@@ -252,13 +252,12 @@ $(document).ready(function(){
     })
     $(".story-tools li").on("click", function(){
         var type = $(this).children().eq(0).val();
-        $("input[name='story-type']").val(type)
+      
         if(type == "image"){
-            // $(".poll-container").hide();
-            // $(".multiple-choice-container").hide();
             $(".story-input-container").show();
         }
         else if(type == "poll") {
+            $("input[name='story-type']").val(type)
             if($(".poll-container").css("display") == "none") {
                 $(".poll-container").draggable({
                     containment: ".add-story-wrapper",
@@ -271,19 +270,17 @@ $(document).ready(function(){
             else {
                 $(".poll-container").hide();
             }
-            
-            
-          
         }
         else if(type == "multiple" ) {
+            $("input[name='story-type']").val(type)
             $(".multiple-choice-container").draggable({
                 containment: ".add-story-wrapper",
                 cursor:"move"
             });
-            $(".multiple-choice-container").show();
+            $(".multiple-choice-container").css("display", "inline-block");
             $(".poll-container").hide();
-            $(".content-container-add-story").hide();
-            $(".story-input-container").hide();
+            // $(".content-container-add-story").hide();
+            
         }
         
     })
